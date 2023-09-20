@@ -8,6 +8,7 @@ extends RigidBody2D
 var thrust = Vector2()
 var rotation_dir = 0
 var screensize
+var pointer_position
 
 func _ready():
 	screensize = get_viewport().get_visible_rect().size
@@ -23,6 +24,11 @@ func get_inputs():
 		rotation_dir = -1
 	else:
 		rotation_dir = 0
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		pointer_position = Vector2(event.position.x / screensize.x, event.position.y / screensize.y)
+		#print(pointer_position)
 
 func _process(delta):
 	get_inputs()

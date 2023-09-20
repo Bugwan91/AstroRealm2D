@@ -77,7 +77,6 @@ radius = 15.0
 height = 68.0
 
 [node name="Ship" type="RigidBody2D" node_paths=PackedStringArray("flame_sprite")]
-position = Vector2(220, 283)
 physics_material_override = SubResource("PhysicsMaterial_gdi56")
 linear_damp = 0.2
 angular_damp = 5.0
@@ -98,7 +97,7 @@ scale = Vector2(0.9, 0.9)
 sprite_frames = SubResource("SpriteFrames_lhhdr")
 animation = &"flame"
 autoplay = "flame"
-frame_progress = 0.868509
+frame_progress = 0.377432
 
 [node name="PointLight2D" type="PointLight2D" parent="Flame"]
 position = Vector2(-128, -0.000244141)
