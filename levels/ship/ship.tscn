@@ -1,11 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=18 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://levels/ship/Ship.gd" id="1_sfbv2"]
 [ext_resource type="Texture2D" uid="uid://bma47ok67e74c" path="res://assets/my/Engine_01.png" id="2_egq1q"]
+[ext_resource type="Script" path="res://levels/ship/thruster.gd" id="3_2lgbi"]
 [ext_resource type="Texture2D" uid="uid://bsmwulpgvt64l" path="res://assets/my/Engine_Flame_01.png" id="3_5730x"]
 [ext_resource type="Texture2D" uid="uid://wum8lxk3kfbh" path="res://assets/my/Engine_Flame_01_light.png" id="4_fxnn0"]
+[ext_resource type="Script" path="res://levels/ship/ship_input.gd" id="6_etgep"]
+[ext_resource type="Script" path="res://levels/ship/thrusters.gd" id="7_inisi"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gdi56"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k0qck"]
+radius = 15.0
+height = 68.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ujwto"]
 atlas = ExtResource("3_5730x")
@@ -71,37 +76,15 @@ animations = [{
 "speed": 60.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k0qck"]
-radius = 15.0
-height = 68.0
-
 [node name="Ship" type="RigidBody2D"]
-physics_material_override = SubResource("PhysicsMaterial_gdi56")
-linear_damp = 0.2
-angular_damp = 5.0
 script = ExtResource("1_sfbv2")
-engine_thrust = 500
-spin_thrust = 25000
+_engine_thrust = 100.0
+_maneuver_thrust = 25.0
 
-[node name="Engine" type="Sprite2D" parent="."]
+[node name="Model" type="Sprite2D" parent="."]
 texture_filter = 1
 rotation = 1.5708
 texture = ExtResource("2_egq1q")
-
-[node name="Flame" type="AnimatedSprite2D" parent="."]
-position = Vector2(-61, 0)
-rotation = 1.5708
-scale = Vector2(0.9, 0.9)
-sprite_frames = SubResource("SpriteFrames_lhhdr")
-animation = &"flame"
-autoplay = "flame"
-frame_progress = 0.802498
-
-[node name="PointLight2D" type="PointLight2D" parent="Flame"]
-position = Vector2(-128, -0.000244141)
-rotation = 1.5708
-texture = ExtResource("4_fxnn0")
-texture_scale = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -109,3 +92,196 @@ texture_scale = 2.0
 visible = false
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_k0qck")
+
+[node name="PlayerInput" type="Node" parent="."]
+script = ExtResource("6_etgep")
+
+[node name="Thrusters" type="Node2D" parent="."]
+script = ExtResource("7_inisi")
+
+[node name="Main" type="Node2D" parent="Thrusters"]
+position = Vector2(-32, 0)
+rotation = 3.14159
+script = ExtResource("3_2lgbi")
+
+[node name="Flame" type="AnimatedSprite2D" parent="Thrusters/Main"]
+position = Vector2(29, 0)
+rotation = -1.5708
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_lhhdr")
+animation = &"flame"
+autoplay = "flame"
+frame_progress = 0.802498
+
+[node name="PointLight2D" type="PointLight2D" parent="Thrusters/Main/Flame"]
+position = Vector2(0, 64)
+texture = ExtResource("4_fxnn0")
+texture_scale = 2.0
+
+[node name="FL" type="Node2D" parent="Thrusters"]
+position = Vector2(21, -13)
+script = ExtResource("3_2lgbi")
+
+[node name="Flame" type="AnimatedSprite2D" parent="Thrusters/FL"]
+position = Vector2(6, 0)
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_lhhdr")
+animation = &"flame"
+autoplay = "flame"
+frame_progress = 0.802498
+
+[node name="PointLight2D" type="PointLight2D" parent="Thrusters/FL/Flame"]
+position = Vector2(0, 64)
+texture = ExtResource("4_fxnn0")
+texture_scale = 2.0
+
+[node name="FR" type="Node2D" parent="Thrusters"]
+position = Vector2(21, 13)
+script = ExtResource("3_2lgbi")
+
+[node name="Flame" type="AnimatedSprite2D" parent="Thrusters/FR"]
+position = Vector2(6, 0)
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_lhhdr")
+animation = &"flame"
+autoplay = "flame"
+frame_progress = 0.802498
+
+[node name="PointLight2D" type="PointLight2D" parent="Thrusters/FR/Flame"]
+position = Vector2(0, 64)
+texture = ExtResource("4_fxnn0")
+texture_scale = 2.0
+
+[node name="RF" type="Node2D" parent="Thrusters"]
+position = Vector2(15, 15)
+rotation = 1.5708
+script = ExtResource("3_2lgbi")
+
+[node name="Flame" type="AnimatedSprite2D" parent="Thrusters/RF"]
+position = Vector2(6, 0)
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_lhhdr")
+animation = &"flame"
+autoplay = "flame"
+frame_progress = 0.802498
+
+[node name="PointLight2D" type="PointLight2D" parent="Thrusters/RF/Flame"]
+position = Vector2(0, 64)
+texture = ExtResource("4_fxnn0")
+texture_scale = 2.0
+
+[node name="RB" type="Node2D" parent="Thrusters"]
+position = Vector2(-15, 14)
+rotation = 1.5708
+script = ExtResource("3_2lgbi")
+
+[node name="Flame" type="AnimatedSprite2D" parent="Thrusters/RB"]
+position = Vector2(6, 0)
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_lhhdr")
+animation = &"flame"
+autoplay = "flame"
+frame_progress = 0.802498
+
+[node name="PointLight2D" type="PointLight2D" parent="Thrusters/RB/Flame"]
+position = Vector2(0, 64)
+texture = ExtResource("4_fxnn0")
+texture_scale = 2.0
+
+[node name="BR" type="Node2D" parent="Thrusters"]
+position = Vector2(-13, 13)
+rotation = 3.14159
+script = ExtResource("3_2lgbi")
+
+[node name="Flame" type="AnimatedSprite2D" parent="Thrusters/BR"]
+position = Vector2(6, 0)
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_lhhdr")
+animation = &"flame"
+autoplay = "flame"
+frame_progress = 0.802498
+
+[node name="PointLight2D" type="PointLight2D" parent="Thrusters/BR/Flame"]
+position = Vector2(0, 64)
+texture = ExtResource("4_fxnn0")
+texture_scale = 2.0
+
+[node name="BL" type="Node2D" parent="Thrusters"]
+position = Vector2(-13, -13)
+rotation = 3.14159
+script = ExtResource("3_2lgbi")
+
+[node name="Flame" type="AnimatedSprite2D" parent="Thrusters/BL"]
+position = Vector2(6, 0)
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_lhhdr")
+animation = &"flame"
+autoplay = "flame"
+frame_progress = 0.802498
+
+[node name="PointLight2D" type="PointLight2D" parent="Thrusters/BL/Flame"]
+position = Vector2(0, 64)
+texture = ExtResource("4_fxnn0")
+texture_scale = 2.0
+
+[node name="LB" type="Node2D" parent="Thrusters"]
+position = Vector2(-15, -14)
+rotation = -1.5708
+script = ExtResource("3_2lgbi")
+
+[node name="Flame" type="AnimatedSprite2D" parent="Thrusters/LB"]
+position = Vector2(6, 0)
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_lhhdr")
+animation = &"flame"
+autoplay = "flame"
+frame_progress = 0.802498
+
+[node name="PointLight2D" type="PointLight2D" parent="Thrusters/LB/Flame"]
+position = Vector2(0, 64)
+texture = ExtResource("4_fxnn0")
+texture_scale = 2.0
+
+[node name="LF" type="Node2D" parent="Thrusters"]
+position = Vector2(15, -15)
+rotation = -1.5708
+script = ExtResource("3_2lgbi")
+
+[node name="Flame" type="AnimatedSprite2D" parent="Thrusters/LF"]
+position = Vector2(6, 0)
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_lhhdr")
+animation = &"flame"
+autoplay = "flame"
+frame_progress = 0.802498
+
+[node name="PointLight2D" type="PointLight2D" parent="Thrusters/LF/Flame"]
+position = Vector2(0, 64)
+texture = ExtResource("4_fxnn0")
+texture_scale = 2.0
+
+[connection signal="back_changed" from="PlayerInput" to="." method="_on_back_input"]
+[connection signal="direction_changed" from="PlayerInput" to="." method="_on_direction_input"]
+[connection signal="forward_changed" from="PlayerInput" to="." method="_on_forward_input"]
+[connection signal="left_changed" from="PlayerInput" to="." method="_on_left_input"]
+[connection signal="main_changed" from="PlayerInput" to="." method="_on_main_engine_input"]
+[connection signal="right_changed" from="PlayerInput" to="." method="_on_right_input"]
+[connection signal="turn_left_changed" from="PlayerInput" to="." method="_on_turn_left_input"]
+[connection signal="turn_right_changed" from="PlayerInput" to="." method="_on_turn_right_input"]
+[connection signal="thrust_changed" from="Thrusters/Main" to="." method="_add_force"]
+[connection signal="thrust_changed" from="Thrusters/FL" to="." method="_add_force"]
+[connection signal="thrust_changed" from="Thrusters/FR" to="." method="_add_force"]
+[connection signal="thrust_changed" from="Thrusters/RF" to="." method="_add_force"]
+[connection signal="thrust_changed" from="Thrusters/RB" to="." method="_add_force"]
+[connection signal="thrust_changed" from="Thrusters/BR" to="." method="_add_force"]
+[connection signal="thrust_changed" from="Thrusters/BL" to="." method="_add_force"]
+[connection signal="thrust_changed" from="Thrusters/LB" to="." method="_add_force"]
+[connection signal="thrust_changed" from="Thrusters/LF" to="." method="_add_force"]
