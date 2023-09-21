@@ -7,10 +7,12 @@ enum Action {MAIN, FORWARD, BACK, RIGHT, LEFT, TURN_LEFT, TURN_RIGHT}
 
 var _thrusters: Array[Thruster] = []
 var _strafe: Array[float] = []
+var _rotation: Array[float] = []
 
 func setup(thrust: float, manuever_thrust: float):
 	_thrusters.resize(9)
 	_strafe.resize(9)
+	_rotation.resize(9)
 	_thrusters[ID.MAIN] = $Main.setup(ID.MAIN, thrust)
 	_thrusters[ID.FL] = $FL.setup(ID.FL, manuever_thrust)
 	_thrusters[ID.FR] = $FR.setup(ID.FR, manuever_thrust)
@@ -50,8 +52,10 @@ func apply(action: int, value: float):
 
 func _throtle(id: int, value: float):
 	_strafe[id] = value
-	_thrusters[id].throttle(value)
+	if _rotation[id] == 0:
+		_thrusters[id].throttle(value)
 
 func _rotate(id: int, value: float):
+	_rotation[id] = value
 	if _strafe[id] == 0:
 		_thrusters[id].throttle(value)
