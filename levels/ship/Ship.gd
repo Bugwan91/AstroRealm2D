@@ -4,6 +4,7 @@ class_name Ship
 
 @export var _main_thrust: float = 100
 @export var _maneuver_thrust: float = 50
+@export var _velocity_limit: float = 1000
 
 @onready var _thrusters: Thrusters = $Thrusters
 @onready var _main_state = get_node("/root/MainState")
@@ -20,9 +21,11 @@ func _process(delta):
 	_update_main_state(delta)
 
 func _physics_process(delta):
-	for force in _forces:
-		if force.force.length() != 0:
-			apply_force(force.force, force.position)
+	if _has_forces():
+		_apply_forces(delta)
+
+func _integrate_forces(state):
+	_limit_velocity(state)
 
 func _init_thrusters():
 	_thrusters.setup(_main_thrust, _maneuver_thrust)
@@ -36,6 +39,22 @@ func _init_thrusters():
 	_forces[Thrusters.ID.BL] = Force.new()
 	_forces[Thrusters.ID.LB] = Force.new()
 	_forces[Thrusters.ID.LF] = Force.new()
+
+func _has_forces():
+	for f in _forces:
+		if f.force.length() > 0:
+			return true
+	return false
+
+func _limit_velocity(state: PhysicsDirectBodyState2D):
+	var state_velocity = state.linear_velocity
+	if state_velocity.length() > _velocity_limit:
+		state.linear_velocity = state_velocity.normalized() * _velocity_limit
+
+func _apply_forces(delta: float):
+	for force in _forces:
+		if force.force.length() != 0:
+			apply_force(force.force, force.position)
 
 func _add_force(id: int, position: Vector2, force: Vector2):
 	_forces[id].position = position.rotated(rotation)
