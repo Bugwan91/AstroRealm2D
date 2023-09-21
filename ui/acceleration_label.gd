@@ -6,4 +6,4 @@ func _ready():
 	text = "Acceleration"
 
 func _process(delta):
-	text = "A: " + str(_main_state.ship_acceleration).pad_decimals(0)
+	text = "a: " + str(_main_state.ship_acceleration).pad_decimals(0)

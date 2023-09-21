@@ -5,7 +5,12 @@ class_name Thruster
 signal thrust_changed(id: int, position: Vector2, force: Vector2)
 
 @onready var _flame: Node2D = $Flame
-@export var on: bool = true
+@export var on: bool = true:
+	get:
+		return on
+	set(value):
+		on = value
+		_throttle = 0
 
 var _power: float = 0
 var _id: int = -1

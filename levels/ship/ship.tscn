@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://ce1dw618jykrb"]
 
-[ext_resource type="Script" path="res://levels/ship/Ship.gd" id="1_sfbv2"]
+[ext_resource type="Script" path="res://levels/ship/ship.gd" id="1_05imn"]
 [ext_resource type="Texture2D" uid="uid://bma47ok67e74c" path="res://assets/my/Engine_01.png" id="2_egq1q"]
 [ext_resource type="Script" path="res://levels/ship/thruster.gd" id="3_2lgbi"]
 [ext_resource type="Texture2D" uid="uid://bsmwulpgvt64l" path="res://assets/my/Engine_Flame_01.png" id="3_5730x"]
@@ -77,9 +77,7 @@ animations = [{
 }]
 
 [node name="Ship" type="RigidBody2D"]
-script = ExtResource("1_sfbv2")
-_engine_thrust = 100.0
-_maneuver_thrust = 25.0
+script = ExtResource("1_05imn")
 
 [node name="Model" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -119,7 +117,7 @@ texture = ExtResource("4_fxnn0")
 texture_scale = 2.0
 
 [node name="FL" type="Node2D" parent="Thrusters"]
-position = Vector2(21, -13)
+position = Vector2(31, -9)
 script = ExtResource("3_2lgbi")
 
 [node name="Flame" type="AnimatedSprite2D" parent="Thrusters/FL"]
@@ -137,7 +135,7 @@ texture = ExtResource("4_fxnn0")
 texture_scale = 2.0
 
 [node name="FR" type="Node2D" parent="Thrusters"]
-position = Vector2(21, 13)
+position = Vector2(31, 9)
 script = ExtResource("3_2lgbi")
 
 [node name="Flame" type="AnimatedSprite2D" parent="Thrusters/FR"]
