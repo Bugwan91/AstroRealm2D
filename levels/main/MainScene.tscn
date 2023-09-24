@@ -19,7 +19,7 @@ ship_scene = ExtResource("3_ih6ak")
 environment = SubResource("Environment_1ojvs")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("2_70vcr")]
-scroll_offset = Vector2(367.373, 85.8677)
+scroll_offset = Vector2(337.074, -603.398)
 
 [node name="UI" parent="." instance=ExtResource("4_egkhu")]
 

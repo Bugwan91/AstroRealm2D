@@ -4,8 +4,7 @@ class_name ShipDirectInput
 
 @export var enabled := true
 @onready var thrusters: Thrusters = %Thrusters
-@onready var engine: Thruster = $"../Hull/Engine/MainEngine"
-
+@onready var engine = $"../MainEngine"
 
 var _burst: float = 0:
 	get:

@@ -8,7 +8,7 @@ class_name ShipRigidBody
 
 @onready var _thrusters: Thrusters = %Thrusters
 @onready var _main_state = get_node("/root/MainState")
-@onready var engine: Thruster = $Hull/Engine/MainEngine
+@onready var engine: Thruster = $MainEngine
 
 enum CONTROL {DIRECT, ASSIST}
 var _control := CONTROL.DIRECT

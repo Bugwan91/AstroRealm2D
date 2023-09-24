@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=23 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://levels/ship/direct_input.gd" id="1_5qs45"]
 [ext_resource type="Script" path="res://levels/ship/assistant_input.gd" id="3_lrilt"]
@@ -10,10 +10,28 @@
 [ext_resource type="Script" path="res://levels/thruster/thruster.gd" id="8_d4b7a"]
 [ext_resource type="PackedScene" uid="uid://k6231xltcfhl" path="res://levels/thruster/thruster.tscn" id="10_wlx63"]
 [ext_resource type="Script" path="res://levels/thruster/thrusters.gd" id="11_hhoku"]
+[ext_resource type="Script" path="res://levels/ship/SubViewport.gd" id="11_nfjr8"]
+[ext_resource type="Texture2D" uid="uid://bw0567gbqiej5" path="res://assets/my/ship_o1/hull_mask.PNG" id="11_twh0c"]
+[ext_resource type="Texture2D" uid="uid://saoxul3lq0cv" path="res://assets/my/ship_o1/cocpit_mask.PNG" id="12_s6v80"]
+[ext_resource type="Texture2D" uid="uid://d2jjuyo4lx3dr" path="res://assets/my/ship_o1/engine_mask.PNG" id="13_n01vj"]
+[ext_resource type="Shader" path="res://levels/ship/ship_style.gdshader" id="15_16ey5"]
+[ext_resource type="Texture2D" uid="uid://dljuhgwuqagig" path="res://ship_mask.png" id="16_f0mh8"]
+[ext_resource type="Texture2D" uid="uid://ctg5xk4txqcd6" path="res://ship.png" id="16_v2u35"]
+[ext_resource type="Texture2D" uid="uid://q026lhon6o0q" path="res://ship_base.png" id="17_g6os6"]
+[ext_resource type="Texture2D" uid="uid://b01ngftnrfm3q" path="res://assets/my/ship_o1/style.PNG" id="18_qyb55"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gvqnx"]
 radius = 8.0
 height = 64.0
+
+[sub_resource type="Environment" id="Environment_73wh7"]
+background_mode = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sayty"]
+shader = ExtResource("15_16ey5")
+shader_parameter/ship_texture = ExtResource("17_g6os6")
+shader_parameter/mask_texture = ExtResource("16_f0mh8")
+shader_parameter/style_texture = ExtResource("18_qyb55")
 
 [node name="Ship" type="RigidBody2D"]
 linear_damp_mode = 1
@@ -21,6 +39,62 @@ angular_damp_mode = 1
 script = ExtResource("3_s2s04")
 _main_thrust = 100.0
 _maneuver_thrust = 20.0
+_velocity_limit = 500.0
+
+[node name="Camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+zoom = Vector2(4, 4)
+position_smoothing_speed = 50.0
+
+[node name="Model" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("16_v2u35")
+
+[node name="MainEngine" parent="." instance=ExtResource("10_wlx63")]
+position = Vector2(-32, -5.48045e-05)
+script = ExtResource("8_d4b7a")
+
+[node name="Thrusters" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("11_hhoku")
+
+[node name="FL" parent="Thrusters" instance=ExtResource("10_wlx63")]
+position = Vector2(24, -6)
+rotation = 3.14159
+scale = Vector2(0.2, 0.2)
+
+[node name="FR" parent="Thrusters" instance=ExtResource("10_wlx63")]
+position = Vector2(24, 6)
+rotation = 3.14159
+scale = Vector2(0.2, 0.2)
+
+[node name="RF" parent="Thrusters" instance=ExtResource("10_wlx63")]
+position = Vector2(19, 8)
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+
+[node name="RB" parent="Thrusters" instance=ExtResource("10_wlx63")]
+position = Vector2(-21, 8)
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+
+[node name="BR" parent="Thrusters" instance=ExtResource("10_wlx63")]
+position = Vector2(-14, 15)
+scale = Vector2(0.2, 0.2)
+
+[node name="BL" parent="Thrusters" instance=ExtResource("10_wlx63")]
+position = Vector2(-14, -15)
+scale = Vector2(0.2, 0.2)
+
+[node name="LB" parent="Thrusters" instance=ExtResource("10_wlx63")]
+position = Vector2(-21, -8)
+rotation = 1.5708
+scale = Vector2(0.2, 0.2)
+
+[node name="LF" parent="Thrusters" instance=ExtResource("10_wlx63")]
+position = Vector2(19, -8)
+rotation = 1.5708
+scale = Vector2(0.2, 0.2)
 
 [node name="DirectInput" type="Node" parent="."]
 unique_name_in_owner = true
@@ -34,70 +108,79 @@ script = ExtResource("3_lrilt")
 unique_name_in_owner = true
 script = ExtResource("4_fdujd")
 
-[node name="Camera" type="Camera2D" parent="."]
-unique_name_in_owner = true
-zoom = Vector2(2, 2)
-
-[node name="Hull" type="Sprite2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 rotation = 1.5708
+shape = SubResource("CapsuleShape2D_gvqnx")
+
+[node name="ShipBaker" type="SubViewport" parent="."]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(32, 64)
+render_target_clear_mode = 1
+render_target_update_mode = 1
+script = ExtResource("11_nfjr8")
+filename = "res://ship_base.png"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="ShipBaker"]
+
+[node name="hull_view" type="Node2D" parent="ShipBaker/CanvasLayer"]
+position = Vector2(16, 32)
+
+[node name="hull" type="Sprite2D" parent="ShipBaker/CanvasLayer/hull_view"]
 texture = ExtResource("5_u7nvr")
 
-[node name="Cocpit" type="Sprite2D" parent="Hull"]
+[node name="cocpit" type="Sprite2D" parent="ShipBaker/CanvasLayer/hull_view"]
 position = Vector2(0, -16)
 texture = ExtResource("6_i8dug")
 
-[node name="Engine" type="Sprite2D" parent="Hull"]
+[node name="engine" type="Sprite2D" parent="ShipBaker/CanvasLayer/hull_view"]
 position = Vector2(0, 16)
 texture = ExtResource("7_l8q4m")
 
-[node name="MainEngine" parent="Hull/Engine" instance=ExtResource("10_wlx63")]
-position = Vector2(6.10352e-05, 16)
-rotation = -1.5708
-script = ExtResource("8_d4b7a")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="ShipBaker"]
+environment = SubResource("Environment_73wh7")
 
-[node name="Thrusters" type="Node2D" parent="Hull"]
-unique_name_in_owner = true
-rotation = -1.5708
-script = ExtResource("11_hhoku")
+[node name="ShipMaskBaker" type="SubViewport" parent="."]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(32, 64)
+render_target_clear_mode = 1
+render_target_update_mode = 1
+script = ExtResource("11_nfjr8")
+filename = "res://ship_mask.png"
 
-[node name="FL" parent="Hull/Thrusters" instance=ExtResource("10_wlx63")]
-position = Vector2(24, -6)
-rotation = 3.14159
-scale = Vector2(0.2, 0.2)
+[node name="CanvasLayer" type="CanvasLayer" parent="ShipMaskBaker"]
 
-[node name="FR" parent="Hull/Thrusters" instance=ExtResource("10_wlx63")]
-position = Vector2(24, 6)
-rotation = 3.14159
-scale = Vector2(0.2, 0.2)
+[node name="mask_view" type="Node2D" parent="ShipMaskBaker/CanvasLayer"]
+texture_filter = 1
+position = Vector2(16, 32)
 
-[node name="RF" parent="Hull/Thrusters" instance=ExtResource("10_wlx63")]
-position = Vector2(19, 8)
-rotation = -1.5708
-scale = Vector2(0.2, 0.2)
+[node name="hull" type="Sprite2D" parent="ShipMaskBaker/CanvasLayer/mask_view"]
+texture = ExtResource("11_twh0c")
 
-[node name="RB" parent="Hull/Thrusters" instance=ExtResource("10_wlx63")]
-position = Vector2(-21, 8)
-rotation = -1.5708
-scale = Vector2(0.2, 0.2)
+[node name="cocpit" type="Sprite2D" parent="ShipMaskBaker/CanvasLayer/mask_view"]
+position = Vector2(0, -16)
+texture = ExtResource("12_s6v80")
 
-[node name="BR" parent="Hull/Thrusters" instance=ExtResource("10_wlx63")]
-position = Vector2(-14, 15)
-scale = Vector2(0.2, 0.2)
+[node name="engine" type="Sprite2D" parent="ShipMaskBaker/CanvasLayer/mask_view"]
+position = Vector2(0, 16)
+texture = ExtResource("13_n01vj")
 
-[node name="BL" parent="Hull/Thrusters" instance=ExtResource("10_wlx63")]
-position = Vector2(-14, -15)
-scale = Vector2(0.2, 0.2)
+[node name="ShipStylizator" type="SubViewport" parent="."]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(32, 64)
+render_target_clear_mode = 1
+render_target_update_mode = 1
+script = ExtResource("11_nfjr8")
+filename = "res://ship.png"
 
-[node name="LB" parent="Hull/Thrusters" instance=ExtResource("10_wlx63")]
-position = Vector2(-21, -8)
-rotation = 1.5708
-scale = Vector2(0.2, 0.2)
+[node name="CanvasLayer" type="CanvasLayer" parent="ShipStylizator"]
 
-[node name="LF" parent="Hull/Thrusters" instance=ExtResource("10_wlx63")]
-position = Vector2(19, -8)
-rotation = 1.5708
-scale = Vector2(0.2, 0.2)
+[node name="ShipStylization" type="Node2D" parent="ShipStylizator/CanvasLayer"]
+position = Vector2(16, 32)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_gvqnx")
+[node name="Ship" type="Sprite2D" parent="ShipStylizator/CanvasLayer/ShipStylization"]
+material = SubResource("ShaderMaterial_sayty")
+texture = ExtResource("16_v2u35")
