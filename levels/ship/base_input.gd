@@ -1,23 +1,16 @@
 extends Node
 
-class_name ShiInput
+class_name ShipBaseInput
 
-signal main_changed(value: float)
-signal forward_changed(value: float)
-signal back_changed(value: float)
-signal left_changed(value: float)
-signal right_changed(value: float)
-signal turn_left_changed(value: float)
-signal turn_right_changed(value: float)
-signal direction_changed(value: Vector2)
+@export var enabled := true
 
-var _main: float = 0:
+var _burst: float = 0:
 	get:
-		return _main
+		return _burst
 	set(value):
-		if value != _main:
-			_main = value
-			main_changed.emit(value)
+		if value != _burst:
+			_burst = value
+			_action(Thrusters.ACTION.MAIN, value)
 
 var _forward: float = 0:
 	get:
@@ -25,7 +18,7 @@ var _forward: float = 0:
 	set(value):
 		if value != _forward:
 			_forward = value
-			forward_changed.emit(value)
+			_action(Thrusters.ACTION.FORWARD, value)
 
 var _back: float = 0:
 	get:
@@ -33,7 +26,7 @@ var _back: float = 0:
 	set(value):
 		if value != _back:
 			_back = value
-			back_changed.emit(value)
+			_action(Thrusters.ACTION.BACK, value)
 
 var _left: float = 0:
 	get:
@@ -41,7 +34,7 @@ var _left: float = 0:
 	set(value):
 		if value != _left:
 			_left = value
-			left_changed.emit(value)
+			_action(Thrusters.ACTION.LEFT, value)
 
 var _right: float = 0:
 	get:
@@ -49,7 +42,7 @@ var _right: float = 0:
 	set(value):
 		if value != _right:
 			_right = value
-			right_changed.emit(value)
+			_action(Thrusters.ACTION.RIGHT, value)
 
 var _turn_left: float = 0:
 	get:
@@ -57,7 +50,7 @@ var _turn_left: float = 0:
 	set(value):
 		if value != _turn_left:
 			_turn_left = value
-			turn_left_changed.emit(value)
+			_action(Thrusters.ACTION.TURN_LEFT, value)
 
 var _turn_right: float = 0:
 	get:
@@ -65,10 +58,12 @@ var _turn_right: float = 0:
 	set(value):
 		if value != _turn_right:
 			_turn_right = value
-			turn_right_changed.emit(value)
+			_action(Thrusters.ACTION.TURN_RIGHT, value)
 
 func _process(delta):
-	_main = 1 if Input.is_action_pressed("main_engine") else 0
+	if not enabled:
+		return
+	_burst = 1 if Input.is_action_pressed("main_engine") else 0
 	_forward = 1 if Input.is_action_pressed("throtle_forward") else 0
 	_back = 1 if Input.is_action_pressed("throtle_back") else 0
 	_back = 1 if Input.is_action_pressed("throtle_back") else 0
@@ -76,3 +71,6 @@ func _process(delta):
 	_right = 1 if Input.is_action_pressed("throtle_right") else 0
 	_turn_left = 1 if Input.is_action_pressed("turn_left") else 0
 	_turn_right = 1 if Input.is_action_pressed("turn_right") else 0
+
+func _action(type: int, value):
+	pass

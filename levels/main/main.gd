@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var ship_scene: PackedScene
+@onready var player = %Player
 
 func _ready():
-	add_child(ship_scene.instantiate())
+	player.add_child(ship_scene.instantiate())

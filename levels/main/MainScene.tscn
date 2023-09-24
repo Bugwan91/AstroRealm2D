@@ -1,15 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=8 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://levels/main/main.gd" id="1_0ls6w"]
 [ext_resource type="PackedScene" uid="uid://de6wu3uauymsr" path="res://levels/background/Background.tscn" id="2_70vcr"]
 [ext_resource type="PackedScene" uid="uid://ce1dw618jykrb" path="res://levels/ship/ship.tscn" id="3_ih6ak"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://ui/ui.tscn" id="4_egkhu"]
+[ext_resource type="Script" path="res://levels/main/cursor.gd" id="5_2vt56"]
+[ext_resource type="Texture2D" uid="uid://cyq7shk5k0udu" path="res://assets/my/pointer.png" id="5_b2lw5"]
 
 [sub_resource type="Environment" id="Environment_1ojvs"]
 background_mode = 3
 glow_enabled = true
-glow_strength = 0.84
-glow_blend_mode = 1
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_0ls6w")
@@ -19,5 +19,13 @@ ship_scene = ExtResource("3_ih6ak")
 environment = SubResource("Environment_1ojvs")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("2_70vcr")]
+scroll_offset = Vector2(367.373, 85.8677)
 
 [node name="UI" parent="." instance=ExtResource("4_egkhu")]
+
+[node name="Player" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Cursor" type="Sprite2D" parent="."]
+texture = ExtResource("5_b2lw5")
+script = ExtResource("5_2vt56")

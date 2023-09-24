@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://k6231xltcfhl"]
+
+[ext_resource type="Script" path="res://levels/thruster/maneuver_thruster.gd" id="1_vmdt3"]
+[ext_resource type="Texture2D" uid="uid://cisex58t66ecf" path="res://assets/my/ship_o1/engine_flame.png" id="2_at78l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3v21"]
+atlas = ExtResource("2_at78l")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nniuo"]
+atlas = ExtResource("2_at78l")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw8jh"]
+atlas = ExtResource("2_at78l")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtvhn"]
+atlas = ExtResource("2_at78l")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lhhdr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3v21")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nniuo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dw8jh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtvhn")
+}],
+"loop": true,
+"name": &"flame",
+"speed": 60.0
+}]
+
+[node name="Thruster" type="Node2D"]
+script = ExtResource("1_vmdt3")
+
+[node name="Flame" type="AnimatedSprite2D" parent="."]
+modulate = Color(1.2, 1.2, 1.2, 1)
+position = Vector2(-16, 0)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_lhhdr")
+animation = &"flame"
+autoplay = "flame"
+frame_progress = 0.0362415
