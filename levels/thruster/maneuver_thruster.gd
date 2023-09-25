@@ -29,6 +29,12 @@ func _calculate_torgue():
 	var forward = transform.x
 	torque = _thrust * (position.x * forward.y - position.y * forward.x) if enabled and _thrust > 0 else 0
 
+func calibrate_strafe(neg: float, pos: float):
+	if neg > pos and torque < -0.001:
+		_strafe_calibrator = pos / neg
+	elif pos > neg and torque > 0.001:
+		_strafe_calibrator = neg / pos
+
 func apply_throttle(type: TYPE, value: float):
 	match type:
 		TYPE.STRAFE:

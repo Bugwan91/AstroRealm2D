@@ -1,6 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=26 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://levels/ship/direct_input.gd" id="1_5qs45"]
+[ext_resource type="Shader" path="res://levels/ship/ship.gdshader" id="2_3hgsf"]
+[ext_resource type="Texture2D" uid="uid://dpp12wrak050k" path="res://ship_emission.png" id="3_h6kgy"]
 [ext_resource type="Script" path="res://levels/ship/assistant_input.gd" id="3_lrilt"]
 [ext_resource type="Script" path="res://levels/ship/ship_rb.gd" id="3_s2s04"]
 [ext_resource type="Script" path="res://levels/ship/assistant.gd" id="4_fdujd"]
@@ -18,7 +20,11 @@
 [ext_resource type="Texture2D" uid="uid://dljuhgwuqagig" path="res://ship_mask.png" id="16_f0mh8"]
 [ext_resource type="Texture2D" uid="uid://ctg5xk4txqcd6" path="res://ship.png" id="16_v2u35"]
 [ext_resource type="Texture2D" uid="uid://q026lhon6o0q" path="res://ship_base.png" id="17_g6os6"]
-[ext_resource type="Texture2D" uid="uid://b01ngftnrfm3q" path="res://assets/my/ship_o1/style.PNG" id="18_qyb55"]
+[ext_resource type="Texture2D" uid="uid://cpb4bjm46s1nn" path="res://assets/my/ship_o1/style_2.png" id="19_u70fy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8d03f"]
+shader = ExtResource("2_3hgsf")
+shader_parameter/emission_texture = ExtResource("3_h6kgy")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gvqnx"]
 radius = 8.0
@@ -29,13 +35,10 @@ background_mode = 3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sayty"]
 shader = ExtResource("15_16ey5")
-shader_parameter/ship_texture = ExtResource("17_g6os6")
 shader_parameter/mask_texture = ExtResource("16_f0mh8")
-shader_parameter/style_texture = ExtResource("18_qyb55")
+shader_parameter/style_texture = ExtResource("19_u70fy")
 
 [node name="Ship" type="RigidBody2D"]
-linear_damp_mode = 1
-angular_damp_mode = 1
 script = ExtResource("3_s2s04")
 _main_thrust = 100.0
 _maneuver_thrust = 20.0
@@ -43,12 +46,18 @@ _velocity_limit = 500.0
 
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true
-zoom = Vector2(4, 4)
+zoom = Vector2(2, 2)
 position_smoothing_speed = 50.0
 
 [node name="Model" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_8d03f")
 rotation = 1.5708
 texture = ExtResource("16_v2u35")
+
+[node name="BaseModel" type="Sprite2D" parent="."]
+visible = false
+rotation = 1.5708
+texture = ExtResource("5_u7nvr")
 
 [node name="MainEngine" parent="." instance=ExtResource("10_wlx63")]
 position = Vector2(-32, -5.48045e-05)
@@ -59,17 +68,17 @@ unique_name_in_owner = true
 script = ExtResource("11_hhoku")
 
 [node name="FL" parent="Thrusters" instance=ExtResource("10_wlx63")]
-position = Vector2(24, -6)
+position = Vector2(14, -7)
 rotation = 3.14159
 scale = Vector2(0.2, 0.2)
 
 [node name="FR" parent="Thrusters" instance=ExtResource("10_wlx63")]
-position = Vector2(24, 6)
+position = Vector2(14, 7)
 rotation = 3.14159
 scale = Vector2(0.2, 0.2)
 
 [node name="RF" parent="Thrusters" instance=ExtResource("10_wlx63")]
-position = Vector2(19, 8)
+position = Vector2(13, 8)
 rotation = -1.5708
 scale = Vector2(0.2, 0.2)
 
@@ -92,7 +101,7 @@ rotation = 1.5708
 scale = Vector2(0.2, 0.2)
 
 [node name="LF" parent="Thrusters" instance=ExtResource("10_wlx63")]
-position = Vector2(19, -8)
+position = Vector2(13, -8)
 rotation = 1.5708
 scale = Vector2(0.2, 0.2)
 
@@ -183,4 +192,4 @@ position = Vector2(16, 32)
 
 [node name="Ship" type="Sprite2D" parent="ShipStylizator/CanvasLayer/ShipStylization"]
 material = SubResource("ShaderMaterial_sayty")
-texture = ExtResource("16_v2u35")
+texture = ExtResource("17_g6os6")

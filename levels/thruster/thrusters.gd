@@ -46,7 +46,6 @@ func _setup_strafe(thruster: ManeuverThruster):
 
 func calibrate():
 	calibrate_strafe()
-	calibrate_rotation()
 
 func calibrate_strafe():
 	for action in _action_map:
@@ -63,15 +62,8 @@ func _calibrate_strafe(type):
 			torque_neg += abs(thruster.torque)
 	if abs(torque_pos - torque_neg) < TORQUE_IGNORE_ZONE:
 		return
-		
 	for thruster: ManeuverThruster in _thrusters[type]:
-		var value = 1 - min(torque_pos, torque_neg) / max(torque_pos, torque_neg)
-		printt("diff: ", value)
-
-func calibrate_rotation():
-	for action in _action_map:
-		if _action_map[action] == ManeuverThruster.TYPE.ROTATE:
-			_calibrate_rotation(action)
+		thruster.calibrate_strafe(torque_neg, torque_pos)
 
 func _calibrate_rotation(type):
 	for thruster: ManeuverThruster in _thrusters[type]:

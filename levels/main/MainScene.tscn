@@ -10,6 +10,9 @@
 [sub_resource type="Environment" id="Environment_1ojvs"]
 background_mode = 3
 glow_enabled = true
+glow_strength = 0.75
+glow_blend_mode = 1
+glow_hdr_scale = 1.0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_0ls6w")
