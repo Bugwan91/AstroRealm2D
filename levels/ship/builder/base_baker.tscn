@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://so45uy7g21oq"]
+
+[ext_resource type="Script" path="res://levels/ship/builder/scripts/base_baker.gd" id="1_wk36k"]
+[ext_resource type="PackedScene" uid="uid://dgnjxbxm23s8p" path="res://levels/ship/builder/ship_base.tscn" id="2_81esr"]
+[ext_resource type="Texture2D" uid="uid://b01ngftnrfm3q" path="res://assets/my/ship_o1/style_1.PNG" id="3_fuhp6"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="BaseBaker" type="SubViewport" parent="."]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(32, 64)
+render_target_clear_mode = 1
+render_target_update_mode = 1
+script = ExtResource("1_wk36k")
+type = null
+
+[node name="CanvasLayer" type="CanvasLayer" parent="BaseBaker"]
+
+[node name="View" parent="BaseBaker/CanvasLayer" instance=ExtResource("2_81esr")]
+unique_name_in_owner = true
+position = Vector2(16, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_fuhp6")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]

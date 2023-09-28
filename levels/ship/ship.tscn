@@ -1,45 +1,45 @@
-[gd_scene load_steps=26 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=28 format=3 uid="uid://ce1dw618jykrb"]
 
-[ext_resource type="Script" path="res://levels/ship/direct_input.gd" id="1_5qs45"]
-[ext_resource type="Shader" path="res://levels/ship/ship.gdshader" id="2_3hgsf"]
-[ext_resource type="Texture2D" uid="uid://dpp12wrak050k" path="res://ship_emission.png" id="3_h6kgy"]
-[ext_resource type="Script" path="res://levels/ship/assistant_input.gd" id="3_lrilt"]
-[ext_resource type="Script" path="res://levels/ship/ship_rb.gd" id="3_s2s04"]
-[ext_resource type="Script" path="res://levels/ship/assistant.gd" id="4_fdujd"]
-[ext_resource type="Texture2D" uid="uid://b5ce1p0jgset6" path="res://assets/my/ship_o1/hull.PNG" id="5_u7nvr"]
-[ext_resource type="Texture2D" uid="uid://5ljk8dqss6jq" path="res://assets/my/ship_o1/cocpit.PNG" id="6_i8dug"]
-[ext_resource type="Texture2D" uid="uid://cufdn5pokpq8y" path="res://assets/my/ship_o1/engine.PNG" id="7_l8q4m"]
+[ext_resource type="Script" path="res://levels/ship/scripts/ship_rb.gd" id="1_wdoy6"]
+[ext_resource type="Shader" path="res://levels/ship/scripts/ship.gdshader" id="2_hj2nt"]
+[ext_resource type="Texture2D" uid="uid://dpp12wrak050k" path="res://ship_emission.png" id="3_co5i1"]
+[ext_resource type="Script" path="res://levels/ship/scripts/direct_input.gd" id="8_bnsrs"]
 [ext_resource type="Script" path="res://levels/thruster/thruster.gd" id="8_d4b7a"]
+[ext_resource type="Script" path="res://levels/ship/scripts/assistant_input.gd" id="9_pme7i"]
+[ext_resource type="Script" path="res://levels/ship/scripts/assistant.gd" id="10_ot58s"]
 [ext_resource type="PackedScene" uid="uid://k6231xltcfhl" path="res://levels/thruster/thruster.tscn" id="10_wlx63"]
+[ext_resource type="Script" path="res://levels/ship/scripts/SubViewport.gd" id="11_f18mv"]
 [ext_resource type="Script" path="res://levels/thruster/thrusters.gd" id="11_hhoku"]
-[ext_resource type="Script" path="res://levels/ship/SubViewport.gd" id="11_nfjr8"]
-[ext_resource type="Texture2D" uid="uid://bw0567gbqiej5" path="res://assets/my/ship_o1/hull_mask.PNG" id="11_twh0c"]
-[ext_resource type="Texture2D" uid="uid://saoxul3lq0cv" path="res://assets/my/ship_o1/cocpit_mask.PNG" id="12_s6v80"]
-[ext_resource type="Texture2D" uid="uid://d2jjuyo4lx3dr" path="res://assets/my/ship_o1/engine_mask.PNG" id="13_n01vj"]
-[ext_resource type="Shader" path="res://levels/ship/ship_style.gdshader" id="15_16ey5"]
+[ext_resource type="Texture2D" uid="uid://cptyhxa6dxk7y" path="res://assets/my/ship_o1/hull_1.PNG" id="12_dapyr"]
+[ext_resource type="Texture2D" uid="uid://bdjs7ywlspykf" path="res://assets/my/ship_o1/cocpit_2.PNG" id="13_ms84k"]
+[ext_resource type="Texture2D" uid="uid://cxe6gi15exjbm" path="res://assets/my/ship_o1/engine_2.PNG" id="14_1r6x2"]
+[ext_resource type="Texture2D" uid="uid://c6b8pehpj46wl" path="res://assets/my/ship_o1/hull_1_mask.PNG" id="15_f7otg"]
 [ext_resource type="Texture2D" uid="uid://dljuhgwuqagig" path="res://ship_mask.png" id="16_f0mh8"]
+[ext_resource type="Texture2D" uid="uid://dmhv48ebm52oe" path="res://assets/my/ship_o1/cocpit_2_mask.PNG" id="16_m6sfl"]
 [ext_resource type="Texture2D" uid="uid://ctg5xk4txqcd6" path="res://ship.png" id="16_v2u35"]
 [ext_resource type="Texture2D" uid="uid://q026lhon6o0q" path="res://ship_base.png" id="17_g6os6"]
-[ext_resource type="Texture2D" uid="uid://cpb4bjm46s1nn" path="res://assets/my/ship_o1/style_2.png" id="19_u70fy"]
+[ext_resource type="Texture2D" uid="uid://cbxltv3f2jfxb" path="res://assets/my/ship_o1/engine_2_mask.PNG" id="17_jk0of"]
+[ext_resource type="Texture2D" uid="uid://e50jxo4o4al" path="res://assets/my/ship_o1/hull_1_emission.PNG" id="18_0gtvi"]
+[ext_resource type="Texture2D" uid="uid://b1div50ru5c4l" path="res://assets/my/ship_o1/cocpit_2_emission.PNG" id="19_6gqhq"]
+[ext_resource type="Texture2D" uid="uid://bl55syfjjpfi7" path="res://assets/my/ship_o1/engine_2_emission.PNG" id="20_d7oi0"]
+[ext_resource type="Shader" path="res://levels/ship/scripts/ship_style.gdshader" id="21_kd45o"]
+[ext_resource type="Texture2D" uid="uid://byxx4hkfvugmv" path="res://assets/my/ship_o1/style_8.PNG" id="23_lrysj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8d03f"]
-shader = ExtResource("2_3hgsf")
-shader_parameter/emission_texture = ExtResource("3_h6kgy")
+shader = ExtResource("2_hj2nt")
+shader_parameter/emission_texture = ExtResource("3_co5i1")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gvqnx"]
 radius = 8.0
 height = 64.0
 
-[sub_resource type="Environment" id="Environment_73wh7"]
-background_mode = 3
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sayty"]
-shader = ExtResource("15_16ey5")
+shader = ExtResource("21_kd45o")
 shader_parameter/mask_texture = ExtResource("16_f0mh8")
-shader_parameter/style_texture = ExtResource("19_u70fy")
+shader_parameter/style_texture = ExtResource("23_lrysj")
 
 [node name="Ship" type="RigidBody2D"]
-script = ExtResource("3_s2s04")
+script = ExtResource("1_wdoy6")
 _main_thrust = 100.0
 _maneuver_thrust = 20.0
 _velocity_limit = 500.0
@@ -47,17 +47,13 @@ _velocity_limit = 500.0
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true
 zoom = Vector2(2, 2)
-position_smoothing_speed = 50.0
+process_callback = 0
+position_smoothing_speed = 10.0
 
 [node name="Model" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_8d03f")
 rotation = 1.5708
 texture = ExtResource("16_v2u35")
-
-[node name="BaseModel" type="Sprite2D" parent="."]
-visible = false
-rotation = 1.5708
-texture = ExtResource("5_u7nvr")
 
 [node name="MainEngine" parent="." instance=ExtResource("10_wlx63")]
 position = Vector2(-32, -5.48045e-05)
@@ -107,89 +103,114 @@ scale = Vector2(0.2, 0.2)
 
 [node name="DirectInput" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("1_5qs45")
+script = ExtResource("8_bnsrs")
 
 [node name="AssistantInput" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("3_lrilt")
+script = ExtResource("9_pme7i")
 
 [node name="Assistant" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("4_fdujd")
+script = ExtResource("10_ot58s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_gvqnx")
 
-[node name="ShipBaker" type="SubViewport" parent="."]
+[node name="Baker" type="Node" parent="."]
+
+[node name="BaseBaker" type="SubViewport" parent="Baker"]
 transparent_bg = true
 canvas_item_default_texture_filter = 0
 size = Vector2i(32, 64)
 render_target_clear_mode = 1
 render_target_update_mode = 1
-script = ExtResource("11_nfjr8")
+script = ExtResource("11_f18mv")
 filename = "res://ship_base.png"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="ShipBaker"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Baker/BaseBaker"]
 
-[node name="hull_view" type="Node2D" parent="ShipBaker/CanvasLayer"]
+[node name="hull_view" type="Node2D" parent="Baker/BaseBaker/CanvasLayer"]
 position = Vector2(16, 32)
 
-[node name="hull" type="Sprite2D" parent="ShipBaker/CanvasLayer/hull_view"]
-texture = ExtResource("5_u7nvr")
+[node name="hull" type="Sprite2D" parent="Baker/BaseBaker/CanvasLayer/hull_view"]
+texture = ExtResource("12_dapyr")
 
-[node name="cocpit" type="Sprite2D" parent="ShipBaker/CanvasLayer/hull_view"]
+[node name="cocpit" type="Sprite2D" parent="Baker/BaseBaker/CanvasLayer/hull_view"]
 position = Vector2(0, -16)
-texture = ExtResource("6_i8dug")
+texture = ExtResource("13_ms84k")
 
-[node name="engine" type="Sprite2D" parent="ShipBaker/CanvasLayer/hull_view"]
+[node name="engine" type="Sprite2D" parent="Baker/BaseBaker/CanvasLayer/hull_view"]
 position = Vector2(0, 16)
-texture = ExtResource("7_l8q4m")
+texture = ExtResource("14_1r6x2")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="ShipBaker"]
-environment = SubResource("Environment_73wh7")
-
-[node name="ShipMaskBaker" type="SubViewport" parent="."]
+[node name="MaskBaker" type="SubViewport" parent="Baker"]
 transparent_bg = true
 canvas_item_default_texture_filter = 0
 size = Vector2i(32, 64)
 render_target_clear_mode = 1
 render_target_update_mode = 1
-script = ExtResource("11_nfjr8")
+script = ExtResource("11_f18mv")
 filename = "res://ship_mask.png"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="ShipMaskBaker"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Baker/MaskBaker"]
 
-[node name="mask_view" type="Node2D" parent="ShipMaskBaker/CanvasLayer"]
+[node name="mask_view" type="Node2D" parent="Baker/MaskBaker/CanvasLayer"]
 texture_filter = 1
 position = Vector2(16, 32)
 
-[node name="hull" type="Sprite2D" parent="ShipMaskBaker/CanvasLayer/mask_view"]
-texture = ExtResource("11_twh0c")
+[node name="hull" type="Sprite2D" parent="Baker/MaskBaker/CanvasLayer/mask_view"]
+texture = ExtResource("15_f7otg")
 
-[node name="cocpit" type="Sprite2D" parent="ShipMaskBaker/CanvasLayer/mask_view"]
+[node name="cocpit" type="Sprite2D" parent="Baker/MaskBaker/CanvasLayer/mask_view"]
 position = Vector2(0, -16)
-texture = ExtResource("12_s6v80")
+texture = ExtResource("16_m6sfl")
 
-[node name="engine" type="Sprite2D" parent="ShipMaskBaker/CanvasLayer/mask_view"]
+[node name="engine" type="Sprite2D" parent="Baker/MaskBaker/CanvasLayer/mask_view"]
 position = Vector2(0, 16)
-texture = ExtResource("13_n01vj")
+texture = ExtResource("17_jk0of")
 
-[node name="ShipStylizator" type="SubViewport" parent="."]
+[node name="EmissionBaker" type="SubViewport" parent="Baker"]
 transparent_bg = true
 canvas_item_default_texture_filter = 0
 size = Vector2i(32, 64)
 render_target_clear_mode = 1
 render_target_update_mode = 1
-script = ExtResource("11_nfjr8")
-filename = "res://ship.png"
+script = ExtResource("11_f18mv")
+filename = "res://ship_emission.png"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="ShipStylizator"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Baker/EmissionBaker"]
 
-[node name="ShipStylization" type="Node2D" parent="ShipStylizator/CanvasLayer"]
+[node name="mask_view" type="Node2D" parent="Baker/EmissionBaker/CanvasLayer"]
+texture_filter = 1
 position = Vector2(16, 32)
 
-[node name="Ship" type="Sprite2D" parent="ShipStylizator/CanvasLayer/ShipStylization"]
+[node name="hull" type="Sprite2D" parent="Baker/EmissionBaker/CanvasLayer/mask_view"]
+texture = ExtResource("18_0gtvi")
+
+[node name="cocpit" type="Sprite2D" parent="Baker/EmissionBaker/CanvasLayer/mask_view"]
+position = Vector2(0, -16)
+texture = ExtResource("19_6gqhq")
+
+[node name="engine" type="Sprite2D" parent="Baker/EmissionBaker/CanvasLayer/mask_view"]
+position = Vector2(0, 16)
+texture = ExtResource("20_d7oi0")
+
+[node name="Stylizator" type="SubViewport" parent="Baker"]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(32, 64)
+render_target_clear_mode = 1
+render_target_update_mode = 1
+script = ExtResource("11_f18mv")
+filename = "res://ship.png"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Baker/Stylizator"]
+
+[node name="ShipStylization" type="Node2D" parent="Baker/Stylizator/CanvasLayer"]
+position = Vector2(16, 32)
+
+[node name="Ship" type="Sprite2D" parent="Baker/Stylizator/CanvasLayer/ShipStylization"]
 material = SubResource("ShaderMaterial_sayty")
 texture = ExtResource("17_g6os6")

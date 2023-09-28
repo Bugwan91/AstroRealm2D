@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dorroxwkwblll"]
+
+[ext_resource type="Script" path="res://levels/ship/builder/scripts/module_view.gd" id="1_qk16h"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ok6m3"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c88bi"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jw33f"]
+
+[node name="Module_16x32" type="Node2D"]
+script = ExtResource("1_qk16h")
+base_texture = SubResource("CompressedTexture2D_ok6m3")
+mask_texture = SubResource("CompressedTexture2D_c88bi")
+emission_texture = SubResource("CompressedTexture2D_jw33f")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(0, 16)
+
+[node name="Base" type="Sprite2D" parent="Node2D"]
+unique_name_in_owner = true
+texture = SubResource("CompressedTexture2D_ok6m3")
+
+[node name="Mask" type="Sprite2D" parent="Node2D"]
+unique_name_in_owner = true
+texture = SubResource("CompressedTexture2D_c88bi")
+
+[node name="Emission" type="Sprite2D" parent="Node2D"]
+unique_name_in_owner = true
+texture = SubResource("CompressedTexture2D_jw33f")
+
+[node name="Embeded" type="Node2D" parent="."]
+unique_name_in_owner = true

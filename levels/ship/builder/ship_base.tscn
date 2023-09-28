@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgnjxbxm23s8p"]
+
+[ext_resource type="Script" path="res://levels/ship/builder/scripts/module_view.gd" id="1_1d7au"]
+[ext_resource type="Script" path="res://levels/ship/builder/scripts/ship_module_builder.gd" id="5_rknuk"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mp7h2"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mqut4"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nx1xb"]
+
+[node name="ShipBase_32x64" type="Node2D"]
+script = ExtResource("1_1d7au")
+base_texture = SubResource("CompressedTexture2D_mp7h2")
+mask_texture = SubResource("CompressedTexture2D_mqut4")
+emission_texture = SubResource("CompressedTexture2D_nx1xb")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(0, 32)
+
+[node name="Base" type="Sprite2D" parent="Node2D"]
+texture = SubResource("CompressedTexture2D_mp7h2")
+
+[node name="Mask" type="Sprite2D" parent="Node2D"]
+texture = SubResource("CompressedTexture2D_mqut4")
+
+[node name="Emission" type="Sprite2D" parent="Node2D"]
+texture = SubResource("CompressedTexture2D_nx1xb")
+
+[node name="Embeded" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_rknuk")
+
+[node name="Cocpit" type="Node2D" parent="Embeded"]
+
+[node name="Engine" type="Node2D" parent="Embeded"]
+position = Vector2(0, 32)

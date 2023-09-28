@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjxqpu80fy1e3"
-path="res://.godot/imported/style.PNG-0e7bfda92fa45971d8e48a1d63813cac.ctex"
+uid="uid://dmhv48ebm52oe"
+path="res://.godot/imported/cocpit_2_mask.PNG-8d3e07d628da928149d05ba7d9b1cd0c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/my/ship_o1/style.PNG"
-dest_files=["res://.godot/imported/style.PNG-0e7bfda92fa45971d8e48a1d63813cac.ctex"]
+source_file="res://assets/my/ship_o1/cocpit_2_mask.PNG"
+dest_files=["res://.godot/imported/cocpit_2_mask.PNG-8d3e07d628da928149d05ba7d9b1cd0c.ctex"]
 
 [params]
 
