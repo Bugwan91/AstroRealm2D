@@ -1,12 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=27 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://levels/ship/scripts/ship_rb.gd" id="1_wdoy6"]
 [ext_resource type="Shader" path="res://levels/ship/scripts/ship.gdshader" id="2_hj2nt"]
 [ext_resource type="Texture2D" uid="uid://dpp12wrak050k" path="res://ship_emission.png" id="3_co5i1"]
-[ext_resource type="Script" path="res://levels/ship/scripts/direct_input.gd" id="8_bnsrs"]
+[ext_resource type="Script" path="res://levels/ship/scripts/flight_assistant.gd" id="8_cd285"]
 [ext_resource type="Script" path="res://levels/thruster/thruster.gd" id="8_d4b7a"]
-[ext_resource type="Script" path="res://levels/ship/scripts/assistant_input.gd" id="9_pme7i"]
-[ext_resource type="Script" path="res://levels/ship/scripts/assistant.gd" id="10_ot58s"]
 [ext_resource type="PackedScene" uid="uid://k6231xltcfhl" path="res://levels/thruster/thruster.tscn" id="10_wlx63"]
 [ext_resource type="Script" path="res://levels/ship/scripts/SubViewport.gd" id="11_f18mv"]
 [ext_resource type="Script" path="res://levels/thruster/thrusters.gd" id="11_hhoku"]
@@ -24,14 +22,12 @@
 [ext_resource type="Texture2D" uid="uid://bl55syfjjpfi7" path="res://assets/my/ship_o1/engine_2_emission.PNG" id="20_d7oi0"]
 [ext_resource type="Shader" path="res://levels/ship/scripts/ship_style.gdshader" id="21_kd45o"]
 [ext_resource type="Texture2D" uid="uid://byxx4hkfvugmv" path="res://assets/my/ship_o1/style_8.PNG" id="23_lrysj"]
+[ext_resource type="Script" path="res://levels/ship/ship_input_reader.gd" id="23_pav5x"]
+[ext_resource type="Script" path="res://levels/ship/interpolation.gd" id="25_1c55w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8d03f"]
 shader = ExtResource("2_hj2nt")
 shader_parameter/emission_texture = ExtResource("3_co5i1")
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gvqnx"]
-radius = 8.0
-height = 64.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sayty"]
 shader = ExtResource("21_kd45o")
@@ -44,79 +40,66 @@ _main_thrust = 100.0
 _maneuver_thrust = 20.0
 _velocity_limit = 500.0
 
-[node name="Camera" type="Camera2D" parent="."]
+[node name="Interpolation" type="Node2D" parent="."]
+script = ExtResource("25_1c55w")
+enabled = true
+
+[node name="Camera" type="Camera2D" parent="Interpolation"]
 unique_name_in_owner = true
 zoom = Vector2(2, 2)
-process_callback = 0
 position_smoothing_speed = 10.0
 
-[node name="Model" type="Sprite2D" parent="."]
+[node name="Model" type="Sprite2D" parent="Interpolation"]
 material = SubResource("ShaderMaterial_8d03f")
 rotation = 1.5708
 texture = ExtResource("16_v2u35")
 
-[node name="MainEngine" parent="." instance=ExtResource("10_wlx63")]
+[node name="MainEngine" parent="Interpolation" instance=ExtResource("10_wlx63")]
+unique_name_in_owner = true
 position = Vector2(-32, -5.48045e-05)
 script = ExtResource("8_d4b7a")
 
-[node name="Thrusters" type="Node2D" parent="."]
+[node name="Thrusters" type="Node2D" parent="Interpolation"]
 unique_name_in_owner = true
 script = ExtResource("11_hhoku")
 
-[node name="FL" parent="Thrusters" instance=ExtResource("10_wlx63")]
+[node name="FL" parent="Interpolation/Thrusters" instance=ExtResource("10_wlx63")]
 position = Vector2(14, -7)
 rotation = 3.14159
 scale = Vector2(0.2, 0.2)
 
-[node name="FR" parent="Thrusters" instance=ExtResource("10_wlx63")]
+[node name="FR" parent="Interpolation/Thrusters" instance=ExtResource("10_wlx63")]
 position = Vector2(14, 7)
 rotation = 3.14159
 scale = Vector2(0.2, 0.2)
 
-[node name="RF" parent="Thrusters" instance=ExtResource("10_wlx63")]
+[node name="RF" parent="Interpolation/Thrusters" instance=ExtResource("10_wlx63")]
 position = Vector2(13, 8)
 rotation = -1.5708
 scale = Vector2(0.2, 0.2)
 
-[node name="RB" parent="Thrusters" instance=ExtResource("10_wlx63")]
+[node name="RB" parent="Interpolation/Thrusters" instance=ExtResource("10_wlx63")]
 position = Vector2(-21, 8)
 rotation = -1.5708
 scale = Vector2(0.2, 0.2)
 
-[node name="BR" parent="Thrusters" instance=ExtResource("10_wlx63")]
+[node name="BR" parent="Interpolation/Thrusters" instance=ExtResource("10_wlx63")]
 position = Vector2(-14, 15)
 scale = Vector2(0.2, 0.2)
 
-[node name="BL" parent="Thrusters" instance=ExtResource("10_wlx63")]
+[node name="BL" parent="Interpolation/Thrusters" instance=ExtResource("10_wlx63")]
 position = Vector2(-14, -15)
 scale = Vector2(0.2, 0.2)
 
-[node name="LB" parent="Thrusters" instance=ExtResource("10_wlx63")]
+[node name="LB" parent="Interpolation/Thrusters" instance=ExtResource("10_wlx63")]
 position = Vector2(-21, -8)
 rotation = 1.5708
 scale = Vector2(0.2, 0.2)
 
-[node name="LF" parent="Thrusters" instance=ExtResource("10_wlx63")]
+[node name="LF" parent="Interpolation/Thrusters" instance=ExtResource("10_wlx63")]
 position = Vector2(13, -8)
 rotation = 1.5708
 scale = Vector2(0.2, 0.2)
-
-[node name="DirectInput" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("8_bnsrs")
-
-[node name="AssistantInput" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("9_pme7i")
-
-[node name="Assistant" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("10_ot58s")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_gvqnx")
 
 [node name="Baker" type="Node" parent="."]
 
@@ -214,3 +197,15 @@ position = Vector2(16, 32)
 [node name="Ship" type="Sprite2D" parent="Baker/Stylizator/CanvasLayer/ShipStylization"]
 material = SubResource("ShaderMaterial_sayty")
 texture = ExtResource("17_g6os6")
+
+[node name="FlightAssistant" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("8_cd285")
+
+[node name="InputReader" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("23_pav5x")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-29, -8, -14, -16, -6, -16, 32, 0, -6, 16, -14, 16, -29, 8)

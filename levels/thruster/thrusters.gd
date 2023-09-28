@@ -3,7 +3,6 @@ class_name Thrusters
 
 enum { FORWARD, BACK, RIGHT, LEFT, TURN_LEFT, TURN_RIGHT }
 var _thrusters = { FORWARD: [], BACK: [], RIGHT: [], LEFT: [], TURN_LEFT: [], TURN_RIGHT: [] }
-#var _power_map = { FORWARD: 0, BACK: 0, RIGHT: 0, LEFT: 0, TURN_LEFT: 0, TURN_RIGHT: 0 }
 var _action_map = {
 	FORWARD: ManeuverThruster.TYPE.STRAFE,
 	BACK: ManeuverThruster.TYPE.STRAFE,
