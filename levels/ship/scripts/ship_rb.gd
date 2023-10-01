@@ -26,8 +26,10 @@ func _physics_process(delta):
 		apply_central_impulse(Vector2(0, -40).rotated(rotation))
 	if Input.is_action_just_pressed("burst_right"):
 		apply_central_impulse(Vector2(0, 40).rotated(rotation))
+	
 	_apply_engine_force()
 	_apply_thrusters_forces()
+	_apply_thrusters_torque()
 	_apply_drag()
 
 func _integrate_forces(state):
@@ -41,12 +43,13 @@ func _reset_ship(state: PhysicsDirectBodyState2D):
 		_reset = false
 
 func _apply_thrusters_forces():
-	for force: Force in _thrusters.forces:
-		if not force.ignore():
-			apply_force(force.force.rotated(rotation), force.position.rotated(rotation))
+	apply_central_force(_thrusters.force.rotated(rotation))
+
+func _apply_thrusters_torque():
+	apply_torque(_thrusters.torque)
 
 func _apply_engine_force():
-	apply_central_force(Vector2(engine.force._scalar, 0).rotated(rotation))
+	apply_central_force(engine.force.rotated(rotation))
 
 func _apply_drag():
 	var delta = linear_velocity.length() - _velocity_limit

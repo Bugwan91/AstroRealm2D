@@ -15,6 +15,7 @@ glow_normalized = true
 glow_blend_mode = 0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0q06g"]
+radius = 17.0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_0ls6w")
@@ -36,7 +37,7 @@ visible = false
 script = ExtResource("5_wfi47")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(343, 0)
+position = Vector2(364, 0)
 mass = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
@@ -46,7 +47,7 @@ shape = SubResource("CircleShape2D_0q06g")
 texture = ExtResource("7_jjjix")
 
 [node name="RigidBody2D2" type="RigidBody2D" parent="."]
-position = Vector2(327, -22)
+position = Vector2(331, -33)
 mass = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
@@ -56,7 +57,7 @@ shape = SubResource("CircleShape2D_0q06g")
 texture = ExtResource("7_jjjix")
 
 [node name="RigidBody2D3" type="RigidBody2D" parent="."]
-position = Vector2(326, 22)
+position = Vector2(327, 34)
 mass = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D3"]
@@ -66,7 +67,7 @@ shape = SubResource("CircleShape2D_0q06g")
 texture = ExtResource("7_jjjix")
 
 [node name="RigidBody2D4" type="RigidBody2D" parent="."]
-position = Vector2(308, -2)
+position = Vector2(291, -8)
 mass = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D4"]
