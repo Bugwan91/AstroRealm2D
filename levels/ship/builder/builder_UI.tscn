@@ -57,6 +57,7 @@ style_icon = ExtResource("5_0hykj")
 
 [node name="Hull" type="ScrollContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/TabContainer"]
 layout_mode = 2
+metadata/_tab_name = ""
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/TabContainer/Hull"]
 layout_mode = 2
@@ -100,6 +101,7 @@ size_flags_vertical = 3
 [node name="Cocpit" type="ScrollContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_name = ""
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/TabContainer/Cocpit"]
 layout_mode = 2
@@ -143,6 +145,7 @@ size_flags_vertical = 3
 [node name="Engine" type="ScrollContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_name = ""
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/TabContainer/Engine"]
 layout_mode = 2
@@ -186,6 +189,7 @@ size_flags_vertical = 3
 [node name="Style" type="ScrollContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_name = ""
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/TabContainer/Style"]
 layout_mode = 2

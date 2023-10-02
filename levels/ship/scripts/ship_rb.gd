@@ -18,19 +18,18 @@ func _ready():
 
 func _process(delta):
 	_update_main_state(delta)
-	#DebugDraw2d.line(global_position, global_position + 0.2 * linear_velocity, Color.GREEN, 2)
 	_reset = Input.is_action_pressed("Reset")
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("burst_left"):
-		apply_central_impulse(Vector2(0, -40).rotated(rotation))
-	if Input.is_action_just_pressed("burst_right"):
-		apply_central_impulse(Vector2(0, 40).rotated(rotation))
-	
 	_apply_engine_force()
 	_apply_thrusters_forces()
 	_apply_thrusters_torque()
 	_apply_drag()
+	
+	if Input.is_action_just_pressed("burst_left"):
+		apply_central_impulse(Vector2(0, -40).rotated(rotation))
+	if Input.is_action_just_pressed("burst_right"):
+		apply_central_impulse(Vector2(0, 40).rotated(rotation))
 
 func _integrate_forces(state):
 	_reset_ship(state)

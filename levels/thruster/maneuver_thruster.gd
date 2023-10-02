@@ -40,9 +40,14 @@ func apply_torque(value: float):
 func _update_flame():
 	if throttle > 0 or torque_throttle > 0:
 		_flame.show()
-		_flame.modulate.a = max(throttle, torque_throttle)
-		_sound.play()
-		_sound.volume_db = -20 - (10 - 10 * max(throttle, torque_throttle))
+		var value = max(throttle, torque_throttle)
+		_flame.modulate.a = value
+		# TODO: Rework thrusters sound
+		_sound.volume_db = -20 - (10 - 10 * value)
+		if not _sound.playing:
+			_sound.play()
+		if value < 0.1: #Threshold
+			_sound.stop()
 	else:
 		_flame.hide()
 		_sound.stop()

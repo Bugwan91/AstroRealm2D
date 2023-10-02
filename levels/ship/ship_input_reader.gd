@@ -4,6 +4,7 @@ class_name ShipInputReader
 signal main_thruster(value: float)
 signal strafe(value: Vector2)
 signal rotate(value: float)
+signal pointer(value: Vector2)
 
 var _main_thruster: float = 0:
 	set(value):
@@ -20,12 +21,14 @@ var _rotate: float = 0:
 		if value != _rotate:
 			_rotate = value
 			rotate.emit(_rotate)
+var _pointer: Vector2 = Vector2.ZERO:
+	set(value):
+		if value != _pointer:
+			_pointer = value
+			pointer.emit(_pointer)
 
 func _process(_delta):
 	_main_thruster = 1 if Input.is_action_pressed("throttle_main") else 0
 	_strafe = Vector2(Input.get_axis("manuever_back", "manuever_forward"), Input.get_axis("manuever_left", "manuever_right"))
 	_rotate = Input.get_axis("turn_left", "turn_right")
-
-#func _input(event):
-	#if event is InputEventMouseMotion:
-		#var target = get_global_mouse_position()
+	_pointer = get_global_mouse_position()

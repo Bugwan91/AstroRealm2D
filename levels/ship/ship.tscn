@@ -172,7 +172,6 @@ _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Interpolation/MainEngine"]
 position = Vector2(7.62939e-06, -5.08611e-07)
-scale = Vector2(1, 1)
 stream = ExtResource("24_ageps")
 
 [node name="Thrusters" type="Node2D" parent="Interpolation"]
@@ -186,7 +185,6 @@ scale = Vector2(0.2, 0.2)
 _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Interpolation/Thrusters/FL"]
-scale = Vector2(1, 1)
 stream = ExtResource("24_ageps")
 volume_db = -20.0
 pitch_scale = 2.0
@@ -198,7 +196,6 @@ scale = Vector2(0.2, 0.2)
 _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Interpolation/Thrusters/FR"]
-scale = Vector2(1, 1)
 stream = ExtResource("24_ageps")
 volume_db = -30.0
 pitch_scale = 2.0
@@ -210,7 +207,6 @@ scale = Vector2(0.2, 0.2)
 _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Interpolation/Thrusters/RF"]
-scale = Vector2(1, 1)
 stream = ExtResource("24_ageps")
 volume_db = -20.0
 pitch_scale = 2.0
@@ -222,7 +218,6 @@ scale = Vector2(0.2, 0.2)
 _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Interpolation/Thrusters/RB"]
-scale = Vector2(1, 1)
 stream = ExtResource("24_ageps")
 volume_db = -20.0
 pitch_scale = 2.0
@@ -233,7 +228,6 @@ scale = Vector2(0.2, 0.2)
 _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Interpolation/Thrusters/BR"]
-scale = Vector2(1, 1)
 stream = ExtResource("24_ageps")
 volume_db = -20.0
 pitch_scale = 2.0
@@ -244,7 +238,6 @@ scale = Vector2(0.2, 0.2)
 _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Interpolation/Thrusters/BL"]
-scale = Vector2(1, 1)
 stream = ExtResource("24_ageps")
 volume_db = -20.0
 pitch_scale = 2.0
@@ -256,7 +249,6 @@ scale = Vector2(0.2, 0.2)
 _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Interpolation/Thrusters/LB"]
-scale = Vector2(1, 1)
 stream = ExtResource("24_ageps")
 volume_db = -20.0
 pitch_scale = 2.0
@@ -268,7 +260,6 @@ scale = Vector2(0.2, 0.2)
 _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Interpolation/Thrusters/LF"]
-scale = Vector2(1, 1)
 stream = ExtResource("24_ageps")
 volume_db = -20.0
 pitch_scale = 2.0
