@@ -12,11 +12,12 @@ enum TYPE { BASE, MASK, EMISSION }
 
 @onready var view: ModuleView = %View
 
-func bake(type: TYPE) -> Texture:
-	view.type = type
+func bake(texture_type: TYPE) -> Texture:
+	view.type = texture_type
 	await RenderingServer.frame_post_draw
 	return get_viewport().get_texture()
 
 @onready var sprite_2d = $"../Sprite2D"
 func _ready():
+	pass
 	#sprite_2d.texture = await bake(TYPE.BASE)

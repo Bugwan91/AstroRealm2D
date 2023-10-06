@@ -5,17 +5,10 @@ var _thrusters: Array[ManeuverThruster] = []
 var force: Vector2 = Vector2.ZERO : get = _get_force
 var torque: float = 0 : get = _get_torque
 
-var torque_sum_pos: float = 0
-var torque_sum_neg: float = 0
-
 func setup(thrust: float):
 	for thruster in get_children() as Array[ManeuverThruster]:
 		thruster.setup(thrust)
 		_thrusters.append(thruster)
-		if thruster._torque > 0:
-			torque_sum_pos += thruster._torque
-		elif thruster._torque < 0:
-			torque_sum_neg += abs(thruster._torque)
 
 func apply_strafe(value: Vector2):
 	for thruster in _thrusters:
@@ -26,13 +19,25 @@ func apply_rotation(value: float):
 		thruster.apply_torque(value)
 
 func _get_force() -> Vector2:
-	var force = Vector2.ZERO
+	force = Vector2.ZERO
 	for thruster in _thrusters:
 		force += thruster.force
 	return force
 
 func _get_torque() -> float:
-	var torque = 0.0
+	torque = 0.0
 	for thruster in _thrusters:
 		torque += thruster.torque
 	return torque
+
+func estimated_strafe_force(direction: Vector2) -> float:
+	var _estimated_force := 0.0
+	for thruster in _thrusters:
+		_estimated_force += thruster.estimated_force(direction)
+	return _estimated_force
+
+func estimated_torque(direction: float) -> float:
+	var _estimated_torque := 0.0
+	for thruster in _thrusters:
+		_estimated_torque += thruster.estimated_torque(direction)
+	return _estimated_torque

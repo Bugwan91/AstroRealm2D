@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://3cqmtymu5w3p"]
+[gd_scene load_steps=7 format=3 uid="uid://3cqmtymu5w3p"]
 
 [ext_resource type="Script" path="res://ui/position_label.gd" id="1_x4cxl"]
 [ext_resource type="Script" path="res://ui/speed_label.gd" id="2_uarfg"]
 [ext_resource type="Script" path="res://ui/acceleration_label.gd" id="3_ex1gd"]
+[ext_resource type="Texture2D" uid="uid://dd8y1mqjs3fwp" path="res://assets/my/icons/flight_assist.png" id="4_m7ift"]
+[ext_resource type="Script" path="res://ui/flight_assist_icon.gd" id="5_djyub"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7coif"]
 bg_color = Color(0, 0.282353, 0.54902, 0.854902)
@@ -67,3 +69,13 @@ script = ExtResource("2_uarfg")
 [node name="Acceleration" type="Label" parent="Control/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 script = ExtResource("3_ex1gd")
+
+[node name="Control" type="Control" parent="Control/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FlightAssist" type="TextureRect" parent="Control/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_m7ift")
+stretch_mode = 4
+script = ExtResource("5_djyub")

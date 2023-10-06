@@ -28,8 +28,8 @@ func setup(value: float):
 	_calculate_torgue()
 
 func _calculate_torgue():
-	var value = _thrust * (position.x * _force_direction.y - position.y * _force_direction.x) if enabled and _thrust > 0 else 0
-	_torque = value if abs(value) > TORQUE_THRESHOLD else 0
+	var value = _thrust * (position.x * _force_direction.y - position.y * _force_direction.x) if enabled and _thrust > 0 else 0.0
+	_torque = value if abs(value) > TORQUE_THRESHOLD else 0.0
 
 func apply_strafe(value: Vector2):
 	throttle = value.dot(_force_direction)
@@ -37,13 +37,19 @@ func apply_strafe(value: Vector2):
 func apply_torque(value: float):
 	torque_throttle = value
 
+func estimated_force(strafe_direction: Vector2) -> float:
+	return clamp(strafe_direction.dot(_force_direction), 0, 1) * _thrust
+
+func estimated_torque(direction: float) -> float:
+	return _torque if (_torque > 0 and direction > 0) or (_torque < 0 and direction < 0) else 0.0
+
 func _update_flame():
 	if throttle > 0 or torque_throttle > 0:
 		_flame.show()
 		var value = max(throttle, torque_throttle)
 		_flame.modulate.a = value
 		# TODO: Rework thrusters sound
-		_sound.volume_db = -20 - (10 - 10 * value)
+		_sound.volume_db = -20 - (40 - 40 * value)
 		if not _sound.playing:
 			_sound.play()
 		if value < 0.1: #Threshold

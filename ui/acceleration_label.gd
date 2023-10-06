@@ -5,5 +5,5 @@ extends Label
 func _ready():
 	text = "Acceleration"
 
-func _process(delta):
+func _process(_delta):
 	text = "a: " + str(_main_state.ship_acceleration).pad_decimals(0)

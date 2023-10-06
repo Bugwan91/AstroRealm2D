@@ -6,11 +6,14 @@ class_name ShipRigidBody
 @export var _maneuver_thrust := 50.0
 @export var _velocity_limit := 1000.0
 
-@onready var _thrusters: Thrusters = %Thrusters
 @onready var _main_state = get_node("/root/MainState")
+@onready var _thrusters: Thrusters = %Thrusters
 @onready var engine: Thruster = %MainEngine
+@onready var flight_assistant: ShipFlightAssistant = %FlightAssistant
 
 var _reset := false
+
+var inverse_inertia := 0.0
 
 func _ready():
 	_thrusters.setup(_maneuver_thrust)
@@ -21,11 +24,12 @@ func _process(delta):
 	_reset = Input.is_action_pressed("Reset")
 
 func _physics_process(delta):
+	flight_assistant.apply_controls(delta)
 	_apply_engine_force()
 	_apply_thrusters_forces()
 	_apply_thrusters_torque()
 	_apply_drag()
-	
+	var S = rotation
 	if Input.is_action_just_pressed("burst_left"):
 		apply_central_impulse(Vector2(0, -40).rotated(rotation))
 	if Input.is_action_just_pressed("burst_right"):
@@ -33,6 +37,7 @@ func _physics_process(delta):
 
 func _integrate_forces(state):
 	_reset_ship(state)
+	inverse_inertia = state.inverse_inertia
 
 func _reset_ship(state: PhysicsDirectBodyState2D):
 	if _reset:

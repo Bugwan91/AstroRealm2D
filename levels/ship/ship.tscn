@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=29 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://levels/ship/scripts/ship_rb.gd" id="1_wdoy6"]
 [ext_resource type="Shader" path="res://levels/ship/scripts/ship.gdshader" id="2_hj2nt"]
@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://c6b8pehpj46wl" path="res://assets/my/ship_o1/hull_1_mask.PNG" id="15_f7otg"]
 [ext_resource type="Texture2D" uid="uid://dljuhgwuqagig" path="res://ship_mask.png" id="16_f0mh8"]
 [ext_resource type="Texture2D" uid="uid://dmhv48ebm52oe" path="res://assets/my/ship_o1/cocpit_2_mask.PNG" id="16_m6sfl"]
-[ext_resource type="Texture2D" uid="uid://ctg5xk4txqcd6" path="res://ship.png" id="16_v2u35"]
+[ext_resource type="Texture2D" uid="uid://paowiimqoup8" path="res://ship.png" id="16_v2u35"]
 [ext_resource type="Texture2D" uid="uid://q026lhon6o0q" path="res://ship_base.png" id="17_g6os6"]
 [ext_resource type="Texture2D" uid="uid://cbxltv3f2jfxb" path="res://assets/my/ship_o1/engine_2_mask.PNG" id="17_jk0of"]
 [ext_resource type="Texture2D" uid="uid://e50jxo4o4al" path="res://assets/my/ship_o1/hull_1_emission.PNG" id="18_0gtvi"]
@@ -26,7 +26,6 @@
 [ext_resource type="Script" path="res://levels/ship/ship_input_reader.gd" id="23_pav5x"]
 [ext_resource type="AudioStream" uid="uid://xn71bm7xult" path="res://assets/sounds/thruster_loop.wav" id="24_ageps"]
 [ext_resource type="Script" path="res://levels/ship/interpolation.gd" id="25_1c55w"]
-[ext_resource type="Texture2D" uid="uid://b0nxk2a5ergrg" path="res://assets/my/icons/hull_icon.png" id="26_pqhyy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sayty"]
 shader = ExtResource("21_kd45o")
@@ -37,7 +36,16 @@ shader_parameter/style_texture = ExtResource("23_lrysj")
 shader = ExtResource("2_hj2nt")
 shader_parameter/emission_texture = ExtResource("3_co5i1")
 
-[node name="Ship" type="Node"]
+[node name="Ship" type="RigidBody2D"]
+unique_name_in_owner = true
+mass = 0.1
+script = ExtResource("1_wdoy6")
+_main_thrust = 100.0
+_maneuver_thrust = 25.0
+_velocity_limit = 500.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-29, -8, -14, -16, -6, -16, 32, 0, -6, 16, -14, 16, -29, 8)
 
 [node name="Baker" type="Node" parent="."]
 
@@ -148,16 +156,7 @@ script = ExtResource("23_pav5x")
 unique_name_in_owner = true
 script = ExtResource("25_1c55w")
 enabled = true
-target = NodePath("../rigidbody")
-
-[node name="Camera" type="Camera2D" parent="Interpolation" node_paths=PackedStringArray("target")]
-unique_name_in_owner = true
-zoom = Vector2(2, 2)
-position_smoothing_speed = 10.0
-script = ExtResource("3_ukcxu")
-target = NodePath("../../rigidbody")
-drag = 0.1
-force = 0.3
+target = NodePath("..")
 
 [node name="Model" type="Sprite2D" parent="Interpolation"]
 material = SubResource("ShaderMaterial_8d03f")
@@ -179,7 +178,7 @@ unique_name_in_owner = true
 script = ExtResource("11_hhoku")
 
 [node name="FL" parent="Interpolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
-position = Vector2(14, -7)
+position = Vector2(-6, -15)
 rotation = 3.14159
 scale = Vector2(0.2, 0.2)
 _sound = NodePath("Sound")
@@ -190,7 +189,7 @@ volume_db = -20.0
 pitch_scale = 2.0
 
 [node name="FR" parent="Interpolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
-position = Vector2(14, 7)
+position = Vector2(-6, 15)
 rotation = 3.14159
 scale = Vector2(0.2, 0.2)
 _sound = NodePath("Sound")
@@ -264,19 +263,10 @@ stream = ExtResource("24_ageps")
 volume_db = -20.0
 pitch_scale = 2.0
 
-[node name="rigidbody" type="RigidBody2D" parent="."]
+[node name="Camera" type="Camera2D" parent="Interpolation" node_paths=PackedStringArray("target")]
 unique_name_in_owner = true
-script = ExtResource("1_wdoy6")
-_main_thrust = 100.0
-_maneuver_thrust = 20.0
-_velocity_limit = 500.0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="rigidbody"]
-visible = false
-polygon = PackedVector2Array(-29, -8, -14, -16, -6, -16, 32, 0, -6, 16, -14, 16, -29, 8)
-
-[node name="Sprite2D" type="Sprite2D" parent="rigidbody"]
-visible = false
-rotation = 1.5708
-scale = Vector2(2, 2)
-texture = ExtResource("26_pqhyy")
+zoom = Vector2(2, 2)
+position_smoothing_speed = 10.0
+script = ExtResource("3_ukcxu")
+target = NodePath("../..")
+inertia = 20.0

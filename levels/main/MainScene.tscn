@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=9 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://levels/main/main.gd" id="1_0ls6w"]
 [ext_resource type="PackedScene" uid="uid://de6wu3uauymsr" path="res://levels/background/Background.tscn" id="2_70vcr"]
@@ -6,72 +6,40 @@
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://ui/ui.tscn" id="4_egkhu"]
 [ext_resource type="PackedScene" uid="uid://cfxgow8gij5u7" path="res://levels/ship/builder/builder_UI.tscn" id="5_2lh5q"]
 [ext_resource type="Script" path="res://levels/main/ship_build_UI_container.gd" id="5_wfi47"]
-[ext_resource type="Texture2D" uid="uid://b0nxk2a5ergrg" path="res://assets/my/icons/hull_icon.png" id="7_jjjix"]
+[ext_resource type="Texture2D" uid="uid://b0nxk2a5ergrg" path="res://assets/my/icons/hull_icon.png" id="7_d5ibj"]
 
 [sub_resource type="Environment" id="Environment_1ojvs"]
 background_mode = 3
 glow_enabled = true
 glow_normalized = true
+glow_strength = 0.8
 glow_blend_mode = 0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0q06g"]
-radius = 17.0
-
-[node name="Node2D" type="Node2D"]
+[node name="Main" type="Node2D"]
 script = ExtResource("1_0ls6w")
-ship_scene = ExtResource("3_ih6ak")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1ojvs")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("2_70vcr")]
-scroll_offset = Vector2(337.074, -603.398)
+scroll_offset = Vector2(738, 453)
 
-[node name="Player" type="Node2D" parent="."]
-unique_name_in_owner = true
+[node name="Ship" parent="." instance=ExtResource("3_ih6ak")]
 
 [node name="UI" parent="." instance=ExtResource("4_egkhu")]
 
-[node name="CanvasLayer" parent="." instance=ExtResource("5_2lh5q")]
+[node name="ShipDesignerUI" parent="." instance=ExtResource("5_2lh5q")]
 visible = false
 script = ExtResource("5_wfi47")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(364, 0)
-mass = 0.1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-shape = SubResource("CircleShape2D_0q06g")
+position = Vector2(-242, 124)
+mass = 0.01
+linear_velocity = Vector2(250, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
-texture = ExtResource("7_jjjix")
+rotation = 1.5708
+texture = ExtResource("7_d5ibj")
 
-[node name="RigidBody2D2" type="RigidBody2D" parent="."]
-position = Vector2(331, -33)
-mass = 0.1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
-shape = SubResource("CircleShape2D_0q06g")
-
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D2"]
-texture = ExtResource("7_jjjix")
-
-[node name="RigidBody2D3" type="RigidBody2D" parent="."]
-position = Vector2(327, 34)
-mass = 0.1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D3"]
-shape = SubResource("CircleShape2D_0q06g")
-
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D3"]
-texture = ExtResource("7_jjjix")
-
-[node name="RigidBody2D4" type="RigidBody2D" parent="."]
-position = Vector2(291, -8)
-mass = 0.1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D4"]
-shape = SubResource("CircleShape2D_0q06g")
-
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D4"]
-texture = ExtResource("7_jjjix")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+polygon = PackedVector2Array(16, 0, -10, 16, -16, 0, -10, -16)

@@ -1,9 +1,9 @@
-extends Label
+extends TextureRect
 
 @onready var _main_state = get_node("/root/MainState")
 
 func _ready():
-	text = "Speed"
+	visible = false
 
 func _process(_delta):
-	text = "v: " + str(_main_state.ship_speed).pad_decimals(0)
+	visible = _main_state.flight_assist

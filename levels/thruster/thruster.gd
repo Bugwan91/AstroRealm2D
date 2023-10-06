@@ -26,7 +26,6 @@ func _set_throttle(value):
 
 func _ready():
 	_flame.hide()
-	#_sound.autoplay
 	_force_direction = transform.x.normalized()
 
 func _process(_delta):

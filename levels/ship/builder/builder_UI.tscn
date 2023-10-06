@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://levels/ship/builder/scripts/base_baker.gd" id="3_tatvg"]
 [ext_resource type="Texture2D" uid="uid://bdjs7ywlspykf" path="res://assets/my/ship_o1/cocpit_2.PNG" id="4_b363k"]
 [ext_resource type="Texture2D" uid="uid://7ma7i2kd3uhu" path="res://assets/my/icons/cocpit_icon.png" id="4_e7sch"]
-[ext_resource type="Texture2D" uid="uid://ctg5xk4txqcd6" path="res://ship.png" id="4_ye5p4"]
 [ext_resource type="Texture2D" uid="uid://ux36to6rkudt" path="res://assets/my/icons/style_icon.png" id="5_0hykj"]
 [ext_resource type="Texture2D" uid="uid://b24hdrylbyydo" path="res://assets/my/ship_o1/engine_1.PNG" id="5_a17ef"]
 [ext_resource type="Texture2D" uid="uid://cxe6gi15exjbm" path="res://assets/my/ship_o1/engine_2.PNG" id="6_0cr1h"]
@@ -19,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://bkk8s8jjfxrj3" path="res://assets/my/ship_o1/style_7.PNG" id="10_ox1lj"]
 [ext_resource type="Texture2D" uid="uid://tsyi84v42gdk" path="res://assets/my/ship_o1/style_6.PNG" id="11_28dfj"]
 [ext_resource type="Texture2D" uid="uid://bev5qi3asmhwq" path="res://assets/my/ship_o1/style_5.PNG" id="12_optiv"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p6avg"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -316,4 +317,4 @@ script = ExtResource("3_tatvg")
 position = Vector2(16, 32)
 
 [node name="Sprite2D" type="Sprite2D" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/CenterContainer/SubViewportContainer/ShipBaseBaker/CanvasLayer/Node2D"]
-texture = ExtResource("4_ye5p4")
+texture = SubResource("CompressedTexture2D_p6avg")
