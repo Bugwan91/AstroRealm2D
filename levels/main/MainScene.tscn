@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=15 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://levels/main/main.gd" id="1_0ls6w"]
 [ext_resource type="PackedScene" uid="uid://de6wu3uauymsr" path="res://levels/background/Background.tscn" id="2_70vcr"]
+[ext_resource type="Texture2D" uid="uid://cwvtmyy8brm3w" path="res://assets/my/Star_01.png" id="3_08nfe"]
 [ext_resource type="PackedScene" uid="uid://ce1dw618jykrb" path="res://levels/ship/ship.tscn" id="3_ih6ak"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://ui/ui.tscn" id="4_egkhu"]
+[ext_resource type="Script" path="res://levels/background/starfield.gd" id="4_vqdk2"]
 [ext_resource type="PackedScene" uid="uid://cfxgow8gij5u7" path="res://levels/ship/builder/builder_UI.tscn" id="5_2lh5q"]
 [ext_resource type="Script" path="res://levels/main/ship_build_UI_container.gd" id="5_wfi47"]
+[ext_resource type="Script" path="res://levels/main/enemy_ship.gd" id="7_55eaf"]
 [ext_resource type="Texture2D" uid="uid://b0nxk2a5ergrg" path="res://assets/my/icons/hull_icon.png" id="7_d5ibj"]
 
 [sub_resource type="Environment" id="Environment_1ojvs"]
@@ -14,6 +17,26 @@ glow_enabled = true
 glow_normalized = true
 glow_strength = 0.8
 glow_blend_mode = 0
+
+[sub_resource type="MultiMesh" id="MultiMesh_6xpph"]
+instance_count = 50
+buffer = PackedFloat32Array(0, 3, 0.1155, 0.132, 0.1595, 1, 0, 0.1, 0, 3, 0.1155, 0.132, 0.1595, 1, 0, 0.1, 0.401924, 1.5, 0.1155, 0.132, 0.1595, 1, 0.00178633, 0.05, 0.401924, 1.5, 0.1155, 0.132, 0.1595, 1, 0.00178633, 0.05, 1.5, 0.401924, 0.1155, 0.132, 0.1595, 1, 0.00666667, 0.0133975, 1.5, 0.401924, 0.1155, 0.132, 0.1595, 1, 0.00666667, 0.0133975, 3, 0, 0.1155, 0.132, 0.1595, 1, 0.0133333, 0, 3, 0, 0.1155, 0.132, 0.1595, 1, 0.0133333, 0, 222, 0, 0.1155, 0.132, 0.1595, 1, 0.986667, 0, 222, 0, 0.1155, 0.132, 0.1595, 1, 0.986667, 0, 223.5, 0.401924, 0.1155, 0.132, 0.1595, 1, 0.993333, 0.0133975, 223.5, 0.401924, 0.1155, 0.132, 0.1595, 1, 0.993333, 0.0133975, 224.598, 1.5, 0.1155, 0.132, 0.1595, 1, 0.998214, 0.05, 224.598, 1.5, 0.1155, 0.132, 0.1595, 1, 0.998214, 0.05, 225, 3, 0.1155, 0.132, 0.1595, 1, 1, 0.1, 225, 3, 0.1155, 0.132, 0.1595, 1, 1, 0.1, 225, 28, 0.1155, 0.132, 0.1595, 1, 1, 0.933333, 225, 30, 0.1155, 0.132, 0.1595, 1, 1, 1, 225, 28, 0.1155, 0.132, 0.1595, 1, 1, 0.933333, 225, 30, 0.1155, 0.132, 0.1595, 1, 1, 1, 225, 28, 0.1155, 0.132, 0.1595, 1, 1, 0.933333, 225, 30, 0.1155, 0.132, 0.1595, 1, 1, 1, 225, 28, 0.1155, 0.132, 0.1595, 1, 1, 0.933333, 225, 30, 0.1155, 0.132, 0.1595, 1, 1, 1, 0, 28, 0.1155, 0.132, 0.1595, 1, 0, 0.933333, 0, 30, 0.1155, 0.132, 0.1595, 1, 0, 1, 0, 28, 0.1155, 0.132, 0.1595, 1, 0, 0.933333, 0, 30, 0.1155, 0.132, 0.1595, 1, 0, 1, 0, 28, 0.1155, 0.132, 0.1595, 1, 0, 0.933333, 0, 30, 0.1155, 0.132, 0.1595, 1, 0, 1, 0, 28, 0.1155, 0.132, 0.1595, 1, 0, 0.933333, 0, 30, 0.1155, 0.132, 0.1595, 1, 0, 1, 0, 3, 0.147, 0.168, 0.203, 1, 0, 0.1, 0.401924, 1.5, 0.147, 0.168, 0.203, 1, 0.00178633, 0.05, 1.5, 0.401924, 0.147, 0.168, 0.203, 1, 0.00666667, 0.0133975, 3, 0, 0.147, 0.168, 0.203, 1, 0.0133333, 0, 222, 0, 0.147, 0.168, 0.203, 1, 0.986667, 0, 223.5, 0.401924, 0.147, 0.168, 0.203, 1, 0.993333, 0.0133975, 224.598, 1.5, 0.147, 0.168, 0.203, 1, 0.998214, 0.05, 225, 3, 0.147, 0.168, 0.203, 1, 1, 0.1, 225, 28, 0.147, 0.168, 0.203, 1, 1, 0.933333, 225, 28, 0.147, 0.168, 0.203, 1, 1, 0.933333, 225, 28, 0.147, 0.168, 0.203, 1, 1, 0.933333, 225, 28, 0.147, 0.168, 0.203, 1, 1, 0.933333, 0, 28, 0.147, 0.168, 0.203, 1, 0, 0.933333, 0, 28, 0.147, 0.168, 0.203, 1, 0, 0.933333, 0, 28, 0.147, 0.168, 0.203, 1, 0, 0.933333, 0, 28, 0.147, 0.168, 0.203, 1, 0, 0.933333, 0, 1.96182e-44, 1.4013e-45, 0, 2.10195e-44, 1.96182e-44, 1.4013e-45, 1.82169e-44, 2.8026e-45, 1.4013e-45, 1.96182e-44, 1.82169e-44, 2.8026e-45, 1.68156e-44, 4.2039e-45, 2.8026e-45)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xlsq0"]
+_surfaces = [{
+"2d": true,
+"aabb": AABB(-4, -4, 0, 8.00001, 8.00001, 0),
+"attribute_data": PackedByteArray(0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0),
+"format": 33558545,
+"index_count": 6,
+"index_data": PackedByteArray(3, 0, 0, 0, 1, 0, 1, 0, 2, 0, 3, 0),
+"primitive": 3,
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 192)
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s6m4d"]
+radius = 20.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0ls6w")
@@ -24,7 +47,42 @@ environment = SubResource("Environment_1ojvs")
 [node name="ParallaxBackground" parent="." instance=ExtResource("2_70vcr")]
 scroll_offset = Vector2(738, 453)
 
+[node name="ParallaxEnvironment" type="ParallaxBackground" parent="."]
+
+[node name="Stars_0" type="ParallaxLayer" parent="ParallaxEnvironment"]
+motion_mirroring = Vector2(4096, 4096)
+
+[node name="Starfield" type="MultiMeshInstance2D" parent="ParallaxEnvironment/Stars_0"]
+multimesh = SubResource("MultiMesh_6xpph")
+texture = ExtResource("3_08nfe")
+script = ExtResource("4_vqdk2")
+size = 4096.0
+
+[node name="Star" type="MeshInstance2D" parent="ParallaxEnvironment/Stars_0/Starfield"]
+mesh = SubResource("ArrayMesh_xlsq0")
+texture = ExtResource("3_08nfe")
+
 [node name="Ship" parent="." instance=ExtResource("3_ih6ak")]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(-242, 124)
+mass = 0.05
+linear_velocity = Vector2(50, 0)
+script = ExtResource("7_55eaf")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+polygon = PackedVector2Array(16, 0, -10, 16, -16, 0, -10, -16)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+rotation = 1.5708
+texture = ExtResource("7_d5ibj")
+
+[node name="Area2D" type="Area2D" parent="RigidBody2D"]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/Area2D"]
+position = Vector2(-2, 0)
+shape = SubResource("CircleShape2D_s6m4d")
 
 [node name="UI" parent="." instance=ExtResource("4_egkhu")]
 
@@ -32,14 +90,5 @@ scroll_offset = Vector2(738, 453)
 visible = false
 script = ExtResource("5_wfi47")
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(-242, 124)
-mass = 0.01
-linear_velocity = Vector2(250, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
-rotation = 1.5708
-texture = ExtResource("7_d5ibj")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
-polygon = PackedVector2Array(16, 0, -10, 16, -16, 0, -10, -16)
+[connection signal="input_event" from="RigidBody2D/Area2D" to="RigidBody2D" method="_on_Area2D_input_event"]
+[connection signal="mouse_entered" from="RigidBody2D/Area2D" to="RigidBody2D" method="_on_mouse_enter"]

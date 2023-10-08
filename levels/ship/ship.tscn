@@ -38,7 +38,7 @@ shader_parameter/emission_texture = ExtResource("3_co5i1")
 
 [node name="Ship" type="RigidBody2D"]
 unique_name_in_owner = true
-mass = 0.1
+mass = 0.2
 script = ExtResource("1_wdoy6")
 _main_thrust = 100.0
 _maneuver_thrust = 25.0
@@ -269,4 +269,4 @@ zoom = Vector2(2, 2)
 position_smoothing_speed = 10.0
 script = ExtResource("3_ukcxu")
 target = NodePath("../..")
-inertia = 20.0
+inertia = 5.0
