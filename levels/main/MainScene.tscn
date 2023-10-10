@@ -64,23 +64,23 @@ texture = ExtResource("3_08nfe")
 
 [node name="Ship" parent="." instance=ExtResource("3_ih6ak")]
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="DummyShip" type="RigidBody2D" parent="."]
 position = Vector2(-242, 124)
 mass = 0.05
 linear_velocity = Vector2(50, 0)
 script = ExtResource("7_55eaf")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DummyShip"]
 polygon = PackedVector2Array(16, 0, -10, 16, -16, 0, -10, -16)
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="DummyShip"]
 rotation = 1.5708
 texture = ExtResource("7_d5ibj")
 
-[node name="Area2D" type="Area2D" parent="RigidBody2D"]
+[node name="Area2D" type="Area2D" parent="DummyShip"]
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DummyShip/Area2D"]
 position = Vector2(-2, 0)
 shape = SubResource("CircleShape2D_s6m4d")
 
@@ -90,5 +90,5 @@ shape = SubResource("CircleShape2D_s6m4d")
 visible = false
 script = ExtResource("5_wfi47")
 
-[connection signal="input_event" from="RigidBody2D/Area2D" to="RigidBody2D" method="_on_Area2D_input_event"]
-[connection signal="mouse_entered" from="RigidBody2D/Area2D" to="RigidBody2D" method="_on_mouse_enter"]
+[connection signal="input_event" from="DummyShip/Area2D" to="DummyShip" method="_on_Area2D_input_event"]
+[connection signal="mouse_entered" from="DummyShip/Area2D" to="DummyShip" method="_on_mouse_enter"]

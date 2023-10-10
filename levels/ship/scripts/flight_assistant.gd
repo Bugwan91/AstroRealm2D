@@ -3,10 +3,10 @@ class_name ShipFlightAssistant
 
 enum Action {STOP, LOOK_TO}
 
-var ship: ShipRigidBody
+var ship: RigidBody2D
 @export var enabled: bool = false
 @onready var thrusters: Thrusters = %Thrusters
-@onready var main_engine: Thruster = %MainEngine
+@onready var engines: Engines = %Engines
 @onready var input_reader: ShipInputReader = %InputReader
 @onready var _main_state = get_node("/root/MainState")
 
@@ -22,7 +22,8 @@ var _linear_control: Vector2 = Vector2.ZERO
 var _angular_control: float = 0
 
 var _pointer_position: Vector2 = Vector2.ZERO
-var _delta_direction: float = 0
+
+var target: RigidBody2D
 
 func _ready():
 	ship = owner
@@ -31,13 +32,18 @@ func _ready():
 	input_reader.rotate.connect(_rotate_input_changed)
 	input_reader.pointer.connect(_pointer_input_changed)
 
+func _physics_process(delta):
+	apply_controls(delta)
+	thrusters.apply_forces()
+	engines.apply_forces()
+
 func apply_controls(delta: float):
 	_update_status()
 	_update_relative_data()
 	_linear_control = _strafe_input
 	_angular_control = _rotate_input
 	if Input.is_action_pressed("stop"):
-		_linear_to_target(delta)
+		_linear_to_target(delta, _get_target_velocity())
 		_angular_to_target(delta)
 	if enabled:
 		_handle_turn(delta)
@@ -47,7 +53,7 @@ func _update_relative_data():
 	_linear_velocity = ship.linear_velocity
 
 func _handle_control():
-	main_engine.throttle = _main_thruster_input
+	engines.apply_throttle(_main_thruster_input)
 	thrusters.apply_strafe(_linear_control)
 	thrusters.apply_rotation(_angular_control)
 
@@ -86,6 +92,14 @@ func _handle_turn(delta: float):
 	var wt = sign(error) * (d/(n+1) + 0.5*a*n)
 	var w = ship.angular_velocity * delta
 	_angular_control = (wt - w) / a
+
+func _get_target_velocity() -> Vector2:
+	if is_instance_valid(target):
+		return target.linear_velocity
+	return Vector2.ZERO
+
+func target_changed(value: RigidBody2D):
+	target = value
 
 func _main_thruster_input_changed(value: float):
 	_main_thruster_input = value

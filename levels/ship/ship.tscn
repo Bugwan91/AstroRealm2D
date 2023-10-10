@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=30 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://levels/ship/scripts/ship_rb.gd" id="1_wdoy6"]
 [ext_resource type="Shader" path="res://levels/ship/scripts/ship.gdshader" id="2_hj2nt"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" path="res://levels/ship/ship_input_reader.gd" id="23_pav5x"]
 [ext_resource type="AudioStream" uid="uid://xn71bm7xult" path="res://assets/sounds/thruster_loop.wav" id="24_ageps"]
 [ext_resource type="Script" path="res://levels/ship/interpolation.gd" id="25_1c55w"]
+[ext_resource type="Script" path="res://levels/ship/Engines.gd" id="25_hgcex"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sayty"]
 shader = ExtResource("21_kd45o")
@@ -163,19 +164,10 @@ material = SubResource("ShaderMaterial_8d03f")
 rotation = 1.5708
 texture = ExtResource("16_v2u35")
 
-[node name="MainEngine" parent="Interpolation" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
-unique_name_in_owner = true
-position = Vector2(-32, -5.48045e-05)
-script = ExtResource("8_d4b7a")
-_sound = NodePath("Sound")
-
-[node name="Sound" type="AudioStreamPlayer2D" parent="Interpolation/MainEngine"]
-position = Vector2(7.62939e-06, -5.08611e-07)
-stream = ExtResource("24_ageps")
-
-[node name="Thrusters" type="Node2D" parent="Interpolation"]
+[node name="Thrusters" type="Node2D" parent="Interpolation" node_paths=PackedStringArray("body")]
 unique_name_in_owner = true
 script = ExtResource("11_hhoku")
+body = NodePath("../..")
 
 [node name="FL" parent="Interpolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
 position = Vector2(-6, -15)
@@ -262,6 +254,20 @@ _sound = NodePath("Sound")
 stream = ExtResource("24_ageps")
 volume_db = -20.0
 pitch_scale = 2.0
+
+[node name="Engines" type="Node2D" parent="Interpolation" node_paths=PackedStringArray("_body")]
+unique_name_in_owner = true
+script = ExtResource("25_hgcex")
+_body = NodePath("../..")
+
+[node name="Engine1" parent="Interpolation/Engines" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
+position = Vector2(-32, -5.48045e-05)
+script = ExtResource("8_d4b7a")
+_sound = NodePath("Sound")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="Interpolation/Engines/Engine1"]
+position = Vector2(7.62939e-06, -5.08611e-07)
+stream = ExtResource("24_ageps")
 
 [node name="Camera" type="Camera2D" parent="Interpolation" node_paths=PackedStringArray("target")]
 unique_name_in_owner = true

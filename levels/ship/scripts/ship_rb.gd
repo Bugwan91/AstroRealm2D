@@ -8,7 +8,7 @@ class_name ShipRigidBody
 
 @onready var _main_state = get_node("/root/MainState")
 @onready var _thrusters: Thrusters = %Thrusters
-@onready var engine: Thruster = %MainEngine
+@onready var _engines: Engines = %Engines
 @onready var flight_assistant: ShipFlightAssistant = %FlightAssistant
 
 var _reset := false
@@ -17,23 +17,13 @@ var inverse_inertia := 0.0
 
 func _ready():
 	_thrusters.setup(_maneuver_thrust)
-	engine.setup(_main_thrust)
+	_engines.setup(_main_thrust, _velocity_limit)
 
 func _process(delta):
 	_update_main_state(delta)
 	_reset = Input.is_action_pressed("Reset")
-
-func _physics_process(delta):
-	flight_assistant.apply_controls(delta)
-	_apply_engine_force()
-	_apply_thrusters_forces()
-	_apply_thrusters_torque()
-	_apply_drag()
-	var S = rotation
-	if Input.is_action_just_pressed("burst_left"):
-		apply_central_impulse(Vector2(0, -40).rotated(rotation))
-	if Input.is_action_just_pressed("burst_right"):
-		apply_central_impulse(Vector2(0, 40).rotated(rotation))
+	if Input.is_action_pressed("target_reset"):
+		reset_target()
 
 func _integrate_forces(state):
 	_reset_ship(state)
@@ -46,19 +36,11 @@ func _reset_ship(state: PhysicsDirectBodyState2D):
 		state.angular_velocity = 0
 		_reset = false
 
-func _apply_thrusters_forces():
-	apply_central_force(_thrusters.force.rotated(rotation))
+func set_target(target: RigidBody2D):
+	flight_assistant.target_changed(target)
 
-func _apply_thrusters_torque():
-	apply_torque(_thrusters.torque)
-
-func _apply_engine_force():
-	apply_central_force(engine.force.rotated(rotation))
-
-func _apply_drag():
-	var delta = linear_velocity.length() - _velocity_limit
-	if delta > 0:
-		apply_central_force(-delta * linear_velocity.normalized())
+func reset_target():
+	flight_assistant.target_changed(null)
 
 # TODO: Refactor
 # Data to main state (UI connection)
