@@ -1,11 +1,9 @@
-extends RigidBody2D
-
 class_name ShipRigidBody
+extends RigidBody2D
 
 @export var _main_thrust := 200.0
 @export var _maneuver_thrust := 50.0
 @export var _velocity_limit := 1000.0
-
 @onready var _main_state = get_node("/root/MainState")
 @onready var _thrusters: Thrusters = %Thrusters
 @onready var _engines: Engines = %Engines

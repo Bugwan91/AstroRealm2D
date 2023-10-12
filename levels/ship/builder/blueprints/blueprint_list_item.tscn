@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://djsvepingast4"]
+
+[ext_resource type="Script" path="res://levels/ship/builder/blueprints/blueprint_list_item.gd" id="1_0v7vi"]
+
+[node name="BlueprintListItem" type="CenterContainer"]
+script = ExtResource("1_0v7vi")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_top = 32
+
+[node name="View" type="TextureRect" parent="MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+expand_mode = 5
+stretch_mode = 4

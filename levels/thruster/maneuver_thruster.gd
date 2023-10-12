@@ -1,5 +1,5 @@
-extends Thruster
 class_name ManeuverThruster
+extends Thruster
 
 var _torque: float = 0
 var torque_throttle: float = 0 : set = _set_torque_throttle

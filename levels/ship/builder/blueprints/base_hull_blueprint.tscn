@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://bai2m5ttlwevy"]
+
+[ext_resource type="Texture2D" uid="uid://cptyhxa6dxk7y" path="res://assets/my/ship_o1/hull_1.PNG" id="1_3offj"]
+[ext_resource type="Texture2D" uid="uid://c6b8pehpj46wl" path="res://assets/my/ship_o1/hull_1_mask.PNG" id="2_dh5fq"]
+[ext_resource type="Texture2D" uid="uid://e50jxo4o4al" path="res://assets/my/ship_o1/hull_1_emission.PNG" id="3_em7e6"]
+[ext_resource type="Texture2D" uid="uid://7ma7i2kd3uhu" path="res://assets/my/icons/cocpit_icon.png" id="4_jnh2c"]
+[ext_resource type="Texture2D" uid="uid://drcsjjfbjru4x" path="res://assets/my/icons/engine_icon.png" id="5_imasr"]
+
+[node name="BaseHullBlueprint" type="Node2D"]
+
+[node name="Albedo" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("1_3offj")
+
+[node name="Mask" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("2_dh5fq")
+
+[node name="Emission" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("3_em7e6")
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
+unique_name_in_owner = true
+visible = false
+polygon = PackedVector2Array(0, -32, 16, 6, 16, 14, 1, 32, -1, 32, -16, 14, -16, 6)
+
+[node name="Thrusters" type="Node2D" parent="."]
+
+[node name="FL" type="Node2D" parent="Thrusters"]
+position = Vector2(-15, 6)
+rotation = 1.5708
+
+[node name="FR" type="Node2D" parent="Thrusters"]
+position = Vector2(15, 6)
+rotation = 1.5708
+
+[node name="RF" type="Node2D" parent="Thrusters"]
+position = Vector2(7, -15)
+rotation = 3.14159
+
+[node name="RB" type="Node2D" parent="Thrusters"]
+position = Vector2(8, 21)
+rotation = 3.14159
+
+[node name="BR" type="Node2D" parent="Thrusters"]
+position = Vector2(15, 14)
+rotation = -1.5708
+
+[node name="BL" type="Node2D" parent="Thrusters"]
+position = Vector2(-15, 14)
+rotation = -1.5708
+
+[node name="LB" type="Node2D" parent="Thrusters"]
+position = Vector2(-8, 21)
+
+[node name="LF" type="Node2D" parent="Thrusters"]
+position = Vector2(-7, -15)
+
+[node name="Cocpit" type="Node2D" parent="."]
+position = Vector2(0, -32)
+
+[node name="Placeholder" type="Sprite2D" parent="Cocpit"]
+modulate = Color(0, 0.521569, 1, 1)
+position = Vector2(0, 16)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_jnh2c")
+
+[node name="Engine" type="Node2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="Placeholder" type="Sprite2D" parent="Engine"]
+modulate = Color(1, 0.521569, 0, 1)
+position = Vector2(-2.08165e-12, 16)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_imasr")

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EngineBlueprintResource" load_steps=5 format=3 uid="uid://2lrej826csft"]
+
+[ext_resource type="Texture2D" uid="uid://b24hdrylbyydo" path="res://assets/my/ship_o1/engine_1.PNG" id="1_dlr7q"]
+[ext_resource type="Script" path="res://levels/ship/builder/blueprints/engines/engine_blueprint_resource.gd" id="1_k635c"]
+[ext_resource type="Texture2D" uid="uid://ccx0ijow6dnjd" path="res://assets/my/ship_o1/engine_1_emission.PNG" id="2_fmcmi"]
+[ext_resource type="Texture2D" uid="uid://c1lcwnb6nwet2" path="res://assets/my/ship_o1/engine_1_mask.PNG" id="3_jyv22"]
+
+[resource]
+script = ExtResource("1_k635c")
+base_texture = ExtResource("1_dlr7q")
+mask = ExtResource("3_jyv22")
+emisison_mask = ExtResource("2_fmcmi")

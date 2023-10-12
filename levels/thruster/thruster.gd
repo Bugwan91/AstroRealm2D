@@ -1,5 +1,5 @@
-extends Node2D
 class_name Thruster
+extends Node2D
 
 @onready var _flame: Node2D = $Flame
 @export var _sound: AudioStreamPlayer2D

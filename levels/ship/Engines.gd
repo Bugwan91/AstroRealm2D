@@ -1,9 +1,16 @@
-extends Node2D
+@tool
 class_name Engines
+extends Node2D
 
 @export var _body: RigidBody2D
 @export var _velocity_limit := 500.0
 var _thrusters: Array[Thruster] = []
+
+func _get_configuration_warnings():
+	var warnings: Array[String] = []
+	if not (is_instance_valid(_body) and _body is RigidBody2D):
+		warnings.append("Needs RigidBody2D to apply forces")
+	return warnings
 
 func setup(thrust: float, max_speed: float):
 	_velocity_limit = max_speed

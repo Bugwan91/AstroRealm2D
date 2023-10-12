@@ -1,8 +1,15 @@
-extends Node2D
+@tool
 class_name Thrusters
+extends Node2D
 
-@export var body: RigidBody2D
+@export var _body: RigidBody2D
 var _thrusters: Array[ManeuverThruster] = []
+
+func _get_configuration_warnings():
+	var warnings: Array[String] = []
+	if not (is_instance_valid(_body) and _body is RigidBody2D):
+		warnings.append("Needs RigidBody2D to apply forces")
+	return warnings
 
 func setup(thrust: float):
 	for thruster in get_children() as Array[ManeuverThruster]:
@@ -18,8 +25,8 @@ func apply_rotation(value: float):
 		thruster.apply_torque(value)
 
 func apply_forces():
-	body.apply_central_force(_force().rotated(body.rotation))
-	body.apply_torque(_torque())
+	_body.apply_central_force(_force().rotated(_body.rotation))
+	_body.apply_torque(_torque())
 
 func _force() -> Vector2:
 	var force = Vector2.ZERO

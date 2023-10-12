@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=14 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://levels/main/main.gd" id="1_0ls6w"]
 [ext_resource type="PackedScene" uid="uid://de6wu3uauymsr" path="res://levels/background/Background.tscn" id="2_70vcr"]
@@ -6,8 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ce1dw618jykrb" path="res://levels/ship/ship.tscn" id="3_ih6ak"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://ui/ui.tscn" id="4_egkhu"]
 [ext_resource type="Script" path="res://levels/background/starfield.gd" id="4_vqdk2"]
-[ext_resource type="PackedScene" uid="uid://cfxgow8gij5u7" path="res://levels/ship/builder/builder_UI.tscn" id="5_2lh5q"]
-[ext_resource type="Script" path="res://levels/main/ship_build_UI_container.gd" id="5_wfi47"]
+[ext_resource type="Script" path="res://levels/ship/interpolation.gd" id="7_4e1cd"]
 [ext_resource type="Script" path="res://levels/main/enemy_ship.gd" id="7_55eaf"]
 [ext_resource type="Texture2D" uid="uid://b0nxk2a5ergrg" path="res://assets/my/icons/hull_icon.png" id="7_d5ibj"]
 
@@ -63,6 +62,7 @@ mesh = SubResource("ArrayMesh_xlsq0")
 texture = ExtResource("3_08nfe")
 
 [node name="Ship" parent="." instance=ExtResource("3_ih6ak")]
+mass = 0.5
 
 [node name="DummyShip" type="RigidBody2D" parent="."]
 position = Vector2(-242, 124)
@@ -73,10 +73,6 @@ script = ExtResource("7_55eaf")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DummyShip"]
 polygon = PackedVector2Array(16, 0, -10, 16, -16, 0, -10, -16)
 
-[node name="Sprite2D" type="Sprite2D" parent="DummyShip"]
-rotation = 1.5708
-texture = ExtResource("7_d5ibj")
-
 [node name="Area2D" type="Area2D" parent="DummyShip"]
 collision_mask = 0
 
@@ -84,11 +80,14 @@ collision_mask = 0
 position = Vector2(-2, 0)
 shape = SubResource("CircleShape2D_s6m4d")
 
-[node name="UI" parent="." instance=ExtResource("4_egkhu")]
+[node name="PositionInterpolation" type="Node2D" parent="DummyShip"]
+script = ExtResource("7_4e1cd")
 
-[node name="ShipDesignerUI" parent="." instance=ExtResource("5_2lh5q")]
-visible = false
-script = ExtResource("5_wfi47")
+[node name="Sprite2D" type="Sprite2D" parent="DummyShip/PositionInterpolation"]
+rotation = 1.5708
+texture = ExtResource("7_d5ibj")
+
+[node name="UI" parent="." instance=ExtResource("4_egkhu")]
 
 [connection signal="input_event" from="DummyShip/Area2D" to="DummyShip" method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="DummyShip/Area2D" to="DummyShip" method="_on_mouse_enter"]

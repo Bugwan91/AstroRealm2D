@@ -1,5 +1,5 @@
-extends Camera2D
 class_name CameraController
+extends Camera2D
 
 @export var target: RigidBody2D
 @export var force: float = 1

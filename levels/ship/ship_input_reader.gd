@@ -1,5 +1,5 @@
-extends Node2D
 class_name ShipInputReader
+extends Node2D
 
 signal main_thruster(value: float)
 signal strafe(value: Vector2)

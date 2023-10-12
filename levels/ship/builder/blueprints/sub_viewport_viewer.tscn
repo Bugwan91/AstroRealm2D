@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsxxslm3h0e4s"]
+
+[ext_resource type="PackedScene" uid="uid://dli6leyaxng4g" path="res://levels/ship/builder/blueprints/blueprint_base_baker.tscn" id="1_770pt"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Control" parent="PanelContainer/SubViewportContainer" instance=ExtResource("1_770pt")]
