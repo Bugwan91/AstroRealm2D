@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://ui/flight_assist_icon.gd" id="5_djyub"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7coif"]
-bg_color = Color(0, 0.282353, 0.54902, 0.854902)
+bg_color = Color(0, 0.282353, 0.54902, 0.960784)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3

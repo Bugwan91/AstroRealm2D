@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CocpitBlueprintResource" load_steps=5 format=3 uid="uid://bcipk3okfgvmw"]
+
+[ext_resource type="Texture2D" uid="uid://bmhmxjaphjbqn" path="res://assets/my/ship_o1/cocpit_1.PNG" id="1_cc6cg"]
+[ext_resource type="Script" path="res://scenes/ship_designer/blueprints/cocpits/cocpit_blueprint_resource.gd" id="1_jnutj"]
+[ext_resource type="Texture2D" uid="uid://bbuly4a1j7qss" path="res://assets/my/ship_o1/cocpit_1_emission.PNG" id="2_shdfw"]
+[ext_resource type="Texture2D" uid="uid://4c6lnbvmqwjj" path="res://assets/my/ship_o1/cocpit_1_mask.PNG" id="3_lvqrj"]
+
+[resource]
+script = ExtResource("1_jnutj")
+base_texture = ExtResource("1_cc6cg")
+mask = ExtResource("3_lvqrj")
+emisison_mask = ExtResource("2_shdfw")
