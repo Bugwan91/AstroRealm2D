@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=15 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="PackedScene" uid="uid://de6wu3uauymsr" path="res://scenes/background/background.tscn" id="1_b53p2"]
 [ext_resource type="Texture2D" uid="uid://cwvtmyy8brm3w" path="res://assets/my/Star_01.png" id="2_i03k3"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://ce1dw618jykrb" path="res://scenes/ship/ship.tscn" id="4_5rllk"]
 [ext_resource type="Script" path="res://scenes/main/enemy_ship.gd" id="5_hb2m2"]
 [ext_resource type="Script" path="res://scenes/ship/position_extrapolation.gd" id="6_k2ut1"]
+[ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="6_udm3s"]
+[ext_resource type="PackedScene" uid="uid://df6i8o1ckqhq3" path="res://scenes/gun/bullet_red.tscn" id="7_1vp7r"]
 [ext_resource type="Texture2D" uid="uid://b0nxk2a5ergrg" path="res://assets/my/icons/hull_icon.png" id="7_xt2p7"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://ui/ui.tscn" id="8_myah8"]
 
@@ -68,6 +70,12 @@ position = Vector2(-242, 124)
 mass = 0.05
 linear_velocity = Vector2(50, 0)
 script = ExtResource("5_hb2m2")
+
+[node name="Gun" parent="DummyShip" node_paths=PackedStringArray("parent") instance=ExtResource("6_udm3s")]
+position = Vector2(15, 0)
+parent = NodePath("..")
+bullet_scene = ExtResource("7_1vp7r")
+bullet_speed = 500.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DummyShip"]
 polygon = PackedVector2Array(16, 0, -10, 16, -16, 0, -10, -16)

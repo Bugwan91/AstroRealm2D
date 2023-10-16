@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://df6i8o1ckqhq3"]
+
+[ext_resource type="PackedScene" uid="uid://dwdthpisfmojs" path="res://scenes/gun/bullet.tscn" id="1_qnle4"]
+[ext_resource type="Texture2D" uid="uid://c6rki13rio2ob" path="res://assets/lasers/02.png" id="2_vsn57"]
+
+[node name="Bullet" instance=ExtResource("1_qnle4")]
+
+[node name="View" parent="." index="0"]
+texture = ExtResource("2_vsn57")

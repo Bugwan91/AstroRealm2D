@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwdthpisfmojs"]
+
+[ext_resource type="Texture2D" uid="uid://cqjp1p6y5dedo" path="res://assets/lasers/01.png" id="1_c3cs0"]
+[ext_resource type="Script" path="res://scenes/gun/bullet.gd" id="1_gtbct"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tj1e3"]
+radius = 3.0
+
+[node name="Bullet" type="RigidBody2D"]
+collision_layer = 0
+lock_rotation = true
+script = ExtResource("1_gtbct")
+
+[node name="View" type="Sprite2D" parent="."]
+modulate = Color(1.5, 1.5, 1.5, 1)
+scale = Vector2(0.2, 0.1)
+texture = ExtResource("1_c3cs0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tj1e3")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true

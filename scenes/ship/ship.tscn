@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=31 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship_rb.gd" id="1_wdoy6"]
 [ext_resource type="Shader" path="res://scenes/ship/scripts/ship.gdshader" id="2_hj2nt"]
@@ -27,6 +27,7 @@
 [ext_resource type="AudioStream" uid="uid://xn71bm7xult" path="res://assets/sounds/thruster_loop.wav" id="24_ageps"]
 [ext_resource type="Script" path="res://scenes/ship/position_extrapolation.gd" id="25_1c55w"]
 [ext_resource type="Script" path="res://scenes/ship/main_thrusters.gd" id="25_fgofk"]
+[ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="28_qwgv6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sayty"]
 shader = ExtResource("21_kd45o")
@@ -160,7 +161,7 @@ script = ExtResource("23_pav5x")
 unique_name_in_owner = true
 script = ExtResource("25_1c55w")
 
-[node name="Model" type="Sprite2D" parent="PositionExtrapolation"]
+[node name="View" type="Sprite2D" parent="PositionExtrapolation"]
 material = SubResource("ShaderMaterial_8d03f")
 rotation = 1.5708
 texture = ExtResource("16_v2u35")
@@ -178,7 +179,6 @@ _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/Thrusters/FL"]
 stream = ExtResource("24_ageps")
-volume_db = -20.0
 pitch_scale = 2.0
 
 [node name="FR" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
@@ -189,7 +189,6 @@ _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/Thrusters/FR"]
 stream = ExtResource("24_ageps")
-volume_db = -30.0
 pitch_scale = 2.0
 
 [node name="RF" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
@@ -200,7 +199,6 @@ _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/Thrusters/RF"]
 stream = ExtResource("24_ageps")
-volume_db = -20.0
 pitch_scale = 2.0
 
 [node name="RB" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
@@ -211,7 +209,6 @@ _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/Thrusters/RB"]
 stream = ExtResource("24_ageps")
-volume_db = -20.0
 pitch_scale = 2.0
 
 [node name="BR" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
@@ -221,7 +218,6 @@ _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/Thrusters/BR"]
 stream = ExtResource("24_ageps")
-volume_db = -20.0
 pitch_scale = 2.0
 
 [node name="BL" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
@@ -231,7 +227,6 @@ _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/Thrusters/BL"]
 stream = ExtResource("24_ageps")
-volume_db = -20.0
 pitch_scale = 2.0
 
 [node name="LB" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
@@ -242,7 +237,6 @@ _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/Thrusters/LB"]
 stream = ExtResource("24_ageps")
-volume_db = -20.0
 pitch_scale = 2.0
 
 [node name="LF" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
@@ -253,7 +247,6 @@ _sound = NodePath("Sound")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/Thrusters/LF"]
 stream = ExtResource("24_ageps")
-volume_db = -20.0
 pitch_scale = 2.0
 
 [node name="MainThrusters" type="Node2D" parent="PositionExtrapolation" node_paths=PackedStringArray("_body")]
@@ -277,3 +270,9 @@ position_smoothing_speed = 10.0
 script = ExtResource("3_ukcxu")
 target = NodePath("../..")
 inertia = 5.0
+
+[node name="Gun" parent="PositionExtrapolation" node_paths=PackedStringArray("parent") instance=ExtResource("28_qwgv6")]
+position = Vector2(32, 0)
+parent = NodePath("../..")
+fire_rate = 5.0
+bullet_speed = 500.0
