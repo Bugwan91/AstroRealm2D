@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://de2fm66vsgby"]
+
+[ext_resource type="PackedScene" uid="uid://dcjlidv1ftgrv" path="res://scenes/gun/hit_effect.tscn" id="1_pkpwy"]
+
+[sub_resource type="Gradient" id="Gradient_idxxb"]
+offsets = PackedFloat32Array(0.138462, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_iux0w"]
+gradient = SubResource("Gradient_idxxb")
+
+[sub_resource type="Curve" id="Curve_rkg3d"]
+max_value = 100.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_awq3e"]
+curve = SubResource("Curve_rkg3d")
+
+[sub_resource type="Curve" id="Curve_mqrkq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.502773, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.48826), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_j3y40"]
+curve = SubResource("Curve_mqrkq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8q3v8"]
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 9.162
+damping_max = 9.162
+damping_curve = SubResource("CurveTexture_awq3e")
+scale_curve = SubResource("CurveTexture_j3y40")
+color = Color(4, 0.294118, 0, 1)
+color_ramp = SubResource("GradientTexture1D_iux0w")
+turbulence_noise_scale = 1.79
+
+[node name="HitEffect" instance=ExtResource("1_pkpwy")]
+
+[node name="GPUParticles2D" parent="." index="0"]
+process_material = SubResource("ParticleProcessMaterial_8q3v8")
+
+[node name="PointLight2D" parent="." index="1"]
+color = Color(1, 0.2, 0, 1)

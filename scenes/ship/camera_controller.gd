@@ -2,7 +2,6 @@ class_name CameraController
 extends Camera2D
 
 @export var target: RigidBody2D
-@export var force: float = 1
 @export var inertia: float = 10
 @export var zoom_min := 0.5
 @export var zoom_max := 4.0
@@ -10,7 +9,7 @@ extends Camera2D
 
 var _inverse_inertia: float
 var _last_veocity: Vector2 = Vector2.ZERO
-var _acceleration: Vector2 = Vector2.ZERO
+var _target_position: Vector2 = Vector2.ZERO
 
 var _zoom_min: Vector2
 var _zoom_max: Vector2
@@ -29,12 +28,12 @@ func _unhandled_input(event):
 	_target_zoom = _target_zoom.clamp(_zoom_min, _zoom_max)
 
 func _process(_delta):
-	var _delta_position = _acceleration.rotated(-target.rotation) * force - position
-	position += _delta_position * _inverse_inertia
+	position = _target_position
 	zoom = lerp(zoom, _target_zoom, .1)
 
 func _physics_process(_delta):
-	_acceleration = _last_veocity - target.linear_velocity
+	var acceleration = _last_veocity - target.linear_velocity
+	_target_position = lerp(_target_position, acceleration.rotated(-target.rotation), _inverse_inertia)
 	_last_veocity = target.linear_velocity
 
 func _init_zoom():

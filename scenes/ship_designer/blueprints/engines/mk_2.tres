@@ -10,3 +10,4 @@ script = ExtResource("1_6idfb")
 base_texture = ExtResource("1_qr8cn")
 mask = ExtResource("3_q5d2l")
 emisison_mask = ExtResource("2_ddu15")
+some = null

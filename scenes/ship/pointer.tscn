@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc0s2khypwfnm"]
+
+[ext_resource type="Texture2D" uid="uid://b0k320qpn4nh" path="res://assets/my/cursor_32.png" id="1_5wfdt"]
+[ext_resource type="Script" path="res://scenes/ship/BattleAssistantPointerpointer.gd" id="1_nadho"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_nadho")
+in_range_color = Color(1, 0, 0, 0.784314)
+out_range_color = Color(0.486275, 0, 0, 0.784314)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Pointer" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PointerTexture" type="TextureRect" parent="CanvasLayer/Pointer"]
+modulate = Color(1, 0.196078, 0.196078, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -36.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5wfdt")

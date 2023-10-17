@@ -12,6 +12,7 @@ const ANGULAR_THRESHOLD = 0.01
 @export var input_reader: ShipInputReader
 @export var thrusters: Thrusters
 @export var main_thrusters: MainThrusters
+@export_range(0, 200) var tracking_accuracy := 10.0
 
 @onready var _main_state: MainState = get_node("/root/MainState")
 
@@ -57,7 +58,7 @@ func apply_controls(delta: float):
 	_linear_control = _strafe_input
 	_angular_control = _rotate_input
 	if Input.is_action_pressed("stop"):
-		_linear_to_target(delta, _get_target_velocity())
+		_linear_to_target(delta, _get_delta_velocity())
 		_angular_to_target(delta)
 	if enabled:
 		_handle_turn(delta)
@@ -79,8 +80,7 @@ func _update_status():
 		enabled = not enabled
 		_main_state.flight_assist = enabled
 
-func _linear_to_target(delta: float, target_velocity: Vector2 = Vector2.ZERO):
-	var dv = (target_velocity - _linear_velocity).rotated(-ship.rotation)
+func _linear_to_target(delta: float, dv: Vector2 = Vector2.ZERO):
 	var dv_len = dv.length()
 	var dv_n = dv / dv_len
 	if dv_len > LINEAR_THRESHOLD:
@@ -110,10 +110,16 @@ func _handle_turn(delta: float):
 	var w = ship.angular_velocity * delta
 	_angular_control = (wt - w) / a
 
-func _get_target_velocity() -> Vector2:
+func _get_delta_velocity() -> Vector2:
 	if is_instance_valid(target):
-		return target.linear_velocity
-	return Vector2.ZERO
+		var delta = (target.linear_velocity - _linear_velocity).rotated(-ship.rotation)
+		if tracking_accuracy <= LINEAR_THRESHOLD:
+			return delta
+		var delta_l = delta.length()
+		if delta_l > tracking_accuracy:
+			var d = max(0.0, delta_l - tracking_accuracy)
+			return delta * (d / delta_l)
+	return -_linear_velocity.rotated(-ship.rotation)
 
 func _main_thruster_input_changed(value: float):
 	_main_thruster_input = value

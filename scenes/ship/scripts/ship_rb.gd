@@ -8,6 +8,9 @@ extends RigidBody2D
 @onready var _thrusters: Thrusters = %Thrusters
 @onready var _engines: MainThrusters = %MainThrusters
 @onready var flight_assistant: ShipFlightAssistant = %FlightAssistant
+@onready var battle_assistant: BattleAssistant = %BattleAssistant
+
+@onready var gun = $PositionExtrapolation/Gun as Gun
 
 var _reset := false
 
@@ -36,9 +39,17 @@ func _reset_ship(state: PhysicsDirectBodyState2D):
 
 func set_target(target: RigidBody2D):
 	flight_assistant.target_changed(target)
+	battle_assistant.set_target(target)
 
 func reset_target():
 	flight_assistant.target_changed(null)
+	battle_assistant.set_target(null)
+
+func _input(event):
+	if event.is_action_pressed("fire"):
+		gun.start_fire()
+	elif event.is_action_released("fire"):
+		gun.stop_fire()
 
 # TODO: Refactor
 # Data to main state (UI connection)

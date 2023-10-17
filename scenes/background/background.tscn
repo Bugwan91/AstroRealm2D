@@ -3704,14 +3704,14 @@ autoplay = "moon_rotation"
 
 [node name="Sun" type="AnimatedSprite2D" parent="Planets"]
 modulate = Color(1.7, 1.7, 1.5, 1)
-position = Vector2(115, 443)
+position = Vector2(2628, 413)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_prdtv")
 animation = &"sub_rotation"
 autoplay = "sub_rotation"
 
 [node name="Mars" type="AnimatedSprite2D" parent="Planets"]
-position = Vector2(2179, 857)
+position = Vector2(405, 449)
 sprite_frames = SubResource("SpriteFrames_p0qbb")
 animation = &"mars_rotation"
 autoplay = "mars_rotation"

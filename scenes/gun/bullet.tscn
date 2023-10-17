@@ -1,24 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwdthpisfmojs"]
+[gd_scene load_steps=6 format=3 uid="uid://dwdthpisfmojs"]
 
-[ext_resource type="Texture2D" uid="uid://cqjp1p6y5dedo" path="res://assets/lasers/01.png" id="1_c3cs0"]
 [ext_resource type="Script" path="res://scenes/gun/bullet.gd" id="1_gtbct"]
+[ext_resource type="Texture2D" uid="uid://ck0awuodqj23r" path="res://assets/my/bullet_01.png" id="2_2wdn1"]
+[ext_resource type="PackedScene" uid="uid://dcjlidv1ftgrv" path="res://scenes/gun/hit_effect.tscn" id="2_m6c5x"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_tj1e3"]
-radius = 3.0
+[sub_resource type="Gradient" id="Gradient_2ebqb"]
+offsets = PackedFloat32Array(0.0962963, 0.788889)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
-[node name="Bullet" type="RigidBody2D"]
-collision_layer = 0
-lock_rotation = true
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w7x75"]
+gradient = SubResource("Gradient_2ebqb")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Bullet" type="Node2D"]
 script = ExtResource("1_gtbct")
+hit_effect = ExtResource("2_m6c5x")
 
 [node name="View" type="Sprite2D" parent="."]
-modulate = Color(1.5, 1.5, 1.5, 1)
-scale = Vector2(0.2, 0.1)
-texture = ExtResource("1_c3cs0")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_tj1e3")
+modulate = Color(0.2, 0.8, 2, 1)
+rotation = 1.5708
+texture = ExtResource("2_2wdn1")
 
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-8, 0)
+rotation = 4.71239
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.415686, 0.686275, 1, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_w7x75")

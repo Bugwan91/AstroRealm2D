@@ -8,8 +8,8 @@
 [ext_resource type="Script" path="res://scenes/ship/position_extrapolation.gd" id="6_k2ut1"]
 [ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="6_udm3s"]
 [ext_resource type="PackedScene" uid="uid://df6i8o1ckqhq3" path="res://scenes/gun/bullet_red.tscn" id="7_1vp7r"]
-[ext_resource type="Texture2D" uid="uid://b0nxk2a5ergrg" path="res://assets/my/icons/hull_icon.png" id="7_xt2p7"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://ui/ui.tscn" id="8_myah8"]
+[ext_resource type="Texture2D" uid="uid://paowiimqoup8" path="res://ship_01.png" id="9_brjfx"]
 
 [sub_resource type="Environment" id="Environment_1ojvs"]
 background_mode = 3
@@ -36,8 +36,9 @@ _surfaces = [{
 "vertex_data": PackedByteArray(0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 192)
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_s6m4d"]
-radius = 20.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ruxak"]
+radius = 17.0
+height = 66.0
 
 [node name="Main" type="Node2D"]
 
@@ -62,37 +63,44 @@ size = 4096.0
 mesh = SubResource("ArrayMesh_xlsq0")
 texture = ExtResource("2_i03k3")
 
-[node name="Ship" parent="." instance=ExtResource("4_5rllk")]
-mass = 0.5
-
 [node name="DummyShip" type="RigidBody2D" parent="."]
-position = Vector2(-242, 124)
-mass = 0.05
-linear_velocity = Vector2(50, 0)
+position = Vector2(3, -244)
+collision_mask = 0
+mass = 0.2
+linear_velocity = Vector2(200, 0)
+angular_velocity = -0.174533
+angular_damp_mode = 1
 script = ExtResource("5_hb2m2")
+radial_force = 10.0
 
 [node name="Gun" parent="DummyShip" node_paths=PackedStringArray("parent") instance=ExtResource("6_udm3s")]
 position = Vector2(15, 0)
 parent = NodePath("..")
 bullet_scene = ExtResource("7_1vp7r")
+fire_rate = 4.0
+range = 1000.0
 bullet_speed = 500.0
+recoil = 0.1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DummyShip"]
-polygon = PackedVector2Array(16, 0, -10, 16, -16, 0, -10, -16)
+polygon = PackedVector2Array(32, 0, -6, 16, -14, 16, -32, 5, -32, -5, -14, -16, -6, -16)
 
 [node name="Area2D" type="Area2D" parent="DummyShip"]
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DummyShip/Area2D"]
-position = Vector2(-2, 0)
-shape = SubResource("CircleShape2D_s6m4d")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ruxak")
 
 [node name="PositionExtrapolation" type="Node2D" parent="DummyShip"]
 script = ExtResource("6_k2ut1")
 
 [node name="Sprite2D" type="Sprite2D" parent="DummyShip/PositionExtrapolation"]
 rotation = 1.5708
-texture = ExtResource("7_xt2p7")
+texture = ExtResource("9_brjfx")
+
+[node name="Ship" parent="." instance=ExtResource("4_5rllk")]
+mass = 0.2
 
 [node name="UI" parent="." instance=ExtResource("8_myah8")]
 

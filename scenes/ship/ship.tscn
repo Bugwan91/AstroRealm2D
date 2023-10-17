@@ -1,28 +1,30 @@
-[gd_scene load_steps=31 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=33 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship_rb.gd" id="1_wdoy6"]
 [ext_resource type="Shader" path="res://scenes/ship/scripts/ship.gdshader" id="2_hj2nt"]
+[ext_resource type="Texture2D" uid="uid://fwe0bdfhki3t" path="res://assets/my/ship_o1/hull_2.PNG" id="3_5y0ng"]
 [ext_resource type="Texture2D" uid="uid://dpp12wrak050k" path="res://ship_emission.png" id="3_co5i1"]
 [ext_resource type="Script" path="res://scenes/ship/camera_controller.gd" id="3_ukcxu"]
+[ext_resource type="Texture2D" uid="uid://b0oompuhil78k" path="res://assets/my/ship_o1/hull_2_mask.PNG" id="6_o1jr6"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/flight_assistant.gd" id="8_cd285"]
 [ext_resource type="Script" path="res://scenes/thruster/thruster.gd" id="8_d4b7a"]
+[ext_resource type="Texture2D" uid="uid://cje3ohukt7y80" path="res://assets/my/ship_o1/hull_2_emission.PNG" id="9_xbv3h"]
 [ext_resource type="PackedScene" uid="uid://k6231xltcfhl" path="res://scenes/thruster/thruster.tscn" id="10_wlx63"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/SubViewport.gd" id="11_f18mv"]
 [ext_resource type="Script" path="res://scenes/thruster/thrusters.gd" id="11_hhoku"]
-[ext_resource type="Texture2D" uid="uid://cptyhxa6dxk7y" path="res://assets/my/ship_o1/hull_1.PNG" id="12_dapyr"]
 [ext_resource type="Texture2D" uid="uid://bdjs7ywlspykf" path="res://assets/my/ship_o1/cocpit_2.PNG" id="13_ms84k"]
+[ext_resource type="Texture2D" uid="uid://tsyi84v42gdk" path="res://assets/my/ship_o1/style_6.PNG" id="14_1mdhf"]
 [ext_resource type="Texture2D" uid="uid://cxe6gi15exjbm" path="res://assets/my/ship_o1/engine_2.PNG" id="14_1r6x2"]
-[ext_resource type="Texture2D" uid="uid://c6b8pehpj46wl" path="res://assets/my/ship_o1/hull_1_mask.PNG" id="15_f7otg"]
 [ext_resource type="Texture2D" uid="uid://dljuhgwuqagig" path="res://ship_mask.png" id="16_f0mh8"]
 [ext_resource type="Texture2D" uid="uid://dmhv48ebm52oe" path="res://assets/my/ship_o1/cocpit_2_mask.PNG" id="16_m6sfl"]
-[ext_resource type="Texture2D" uid="uid://paowiimqoup8" path="res://ship.png" id="16_v2u35"]
+[ext_resource type="Texture2D" uid="uid://dp224au4ijms3" path="res://ship.png" id="16_v2u35"]
+[ext_resource type="Script" path="res://scenes/ship/BattleAssistant.gd" id="17_1oqh4"]
 [ext_resource type="Texture2D" uid="uid://q026lhon6o0q" path="res://ship_base.png" id="17_g6os6"]
 [ext_resource type="Texture2D" uid="uid://cbxltv3f2jfxb" path="res://assets/my/ship_o1/engine_2_mask.PNG" id="17_jk0of"]
-[ext_resource type="Texture2D" uid="uid://e50jxo4o4al" path="res://assets/my/ship_o1/hull_1_emission.PNG" id="18_0gtvi"]
+[ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="18_pfi8s"]
 [ext_resource type="Texture2D" uid="uid://b1div50ru5c4l" path="res://assets/my/ship_o1/cocpit_2_emission.PNG" id="19_6gqhq"]
 [ext_resource type="Texture2D" uid="uid://bl55syfjjpfi7" path="res://assets/my/ship_o1/engine_2_emission.PNG" id="20_d7oi0"]
 [ext_resource type="Shader" path="res://scenes/ship/scripts/ship_style.gdshader" id="21_kd45o"]
-[ext_resource type="Texture2D" uid="uid://byxx4hkfvugmv" path="res://assets/my/ship_o1/style_8.PNG" id="23_lrysj"]
 [ext_resource type="Script" path="res://scenes/ship/ship_input_reader.gd" id="23_pav5x"]
 [ext_resource type="AudioStream" uid="uid://xn71bm7xult" path="res://assets/sounds/thruster_loop.wav" id="24_ageps"]
 [ext_resource type="Script" path="res://scenes/ship/position_extrapolation.gd" id="25_1c55w"]
@@ -32,7 +34,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sayty"]
 shader = ExtResource("21_kd45o")
 shader_parameter/mask_texture = ExtResource("16_f0mh8")
-shader_parameter/style_texture = ExtResource("23_lrysj")
+shader_parameter/style_texture = ExtResource("14_1mdhf")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8d03f"]
 shader = ExtResource("2_hj2nt")
@@ -40,13 +42,15 @@ shader_parameter/emission_texture = ExtResource("3_co5i1")
 
 [node name="Ship" type="RigidBody2D"]
 unique_name_in_owner = true
+collision_mask = 0
+mass = 0.5
 script = ExtResource("1_wdoy6")
 _main_thrust = 100.0
 _maneuver_thrust = 25.0
 _velocity_limit = 500.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-29, -8, -14, -16, -6, -16, 32, 0, -6, 16, -14, 16, -29, 8)
+polygon = PackedVector2Array(-32, -16, -6, -16, 32, 0, -6, 16, -32, 16)
 
 [node name="Baker" type="Node" parent="."]
 
@@ -65,7 +69,7 @@ filename = "res://ship_base.png"
 position = Vector2(16, 32)
 
 [node name="hull" type="Sprite2D" parent="Baker/BaseBaker/CanvasLayer/hull_view"]
-texture = ExtResource("12_dapyr")
+texture = ExtResource("3_5y0ng")
 
 [node name="cocpit" type="Sprite2D" parent="Baker/BaseBaker/CanvasLayer/hull_view"]
 position = Vector2(0, -16)
@@ -91,7 +95,7 @@ texture_filter = 1
 position = Vector2(16, 32)
 
 [node name="hull" type="Sprite2D" parent="Baker/MaskBaker/CanvasLayer/mask_view"]
-texture = ExtResource("15_f7otg")
+texture = ExtResource("6_o1jr6")
 
 [node name="cocpit" type="Sprite2D" parent="Baker/MaskBaker/CanvasLayer/mask_view"]
 position = Vector2(0, -16)
@@ -117,7 +121,7 @@ texture_filter = 1
 position = Vector2(16, 32)
 
 [node name="hull" type="Sprite2D" parent="Baker/EmissionBaker/CanvasLayer/mask_view"]
-texture = ExtResource("18_0gtvi")
+texture = ExtResource("9_xbv3h")
 
 [node name="cocpit" type="Sprite2D" parent="Baker/EmissionBaker/CanvasLayer/mask_view"]
 position = Vector2(0, -16)
@@ -144,18 +148,6 @@ position = Vector2(16, 32)
 [node name="Ship" type="Sprite2D" parent="Baker/Stylizator/CanvasLayer/ShipStylization"]
 material = SubResource("ShaderMaterial_sayty")
 texture = ExtResource("17_g6os6")
-
-[node name="FlightAssistant" type="Node" parent="." node_paths=PackedStringArray("ship", "input_reader", "thrusters", "main_thrusters")]
-unique_name_in_owner = true
-script = ExtResource("8_cd285")
-ship = NodePath("..")
-input_reader = NodePath("../InputReader")
-thrusters = NodePath("../PositionExtrapolation/Thrusters")
-main_thrusters = NodePath("../PositionExtrapolation/MainThrusters")
-
-[node name="InputReader" type="Node2D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("23_pav5x")
 
 [node name="PositionExtrapolation" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -202,7 +194,7 @@ stream = ExtResource("24_ageps")
 pitch_scale = 2.0
 
 [node name="RB" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
-position = Vector2(-21, 8)
+position = Vector2(-31, 16)
 rotation = -1.5708
 scale = Vector2(0.2, 0.2)
 _sound = NodePath("Sound")
@@ -212,7 +204,7 @@ stream = ExtResource("24_ageps")
 pitch_scale = 2.0
 
 [node name="BR" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
-position = Vector2(-14, 15)
+position = Vector2(-32, 15)
 scale = Vector2(0.2, 0.2)
 _sound = NodePath("Sound")
 
@@ -221,7 +213,7 @@ stream = ExtResource("24_ageps")
 pitch_scale = 2.0
 
 [node name="BL" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
-position = Vector2(-14, -15)
+position = Vector2(-32, -15)
 scale = Vector2(0.2, 0.2)
 _sound = NodePath("Sound")
 
@@ -230,7 +222,7 @@ stream = ExtResource("24_ageps")
 pitch_scale = 2.0
 
 [node name="LB" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
-position = Vector2(-21, -8)
+position = Vector2(-31, -16)
 rotation = 1.5708
 scale = Vector2(0.2, 0.2)
 _sound = NodePath("Sound")
@@ -274,5 +266,29 @@ inertia = 5.0
 [node name="Gun" parent="PositionExtrapolation" node_paths=PackedStringArray("parent") instance=ExtResource("28_qwgv6")]
 position = Vector2(32, 0)
 parent = NodePath("../..")
-fire_rate = 5.0
+fire_rate = 20.0
+range = 700.0
 bullet_speed = 500.0
+recoil = 0.0
+
+[node name="InputReader" type="Node2D" parent="PositionExtrapolation"]
+unique_name_in_owner = true
+script = ExtResource("23_pav5x")
+
+[node name="BattleAssistant" type="Node2D" parent="PositionExtrapolation" node_paths=PackedStringArray("ship", "gun")]
+unique_name_in_owner = true
+script = ExtResource("17_1oqh4")
+ship = NodePath("../..")
+gun = NodePath("../Gun")
+
+[node name="Pointer" parent="PositionExtrapolation/BattleAssistant" instance=ExtResource("18_pfi8s")]
+unique_name_in_owner = true
+
+[node name="FlightAssistant" type="Node" parent="PositionExtrapolation" node_paths=PackedStringArray("ship", "input_reader", "thrusters", "main_thrusters")]
+unique_name_in_owner = true
+script = ExtResource("8_cd285")
+ship = NodePath("../..")
+input_reader = NodePath("../InputReader")
+thrusters = NodePath("../Thrusters")
+main_thrusters = NodePath("../MainThrusters")
+tracking_accuracy = 50.0
