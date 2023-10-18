@@ -229,11 +229,15 @@ gun = NodePath("../Gun")
 [node name="Pointer" parent="PositionExtrapolation/BattleAssistant" instance=ExtResource("18_pfi8s")]
 unique_name_in_owner = true
 
-[node name="FlightAssistant" type="Node" parent="PositionExtrapolation" node_paths=PackedStringArray("ship", "input_reader", "thrusters", "main_thrusters")]
+[node name="FlightAssistant" type="Node2D" parent="PositionExtrapolation" node_paths=PackedStringArray("ship", "input_reader", "thrusters", "main_thrusters")]
 unique_name_in_owner = true
 script = ExtResource("8_cd285")
 ship = NodePath("../..")
 input_reader = NodePath("../InputReader")
 thrusters = NodePath("../Thrusters")
 main_thrusters = NodePath("../MainThrusters")
-tracking_accuracy = 0.0
+
+[node name="PositionPointer" parent="PositionExtrapolation/FlightAssistant" instance=ExtResource("18_pfi8s")]
+unique_name_in_owner = true
+in_range_color = Color(0, 1, 0, 0.784314)
+out_range_color = Color(0, 0.486275, 0, 0.784314)

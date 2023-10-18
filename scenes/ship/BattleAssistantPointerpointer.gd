@@ -6,7 +6,7 @@ extends Node2D
 @export var in_range_color: Color
 @export var out_range_color: Color
 
-func update(new_position: Vector2, in_range: bool):
+func update(new_position: Vector2, in_range: bool = true):
 	pointer.visible = true
 	pointer.modulate = in_range_color if in_range else out_range_color
 	var canvas_transform = get_global_transform_with_canvas()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=15 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="PackedScene" uid="uid://de6wu3uauymsr" path="res://scenes/background/background.tscn" id="1_b53p2"]
 [ext_resource type="Texture2D" uid="uid://cwvtmyy8brm3w" path="res://assets/my/Star_01.png" id="2_i03k3"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://df6i8o1ckqhq3" path="res://scenes/gun/bullet_red.tscn" id="7_1vp7r"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://ui/ui.tscn" id="8_myah8"]
 [ext_resource type="Texture2D" uid="uid://paowiimqoup8" path="res://ship_01.png" id="9_brjfx"]
-[ext_resource type="Texture2D" uid="uid://b0k320qpn4nh" path="res://assets/my/cursor_32.png" id="11_f5sy5"]
 
 [sub_resource type="Environment" id="Environment_1ojvs"]
 background_mode = 3
@@ -38,8 +37,8 @@ _surfaces = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ruxak"]
-radius = 17.0
-height = 66.0
+radius = 23.0
+height = 80.0
 
 [node name="Main" type="Node2D"]
 
@@ -112,15 +111,9 @@ texture = ExtResource("9_brjfx")
 
 [node name="UI" parent="." instance=ExtResource("8_myah8")]
 
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(1000, 500)
-
-[node name="Cursor32" type="Sprite2D" parent="Node2D"]
-modulate = Color(0.7, 2, 0.7, 1)
-texture = ExtResource("11_f5sy5")
-
 [node name="Ship" parent="." instance=ExtResource("4_5rllk")]
 mass = 1.0
-_maneuver_thrust = 50.0
+_maneuver_thrust = 20.0
+_flight_assistant_error = 50.0
 
 [connection signal="input_event" from="DummyShip/Area2D" to="DummyShip" method="_on_Area2D_input_event"]

@@ -1,9 +1,11 @@
 class_name ShipRigidBody
 extends RigidBody2D
 
-@export var _main_thrust := 200.0
-@export var _maneuver_thrust := 50.0
-@export var _velocity_limit := 1000.0
+@export_range(0, 500) var _main_thrust := 200.0
+@export_range(0, 100) var _maneuver_thrust := 50.0
+@export_range(0, 2000) var _velocity_limit := 1000.0
+@export_range(0, 500) var _flight_assistant_error := 0.0
+
 @onready var _main_state = get_node("/root/MainState")
 @onready var _thrusters: Thrusters = %Thrusters
 @onready var _engines: MainThrusters = %MainThrusters
@@ -19,7 +21,7 @@ var inverse_inertia := 0.0
 func _ready():
 	_thrusters.setup(_maneuver_thrust)
 	_engines.setup(_main_thrust, _velocity_limit)
-	flight_assistant.setup()
+	flight_assistant.setup(_flight_assistant_error)
 
 func _process(delta):
 	_update_main_state(delta)
