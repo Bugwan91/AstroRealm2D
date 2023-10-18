@@ -6,21 +6,22 @@ extends RigidBody2D
 @export_range(0, 2000) var _velocity_limit := 1000.0
 @export_range(0, 500) var _flight_assistant_error := 0.0
 
-@onready var _main_state = get_node("/root/MainState")
-@onready var _thrusters: Thrusters = %Thrusters
-@onready var _engines: MainThrusters = %MainThrusters
+@onready var position_extrapolation: Node2D = %PositionExtrapolation
+@onready var thrusters: Thrusters = %Thrusters
+@onready var engines: MainThrusters = %MainThrusters
 @onready var flight_assistant: ShipFlightAssistant = %FlightAssistant
 @onready var battle_assistant: BattleAssistant = %BattleAssistant
 
 @onready var gun = $PositionExtrapolation/Gun as Gun
-
-var _reset := false
+@onready var _main_state = get_node("/root/MainState")
 
 var inverse_inertia := 0.0
 
+var _reset := false
+
 func _ready():
-	_thrusters.setup(_maneuver_thrust)
-	_engines.setup(_main_thrust, _velocity_limit)
+	thrusters.setup(_maneuver_thrust)
+	engines.setup(_main_thrust, _velocity_limit)
 	flight_assistant.setup(_flight_assistant_error)
 
 func _process(delta):

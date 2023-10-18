@@ -1,9 +1,9 @@
 class_name BattleAssistant
-extends Node2D
+extends Node
 
-@export var ship: RigidBody2D
 @export var gun: Gun
 
+@onready var ship: ShipRigidBody = owner
 @onready var pointer: BattleAssistantPointer = %Pointer
 
 var target: RigidBody2D
@@ -11,11 +11,15 @@ var target: RigidBody2D
 func _ready():
 	pointer.disable()
 
+
 func _process(_delta):
 	_calculate_bullet_intersection()
+	pointer.position = ship.position
+
 
 func set_target(value: RigidBody2D):
 	target = value
+
 
 func _calculate_bullet_intersection():
 	if not(is_instance_valid(target) and target is RigidBody2D):
@@ -26,7 +30,7 @@ func _calculate_bullet_intersection():
 	if a == 0.0:
 		pointer.disable()
 		return
-	var to_target = target.position - ship.global_position
+	var to_target = target.position - ship.position
 	var b = 2 * to_target.dot(relative_target_vel)
 	var c = to_target.length_squared()
 	var discriminant = b * b - 4 * a * c

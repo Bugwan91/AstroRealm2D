@@ -112,7 +112,6 @@ texture = ExtResource("9_brjfx")
 [node name="UI" parent="." instance=ExtResource("8_myah8")]
 
 [node name="Ship" parent="." instance=ExtResource("4_5rllk")]
-mass = 1.0
 _maneuver_thrust = 20.0
 _flight_assistant_error = 50.0
 

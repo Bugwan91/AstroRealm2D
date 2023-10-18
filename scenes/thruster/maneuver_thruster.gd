@@ -26,7 +26,7 @@ func _set_torque_throttle(value):
 func setup(value: float):
 	super(value)
 	_calculate_torgue()
-	_flame.setup_sound(-30, 2)
+	_flame.setup_sound(-20, 2)
 
 func _calculate_torgue():
 	var value = _thrust * (position.x * _force_direction.y - position.y * _force_direction.x) if enabled and _thrust > 0 else 0.0

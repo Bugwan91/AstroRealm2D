@@ -26,7 +26,7 @@ func _set_throttle(value):
 
 func _ready():
 	_force_direction = transform.x.normalized()
-	_flame.setup_sound(-20, 1)
+	_flame.setup_sound(0, 1)
 
 func _process(_delta):
 	pass

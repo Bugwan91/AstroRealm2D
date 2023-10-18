@@ -1,5 +1,5 @@
 class_name ShipFlightAssistant
-extends Node2D
+extends Node
 
 enum Action {STOP, LOOK_TO}
 
@@ -8,13 +8,14 @@ const AUTOPILOT_THRESHOLD = 16
 const ANGULAR_THRESHOLD = 0.01
 
 @export var enabled := false
-@export var ship: RigidBody2D
 @export var input_reader: ShipInputReader
 @export var thrusters: Thrusters
 @export var main_thrusters: MainThrusters
 
-@onready var _main_state: MainState = get_node("/root/MainState")
+@onready var ship: ShipRigidBody = owner
 @onready var position_pointer: BattleAssistantPointer = %PositionPointer
+
+@onready var _main_state: MainState = get_node("/root/MainState")
 
 var target: RigidBody2D
 
@@ -47,8 +48,9 @@ func setup(error: float):
 
 
 func _process(_delta):
+	position_pointer.position = ship.position
 	if enabled and _is_autopilot:
-		position_pointer.update(_target_position - global_position)
+		position_pointer.update(_target_position - ship.position)
 	else:
 		position_pointer.disable()
 	if Input.is_action_pressed("set_target") and _is_autopilot:
@@ -66,11 +68,11 @@ func _unhandled_input(event):
 	if event.is_action_pressed("flight_assist"):
 		enabled = not enabled
 		_main_state.flight_assist = enabled
-	if event.is_action_pressed("stop"):
+	if enabled and event.is_action_pressed("stop"):
 		_is_tracking = not _is_tracking
 		if _is_tracking:
 			_is_autopilot = false
-	if event.is_action_pressed("autopilot"):
+	if enabled and event.is_action_pressed("autopilot"):
 		_is_autopilot = not _is_autopilot
 		if _is_autopilot:
 			_is_tracking = false
@@ -106,6 +108,7 @@ func _handle_control():
 	thrusters.apply_rotation(_angular_control)
 	main_thrusters.apply_throttle(_main_thrusters_control)
 
+
 func _linear_to_target(delta: float, dv: Vector2 = Vector2.ZERO):
 	dv = dv.rotated(-ship.rotation)
 	var dv_len = dv.length()
@@ -114,7 +117,7 @@ func _linear_to_target(delta: float, dv: Vector2 = Vector2.ZERO):
 		var a = delta * (thrusters.estimated_strafe_force(dv * 100) / ship.mass)
 		var f = (dv_len / a)
 		_linear_control = 2 * f * _strafe_input + f * dv_n
-		if dv.x > main_thrusters.estimated_force() / a and _linear_control.x > 1:
+		if  _linear_control.x > 1:# and _linear_control.x - 1 > main_thrusters.estimated_force() / a:
 			_main_thrusters_control = _main_thruster_input + (_linear_control.x - 1) * _thrusters_ratio
 
 
@@ -126,6 +129,7 @@ func _angular_to_target(delta: float, target_velocity: float = 0):
 		var a = delta * abs(thrusters.estimated_torque(dv)) * ship.inverse_inertia
 		_angular_control = dv / a
 
+
 func _move_to(delta: float, target_point: Vector2):
 	var delta_position = target_point - ship.position
 	var velocity_l = ship.linear_velocity.length()
@@ -134,6 +138,7 @@ func _move_to(delta: float, target_point: Vector2):
 		return
 	_handle_turn(delta, target_point)
 	_handle_move(delta, delta_position)
+
 
 func _handle_turn(delta: float, target_point: Vector2):
 	if _rotate_input != 0:
@@ -174,7 +179,6 @@ func _get_delta_velocity(accurate: bool = false) -> Vector2:
 
 func _main_thruster_input_changed(value: float):
 	_main_thruster_input = value
-	_strafe_input.x = value
 
 
 func _strafe_input_changed(value: Vector2):
