@@ -3,9 +3,8 @@ extends Node2D
 
 @onready var timer: Timer = %Timer
 @onready var ray: RayCast2D = %RayCast2D
-@onready var hit_particles = $GPUParticles2D
 
-@export var hit_effect: PackedScene
+@export var hit_effect_scene: PackedScene
 
 var velocity: Vector2 = Vector2.ZERO
 
@@ -26,15 +25,11 @@ func start(lifetime: float):
 
 func _collide():
 	if ray.is_colliding():
-		var hit = hit_effect.instantiate() as BulletHitEffect
-		hit.position = ray.get_collision_point()
-		hit.velocity = velocity
-		get_parent().add_child(hit)
+		var hit_effect = hit_effect_scene.instantiate() as BulletHitEffect
+		hit_effect.position = ray.get_collision_point()
+		hit_effect.velocity = velocity
+		get_parent().add_child(hit_effect)
 		_self_destroy()
 
 func _self_destroy():
 	queue_free()
-
-func _check_collision(delta: float):
-	pass
-	#ray.

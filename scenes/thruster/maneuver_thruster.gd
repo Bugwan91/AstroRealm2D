@@ -15,7 +15,7 @@ func _set_enabled(value):
 func _set_torque_throttle(value):
 	if not enabled:
 		return
-	if (value > 0 and _torque < 0) or (value < 0 and _torque > 0):
+	if sign(value) != sign(_torque):
 		value = 0
 	value = clamp(abs(value), 0, 1)
 	if torque_throttle != value:
@@ -44,16 +44,10 @@ func estimated_torque(direction: float) -> float:
 	return _torque if (_torque > 0 and direction > 0) or (_torque < 0 and direction < 0) else 0.0
 
 func _update_flame():
-	if throttle > 0 or torque_throttle > 0:
+	var value = max(throttle, torque_throttle)
+	if throttle > 0:
 		_flame.show()
-		var value = max(throttle, torque_throttle)
-		_flame.modulate.a = value
-		# TODO: Rework thrusters sound
-		_sound.volume_db = -30 - (40 - 40 * value)
-		if not _sound.playing:
-			_sound.play()
-		if value < 0.01: #Threshold
-			_sound.stop()
+		_flame.modulate.a = throttle
 	else:
 		_flame.hide()
-		_sound.stop()
+	_update_sound(value)

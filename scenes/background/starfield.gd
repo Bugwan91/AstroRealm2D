@@ -1,7 +1,8 @@
 extends MultiMeshInstance2D
 
-@onready var _mesh_instance = $Star
 @export var size: float = 2048
+
+@onready var _mesh_instance = %Star
 
 var rng = RandomNumberGenerator.new()
 

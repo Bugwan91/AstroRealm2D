@@ -266,10 +266,10 @@ inertia = 5.0
 [node name="Gun" parent="PositionExtrapolation" node_paths=PackedStringArray("parent") instance=ExtResource("28_qwgv6")]
 position = Vector2(32, 0)
 parent = NodePath("../..")
-fire_rate = 20.0
+fire_rate = 10.0
 range = 700.0
 bullet_speed = 500.0
-recoil = 0.0
+recoil = 10.0
 
 [node name="InputReader" type="Node2D" parent="PositionExtrapolation"]
 unique_name_in_owner = true
@@ -291,4 +291,4 @@ ship = NodePath("../..")
 input_reader = NodePath("../InputReader")
 thrusters = NodePath("../Thrusters")
 main_thrusters = NodePath("../MainThrusters")
-tracking_accuracy = 50.0
+tracking_accuracy = 100.0

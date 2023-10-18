@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://de2fm66vsgby" path="res://scenes/gun/hit_effect_red.tscn" id="2_yqie5"]
 
 [node name="Bullet" instance=ExtResource("1_qnle4")]
-hit_effect = ExtResource("2_yqie5")
+hit_effect_scene = ExtResource("2_yqie5")
 
 [node name="View" parent="." index="0"]
 modulate = Color(2, 0.3, 0.1, 1)

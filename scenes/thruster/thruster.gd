@@ -38,7 +38,13 @@ func _update_flame():
 	if throttle > 0:
 		_flame.show()
 		_flame.modulate.a = throttle
-		_sound.play()
 	else:
 		_flame.hide()
+	_update_sound(throttle)
+
+func _update_sound(value: float):
+	_sound.volume_db = -30 - (40 - 40 * value)
+	if not _sound.playing:
+		_sound.play()
+	if value < 0.01:
 		_sound.stop()

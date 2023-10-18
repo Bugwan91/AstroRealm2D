@@ -15,7 +15,7 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="Bullet" type="Node2D"]
 script = ExtResource("1_gtbct")
-hit_effect = ExtResource("2_m6c5x")
+hit_effect_scene = ExtResource("2_m6c5x")
 
 [node name="View" type="Sprite2D" parent="."]
 modulate = Color(0.2, 0.8, 2, 1)

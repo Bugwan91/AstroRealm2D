@@ -19,9 +19,8 @@ var _charging := false
 func _ready():
 	_charge_timer.wait_time = 1.0 / fire_rate
 	_charge_timer.timeout.connect(_charge_done)
-	var bul = bullet_scene.instantiate() as Bullet
 
-func _process(delta):
+func _process(_delta):
 	if _is_firing:
 		fire()
 

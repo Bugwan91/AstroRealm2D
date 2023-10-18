@@ -19,6 +19,7 @@ var inverse_inertia := 0.0
 func _ready():
 	_thrusters.setup(_maneuver_thrust)
 	_engines.setup(_main_thrust, _velocity_limit)
+	flight_assistant.setup()
 
 func _process(delta):
 	_update_main_state(delta)
