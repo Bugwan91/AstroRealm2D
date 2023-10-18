@@ -113,7 +113,6 @@ texture = ExtResource("9_brjfx")
 [node name="UI" parent="." instance=ExtResource("8_myah8")]
 
 [node name="Node2D" type="Node2D" parent="."]
-visible = false
 position = Vector2(1000, 500)
 
 [node name="Cursor32" type="Sprite2D" parent="Node2D"]

@@ -5,6 +5,7 @@ extends Node
 enum Action {STOP, LOOK_TO}
 
 const LINEAR_THRESHOLD = 0.1
+const AUTOPILOT_THRESHOLD = 16
 const ANGULAR_THRESHOLD = 0.01
 
 @export var enabled := false
@@ -19,6 +20,7 @@ const ANGULAR_THRESHOLD = 0.01
 var target: RigidBody2D
 
 var _is_tracking := false
+var _is_autopilot := false
 var _thrusters_ratio := 0.0
 var _main_thruster_input := 0.0
 var _strafe_input := Vector2.ZERO
@@ -46,7 +48,6 @@ func setup():
 func _physics_process(delta):
 	if Engine.is_editor_hint(): return
 	apply_controls(delta)
-	_move_to(Vector2(1000, 500))
 	thrusters.apply_forces()
 	main_thrusters.apply_forces()
 
@@ -65,22 +66,28 @@ func _get_configuration_warnings():
 
 
 func _unhandled_input(event):
-	if event.is_action_pressed("autopilot"):
+	if event.is_action_pressed("flight_assist"):
 		enabled = not enabled
 		_main_state.flight_assist = enabled
 	if event.is_action_pressed("stop"):
 		_is_tracking = not _is_tracking
+	if event.is_action_pressed("autopilot"):
+		_is_autopilot = not _is_autopilot
 
 func apply_controls(delta: float):
 	_update_relative_data()
 	_linear_control = _strafe_input
 	_angular_control = _rotate_input
 	_main_thrusters_control = _main_thruster_input
-	if _is_tracking:
-		_linear_to_target(delta, _get_delta_velocity())
-		_angular_to_target(delta)
 	if enabled:
-		_handle_turn(delta)
+		if _is_tracking:
+			_linear_to_target(delta, _get_delta_velocity())
+			_angular_to_target(delta)
+			_handle_turn(delta, _pointer_position)
+		elif _is_autopilot:
+			_move_to(delta, Vector2(1000, 500))
+		else:
+			_handle_turn(delta, _pointer_position)
 	_handle_control()
 
 
@@ -98,6 +105,7 @@ func _handle_control():
 	main_thrusters.apply_throttle(_main_thrusters_control)
 
 func _linear_to_target(delta: float, dv: Vector2 = Vector2.ZERO):
+	dv = dv.rotated(-ship.rotation)
 	var dv_len = dv.length()
 	var dv_n = dv / dv_len
 	if dv_len > LINEAR_THRESHOLD:
@@ -116,11 +124,19 @@ func _angular_to_target(delta: float, target_velocity: float = 0):
 		var a = delta * abs(thrusters.estimated_torque(dv)) * ship.inverse_inertia
 		_angular_control = dv / a
 
+func _move_to(delta: float, target_point: Vector2):
+	var delta_position = target_point - ship.position
+	var velocity_l = ship.linear_velocity.length()
+	if delta_position.length() < AUTOPILOT_THRESHOLD and velocity_l < LINEAR_THRESHOLD:
+		_angular_to_target(delta, 0)
+		return
+	_handle_turn(delta, target_point)
+	_handle_move(delta, delta_position)
 
-func _handle_turn(delta: float):
+func _handle_turn(delta: float, target_point: Vector2):
 	if _rotate_input != 0:
 		return
-	var error = ship.transform.x.angle_to(_pointer_position - ship.position)
+	var error = ship.transform.x.angle_to(target_point - ship.position)
 	if abs(error) < ANGULAR_THRESHOLD and abs(ship.angular_velocity) < ANGULAR_THRESHOLD:
 		return
 	var a = abs(thrusters.estimated_torque(1) * ship.inverse_inertia) * delta * delta
@@ -133,20 +149,25 @@ func _handle_turn(delta: float):
 	_angular_control = (wt - w) / a
 
 
+func _handle_move(delta: float, delta_position: Vector2):
+	var velocity_l = ship.linear_velocity.length()
+	if delta_position.length() < AUTOPILOT_THRESHOLD and velocity_l < LINEAR_THRESHOLD:
+		return
+	var a = thrusters.estimated_strafe_force(delta_position)
+	var v = sqrt((2 * a * delta_position.length())/3) * delta_position.normalized()
+	_linear_to_target(delta, v - ship.linear_velocity)
+
+
 func _get_delta_velocity(accurate: bool = false) -> Vector2:
 	if is_instance_valid(target):
-		var delta = (target.linear_velocity - _linear_velocity).rotated(-ship.rotation)
+		var delta = (target.linear_velocity - _linear_velocity)
 		if tracking_accuracy <= LINEAR_THRESHOLD:
 			return delta
 		var delta_l = delta.length()
 		if delta_l > tracking_accuracy:
 			var d = max(0.0, delta_l - tracking_accuracy if not accurate else 0.0)
 			return delta * (d / delta_l)
-	return -_linear_velocity.rotated(-ship.rotation)
-
-func _move_to(target_point: Vector2):
-	var delta = target_point - ship.position
-	#DebugDraw2d.line_vector(ship.position, delta, Color.PURPLE)
+	return -_linear_velocity
 
 
 func _main_thruster_input_changed(value: float):
