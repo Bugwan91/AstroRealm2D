@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=32 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship_rb.gd" id="1_wdoy6"]
 [ext_resource type="Shader" path="res://scenes/ship/scripts/ship.gdshader" id="2_hj2nt"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://scenes/ship/camera_controller.gd" id="3_ukcxu"]
 [ext_resource type="Texture2D" uid="uid://b0oompuhil78k" path="res://assets/my/ship_o1/hull_2_mask.PNG" id="6_o1jr6"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/flight_assistant.gd" id="8_cd285"]
-[ext_resource type="Script" path="res://scenes/thruster/thruster.gd" id="8_d4b7a"]
 [ext_resource type="Texture2D" uid="uid://cje3ohukt7y80" path="res://assets/my/ship_o1/hull_2_emission.PNG" id="9_xbv3h"]
 [ext_resource type="PackedScene" uid="uid://k6231xltcfhl" path="res://scenes/thruster/thruster.tscn" id="10_wlx63"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/SubViewport.gd" id="11_f18mv"]
@@ -24,9 +23,9 @@
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="18_pfi8s"]
 [ext_resource type="Texture2D" uid="uid://b1div50ru5c4l" path="res://assets/my/ship_o1/cocpit_2_emission.PNG" id="19_6gqhq"]
 [ext_resource type="Texture2D" uid="uid://bl55syfjjpfi7" path="res://assets/my/ship_o1/engine_2_emission.PNG" id="20_d7oi0"]
+[ext_resource type="PackedScene" uid="uid://bxhk5f3ir05ad" path="res://scenes/thruster/maneuver_thruster.tscn" id="21_bnxwn"]
 [ext_resource type="Shader" path="res://scenes/ship/scripts/ship_style.gdshader" id="21_kd45o"]
 [ext_resource type="Script" path="res://scenes/ship/ship_input_reader.gd" id="23_pav5x"]
-[ext_resource type="AudioStream" uid="uid://xn71bm7xult" path="res://assets/sounds/thruster_loop.wav" id="24_ageps"]
 [ext_resource type="Script" path="res://scenes/ship/position_extrapolation.gd" id="25_1c55w"]
 [ext_resource type="Script" path="res://scenes/ship/main_thrusters.gd" id="25_fgofk"]
 [ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="28_qwgv6"]
@@ -163,97 +162,43 @@ unique_name_in_owner = true
 script = ExtResource("11_hhoku")
 _body = NodePath("../..")
 
-[node name="FL" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
-position = Vector2(-6, -15)
+[node name="FL" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
+position = Vector2(15, -8)
 rotation = 3.14159
-scale = Vector2(0.2, 0.2)
-_sound = NodePath("Sound")
 
-[node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/Thrusters/FL"]
-stream = ExtResource("24_ageps")
-pitch_scale = 2.0
-
-[node name="FR" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
-position = Vector2(-6, 15)
+[node name="FR" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
+position = Vector2(15, 8)
 rotation = 3.14159
-scale = Vector2(0.2, 0.2)
-_sound = NodePath("Sound")
 
-[node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/Thrusters/FR"]
-stream = ExtResource("24_ageps")
-pitch_scale = 2.0
-
-[node name="RF" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
-position = Vector2(13, 8)
+[node name="RF" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
+position = Vector2(10, 10)
 rotation = -1.5708
-scale = Vector2(0.2, 0.2)
-_sound = NodePath("Sound")
 
-[node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/Thrusters/RF"]
-stream = ExtResource("24_ageps")
-pitch_scale = 2.0
-
-[node name="RB" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
+[node name="RB" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
 position = Vector2(-31, 16)
 rotation = -1.5708
-scale = Vector2(0.2, 0.2)
-_sound = NodePath("Sound")
 
-[node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/Thrusters/RB"]
-stream = ExtResource("24_ageps")
-pitch_scale = 2.0
-
-[node name="BR" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
+[node name="BR" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
 position = Vector2(-32, 15)
-scale = Vector2(0.2, 0.2)
-_sound = NodePath("Sound")
 
-[node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/Thrusters/BR"]
-stream = ExtResource("24_ageps")
-pitch_scale = 2.0
-
-[node name="BL" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
+[node name="BL" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
 position = Vector2(-32, -15)
-scale = Vector2(0.2, 0.2)
-_sound = NodePath("Sound")
 
-[node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/Thrusters/BL"]
-stream = ExtResource("24_ageps")
-pitch_scale = 2.0
-
-[node name="LB" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
+[node name="LB" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
 position = Vector2(-31, -16)
 rotation = 1.5708
-scale = Vector2(0.2, 0.2)
-_sound = NodePath("Sound")
 
-[node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/Thrusters/LB"]
-stream = ExtResource("24_ageps")
-pitch_scale = 2.0
-
-[node name="LF" parent="PositionExtrapolation/Thrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
-position = Vector2(13, -8)
+[node name="LF" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
+position = Vector2(10, -10)
 rotation = 1.5708
-scale = Vector2(0.2, 0.2)
-_sound = NodePath("Sound")
-
-[node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/Thrusters/LF"]
-stream = ExtResource("24_ageps")
-pitch_scale = 2.0
 
 [node name="MainThrusters" type="Node2D" parent="PositionExtrapolation" node_paths=PackedStringArray("_body")]
 unique_name_in_owner = true
 script = ExtResource("25_fgofk")
 _body = NodePath("../..")
 
-[node name="Thruster1" parent="PositionExtrapolation/MainThrusters" node_paths=PackedStringArray("_sound") instance=ExtResource("10_wlx63")]
+[node name="Thruster" parent="PositionExtrapolation/MainThrusters" instance=ExtResource("10_wlx63")]
 position = Vector2(-32, -5.48045e-05)
-script = ExtResource("8_d4b7a")
-_sound = NodePath("Sound")
-
-[node name="Sound" type="AudioStreamPlayer2D" parent="PositionExtrapolation/MainThrusters/Thruster1"]
-position = Vector2(7.62939e-06, -5.08611e-07)
-stream = ExtResource("24_ageps")
 
 [node name="Camera" type="Camera2D" parent="PositionExtrapolation" node_paths=PackedStringArray("target")]
 unique_name_in_owner = true
@@ -291,4 +236,4 @@ ship = NodePath("../..")
 input_reader = NodePath("../InputReader")
 thrusters = NodePath("../Thrusters")
 main_thrusters = NodePath("../MainThrusters")
-tracking_accuracy = 100.0
+tracking_accuracy = 0.0

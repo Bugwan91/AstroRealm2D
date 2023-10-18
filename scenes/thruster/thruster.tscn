@@ -1,7 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://k6231xltcfhl"]
+[gd_scene load_steps=23 format=3 uid="uid://k6231xltcfhl"]
 
-[ext_resource type="Script" path="res://scenes/thruster/maneuver_thruster.gd" id="1_vmdt3"]
+[ext_resource type="Script" path="res://scenes/thruster/thruster.gd" id="1_esf7n"]
+[ext_resource type="Script" path="res://scenes/thruster/Flame.gd" id="2_a1vau"]
 [ext_resource type="Texture2D" uid="uid://cisex58t66ecf" path="res://assets/my/ship_o1/engine_flame.png" id="2_at78l"]
+[ext_resource type="Texture2D" uid="uid://kcenv1b8avup" path="res://assets/my/ship_o1/engine_flame_single.png" id="3_3opbs"]
+[ext_resource type="AudioStream" uid="uid://xn71bm7xult" path="res://assets/sounds/thruster_loop.wav" id="5_raf0x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s3v21"]
 atlas = ExtResource("2_at78l")
@@ -39,14 +42,105 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="Thruster" type="Marker2D"]
-script = ExtResource("1_vmdt3")
+[sub_resource type="Gradient" id="Gradient_vgmsy"]
+offsets = PackedFloat32Array(0, 0.263462, 0.653846, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.0784314, 1, 1, 1, 0.0784314, 1, 1, 1, 0)
 
-[node name="Flame" type="AnimatedSprite2D" parent="."]
-modulate = Color(1.2, 1.2, 1.2, 1)
-position = Vector2(-16, 0)
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ecymi"]
+gradient = SubResource("Gradient_vgmsy")
+
+[sub_resource type="Curve" id="Curve_oy74b"]
+_data = [Vector2(0, 0.250345), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_d20rb"]
+curve = SubResource("Curve_oy74b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lhffd"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 5.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_d20rb")
+color_ramp = SubResource("GradientTexture1D_ecymi")
+
+[sub_resource type="Gradient" id="Gradient_mksgf"]
+offsets = PackedFloat32Array(0, 0.714815)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pvehi"]
+gradient = SubResource("Gradient_mksgf")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_direw"]
+offsets = PackedFloat32Array(0, 0.307692, 0.571154, 1)
+colors = PackedColorArray(2, 2, 0.4, 1, 2, 1, 0, 1, 2, 0.501961, 0, 0.784314, 1, 0.196078, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ulhdr"]
+gradient = SubResource("Gradient_direw")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_3qwdg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.245841, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.259323), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ld446"]
+curve = SubResource("Curve_3qwdg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0q42v"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_ld446")
+color_ramp = SubResource("GradientTexture1D_ulhdr")
+
+[node name="Thruster" type="Marker2D"]
+script = ExtResource("1_esf7n")
+
+[node name="Flame" type="Node2D" parent="."]
+unique_name_in_owner = true
 rotation = 1.5708
+script = ExtResource("2_a1vau")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Flame"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1.2, 1.2, 1.2, 1)
+position = Vector2(0, 16)
 sprite_frames = SubResource("SpriteFrames_lhhdr")
 animation = &"flame"
 autoplay = "flame"
 frame_progress = 0.0362415
+
+[node name="SmokeEffect" type="GPUParticles2D" parent="Flame"]
+unique_name_in_owner = true
+position = Vector2(0, 16)
+process_material = SubResource("ParticleProcessMaterial_lhffd")
+texture = SubResource("GradientTexture2D_pvehi")
+lifetime = 0.5
+local_coords = true
+
+[node name="FlameEffect" type="GPUParticles2D" parent="Flame"]
+unique_name_in_owner = true
+position = Vector2(0, 16)
+process_material = SubResource("ParticleProcessMaterial_0q42v")
+texture = ExtResource("3_3opbs")
+lifetime = 0.2
+local_coords = true
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="Flame"]
+unique_name_in_owner = true
+stream = ExtResource("5_raf0x")
+volume_db = -0.07
+pitch_scale = 1.25

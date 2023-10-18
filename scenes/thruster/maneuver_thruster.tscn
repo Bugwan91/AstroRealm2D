@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxhk5f3ir05ad"]
+
+[ext_resource type="PackedScene" uid="uid://k6231xltcfhl" path="res://scenes/thruster/thruster.tscn" id="1_4tnod"]
+[ext_resource type="Script" path="res://scenes/thruster/maneuver_thruster.gd" id="2_e25ev"]
+
+[node name="ManeuverThruster" instance=ExtResource("1_4tnod")]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("2_e25ev")

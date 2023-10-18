@@ -12,6 +12,7 @@ out_range_color = Color(0.486275, 0, 0, 0.784314)
 
 [node name="Pointer" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
 

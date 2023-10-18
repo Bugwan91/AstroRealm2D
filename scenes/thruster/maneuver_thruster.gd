@@ -20,12 +20,13 @@ func _set_torque_throttle(value):
 	value = clamp(abs(value), 0, 1)
 	if torque_throttle != value:
 		torque_throttle = value
-		_update_flame()
+		_flame.run(max(throttle, torque_throttle))
 		torque = torque_throttle * _torque
 
 func setup(value: float):
 	super(value)
 	_calculate_torgue()
+	_flame.setup_sound(-30, 2)
 
 func _calculate_torgue():
 	var value = _thrust * (position.x * _force_direction.y - position.y * _force_direction.x) if enabled and _thrust > 0 else 0.0
@@ -42,12 +43,3 @@ func estimated_force(strafe_direction: Vector2) -> float:
 
 func estimated_torque(direction: float) -> float:
 	return _torque if (_torque > 0 and direction > 0) or (_torque < 0 and direction < 0) else 0.0
-
-func _update_flame():
-	var value = max(throttle, torque_throttle)
-	if throttle > 0:
-		_flame.show()
-		_flame.modulate.a = throttle
-	else:
-		_flame.hide()
-	_update_sound(value)

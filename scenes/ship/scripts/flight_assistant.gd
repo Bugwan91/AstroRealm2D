@@ -68,14 +68,14 @@ func _unhandled_input(event):
 	if event.is_action_pressed("autopilot"):
 		enabled = not enabled
 		_main_state.flight_assist = enabled
-	if is_instance_valid(target) and event.is_action_pressed("stop"):
+	if event.is_action_pressed("stop"):
 		_is_tracking = not _is_tracking
-
 
 func apply_controls(delta: float):
 	_update_relative_data()
 	_linear_control = _strafe_input
 	_angular_control = _rotate_input
+	_main_thrusters_control = _main_thruster_input
 	if _is_tracking:
 		_linear_to_target(delta, _get_delta_velocity())
 		_angular_to_target(delta)
@@ -93,23 +93,19 @@ func _update_relative_data():
 
 
 func _handle_control():
-	_add_strafe_to_main_thrusters()
 	thrusters.apply_strafe(_linear_control)
 	thrusters.apply_rotation(_angular_control)
 	main_thrusters.apply_throttle(_main_thrusters_control)
-
-func _add_strafe_to_main_thrusters():
-	_main_thrusters_control = _main_thruster_input
-	if _linear_control.x > 1:
-		_main_thrusters_control += (_linear_control.x - 1) * _thrusters_ratio  
-
 
 func _linear_to_target(delta: float, dv: Vector2 = Vector2.ZERO):
 	var dv_len = dv.length()
 	var dv_n = dv / dv_len
 	if dv_len > LINEAR_THRESHOLD:
 		var a = delta * (thrusters.estimated_strafe_force(dv * 100) / ship.mass)
-		_linear_control = 2.0*_strafe_input + (dv_len/a)*dv_n
+		var f = (dv_len / a)
+		_linear_control = 2 * f * _strafe_input + f * dv_n
+		if _linear_control.x > 1:
+			_main_thrusters_control = _main_thruster_input + (_linear_control.x - 1) * _thrusters_ratio
 
 
 func _angular_to_target(delta: float, target_velocity: float = 0):
@@ -150,8 +146,7 @@ func _get_delta_velocity(accurate: bool = false) -> Vector2:
 
 func _move_to(target_point: Vector2):
 	var delta = target_point - ship.position
-	DebugDraw2d.line_vector(ship.position, delta, Color.PURPLE)
-	
+	#DebugDraw2d.line_vector(ship.position, delta, Color.PURPLE)
 
 
 func _main_thruster_input_changed(value: float):

@@ -74,7 +74,6 @@ angular_velocity = -0.174533
 angular_damp_mode = 1
 script = ExtResource("5_hb2m2")
 radial_force = 10.0
-is_firing = true
 
 [node name="Gun" parent="DummyShip" node_paths=PackedStringArray("parent") instance=ExtResource("6_udm3s")]
 position = Vector2(4, 10)
@@ -114,6 +113,7 @@ texture = ExtResource("9_brjfx")
 [node name="UI" parent="." instance=ExtResource("8_myah8")]
 
 [node name="Node2D" type="Node2D" parent="."]
+visible = false
 position = Vector2(1000, 500)
 
 [node name="Cursor32" type="Sprite2D" parent="Node2D"]
