@@ -4,11 +4,12 @@
 [ext_resource type="AudioStream" uid="uid://cejv4j507tnti" path="res://assets/sounds/spacelord_hit2.wav" id="2_6t2pu"]
 
 [sub_resource type="Gradient" id="Gradient_idxxb"]
-offsets = PackedFloat32Array(0.138462, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0.563462, 1)
+colors = PackedColorArray(2, 2, 2, 1, 2, 2, 2, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_iux0w"]
 gradient = SubResource("Gradient_idxxb")
+use_hdr = true
 
 [sub_resource type="Curve" id="Curve_rkg3d"]
 max_value = 100.0
@@ -19,13 +20,13 @@ point_count = 2
 curve = SubResource("Curve_rkg3d")
 
 [sub_resource type="Curve" id="Curve_mqrkq"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.299724), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 4.74209, 0, 0, Vector2(0.438078, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.151588), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_j3y40"]
 curve = SubResource("Curve_mqrkq")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_utsl3"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yvocr"]
 lifetime_randomness = 0.5
 particle_flag_disable_z = true
 spread = 180.0
@@ -39,7 +40,7 @@ damping_max = 20.0
 damping_curve = SubResource("CurveTexture_awq3e")
 scale_min = 0.5
 scale_curve = SubResource("CurveTexture_j3y40")
-color = Color(0.2, 1, 4, 1)
+color = Color(0.376471, 0.643137, 1, 1)
 color_ramp = SubResource("GradientTexture1D_iux0w")
 turbulence_noise_scale = 1.79
 
@@ -89,7 +90,7 @@ script = ExtResource("1_27y4s")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(0, 2)
 amount = 16
-process_material = SubResource("ParticleProcessMaterial_utsl3")
+process_material = SubResource("ParticleProcessMaterial_yvocr")
 texture = SubResource("GradientTexture2D_qdaip")
 lifetime = 0.2
 explosiveness = 0.8

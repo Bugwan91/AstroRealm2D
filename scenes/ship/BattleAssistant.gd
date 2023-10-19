@@ -13,8 +13,8 @@ func _ready():
 
 
 func _process(_delta):
+	pointer.position = ship.extrapolated_position
 	_calculate_bullet_intersection()
-	pointer.position = ship.position
 
 
 func set_target(value: RigidBody2D):
@@ -30,7 +30,7 @@ func _calculate_bullet_intersection():
 	if a == 0.0:
 		pointer.disable()
 		return
-	var to_target = target.position - ship.position
+	var to_target = target.position - ship.extrapolated_position
 	var b = 2 * to_target.dot(relative_target_vel)
 	var c = to_target.length_squared()
 	var discriminant = b * b - 4 * a * c

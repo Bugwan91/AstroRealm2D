@@ -6,6 +6,11 @@ extends RigidBody2D
 @onready var ship = %Ship
 @onready var gun = $Gun as Gun
 @onready var gun_2 = $Gun2 as Gun
+@onready var position_extrapolation = $PositionExtrapolation
+
+var extrapolated_position: Vector2:
+	get:
+		return position + position_extrapolation.position
 
 func _ready():
 	if is_firing:
@@ -13,6 +18,7 @@ func _ready():
 		gun_2.start_fire()
 
 func _physics_process(_delta):
+	pass
 	apply_central_force(linear_velocity.normalized().rotated(3.14 / 2.0) * radial_force)
 
 func _on_Area2D_input_event(_viewport, event, _shape_idx):

@@ -19,6 +19,10 @@ var inverse_inertia := 0.0
 
 var _reset := false
 
+var extrapolated_position: Vector2 :
+	get:
+		return position + position_extrapolation.position
+
 func _ready():
 	thrusters.setup(_maneuver_thrust)
 	engines.setup(_main_thrust, _velocity_limit)
@@ -42,11 +46,11 @@ func _reset_ship(state: PhysicsDirectBodyState2D):
 		_reset = false
 
 func set_target(target: RigidBody2D):
-	flight_assistant.target_changed(target)
+	flight_assistant.target_body = target
 	battle_assistant.set_target(target)
 
 func reset_target():
-	flight_assistant.target_changed(null)
+	flight_assistant.target_body = null
 	battle_assistant.set_target(null)
 
 func _input(event):

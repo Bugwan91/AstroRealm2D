@@ -147,11 +147,11 @@ position = Vector2(16, 32)
 material = SubResource("ShaderMaterial_sayty")
 texture = ExtResource("17_g6os6")
 
-[node name="FlightAssistant" parent="." node_paths=PackedStringArray("input_reader", "thrusters", "main_thrusters") instance=ExtResource("16_avemu")]
+[node name="FlightAssistant" parent="." node_paths=PackedStringArray("_input_reader", "_thrusters", "_main_thrusters") instance=ExtResource("16_avemu")]
 unique_name_in_owner = true
-input_reader = NodePath("../InputReader")
-thrusters = NodePath("../PositionExtrapolation/Thrusters")
-main_thrusters = NodePath("../PositionExtrapolation/MainThrusters")
+_input_reader = NodePath("../InputReader")
+_thrusters = NodePath("../PositionExtrapolation/Thrusters")
+_main_thrusters = NodePath("../PositionExtrapolation/MainThrusters")
 
 [node name="BattleAssistant" parent="." node_paths=PackedStringArray("gun") instance=ExtResource("17_w8wag")]
 unique_name_in_owner = true
@@ -171,7 +171,7 @@ zoom = Vector2(2, 2)
 position_smoothing_speed = 10.0
 script = ExtResource("3_ukcxu")
 target = NodePath("../..")
-inertia = 5.0
+inertia = 0.1
 
 [node name="View" type="Sprite2D" parent="PositionExtrapolation"]
 material = SubResource("ShaderMaterial_8d03f")
@@ -228,4 +228,4 @@ parent = NodePath("../..")
 fire_rate = 10.0
 range = 700.0
 bullet_speed = 500.0
-recoil = 10.0
+recoil = 2.0

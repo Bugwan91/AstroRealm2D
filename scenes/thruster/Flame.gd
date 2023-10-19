@@ -32,8 +32,8 @@ func run_effect(force: float):
 		flame_effect.emitting = true
 
 func run_sound(force: float):
+	sound.volume_db = _max_volume - (40 - 40 * force)
 	if force < THRESHOLD:
 		sound.stop()
 	elif not sound.playing:
-		sound.volume_db = _max_volume - (40 - 40 * force)
 		sound.play()

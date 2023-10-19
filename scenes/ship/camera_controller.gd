@@ -21,9 +21,9 @@ func _ready():
 	_init_zoom()
 
 func _unhandled_input(event):
-	if event.is_action("zoom_in"):
+	if event.is_action("zoom_in") and not event.is_action("distance_down") and not event.is_action("autopilot_speed_up"):
 		_target_zoom += _zoom_speed
-	elif event.is_action("zoom_out"):
+	elif event.is_action("zoom_out") and not event.is_action("distance_up") and not event.is_action("autopilot_speed_down"):
 		_target_zoom -= _zoom_speed
 	_target_zoom = _target_zoom.clamp(_zoom_min, _zoom_max)
 
@@ -33,7 +33,7 @@ func _process(_delta):
 
 func _physics_process(_delta):
 	var acceleration = _last_veocity - target.linear_velocity
-	_target_position = lerp(_target_position, acceleration.rotated(-target.rotation), _inverse_inertia)
+	_target_position = lerp(_target_position, acceleration.rotated(-target.rotation), _inverse_inertia * _delta)
 	_last_veocity = target.linear_velocity
 
 func _init_zoom():

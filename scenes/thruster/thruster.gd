@@ -28,8 +28,5 @@ func _ready():
 	_force_direction = transform.x.normalized()
 	_flame.setup_sound(0, 1)
 
-func _process(_delta):
-	pass
-
 func setup(value: float):
 	_thrust = value

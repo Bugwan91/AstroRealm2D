@@ -113,6 +113,5 @@ texture = ExtResource("9_brjfx")
 
 [node name="Ship" parent="." instance=ExtResource("4_5rllk")]
 _maneuver_thrust = 20.0
-_flight_assistant_error = 50.0
 
 [connection signal="input_event" from="DummyShip/Area2D" to="DummyShip" method="_on_Area2D_input_event"]
