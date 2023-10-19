@@ -7,6 +7,7 @@ extends RigidBody2D
 @onready var gun = $Gun as Gun
 @onready var gun_2 = $Gun2 as Gun
 @onready var position_extrapolation = $PositionExtrapolation
+@onready var player = %Ship
 
 var extrapolated_position: Vector2:
 	get:
@@ -20,6 +21,10 @@ func _ready():
 func _physics_process(_delta):
 	pass
 	apply_central_force(linear_velocity.normalized().rotated(3.14 / 2.0) * radial_force)
+
+func _integrate_forces(state):
+	var angle: float = (player.position - position).angle()
+	state.transform = Transform2D(angle, state.transform.origin)
 
 func _on_Area2D_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE:

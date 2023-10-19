@@ -2,7 +2,9 @@ class_name CameraController
 extends Camera2D
 
 @export var target: ShipRigidBody
-@export var inertia: float = 10
+@export var inertia: float = 10.0
+@export var move_force: float = 10.0
+@export var moves_strenght: float = 4.0
 @export var zoom_min := 0.5
 @export var zoom_max := 4.0
 @export var zoom_speed := 0.1
@@ -21,9 +23,9 @@ func _ready():
 	_init_zoom()
 
 func _unhandled_input(event):
-	if event.is_action("zoom_in") and not event.is_action("distance_down") and not event.is_action("autopilot_speed_up"):
+	if event.is_action("zoom_in") and not event.is_action("distance_up") and not event.is_action("autopilot_speed_up"):
 		_target_zoom += _zoom_speed
-	elif event.is_action("zoom_out") and not event.is_action("distance_up") and not event.is_action("autopilot_speed_down"):
+	elif event.is_action("zoom_out") and not event.is_action("distance_down") and not event.is_action("autopilot_speed_down"):
 		_target_zoom -= _zoom_speed
 	_target_zoom = _target_zoom.clamp(_zoom_min, _zoom_max)
 
@@ -32,8 +34,8 @@ func _process(_delta):
 	zoom = lerp(zoom, _target_zoom, .1)
 
 func _physics_process(_delta):
-	var acceleration = _last_veocity - target.linear_velocity
-	_target_position = lerp(_target_position, acceleration.rotated(-target.rotation), _inverse_inertia * _delta)
+	var acceleration = (_last_veocity - target.linear_velocity) * (Vector2.ONE * move_force / zoom)
+	_target_position = lerp(_target_position, _look_direction() + acceleration, _inverse_inertia * _delta)
 	_last_veocity = target.linear_velocity
 
 func _init_zoom():
@@ -41,3 +43,6 @@ func _init_zoom():
 	_zoom_max = Vector2(zoom_max, zoom_max)
 	_zoom_speed = Vector2(zoom_speed, zoom_speed)
 	_target_zoom = zoom
+
+func _look_direction() -> Vector2:
+	return (get_global_mouse_position() - target.position) / moves_strenght
