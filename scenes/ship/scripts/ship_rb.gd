@@ -3,10 +3,10 @@ extends RigidBody2D
 
 @export_range(0, 500) var _main_thrust := 200.0
 @export_range(0, 100) var _maneuver_thrust := 50.0
-@export_range(0, 2000) var _velocity_limit := 1000.0
+@export_range(0, 2000) var max_speed := 1000.0
 @export_range(0, 500) var _flight_assistant_error := 0.0
 
-@onready var position_extrapolation: Node2D = %PositionExtrapolation
+@onready var position_extrapolation: PositionExtrapolation = %PositionExtrapolation
 @onready var thrusters: Thrusters = %Thrusters
 @onready var engines: MainThrusters = %MainThrusters
 @onready var flight_assistant: ShipFlightAssistant = %FlightAssistant
@@ -21,11 +21,11 @@ var _reset := false
 
 var extrapolated_position: Vector2 :
 	get:
-		return position + position_extrapolation.position
+		return position + position_extrapolation.position.rotated(rotation)
 
 func _ready():
 	thrusters.setup(_maneuver_thrust)
-	engines.setup(_main_thrust, _velocity_limit)
+	engines.setup(_main_thrust, max_speed)
 	flight_assistant.setup(_flight_assistant_error)
 
 func _process(delta):

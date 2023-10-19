@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=16 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="PackedScene" uid="uid://de6wu3uauymsr" path="res://scenes/background/background.tscn" id="1_b53p2"]
 [ext_resource type="Texture2D" uid="uid://cwvtmyy8brm3w" path="res://assets/my/Star_01.png" id="2_i03k3"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://df6i8o1ckqhq3" path="res://scenes/gun/bullet_red.tscn" id="7_1vp7r"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://ui/ui.tscn" id="8_myah8"]
 [ext_resource type="Texture2D" uid="uid://paowiimqoup8" path="res://ship_01.png" id="9_brjfx"]
+[ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
 
 [sub_resource type="Environment" id="Environment_1ojvs"]
 background_mode = 3
@@ -113,5 +114,8 @@ texture = ExtResource("9_brjfx")
 
 [node name="Ship" parent="." instance=ExtResource("4_5rllk")]
 _maneuver_thrust = 20.0
+
+[node name="Camera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("11_2fp23")]
+target = NodePath("../Ship")
 
 [connection signal="input_event" from="DummyShip/Area2D" to="DummyShip" method="_on_Area2D_input_event"]

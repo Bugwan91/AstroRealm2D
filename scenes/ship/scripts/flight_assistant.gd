@@ -85,16 +85,16 @@ func _unhandled_input(event):
 	
 	if enabled and _is_tracking:
 		if event.is_action_pressed("distance_up"):
-			tracking_distance += 50
+			tracking_distance += 10
 		if event.is_action_pressed("distance_down"):
-			tracking_distance = max(0, tracking_distance - 50)
+			tracking_distance = max(0, tracking_distance - 10)
 		_main_state.fa_tracking_distance = tracking_distance
 	
 	if enabled and _is_autopilot:
 		if event.is_action_pressed("autopilot_speed_up"):
-			autopilot_speed += 50
+			autopilot_speed += 10
 		if event.is_action_pressed("autopilot_speed_down"):
-			autopilot_speed = max(0, autopilot_speed - 50)
+			autopilot_speed = max(0, autopilot_speed - 10)
 		_main_state.fa_autopilot_speed = autopilot_speed
 
 func override_controls(delta: float):
@@ -150,14 +150,20 @@ func match_rotation(delta: float, target_velocity: float = 0):
 		_angular_control = dv / a
 
 
-func move_to(delta: float, target_point: Vector2, max_speed: float = 0.0):
+func move_to(delta: float, target_point: Vector2, max_speed: float = 0.0, stop: bool = true):
 	var delta_position := target_point - _ship.position
+	if not stop:
+		turn_to(delta, target_point)
+		var speed := _ship.max_speed if max_speed == 0 else max_speed
+		var dv: = delta_position.normalized() * speed - _ship.linear_velocity
+		match_velocity(delta, dv, false)
+		return
 	var velocity_l := _ship.linear_velocity.length()
 	if delta_position.length() < AUTOPILOT_THRESHOLD and velocity_l < LINEAR_THRESHOLD:
 		match_rotation(delta, 0)
 		return
 	turn_to(delta, target_point)
-	slide_to(delta, delta_position, max_speed)
+	match_velocity(delta, _get_stop_velocity(delta_position, _ship.linear_velocity, max_speed), false)
 
 
 func turn_to(delta: float, target_point: Vector2):
@@ -174,10 +180,6 @@ func turn_to(delta: float, target_point: Vector2):
 	var wt: float = sign(error) * (d/(n+1) + 0.5*a*n)
 	var w := _ship.angular_velocity * delta
 	_angular_control = (wt - w) / a
-
-
-func slide_to(delta: float, delta_position: Vector2, max_speed: float = 0.0):
-	match_velocity(delta, _get_stop_velocity(delta_position, _ship.linear_velocity, max_speed), false)
 
 
 func _get_stop_velocity(position: Vector2, velocity: Vector2, max_speed: float = 0.0, error: float =  0.0) -> Vector2:

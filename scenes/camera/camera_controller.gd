@@ -1,7 +1,7 @@
 class_name CameraController
 extends Camera2D
 
-@export var target: RigidBody2D
+@export var target: ShipRigidBody
 @export var inertia: float = 10
 @export var zoom_min := 0.5
 @export var zoom_max := 4.0
@@ -28,7 +28,7 @@ func _unhandled_input(event):
 	_target_zoom = _target_zoom.clamp(_zoom_min, _zoom_max)
 
 func _process(_delta):
-	position = _target_position
+	position = target.extrapolated_position + _target_position
 	zoom = lerp(zoom, _target_zoom, .1)
 
 func _physics_process(_delta):

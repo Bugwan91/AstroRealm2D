@@ -1,10 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=30 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship_rb.gd" id="1_wdoy6"]
 [ext_resource type="Shader" path="res://scenes/ship/scripts/ship.gdshader" id="2_hj2nt"]
 [ext_resource type="Texture2D" uid="uid://fwe0bdfhki3t" path="res://assets/my/ship_o1/hull_2.PNG" id="3_5y0ng"]
 [ext_resource type="Texture2D" uid="uid://dpp12wrak050k" path="res://ship_emission.png" id="3_co5i1"]
-[ext_resource type="Script" path="res://scenes/ship/camera_controller.gd" id="3_ukcxu"]
 [ext_resource type="Texture2D" uid="uid://b0oompuhil78k" path="res://assets/my/ship_o1/hull_2_mask.PNG" id="6_o1jr6"]
 [ext_resource type="Texture2D" uid="uid://cje3ohukt7y80" path="res://assets/my/ship_o1/hull_2_emission.PNG" id="9_xbv3h"]
 [ext_resource type="PackedScene" uid="uid://k6231xltcfhl" path="res://scenes/thruster/thruster.tscn" id="10_wlx63"]
@@ -45,7 +44,6 @@ mass = 0.5
 script = ExtResource("1_wdoy6")
 _main_thrust = 100.0
 _maneuver_thrust = 25.0
-_velocity_limit = 500.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-32, -16, -6, -16, 32, 0, -6, 16, -32, 16)
@@ -165,14 +163,6 @@ script = ExtResource("23_pav5x")
 unique_name_in_owner = true
 script = ExtResource("25_1c55w")
 
-[node name="Camera" type="Camera2D" parent="PositionExtrapolation" node_paths=PackedStringArray("target")]
-unique_name_in_owner = true
-zoom = Vector2(2, 2)
-position_smoothing_speed = 10.0
-script = ExtResource("3_ukcxu")
-target = NodePath("../..")
-inertia = 0.1
-
 [node name="View" type="Sprite2D" parent="PositionExtrapolation"]
 material = SubResource("ShaderMaterial_8d03f")
 rotation = 1.5708
@@ -227,5 +217,5 @@ position = Vector2(32, 0)
 parent = NodePath("../..")
 fire_rate = 10.0
 range = 700.0
-bullet_speed = 500.0
+bullet_speed = 1000.0
 recoil = 2.0
