@@ -12,6 +12,7 @@ signal fa_autopilot(value: bool)
 signal autopilot_speed(value: float)
 signal follow_distance(value: float)
 signal autopilot_target_point(value: Vector2)
+signal auto_aim(value: bool)
 
 
 func _process(_delta):
@@ -39,3 +40,5 @@ func _unhandled_input(event):
 		autopilot_speed.emit(1.0)
 	if event.is_action_pressed("autopilot_speed_down"):
 		autopilot_speed.emit(-1.0)
+	if event.is_action_pressed("auto_aim"):
+		auto_aim.emit(true)

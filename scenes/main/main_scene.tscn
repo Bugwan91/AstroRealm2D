@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=12 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="PackedScene" uid="uid://de6wu3uauymsr" path="res://scenes/background/background.tscn" id="1_b53p2"]
 [ext_resource type="PackedScene" uid="uid://ce1dw618jykrb" path="res://scenes/ship/ship.tscn" id="4_5rllk"]
 [ext_resource type="Texture2D" uid="uid://ctxhmtvm80a2o" path="res://assets/my/grid.png" id="4_8aefd"]
 [ext_resource type="PackedScene" uid="uid://csufvxpfo8jbl" path="res://scenes/navigation_grid/grid.tscn" id="4_aip35"]
+[ext_resource type="PackedScene" uid="uid://cw8wqa4ib5mkj" path="res://scenes/dummy_ship.tscn" id="6_fa5fm"]
 [ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="8_cwv63"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://scenes/ui/ui.tscn" id="8_myah8"]
 [ext_resource type="Texture2D" uid="uid://dp224au4ijms3" path="res://ship.png" id="9_eiq6r"]
@@ -37,6 +38,9 @@ target = NodePath("../Ship")
 
 [node name="Center" type="Sprite2D" parent="."]
 texture = ExtResource("4_8aefd")
+
+[node name="DummyShip" parent="." node_paths=PackedStringArray("players") instance=ExtResource("6_fa5fm")]
+players = [NodePath("../Ship")]
 
 [node name="Ship" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_5rllk")]
 _texture = ExtResource("9_eiq6r")

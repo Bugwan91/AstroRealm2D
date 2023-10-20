@@ -31,9 +31,11 @@ func _ready():
 	flight_assistant.setup(_flight_assistant_precision)
 	if is_instance_valid(inputs):
 		flight_assistant.connect_inputs(inputs)
+		battle_assistant.connect_inputs(inputs)
 	_view.texture = _texture
 	gun = gun_scene.instantiate()
 	gun.shoot_recoil.connect(_on_shoot_recoil)
+	battle_assistant.gun = gun
 	_gun_slot.add_child(gun)
 
 

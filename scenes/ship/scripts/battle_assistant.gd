@@ -1,30 +1,46 @@
 class_name BattleAssistant
 extends Node
 
-@export var gun: Gun
+@export var flight_assistant: ShipFlightAssistant
 
 @onready var ship: ShipRigidBody = owner
 @onready var pointer: BattleAssistantPointer = %Pointer
 
+var gun: Gun
 var target: RigidBody2D
-var shoot_point: Vector2
+var shoot_point := Vector2.ZERO
 
+var _is_auto_aim := false
 
 func _ready():
 	_disable_pointer()
 
 
-func _process(_delta):
+func _process(delta):
 	pointer.position = ship.extrapolator.global_position
 	_calculate_bullet_intersection()
+	auto_aim()
+
+
+func connect_inputs(inputs: ShipInputReader):
+	inputs.auto_aim.connect(_auto_aim_toggle)
 
 
 func set_target(new_target: RigidBody2D):
 	target = new_target
 
 
+func auto_aim():
+	if _is_auto_aim and shoot_point != Vector2.ZERO:
+		flight_assistant.ignore_direction_update = true
+		flight_assistant.direction = shoot_point + ship.position
+	else:
+		flight_assistant.ignore_direction_update = false
+
+
 func _calculate_bullet_intersection():
 	# TODO: Refactor this garbage
+	shoot_point = Vector2.ZERO
 	if not(is_instance_valid(target) and target is RigidBody2D):
 		_disable_pointer()
 		return
@@ -56,3 +72,7 @@ func _disable_pointer():
 func _update_pointer(point: Vector2, in_range: bool):
 	if is_instance_valid(pointer):
 		pointer.update(point, in_range)
+
+func _auto_aim_toggle(value: bool):
+	if not value: return
+	_is_auto_aim = not _is_auto_aim

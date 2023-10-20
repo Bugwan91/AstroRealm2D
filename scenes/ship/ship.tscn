@@ -19,7 +19,6 @@ shader_parameter/emission_texture = ExtResource("3_co5i1")
 [node name="Ship" type="RigidBody2D"]
 unique_name_in_owner = true
 collision_mask = 0
-mass = 0.5
 script = ExtResource("1_5ckws")
 _main_thrust = 100.0
 _maneuver_thrust = 25.0
@@ -32,8 +31,9 @@ unique_name_in_owner = true
 _thrusters = NodePath("../PositionExtrapolation/Thrusters")
 _main_thrusters = NodePath("../PositionExtrapolation/MainThrusters")
 
-[node name="BattleAssistant" parent="." instance=ExtResource("17_w8wag")]
+[node name="BattleAssistant" parent="." node_paths=PackedStringArray("flight_assistant") instance=ExtResource("17_w8wag")]
 unique_name_in_owner = true
+flight_assistant = NodePath("../FlightAssistant")
 
 [node name="PositionExtrapolation" type="Node2D" parent="."]
 unique_name_in_owner = true

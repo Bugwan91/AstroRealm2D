@@ -18,6 +18,8 @@ const ANGULAR_THRESHOLD = 0.01
 var target_body: RigidBody2D
 var autopilot_speed := 500.0
 var follow_distance := 500.0
+var direction := Vector2.ZERO
+var ignore_direction_update := false
 
 var _is_follow := false
 var _follow_error := 0.0
@@ -31,7 +33,6 @@ var _strafe_input := Vector2.ZERO
 var _linear_control := Vector2.ZERO
 var _rotation_input := 0.0
 var _angular_control := 0.0
-var _pointer_position := Vector2.ZERO
 var _target_position := Vector2.ZERO
 
 
@@ -83,7 +84,7 @@ func override_controls(delta: float):
 	if _is_autopilot:
 		move_to(delta, _target_position, autopilot_speed)
 	else:
-		turn_to(delta, _pointer_position)
+		turn_to(delta, direction)
 	if _is_follow:
 		follow_target(delta, follow_distance)
 
@@ -205,7 +206,8 @@ func _rotate_input_changed(value: float):
 	_rotation_input = value
 
 func _pointer_input_changed(value: Vector2):
-	_pointer_position = value
+	if ignore_direction_update: return
+	direction = value
 	
 func _flight_assistant_toggled(value: bool):
 	if not value: return
