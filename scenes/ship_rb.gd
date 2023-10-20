@@ -4,7 +4,8 @@ extends RigidBody2D
 @export_range(0, 500) var _main_thrust := 200.0
 @export_range(0, 100) var _maneuver_thrust := 50.0
 @export_range(0, 2000) var max_speed := 1000.0
-@export_range(0, 500) var _flight_assistant_error := 0.0
+@export_range(0, 500) var _flight_assistant_precision := 0.0
+@export var inputs: ShipInputReader
 
 @onready var extrapolator: PositionExtrapolation = %PositionExtrapolation
 @onready var thrusters: Thrusters = %Thrusters
@@ -22,7 +23,8 @@ var _reset := false
 func _ready():
 	thrusters.setup(_maneuver_thrust)
 	engines.setup(_main_thrust, max_speed)
-	flight_assistant.setup(_flight_assistant_error)
+	flight_assistant.setup(_flight_assistant_precision)
+	flight_assistant.connect_inputs(inputs)
 
 func _process(delta):
 	_update_main_state(delta)

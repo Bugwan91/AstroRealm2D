@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=19 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="PackedScene" uid="uid://de6wu3uauymsr" path="res://scenes/background/background.tscn" id="1_b53p2"]
 [ext_resource type="PackedScene" uid="uid://ce1dw618jykrb" path="res://scenes/ship/ship.tscn" id="4_5rllk"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://ui/ui.tscn" id="8_myah8"]
 [ext_resource type="Texture2D" uid="uid://paowiimqoup8" path="res://ship_01.png" id="9_brjfx"]
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
+[ext_resource type="PackedScene" uid="uid://dt7wav32bva3j" path="res://scenes/player/input_reader.tscn" id="13_epig2"]
 
 [sub_resource type="Environment" id="Environment_1ojvs"]
 background_mode = 3
@@ -43,6 +44,11 @@ radius = 32.0
 height = 92.0
 
 [node name="Main" type="Node2D"]
+
+[node name="UI" parent="." instance=ExtResource("8_myah8")]
+
+[node name="InputReader" parent="." instance=ExtResource("13_epig2")]
+unique_name_in_owner = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1ojvs")
@@ -111,12 +117,10 @@ script = ExtResource("6_k2ut1")
 rotation = 1.5708
 texture = ExtResource("9_brjfx")
 
-[node name="UI" parent="." instance=ExtResource("8_myah8")]
-
-[node name="Ship" parent="." instance=ExtResource("4_5rllk")]
+[node name="Ship" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_5rllk")]
 _maneuver_thrust = 20.0
 max_speed = 2000.0
-_flight_assistant_error = 20.0
+inputs = NodePath("../InputReader")
 
 [node name="Camera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("11_2fp23")]
 zoom = Vector2(1, 1)

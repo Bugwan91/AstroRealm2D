@@ -8,7 +8,6 @@ const AUTOPILOT_THRESHOLD = 16
 const ANGULAR_THRESHOLD = 0.01
 
 @export var enabled := false
-@export var _input_reader: ShipInputReader
 @export var _thrusters: Thrusters
 @export var _main_thrusters: MainThrusters
 
@@ -38,24 +37,8 @@ var _target_position := Vector2.ZERO
 
 func _ready():
 	_ship = owner
-	_input_reader.main_thruster.connect(_main_thruster_input_changed)
-	_input_reader.strafe.connect(_strafe_input_changed)
-	_input_reader.rotate.connect(_rotate_input_changed)
-	_input_reader.pointer.connect(_pointer_input_changed)
-	_input_reader.flight_assistant.connect(_flight_assistant_toggled)
-	_input_reader.fa_follow.connect(_target_follow_toggled)
-	_input_reader.follow_distance.connect(_follow_distance_changed)
-	_input_reader.fa_autopilot.connect(_autopilot_toggled)
-	_input_reader.autopilot_speed.connect(_autopilot_speed_changed)
-	_input_reader.autopilot_target_point.connect(_autopilot_point_changed)
 	_main_state.fa_tracking_distance = follow_distance
 	_main_state.fa_autopilot_speed = autopilot_speed
-
-
-func setup(error: float):
-	_thrusters_ratio = _thrusters.estimated_strafe_force(Vector2.RIGHT) / _main_thrusters.estimated_force()
-	_follow_error = error
-
 
 func _process(_delta):
 	position_pointer.position = _ship.position
@@ -70,6 +53,22 @@ func _physics_process(delta):
 	_update_thrusters()
 	_thrusters.apply_forces()
 	_main_thrusters.apply_forces()
+
+func setup(precision: float):
+	_thrusters_ratio = _thrusters.estimated_strafe_force(Vector2.RIGHT) / _main_thrusters.estimated_force()
+	_follow_error = precision
+
+func connect_inputs(inputs: ShipInputReader):
+	inputs.main_thruster.connect(_main_thruster_input_changed)
+	inputs.strafe.connect(_strafe_input_changed)
+	inputs.rotate.connect(_rotate_input_changed)
+	inputs.pointer.connect(_pointer_input_changed)
+	inputs.flight_assistant.connect(_flight_assistant_toggled)
+	inputs.fa_follow.connect(_target_follow_toggled)
+	inputs.follow_distance.connect(_follow_distance_changed)
+	inputs.fa_autopilot.connect(_autopilot_toggled)
+	inputs.autopilot_speed.connect(_autopilot_speed_changed)
+	inputs.autopilot_target_point.connect(_autopilot_point_changed)
 
 
 func override_controls(delta: float):
