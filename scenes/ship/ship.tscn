@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Texture2D" uid="uid://dpp12wrak050k" path="res://ship_emission.png" id="3_co5i1"]
 [ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="5_ipsoo"]
+[ext_resource type="Texture2D" uid="uid://q026lhon6o0q" path="res://ship_base.png" id="7_ek0b1"]
 [ext_resource type="PackedScene" uid="uid://k6231xltcfhl" path="res://scenes/thruster/thruster.tscn" id="10_wlx63"]
 [ext_resource type="Script" path="res://scenes/thruster/scripts/thrusters.gd" id="11_hhoku"]
 [ext_resource type="PackedScene" uid="uid://t86wis3mvind" path="res://scenes/ship/flight_assistant.tscn" id="16_avemu"]
-[ext_resource type="Texture2D" uid="uid://dp224au4ijms3" path="res://ship.png" id="16_v2u35"]
 [ext_resource type="PackedScene" uid="uid://bqiu3ng56ogjy" path="res://scenes/ship/battle_assistant.tscn" id="17_w8wag"]
 [ext_resource type="PackedScene" uid="uid://bxhk5f3ir05ad" path="res://scenes/thruster/maneuver_thruster.tscn" id="21_bnxwn"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/position_extrapolation.gd" id="25_1c55w"]
@@ -16,12 +16,14 @@
 shader = ExtResource("5_ipsoo")
 shader_parameter/emission_texture = ExtResource("3_co5i1")
 
-[node name="Ship" type="RigidBody2D"]
+[node name="Ship" type="RigidBody2D" node_paths=PackedStringArray("flight_assistant", "battle_assistant")]
 unique_name_in_owner = true
 collision_mask = 0
 script = ExtResource("1_5ckws")
 _main_thrust = 100.0
 _maneuver_thrust = 25.0
+flight_assistant = NodePath("FlightAssistant")
+battle_assistant = NodePath("BattleAssistant")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-32, -16, -6, -16, 32, 0, -6, 16, -32, 16)
@@ -31,9 +33,8 @@ unique_name_in_owner = true
 _thrusters = NodePath("../PositionExtrapolation/Thrusters")
 _main_thrusters = NodePath("../PositionExtrapolation/MainThrusters")
 
-[node name="BattleAssistant" parent="." node_paths=PackedStringArray("flight_assistant") instance=ExtResource("17_w8wag")]
+[node name="BattleAssistant" parent="." instance=ExtResource("17_w8wag")]
 unique_name_in_owner = true
-flight_assistant = NodePath("../FlightAssistant")
 
 [node name="PositionExtrapolation" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -43,7 +44,7 @@ script = ExtResource("25_1c55w")
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_8d03f")
 rotation = 1.5708
-texture = ExtResource("16_v2u35")
+texture = ExtResource("7_ek0b1")
 
 [node name="Thrusters" type="Node2D" parent="PositionExtrapolation"]
 unique_name_in_owner = true

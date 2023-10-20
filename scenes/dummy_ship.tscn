@@ -25,15 +25,11 @@ rotate_towards_player = true
 [node name="Gun" parent="." instance=ExtResource("2_glskv")]
 position = Vector2(4, 10)
 bullet_scene = ExtResource("3_ki0ic")
-range = 1000.0
-bullet_speed = 500.0
 recoil = 0.1
 
 [node name="Gun2" parent="." instance=ExtResource("2_glskv")]
 position = Vector2(4, -10)
 bullet_scene = ExtResource("3_ki0ic")
-range = 1000.0
-bullet_speed = 500.0
 recoil = 0.1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

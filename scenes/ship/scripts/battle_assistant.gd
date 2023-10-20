@@ -1,16 +1,19 @@
 class_name BattleAssistant
 extends Node
 
-@export var flight_assistant: ShipFlightAssistant
-
 @onready var ship: ShipRigidBody = owner
 @onready var pointer: BattleAssistantPointer = %Pointer
 
 var gun: Gun
 var target: RigidBody2D
 var shoot_point := Vector2.ZERO
+var is_show_point := false
 
 var _is_auto_aim := false
+var is_auto_shoot := false
+
+var _last_target_velocity := Vector2.ZERO
+var _last_velocity := Vector2.ZERO
 
 func _ready():
 	_disable_pointer()
@@ -22,7 +25,7 @@ func _process(delta):
 	auto_aim()
 
 
-func connect_inputs(inputs: ShipInputReader):
+func connect_inputs(inputs: ShipInput):
 	inputs.auto_aim.connect(_auto_aim_toggle)
 
 
@@ -32,10 +35,14 @@ func set_target(new_target: RigidBody2D):
 
 func auto_aim():
 	if _is_auto_aim and shoot_point != Vector2.ZERO:
-		flight_assistant.ignore_direction_update = true
-		flight_assistant.direction = shoot_point + ship.position
+		ship.flight_assistant.ignore_direction_update = true
+		ship.flight_assistant.direction = shoot_point + ship.position
 	else:
-		flight_assistant.ignore_direction_update = false
+		ship.flight_assistant.ignore_direction_update = false
+
+
+func auto_shoot():
+	if not is_auto_shoot: return
 
 
 func _calculate_bullet_intersection():
@@ -61,6 +68,11 @@ func _calculate_bullet_intersection():
 			t = max(t1, t2)
 		if t >= 0:
 			shoot_point = to_target + relative_target_vel * t
+			+ (0.5 * (target.linear_velocity - _last_target_velocity) * t * t)
+			+ (0.5 * (ship.linear_velocity - _last_velocity) * t * t)
+			#shoot_point = to_target + (0.5 * (target.linear_velocity - _last_velocity) * t * t)
+			_last_target_velocity = target.linear_velocity
+			_last_velocity = ship.linear_velocity
 			_update_pointer(shoot_point, shoot_point.length() < gun.range)
 			return
 	_disable_pointer()
@@ -70,7 +82,7 @@ func _disable_pointer():
 		pointer.disable()
 
 func _update_pointer(point: Vector2, in_range: bool):
-	if is_instance_valid(pointer):
+	if is_show_point and is_instance_valid(pointer):
 		pointer.update(point, in_range)
 
 func _auto_aim_toggle(value: bool):

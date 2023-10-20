@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo1excw82m47m"]
+
+[ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="1_pvaki"]
+[ext_resource type="PackedScene" uid="uid://df6i8o1ckqhq3" path="res://scenes/gun/bullet_red.tscn" id="2_plobu"]
+
+[node name="Gun" instance=ExtResource("1_pvaki")]
+bullet_scene = ExtResource("2_plobu")
+fire_rate = 2.0
+bullet_speed = 500.0

@@ -27,6 +27,9 @@ func _process(_delta):
 	if _is_firing:
 		fire()
 
+func connect_inputs(inputs: ShipInput):
+	inputs.fire.connect(_on_fire_input)
+
 func fire():
 	if _charging: return
 	_charge_start()
@@ -56,3 +59,7 @@ func _spawn_bullet():
 	bullet.speed = bullet_speed
 	_world_node.add_child(bullet)
 	bullet.start(bullet_lifetime)
+
+
+func _on_fire_input(value: bool):
+	_is_firing = value

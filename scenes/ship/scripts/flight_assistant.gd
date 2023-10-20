@@ -62,7 +62,7 @@ func _physics_process(delta):
 	_main_thrusters.apply_forces()
 
 
-func connect_inputs(inputs: ShipInputReader):
+func connect_inputs(inputs: ShipInput):
 	inputs.main_thruster.connect(_main_thruster_input_changed)
 	inputs.strafe.connect(_strafe_input_changed)
 	inputs.rotate.connect(_rotate_input_changed)
