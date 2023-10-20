@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/dummy_ship.gd" id="1_1bpt7"]
 [ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="2_glskv"]
 [ext_resource type="PackedScene" uid="uid://df6i8o1ckqhq3" path="res://scenes/gun/bullet_red.tscn" id="3_ki0ic"]
-[ext_resource type="Script" path="res://scenes/ship/position_extrapolation.gd" id="4_c1nr7"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/position_extrapolation.gd" id="4_c1nr7"]
 [ext_resource type="Texture2D" uid="uid://paowiimqoup8" path="res://ship_01.png" id="5_3lcfg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gqi5o"]

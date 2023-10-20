@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://knltwhe2pktm" path="res://assets/bg/Large 1024x1024/Blue Nebula/Blue_Nebula_02-1024x1024.png" id="1_obii5"]
 [ext_resource type="Texture2D" uid="uid://cwvtmyy8brm3w" path="res://assets/my/Star_01.png" id="2_4u2u4"]
-[ext_resource type="Script" path="res://scenes/background/starfield.gd" id="3_v5p6l"]
+[ext_resource type="Script" path="res://scenes/background/scripts/starfield.gd" id="3_v5p6l"]
 [ext_resource type="Texture2D" uid="uid://bh1i0yj68tcep" path="res://assets/celestials/Galaxy_01.png" id="4_x10jg"]
 [ext_resource type="Texture2D" uid="uid://c73r1d4lkau07" path="res://assets/celestials/BlackHole.png" id="5_666a8"]
 [ext_resource type="Texture2D" uid="uid://btdv56pfp7yce" path="res://assets/celestials/Planets/Earth_01.png" id="6_blw1a"]

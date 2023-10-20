@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://f787xuov3u4t"]
 
-[ext_resource type="Script" path="res://scenes/gun/gun.gd" id="1_heu61"]
+[ext_resource type="Script" path="res://scenes/gun/scripts/gun.gd" id="1_heu61"]
 [ext_resource type="PackedScene" uid="uid://dwdthpisfmojs" path="res://scenes/gun/bullet.tscn" id="2_gsief"]
 [ext_resource type="AudioStream" uid="uid://c6bvxn0m82uha" path="res://assets/sounds/tripleshot.wav" id="3_jnxdh"]
 

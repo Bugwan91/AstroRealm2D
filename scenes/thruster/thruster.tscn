@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://k6231xltcfhl"]
 
-[ext_resource type="Script" path="res://scenes/thruster/thruster.gd" id="1_esf7n"]
-[ext_resource type="Script" path="res://scenes/thruster/flame.gd" id="2_a1vau"]
+[ext_resource type="Script" path="res://scenes/thruster/scripts/thruster.gd" id="1_esf7n"]
+[ext_resource type="Script" path="res://scenes/thruster/scripts/flame.gd" id="2_a1vau"]
 [ext_resource type="Texture2D" uid="uid://kcenv1b8avup" path="res://assets/my/ship_o1/engine_flame_single.png" id="3_3opbs"]
 [ext_resource type="AudioStream" uid="uid://xn71bm7xult" path="res://assets/sounds/thruster_loop.wav" id="5_raf0x"]
 

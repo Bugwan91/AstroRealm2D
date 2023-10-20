@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://dcjlidv1ftgrv"]
 
-[ext_resource type="Script" path="res://scenes/gun/bullet_hit_effect.gd" id="1_27y4s"]
+[ext_resource type="Script" path="res://scenes/gun/scripts/bullet_hit_effect.gd" id="1_27y4s"]
 [ext_resource type="AudioStream" uid="uid://cejv4j507tnti" path="res://assets/sounds/spacelord_hit2.wav" id="2_6t2pu"]
 
 [sub_resource type="Gradient" id="Gradient_idxxb"]
