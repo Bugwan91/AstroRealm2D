@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://ce1dw618jykrb"]
 
-[ext_resource type="Script" path="res://scenes/ship_rb.gd" id="1_5ckws"]
+[ext_resource type="Script" path="res://scenes/ship/ship.gd" id="1_5ckws"]
 [ext_resource type="Texture2D" uid="uid://dpp12wrak050k" path="res://ship_emission.png" id="3_co5i1"]
-[ext_resource type="Shader" path="res://scenes/ship.gdshader" id="5_ipsoo"]
+[ext_resource type="Shader" path="res://scenes/ship/ship.gdshader" id="5_ipsoo"]
 [ext_resource type="PackedScene" uid="uid://k6231xltcfhl" path="res://scenes/thruster/thruster.tscn" id="10_wlx63"]
 [ext_resource type="Script" path="res://scenes/thruster/thrusters.gd" id="11_hhoku"]
 [ext_resource type="PackedScene" uid="uid://t86wis3mvind" path="res://scenes/ship/flight_assistant.tscn" id="16_avemu"]

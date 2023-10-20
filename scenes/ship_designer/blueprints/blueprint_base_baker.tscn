@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dli6leyaxng4g"]
 
-[ext_resource type="Script" path="res://blueprint_module_baker.gd" id="1_wvwht"]
+[ext_resource type="Script" path="res://scenes/ship_designer/blueprint_module_baker.gd" id="1_wvwht"]
 [ext_resource type="PackedScene" uid="uid://yfaneye4lfkp" path="res://scenes/ship_designer/blueprints/base_blueprint.tscn" id="2_0s2bo"]
 
 [node name="BlueprintModuleBaker" type="SubViewport"]

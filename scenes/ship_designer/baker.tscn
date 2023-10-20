@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://tulgf6ok78fw"]
 
-[ext_resource type="Script" path="res://scenes/SubViewport.gd" id="1_gmkwd"]
+[ext_resource type="Script" path="res://scenes/ship_designer/sub_viewport.gd" id="1_gmkwd"]
 [ext_resource type="Texture2D" uid="uid://fwe0bdfhki3t" path="res://assets/my/ship_o1/hull_2.PNG" id="2_rxseg"]
 [ext_resource type="Texture2D" uid="uid://bdjs7ywlspykf" path="res://assets/my/ship_o1/cocpit_2.PNG" id="3_uq2e6"]
 [ext_resource type="Texture2D" uid="uid://cxe6gi15exjbm" path="res://assets/my/ship_o1/engine_2.PNG" id="4_fn6sp"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cje3ohukt7y80" path="res://assets/my/ship_o1/hull_2_emission.PNG" id="8_och8f"]
 [ext_resource type="Texture2D" uid="uid://b1div50ru5c4l" path="res://assets/my/ship_o1/cocpit_2_emission.PNG" id="9_1u10f"]
 [ext_resource type="Texture2D" uid="uid://bl55syfjjpfi7" path="res://assets/my/ship_o1/engine_2_emission.PNG" id="10_d2e3l"]
-[ext_resource type="Shader" path="res://scenes/ship_style.gdshader" id="11_cs4kv"]
+[ext_resource type="Shader" path="res://scenes/ship/ship_style.gdshader" id="11_cs4kv"]
 [ext_resource type="Texture2D" uid="uid://dljuhgwuqagig" path="res://ship_mask.png" id="12_ej4yl"]
 [ext_resource type="Texture2D" uid="uid://tsyi84v42gdk" path="res://assets/my/ship_o1/style_6.PNG" id="13_bacfi"]
 [ext_resource type="Texture2D" uid="uid://q026lhon6o0q" path="res://ship_base.png" id="14_aqkap"]

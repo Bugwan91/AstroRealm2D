@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ce1dw618jykrb" path="res://scenes/ship/ship.tscn" id="4_5rllk"]
 [ext_resource type="Texture2D" uid="uid://ctxhmtvm80a2o" path="res://assets/my/grid.png" id="4_8aefd"]
 [ext_resource type="Shader" path="res://scenes/navigation_grid/grid.gdshader" id="4_ym8vn"]
-[ext_resource type="Script" path="res://scenes/navigation_grid/Grid.gd" id="6_aao85"]
+[ext_resource type="Script" path="res://scenes/navigation_grid/grid.gd" id="6_aao85"]
 [ext_resource type="PackedScene" uid="uid://cw8wqa4ib5mkj" path="res://scenes/dummy_ship.tscn" id="7_njk33"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://ui/ui.tscn" id="8_myah8"]
 [ext_resource type="Texture2D" uid="uid://dp224au4ijms3" path="res://ship.png" id="9_eiq6r"]

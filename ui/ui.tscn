@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://ui/position_label.gd" id="1_x4cxl"]
 [ext_resource type="Script" path="res://ui/speed_label.gd" id="2_uarfg"]
 [ext_resource type="Script" path="res://ui/acceleration_label.gd" id="3_ex1gd"]
-[ext_resource type="Script" path="res://ui/FlightAssistantUI.gd" id="4_7x04l"]
-[ext_resource type="Script" path="res://ui/DebugInfo.gd" id="5_u0tch"]
+[ext_resource type="Script" path="res://ui/flight_assistant_ui.gd" id="4_7x04l"]
+[ext_resource type="Script" path="res://ui/debug_info.gd" id="5_u0tch"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7coif"]
 bg_color = Color(0, 0.282353, 0.54902, 0.960784)

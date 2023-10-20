@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqiu3ng56ogjy"]
 
-[ext_resource type="Script" path="res://scenes/ship/BattleAssistant.gd" id="1_0q78c"]
+[ext_resource type="Script" path="res://scenes/ship/battle_assistant.gd" id="1_0q78c"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="2_sk52j"]
 
 [node name="BattleAssistant" type="Node" node_paths=PackedStringArray("ship", "gun")]
