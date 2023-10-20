@@ -6,7 +6,7 @@ extends RigidBody2D
 @export_range(0, 2000) var max_speed := 1000.0
 @export_range(0, 500) var _flight_assistant_error := 0.0
 
-@onready var position_extrapolation: PositionExtrapolation = %PositionExtrapolation
+@onready var extrapolator: PositionExtrapolation = %PositionExtrapolation
 @onready var thrusters: Thrusters = %Thrusters
 @onready var engines: MainThrusters = %MainThrusters
 @onready var flight_assistant: ShipFlightAssistant = %FlightAssistant
@@ -18,10 +18,6 @@ extends RigidBody2D
 var inverse_inertia := 0.0
 
 var _reset := false
-
-var extrapolated_position: Vector2 :
-	get:
-		return position + position_extrapolation.position.rotated(rotation)
 
 func _ready():
 	thrusters.setup(_maneuver_thrust)

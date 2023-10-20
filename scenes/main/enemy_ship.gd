@@ -7,12 +7,8 @@ extends RigidBody2D
 @onready var ship = %Ship
 @onready var gun = $Gun as Gun
 @onready var gun_2 = $Gun2 as Gun
-@onready var position_extrapolation = $PositionExtrapolation
+@onready var extrapolator = $PositionExtrapolation
 @onready var player = %Ship
-
-var extrapolated_position: Vector2:
-	get:
-		return position + position_extrapolation.position
 
 func _ready():
 	if is_firing:

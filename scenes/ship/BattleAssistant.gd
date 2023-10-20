@@ -15,7 +15,7 @@ func _ready():
 
 
 func _process(_delta):
-	pointer.position = ship.extrapolated_position
+	pointer.position = ship.extrapolator.global_position
 	_calculate_bullet_intersection()
 
 
@@ -33,7 +33,7 @@ func _calculate_bullet_intersection():
 	if a == 0.0:
 		_disable_pointer()
 		return
-	var to_target = target.position - ship.extrapolated_position
+	var to_target = target.extrapolator.global_position - ship.extrapolator.global_position
 	var b = 2 * to_target.dot(relative_target_vel)
 	var c = to_target.length_squared()
 	var discriminant = b * b - 4 * a * c

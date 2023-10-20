@@ -31,7 +31,7 @@ func _unhandled_input(event):
 	_target_zoom = _target_zoom.clamp(_zoom_min, _zoom_max)
 
 func _process(_delta):
-	position = target.extrapolated_position + _target_position
+	position = target.extrapolator.global_position + _target_position
 	zoom = lerp(zoom, _target_zoom, .1)
 
 func _physics_process(_delta):
@@ -46,4 +46,4 @@ func _init_zoom():
 	_target_zoom = zoom
 
 func _look_direction() -> Vector2:
-	return (get_global_mouse_position() - target.extrapolated_position) * moves_smoosnes
+	return (get_global_mouse_position() - target.extrapolator.global_position) * moves_smoosnes

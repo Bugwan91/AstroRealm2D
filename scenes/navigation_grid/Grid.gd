@@ -15,9 +15,9 @@ func _ready():
 	_start_grid_scale = grid_scale
 
 func _process(_delta):
-	position = target.extrapolated_position
+	position = target.extrapolator.global_position
 	scale = _start_scale / camera.zoom
-	grid_offset = target.extrapolated_position / (texture.get_size() * grid_scale)
+	grid_offset = target.extrapolator.global_position / (texture.get_size() * grid_scale)
 	material.set("shader_parameter/scale", scale / grid_scale)
 
 func update_opacity(value: float):
