@@ -3,6 +3,7 @@ extends RigidBody2D
 
 @export var _texture: Texture2D
 @export var inputs: ShipInputReader
+@export var gun_scene: PackedScene
 @export_range(0, 500) var _main_thrust := 200.0
 @export_range(0, 100) var _maneuver_thrust := 50.0
 @export_range(0, 2000) var max_speed := 1000.0
@@ -14,12 +15,14 @@ extends RigidBody2D
 @onready var flight_assistant: ShipFlightAssistant = %FlightAssistant
 @onready var battle_assistant: BattleAssistant = %BattleAssistant
 
-@onready var gun: Gun = %Gun
+
 @onready var _view = %View
+@onready var _gun_slot = %GunSlot
 
 @onready var _main_state = get_node("/root/MainState")
 
 var inverse_inertia := 0.0
+var gun: Gun
 
 
 func _ready():
@@ -29,10 +32,14 @@ func _ready():
 	if is_instance_valid(inputs):
 		flight_assistant.connect_inputs(inputs)
 	_view.texture = _texture
+	gun = gun_scene.instantiate()
+	gun.shoot_recoil.connect(_on_shoot_recoil)
+	_gun_slot.add_child(gun)
 
 
 func _process(delta):
 	_update_main_state(delta)
+	gun.velocity = linear_velocity
 
 
 func _integrate_forces(state):
@@ -49,6 +56,9 @@ func _input(event):
 		gun.start_fire()
 	elif event.is_action_released("fire"):
 		gun.stop_fire()
+
+func _on_shoot_recoil(force: float):
+	apply_central_impulse(-transform.x * force)
 
 # TODO: Refactor
 # Data to main state (UI connection)

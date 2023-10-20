@@ -1,11 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=11 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="PackedScene" uid="uid://de6wu3uauymsr" path="res://scenes/background/background.tscn" id="1_b53p2"]
 [ext_resource type="PackedScene" uid="uid://ce1dw618jykrb" path="res://scenes/ship/ship.tscn" id="4_5rllk"]
 [ext_resource type="Texture2D" uid="uid://ctxhmtvm80a2o" path="res://assets/my/grid.png" id="4_8aefd"]
-[ext_resource type="Shader" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="4_ym8vn"]
-[ext_resource type="Script" path="res://scenes/navigation_grid/scripts/grid.gd" id="6_aao85"]
-[ext_resource type="PackedScene" uid="uid://cw8wqa4ib5mkj" path="res://scenes/dummy_ship.tscn" id="7_njk33"]
+[ext_resource type="PackedScene" uid="uid://csufvxpfo8jbl" path="res://scenes/navigation_grid/grid.tscn" id="4_aip35"]
+[ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="8_cwv63"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://scenes/ui/ui.tscn" id="8_myah8"]
 [ext_resource type="Texture2D" uid="uid://dp224au4ijms3" path="res://ship.png" id="9_eiq6r"]
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
@@ -18,23 +17,6 @@ glow_enabled = true
 glow_normalized = true
 glow_strength = 0.8
 glow_blend_mode = 0
-
-[sub_resource type="Gradient" id="Gradient_8l20h"]
-offsets = PackedFloat32Array(0, 0.746063)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_fghus"]
-gradient = SubResource("Gradient_8l20h")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bgrib"]
-shader = ExtResource("4_ym8vn")
-shader_parameter/scale = Vector2(4, 4)
-shader_parameter/opacity = 0.031
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/emission = Color(0, 0.3, 1, 1)
-shader_parameter/mask = SubResource("GradientTexture2D_fghus")
 
 [node name="Main" type="Node2D"]
 
@@ -49,30 +31,18 @@ environment = SubResource("Environment_1ojvs")
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_b53p2")]
 scroll_offset = Vector2(738, 453)
 
-[node name="Center" type="Sprite2D" parent="."]
-texture = ExtResource("4_8aefd")
-
-[node name="Grid" type="Sprite2D" parent="." node_paths=PackedStringArray("camera", "target")]
-texture_repeat = 2
-material = SubResource("ShaderMaterial_bgrib")
-scale = Vector2(20, 20)
-texture = ExtResource("4_8aefd")
-script = ExtResource("6_aao85")
-opacity = 0.031
-grid_scale = 5.0
+[node name="Grid" parent="." node_paths=PackedStringArray("camera", "target") instance=ExtResource("4_aip35")]
 camera = NodePath("../Camera")
 target = NodePath("../Ship")
 
-[node name="DummyShip" parent="." node_paths=PackedStringArray("players") instance=ExtResource("7_njk33")]
-players = [NodePath("../Ship")]
+[node name="Center" type="Sprite2D" parent="."]
+texture = ExtResource("4_8aefd")
 
 [node name="Ship" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_5rllk")]
 _texture = ExtResource("9_eiq6r")
 inputs = NodePath("../InputReader")
-_maneuver_thrust = 20.0
-max_speed = 2000.0
+gun_scene = ExtResource("8_cwv63")
+_flight_assistant_precision = 20.0
 
 [node name="Camera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("11_2fp23")]
-zoom = Vector2(1, 1)
 target = NodePath("../Ship")
-inertia = 0.5

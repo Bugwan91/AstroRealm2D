@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://csufvxpfo8jbl"]
+
+[ext_resource type="Shader" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="1_lgcud"]
+[ext_resource type="Texture2D" uid="uid://ctxhmtvm80a2o" path="res://assets/my/grid.png" id="2_t5ss0"]
+[ext_resource type="Script" path="res://scenes/navigation_grid/scripts/grid.gd" id="3_w55vd"]
+
+[sub_resource type="Gradient" id="Gradient_8l20h"]
+offsets = PackedFloat32Array(0, 0.746063)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fghus"]
+gradient = SubResource("Gradient_8l20h")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bgrib"]
+shader = ExtResource("1_lgcud")
+shader_parameter/scale = Vector2(4, 4)
+shader_parameter/opacity = 0.031
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/emission = Color(0, 0.3, 1, 1)
+shader_parameter/mask = SubResource("GradientTexture2D_fghus")
+
+[node name="Grid" type="Sprite2D" node_paths=PackedStringArray("target")]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_bgrib")
+scale = Vector2(20, 20)
+texture = ExtResource("2_t5ss0")
+script = ExtResource("3_w55vd")
+opacity = 0.031
+grid_scale = 5.0
+target = NodePath("")

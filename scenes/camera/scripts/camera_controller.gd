@@ -32,7 +32,7 @@ func _unhandled_input(event):
 
 func _process(_delta):
 	position = target.extrapolator.global_position + _target_position
-	zoom = lerp(zoom, _target_zoom, .1)
+	zoom = lerp(zoom, _target_zoom, 0.1)
 
 func _physics_process(_delta):
 	var acceleration = (_last_veocity - target.linear_velocity) * (Vector2.ONE * acceleration_multiplyer / zoom)
