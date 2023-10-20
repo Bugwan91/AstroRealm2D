@@ -7,11 +7,12 @@ signal rotate(value: float)
 signal pointer(value: Vector2)
 signal flight_assistant(value: bool)
 signal fa_follow(value: bool)
+signal reset_target(value: bool)
 signal fa_autopilot(value: bool)
 signal autopilot_speed(value: float)
 signal follow_distance(value: float)
 signal autopilot_target_point(value: Vector2)
-signal reset(value: bool)
+
 
 func _process(_delta):
 	main_thruster.emit(1 if Input.is_action_pressed("throttle_main") else 0)
@@ -26,10 +27,10 @@ func _unhandled_input(event):
 		flight_assistant.emit(true)
 	if event.is_action_pressed("follow_target"):
 		fa_follow.emit(true)
+	if event.is_action_pressed("target_reset"):
+		reset_target.emit(true)
 	if event.is_action_pressed("autopilot"):
 		fa_autopilot.emit(true)
-	if event.is_action_pressed("Reset"):
-		reset.emit(true)
 	if event.is_action_pressed("distance_up"):
 		follow_distance.emit(1.0)
 	if event.is_action_pressed("distance_down"):
@@ -38,4 +39,3 @@ func _unhandled_input(event):
 		autopilot_speed.emit(1.0)
 	if event.is_action_pressed("autopilot_speed_down"):
 		autopilot_speed.emit(-1.0)
-

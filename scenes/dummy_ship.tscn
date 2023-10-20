@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://cw8wqa4ib5mkj"]
+
+[ext_resource type="Script" path="res://scenes/main/enemy_ship.gd" id="1_1bpt7"]
+[ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="2_glskv"]
+[ext_resource type="PackedScene" uid="uid://df6i8o1ckqhq3" path="res://scenes/gun/bullet_red.tscn" id="3_ki0ic"]
+[ext_resource type="Script" path="res://scenes/ship/position_extrapolation.gd" id="4_c1nr7"]
+[ext_resource type="Texture2D" uid="uid://paowiimqoup8" path="res://ship_01.png" id="5_3lcfg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gqi5o"]
+radius = 32.0
+height = 92.0
+
+[node name="DummyShip" type="RigidBody2D"]
+position = Vector2(3, -244)
+collision_mask = 0
+mass = 0.2
+linear_velocity = Vector2(400, 0)
+angular_velocity = 0.174533
+angular_damp_mode = 1
+script = ExtResource("1_1bpt7")
+radial_force = 10.0
+is_firing = true
+rotate_towards_player = true
+
+[node name="Gun" parent="." instance=ExtResource("2_glskv")]
+position = Vector2(4, 10)
+bullet_scene = ExtResource("3_ki0ic")
+range = 1000.0
+bullet_speed = 500.0
+recoil = 0.1
+
+[node name="Gun2" parent="." instance=ExtResource("2_glskv")]
+position = Vector2(4, -10)
+bullet_scene = ExtResource("3_ki0ic")
+range = 1000.0
+bullet_speed = 500.0
+recoil = 0.1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(32, 0, -6, 16, -14, 16, -32, 5, -32, -5, -14, -16, -6, -16)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-3, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_gqi5o")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="PositionExtrapolation" type="Node2D" parent="."]
+script = ExtResource("4_c1nr7")
+
+[node name="Sprite2D" type="Sprite2D" parent="PositionExtrapolation"]
+rotation = 1.5708
+texture = ExtResource("5_3lcfg")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]

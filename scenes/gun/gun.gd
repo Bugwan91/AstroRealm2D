@@ -1,7 +1,6 @@
 class_name Gun
 extends Node2D
 
-@export var parent: RigidBody2D
 @export var bullet_scene: PackedScene
 @export_range(0, 20) var fire_rate := 10.0
 @export_range(0, 2000) var range := 500.0
@@ -28,7 +27,7 @@ func fire():
 	if not _charging:
 		_charge_start()
 		_spawn_bullet()
-		parent.apply_central_impulse(global_transform.x * -recoil)
+		owner.apply_central_impulse(global_transform.x * -recoil) # TODO: signal
 		sound.play()
 
 func start_fire():
@@ -48,7 +47,7 @@ func _spawn_bullet():
 	var bullet = bullet_scene.instantiate() as Bullet
 	bullet.global_position = global_position
 	bullet.global_rotation = global_rotation
-	bullet.velocity = parent.linear_velocity
+	bullet.velocity = owner.linear_velocity # TODO: signal
 	bullet.impulse = recoil
 	bullet.speed = bullet_speed
 	_world_node.add_child(bullet)

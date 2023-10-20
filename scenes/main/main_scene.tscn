@@ -1,16 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=15 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="PackedScene" uid="uid://de6wu3uauymsr" path="res://scenes/background/background.tscn" id="1_b53p2"]
 [ext_resource type="PackedScene" uid="uid://ce1dw618jykrb" path="res://scenes/ship/ship.tscn" id="4_5rllk"]
 [ext_resource type="Texture2D" uid="uid://ctxhmtvm80a2o" path="res://assets/my/grid.png" id="4_8aefd"]
 [ext_resource type="Shader" path="res://scenes/navigation_grid/grid.gdshader" id="4_ym8vn"]
-[ext_resource type="Script" path="res://scenes/main/enemy_ship.gd" id="5_hb2m2"]
 [ext_resource type="Script" path="res://scenes/navigation_grid/Grid.gd" id="6_aao85"]
-[ext_resource type="Script" path="res://scenes/ship/position_extrapolation.gd" id="6_k2ut1"]
-[ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="6_udm3s"]
-[ext_resource type="PackedScene" uid="uid://df6i8o1ckqhq3" path="res://scenes/gun/bullet_red.tscn" id="7_1vp7r"]
+[ext_resource type="PackedScene" uid="uid://cw8wqa4ib5mkj" path="res://scenes/dummy_ship.tscn" id="7_njk33"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://ui/ui.tscn" id="8_myah8"]
-[ext_resource type="Texture2D" uid="uid://paowiimqoup8" path="res://ship_01.png" id="9_brjfx"]
+[ext_resource type="Texture2D" uid="uid://dp224au4ijms3" path="res://ship.png" id="9_eiq6r"]
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
 [ext_resource type="PackedScene" uid="uid://dt7wav32bva3j" path="res://scenes/player/input_reader.tscn" id="13_epig2"]
 
@@ -39,10 +36,6 @@ shader_parameter/offset = Vector2(0, 0)
 shader_parameter/emission = Color(0, 0.3, 1, 1)
 shader_parameter/mask = SubResource("GradientTexture2D_fghus")
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gqi5o"]
-radius = 32.0
-height = 92.0
-
 [node name="Main" type="Node2D"]
 
 [node name="UI" parent="." instance=ExtResource("8_myah8")]
@@ -70,61 +63,16 @@ grid_scale = 5.0
 camera = NodePath("../Camera")
 target = NodePath("../Ship")
 
-[node name="DummyShip" type="RigidBody2D" parent="."]
-position = Vector2(3, -244)
-collision_mask = 0
-mass = 0.2
-linear_velocity = Vector2(400, 0)
-angular_velocity = 0.174533
-angular_damp_mode = 1
-script = ExtResource("5_hb2m2")
-radial_force = 10.0
-is_firing = true
-rotate_towards_player = true
-
-[node name="Gun" parent="DummyShip" node_paths=PackedStringArray("parent") instance=ExtResource("6_udm3s")]
-position = Vector2(4, 10)
-parent = NodePath("..")
-bullet_scene = ExtResource("7_1vp7r")
-range = 1000.0
-bullet_speed = 500.0
-recoil = 0.1
-
-[node name="Gun2" parent="DummyShip" node_paths=PackedStringArray("parent") instance=ExtResource("6_udm3s")]
-position = Vector2(4, -10)
-parent = NodePath("..")
-bullet_scene = ExtResource("7_1vp7r")
-range = 1000.0
-bullet_speed = 500.0
-recoil = 0.1
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DummyShip"]
-polygon = PackedVector2Array(32, 0, -6, 16, -14, 16, -32, 5, -32, -5, -14, -16, -6, -16)
-
-[node name="Area2D" type="Area2D" parent="DummyShip"]
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DummyShip/Area2D"]
-position = Vector2(-3, 0)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_gqi5o")
-debug_color = Color(0, 0.6, 0.701961, 0.419608)
-
-[node name="PositionExtrapolation" type="Node2D" parent="DummyShip"]
-script = ExtResource("6_k2ut1")
-
-[node name="Sprite2D" type="Sprite2D" parent="DummyShip/PositionExtrapolation"]
-rotation = 1.5708
-texture = ExtResource("9_brjfx")
+[node name="DummyShip" parent="." node_paths=PackedStringArray("players") instance=ExtResource("7_njk33")]
+players = [NodePath("../Ship")]
 
 [node name="Ship" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_5rllk")]
+_texture = ExtResource("9_eiq6r")
+inputs = NodePath("../InputReader")
 _maneuver_thrust = 20.0
 max_speed = 2000.0
-inputs = NodePath("../InputReader")
 
 [node name="Camera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("11_2fp23")]
 zoom = Vector2(1, 1)
 target = NodePath("../Ship")
 inertia = 0.5
-
-[connection signal="input_event" from="DummyShip/Area2D" to="DummyShip" method="_on_Area2D_input_event"]

@@ -42,14 +42,14 @@ unique_name_in_owner = true
 script = ExtResource("25_1c55w")
 
 [node name="View" type="Sprite2D" parent="PositionExtrapolation"]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_8d03f")
 rotation = 1.5708
 texture = ExtResource("16_v2u35")
 
-[node name="Thrusters" type="Node2D" parent="PositionExtrapolation" node_paths=PackedStringArray("_body")]
+[node name="Thrusters" type="Node2D" parent="PositionExtrapolation"]
 unique_name_in_owner = true
 script = ExtResource("11_hhoku")
-_body = NodePath("../..")
 
 [node name="FL" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
 position = Vector2(15, -8)
@@ -89,10 +89,9 @@ _body = NodePath("../..")
 [node name="Thruster" parent="PositionExtrapolation/MainThrusters" instance=ExtResource("10_wlx63")]
 position = Vector2(-32, -5.48045e-05)
 
-[node name="Gun" parent="PositionExtrapolation" node_paths=PackedStringArray("parent") instance=ExtResource("28_qwgv6")]
+[node name="Gun" parent="PositionExtrapolation" instance=ExtResource("28_qwgv6")]
 unique_name_in_owner = true
 position = Vector2(32, 0)
-parent = NodePath("../..")
 fire_rate = 5.0
 range = 700.0
 bullet_speed = 700.0

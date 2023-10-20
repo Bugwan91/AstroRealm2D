@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dwdthpisfmojs" path="res://scenes/gun/bullet.tscn" id="2_gsief"]
 [ext_resource type="AudioStream" uid="uid://c6bvxn0m82uha" path="res://assets/sounds/tripleshot.wav" id="3_jnxdh"]
 
-[node name="Gun" type="Marker2D"]
+[node name="Gun" type="Node2D"]
 script = ExtResource("1_heu61")
 bullet_scene = ExtResource("2_gsief")
 fire_rate = 2.0
