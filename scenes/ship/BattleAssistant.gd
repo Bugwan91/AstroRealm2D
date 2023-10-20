@@ -24,6 +24,7 @@ func set_target(new_target: RigidBody2D):
 
 
 func _calculate_bullet_intersection():
+	# TODO: Refactor this garbage
 	if not(is_instance_valid(target) and target is RigidBody2D):
 		_disable_pointer()
 		return

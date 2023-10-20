@@ -1,10 +1,10 @@
-@tool
 extends Sprite2D
 
 @export_range(0, 1) var opacity := 0.5: set = update_opacity
 @export var grid_offset: Vector2: set = update_offset
 @export var grid_scale := 1.0: set = update_scale
 @export var camera: Camera2D
+@export var target: ShipRigidBody
 
 var _inverted_scale: Vector2
 var _start_scale: Vector2
@@ -15,9 +15,9 @@ func _ready():
 	_start_grid_scale = grid_scale
 
 func _process(_delta):
-	position = camera.position
+	position = target.extrapolated_position
 	scale = _start_scale / camera.zoom
-	grid_offset = camera.position / (texture.get_size() * grid_scale)
+	grid_offset = target.extrapolated_position / (texture.get_size() * grid_scale)
 	material.set("shader_parameter/scale", scale / grid_scale)
 
 func update_opacity(value: float):

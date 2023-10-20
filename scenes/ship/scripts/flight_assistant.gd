@@ -17,11 +17,11 @@ const ANGULAR_THRESHOLD = 0.01
 @onready var _main_state: MainState = get_node("/root/MainState")
 
 var target_body: RigidBody2D
-var autopilot_speed := 0.0
-var tracking_distance := 300.0
+var autopilot_speed := 300.0
+var follow_distance := 300.0
 
-var _is_tracking := false
-var _tracking_error := 0.0
+var _is_follow := false
+var _follow_error := 0.0
 var _is_autopilot := false
 
 var _thrusters_ratio := 0.0
@@ -42,13 +42,19 @@ func _ready():
 	_input_reader.strafe.connect(_strafe_input_changed)
 	_input_reader.rotate.connect(_rotate_input_changed)
 	_input_reader.pointer.connect(_pointer_input_changed)
-	_main_state.fa_tracking_distance = tracking_distance
+	_input_reader.flight_assistant.connect(_flight_assistant_toggled)
+	_input_reader.fa_follow.connect(_target_follow_toggled)
+	_input_reader.follow_distance.connect(_follow_distance_changed)
+	_input_reader.fa_autopilot.connect(_autopilot_toggled)
+	_input_reader.autopilot_speed.connect(_autopilot_speed_changed)
+	_input_reader.autopilot_target_point.connect(_autopilot_point_changed)
+	_main_state.fa_tracking_distance = follow_distance
 	_main_state.fa_autopilot_speed = autopilot_speed
 
 
 func setup(error: float):
 	_thrusters_ratio = _thrusters.estimated_strafe_force(Vector2.RIGHT) / _main_thrusters.estimated_force()
-	_tracking_error = error
+	_follow_error = error
 
 
 func _process(_delta):
@@ -57,8 +63,6 @@ func _process(_delta):
 		position_pointer.update(_target_position - _ship.position)
 	else:
 		position_pointer.disable()
-	if Input.is_action_pressed("set_target") and _is_autopilot:
-		_target_position = _pointer_position
 
 
 func _physics_process(delta):
@@ -68,59 +72,30 @@ func _physics_process(delta):
 	_main_thrusters.apply_forces()
 
 
-func _unhandled_input(event):
-	if event.is_action_pressed("flight_assist"):
-		enabled = not enabled
-	if enabled and event.is_action_pressed("stop"):
-		_is_tracking = not _is_tracking
-		if _is_tracking:
-			_is_autopilot = false
-	if enabled and event.is_action_pressed("autopilot"):
-		_is_autopilot = not _is_autopilot
-		if _is_autopilot:
-			_is_tracking = false
-	_main_state.fa_enabled = enabled
-	_main_state.fa_tracking = enabled and _is_tracking
-	_main_state.fa_autopilot = enabled and _is_autopilot
-	
-	if enabled and _is_tracking:
-		if event.is_action_pressed("distance_up"):
-			tracking_distance += 10
-		if event.is_action_pressed("distance_down"):
-			tracking_distance = max(0, tracking_distance - 10)
-		_main_state.fa_tracking_distance = tracking_distance
-	
-	if enabled and _is_autopilot:
-		if event.is_action_pressed("autopilot_speed_up"):
-			autopilot_speed += 10
-		if event.is_action_pressed("autopilot_speed_down"):
-			autopilot_speed = max(0, autopilot_speed - 10)
-		_main_state.fa_autopilot_speed = autopilot_speed
-
 func override_controls(delta: float):
 	_main_thrusters_control = _main_thruster_input
 	_linear_control = _strafe_input
 	_angular_control = _rotation_input
-	if enabled:
-		if _is_autopilot:
-			move_to(delta, _target_position, autopilot_speed)
-		else:
-			turn_to(delta, _pointer_position)
-			if _is_tracking:
-				if is_instance_valid(target_body):
-					follow_target(delta, tracking_distance)
-				else:
-					match_velocity(delta, _get_delta_velocity())
+	if not enabled: return
+	if _is_autopilot:
+		move_to(delta, _target_position, autopilot_speed)
+	else:
+		turn_to(delta, _pointer_position)
+	if _is_follow:
+		follow_target(delta, follow_distance)
 
 
 func follow_target(delta: float, distance: float = 0.0):
-	var dv := _get_delta_velocity(_tracking_error)
+	if not is_instance_valid(target_body):
+		match_velocity(delta, _get_delta_velocity())
+		return
+	var dv := _get_delta_velocity(_follow_error)
 	if distance == 0:
 		match_velocity(delta, dv)
 		return
 	var dp := target_body.position - _ship.position
 	var dp_target := dp - dp.normalized() * distance
-	var vs = _get_stop_velocity(dp_target, -dv, 0, _tracking_error)
+	var vs = _get_stop_velocity(dp_target, -dv, 0, _follow_error)
 	match_velocity(delta, vs)
 
 
@@ -154,8 +129,7 @@ func move_to(delta: float, target_point: Vector2, max_speed: float = 0.0, stop: 
 	var delta_position := target_point - _ship.position
 	if not stop:
 		turn_to(delta, target_point)
-		var speed := _ship.max_speed if max_speed == 0 else max_speed
-		var dv: = delta_position.normalized() * speed - _ship.linear_velocity
+		var dv: = delta_position.normalized() * max_speed - _ship.linear_velocity
 		match_velocity(delta, dv, false)
 		return
 	var velocity_l := _ship.linear_velocity.length()
@@ -163,10 +137,15 @@ func move_to(delta: float, target_point: Vector2, max_speed: float = 0.0, stop: 
 		match_rotation(delta, 0)
 		return
 	turn_to(delta, target_point)
-	match_velocity(delta, _get_stop_velocity(delta_position, _ship.linear_velocity, max_speed), false)
+	match_velocity(\
+		delta,\
+		_get_stop_velocity(delta_position, _ship.linear_velocity, max_speed),\
+		false)
 
 
 func turn_to(delta: float, target_point: Vector2):
+	# TODO: Rethink and rework this algorythm.
+	# I don't like it and don't fully understand it.
 	if _angular_control != 0:
 		return
 	var error := _ship.transform.x.angle_to(target_point - _ship.position)
@@ -188,8 +167,7 @@ func _get_stop_velocity(position: Vector2, velocity: Vector2, max_speed: float =
 		return Vector2.ZERO
 	var a := _thrusters.estimated_strafe_force(position)
 	var v := sqrt((2 * a * position.length())/3)
-	if max_speed != 0:
-		v = min(max_speed, v)
+	v = v if max_speed == 0 else min(max_speed, v)
 	return _velocity_with_error(v * position.normalized() - velocity, error)
 
 
@@ -225,3 +203,39 @@ func _rotate_input_changed(value: float):
 
 func _pointer_input_changed(value: Vector2):
 	_pointer_position = value
+	
+func _flight_assistant_toggled(value: bool):
+	if not value: return
+	enabled = not enabled
+	_main_state.fa_enabled = enabled
+	_main_state.fa_tracking = enabled and _is_follow
+	_main_state.fa_autopilot = enabled and _is_autopilot
+	
+func _target_follow_toggled(value: bool):
+	if not value: return
+	_is_follow = not _is_follow
+	if _is_follow:
+		_is_autopilot = false
+	_main_state.fa_tracking = enabled and _is_follow
+	_main_state.fa_autopilot = enabled and _is_autopilot
+
+func _follow_distance_changed(value: float):
+	if enabled and _is_follow:
+		follow_distance += 10 * value
+	_main_state.fa_tracking_distance = follow_distance
+
+func _autopilot_toggled(value: bool):
+	if not value: return
+	_is_autopilot = not _is_autopilot
+	if _is_autopilot:
+		_is_follow = false
+	_main_state.fa_tracking = enabled and _is_follow
+	_main_state.fa_autopilot = enabled and _is_autopilot
+
+func _autopilot_speed_changed(value: float):
+	if enabled and _is_autopilot:
+		autopilot_speed += 10 * value
+	_main_state.fa_autopilot_speed = autopilot_speed
+
+func _autopilot_point_changed(value: Vector2):
+	_target_position = value

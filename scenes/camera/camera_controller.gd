@@ -23,9 +23,10 @@ func _ready():
 	_init_zoom()
 
 func _unhandled_input(event):
-	if event.is_action("zoom_in") and not event.is_action("distance_up") and not event.is_action("autopilot_speed_up"):
+	if Input.is_key_pressed(KEY_ALT): return
+	if event.is_action("zoom_in"):
 		_target_zoom += _zoom_speed
-	elif event.is_action("zoom_out") and not event.is_action("distance_down") and not event.is_action("autopilot_speed_down"):
+	elif event.is_action("zoom_out"):
 		_target_zoom -= _zoom_speed
 	_target_zoom = _target_zoom.clamp(_zoom_min, _zoom_max)
 

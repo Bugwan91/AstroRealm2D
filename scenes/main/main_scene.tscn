@@ -53,7 +53,7 @@ scroll_offset = Vector2(738, 453)
 [node name="Center" type="Sprite2D" parent="."]
 texture = ExtResource("4_8aefd")
 
-[node name="Grid" type="Sprite2D" parent="." node_paths=PackedStringArray("camera")]
+[node name="Grid" type="Sprite2D" parent="." node_paths=PackedStringArray("camera", "target")]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_bgrib")
 scale = Vector2(20, 20)
@@ -62,16 +62,17 @@ script = ExtResource("6_aao85")
 opacity = 0.031
 grid_scale = 5.0
 camera = NodePath("../Camera")
+target = NodePath("../Ship")
 
 [node name="DummyShip" type="RigidBody2D" parent="."]
 position = Vector2(3, -244)
 collision_mask = 0
 mass = 0.2
 linear_velocity = Vector2(400, 0)
+angular_velocity = 0.174533
 angular_damp_mode = 1
 script = ExtResource("5_hb2m2")
-radial_force = 20.0
-is_firing = true
+radial_force = 10.0
 
 [node name="Gun" parent="DummyShip" node_paths=PackedStringArray("parent") instance=ExtResource("6_udm3s")]
 position = Vector2(4, 10)
@@ -112,10 +113,13 @@ texture = ExtResource("9_brjfx")
 
 [node name="Ship" parent="." instance=ExtResource("4_5rllk")]
 _maneuver_thrust = 20.0
+max_speed = 2000.0
+_flight_assistant_error = 20.0
 
 [node name="Camera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("11_2fp23")]
 zoom = Vector2(1, 1)
 target = NodePath("../Ship")
 inertia = 0.5
+moves_strenght = 3.0
 
 [connection signal="input_event" from="DummyShip/Area2D" to="DummyShip" method="_on_Area2D_input_event"]

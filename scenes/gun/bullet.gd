@@ -15,10 +15,12 @@ var speed := 0.0
 func _ready():
 	velocity += global_transform.x * speed
 
-func _physics_process(delta):
-	_collide()
+func _process(delta):
 	position += velocity * delta
+
+func _physics_process(delta):
 	ray.target_position.y = speed * delta + size
+	_collide()
 
 func start(lifetime: float):
 	timer.timeout.connect(_self_destroy)

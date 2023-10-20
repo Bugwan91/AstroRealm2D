@@ -3650,7 +3650,7 @@ autoplay = "galaxy_rotation"
 
 [node name="BlackHole" type="AnimatedSprite2D" parent="Galaxy"]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(3553, 2286)
+position = Vector2(2294, 431)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_dan38")
 animation = &"blackHole_rotation"
@@ -3676,7 +3676,7 @@ autoplay = "moon_rotation"
 
 [node name="Sun" type="AnimatedSprite2D" parent="Planets"]
 modulate = Color(1.7, 1.7, 1.5, 1)
-position = Vector2(2628, 413)
+position = Vector2(1301, 2124)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_prdtv")
 animation = &"sub_rotation"
@@ -3705,7 +3705,7 @@ animation = &"saturn_rotation"
 autoplay = "saturn_rotation"
 
 [node name="Jupiter" type="AnimatedSprite2D" parent="Planets"]
-position = Vector2(3302, 2818)
+position = Vector2(2396, 2629)
 scale = Vector2(2.2, 2.2)
 sprite_frames = SubResource("SpriteFrames_68ya0")
 animation = &"jupiter_rotation"
@@ -3713,7 +3713,7 @@ autoplay = "jupiter_rotation"
 
 [node name="Sirius" type="AnimatedSprite2D" parent="Planets"]
 modulate = Color(1, 2, 3, 1)
-position = Vector2(1893, 1996)
+position = Vector2(3478, 599)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_kplxm")
 autoplay = "default"

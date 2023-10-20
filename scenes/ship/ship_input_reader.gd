@@ -5,30 +5,37 @@ signal main_thruster(value: float)
 signal strafe(value: Vector2)
 signal rotate(value: float)
 signal pointer(value: Vector2)
-
-var _main_thruster: float = 0:
-	set(value):
-		if value != _main_thruster:
-			_main_thruster = value
-			main_thruster.emit(_main_thruster)
-var _strafe: Vector2 = Vector2.ZERO:
-	set(value):
-		if value != _strafe:
-			_strafe = value
-			strafe.emit(_strafe)
-var _rotate: float = 0:
-	set(value):
-		if value != _rotate:
-			_rotate = value
-			rotate.emit(_rotate)
-var _pointer: Vector2 = Vector2.ZERO:
-	set(value):
-		if value != _pointer:
-			_pointer = value
-			pointer.emit(_pointer)
+signal flight_assistant(value: bool)
+signal fa_follow(value: bool)
+signal fa_autopilot(value: bool)
+signal autopilot_speed(value: float)
+signal follow_distance(value: float)
+signal autopilot_target_point(value: Vector2)
+signal reset(value: bool)
 
 func _process(_delta):
-	_main_thruster = 1 if Input.is_action_pressed("throttle_main") else 0
-	_strafe = Vector2(Input.get_axis("manuever_back", "manuever_forward"), Input.get_axis("manuever_left", "manuever_right"))
-	_rotate = Input.get_axis("turn_left", "turn_right")
-	_pointer = get_global_mouse_position()
+	main_thruster.emit(1 if Input.is_action_pressed("throttle_main") else 0)
+	strafe.emit(Vector2(Input.get_axis("manuever_back", "manuever_forward"), Input.get_axis("manuever_left", "manuever_right")))
+	rotate.emit(Input.get_axis("turn_left", "turn_right"))
+	pointer.emit(get_global_mouse_position())
+
+func _unhandled_input(event):
+	if event.is_action_pressed("flight_assist"):
+		flight_assistant.emit(true)
+	if event.is_action_pressed("follow_target"):
+		fa_follow.emit(true)
+	if event.is_action_pressed("autopilot"):
+		fa_autopilot.emit(true)
+	if event.is_action_pressed("Reset"):
+		reset.emit(true)
+	if event.is_action_pressed("set_target"):
+		autopilot_target_point.emit(get_global_mouse_position())
+	if event.is_action_pressed("distance_up"):
+		follow_distance.emit(1.0)
+	if event.is_action_pressed("distance_down"):
+		follow_distance.emit(-1.0)
+	if event.is_action_pressed("autopilot_speed_up"):
+		autopilot_speed.emit(1.0)
+	if event.is_action_pressed("autopilot_speed_down"):
+		autopilot_speed.emit(-1.0)
+

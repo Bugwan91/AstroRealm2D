@@ -97,7 +97,7 @@ horizontal_alignment = 1
 [node name="Tracking" type="Label" parent="Control/MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Tracking"
+text = "Follow/Stop"
 label_settings = SubResource("LabelSettings_1il4g")
 horizontal_alignment = 1
 
