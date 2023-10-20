@@ -3,8 +3,8 @@ extends Camera2D
 
 @export var target: ShipRigidBody
 @export var inertia: float = 10.0
-@export var move_force: float = 10.0
-@export var moves_strenght: float = 4.0
+@export var acceleration_multiplyer: float = 10.0
+@export var moves_smoosnes: float = 0.25
 @export var zoom_min := 0.5
 @export var zoom_max := 4.0
 @export var zoom_speed := 0.1
@@ -35,7 +35,7 @@ func _process(_delta):
 	zoom = lerp(zoom, _target_zoom, .1)
 
 func _physics_process(_delta):
-	var acceleration = (_last_veocity - target.linear_velocity) * (Vector2.ONE * move_force / zoom)
+	var acceleration = (_last_veocity - target.linear_velocity) * (Vector2.ONE * acceleration_multiplyer / zoom)
 	_target_position = lerp(_target_position, _look_direction() + acceleration, _inverse_inertia * _delta)
 	_last_veocity = target.linear_velocity
 
@@ -46,4 +46,4 @@ func _init_zoom():
 	_target_zoom = zoom
 
 func _look_direction() -> Vector2:
-	return (get_global_mouse_position() - target.position) / moves_strenght
+	return (get_global_mouse_position() - target.extrapolated_position) * moves_smoosnes

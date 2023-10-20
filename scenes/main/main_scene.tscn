@@ -73,6 +73,8 @@ angular_velocity = 0.174533
 angular_damp_mode = 1
 script = ExtResource("5_hb2m2")
 radial_force = 10.0
+is_firing = true
+rotate_towards_player = true
 
 [node name="Gun" parent="DummyShip" node_paths=PackedStringArray("parent") instance=ExtResource("6_udm3s")]
 position = Vector2(4, 10)
@@ -120,6 +122,5 @@ _flight_assistant_error = 20.0
 zoom = Vector2(1, 1)
 target = NodePath("../Ship")
 inertia = 0.5
-moves_strenght = 3.0
 
 [connection signal="input_event" from="DummyShip/Area2D" to="DummyShip" method="_on_Area2D_input_event"]

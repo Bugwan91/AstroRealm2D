@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Astro2D"
+config/name="AstroRealm"
 run/main_scene="res://scenes/main/main_scene.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://icon.png"
+config/icon="res://ship.png"
 
 [autoload]
 

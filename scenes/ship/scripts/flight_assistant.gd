@@ -17,8 +17,8 @@ const ANGULAR_THRESHOLD = 0.01
 @onready var _main_state: MainState = get_node("/root/MainState")
 
 var target_body: RigidBody2D
-var autopilot_speed := 300.0
-var follow_distance := 300.0
+var autopilot_speed := 500.0
+var follow_distance := 500.0
 
 var _is_follow := false
 var _follow_error := 0.0
@@ -238,4 +238,5 @@ func _autopilot_speed_changed(value: float):
 	_main_state.fa_autopilot_speed = autopilot_speed
 
 func _autopilot_point_changed(value: Vector2):
-	_target_position = value
+	if enabled and _is_autopilot:
+		_target_position = value
