@@ -7,13 +7,12 @@
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_heu61")
 bullet_scene = ExtResource("2_gsief")
-fire_rate = 4.0
-range = 700.0
-bullet_speed = 700.0
+fire_rate = 40.0
+range = 3000.0
+bullet_speed = 4000.0
 
 [node name="ChargeTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-one_shot = true
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true

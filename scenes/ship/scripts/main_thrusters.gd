@@ -26,14 +26,14 @@ func apply_throttle(value: float):
 
 
 func apply_forces():
-	_body.apply_central_force(_force().rotated(_body.rotation))
+	_body.add_force(_force().rotated(_body.rotation))
 	_apply_drag()
 
 
 func _apply_drag():
-	var delta = _body.linear_velocity.length() - _velocity_limit
+	var delta = _body.real_velocity.length() - _velocity_limit
 	if delta > 0:
-		_body.apply_central_force(-delta * _body.linear_velocity.normalized())
+		_body.add_force(-delta * 10 * _body.real_velocity.normalized())
 
 
 func estimated_force() -> float:

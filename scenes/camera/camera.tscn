@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/camera/scripts/camera_controller.gd" id="1_gmqix"]
 
-[node name="Camera" type="Camera2D" node_paths=PackedStringArray("target")]
+[node name="Camera" type="Camera2D"]
 zoom = Vector2(2, 2)
 position_smoothing_speed = 10.0
 script = ExtResource("1_gmqix")
-target = NodePath("")
-inertia = 0.1

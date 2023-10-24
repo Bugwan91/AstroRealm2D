@@ -3,10 +3,8 @@
 [ext_resource type="Script" path="res://scenes/ship/scripts/battle_assistant.gd" id="1_0q78c"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="2_sk52j"]
 
-[node name="BattleAssistant" type="Node" node_paths=PackedStringArray("ship", "gun")]
+[node name="BattleAssistant" type="Node"]
 script = ExtResource("1_0q78c")
-ship = NodePath("")
-gun = NodePath("")
 
 [node name="Pointer" parent="." instance=ExtResource("2_sk52j")]
 unique_name_in_owner = true

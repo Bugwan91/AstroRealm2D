@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://dcjlidv1ftgrv"]
+[gd_scene load_steps=17 format=3 uid="uid://dcjlidv1ftgrv"]
 
 [ext_resource type="Script" path="res://scenes/gun/scripts/bullet_hit_effect.gd" id="1_27y4s"]
 [ext_resource type="AudioStream" uid="uid://cejv4j507tnti" path="res://assets/sounds/spacelord_hit2.wav" id="2_6t2pu"]
+[ext_resource type="Script" path="res://scenes/main/scripts/velocity_shifter.gd" id="3_u8joq"]
 
 [sub_resource type="Gradient" id="Gradient_idxxb"]
 offsets = PackedFloat32Array(0.563462, 1)
@@ -30,11 +31,9 @@ curve = SubResource("Curve_mqrkq")
 lifetime_randomness = 0.5
 particle_flag_disable_z = true
 spread = 180.0
-gravity = Vector3(0, 0, 0)
 initial_velocity_min = 50.0
 initial_velocity_max = 200.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(0, 0, 0)
 damping_min = 20.0
 damping_max = 20.0
 damping_curve = SubResource("CurveTexture_awq3e")
@@ -69,7 +68,7 @@ resource_name = "hit_light_animation"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:energy")
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -87,13 +86,26 @@ _data = {
 [node name="HitEffect" type="Node2D"]
 script = ExtResource("1_27y4s")
 
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.2
+one_shot = true
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_6t2pu")
+autoplay = true
+
+[node name="VelocityShifter" type="Node" parent="."]
+script = ExtResource("3_u8joq")
+
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(0, 2)
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_yvocr")
 texture = SubResource("GradientTexture2D_qdaip")
-lifetime = 0.2
+lifetime = 0.15
 explosiveness = 0.8
+fract_delta = false
 local_coords = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
@@ -103,17 +115,8 @@ energy = 5.6
 texture = SubResource("GradientTexture2D_e4582")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PointLight2D"]
-autoplay = "hit_light_animation"
-speed_scale = 5.0
 libraries = {
 "": SubResource("AnimationLibrary_bl632")
 }
-
-[node name="Timer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 0.2
-one_shot = true
-
-[node name="Sound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_6t2pu")
-autoplay = true
+autoplay = "hit_light_animation"
+speed_scale = 5.0

@@ -1,6 +1,5 @@
 extends HBoxContainer
 
-@onready var flight_assistant: Label = %FlightAssistant
 @onready var tracking: Label = %Tracking
 @onready var tracking_distance: Label = %TrackingDistance
 @onready var autopilot: Label = %Autopilot
@@ -9,14 +8,12 @@ extends HBoxContainer
 @onready var _main_state: MainState = get_node("/root/MainState")
 
 func _ready():
-	flight_assistant.visible = false
 	tracking.visible = false
 	autopilot.visible = false
 	tracking_distance.visible = false
 	autopilot_speed.visible = false
 
 func _process(_delta):
-	flight_assistant.visible = _main_state.fa_enabled
 	tracking.visible = _main_state.fa_tracking
 	autopilot.visible = _main_state.fa_autopilot
 	if _main_state.fa_tracking and _main_state.fa_tracking_distance > 0:

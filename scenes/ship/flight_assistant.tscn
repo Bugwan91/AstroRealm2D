@@ -1,16 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://t86wis3mvind"]
+[gd_scene load_steps=2 format=3 uid="uid://t86wis3mvind"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/flight_assistant.gd" id="1_7km3k"]
-[ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="2_basvo"]
 
-[node name="FlightAssistant" type="Node" node_paths=PackedStringArray("ship", "input_reader", "thrusters", "main_thrusters")]
+[node name="FlightAssistant" type="Node"]
 script = ExtResource("1_7km3k")
-ship = NodePath("")
-input_reader = NodePath("")
-thrusters = NodePath("")
-main_thrusters = NodePath("")
-
-[node name="PositionPointer" parent="." instance=ExtResource("2_basvo")]
-unique_name_in_owner = true
-in_range_color = Color(0, 1, 0, 0.784314)
-out_range_color = Color(0, 0.486275, 0, 0.784314)

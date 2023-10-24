@@ -1,6 +1,7 @@
 extends MultiMeshInstance2D
 
-@export var size: float = 2048
+@export var size: float = 4096
+@export var count: int = 100
 
 @onready var _mesh_instance = %Star
 
@@ -8,6 +9,7 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	rng.randomize()
+	multimesh.instance_count = count
 	_do_distribution()
 
 func _do_distribution():

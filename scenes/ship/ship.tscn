@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=15 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Texture2D" uid="uid://dpp12wrak050k" path="res://ship_emission.png" id="3_co5i1"]
@@ -6,11 +6,16 @@
 [ext_resource type="Texture2D" uid="uid://q026lhon6o0q" path="res://ship_base.png" id="7_ek0b1"]
 [ext_resource type="PackedScene" uid="uid://k6231xltcfhl" path="res://scenes/thruster/thruster.tscn" id="10_wlx63"]
 [ext_resource type="Script" path="res://scenes/thruster/scripts/thrusters.gd" id="11_hhoku"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/ship_selection_area.gd" id="12_bsixf"]
 [ext_resource type="PackedScene" uid="uid://t86wis3mvind" path="res://scenes/ship/flight_assistant.tscn" id="16_avemu"]
 [ext_resource type="PackedScene" uid="uid://bqiu3ng56ogjy" path="res://scenes/ship/battle_assistant.tscn" id="17_w8wag"]
 [ext_resource type="PackedScene" uid="uid://bxhk5f3ir05ad" path="res://scenes/thruster/maneuver_thruster.tscn" id="21_bnxwn"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/position_extrapolation.gd" id="25_1c55w"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/main_thrusters.gd" id="25_fgofk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e8eu5"]
+radius = 25.0
+height = 84.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8d03f"]
 shader = ExtResource("5_ipsoo")
@@ -18,18 +23,23 @@ shader_parameter/emission_texture = ExtResource("3_co5i1")
 
 [node name="Ship" type="RigidBody2D" node_paths=PackedStringArray("flight_assistant", "battle_assistant")]
 unique_name_in_owner = true
-collision_mask = 0
 script = ExtResource("1_5ckws")
-_main_thrust = 100.0
-_maneuver_thrust = 25.0
 flight_assistant = NodePath("FlightAssistant")
 battle_assistant = NodePath("BattleAssistant")
+
+[node name="AreaSelection" type="Area2D" parent="."]
+collision_mask = 0
+script = ExtResource("12_bsixf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaSelection"]
+position = Vector2(-4, 0)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_e8eu5")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-32, -16, -6, -16, 32, 0, -6, 16, -32, 16)
 
 [node name="FlightAssistant" parent="." node_paths=PackedStringArray("_thrusters", "_main_thrusters") instance=ExtResource("16_avemu")]
-unique_name_in_owner = true
 _thrusters = NodePath("../PositionExtrapolation/Thrusters")
 _main_thrusters = NodePath("../PositionExtrapolation/MainThrusters")
 

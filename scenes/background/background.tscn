@@ -1,8 +1,8 @@
-[gd_scene load_steps=526 format=3 uid="uid://de6wu3uauymsr"]
+[gd_scene load_steps=524 format=3 uid="uid://de6wu3uauymsr"]
 
+[ext_resource type="Script" path="res://scenes/background/scripts/background.gd" id="1_lpf5v"]
 [ext_resource type="Texture2D" uid="uid://knltwhe2pktm" path="res://assets/bg/Large 1024x1024/Blue Nebula/Blue_Nebula_02-1024x1024.png" id="1_obii5"]
-[ext_resource type="Texture2D" uid="uid://cwvtmyy8brm3w" path="res://assets/my/Star_01.png" id="2_4u2u4"]
-[ext_resource type="Script" path="res://scenes/background/scripts/starfield.gd" id="3_v5p6l"]
+[ext_resource type="PackedScene" uid="uid://cy12owbe3sx1j" path="res://scenes/background/starfield.tscn" id="2_eev5q"]
 [ext_resource type="Texture2D" uid="uid://bh1i0yj68tcep" path="res://assets/celestials/Galaxy_01.png" id="4_x10jg"]
 [ext_resource type="Texture2D" uid="uid://c73r1d4lkau07" path="res://assets/celestials/BlackHole.png" id="5_666a8"]
 [ext_resource type="Texture2D" uid="uid://btdv56pfp7yce" path="res://assets/celestials/Planets/Earth_01.png" id="6_blw1a"]
@@ -13,23 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://cm7t8eoexkqkv" path="res://assets/celestials/Planets/Saturn_01.png" id="11_d2ow1"]
 [ext_resource type="Texture2D" uid="uid://d2fwqgpoimuqh" path="res://assets/celestials/Planets/Jupiter_01.png" id="12_nyujt"]
 [ext_resource type="Texture2D" uid="uid://capgmm6hihaml" path="res://assets/celestials/Star_BW1.png" id="13_elbr2"]
-
-[sub_resource type="MultiMesh" id="MultiMesh_u8g2x"]
-instance_count = 50
-buffer = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_pwk55"]
-_surfaces = [{
-"2d": true,
-"aabb": AABB(-4, -4, 0, 8.00001, 8.00001, 0),
-"attribute_data": PackedByteArray(0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0),
-"format": 33558545,
-"index_count": 6,
-"index_data": PackedByteArray(3, 0, 0, 0, 1, 0, 1, 0, 2, 0, 3, 0),
-"primitive": 3,
-"vertex_count": 4,
-"vertex_data": PackedByteArray(0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 192)
-}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dtvot"]
 atlas = ExtResource("4_x10jg")
@@ -3612,45 +3595,54 @@ animations = [{
 }]
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
-scroll_ignore_camera_zoom = true
+follow_viewport_enabled = true
+script = ExtResource("1_lpf5v")
 
 [node name="Space" type="ParallaxLayer" parent="."]
 motion_scale = Vector2(0.01, 0.01)
-motion_mirroring = Vector2(4096, 4096)
+motion_mirroring = Vector2(8192, 8192)
 
 [node name="BG" type="Sprite2D" parent="Space"]
-scale = Vector2(4, 4)
+scale = Vector2(8, 8)
 texture = ExtResource("1_obii5")
-offset = Vector2(512, 512)
+
+[node name="Stars_2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.012, 0.012)
+motion_mirroring = Vector2(8192, 8192)
+
+[node name="Starfield" parent="Stars_2" instance=ExtResource("2_eev5q")]
+size = 8192.0
+count = 1000
 
 [node name="Stars_0" type="ParallaxLayer" parent="."]
 motion_scale = Vector2(0.015, 0.015)
-motion_mirroring = Vector2(4096, 4096)
+motion_mirroring = Vector2(8192, 8192)
 
-[node name="Starfield" type="MultiMeshInstance2D" parent="Stars_0"]
-multimesh = SubResource("MultiMesh_u8g2x")
-texture = ExtResource("2_4u2u4")
-script = ExtResource("3_v5p6l")
-size = 4096.0
+[node name="Starfield" parent="Stars_0" instance=ExtResource("2_eev5q")]
+size = 8192.0
+count = 1000
 
-[node name="Star" type="MeshInstance2D" parent="Stars_0/Starfield"]
-unique_name_in_owner = true
-mesh = SubResource("ArrayMesh_pwk55")
-texture = ExtResource("2_4u2u4")
+[node name="Stars_1" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.03, 0.03)
+motion_mirroring = Vector2(8192, 8192)
+
+[node name="Starfield" parent="Stars_1" instance=ExtResource("2_eev5q")]
+size = 8192.0
+count = 1000
 
 [node name="Galaxy" type="ParallaxLayer" parent="."]
 motion_scale = Vector2(0.02, 0.02)
-motion_mirroring = Vector2(4096, 4096)
+motion_mirroring = Vector2(8192, 8192)
 
 [node name="Galaxy" type="AnimatedSprite2D" parent="Galaxy"]
-position = Vector2(547, 253)
+position = Vector2(5951, -1973)
 sprite_frames = SubResource("SpriteFrames_blfry")
 animation = &"galaxy_rotation"
 autoplay = "galaxy_rotation"
 
 [node name="BlackHole" type="AnimatedSprite2D" parent="Galaxy"]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(2294, 431)
+position = Vector2(3283, 1192)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_dan38")
 animation = &"blackHole_rotation"
@@ -3658,7 +3650,7 @@ autoplay = "blackHole_rotation"
 
 [node name="Planets" type="ParallaxLayer" parent="."]
 motion_scale = Vector2(0.05, 0.05)
-motion_mirroring = Vector2(4096, 4096)
+motion_mirroring = Vector2(8192, 8192)
 
 [node name="Earth" type="AnimatedSprite2D" parent="Planets"]
 position = Vector2(1433, 949)
@@ -3676,28 +3668,28 @@ autoplay = "moon_rotation"
 
 [node name="Sun" type="AnimatedSprite2D" parent="Planets"]
 modulate = Color(1.7, 1.7, 1.5, 1)
-position = Vector2(1301, 2124)
+position = Vector2(-526, -292)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_prdtv")
 animation = &"sub_rotation"
 autoplay = "sub_rotation"
 
 [node name="Mars" type="AnimatedSprite2D" parent="Planets"]
-position = Vector2(405, 449)
+position = Vector2(-699, -1758)
 sprite_frames = SubResource("SpriteFrames_p0qbb")
 animation = &"mars_rotation"
 autoplay = "mars_rotation"
 
 [node name="Lava" type="AnimatedSprite2D" parent="Planets"]
 modulate = Color(1.5, 1, 1, 1)
-position = Vector2(905, 2954)
+position = Vector2(4482, -2221)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_ekrgb")
 animation = &"lava_rotation"
 autoplay = "lava_rotation"
 
 [node name="Saturn" type="AnimatedSprite2D" parent="Planets"]
-position = Vector2(455, 1793)
+position = Vector2(-1771, 2535)
 rotation = 3.3999
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_w7ya5")
@@ -3705,7 +3697,7 @@ animation = &"saturn_rotation"
 autoplay = "saturn_rotation"
 
 [node name="Jupiter" type="AnimatedSprite2D" parent="Planets"]
-position = Vector2(2396, 2629)
+position = Vector2(1426, 5255)
 scale = Vector2(2.2, 2.2)
 sprite_frames = SubResource("SpriteFrames_68ya0")
 animation = &"jupiter_rotation"
@@ -3713,7 +3705,7 @@ autoplay = "jupiter_rotation"
 
 [node name="Sirius" type="AnimatedSprite2D" parent="Planets"]
 modulate = Color(1, 2, 3, 1)
-position = Vector2(3478, 599)
+position = Vector2(8052, 3915)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_kplxm")
 autoplay = "default"

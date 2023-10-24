@@ -7,16 +7,17 @@ extends Node2D
 @export var hit_effect_scene: PackedScene
 @export var size := 8
 
-var velocity: Vector2 = Vector2.ZERO
+var linear_velocity: Vector2 = Vector2.ZERO
 
 var impulse := 0.0
 var speed := 0.0
 
 func _ready():
-	velocity += global_transform.x * speed
+	add_to_group("shiftable")
+	linear_velocity += transform.x * speed
 
 func _process(delta):
-	position += velocity * delta
+	position += linear_velocity * delta
 
 func _physics_process(delta):
 	ray.target_position.y = speed * delta + size
@@ -30,7 +31,10 @@ func _collide():
 	if ray.is_colliding():
 		var hit_effect = hit_effect_scene.instantiate() as BulletHitEffect
 		hit_effect.position = ray.get_collision_point()
-		hit_effect.velocity = velocity
+		var target = ray.get_collider()
+		if "linear_velocity" in target:
+			print(target.real_velocity)
+			hit_effect.linear_velocity = target.real_velocity
 		get_parent().add_child(hit_effect)
 		_self_destroy()
 

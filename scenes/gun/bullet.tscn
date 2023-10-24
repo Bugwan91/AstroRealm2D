@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwdthpisfmojs"]
+[gd_scene load_steps=7 format=3 uid="uid://dwdthpisfmojs"]
 
 [ext_resource type="Script" path="res://scenes/gun/scripts/bullet.gd" id="1_gtbct"]
 [ext_resource type="Texture2D" uid="uid://ck0awuodqj23r" path="res://assets/my/bullet_01.png" id="2_2wdn1"]
 [ext_resource type="PackedScene" uid="uid://dcjlidv1ftgrv" path="res://scenes/gun/hit_effect.tscn" id="2_m6c5x"]
+[ext_resource type="Script" path="res://scenes/main/scripts/velocity_shifter.gd" id="4_ud3i3"]
 
 [sub_resource type="Gradient" id="Gradient_2ebqb"]
 offsets = PackedFloat32Array(0.0962963, 0.788889)
@@ -35,3 +36,6 @@ rotation = 4.71239
 color = Color(0.415686, 0.686275, 1, 1)
 energy = 2.0
 texture = SubResource("GradientTexture2D_w7x75")
+
+[node name="VelocityShifter" type="Node" parent="."]
+script = ExtResource("4_ud3i3")

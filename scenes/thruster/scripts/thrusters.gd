@@ -14,15 +14,14 @@ func apply_strafe(value: Vector2):
 	for thruster in _thrusters:
 		thruster.apply_strafe(value)
 
-
 func apply_rotation(value: float):
 	for thruster in _thrusters:
 		thruster.apply_torque(value)
 
 
 func apply_forces():
-	owner.apply_central_force(_force().rotated(owner.rotation))
-	owner.apply_torque(_torque())
+	owner.add_force(_force().rotated(owner.rotation))
+	owner.add_torque(_torque())
 
 
 func _force() -> Vector2:
