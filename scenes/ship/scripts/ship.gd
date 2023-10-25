@@ -4,7 +4,6 @@ extends RigidBody2D
 @export var _texture: Texture2D
 @export var inputs: ShipInput
 @export var gun_scene: PackedScene
-@export_range(0, 10000) var max_speed := 250.0
 @export_range(0, 1000) var _main_thrust := 500.0
 @export_range(0, 500) var _maneuver_thrust := 200.0
 
@@ -12,11 +11,13 @@ extends RigidBody2D
 @export_range(0, 10) var _FA_accuracy_damp := 0.1
 @export_range(0, 1) var _BA_accuracy := 1.0
 @export_range(0, 10) var _BA_accuracy_damp := 0.1
-@export var flight_assistant: ShipFlightAssistant
-@export var autopilot_pointer: AssistantPointer
-@export var battle_assistant: BattleAssistant
-@export var target_prediction_pointer: AssistantPointer
 
+@export var autopilot_pointer: AssistantPointer
+@export var target_prediction_pointer: AssistantPointer
+@export var shoot_marker: AssistantPointer
+
+@onready var flight_assistant: ShipFlightAssistant = %FlightAssistant
+@onready var battle_assistant: BattleAssistant = %BattleAssistant
 @onready var extrapolator: PositionExtrapolation = %PositionExtrapolation
 @onready var thrusters: Thrusters = %Thrusters
 @onready var engines: MainThrusters = %MainThrusters
@@ -36,7 +37,7 @@ func _ready():
 		FloatingOrigin.target = self
 		MainState.player_ship = self
 	thrusters.setup(_maneuver_thrust)
-	engines.setup(_main_thrust, max_speed)
+	engines.setup(_main_thrust)
 	flight_assistant.setup()
 	flight_assistant.follow_accuracy = _FA_accuracy
 	flight_assistant.follow_accuracy_damp = _FA_accuracy_damp
@@ -46,7 +47,7 @@ func _ready():
 	battle_assistant.pointer_view = target_prediction_pointer
 	_view.texture = _texture
 	gun = gun_scene.instantiate()
-	gun.position_extrapolator = extrapolator
+	gun.marker = shoot_marker
 	gun.shoot_recoil.connect(_on_shoot_recoil)
 	battle_assistant.gun = gun
 	_gun_slot.add_child(gun)
@@ -58,19 +59,25 @@ func _ready():
 
 func _process(delta):
 	#DebugDraw2d.line_vector(extrapolator.smooth_position, linear_velocity, Color.LIGHT_SEA_GREEN)
-	_update_main_state(delta)
 	if inputs is PlayerShipInput:
 		MainState.add_debug_info("Origin delta", position)
 		MainState.add_debug_info("Origin vel delta", linear_velocity)
 
 func _physics_process(delta):
+	_update_main_state(delta)
 	gun.velocity = real_velocity
+
+var _mass_0 := 1.0
 
 func _integrate_forces(state):
 	if inputs is PlayerShipInput:
 		FloatingOrigin.update_state(state)
+		MainState.add_debug_info("mass", mass)
+		MainState.add_debug_info("speed", real_velocity.length())
+		MainState.add_debug_info("c", FloatingOrigin.c)
 	state.linear_velocity -= FloatingOrigin.velocity_delta
 	state.transform.origin -= FloatingOrigin.origin_delta
+	mass = _mass_0 / sqrt(1.0 - real_velocity.length() / FloatingOrigin.c)
 	flight_assistant.process(state)
 	_apply_forcces(state)
 
@@ -99,15 +106,11 @@ func _on_shoot_recoil(force: float):
 
 # TODO: Refactor
 # Data to main state (UI connection)
-var _previous_speed = 0
-var _time_delta = 0
+var _previous_v := Vector2.ZERO
 
 func _update_main_state(delta):
-	var speed = real_velocity.length()
+	var v = real_velocity
 	MainState.ship_position = position + FloatingOrigin.origin
-	MainState.ship_speed = speed
-	_time_delta += delta
-	if _time_delta >= 0.5:
-		MainState.ship_acceleration = (speed - _previous_speed) / 0.5
-		_time_delta = 0
-		_previous_speed = speed
+	MainState.ship_speed = v.length()
+	MainState.ship_acceleration = (v - _previous_v).length() / delta
+	_previous_v = v

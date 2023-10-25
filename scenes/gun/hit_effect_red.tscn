@@ -27,11 +27,9 @@ curve = SubResource("Curve_mqrkq")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8q3v8"]
 particle_flag_disable_z = true
 spread = 180.0
-gravity = Vector3(0, 0, 0)
 initial_velocity_min = 100.0
 initial_velocity_max = 200.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(0, 0, 0)
 damping_min = 9.162
 damping_max = 9.162
 damping_curve = SubResource("CurveTexture_awq3e")
@@ -42,8 +40,8 @@ turbulence_noise_scale = 1.79
 
 [node name="HitEffect" instance=ExtResource("1_pkpwy")]
 
-[node name="GPUParticles2D" parent="." index="0"]
+[node name="GPUParticles2D" parent="." index="3"]
 process_material = SubResource("ParticleProcessMaterial_8q3v8")
 
-[node name="PointLight2D" parent="." index="1"]
+[node name="PointLight2D" parent="." index="4"]
 color = Color(1, 0.2, 0, 1)

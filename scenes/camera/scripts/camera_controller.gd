@@ -37,7 +37,7 @@ func _process(delta):
 	_required_look_position = lerp(_required_look_position, new_look, 2 * delta)
 	position = target.extrapolator.smooth_position + _required_acceleration_position + _required_look_position
 	zoom = lerp(zoom, _target_zoom, 5 * delta)
-	MainState.add_debug_info("Zoom", zoom.x)
+	MainState.add_debug_info("Camera zoom", zoom.x)
 
 func _physics_process(delta):
 	var acceleration = (_last_veocity - target.real_velocity) * (Vector2.ONE * acceleration_multiplyer / zoom)

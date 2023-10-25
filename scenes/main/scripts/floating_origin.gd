@@ -1,5 +1,7 @@
 extends Node2D
 
+const c := 100000.0
+
 var enabled := true
 var target: ShipRigidBody
 
@@ -17,7 +19,6 @@ func update_state(state: PhysicsDirectBodyState2D):
 func _process(delta):
 	MainState.add_debug_info("origin", origin)
 	MainState.add_debug_info("origin velocity", velocity)
-	DebugDraw2d.line_vector(Vector2.ZERO, -origin, Color.REBECCA_PURPLE)
 	for node in get_tree().get_nodes_in_group("shiftable"):
 		node.position -= velocity * delta
 	

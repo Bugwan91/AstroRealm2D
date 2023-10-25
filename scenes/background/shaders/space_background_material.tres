@@ -1,0 +1,116 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://c282gyqimhled"]
+
+[sub_resource type="Shader" id="Shader_4q312"]
+code = "shader_type canvas_item;
+
+uniform float scale = 1.0;
+uniform float zoom = 1.0;
+uniform vec2 offset;
+uniform sampler2D mask_texture : repeat_enable;
+uniform sampler2D shift_texture : repeat_enable;
+
+void fragment() {
+	vec4 color = vec4(0.0);
+	float mult_base = 2.0;
+	float mult = mult_base;
+	int i = 1;
+	for (; i < 5; i += 1) {
+		vec2 shift_zoomed_uv = (UV - vec2(0.5, 0.5)) / (zoom * mult)  + vec2(0.5, 0.5);
+		vec2 shift_uv = shift_zoomed_uv + offset * scale / mult;
+		vec2 shift = texture(shift_texture, shift_uv).rg;
+		vec4 base = texture(TEXTURE, shift);
+		vec4 mask = texture(mask_texture, shift);
+		color = mix(color, mask * base, 0.5);
+		mult *= mult_base;
+	}
+	vec2 zoomed_uv = (UV - vec2(0.5, 0.5)) / zoom  + vec2(0.5, 0.5);
+	vec2 mask_uv = zoomed_uv + offset * scale;
+	//color = pow(color, vec4(1.0) / float(i));
+	COLOR = color;// * texture(mask_texture, mask_uv) * texture(TEXTURE, color.rg);
+		//mult *= mult;
+		//mask_zoomed_uv = (UV - vec2(0.5, 0.5)) / (zoom * mult)  + vec2(0.5, 0.5);
+		//mask_uv = mask_zoomed_uv + offset * scale / mult;
+		//mask = texture(mask_texture, mask_uv, 0.0).r;
+		//a = a + pow(mask + 0.5, 2.0) - 0.5;
+	//};
+	
+	
+	//vec2 zoomed_uv = (UV - vec2(0.5, 0.5)) / zoom + vec2(0.5, 0.5);
+    //vec2 offset_uv = zoomed_uv + offset * scale;
+	//vec4 base = texture(TEXTURE, offset_uv);
+	//vec4 mask = texture(mask_texture, offset_uv);
+	//base = base * mask * mask;
+	
+}
+
+
+
+//shader_type canvas_item;
+//
+//uniform float scale = 1.0;
+//uniform float zoom = 1.0;
+//uniform vec2 offset;
+//uniform sampler2D mask_texture : repeat_enable;
+//
+//void fragment() {
+	//vec2 zoomed_uv = (UV - vec2(0.5, 0.5)) / zoom + vec2(0.5, 0.5);
+    //vec2 offset_uv = zoomed_uv + offset * scale;
+	//vec4 main = texture(TEXTURE, offset_uv);
+	//vec2 mask_zoomed_uv;
+	//vec2 mask_uv;
+	//float mask;
+	//float a = main.a;
+	//float mult = 2.0;
+	//int i = 1;
+	//for (; i < 8; i += 1) {
+		//mult *= mult;
+		//mask_zoomed_uv = (UV - vec2(0.5, 0.5)) / (zoom * mult)  + vec2(0.5, 0.5);
+		//mask_uv = mask_zoomed_uv + offset * scale / mult;
+		//mask = texture(mask_texture, mask_uv, 0.0).r;
+		//a = a + pow(mask + 0.5, 2.0) - 0.5;
+	//};
+	//a = pow(a / 8.0, 8.0);
+	//main.a = a;
+	//COLOR = main;
+//}
+//
+//
+//
+"
+metadata/_edit_res_path = "res://scenes/background/shaders/space_background.gdshader"
+
+[sub_resource type="Gradient" id="Gradient_1h3qr"]
+offsets = PackedFloat32Array(0.350775, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6auvo"]
+noise_type = 3
+seed = 1
+frequency = 0.005
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7opl0"]
+width = 1024
+height = 1024
+seamless = true
+color_ramp = SubResource("Gradient_1h3qr")
+noise = SubResource("FastNoiseLite_6auvo")
+
+[sub_resource type="Gradient" id="Gradient_go0i7"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mfsy2"]
+noise_type = 3
+seed = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x5m03"]
+seamless = true
+color_ramp = SubResource("Gradient_go0i7")
+noise = SubResource("FastNoiseLite_mfsy2")
+
+[resource]
+shader = SubResource("Shader_4q312")
+shader_parameter/scale = 1.0
+shader_parameter/zoom = 1.0
+shader_parameter/offset = null
+shader_parameter/mask_texture = SubResource("NoiseTexture2D_7opl0")
+shader_parameter/shift_texture = SubResource("NoiseTexture2D_x5m03")

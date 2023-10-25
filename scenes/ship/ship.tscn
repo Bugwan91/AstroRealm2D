@@ -21,11 +21,9 @@ height = 84.0
 shader = ExtResource("5_ipsoo")
 shader_parameter/emission_texture = ExtResource("3_co5i1")
 
-[node name="Ship" type="RigidBody2D" node_paths=PackedStringArray("flight_assistant", "battle_assistant")]
+[node name="Ship" type="RigidBody2D"]
 unique_name_in_owner = true
 script = ExtResource("1_5ckws")
-flight_assistant = NodePath("FlightAssistant")
-battle_assistant = NodePath("BattleAssistant")
 
 [node name="AreaSelection" type="Area2D" parent="."]
 collision_mask = 0
@@ -40,6 +38,7 @@ shape = SubResource("CapsuleShape2D_e8eu5")
 polygon = PackedVector2Array(-32, -16, -6, -16, 32, 0, -6, 16, -32, 16)
 
 [node name="FlightAssistant" parent="." node_paths=PackedStringArray("_thrusters", "_main_thrusters") instance=ExtResource("16_avemu")]
+unique_name_in_owner = true
 _thrusters = NodePath("../PositionExtrapolation/Thrusters")
 _main_thrusters = NodePath("../PositionExtrapolation/MainThrusters")
 
@@ -100,4 +99,4 @@ position = Vector2(-32, -5.48045e-05)
 
 [node name="GunSlot" type="Marker2D" parent="PositionExtrapolation"]
 unique_name_in_owner = true
-position = Vector2(30, 0)
+position = Vector2(35, 0)

@@ -1,13 +1,15 @@
 extends Sprite2D
 
-@export_range(0, 1) var opacity := 0.5
+@export_range(0, 1) var base_opacity := 0.5
 @export var grid_offset: Vector2
 @export var grid_scale := 1.0
+@export var speed_limit := 10000.0
 @export var camera: Camera2D
 @export var target: ShipRigidBody
 
 @onready var subgrid = %Subgrid
 
+var opacity: float
 var _inverted_scale: Vector2
 var _start_scale: Vector2
 var _start_grid_scale: float
@@ -15,7 +17,7 @@ var _start_grid_scale: float
 func _ready():
 	_start_scale = scale
 	_start_grid_scale = grid_scale
-	update_opacity(opacity)
+	update_opacity(base_opacity)
 	update_scale(grid_scale)
 	update_offset(grid_offset)
 
@@ -24,6 +26,7 @@ func _process(_delta):
 	scale = _start_scale / camera.zoom
 	update_offset((position + FloatingOrigin.origin) / (texture.get_size() * grid_scale))
 	update_scale(grid_scale)
+	update_opacity(base_opacity * clamp((speed_limit - target.real_velocity.length()) / speed_limit, 0, 1))
 
 func update_opacity(value: float = 0.0):
 	opacity = value

@@ -6,6 +6,7 @@
 [node name="Gun" instance=ExtResource("1_pvaki")]
 bullet_scene = ExtResource("2_plobu")
 fire_rate = 10.0
+overheat = 1.0
 
 [node name="Sound" parent="." index="1"]
-volume_db = -10.0
+volume_db = -25.0

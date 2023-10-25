@@ -23,3 +23,4 @@ func _physics_process(delta):
 	else:
 		ship.flight_assistant.is_autopilot = true
 		autopilot_target_point.emit(ship.position + FloatingOrigin.origin + target_position)
+	strafe.emit(0, 0.5)

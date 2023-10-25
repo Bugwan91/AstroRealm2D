@@ -5,7 +5,6 @@ extends Node2D
 @onready var ray: RayCast2D = %RayCast2D
 
 @export var hit_effect_scene: PackedScene
-@export var size := 8
 
 var linear_velocity: Vector2 = Vector2.ZERO
 
@@ -20,7 +19,7 @@ func _process(delta):
 	position += linear_velocity * delta
 
 func _physics_process(delta):
-	ray.target_position.y = speed * delta + size
+	ray.target_position.y = speed * delta
 	_collide()
 
 func start(lifetime: float):
@@ -33,7 +32,6 @@ func _collide():
 		hit_effect.position = ray.get_collision_point()
 		var target = ray.get_collider()
 		if "linear_velocity" in target:
-			print(target.real_velocity)
 			hit_effect.linear_velocity = target.real_velocity
 		get_parent().add_child(hit_effect)
 		_self_destroy()

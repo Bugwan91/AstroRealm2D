@@ -58,7 +58,7 @@ func auto_aim():
 
 
 func auto_shoot():
-	if not is_auto_shoot: return 
+	if not is_auto_shoot: return
 	if is_instance_valid(target)\
 			and abs(ship.transform.x.angle_to(shoot_point)) < 1\
 			and shoot_point.length() < gun.range + _get_delta_v().project(ship.transform.x).length():

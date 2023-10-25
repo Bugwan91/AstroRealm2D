@@ -13,8 +13,8 @@ const ANGULAR_THRESHOLD = 0.01
 @export var autopilot_pointer_view: AssistantPointer
 
 var target_body: RigidBody2D
-var autopilot_speed := 10000.0
-var follow_distance := 250.0
+var autopilot_speed := 100000.0
+var follow_distance := 1000.0
 var direction := Vector2.ZERO
 var ignore_direction_update := false
 var is_follow := false

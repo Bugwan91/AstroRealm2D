@@ -44,7 +44,6 @@ material = SubResource("ShaderMaterial_bgrib")
 scale = Vector2(20, 20)
 texture = ExtResource("2_t5ss0")
 script = ExtResource("3_w55vd")
-opacity = 0.05
 grid_scale = 5.0
 
 [node name="Subgrid" type="Sprite2D" parent="."]

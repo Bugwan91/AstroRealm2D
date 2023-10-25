@@ -1,10 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqiu3ng56ogjy"]
+[gd_scene load_steps=2 format=3 uid="uid://bqiu3ng56ogjy"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/battle_assistant.gd" id="1_0q78c"]
-[ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="2_sk52j"]
 
 [node name="BattleAssistant" type="Node"]
 script = ExtResource("1_0q78c")
-
-[node name="Pointer" parent="." instance=ExtResource("2_sk52j")]
-unique_name_in_owner = true
