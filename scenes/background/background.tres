@@ -1,14 +1,42 @@
-[gd_resource type="NoiseTexture2D" load_steps=3 format=3 uid="uid://dmiug4j6lc0ey"]
+[gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://dmiug4j6lc0ey"]
 
-[sub_resource type="Gradient" id="Gradient_ckuod"]
-colors = PackedColorArray(0, 0.51, 0.75, 0, 0, 0.51, 0.75, 0.1)
+[ext_resource type="Shader" path="res://scenes/background/shaders/space_background.gdshader" id="1_nnlbi"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_5kgn3"]
-noise_type = 4
-seed = 12
-frequency = 0.002
+[sub_resource type="Gradient" id="Gradient_k3mub"]
+offsets = PackedFloat32Array(0.224806, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_x3d8j"]
+noise_type = 3
+seed = 2
+frequency = 0.005
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_82ana"]
+seamless = true
+color_ramp = SubResource("Gradient_k3mub")
+noise = SubResource("FastNoiseLite_x3d8j")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4n6f4"]
+noise_type = 3
+seed = 51623
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ovbpg"]
+seamless = true
+noise = SubResource("FastNoiseLite_4n6f4")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bptoh"]
+noise_type = 3
+seed = 98179783
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xnb55"]
+seamless = true
+noise = SubResource("FastNoiseLite_bptoh")
 
 [resource]
-seamless = true
-color_ramp = SubResource("Gradient_ckuod")
-noise = SubResource("FastNoiseLite_5kgn3")
+shader = ExtResource("1_nnlbi")
+shader_parameter/scale = 1.0
+shader_parameter/zoom = 1.0
+shader_parameter/offset = null
+shader_parameter/mask_texture = SubResource("NoiseTexture2D_82ana")
+shader_parameter/shift_texture_x = SubResource("NoiseTexture2D_ovbpg")
+shader_parameter/shift_texture_y = SubResource("NoiseTexture2D_xnb55")

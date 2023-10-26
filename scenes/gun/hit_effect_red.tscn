@@ -45,3 +45,4 @@ process_material = SubResource("ParticleProcessMaterial_8q3v8")
 
 [node name="PointLight2D" parent="." index="4"]
 color = Color(1, 0.2, 0, 1)
+energy = 1.0
