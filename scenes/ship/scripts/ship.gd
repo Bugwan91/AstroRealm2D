@@ -70,16 +70,21 @@ func _physics_process(delta):
 var _mass_0 := 1.0
 
 func _integrate_forces(state):
+	var full_velocity: Vector2 = state.linear_velocity + FloatingOrigin.velocity
+	if full_velocity.length() >= FloatingOrigin.c:
+		full_velocity = FloatingOrigin.c * 0.999999 * full_velocity.normalized()
+		state.linear_velocity = full_velocity - FloatingOrigin.velocity
 	if inputs is PlayerShipInput:
 		FloatingOrigin.update_state(state)
-		MainState.add_debug_info("mass", mass)
-		MainState.add_debug_info("speed", real_velocity.length())
-		MainState.add_debug_info("c", FloatingOrigin.c)
 	state.linear_velocity -= FloatingOrigin.velocity_delta
 	state.transform.origin -= FloatingOrigin.origin_delta
-	mass = _mass_0 / sqrt(1.0 - real_velocity.length() / FloatingOrigin.c)
+	mass = _mass_0 / sqrt(1.0 - full_velocity.length() / FloatingOrigin.c)
 	flight_assistant.process(state)
 	_apply_forcces(state)
+	if inputs is PlayerShipInput:
+		MainState.add_debug_info("m", mass)
+		MainState.add_debug_info("v", full_velocity.length() / FloatingOrigin.c)
+		MainState.add_debug_info("c", FloatingOrigin.c)
 
 
 func set_target(target: RigidBody2D):

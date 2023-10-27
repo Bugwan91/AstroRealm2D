@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://dwdthpisfmojs"]
+[gd_scene load_steps=13 format=3 uid="uid://dwdthpisfmojs"]
 
 [ext_resource type="Script" path="res://scenes/gun/scripts/bullet.gd" id="1_gtbct"]
-[ext_resource type="Texture2D" uid="uid://ck0awuodqj23r" path="res://assets/my/bullet_01.png" id="2_2wdn1"]
 [ext_resource type="PackedScene" uid="uid://dcjlidv1ftgrv" path="res://scenes/gun/hit_effect.tscn" id="2_m6c5x"]
 [ext_resource type="Script" path="res://scenes/main/scripts/velocity_shifter.gd" id="4_ud3i3"]
 
@@ -14,20 +13,20 @@ gradient = SubResource("Gradient_2ebqb")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="Gradient" id="Gradient_5n30p"]
+[sub_resource type="Gradient" id="Gradient_gn42t"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_s7bii"]
-gradient = SubResource("Gradient_5n30p")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vkco0"]
+gradient = SubResource("Gradient_gn42t")
 
-[sub_resource type="Curve" id="Curve_pifgi"]
+[sub_resource type="Curve" id="Curve_vehie"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.697359), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_s03q0"]
-curve = SubResource("Curve_pifgi")
+[sub_resource type="CurveTexture" id="CurveTexture_73os7"]
+curve = SubResource("Curve_vehie")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m0ced"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a13dy"]
 particle_flag_disable_z = true
 direction = Vector3(-1, 0, 0)
 spread = 0.0
@@ -36,8 +35,8 @@ initial_velocity_max = 500.0
 gravity = Vector3(0, 0, 0)
 scale_min = 2.0
 scale_max = 2.0
-scale_curve = SubResource("CurveTexture_s03q0")
-color_ramp = SubResource("GradientTexture1D_s7bii")
+scale_curve = SubResource("CurveTexture_73os7")
+color_ramp = SubResource("GradientTexture1D_vkco0")
 
 [sub_resource type="Gradient" id="Gradient_0vyck"]
 colors = PackedColorArray(0, 1, 2, 1, 0, 1, 2, 0)
@@ -54,12 +53,6 @@ fill_from = Vector2(0.5, 0.5)
 script = ExtResource("1_gtbct")
 hit_effect_scene = ExtResource("2_m6c5x")
 
-[node name="View" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(0.2, 0.8, 2, 1)
-rotation = 1.5708
-texture = ExtResource("2_2wdn1")
-
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
@@ -69,17 +62,17 @@ unique_name_in_owner = true
 rotation = 4.71239
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 color = Color(0.415686, 0.686275, 1, 1)
-energy = 2.0
 texture = SubResource("GradientTexture2D_w7x75")
 
 [node name="VelocityShifter" type="Node" parent="."]
 script = ExtResource("4_ud3i3")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(8, 0)
+position = Vector2(2, 0)
 amount = 64
-process_material = SubResource("ParticleProcessMaterial_m0ced")
+process_material = SubResource("ParticleProcessMaterial_a13dy")
 texture = SubResource("GradientTexture2D_ndkmm")
 lifetime = 0.2
 preprocess = 0.05

@@ -15,5 +15,5 @@ func _ready():
 func _process(_delta):
 	var shift = _camera.position + FloatingOrigin.origin
 	for layer in _layers:
-		layer.shift(shift, _camera.zoom.x)
+		layer.shift(shift, _camera.zoom)
 

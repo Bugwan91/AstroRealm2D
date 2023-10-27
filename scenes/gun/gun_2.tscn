@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlwjeo7xvcgky"]
+
+[ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="1_cxanw"]
+
+[node name="Gun" instance=ExtResource("1_cxanw")]
+fire_rate = 5.0
+overheat = 3.0

@@ -3,23 +3,16 @@
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
 [ext_resource type="PackedScene" uid="uid://ce1dw618jykrb" path="res://scenes/ship/ship.tscn" id="4_5rllk"]
 [ext_resource type="PackedScene" uid="uid://csufvxpfo8jbl" path="res://scenes/navigation_grid/grid.tscn" id="4_aip35"]
+[ext_resource type="Environment" uid="uid://chl1sjnqh1sa7" path="res://scenes/main/main_environment.tres" id="4_h5iwh"]
 [ext_resource type="Texture2D" uid="uid://q026lhon6o0q" path="res://ship_base.png" id="7_17mci"]
 [ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="8_cwv63"]
-[ext_resource type="PackedScene" uid="uid://bo1excw82m47m" path="res://scenes/gun/gun_red.tscn" id="8_l32sw"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://scenes/ui/ui.tscn" id="8_myah8"]
 [ext_resource type="Texture2D" uid="uid://dp224au4ijms3" path="res://ship.png" id="9_eiq6r"]
 [ext_resource type="Script" path="res://scenes/ai/scripts/ship_input.gd" id="9_nd6tp"]
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
+[ext_resource type="PackedScene" uid="uid://dlwjeo7xvcgky" path="res://scenes/gun/gun_2.tscn" id="12_b3y3v"]
 [ext_resource type="PackedScene" uid="uid://dt7wav32bva3j" path="res://scenes/player/input_reader.tscn" id="13_epig2"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="15_5xucn"]
-
-[sub_resource type="Environment" id="Environment_1ojvs"]
-background_mode = 3
-tonemap_mode = 2
-glow_enabled = true
-glow_normalized = true
-glow_strength = 0.8
-glow_blend_mode = 0
 
 [node name="Main" type="Node2D"]
 
@@ -32,7 +25,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_1ojvs")
+environment = ExtResource("4_h5iwh")
 
 [node name="Grid" parent="." node_paths=PackedStringArray("camera", "target") instance=ExtResource("4_aip35")]
 base_opacity = 0.1
@@ -43,7 +36,7 @@ target = NodePath("../Ship")
 [node name="Camera" parent="." node_paths=PackedStringArray("target") groups=["shiftable"] instance=ExtResource("11_2fp23")]
 target = NodePath("../Ship")
 
-[node name="Ship" parent="." node_paths=PackedStringArray("inputs", "autopilot_pointer", "target_prediction_pointer", "shoot_marker") groups=["player"] instance=ExtResource("4_5rllk")]
+[node name="Ship" parent="." node_paths=PackedStringArray("inputs", "autopilot_pointer") groups=["player"] instance=ExtResource("4_5rllk")]
 _texture = ExtResource("9_eiq6r")
 inputs = NodePath("../InputReader")
 gun_scene = ExtResource("8_cwv63")
@@ -52,8 +45,6 @@ _maneuver_thrust = 300.0
 _FA_accuracy = 0.9
 _FA_accuracy_damp = 0.16
 autopilot_pointer = NodePath("AutopilotPointer")
-target_prediction_pointer = NodePath("TargetPointer")
-shoot_marker = NodePath("ShootPointer")
 
 [node name="AutopilotPointer" parent="Ship" instance=ExtResource("15_5xucn")]
 in_range_color = Color(0, 0, 1, 0.78)
@@ -68,7 +59,7 @@ out_range_color = Color(0.486275, 0.486275, 0, 0.784314)
 [node name="ShipEnemy" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_5rllk")]
 _texture = ExtResource("7_17mci")
 inputs = NodePath("AIShipInput")
-gun_scene = ExtResource("8_l32sw")
+gun_scene = ExtResource("12_b3y3v")
 _main_thrust = 1000.0
 _maneuver_thrust = 500.0
 _FA_accuracy = 0.9

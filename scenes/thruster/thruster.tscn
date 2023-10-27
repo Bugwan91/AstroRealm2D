@@ -6,8 +6,8 @@
 [ext_resource type="AudioStream" uid="uid://xn71bm7xult" path="res://assets/sounds/thruster_loop.wav" id="5_raf0x"]
 
 [sub_resource type="Gradient" id="Gradient_direw"]
-offsets = PackedFloat32Array(0, 0.307692, 0.571154, 1)
-colors = PackedColorArray(2, 2, 0.4, 1, 2, 1, 0, 1, 2, 0.501961, 0, 0.784314, 1, 0.196078, 0, 0)
+offsets = PackedFloat32Array(0, 0.286041, 0.571154, 1)
+colors = PackedColorArray(1.1, 1.1, 0.4, 1, 1, 0.8, 0, 1, 1, 0.5, 0, 0.78, 1, 0.196078, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ulhdr"]
 gradient = SubResource("Gradient_direw")
