@@ -30,16 +30,8 @@ void fragment() {
 		mult *= mult_base;
 	}
 	vec4 base = texture(TEXTURE, base_uv + shift_total);
-	vec4 mix_color = texture(mix_texture, base_uv + shift_mix);
-	vec4 mask = texture(mask_texture, base_uv);
-	mask = texture(mask_texture, base_uv + (shift_total));
-	vec4 final = mix(base, mix_color, 0.5) * mask;
-	//final.a *= mask.a;
-	//final.a *= 2.0;
-	//final.a = pow(final.a, 2.0);
+	vec4 mix_color = texture(mix_texture, 1.0 - (base_uv + shift_mix));
+	vec4 final = mix(base, mix_color, 0.5) * texture(mask_texture, base_uv + shift_total);
 	final = smoothstep(0.0, 1.0, final);
-	final.a = smoothstep(0.0, 1.0, final.a);
-	
-	final = vec4(final.rgb + final.rgb * glow, final.a);
-	COLOR = final;
+	COLOR = vec4(final.rgb + final.rgb * glow, smoothstep(0.0, 1.0, final.a));
 }
