@@ -8,6 +8,8 @@
 
 config_version=5
 
+show_default_buttons=false
+
 [application]
 
 config/name="AstroRealm"
@@ -31,6 +33,10 @@ mouse_cursor/custom_image_hotspot=Vector2(16, 16)
 [dotnet]
 
 project/assembly_name="Astro2D"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/tool_button/plugin.cfg")
 
 [input]
 

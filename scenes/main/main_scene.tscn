@@ -36,7 +36,7 @@ target = NodePath("../Ship")
 [node name="Camera" parent="." node_paths=PackedStringArray("target") groups=["shiftable"] instance=ExtResource("11_2fp23")]
 target = NodePath("../Ship")
 
-[node name="Ship" parent="." node_paths=PackedStringArray("inputs", "autopilot_pointer") groups=["player"] instance=ExtResource("4_5rllk")]
+[node name="Ship" parent="." node_paths=PackedStringArray("inputs", "autopilot_pointer", "shoot_marker") groups=["player"] instance=ExtResource("4_5rllk")]
 _texture = ExtResource("9_eiq6r")
 inputs = NodePath("../InputReader")
 gun_scene = ExtResource("8_cwv63")
@@ -45,6 +45,7 @@ _maneuver_thrust = 300.0
 _FA_accuracy = 0.9
 _FA_accuracy_damp = 0.16
 autopilot_pointer = NodePath("AutopilotPointer")
+shoot_marker = NodePath("ShootPointer")
 
 [node name="AutopilotPointer" parent="Ship" instance=ExtResource("15_5xucn")]
 in_range_color = Color(0, 0, 1, 0.78)

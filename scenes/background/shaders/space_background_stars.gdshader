@@ -47,8 +47,6 @@ void fragment() {
 	float temperature = texture(temperature_mask, base_uv).r;
 	color = getStarColor(temperature) * intensity;
 	color += color * glow * 2.0 / (zoom_factor.x + zoom_factor.y);
-	if (intensity > 0.0) {
-		color.a = 1.0;
-	}
+	color.a = intensity;
 	COLOR = color;
 }
