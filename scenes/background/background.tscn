@@ -516,7 +516,7 @@ noise = SubResource("FastNoiseLite_ylvbq")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_875ma"]
 shader = ExtResource("3_pr640")
-shader_parameter/glow = 0.0
+shader_parameter/glow = 0.5
 shader_parameter/scale = 1.0
 shader_parameter/vp_size = Vector2(1, 1)
 shader_parameter/zoom = Vector2(1, 1)
@@ -667,6 +667,7 @@ script = ExtResource("1_48uix")
 shift_scale = 0.1
 
 [node name="BackgroundSprite" type="Sprite2D" parent="Layers/L4"]
+visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_t844t")
 texture = SubResource("NoiseTexture2D_a673f")
@@ -677,6 +678,7 @@ script = ExtResource("1_48uix")
 shift_scale = 0.5
 
 [node name="BackgroundSprite" type="Sprite2D" parent="Layers/L5"]
+visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_x5hqi")
 texture = SubResource("NoiseTexture2D_62w84")
@@ -686,6 +688,7 @@ script = ExtResource("3_u112l")
 script = ExtResource("1_48uix")
 
 [node name="BackgroundSprite" type="Sprite2D" parent="Layers/L6"]
+visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_875ma")
 texture = SubResource("NoiseTexture2D_4uw8y")

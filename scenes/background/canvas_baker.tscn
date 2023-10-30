@@ -1,50 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://be8uuh84h5m7r"]
+[gd_scene load_steps=2 format=3 uid="uid://be8uuh84h5m7r"]
 
 [ext_resource type="Script" path="res://scenes/background/scripts/canvas_baker.gd" id="1_yepog"]
-[ext_resource type="Shader" path="res://scenes/background/shaders/space_background_stars.gdshader" id="2_52ven"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3tigu"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_fu21h"]
-noise_type = 5
-seed = 456746
-frequency = 1.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hc5yt"]
-width = 4096
-height = 4096
-noise = SubResource("FastNoiseLite_fu21h")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_w70pe"]
-noise_type = 5
-seed = 67986789
-frequency = 0.2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g8vgq"]
-width = 2048
-height = 2048
-noise = SubResource("FastNoiseLite_w70pe")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lbb5h"]
-shader = ExtResource("2_52ven")
-shader_parameter/glow = 0.0
-shader_parameter/density = 0.45
-shader_parameter/scale = 1.0
-shader_parameter/vp_size = Vector2(1, 1)
-shader_parameter/zoom = Vector2(1, 1)
-shader_parameter/offset = null
-shader_parameter/mask_texture = SubResource("NoiseTexture2D_hc5yt")
-shader_parameter/temperature_mask = SubResource("NoiseTexture2D_g8vgq")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_yxtx3"]
-noise_type = 5
-seed = 23452345
-frequency = 1.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4fy35"]
-width = 4096
-height = 4096
-noise = SubResource("FastNoiseLite_yxtx3")
 
 [node name="CanvasBaker" type="Control"]
 layout_mode = 3
@@ -72,15 +28,3 @@ script = ExtResource("1_yepog")
 filename = "stars_045"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport"]
-
-[node name="Back" type="Sprite2D" parent="SubViewportContainer/SubViewport/CanvasLayer"]
-visible = false
-modulate = Color(0, 0, 0, 1)
-position = Vector2(2048, 2048)
-scale = Vector2(4096, 4096)
-texture = SubResource("PlaceholderTexture2D_3tigu")
-
-[node name="Stars" type="Sprite2D" parent="SubViewportContainer/SubViewport/CanvasLayer"]
-material = SubResource("ShaderMaterial_lbb5h")
-position = Vector2(2048, 2048)
-texture = SubResource("NoiseTexture2D_4fy35")

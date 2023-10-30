@@ -23,7 +23,7 @@ var _is_firing := false
 var _is_charging := false
 var _is_reloading := false
 var _firing_time := 0.0
-var _rel_effect: float
+#var _rel_effect: float
 
 func _ready():
 	_charge_timer.wait_time = 1.0 / fire_rate
@@ -34,9 +34,9 @@ func _ready():
 func _process(delta):
 	_update_marker()
 	_shoot(delta)
-	_rel_effect = sqrt(1.0 - velocity.length() / FloatingOrigin.c)
-	_charge_timer.wait_time = 1.0 / (fire_rate * _rel_effect)
-	reloading_timer.wait_time = reload_time / _rel_effect
+	#_rel_effect = sqrt(1.0 - velocity.length() / FloatingOrigin.c)
+	#_charge_timer.wait_time = 1.0 / (fire_rate * _rel_effect)
+	#reloading_timer.wait_time = reload_time / _rel_effect
 
 func connect_inputs(inputs: ShipInput):
 	inputs.fire.connect(_on_fire_input)
@@ -69,7 +69,7 @@ func _spawn_bullet():
 	bullet.rotation = global_rotation
 	bullet.linear_velocity = velocity
 	bullet.impulse = recoil
-	bullet.speed = bullet_speed * _rel_effect
+	bullet.speed = bullet_speed# * _rel_effect
 	_world_node.add_child(bullet)
 	bullet.start(range / bullet.speed)
 

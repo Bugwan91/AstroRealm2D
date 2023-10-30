@@ -20,15 +20,15 @@ void fragment() {
 	float mult = mult_base;
 	vec2 shift_total = vec2(0.0);
 	vec2 shift_mix = vec2(1.0);
-	int i = 1;
-	for (; i <= 2; i += 1) {
-		vec2 shift_zoomed_uv = (UV - vec2(0.5, 0.5)) * vp_size / (zoom_factor * mult)  + vec2(0.5, 0.5);
-		vec2 shift_uv = shift_zoomed_uv + scale * offset / mult;
-		vec2 shift = vec2(texture(shift_texture_x, shift_uv).r, texture(shift_texture_y, shift_uv).r);
-		shift_total += (shift - 0.5);
-		shift_mix *= shift;
-		mult *= mult_base;
-	}
+	//int i = 1;
+	//for (; i <= 1; i += 1) {
+	vec2 shift_zoomed_uv = (UV - vec2(0.5, 0.5)) * vp_size / (zoom_factor * mult)  + vec2(0.5, 0.5);
+	vec2 shift_uv = shift_zoomed_uv + scale * offset / mult;
+	vec2 shift = vec2(texture(shift_texture_x, shift_uv).r, texture(shift_texture_y, shift_uv).r);
+	shift_total += (shift - 0.5);
+	shift_mix += shift * shift;
+	mult *= mult_base;
+	//}
 	vec4 base = texture(TEXTURE, base_uv + shift_total);
 	vec4 mix_color = texture(mix_texture, 1.0 - (base_uv + shift_mix));
 	vec4 final = mix(base, mix_color, 0.5) * texture(mask_texture, base_uv + shift_total);

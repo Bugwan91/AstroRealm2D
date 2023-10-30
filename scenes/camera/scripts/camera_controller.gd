@@ -51,7 +51,6 @@ func _init_zoom():
 	_target_zoom = zoom
 
 func _get_look_position() -> Vector2:
-	return Vector2.ZERO
 	var screen = Vector2(get_viewport().size) / zoom
 	var deadzone = screen * 0.4 # 0.5 * 0.8 => half_screen * (1 - margins)
 	var delta = get_global_mouse_position() - target.extrapolator.smooth_position

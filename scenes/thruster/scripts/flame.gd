@@ -3,7 +3,6 @@ extends Node2D
 
 const THRESHOLD := 0.01
 
-@onready var sprite = %Sprite
 @onready var smoke_effect = %SmokeEffect
 @onready var flame_effect = %FlameEffect
 @onready var sound = %Sound

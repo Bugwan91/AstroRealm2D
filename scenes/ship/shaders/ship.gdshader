@@ -6,5 +6,5 @@ uniform sampler2D emission_texture : hint_default_black;
 void fragment() {
 	vec4 ship_color = texture(TEXTURE, UV);
 	float emission_value = texture(emission_texture, UV).r;
-	COLOR = ship_color + ship_color * emission_value * 0.5;
+	COLOR = ship_color + ship_color * emission_value * 0.2;
 }

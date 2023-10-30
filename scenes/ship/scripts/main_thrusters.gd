@@ -2,6 +2,7 @@ class_name MainThrusters
 extends Node2D
 
 @export var _body: RigidBody2D
+var _velocity_limit: float = 1000.0
 var _thrusters: Array[Thruster] = []
 
 
@@ -25,12 +26,12 @@ func apply_throttle(value: float):
 
 func apply_forces():
 	_body.add_force(_force().rotated(_body.rotation))
+	_apply_drag()
 
-
-#func _apply_drag():
-	#var delta = _body.real_velocity.length() - _velocity_limit
-	#if delta > 0:
-		#_body.add_force(-delta * 10 * _body.real_velocity.normalized())
+func _apply_drag():
+	var delta = _body.real_velocity.length() - _velocity_limit
+	if delta > 0:
+		_body.add_force(-delta * 10 * _body.real_velocity.normalized())
 
 
 func estimated_force() -> float:

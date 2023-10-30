@@ -1,7 +1,6 @@
 class_name BulletHitEffect
 extends Node2D
 
-@onready var point_light_2d = %PointLight2D
 @onready var timer = %Timer
 
 var linear_velocity := Vector2.ZERO
