@@ -10,9 +10,10 @@ extends Camera2D
 @onready var _main_state: MainState = get_node("/root/MainState")
 
 var target: ShipRigidBody
-var _last_veocity: Vector2 = Vector2.ZERO
-var _required_acceleration_position: Vector2 = Vector2.ZERO
-var _required_look_position: Vector2 = Vector2.ZERO
+var _last_veocity: Vector2
+var _required_acceleration_position: Vector2
+var _required_look_position: Vector2
+var _hit_position: Vector2
 var _zoom_min: Vector2
 var _zoom_max: Vector2
 var _zoom_speed: Vector2
@@ -35,7 +36,8 @@ func _unhandled_input(event):
 func _process(delta):
 	if not is_instance_valid(target): return
 	_required_look_position = lerp(_required_look_position, _get_look_position(), 2 * delta)
-	position = target.extrapolator.smooth_position + _required_acceleration_position + _required_look_position
+	_hit_position = lerp(_hit_position, Vector2.ZERO, 0.1)
+	position = target.extrapolator.smooth_position + _required_acceleration_position + _required_look_position + _hit_position
 	zoom = lerp(zoom, _target_zoom, 5 * delta)
 	MainState.add_debug_info("Camera zoom", zoom.x)
 
@@ -58,3 +60,7 @@ func _get_look_position() -> Vector2:
 
 func _on_update_player_ship(player_ship: ShipRigidBody):
 	target = player_ship
+	target.had_hit.connect(_shake_on_hit)
+
+func _shake_on_hit(hit: Vector2):
+	_hit_position = -hit

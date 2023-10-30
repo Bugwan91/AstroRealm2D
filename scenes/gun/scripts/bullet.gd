@@ -55,4 +55,5 @@ func _create_damage() -> Damage:
 	var damage = Damage.new()
 	damage.amount = _damage
 	damage.position = ray.get_collision_point()
+	damage.impulse = transform.x * 10.0
 	return damage

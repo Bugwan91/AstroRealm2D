@@ -33,6 +33,7 @@ speed_limit = 7000.0
 camera = NodePath("../Camera")
 
 [node name="Camera" parent="." instance=ExtResource("11_2fp23")]
+zoom = Vector2(1, 1)
 
 [node name="Ship" parent="." node_paths=PackedStringArray("inputs", "gun") instance=ExtResource("4_5rllk")]
 _texture = ExtResource("8_rjbsu")
@@ -48,9 +49,9 @@ agressive = true
 
 [node name="Gun" parent="Ship" instance=ExtResource("8_cwv63")]
 bullet_color = Color(1, 0, 0.262745, 1)
-fire_rate = 5.0
-range = 1000.0
-bullet_speed = 2000.0
+range = 1500.0
+overheat = 0.5
+reload_time = 1.0
 
 [node name="Health" type="Node" parent="Ship"]
 script = ExtResource("14_cmupl")
@@ -61,8 +62,7 @@ inputs = NodePath("../InputReader")
 gun = NodePath("Gun")
 _main_thrust = 1000.0
 _maneuver_thrust = 250.0
-_FA_accuracy = 0.8
-_FA_accuracy_damp = 0.2
+_FA_accuracy = 0.9
 autopilot_pointer = NodePath("AutopilotPointer")
 target_prediction_pointer = NodePath("TargetPointer")
 
@@ -80,7 +80,7 @@ out_range_color = Color(0.49, 0.49, 0, 0.1)
 
 [node name="Gun" parent="ShipPlayer" instance=ExtResource("8_cwv63")]
 bullet_color = Color(0, 0.580392, 1, 1)
-range = 1200.0
+range = 1500.0
 overheat = 0.0
 
 [node name="Health" type="Node" parent="ShipPlayer"]
