@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://s0kc0iwk14gt"]
+
+[ext_resource type="Script" path="res://scenes/ship/scripts/ui.gd" id="1_3cokm"]
+[ext_resource type="Texture2D" uid="uid://bd08kqu7l1pb4" path="res://assets/my/target_selection.png" id="2_o00vp"]
+[ext_resource type="StyleBox" uid="uid://besf5phm646jx" path="res://scenes/ship/styles/enemy_health_fill.tres" id="3_7fb0v"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/health_bar.gd" id="4_jeu7y"]
+[ext_resource type="StyleBox" uid="uid://d0befhceovdeo" path="res://scenes/ship/styles/player_health_fill.tres" id="5_mxgpw"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_3cokm")
+
+[node name="Pivot" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="Pivot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Selection" type="TextureRect" parent="Pivot/Control"]
+unique_name_in_owner = true
+modulate = Color(0.8, 0, 0, 0.5)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+texture = ExtResource("2_o00vp")
+
+[node name="Health" type="ProgressBar" parent="Pivot/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/fill = ExtResource("3_7fb0v")
+max_value = 1.0
+step = 0.001
+value = 0.45
+show_percentage = false
+script = ExtResource("4_jeu7y")
+player_fill_style = ExtResource("5_mxgpw")
+enemy_fill_style = ExtResource("3_7fb0v")

@@ -12,7 +12,7 @@ const ANGULAR_THRESHOLD = 0.01
 
 @export var autopilot_pointer_view: AssistantPointer
 
-var target_body: RigidBody2D
+var target: RigidBody2D
 var autopilot_speed := 100000.0
 var follow_distance := 1000.0
 var direction := Vector2.ZERO
@@ -95,14 +95,14 @@ func override_controls():
 func follow_target(distance: float = 0.0):
 	#DebugDraw2d.circle(_target_position, 2, 6, Color.GREEN)
 	#DebugDraw2d.line_vector(_target_position, _target_velocity, Color.GREEN)
-	if not is_instance_valid(target_body):
+	if not is_instance_valid(target):
 		match_velocity(_get_delta_velocity())
 		return
 	var dv := _get_delta_velocity()
 	if distance == 0:
 		match_velocity(dv)
 		return
-	var dp := target_body.position - _state_position
+	var dp := target.position - _state_position
 	var dp_target := dp - dp.normalized() * distance
 	var vs = _get_stop_velocity(dp_target, -dv, 0)
 	match_velocity(vs * (1.0 - _velocity_error))
@@ -171,9 +171,9 @@ func _apply_forces():
 	_main_thrusters.apply_forces()
 
 func _update_error():
-	if is_instance_valid(target_body):
-		var acceleration : Vector2 = target_body.real_velocity - _last_velocity
-		_last_velocity = target_body.real_velocity
+	if is_instance_valid(target):
+		var acceleration : Vector2 = target.real_velocity - _last_velocity
+		_last_velocity = target.real_velocity
 		var rate = (acceleration / _get_delta_velocity()).length()
 		_velocity_error = clamp(_velocity_error + rate, 0, follow_accuracy)
 		_velocity_error = max(0.0, _velocity_error - (follow_accuracy_damp * _state.step))
@@ -190,8 +190,8 @@ func _get_stop_velocity(position: Vector2, velocity: Vector2, max_speed: float =
 
 
 func _get_delta_velocity() -> Vector2:
-	if is_instance_valid(target_body):
-		return target_body.linear_velocity - _state.linear_velocity
+	if is_instance_valid(target):
+		return target.linear_velocity - _state.linear_velocity
 	else:
 		return -_state_real_velocity
 
@@ -211,7 +211,7 @@ func _rotate_input_changed(value: float):
 	_rotation_input = value
 
 func _point_input_changed(value: Vector2):
-	if ignore_direction_update: return
+	if ignore_direction_update: return #TODO: remove tis
 	direction = value
 	
 func _target_follow_toggled(value: bool):
@@ -223,7 +223,7 @@ func _target_follow_toggled(value: bool):
 	MainState.fa_autopilot = is_autopilot
 
 func _reset_target(value: bool):
-	if value: target_body = null
+	if value: target = null
 
 func _follow_distance_changed(value: float):
 	if is_follow:

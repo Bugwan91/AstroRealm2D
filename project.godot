@@ -19,7 +19,7 @@ config/icon="res://ship.png"
 
 [autoload]
 
-MainState="*res://scripts/main_state.gd"
+MainState="*res://scenes/main/scripts/main_state.gd"
 DebugDraw2d="*res://addons/debugdraw2d/DebugDraw2D.gd"
 FloatingOrigin="*res://scenes/main/scripts/floating_origin.gd"
 

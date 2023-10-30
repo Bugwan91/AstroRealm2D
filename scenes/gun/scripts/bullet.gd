@@ -12,6 +12,7 @@ var linear_velocity: Vector2 = Vector2.ZERO
 var impulse := 0.0
 var speed := 0.0
 var hit_material: ParticleProcessMaterial
+var _damage := 10.0
 
 func _ready():
 	FloatingOrigin.add(self)
@@ -34,14 +35,24 @@ func start(lifetime: float):
 
 func _collide():
 	if ray.is_colliding():
-		var hit_effect = hit_effect_scene.instantiate() as BulletHitEffect
-		hit_effect.position = ray.get_collision_point()
-		var target = ray.get_collider()
-		if "linear_velocity" in target:
-			hit_effect.linear_velocity = target.real_velocity
-		get_parent().add_child(hit_effect)
-		hit_effect.update_material(hit_material)
+		_on_hit(ray.get_collider())
 		_self_destroy()
+
+func _on_hit(target):
+	var damageTaker = target.get_node("TakingDamage") as TakingDamage
+	if is_instance_valid(damageTaker):
+		damageTaker.damage(_create_damage())
+	var hit_effect = hit_effect_scene.instantiate() as BulletHitEffect
+	hit_effect.position = ray.get_collision_point()
+	hit_effect.linear_velocity = target.real_velocity
+	get_parent().add_child(hit_effect)
+	hit_effect.update_material(hit_material)
 
 func _self_destroy():
 	queue_free()
+
+func _create_damage() -> Damage:
+	var damage = Damage.new()
+	damage.amount = _damage
+	damage.position = ray.get_collision_point()
+	return damage

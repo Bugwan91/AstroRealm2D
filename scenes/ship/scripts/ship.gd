@@ -15,7 +15,6 @@ extends RigidBody2D
 
 @export var autopilot_pointer: AssistantPointer
 @export var target_prediction_pointer: AssistantPointer
-@export var shoot_marker: AssistantPointer
 
 @onready var flight_assistant: ShipFlightAssistant = %FlightAssistant
 @onready var battle_assistant: BattleAssistant = %BattleAssistant
@@ -25,7 +24,7 @@ extends RigidBody2D
 
 
 @onready var _view = %View
-@onready var _gun_slot = %GunSlot
+@onready var _gun_slot: GunSlot = %GunSlot
 
 var real_velocity: Vector2: get = _real_velocity
 
@@ -34,7 +33,6 @@ var _torque := 0.0
 
 func _ready():
 	if inputs is PlayerShipInput:
-		FloatingOrigin.target = self
 		MainState.player_ship = self
 	thrusters.setup(_maneuver_thrust)
 	engines.setup(_main_thrust, _max_speed)
@@ -46,10 +44,7 @@ func _ready():
 	battle_assistant.aim_accuracy_damp = _BA_accuracy_damp
 	battle_assistant.pointer_view = target_prediction_pointer
 	_view.texture = _texture
-	gun.position = _gun_slot.position
-	#_gun_slot.add_child(gun)
-	#gun.position = Vector2.ZERO
-	gun.marker = shoot_marker
+	_gun_slot.add_gun(gun)
 	gun.shoot_recoil.connect(_on_shoot_recoil)
 	battle_assistant.gun = gun
 	if is_instance_valid(inputs):

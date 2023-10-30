@@ -39,7 +39,6 @@ func _ready():
 	reloading_timer.wait_time = reload_time
 	reloading_timer.timeout.connect(_on_reloaded)
 	_bullet_lifetime = range / bullet_speed
-	print(_bullet_lifetime)
 
 func _process(delta):
 	_update_marker()
@@ -79,7 +78,6 @@ func _spawn_bullet():
 	_world_node.add_child(bullet)
 	bullet.update_material(bullet_material, hit_material)
 	bullet.start(_bullet_lifetime)
-	print(_bullet_lifetime)
 
 func _update_marker():
 	if is_instance_valid(marker):

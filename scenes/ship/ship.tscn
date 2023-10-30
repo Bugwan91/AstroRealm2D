@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=18 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Texture2D" uid="uid://dpp12wrak050k" path="res://ship_emission.png" id="3_co5i1"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://k6231xltcfhl" path="res://scenes/thruster/thruster.tscn" id="10_wlx63"]
 [ext_resource type="Script" path="res://scenes/thruster/scripts/thrusters.gd" id="11_hhoku"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship_selection_area.gd" id="12_bsixf"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/gun_slot.gd" id="13_n2hg0"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/taking_damage.gd" id="13_o14b0"]
+[ext_resource type="PackedScene" uid="uid://s0kc0iwk14gt" path="res://scenes/ship/ui.tscn" id="15_m8yda"]
 [ext_resource type="PackedScene" uid="uid://t86wis3mvind" path="res://scenes/ship/flight_assistant.tscn" id="16_avemu"]
 [ext_resource type="PackedScene" uid="uid://bqiu3ng56ogjy" path="res://scenes/ship/battle_assistant.tscn" id="17_w8wag"]
 [ext_resource type="PackedScene" uid="uid://bxhk5f3ir05ad" path="res://scenes/thruster/maneuver_thruster.tscn" id="21_bnxwn"]
@@ -100,7 +103,9 @@ position = Vector2(-32, -5.48045e-05)
 [node name="GunSlot" type="Marker2D" parent="PositionExtrapolation"]
 unique_name_in_owner = true
 position = Vector2(34, 0)
+script = ExtResource("13_n2hg0")
 
 [node name="TakingDamage" type="Node" parent="."]
+script = ExtResource("13_o14b0")
 
-[node name="Health" type="Node" parent="."]
+[node name="UI" parent="." instance=ExtResource("15_m8yda")]
