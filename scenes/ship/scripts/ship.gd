@@ -48,6 +48,7 @@ func _ready():
 	_view.texture = _texture
 	gun.position = _gun_slot.position
 	#_gun_slot.add_child(gun)
+	#gun.position = Vector2.ZERO
 	gun.marker = shoot_marker
 	gun.shoot_recoil.connect(_on_shoot_recoil)
 	battle_assistant.gun = gun

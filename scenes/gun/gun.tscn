@@ -12,12 +12,6 @@ bullet_scene = ExtResource("2_gsief")
 bullet_color = Color(1, 0, 0, 1)
 bullet_material = ExtResource("3_kxjdw")
 hit_material = ExtResource("4_ceta7")
-fire_rate = null
-range = null
-bullet_speed = null
-recoil = null
-overheat = null
-reload_time = null
 
 [node name="ChargeTimer" type="Timer" parent="."]
 unique_name_in_owner = true

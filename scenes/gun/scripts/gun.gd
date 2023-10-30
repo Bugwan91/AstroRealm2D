@@ -9,7 +9,7 @@ signal shoot_recoil(force: float)
 @export var hit_material: ParticleProcessMaterial
 @export_range(0, 40) var fire_rate := 10.0
 @export_range(0, 5000) var range := 1600.0
-@export_range(0, 10000) var bullet_speed := 1600.0
+@export_range(0, 10000) var bullet_speed := 3000.0
 @export_range(0, 100) var recoil := 1.0
 @export_range(0, 10) var overheat := 1.0
 @export_range(0, 10) var reload_time := 2.0
@@ -26,7 +26,7 @@ var _is_firing := false
 var _is_charging := false
 var _is_reloading := false
 var _firing_time := 0.0
-var _bullet_lifetime := range / bullet_speed
+var _bullet_lifetime: float
 
 
 func _ready():
@@ -38,6 +38,8 @@ func _ready():
 	_charge_timer.timeout.connect(_charge_done)
 	reloading_timer.wait_time = reload_time
 	reloading_timer.timeout.connect(_on_reloaded)
+	_bullet_lifetime = range / bullet_speed
+	print(_bullet_lifetime)
 
 func _process(delta):
 	_update_marker()
@@ -77,6 +79,7 @@ func _spawn_bullet():
 	_world_node.add_child(bullet)
 	bullet.update_material(bullet_material, hit_material)
 	bullet.start(_bullet_lifetime)
+	print(_bullet_lifetime)
 
 func _update_marker():
 	if is_instance_valid(marker):

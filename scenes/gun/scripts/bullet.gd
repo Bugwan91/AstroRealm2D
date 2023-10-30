@@ -21,7 +21,7 @@ func _process(delta):
 	position += linear_velocity * delta
 
 func _physics_process(delta):
-	ray.target_position.y = speed * delta
+	ray.target_position.y = speed * delta + 8.0
 	_collide()
 
 func update_material(mat: ParticleProcessMaterial, hit_mat: ParticleProcessMaterial):

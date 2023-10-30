@@ -1,41 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwdthpisfmojs"]
+[gd_scene load_steps=7 format=3 uid="uid://dwdthpisfmojs"]
 
 [ext_resource type="Script" path="res://scenes/gun/scripts/bullet.gd" id="1_gtbct"]
 [ext_resource type="PackedScene" uid="uid://dcjlidv1ftgrv" path="res://scenes/gun/hit_effect.tscn" id="2_m6c5x"]
+[ext_resource type="Material" uid="uid://nsu04m3ieh4b" path="res://scenes/gun/assets/bullet_mat.tres" id="4_3wp6u"]
 [ext_resource type="Script" path="res://scenes/main/scripts/velocity_shifter.gd" id="4_ud3i3"]
 
-[sub_resource type="Gradient" id="Gradient_orn7p"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_g2u0v"]
-gradient = SubResource("Gradient_orn7p")
-
-[sub_resource type="Curve" id="Curve_ped81"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.697359), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_upjdp"]
-curve = SubResource("Curve_ped81")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_at35v"]
-particle_flag_disable_z = true
-direction = Vector3(-1, 0, 0)
-spread = 0.0
-initial_velocity_min = 400.0
-initial_velocity_max = 500.0
-gravity = Vector3(0, 0, 0)
-scale_min = 2.0
-scale_max = 2.0
-scale_curve = SubResource("CurveTexture_upjdp")
-color_ramp = SubResource("GradientTexture1D_g2u0v")
-
 [sub_resource type="Gradient" id="Gradient_re0jn"]
+offsets = PackedFloat32Array(0, 0.775986)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_soypm"]
 gradient = SubResource("Gradient_re0jn")
-width = 4
-height = 4
+width = 8
+height = 8
 use_hdr = true
 fill = 1
 fill_from = Vector2(0.5, 0.5)
@@ -50,6 +27,7 @@ one_shot = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(-4, 1)
 rotation = 4.71239
 
 [node name="VelocityShifter" type="Node" parent="."]
@@ -59,7 +37,7 @@ script = ExtResource("4_ud3i3")
 unique_name_in_owner = true
 position = Vector2(2, 0)
 amount = 64
-process_material = SubResource("ParticleProcessMaterial_at35v")
+process_material = ExtResource("4_3wp6u")
 texture = SubResource("GradientTexture2D_soypm")
 lifetime = 0.2
 preprocess = 0.05

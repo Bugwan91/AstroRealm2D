@@ -13,6 +13,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 gradient = SubResource("Gradient_unluh")
 width = 16
 height = 16
+use_hdr = true
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 

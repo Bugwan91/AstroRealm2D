@@ -40,8 +40,6 @@ target = NodePath("../Ship2")
 _texture = ExtResource("8_rjbsu")
 inputs = NodePath("AIShipInput")
 gun = NodePath("Gun")
-_main_thrust = 1000.0
-_maneuver_thrust = 300.0
 _FA_accuracy = 0.9
 
 [node name="AIShipInput" type="Node2D" parent="ShipEnemy" node_paths=PackedStringArray("player")]
@@ -52,13 +50,12 @@ keep_distance = 1000.0
 
 [node name="Gun" parent="ShipEnemy" instance=ExtResource("8_cwv63")]
 bullet_color = Color(1, 0, 0.262745, 1)
-bullet_speed = 3000.0
+bullet_speed = 2000.0
 
 [node name="Ship2" parent="." node_paths=PackedStringArray("inputs", "gun", "autopilot_pointer", "target_prediction_pointer") instance=ExtResource("11_4jqrg")]
 _texture = ExtResource("12_lbr7m")
 inputs = NodePath("../InputReader")
 gun = NodePath("Gun")
-_main_thrust = 1000.0
 _maneuver_thrust = 500.0
 _FA_accuracy = 0.9
 autopilot_pointer = NodePath("AutopilotPointer")
@@ -77,6 +74,5 @@ in_range_color = Color(1, 1, 0, 0.784314)
 out_range_color = Color(0.486275, 0.486275, 0, 0.784314)
 
 [node name="Gun" parent="Ship2" instance=ExtResource("8_cwv63")]
-bullet_color = Color(0, 0.8, 1, 1)
-bullet_speed = 3000.0
+bullet_color = Color(0, 0.87451, 0.231373, 1)
 overheat = 0.0
