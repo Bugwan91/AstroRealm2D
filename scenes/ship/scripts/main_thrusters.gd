@@ -13,7 +13,8 @@ func _get_configuration_warnings():
 	return warnings
 
 
-func setup(thrust: float):
+func setup(thrust: float, max_speed: float):
+	_velocity_limit = max_speed
 	for thruster in get_children() as Array[Thruster]:
 		thruster.setup(thrust)
 		_thrusters.append(thruster)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=14 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
 [ext_resource type="PackedScene" uid="uid://ce1dw618jykrb" path="res://scenes/ship/ship.tscn" id="4_5rllk"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://scenes/ai/scripts/ship_input.gd" id="9_nd6tp"]
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
 [ext_resource type="PackedScene" uid="uid://dvl5olv4rqaox" path="res://scenes/ship/ship_2.tscn" id="11_4jqrg"]
-[ext_resource type="PackedScene" uid="uid://dlwjeo7xvcgky" path="res://scenes/gun/gun_2.tscn" id="12_b3y3v"]
 [ext_resource type="Texture2D" uid="uid://xda1wh1ir030" path="res://scenes/ship/views/07.png" id="12_lbr7m"]
 [ext_resource type="PackedScene" uid="uid://dt7wav32bva3j" path="res://scenes/player/input_reader.tscn" id="13_epig2"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="15_5xucn"]
@@ -37,10 +36,10 @@ target = NodePath("../Ship2")
 [node name="Camera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("11_2fp23")]
 target = NodePath("../Ship2")
 
-[node name="ShipEnemy" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_5rllk")]
+[node name="ShipEnemy" parent="." node_paths=PackedStringArray("inputs", "gun") instance=ExtResource("4_5rllk")]
 _texture = ExtResource("8_rjbsu")
 inputs = NodePath("AIShipInput")
-gun_scene = ExtResource("12_b3y3v")
+gun = NodePath("Gun")
 _main_thrust = 1000.0
 _maneuver_thrust = 300.0
 _FA_accuracy = 0.9
@@ -51,10 +50,14 @@ player = NodePath("../../Ship2")
 agressive = true
 keep_distance = 1000.0
 
-[node name="Ship2" parent="." node_paths=PackedStringArray("inputs", "autopilot_pointer", "target_prediction_pointer") instance=ExtResource("11_4jqrg")]
+[node name="Gun" parent="ShipEnemy" instance=ExtResource("8_cwv63")]
+bullet_color = Color(1, 0, 0.262745, 1)
+bullet_speed = 3000.0
+
+[node name="Ship2" parent="." node_paths=PackedStringArray("inputs", "gun", "autopilot_pointer", "target_prediction_pointer") instance=ExtResource("11_4jqrg")]
 _texture = ExtResource("12_lbr7m")
 inputs = NodePath("../InputReader")
-gun_scene = ExtResource("8_cwv63")
+gun = NodePath("Gun")
 _main_thrust = 1000.0
 _maneuver_thrust = 500.0
 _FA_accuracy = 0.9
@@ -66,7 +69,14 @@ in_range_color = Color(0, 0, 1, 0.78)
 out_range_color = Color(0, 0, 0.486275, 0.784314)
 
 [node name="TargetPointer" parent="Ship2" instance=ExtResource("15_5xucn")]
+in_range_color = Color(1, 0, 0, 0.2)
+out_range_color = Color(0.49, 0, 0, 0.2)
 
 [node name="ShootPointer" parent="Ship2" instance=ExtResource("15_5xucn")]
 in_range_color = Color(1, 1, 0, 0.784314)
 out_range_color = Color(0.486275, 0.486275, 0, 0.784314)
+
+[node name="Gun" parent="Ship2" instance=ExtResource("8_cwv63")]
+bullet_color = Color(0, 0.8, 1, 1)
+bullet_speed = 3000.0
+overheat = 0.0

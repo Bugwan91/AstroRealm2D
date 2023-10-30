@@ -1,47 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dcjlidv1ftgrv"]
+[gd_scene load_steps=7 format=3 uid="uid://dcjlidv1ftgrv"]
 
 [ext_resource type="Script" path="res://scenes/gun/scripts/bullet_hit_effect.gd" id="1_27y4s"]
 [ext_resource type="AudioStream" uid="uid://cejv4j507tnti" path="res://assets/sounds/spacelord_hit2.wav" id="2_6t2pu"]
 [ext_resource type="Script" path="res://scenes/main/scripts/velocity_shifter.gd" id="3_u8joq"]
-
-[sub_resource type="Gradient" id="Gradient_idxxb"]
-offsets = PackedFloat32Array(0.563462, 1)
-colors = PackedColorArray(2, 2, 2, 1, 2, 2, 2, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_iux0w"]
-gradient = SubResource("Gradient_idxxb")
-use_hdr = true
-
-[sub_resource type="Curve" id="Curve_rkg3d"]
-max_value = 100.0
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_awq3e"]
-curve = SubResource("Curve_rkg3d")
-
-[sub_resource type="Curve" id="Curve_mqrkq"]
-_data = [Vector2(0, 0), 0.0, 4.74209, 0, 0, Vector2(0.438078, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.151588), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_j3y40"]
-curve = SubResource("Curve_mqrkq")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yvocr"]
-lifetime_randomness = 0.5
-particle_flag_disable_z = true
-spread = 180.0
-initial_velocity_min = 50.0
-initial_velocity_max = 200.0
-gravity = Vector3(0, 0, 0)
-damping_min = 20.0
-damping_max = 20.0
-damping_curve = SubResource("CurveTexture_awq3e")
-scale_min = 0.5
-scale_curve = SubResource("CurveTexture_j3y40")
-color = Color(0.376471, 0.643137, 1, 1)
-color_ramp = SubResource("GradientTexture1D_iux0w")
-turbulence_noise_scale = 1.79
+[ext_resource type="Material" uid="uid://clufqa0vb1vo4" path="res://scenes/gun/assets/hit_effect_mat.tres" id="4_03671"]
 
 [sub_resource type="Gradient" id="Gradient_unluh"]
 offsets = PackedFloat32Array(0, 0.605556)
@@ -71,9 +33,10 @@ autoplay = true
 script = ExtResource("3_u8joq")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, 2)
 amount = 16
-process_material = SubResource("ParticleProcessMaterial_yvocr")
+process_material = ExtResource("4_03671")
 texture = SubResource("GradientTexture2D_qdaip")
 lifetime = 0.15
 explosiveness = 0.8

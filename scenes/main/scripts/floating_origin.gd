@@ -1,6 +1,6 @@
 extends Node2D
 
-const c := 100000.0
+const GROUP_NAME = "FloatingOriginShiftable"
 
 var enabled := true
 var target: ShipRigidBody
@@ -16,9 +16,12 @@ func update_state(state: PhysicsDirectBodyState2D):
 	origin_delta = state.transform.origin + velocity_delta * state.step
 	origin += velocity * state.step
 
+func add(node: Node):
+	node.add_to_group(GROUP_NAME)
+
 func _process(delta):
 	MainState.add_debug_info("origin", origin)
 	MainState.add_debug_info("origin velocity", velocity)
-	for node in get_tree().get_nodes_in_group("shiftable"):
+	for node in get_tree().get_nodes_in_group(GROUP_NAME):
 		node.position -= velocity * delta
 	

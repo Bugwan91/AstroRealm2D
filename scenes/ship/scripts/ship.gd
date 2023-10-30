@@ -3,7 +3,8 @@ extends RigidBody2D
 
 @export var _texture: Texture2D
 @export var inputs: ShipInput
-@export var gun_scene: PackedScene
+@export var gun: Gun
+@export_range(0, 10000) var _max_speed := 2000.0
 @export_range(0, 1000) var _main_thrust := 500.0
 @export_range(0, 500) var _maneuver_thrust := 200.0
 
@@ -26,7 +27,6 @@ extends RigidBody2D
 @onready var _view = %View
 @onready var _gun_slot = %GunSlot
 
-var gun: Gun
 var real_velocity: Vector2: get = _real_velocity
 
 var _forces := Vector2.ZERO
@@ -37,7 +37,7 @@ func _ready():
 		FloatingOrigin.target = self
 		MainState.player_ship = self
 	thrusters.setup(_maneuver_thrust)
-	engines.setup(_main_thrust)
+	engines.setup(_main_thrust, _max_speed)
 	flight_assistant.setup()
 	flight_assistant.follow_accuracy = _FA_accuracy
 	flight_assistant.follow_accuracy_damp = _FA_accuracy_damp
@@ -46,11 +46,11 @@ func _ready():
 	battle_assistant.aim_accuracy_damp = _BA_accuracy_damp
 	battle_assistant.pointer_view = target_prediction_pointer
 	_view.texture = _texture
-	gun = gun_scene.instantiate()
+	gun.position = _gun_slot.position
+	#_gun_slot.add_child(gun)
 	gun.marker = shoot_marker
 	gun.shoot_recoil.connect(_on_shoot_recoil)
 	battle_assistant.gun = gun
-	_gun_slot.add_child(gun)
 	if is_instance_valid(inputs):
 		flight_assistant.connect_inputs(inputs)
 		battle_assistant.connect_inputs(inputs)
@@ -58,33 +58,24 @@ func _ready():
 
 
 func _process(delta):
-	#DebugDraw2d.line_vector(extrapolator.smooth_position, linear_velocity, Color.LIGHT_SEA_GREEN)
 	if inputs is PlayerShipInput:
 		MainState.add_debug_info("Origin delta", position)
 		MainState.add_debug_info("Origin vel delta", linear_velocity)
+
 
 func _physics_process(delta):
 	_update_main_state(delta)
 	gun.velocity = real_velocity
 
-var _mass_0 := 1.0
 
 func _integrate_forces(state):
 	var full_velocity: Vector2 = state.linear_velocity + FloatingOrigin.velocity
-	#if full_velocity.length() >= FloatingOrigin.c:
-		#full_velocity = FloatingOrigin.c * 0.999999 * full_velocity.normalized()
-		#state.linear_velocity = full_velocity - FloatingOrigin.velocity
 	if inputs is PlayerShipInput:
 		FloatingOrigin.update_state(state)
 	state.linear_velocity -= FloatingOrigin.velocity_delta
 	state.transform.origin -= FloatingOrigin.origin_delta
-	#mass = _mass_0 / sqrt(1.0 - full_velocity.length() / FloatingOrigin.c)
 	flight_assistant.process(state)
 	_apply_forcces(state)
-	if inputs is PlayerShipInput:
-		MainState.add_debug_info("m", mass)
-		MainState.add_debug_info("v", full_velocity.length() / FloatingOrigin.c)
-		MainState.add_debug_info("c", FloatingOrigin.c)
 
 
 func set_target(target: RigidBody2D):
