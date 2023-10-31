@@ -10,6 +10,9 @@ extends Node
 var _pivot: Vector2
 var _position: Vector2
 
+func _ready():
+	pointer_texture.visible = false
+
 func _process(_delta):
 	_update_position()
 

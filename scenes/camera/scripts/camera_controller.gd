@@ -60,7 +60,7 @@ func _get_look_position() -> Vector2:
 
 func _on_update_player_ship(player_ship: ShipRigidBody):
 	target = player_ship
-	target.had_hit.connect(_shake_on_hit)
+	target.got_hit.connect(_shake_on_hit)
 
 func _shake_on_hit(hit: Vector2):
 	_hit_position = -hit

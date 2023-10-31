@@ -1,21 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcjlidv1ftgrv"]
+[gd_scene load_steps=6 format=3 uid="uid://dcjlidv1ftgrv"]
 
 [ext_resource type="Script" path="res://scenes/gun/scripts/bullet_hit_effect.gd" id="1_27y4s"]
 [ext_resource type="AudioStream" uid="uid://cejv4j507tnti" path="res://assets/sounds/spacelord_hit2.wav" id="2_6t2pu"]
 [ext_resource type="Script" path="res://scenes/main/scripts/velocity_shifter.gd" id="3_u8joq"]
 [ext_resource type="Material" uid="uid://clufqa0vb1vo4" path="res://scenes/gun/assets/hit_effect_mat.tres" id="4_03671"]
-
-[sub_resource type="Gradient" id="Gradient_unluh"]
-offsets = PackedFloat32Array(0, 0.605556)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_qdaip"]
-gradient = SubResource("Gradient_unluh")
-width = 16
-height = 16
-use_hdr = true
-fill = 1
-fill_from = Vector2(0.5, 0.5)
+[ext_resource type="Texture2D" uid="uid://c6lqhd1nsdtbv" path="res://assets/my/circle_texture_16.tres" id="5_r2cy4"]
 
 [node name="HitEffect" type="Node2D"]
 script = ExtResource("1_27y4s")
@@ -38,7 +27,7 @@ unique_name_in_owner = true
 position = Vector2(0, 2)
 amount = 16
 process_material = ExtResource("4_03671")
-texture = SubResource("GradientTexture2D_qdaip")
+texture = ExtResource("5_r2cy4")
 lifetime = 0.3
 explosiveness = 0.8
 fract_delta = false

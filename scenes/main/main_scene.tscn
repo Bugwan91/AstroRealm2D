@@ -36,11 +36,14 @@ camera = NodePath("../Camera")
 zoom = Vector2(1, 1)
 
 [node name="Ship" parent="." node_paths=PackedStringArray("inputs", "gun") instance=ExtResource("4_5rllk")]
+position = Vector2(-1000, 1000)
+rotation = 1.74533
 _texture = ExtResource("8_rjbsu")
 inputs = NodePath("AIShipInput")
 gun = NodePath("Gun")
 _main_thrust = 1000.0
 _maneuver_thrust = 250.0
+_FA_accuracy = 0.99
 
 [node name="AIShipInput" type="Node2D" parent="Ship"]
 position = Vector2(-318, -462)
@@ -55,6 +58,7 @@ reload_time = 1.0
 
 [node name="Health" type="Node" parent="Ship"]
 script = ExtResource("14_cmupl")
+max_health = 100.0
 
 [node name="ShipPlayer" parent="." node_paths=PackedStringArray("inputs", "gun", "autopilot_pointer", "target_prediction_pointer") instance=ExtResource("4_5rllk")]
 _texture = ExtResource("12_qidbo")
@@ -85,3 +89,4 @@ overheat = 0.0
 
 [node name="Health" type="Node" parent="ShipPlayer"]
 script = ExtResource("14_cmupl")
+max_health = 100.0

@@ -187,7 +187,7 @@ noise = SubResource("FastNoiseLite_awlvi")
 
 [sub_resource type="Gradient" id="Gradient_mw7mr"]
 offsets = PackedFloat32Array(0.00915332, 1)
-colors = PackedColorArray(0, 0.54902, 0.611765, 0, 0, 0.55, 0.61, 0.2)
+colors = PackedColorArray(0.471394, 0.333343, 1, 0, 0.543662, 0.281906, 1, 0.2)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_bytvj"]
 seed = 767567
@@ -631,7 +631,6 @@ script = ExtResource("1_48uix")
 shift_scale = 0.0060001
 
 [node name="BackgroundSprite" type="Sprite2D" parent="Layers/L1"]
-visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_83i60")
 texture = SubResource("NoiseTexture2D_2oyq7")

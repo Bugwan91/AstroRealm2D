@@ -1,7 +1,7 @@
 class_name ShipRigidBody
 extends RigidBody2D
 
-signal had_hit(value: Vector2)
+signal got_hit(value: Vector2)
 
 @export var _texture: Texture2D
 @export var inputs: ShipInput
@@ -24,7 +24,8 @@ signal had_hit(value: Vector2)
 @onready var thrusters: Thrusters = %Thrusters
 @onready var engines: MainThrusters = %MainThrusters
 
-
+@onready var ship_destroy_effect: ShipDestroyEffect = %ShipDestroyEffect
+@onready var hp: Health = $"Health"
 @onready var _view = %View
 @onready var _gun_slot: GunSlot = %GunSlot
 
@@ -54,6 +55,8 @@ func _ready():
 		flight_assistant.connect_inputs(inputs)
 		battle_assistant.connect_inputs(inputs)
 		gun.connect_inputs(inputs)
+	if is_instance_valid(hp):
+		hp.dying.connect(_destroy)
 
 
 func _process(delta):
@@ -100,6 +103,9 @@ func _real_velocity() -> Vector2:
 
 func _on_shoot_recoil(force: float):
 	apply_central_impulse(-transform.x * force)
+
+func _destroy():
+	ship_destroy_effect.run()
 
 # TODO: Refactor
 # Data to main state (UI connection)
