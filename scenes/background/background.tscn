@@ -631,6 +631,7 @@ script = ExtResource("1_48uix")
 shift_scale = 0.0060001
 
 [node name="BackgroundSprite" type="Sprite2D" parent="Layers/L1"]
+visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_83i60")
 texture = SubResource("NoiseTexture2D_2oyq7")
@@ -649,6 +650,7 @@ script = ExtResource("1_48uix")
 shift_scale = 0.0200001
 
 [node name="BackgroundSprite" type="Sprite2D" parent="Layers/L2"]
+visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_7jhvc")
 texture = SubResource("NoiseTexture2D_1m68o")

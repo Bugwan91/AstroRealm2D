@@ -6,7 +6,6 @@ var canvas_position: Vector2:
 	get:
 		return get_global_transform_with_canvas().origin
 
-
 var smooth_position: Vector2:
 	get:
 		return owner.position + position.rotated(owner.rotation)

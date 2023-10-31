@@ -1,6 +1,8 @@
 class_name ShipRigidBody
 extends RigidBody2D
 
+signal had_hit(value: Vector2)
+
 @export var _texture: Texture2D
 @export var inputs: ShipInput
 @export var gun: Gun
@@ -28,6 +30,7 @@ extends RigidBody2D
 
 var real_velocity: Vector2: get = _real_velocity
 
+var _impulses := Vector2.ZERO
 var _forces := Vector2.ZERO
 var _torque := 0.0
 
@@ -86,8 +89,10 @@ func add_torque(torque: float):
 
 func _apply_forcces(state: PhysicsDirectBodyState2D):
 	state.apply_central_force(_forces)
+	state.apply_central_impulse(_impulses)
 	state.apply_torque(_torque)
 	_forces = Vector2.ZERO
+	_impulses = Vector2.ZERO
 	_torque = 0.0
 
 func _real_velocity() -> Vector2:
