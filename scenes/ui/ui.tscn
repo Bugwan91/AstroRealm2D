@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://3cqmtymu5w3p"]
+[gd_scene load_steps=10 format=3 uid="uid://3cqmtymu5w3p"]
 
 [ext_resource type="Script" path="res://scenes/ui/scripts/position_label.gd" id="1_x4cxl"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/speed_label.gd" id="2_uarfg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/ui/scripts/flight_assistant_ui.gd" id="4_7x04l"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/fps.gd" id="5_8a6ql"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/debug_info.gd" id="5_u0tch"]
+[ext_resource type="PackedScene" uid="uid://dgf4ciui6fwt5" path="res://scenes/ui/game_over_container.tscn" id="7_vcp7q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7coif"]
 bg_color = Color(0, 0.282353, 0.54902, 0.960784)
@@ -143,3 +144,6 @@ theme_override_constants/margin_bottom = 10
 [node name="DebugInfo" type="VBoxContainer" parent="Control/MarginContainer/DebugInfo/MarginContainer"]
 layout_mode = 2
 script = ExtResource("5_u0tch")
+
+[node name="GameOverContainer" parent="Control/MarginContainer" instance=ExtResource("7_vcp7q")]
+layout_mode = 2

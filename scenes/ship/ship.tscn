@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Texture2D" uid="uid://dpp12wrak050k" path="res://ship_emission.png" id="3_co5i1"]
 [ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="5_ipsoo"]
-[ext_resource type="Texture2D" uid="uid://q026lhon6o0q" path="res://ship_base.png" id="7_ek0b1"]
+[ext_resource type="Texture2D" uid="uid://dp224au4ijms3" path="res://ship.png" id="8_lcdbn"]
 [ext_resource type="PackedScene" uid="uid://k6231xltcfhl" path="res://scenes/thruster/thruster.tscn" id="10_wlx63"]
 [ext_resource type="Script" path="res://scenes/thruster/scripts/thrusters.gd" id="11_hhoku"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship_selection_area.gd" id="12_bsixf"]
@@ -56,7 +56,7 @@ script = ExtResource("25_1c55w")
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_8d03f")
 rotation = 1.5708
-texture = ExtResource("7_ek0b1")
+texture = ExtResource("8_lcdbn")
 
 [node name="Thrusters" type="Node2D" parent="PositionExtrapolation"]
 unique_name_in_owner = true
@@ -109,6 +109,8 @@ script = ExtResource("13_n2hg0")
 unique_name_in_owner = true
 
 [node name="TakingDamage" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("13_o14b0")
 
 [node name="UI" parent="." instance=ExtResource("15_m8yda")]
+unique_name_in_owner = true

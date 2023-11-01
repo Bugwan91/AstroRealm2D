@@ -1,0 +1,16 @@
+class_name GameOverPanel
+extends PanelContainer
+
+@onready var respawn_button = %RespawnButton
+
+func _ready():
+	visible = false
+	MainState.player_dead.connect(_on_player_dead)
+	respawn_button.pressed.connect(_respawn_player)
+
+func _on_player_dead():
+	visible = true
+
+func _respawn_player():
+	MainState.main_scene.spawn_player_ship()
+	visible = false

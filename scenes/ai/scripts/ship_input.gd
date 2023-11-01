@@ -20,7 +20,4 @@ func _on_update_player_ship(player_ship: ShipRigidBody):
 	player = player_ship
 	ship.flight_assistant.target = player
 	ship.battle_assistant.target = player
-	player.dead.connect(do_reset_target)
 
-func do_reset_target():
-	reset_target.emit()

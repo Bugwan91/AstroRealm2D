@@ -1,7 +1,7 @@
 class_name TakingDamage
 extends Node
 
-@onready var health: Health = get_node("../Health")
+var health: Health
 
 func damage(damage: Damage):
 	if is_instance_valid(health):

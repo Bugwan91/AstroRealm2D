@@ -11,7 +11,6 @@ func _ready():
 	selection.visible = false
 	health_bar.value = 1.0
 	health_bar.visible = false
-	_connect_health()
 	MainState.player_ship_updated.connect(_player_updated)
 	MainState.player_target_updated.connect(_target_updated)
 
@@ -29,10 +28,8 @@ func display_health(value: float, max: float):
 	health_bar.visible = value < max
 	health_bar.value = value / max
 
-func _connect_health():
-	var health = get_node("../Health") as Health
-	if is_instance_valid(health):
-		health.damaged.connect(display_health)
+func connect_health(health: Health):
+	health.damaged.connect(display_health)
 
 func _player_updated(player: ShipRigidBody):
 	_is_player = player == get_parent()
