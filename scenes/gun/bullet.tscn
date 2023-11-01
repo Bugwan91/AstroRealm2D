@@ -1,21 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwdthpisfmojs"]
+[gd_scene load_steps=5 format=3 uid="uid://dwdthpisfmojs"]
 
 [ext_resource type="Script" path="res://scenes/gun/scripts/bullet.gd" id="1_gtbct"]
 [ext_resource type="PackedScene" uid="uid://dcjlidv1ftgrv" path="res://scenes/gun/hit_effect.tscn" id="2_m6c5x"]
-[ext_resource type="Material" uid="uid://nsu04m3ieh4b" path="res://scenes/gun/assets/bullet_mat.tres" id="4_3wp6u"]
+[ext_resource type="Texture2D" uid="uid://cyl63tih1p2em" path="res://assets/VFX_textures/Rotated/trace_01_rotated.png" id="4_u3vfw"]
 [ext_resource type="Script" path="res://scenes/main/scripts/velocity_shifter.gd" id="4_ud3i3"]
-
-[sub_resource type="Gradient" id="Gradient_re0jn"]
-offsets = PackedFloat32Array(0, 0.775986)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_soypm"]
-gradient = SubResource("Gradient_re0jn")
-width = 8
-height = 8
-use_hdr = true
-fill = 1
-fill_from = Vector2(0.5, 0.5)
 
 [node name="Bullet" type="Node2D"]
 script = ExtResource("1_gtbct")
@@ -27,18 +15,14 @@ one_shot = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-4, 1)
+position = Vector2(-4, 0)
 rotation = 4.71239
 
 [node name="VelocityShifter" type="Node" parent="."]
 script = ExtResource("4_ud3i3")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(2, 0)
-amount = 64
-process_material = ExtResource("4_3wp6u")
-texture = SubResource("GradientTexture2D_soypm")
-lifetime = 0.2
-preprocess = 0.05
-local_coords = true
+position = Vector2(-15, 0)
+scale = Vector2(0.2, 0.4)
+texture = ExtResource("4_u3vfw")

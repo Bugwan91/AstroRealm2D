@@ -11,6 +11,6 @@ func _ready():
 			sprite.base_shift_scale = shift_scale
 			_sprites.append(sprite)
 
-func shift(shift: Vector2, zoom: Vector2):
+func shift(shift_vector: Vector2, zoom: Vector2):
 	for sprite in _sprites:
-		sprite.shift(shift, zoom)
+		sprite.shift(shift_vector, zoom)

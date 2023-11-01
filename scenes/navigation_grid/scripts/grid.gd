@@ -10,7 +10,6 @@ extends Sprite2D
 
 var target: ShipRigidBody
 var opacity: float
-var _inverted_scale: Vector2
 var _start_scale: Vector2
 var _start_grid_scale: float
 
@@ -24,7 +23,7 @@ func _ready():
 
 func _process(_delta):
 	if not is_instance_valid(target):
-		update_opacity(1.0)
+		update_opacity(0.0)
 		return
 	position = target.extrapolator.global_position
 	scale = _start_scale / camera.zoom

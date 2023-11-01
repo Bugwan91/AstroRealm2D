@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://cejv4j507tnti" path="res://assets/sounds/spacelord_hit2.wav" id="2_6t2pu"]
 [ext_resource type="Script" path="res://scenes/main/scripts/velocity_shifter.gd" id="3_u8joq"]
 [ext_resource type="Material" uid="uid://clufqa0vb1vo4" path="res://scenes/gun/assets/hit_effect_mat.tres" id="4_03671"]
-[ext_resource type="Texture2D" uid="uid://c6lqhd1nsdtbv" path="res://assets/my/circle_texture_16.tres" id="5_r2cy4"]
+[ext_resource type="Texture2D" uid="uid://dbc8lck8ryqlr" path="res://assets/my/star.png" id="5_doqwm"]
 
 [node name="HitEffect" type="Node2D"]
 script = ExtResource("1_27y4s")
@@ -27,7 +27,7 @@ unique_name_in_owner = true
 position = Vector2(0, 2)
 amount = 16
 process_material = ExtResource("4_03671")
-texture = ExtResource("5_r2cy4")
+texture = ExtResource("5_doqwm")
 lifetime = 0.3
 explosiveness = 0.8
 fract_delta = false

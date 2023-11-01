@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cxaoyw4qxcd0p"]
+[gd_scene load_steps=14 format=3 uid="uid://cxaoyw4qxcd0p"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/damage_effect.gd" id="1_mp2sa"]
-[ext_resource type="Texture2D" uid="uid://c6lqhd1nsdtbv" path="res://assets/my/circle_texture_16.tres" id="2_nbpsp"]
+[ext_resource type="Texture2D" uid="uid://hnfioahelelc" path="res://assets/VFX_textures/fire_01.png" id="2_7r8uf"]
+[ext_resource type="Texture2D" uid="uid://crf347o6fh4jm" path="res://assets/VFX_textures/smoke_07.png" id="3_qucro"]
 
 [sub_resource type="Gradient" id="Gradient_ksgce"]
 offsets = PackedFloat32Array(0, 0.401408, 1)
@@ -22,20 +23,23 @@ curve = SubResource("Curve_hvqik")
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 8.0
+angle_min = -90.0
+angle_max = 90.0
 spread = 6.0
 initial_velocity_min = 250.0
 initial_velocity_max = 500.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
 gravity = Vector3(0, 0, 0)
-scale_max = 2.0
+scale_min = 0.1
+scale_max = 0.2
 scale_curve = SubResource("CurveTexture_caox6")
 color_ramp = SubResource("GradientTexture1D_ft1rn")
 turbulence_enabled = true
-sub_emitter_mode = 1
-sub_emitter_frequency = 4.0
 
 [sub_resource type="Gradient" id="Gradient_378vb"]
 offsets = PackedFloat32Array(0.00234742, 0.0610329, 0.603286, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.2, 1, 1, 1, 0.2, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_dj3qi"]
 gradient = SubResource("Gradient_378vb")
@@ -54,15 +58,13 @@ emission_sphere_radius = 16.0
 spread = 2.0
 initial_velocity_min = 1000.0
 initial_velocity_max = 1000.0
-angular_velocity_min = 5.0
-angular_velocity_max = 10.0
-radial_velocity_min = 1.0
-radial_velocity_max = 3.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
 gravity = Vector3(0, 0, 0)
-scale_min = 4.0
-scale_max = 16.0
+scale_min = 0.2
+scale_max = 0.5
 scale_curve = SubResource("CurveTexture_qfxxv")
-color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+color = Color(0.207843, 0.207843, 0.207843, 1)
 color_ramp = SubResource("GradientTexture1D_dj3qi")
 turbulence_enabled = true
 
@@ -72,18 +74,17 @@ fire = NodePath("Fire")
 smoke = NodePath("Smoke")
 
 [node name="Fire" type="GPUParticles2D" parent="."]
-amount = 16
 process_material = SubResource("ParticleProcessMaterial_pcjcm")
-texture = ExtResource("2_nbpsp")
+texture = ExtResource("2_7r8uf")
 lifetime = 0.2
 fixed_fps = 60
 interpolate = false
 local_coords = true
 
 [node name="Smoke" type="GPUParticles2D" parent="."]
-amount = 64
+amount = 32
 process_material = SubResource("ParticleProcessMaterial_k28ba")
-texture = ExtResource("2_nbpsp")
+texture = ExtResource("3_qucro")
 randomness = 0.5
 fixed_fps = 60
 interpolate = false

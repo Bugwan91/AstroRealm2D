@@ -1,14 +1,11 @@
 class_name DamageEffect
 extends Node2D
 
-@export var ship: ShipRigidBody
-@export_range(0, 1) var show_damage_hp := 0.3
 @export var fire_speed_multiplyer := 0.2
 @export var fire: GPUParticles2D
 @export var smoke: GPUParticles2D
 
-@onready var health: Health = get_node("../../Health")
-
+var velocity: Vector2
 var intensity := 0.0: set = _set_intensity
 
 var _fire_material: ParticleProcessMaterial
@@ -20,17 +17,14 @@ func _ready():
 	_smoke_material = smoke.process_material.duplicate()
 	smoke.process_material = _smoke_material
 	intensity = 0.0
-	if is_instance_valid(health):
-		health.damaged.connect(_on_damage)
 
 func _process(_delta):
 	if intensity == 0.0: return
 	global_rotation = 0.0
-	var v = ship.real_velocity
-	var speed = v.length()
+	var speed = velocity.length()
 	var direction = Vector3(
-		-v.x / speed,
-		-v.y / speed,
+		-velocity.x / speed,
+		-velocity.y / speed,
 		0.0
 	)
 	_fire_material.set("direction", direction)
@@ -50,6 +44,3 @@ func _set_intensity(value: float):
 	else:
 		fire.emitting = false
 		smoke.emitting = false
-
-func _on_damage(hp: float, max_hp: float):
-	intensity = clamp(1.0 - hp / (max_hp * show_damage_hp), 0, 1)

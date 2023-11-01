@@ -39,8 +39,6 @@ var _autopilot_target_position := Vector2.ZERO
 var _velocity_error := 0.0
 var _last_velocity := Vector2.ZERO
 
-var _real_velocity := Vector2.ZERO
-
 func _ready():
 	MainState.fa_tracking_distance = follow_distance
 	MainState.fa_autopilot_speed = autopilot_speed

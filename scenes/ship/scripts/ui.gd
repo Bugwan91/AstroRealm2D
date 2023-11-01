@@ -16,7 +16,6 @@ func _ready():
 	MainState.player_target_updated.connect(_target_updated)
 
 func _process(_delta):
-	var r_pos = owner.extrapolator.global_position
 	var viewport = Vector2(get_viewport().get_size()) * 0.5
 	var position = owner.extrapolator.canvas_position - viewport
 	position = Vector2(

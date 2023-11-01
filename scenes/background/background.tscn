@@ -5,12 +5,12 @@
 [ext_resource type="Script" path="res://scenes/background/scripts/star_prerender.gd" id="2_14nt0"]
 [ext_resource type="Shader" path="res://scenes/background/shaders/space_background.gdshader" id="3_pr640"]
 [ext_resource type="Script" path="res://scenes/background/scripts/background_sprite.gd" id="3_u112l"]
-[ext_resource type="Environment" uid="uid://chl1sjnqh1sa7" path="res://scenes/main/main_environment.tres" id="5_3ffpc"]
 [ext_resource type="Shader" path="res://scenes/background/shaders/space_background_stars_prebaked.gdshader" id="6_gdvqf"]
 [ext_resource type="Texture2D" uid="uid://1swugkpq4ua2" path="res://assets/my/debug_texture.jpeg" id="6_ody0m"]
 [ext_resource type="Texture2D" uid="uid://yw4mt1hubmdd" path="res://scenes/background/starfields/stars_03.png" id="8_4osm0"]
 [ext_resource type="Texture2D" uid="uid://cooevx5ku5t15" path="res://scenes/background/starfields/stars_05.png" id="10_enux2"]
 [ext_resource type="Texture2D" uid="uid://hlh52j0rmh1i" path="res://scenes/background/starfields/stars_035.png" id="10_hooou"]
+[ext_resource type="Texture2D" uid="uid://dpyudoc0duh36" path="res://scenes/background/starfields/stars_045.png" id="10_y34go"]
 [ext_resource type="Texture2D" uid="uid://cw3wu2o11cb73" path="res://scenes/background/starfields/stars_04.png" id="11_5yul3"]
 
 [sub_resource type="Gradient" id="Gradient_mdooe"]
@@ -588,18 +588,18 @@ unique_name_in_owner = true
 layer = -128
 script = ExtResource("2_14nt0")
 
-[node name="L0" type="Node" parent="Layers"]
+[node name="L0_001" type="Node" parent="Layers"]
 script = ExtResource("1_48uix")
 shift_scale = 0.0010001
 
-[node name="BackgroundSprite" type="Sprite2D" parent="Layers/L0"]
+[node name="BackgroundSprite" type="Sprite2D" parent="Layers/L0_001"]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_5mphx")
 position = Vector2(0, 1)
 texture = SubResource("NoiseTexture2D_dqr4f")
 script = ExtResource("3_u112l")
 
-[node name="Stars0" type="Sprite2D" parent="Layers/L0"]
+[node name="Stars0" type="Sprite2D" parent="Layers/L0_001"]
 texture_filter = 4
 texture_repeat = 2
 material = SubResource("ShaderMaterial_3poxa")
@@ -607,18 +607,18 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("8_4osm0")
 script = ExtResource("3_u112l")
 
-[node name="L3" type="Node" parent="Layers"]
+[node name="L0_003" type="Node" parent="Layers"]
 script = ExtResource("1_48uix")
 shift_scale = 0.0030001
 
-[node name="BackgroundSprite" type="Sprite2D" parent="Layers/L3"]
+[node name="BackgroundSprite" type="Sprite2D" parent="Layers/L0_003"]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_xnmiy")
 scale = Vector2(0.5, 0.5)
 texture = SubResource("NoiseTexture2D_dkien")
 script = ExtResource("3_u112l")
 
-[node name="Stars1" type="Sprite2D" parent="Layers/L3"]
+[node name="Stars1" type="Sprite2D" parent="Layers/L0_003"]
 texture_filter = 4
 texture_repeat = 2
 material = SubResource("ShaderMaterial_3erip")
@@ -626,17 +626,17 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("10_hooou")
 script = ExtResource("3_u112l")
 
-[node name="L1" type="Node" parent="Layers"]
+[node name="L0_006" type="Node" parent="Layers"]
 script = ExtResource("1_48uix")
 shift_scale = 0.0060001
 
-[node name="BackgroundSprite" type="Sprite2D" parent="Layers/L1"]
+[node name="BackgroundSprite" type="Sprite2D" parent="Layers/L0_006"]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_83i60")
 texture = SubResource("NoiseTexture2D_2oyq7")
 script = ExtResource("3_u112l")
 
-[node name="Stars2" type="Sprite2D" parent="Layers/L1"]
+[node name="Stars2" type="Sprite2D" parent="Layers/L0_006"]
 texture_filter = 4
 texture_repeat = 2
 material = SubResource("ShaderMaterial_8mgoq")
@@ -644,18 +644,30 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("11_5yul3")
 script = ExtResource("3_u112l")
 
-[node name="L2" type="Node" parent="Layers"]
+[node name="L0_02" type="Node" parent="Layers"]
 script = ExtResource("1_48uix")
 shift_scale = 0.0200001
 
-[node name="BackgroundSprite" type="Sprite2D" parent="Layers/L2"]
+[node name="BackgroundSprite" type="Sprite2D" parent="Layers/L0_02"]
 visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_7jhvc")
 texture = SubResource("NoiseTexture2D_1m68o")
 script = ExtResource("3_u112l")
 
-[node name="Stars3" type="Sprite2D" parent="Layers/L2"]
+[node name="Stars3" type="Sprite2D" parent="Layers/L0_02"]
+texture_filter = 4
+texture_repeat = 2
+material = SubResource("ShaderMaterial_x1knc")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("10_y34go")
+script = ExtResource("3_u112l")
+
+[node name="L0_04" type="Node" parent="Layers"]
+script = ExtResource("1_48uix")
+shift_scale = 0.0400001
+
+[node name="Stars4" type="Sprite2D" parent="Layers/L0_04"]
 texture_filter = 4
 texture_repeat = 2
 material = SubResource("ShaderMaterial_x1knc")
@@ -663,47 +675,44 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("10_enux2")
 script = ExtResource("3_u112l")
 
-[node name="L4" type="Node" parent="Layers"]
+[node name="L0_1" type="Node" parent="Layers"]
 script = ExtResource("1_48uix")
 shift_scale = 0.1
 
-[node name="BackgroundSprite" type="Sprite2D" parent="Layers/L4"]
+[node name="BackgroundSprite" type="Sprite2D" parent="Layers/L0_1"]
 visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_t844t")
 texture = SubResource("NoiseTexture2D_a673f")
 script = ExtResource("3_u112l")
 
-[node name="L5" type="Node" parent="Layers"]
+[node name="L0_5" type="Node" parent="Layers"]
 script = ExtResource("1_48uix")
 shift_scale = 0.5
 
-[node name="BackgroundSprite" type="Sprite2D" parent="Layers/L5"]
+[node name="BackgroundSprite" type="Sprite2D" parent="Layers/L0_5"]
 visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_x5hqi")
 texture = SubResource("NoiseTexture2D_62w84")
 script = ExtResource("3_u112l")
 
-[node name="L6" type="Node" parent="Layers"]
+[node name="L1" type="Node" parent="Layers"]
 script = ExtResource("1_48uix")
 
-[node name="BackgroundSprite" type="Sprite2D" parent="Layers/L6"]
+[node name="BackgroundSprite" type="Sprite2D" parent="Layers/L1"]
 visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_875ma")
 texture = SubResource("NoiseTexture2D_4uw8y")
 script = ExtResource("3_u112l")
 
-[node name="L7" type="Node" parent="Layers"]
+[node name="L1_DEBUG" type="Node" parent="Layers"]
 script = ExtResource("1_48uix")
 
-[node name="BackgroundSprite" type="Sprite2D" parent="Layers/L7"]
+[node name="BackgroundSprite" type="Sprite2D" parent="Layers/L1_DEBUG"]
 visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_jrvdh")
 texture = ExtResource("6_ody0m")
 script = ExtResource("3_u112l")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("5_3ffpc")

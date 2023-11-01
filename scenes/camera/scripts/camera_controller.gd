@@ -7,8 +7,6 @@ extends Camera2D
 @export var zoom_max := 4.0
 @export var zoom_speed := 0.1
 
-@onready var _main_state: MainState = get_node("/root/MainState")
-
 var target: ShipRigidBody
 var _last_veocity: Vector2
 var _required_acceleration_position: Vector2
@@ -42,6 +40,7 @@ func _process(delta):
 	MainState.add_debug_info("Camera zoom", zoom.x)
 
 func _physics_process(delta):
+	if not is_instance_valid(target): return
 	var acceleration = (_last_veocity - target.real_velocity) * (Vector2.ONE * acceleration_multiplyer / zoom)
 	_required_acceleration_position = lerp(_required_acceleration_position, acceleration, _inverse_inertia * delta)
 	_last_veocity = target.real_velocity

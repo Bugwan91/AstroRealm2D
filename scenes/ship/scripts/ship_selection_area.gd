@@ -1,7 +1,5 @@
 extends Area2D
 
-@onready var _main_state: MainState = get_node("/root/MainState")
-
 func _ready():
 	input_event.connect(_selected)
 

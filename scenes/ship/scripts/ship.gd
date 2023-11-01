@@ -2,6 +2,7 @@ class_name ShipRigidBody
 extends RigidBody2D
 
 signal got_hit(value: Vector2)
+signal dead()
 
 @export var _texture: Texture2D
 @export var inputs: ShipInput
@@ -24,9 +25,9 @@ signal got_hit(value: Vector2)
 @onready var thrusters: Thrusters = %Thrusters
 @onready var engines: MainThrusters = %MainThrusters
 
-@onready var ship_destroy_effect: ShipDestroyEffect = %ShipDestroyEffect
-@onready var hp: Health = $"Health"
-@onready var _view = %View
+@onready var health: Health = $"Health"
+@onready var destroy_effect: DestroyEffectManager = %DestroyEffectManager
+@onready var _view: Sprite2D = %View
 @onready var _gun_slot: GunSlot = %GunSlot
 
 var real_velocity: Vector2: get = _real_velocity
@@ -55,11 +56,14 @@ func _ready():
 		flight_assistant.connect_inputs(inputs)
 		battle_assistant.connect_inputs(inputs)
 		gun.connect_inputs(inputs)
-	if is_instance_valid(hp):
-		hp.dying.connect(_destroy)
+	if is_instance_valid(health):
+		health.dying.connect(_die)
+		destroy_effect.ship = self
+		destroy_effect.connect_health(health)
+		destroy_effect.destroy.connect(_destroy)
 
 
-func _process(delta):
+func _process(_delta):
 	if inputs is PlayerShipInput:
 		MainState.add_debug_info("Origin delta", position)
 		MainState.add_debug_info("Origin vel delta", linear_velocity)
@@ -71,7 +75,6 @@ func _physics_process(delta):
 
 
 func _integrate_forces(state):
-	var full_velocity: Vector2 = state.linear_velocity + FloatingOrigin.velocity
 	if inputs is PlayerShipInput:
 		FloatingOrigin.update_state(state)
 	state.linear_velocity -= FloatingOrigin.velocity_delta
@@ -104,11 +107,14 @@ func _real_velocity() -> Vector2:
 func _on_shoot_recoil(force: float):
 	apply_central_impulse(-transform.x * force)
 
-func _destroy():
+func _die():
 	flight_assistant.enabled = false
 	battle_assistant.enabled = false
 	gun.enabled = false
-	ship_destroy_effect.run()
+	dead.emit()
+
+func _destroy():
+	queue_free()
 
 # TODO: Refactor
 # Data to main state (UI connection)

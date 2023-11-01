@@ -5,8 +5,6 @@ signal shoot_recoil(force: float)
 
 @export var bullet_scene: PackedScene
 @export var bullet_color: Color
-@export var bullet_material: ParticleProcessMaterial
-@export var hit_material: ParticleProcessMaterial
 @export_range(0, 40) var fire_rate := 10.0
 @export_range(0, 5000) var range := 1600.0
 @export_range(0, 10000) var bullet_speed := 3000.0
@@ -17,7 +15,6 @@ signal shoot_recoil(force: float)
 
 @onready var _charge_timer = %ChargeTimer
 @onready var _sound = %Sound
-@onready var _world_node = get_node("/root/Main")
 @onready var reloading_timer: Timer = %ReloadingTimer
 
 var enabled := false
@@ -31,10 +28,6 @@ var _bullet_lifetime: float
 
 
 func _ready():
-	bullet_material = bullet_material.duplicate()
-	hit_material = hit_material.duplicate()
-	bullet_material.color = bullet_color
-	hit_material.color = bullet_color
 	_charge_timer.wait_time = 1.0 / fire_rate
 	_charge_timer.timeout.connect(_charge_done)
 	reloading_timer.wait_time = reload_time
@@ -79,8 +72,8 @@ func _spawn_bullet():
 	bullet.linear_velocity = velocity
 	bullet.impulse = recoil
 	bullet.speed = bullet_speed
-	_world_node.add_child(bullet)
-	bullet.update_material(bullet_material, hit_material)
+	MainState.world_node.add_child(bullet)
+	bullet.update_material(bullet_color)
 	bullet.start(_bullet_lifetime)
 
 func _update_marker():

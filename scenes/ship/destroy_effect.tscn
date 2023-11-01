@@ -1,8 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://dcy3g0684tgaa"]
+[gd_scene load_steps=24 format=3 uid="uid://dcy3g0684tgaa"]
 
-[ext_resource type="Texture2D" uid="uid://c6lqhd1nsdtbv" path="res://assets/my/circle_texture_16.tres" id="1_7dgdg"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/ship_destroy_effect.gd" id="1_7w3vq"]
-[ext_resource type="Texture2D" uid="uid://dbc8lck8ryqlr" path="res://assets/my/star.png" id="1_tnh4q"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/ship_destroy_effect.gd" id="1_l4mfa"]
+[ext_resource type="Texture2D" uid="uid://balodvxn3doji" path="res://assets/VFX_textures/smoke_05.png" id="2_e5hvd"]
+[ext_resource type="Texture2D" uid="uid://c6lqhd1nsdtbv" path="res://assets/my/circle_texture_16.tres" id="3_2hv08"]
+[ext_resource type="Texture2D" uid="uid://ct5hytm7xe6po" path="res://assets/my/star2.png" id="4_02x4f"]
 
 [sub_resource type="Gradient" id="Gradient_gr4v4"]
 offsets = PackedFloat32Array(0, 0.0446009, 0.319249, 1)
@@ -38,8 +39,7 @@ gravity = Vector3(0, 0, 0)
 damping_min = 10.0
 damping_max = 10.0
 damping_curve = SubResource("CurveTexture_rkmpg")
-scale_min = 12.0
-scale_max = 16.0
+scale_max = 2.0
 scale_curve = SubResource("CurveTexture_73rfj")
 color = Color(0.145098, 0.145098, 0.145098, 1)
 color_ramp = SubResource("GradientTexture1D_t160v")
@@ -111,37 +111,39 @@ scale_curve = SubResource("CurveTexture_y6w6v")
 color_ramp = SubResource("GradientTexture1D_ps4e2")
 
 [node name="ShipDestroyEffect" type="Node2D"]
-script = ExtResource("1_7w3vq")
+script = ExtResource("1_l4mfa")
 
 [node name="Smoke" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 emitting = false
-amount = 64
 process_material = SubResource("ParticleProcessMaterial_is74h")
-texture = ExtResource("1_7dgdg")
+texture = ExtResource("2_e5hvd")
 lifetime = 0.6
 one_shot = true
 explosiveness = 0.8
 randomness = 0.3
+local_coords = true
 
 [node name="Fire" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 emitting = false
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_4iykj")
-texture = ExtResource("1_7dgdg")
+texture = ExtResource("3_2hv08")
 lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
+local_coords = true
 
 [node name="Sparcles" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 emitting = false
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_wtsvi")
-texture = ExtResource("1_tnh4q")
-lifetime = 0.2
+texture = ExtResource("4_02x4f")
+lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 randomness = 0.5
+local_coords = true
 trail_enabled = true

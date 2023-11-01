@@ -14,10 +14,10 @@ func _ready():
 	get_viewport().size_changed.connect(resize)
 	resize()
 
-func shift(shift: Vector2, zoom: Vector2):
+func shift(shift_vector: Vector2, zoom: Vector2):
 	material.set("shader_parameter/scale", shift_scale)
 	material.set("shader_parameter/vp_size", _vp_to_uv_size)
-	material.set("shader_parameter/offset", shift)
+	material.set("shader_parameter/offset", shift_vector)
 	material.set("shader_parameter/zoom", zoom)
 
 func resize():

@@ -3,6 +3,8 @@ extends Node
 signal player_ship_updated(ship: ShipRigidBody)
 signal player_target_updated(ship: ShipRigidBody)
 
+@onready var world_node: Node2D = get_node("/root/Main")
+
 var ship_position := Vector2.ZERO
 var ship_speed := 0
 var ship_acceleration := 0
