@@ -20,6 +20,7 @@ signal shoot_recoil(force: float)
 @onready var _world_node = get_node("/root/Main")
 @onready var reloading_timer: Timer = %ReloadingTimer
 
+var enabled := false
 var velocity := Vector2.ZERO
 
 var _is_firing := false
@@ -41,11 +42,14 @@ func _ready():
 	_bullet_lifetime = range / bullet_speed
 
 func _process(delta):
+	if not enabled: return
 	_update_marker()
 	_shoot(delta)
 
 func connect_inputs(inputs: ShipInput):
 	inputs.fire.connect(_on_fire_input)
+	enabled = true
+
 
 func _shoot(delta: float):
 	if _is_firing and not _is_reloading:

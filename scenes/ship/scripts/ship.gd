@@ -105,6 +105,9 @@ func _on_shoot_recoil(force: float):
 	apply_central_impulse(-transform.x * force)
 
 func _destroy():
+	flight_assistant.enabled = false
+	battle_assistant.enabled = false
+	gun.enabled = false
 	ship_destroy_effect.run()
 
 # TODO: Refactor

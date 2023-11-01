@@ -33,7 +33,7 @@ func _unhandled_input(event):
 		fire.emit(event.is_pressed())
 
 func _target_updated(target: ShipRigidBody):
-	var player = MainState.player_ship
+	var player: ShipRigidBody = MainState.player_ship
 	if is_instance_valid(player):
 		player.flight_assistant.target = target
 		player.battle_assistant.target = target

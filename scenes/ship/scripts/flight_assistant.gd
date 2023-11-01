@@ -23,6 +23,7 @@ var follow_accuracy_damp := 0.1
 var is_autopilot := false
 var is_autopilot_stop := true
 
+var enabled := false
 var _state: PhysicsDirectBodyState2D
 var _state_position: Vector2
 var _state_rotation: float
@@ -48,14 +49,15 @@ func setup():
 	_thrusters_ratio = _thrusters.estimated_strafe_force(Vector2.RIGHT) / _main_thrusters.estimated_force()
 
 func process(state: PhysicsDirectBodyState2D):
-	_state = state
-	_state_position = _state.transform.origin
-	_state_rotation = _state.transform.x.angle()
-	_state_real_velocity = _state.linear_velocity + FloatingOrigin.velocity
-	_update_autopilot_pointer_view()
-	_update_error()
-	override_controls()
-	_update_thrusters()
+	if enabled:
+		_state = state
+		_state_position = _state.transform.origin
+		_state_rotation = _state.transform.x.angle()
+		_state_real_velocity = _state.linear_velocity + FloatingOrigin.velocity
+		_update_autopilot_pointer_view()
+		_update_error()
+		override_controls()
+		_update_thrusters()
 	_apply_forces()
 
 func _update_autopilot_pointer_view():
@@ -78,7 +80,7 @@ func connect_inputs(inputs: ShipInput):
 	inputs.fa_autopilot.connect(_autopilot_toggled)
 	inputs.autopilot_speed.connect(_autopilot_speed_changed)
 	inputs.autopilot_target_point.connect(_autopilot_point_changed)
-
+	enabled = true
 
 func override_controls():
 	_main_thrusters_control = _main_thruster_input

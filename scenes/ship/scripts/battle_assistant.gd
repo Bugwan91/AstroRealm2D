@@ -15,6 +15,7 @@ var aim_accuracy_damp := 0.1
 var _is_auto_aim := false
 var is_auto_shoot := false
 
+var enabled := false
 var _last_delta_velocity := Vector2.ZERO
 var _aim_error := 0.0
 
@@ -32,6 +33,7 @@ func _ready():
 
 
 func _process(delta):
+	if not enabled: return
 	_calculate_bullet_intersection()
 	auto_aim()
 	auto_shoot()
@@ -43,6 +45,7 @@ func _physics_process(delta):
 func connect_inputs(inputs: ShipInput):
 	inputs.auto_aim.connect(_auto_aim_toggle)
 	inputs.reset_target.connect(_reset_target)
+	enabled = true
 
 
 func set_target(new_target: RigidBody2D):
