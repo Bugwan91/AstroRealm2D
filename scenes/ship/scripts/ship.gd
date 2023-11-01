@@ -94,9 +94,8 @@ func _physics_process(delta):
 
 func _integrate_forces(state):
 	if inputs is PlayerShipInput:
-		FloatingOrigin.update_state(state)
-	state.linear_velocity -= FloatingOrigin.velocity_delta
-	state.transform.origin -= FloatingOrigin.origin_delta
+		FloatingOrigin.update_from_state(state)
+	FloatingOrigin.update_state(state)
 	flight_assistant.process(state)
 	_apply_forcces(state)
 
