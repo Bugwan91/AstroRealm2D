@@ -10,7 +10,7 @@ var linear_velocity := Vector2.ZERO
 
 func _ready():
 	particles.process_material = particles.process_material.duplicate()
-	particles.process_material.color = color
+	particles.process_material.color = color + color * 0.8
 	FloatingOrigin.add(self)
 	timer.timeout.connect(_self_destroy)
 	timer.start()

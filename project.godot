@@ -15,7 +15,7 @@ show_default_buttons=false
 config/name="AstroRealm"
 run/main_scene="res://scenes/main/main_scene.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://ship.png"
+config/icon="res://icon.png"
 
 [autoload]
 

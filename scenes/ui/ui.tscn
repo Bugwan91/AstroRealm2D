@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://3cqmtymu5w3p"]
+[gd_scene load_steps=11 format=3 uid="uid://3cqmtymu5w3p"]
 
 [ext_resource type="Script" path="res://scenes/ui/scripts/position_label.gd" id="1_x4cxl"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/speed_label.gd" id="2_uarfg"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scenes/ui/scripts/fps.gd" id="5_8a6ql"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/debug_info.gd" id="5_u0tch"]
 [ext_resource type="PackedScene" uid="uid://dgf4ciui6fwt5" path="res://scenes/ui/game_over_container.tscn" id="7_vcp7q"]
+[ext_resource type="PackedScene" uid="uid://c07j8tweejekt" path="res://scenes/ui/radar_ui.tscn" id="8_umk2t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7coif"]
 bg_color = Color(0, 0.282353, 0.54902, 0.960784)
@@ -147,3 +148,18 @@ script = ExtResource("5_u0tch")
 
 [node name="GameOverContainer" parent="Control/MarginContainer" instance=ExtResource("7_vcp7q")]
 layout_mode = 2
+
+[node name="RadarUI" parent="Control" instance=ExtResource("8_umk2t")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -512.0
+offset_top = -512.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(256, 256)

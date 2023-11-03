@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://hhj5ip7is6r4"]
+
+[ext_resource type="Script" path="res://scenes/ship/scripts/radar.gd" id="1_xrteo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xcbjy"]
+radius = 104.235
+
+[node name="Radar" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_xrteo")
+
+[node name="CoveringShape" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2, 1)
+shape = SubResource("CircleShape2D_xcbjy")
