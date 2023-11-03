@@ -5,8 +5,6 @@ signal got_hit(value: Vector2)
 signal dead()
 
 @export var _texture: Texture2D
-@export var radar_icon: Texture2D
-@export var radar_color := Color.WHITE
 @export var inputs: ShipInput
 @export var gun: Gun
 @export_range(0, 10000) var max_speed := 2000.0
@@ -82,11 +80,6 @@ func connect_inputs(new_inputs: ShipInput):
 	flight_assistant.connect_inputs(inputs)
 	battle_assistant.connect_inputs(inputs)
 	gun.connect_inputs(inputs)
-
-func _process(_delta):
-	if inputs is PlayerShipInput:
-		MainState.add_debug_info("Origin delta", position)
-		MainState.add_debug_info("Origin vel delta", linear_velocity)
 
 
 func _physics_process(delta):

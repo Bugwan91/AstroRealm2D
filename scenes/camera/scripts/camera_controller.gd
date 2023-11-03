@@ -37,7 +37,6 @@ func _process(delta):
 	_hit_position = lerp(_hit_position, Vector2.ZERO, 0.1)
 	position = target.extrapolator.smooth_position + _required_acceleration_position + _required_look_position + _hit_position
 	zoom = lerp(zoom, _target_zoom, 5 * delta)
-	MainState.add_debug_info("Camera zoom", zoom.x)
 
 func _physics_process(delta):
 	if not is_instance_valid(target): return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://3cqmtymu5w3p"]
+[gd_scene load_steps=9 format=3 uid="uid://3cqmtymu5w3p"]
 
 [ext_resource type="Script" path="res://scenes/ui/scripts/position_label.gd" id="1_x4cxl"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/speed_label.gd" id="2_uarfg"]
@@ -7,19 +7,6 @@
 [ext_resource type="Script" path="res://scenes/ui/scripts/fps.gd" id="5_8a6ql"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/debug_info.gd" id="5_u0tch"]
 [ext_resource type="PackedScene" uid="uid://dgf4ciui6fwt5" path="res://scenes/ui/game_over_container.tscn" id="7_vcp7q"]
-[ext_resource type="PackedScene" uid="uid://c07j8tweejekt" path="res://scenes/ui/radar_ui.tscn" id="8_umk2t"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7coif"]
-bg_color = Color(0, 0.282353, 0.54902, 0.960784)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0, 0.537255, 0.729412, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 
 [sub_resource type="LabelSettings" id="LabelSettings_1il4g"]
 font_size = 32
@@ -53,7 +40,6 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_7coif")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/PanelContainer"]
 layout_mode = 2
@@ -148,18 +134,3 @@ script = ExtResource("5_u0tch")
 
 [node name="GameOverContainer" parent="Control/MarginContainer" instance=ExtResource("7_vcp7q")]
 layout_mode = 2
-
-[node name="RadarUI" parent="Control" instance=ExtResource("8_umk2t")]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -512.0
-offset_top = -512.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 0
-grow_vertical = 0
-pivot_offset = Vector2(256, 256)

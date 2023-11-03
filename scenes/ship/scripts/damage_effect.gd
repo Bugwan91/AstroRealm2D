@@ -41,6 +41,7 @@ func _set_intensity(value: float):
 		fire.amount_ratio = intensity
 		smoke.emitting = true
 		smoke.amount_ratio = intensity
+		modulate.a = intensity
 	else:
 		fire.emitting = false
 		smoke.emitting = false

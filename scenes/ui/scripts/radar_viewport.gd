@@ -1,5 +1,8 @@
 class_name RadarViewport
-extends SubViewport
+extends Node2D
+
+@export var view_radius := 512.0
+@onready var outline = $Outline
 
 var radar: Radar
 
@@ -7,11 +10,13 @@ var _items: Array[RadarItem] = []
 
 func _ready():
 	MainState.radar_updated.connect(_radar_updated)
+	global_scale = Vector2.ONE
+	outline.global_scale = Vector2.ONE
 
 func _physics_process(_delta):
 	if not is_instance_valid(radar): return
 	for item in _items:
-		item.update(256.0, radar.radius)
+		item.update(view_radius, radar.radius)
 
 func _radar_updated(value: Radar):
 	_items.clear()
@@ -25,7 +30,7 @@ func _radar_entered(detected_item: Node2D):
 	if not is_instance_valid(item): return
 	_items.append(item)
 	item.init()
-	item.update(256.0, radar.radius)
+	item.update(view_radius, radar.radius)
 	add_child(item.icon)
 
 func _radar_exited(detected_item):

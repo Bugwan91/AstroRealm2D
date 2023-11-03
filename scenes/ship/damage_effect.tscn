@@ -45,7 +45,7 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 gradient = SubResource("Gradient_378vb")
 
 [sub_resource type="Curve" id="Curve_n4m7n"]
-_data = [Vector2(0, 0.499572), 0.0, 0.805917, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.101536), 0.0, 1.86048, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_qfxxv"]
@@ -61,10 +61,10 @@ initial_velocity_max = 1000.0
 angular_velocity_min = -90.0
 angular_velocity_max = 90.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.2
-scale_max = 0.5
+scale_min = 0.5
+scale_max = 2.0
 scale_curve = SubResource("CurveTexture_qfxxv")
-color = Color(0.207843, 0.207843, 0.207843, 1)
+color = Color(0.21, 0.21, 0.21, 0.5)
 color_ramp = SubResource("GradientTexture1D_dj3qi")
 turbulence_enabled = true
 
@@ -82,7 +82,7 @@ interpolate = false
 local_coords = true
 
 [node name="Smoke" type="GPUParticles2D" parent="."]
-amount = 32
+amount = 16
 process_material = SubResource("ParticleProcessMaterial_k28ba")
 texture = ExtResource("3_qucro")
 randomness = 0.5

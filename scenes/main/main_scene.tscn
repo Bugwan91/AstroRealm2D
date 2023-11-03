@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=23 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -9,12 +9,43 @@
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://scenes/ui/ui.tscn" id="8_myah8"]
 [ext_resource type="Texture2D" uid="uid://ds3kng2esnocn" path="res://scenes/ship/views/01.png" id="8_rjbsu"]
 [ext_resource type="Script" path="res://scenes/ai/scripts/ship_input.gd" id="9_nd6tp"]
+[ext_resource type="Shader" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="10_7ps0f"]
+[ext_resource type="Script" path="res://scenes/ui/scripts/radar_viewport.gd" id="10_nsy5m"]
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
 [ext_resource type="Texture2D" uid="uid://dp224au4ijms3" path="res://ship.png" id="12_qidbo"]
 [ext_resource type="PackedScene" uid="uid://dt7wav32bva3j" path="res://scenes/player/input_reader.tscn" id="13_epig2"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/health.gd" id="14_cmupl"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="15_5xucn"]
 [ext_resource type="PackedScene" uid="uid://hhj5ip7is6r4" path="res://scenes/ship/radar.tscn" id="15_ln8xj"]
+
+[sub_resource type="Gradient" id="Gradient_2be3f"]
+offsets = PackedFloat32Array(0, 0.746063)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_njkiq"]
+gradient = SubResource("Gradient_2be3f")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bh3nw"]
+shader = ExtResource("10_7ps0f")
+shader_parameter/scale = Vector2(4, 4)
+shader_parameter/opacity = 0.031
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/emission = Color(0, 0.301961, 1, 1)
+shader_parameter/mask = SubResource("GradientTexture2D_njkiq")
+
+[sub_resource type="Gradient" id="Gradient_fkijs"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.633987, 0.703704, 0.708061)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4qutk"]
+gradient = SubResource("Gradient_fkijs")
+width = 1024
+height = 1024
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2ehlx")
@@ -34,9 +65,18 @@ environment = ExtResource("4_h5iwh")
 unique_name_in_owner = true
 
 [node name="Grid" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_aip35")]
+material = SubResource("ShaderMaterial_bh3nw")
 base_opacity = 0.01
 speed_limit = 7000.0
 camera = NodePath("../Camera")
+
+[node name="RadarViewport" type="Node2D" parent="Grid"]
+modulate = Color(1, 0, 0.3, 0.1)
+script = ExtResource("10_nsy5m")
+
+[node name="Outline" type="Sprite2D" parent="Grid/RadarViewport"]
+modulate = Color(0, 0.5, 1, 0.8)
+texture = SubResource("GradientTexture2D_4qutk")
 
 [node name="Camera" parent="." instance=ExtResource("11_2fp23")]
 zoom = Vector2(1, 1)
@@ -60,13 +100,15 @@ out_range_color = Color(0.49, 0.49, 0, 0.1)
 position = Vector2(-1000, 1000)
 rotation = 1.74533
 _texture = ExtResource("8_rjbsu")
-radar_color = Color(1, 0, 0, 1)
 inputs = NodePath("AIShipInput")
 gun = NodePath("Gun")
+FA_accuracy = 0.98
+FA_accuracy_damp = 0.01
 
 [node name="AIShipInput" type="Node2D" parent="Ship"]
 position = Vector2(-318, -462)
 script = ExtResource("9_nd6tp")
+agressive = true
 
 [node name="Gun" parent="Ship" instance=ExtResource("8_cwv63")]
 bullet_color = Color(1, 0, 0.262745, 1)
@@ -82,6 +124,7 @@ max_health = 100.0
 _texture = ExtResource("12_qidbo")
 inputs = NodePath("../InputReader")
 gun = NodePath("Gun")
+max_speed = 2100.0
 autopilot_pointer = NodePath("../AutopilotPointer")
 target_prediction_pointer = NodePath("../TargetPointer")
 

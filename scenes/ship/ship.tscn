@@ -30,7 +30,6 @@ shader_parameter/emission_texture = ExtResource("3_co5i1")
 [node name="Ship" type="RigidBody2D"]
 unique_name_in_owner = true
 script = ExtResource("1_5ckws")
-radar_icon = ExtResource("2_e2mwk")
 
 [node name="AreaSelection" type="Area2D" parent="."]
 collision_mask = 0
