@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c54udbbcdd67b"
-path="res://.godot/imported/Vinok_mk2.png-85ff2f901d1e08c66dfc247f0f58565f.ctex"
+uid="uid://ckw8nvh3c8t7b"
+path="res://.godot/imported/Kosa.png-4f80647bfe8e91c221863ec6b914656d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/ship/views/Vinok_mk2.png"
-dest_files=["res://.godot/imported/Vinok_mk2.png-85ff2f901d1e08c66dfc247f0f58565f.ctex"]
+source_file="res://assets/spaceships/Kosa/Kosa.png"
+dest_files=["res://.godot/imported/Kosa.png-4f80647bfe8e91c221863ec6b914656d.ctex"]
 
 [params]
 

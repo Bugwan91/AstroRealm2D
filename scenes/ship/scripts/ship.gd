@@ -4,7 +4,6 @@ extends RigidBody2D
 signal got_hit(value: Vector2)
 signal dead()
 
-@export var _texture: Texture2D
 @export var inputs: ShipInput
 @export var gun: Gun
 @export_range(0, 10000) var max_speed := 2000.0
@@ -63,8 +62,6 @@ func _ready():
 		destroy_effect.ship = self
 		destroy_effect.connect_health(health)
 		destroy_effect.destroy.connect(_destroy)
-	if _texture:
-		_view.texture.diffuse_texture = _texture
 
 func setup_health(new_health: Health = null):
 	if new_health:
@@ -81,7 +78,8 @@ func connect_inputs(new_inputs: ShipInput):
 		MainState.player_ship = self
 	flight_assistant.connect_inputs(inputs)
 	battle_assistant.connect_inputs(inputs)
-	gun.connect_inputs(inputs)
+	if is_instance_valid(gun):
+		gun.connect_inputs(inputs)
 
 
 func _physics_process(delta):

@@ -16,6 +16,17 @@
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="15_5xucn"]
 [ext_resource type="PackedScene" uid="uid://hhj5ip7is6r4" path="res://scenes/ship/radar.tscn" id="15_ln8xj"]
 
+[sub_resource type="Gradient" id="Gradient_owpx4"]
+offsets = PackedFloat32Array(0, 0.686529)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3cj2f"]
+gradient = SubResource("Gradient_owpx4")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [sub_resource type="Gradient" id="Gradient_2be3f"]
 offsets = PackedFloat32Array(0, 0.746063)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -45,17 +56,6 @@ height = 1024
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="Gradient" id="Gradient_owpx4"]
-offsets = PackedFloat32Array(0, 0.686529)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_3cj2f"]
-gradient = SubResource("Gradient_owpx4")
-width = 512
-height = 512
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2ehlx")
 ship_scene = ExtResource("4_5rllk")
@@ -75,12 +75,17 @@ unique_name_in_owner = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 position = Vector2(-330, -177)
-rotation = -1.68134
-color = Color(0.380392, 0.709804, 0.858824, 1)
+rotation = -1.20638
 energy = 0.99
 blend_mode = 2
 shadow_enabled = true
 height = 0.05
+
+[node name="PointLight2D" type="PointLight2D" parent="." groups=["shiftable"]]
+position = Vector2(-40, -358)
+color = Color(1, 0.6, 0, 1)
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 5.0
 
 [node name="Grid" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_aip35")]
 light_mask = 0
@@ -116,26 +121,23 @@ unique_name_in_owner = true
 in_range_color = Color(1, 1, 0, 0.1)
 out_range_color = Color(0.49, 0.49, 0, 0.1)
 
-[node name="Ship" parent="." node_paths=PackedStringArray("inputs", "gun") instance=ExtResource("4_5rllk")]
+[node name="ShipEnemy" parent="." node_paths=PackedStringArray("inputs", "gun") instance=ExtResource("4_5rllk")]
+unique_name_in_owner = false
 position = Vector2(-30000, 3000)
-rotation = 1.74533
 inputs = NodePath("AIShipInput")
 gun = NodePath("Gun")
-FA_accuracy = 0.98
-FA_accuracy_damp = 0.01
+FA_accuracy = 0.92
+FA_accuracy_damp = 0.2
 
-[node name="AIShipInput" type="Node2D" parent="Ship"]
-position = Vector2(-318, -462)
+[node name="AIShipInput" type="Node2D" parent="ShipEnemy"]
 script = ExtResource("9_nd6tp")
-agressive = true
-keep_distance = 800.0
+keep_distance = 700.0
 
-[node name="Gun" parent="Ship" instance=ExtResource("8_cwv63")]
-bullet_color = Color(1, 0, 0.262745, 1)
-overheat = 0.5
+[node name="Gun" parent="ShipEnemy" instance=ExtResource("8_cwv63")]
+overheat = 0.2
 reload_time = 1.0
 
-[node name="Health" type="Node" parent="Ship"]
+[node name="Health" type="Node" parent="ShipEnemy"]
 script = ExtResource("14_cmupl")
 
 [node name="ShipPlayer" parent="." node_paths=PackedStringArray("inputs", "gun", "autopilot_pointer", "target_prediction_pointer") instance=ExtResource("4_5rllk")]
@@ -148,7 +150,6 @@ autopilot_pointer = NodePath("../AutopilotPointer")
 target_prediction_pointer = NodePath("../TargetPointer")
 
 [node name="Gun" parent="ShipPlayer" instance=ExtResource("8_cwv63")]
-bullet_color = Color(0, 0.933333, 1, 1)
 overheat = 0.0
 
 [node name="Health" type="Node" parent="ShipPlayer"]
@@ -156,13 +157,3 @@ script = ExtResource("14_cmupl")
 
 [node name="Radar" parent="ShipPlayer" instance=ExtResource("15_ln8xj")]
 visible = false
-
-[node name="Ship2" parent="." instance=ExtResource("4_5rllk")]
-position = Vector2(-431, -284)
-rotation = -1.54777
-
-[node name="PointLight2D" type="PointLight2D" parent="." groups=["shiftable"]]
-position = Vector2(55, -183)
-color = Color(0.682353, 0.337255, 0, 1)
-texture = SubResource("GradientTexture2D_3cj2f")
-texture_scale = 5.0

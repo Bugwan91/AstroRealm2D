@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ywt3yecdem7f"
-path="res://.godot/imported/Vinok_mk2_normal.png-cf54d220ccbd5f15305f3a9fb68c2bdb.ctex"
+uid="uid://dy6bvyf7tmyw7"
+path="res://.godot/imported/URA.png-bd13d9b2b8cf9a3dfa2b316cfad54b3b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/ship/views/Vinok_mk2_normal.png"
-dest_files=["res://.godot/imported/Vinok_mk2_normal.png-cf54d220ccbd5f15305f3a9fb68c2bdb.ctex"]
+source_file="res://assets/spaceships/Styles/URA.png"
+dest_files=["res://.godot/imported/URA.png-bd13d9b2b8cf9a3dfa2b316cfad54b3b.ctex"]
 
 [params]
 

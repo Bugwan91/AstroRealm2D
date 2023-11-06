@@ -23,12 +23,12 @@ func _process(delta):
 	position += linear_velocity * delta
 
 func _physics_process(delta):
-	ray.target_position.y = speed * delta
+	ray.target_position.y = speed * delta + 10.0
 	_collide()
 
 func update_material(color: Color):
 	_color = color
-	sprite.modulate = _color + _color * 0.2
+	sprite.modulate = _color + _color * 0.5
 	light.color = _color
 
 func start(lifetime: float):

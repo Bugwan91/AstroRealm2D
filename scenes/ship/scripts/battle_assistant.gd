@@ -8,7 +8,6 @@ extends Node
 var gun: Gun
 var target: ShipRigidBody
 var shoot_point := Vector2.ZERO
-var shoot_point_2 := Vector2.ZERO
 var aim_accuracy := 1.0
 var aim_accuracy_damp := 0.1
 var _is_auto_aim := false
@@ -60,6 +59,7 @@ func auto_aim():
 
 
 func auto_shoot():
+	if not is_instance_valid(gun): return
 	if not is_auto_shoot: return
 	if is_instance_valid(target)\
 			and abs(ship.transform.x.angle_to(shoot_point)) < 1\
@@ -70,6 +70,7 @@ func auto_shoot():
 
 
 func _calculate_bullet_intersection():
+	if not is_instance_valid(gun): return
 	# TODO: Refactor this garbage
 	shoot_point = Vector2.ZERO
 	if not(is_instance_valid(target) and target is RigidBody2D):
@@ -97,32 +98,6 @@ func _calculate_bullet_intersection():
 			_update_pointer(shoot_point, shoot_point.length() < gun.range)
 			return
 	_disable_pointer()
-
-
-func _calculate_bullet_intersection_2():
-	# TODO: Refactor this garbage
-	shoot_point_2 = Vector2.ZERO
-	if not(is_instance_valid(target) and target is RigidBody2D):
-		return
-	var dv := _get_delta_v()
-	var a := dv.length_squared() - gun.bullet_speed * gun.bullet_speed
-	if a == 0.0:
-		return
-	var to_target = target.extrapolator.smooth_position - ship.extrapolator.smooth_position
-	var b = 2 * to_target.dot(dv)
-	var c = to_target.length_squared()
-	var discriminant = b * b - 4 * a * c
-	if discriminant >= 0:
-		var t1 = (-b + sqrt(discriminant)) / (2 * a)
-		var t2 = (-b - sqrt(discriminant)) / (2 * a)
-		var t = min(t1, t2)
-		if t < 0:
-			t = max(t1, t2)
-		if t >= 0:
-			shoot_point_2 = to_target + dv * t
-			#DebugDraw2d.line_vector(ship.extrapolator.smooth_position, shoot_point, Color.RED)
-			#DebugDraw2d.line_vector(ship.extrapolator.smooth_position, shoot_point_2, Color.GREEN)
-			return
 
 func _get_delta_v() -> Vector2:
 	return target.linear_velocity - ship.linear_velocity

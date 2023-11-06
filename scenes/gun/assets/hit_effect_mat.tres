@@ -37,6 +37,7 @@ gravity = Vector3(0, 0, 0)
 damping_min = 20.0
 damping_max = 20.0
 damping_curve = SubResource("CurveTexture_p12bm")
+scale_min = 0.2
 scale_max = 2.0
 scale_curve = SubResource("CurveTexture_ru7eh")
 color_ramp = SubResource("GradientTexture1D_0mgya")

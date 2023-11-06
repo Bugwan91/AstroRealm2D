@@ -100,8 +100,10 @@ local_coords = true
 
 [node name="Light" type="PointLight2D" parent="Flame"]
 unique_name_in_owner = true
+visible = false
 rotation = -1.5708
 color = Color(0.94902, 0.682353, 0, 1)
+energy = 0.0
 texture = ExtResource("5_2krt3")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Flame"]

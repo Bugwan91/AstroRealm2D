@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Texture2D" uid="uid://c0g0c4k4h83o" path="res://assets/my/icons/ship_s.png" id="2_e2mwk"]
 [ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="6_hiljr"]
-[ext_resource type="Texture2D" uid="uid://c54udbbcdd67b" path="res://scenes/ship/views/Vinok_mk2.png" id="6_l50uj"]
-[ext_resource type="Texture2D" uid="uid://ywt3yecdem7f" path="res://scenes/ship/views/Vinok_mk2_normal.png" id="7_0w6ur"]
-[ext_resource type="Texture2D" uid="uid://cg3ojemplkovs" path="res://scenes/ship/views/Vinok_mk2_emission.png" id="7_ridrs"]
-[ext_resource type="Texture2D" uid="uid://b2eu0syx0jhli" path="res://scenes/ship/views/Vinok_mk2_specular.png" id="8_pissw"]
+[ext_resource type="Texture2D" uid="uid://b8c4uqr34f2rw" path="res://scenes/ship/views/Kosa_emission.png" id="7_vaxwt"]
+[ext_resource type="Texture2D" uid="uid://dy0tuvhlwwbhp" path="res://scenes/ship/views/Kosa_specular.png" id="8_dx7pu"]
+[ext_resource type="Texture2D" uid="uid://cna1eb1a0fob5" path="res://scenes/ship/views/Kosa.png" id="9_yvsbj"]
+[ext_resource type="Texture2D" uid="uid://3ujfkf8os10d" path="res://scenes/ship/views/Kosa_normal.png" id="10_hb43x"]
 [ext_resource type="PackedScene" uid="uid://k6231xltcfhl" path="res://scenes/thruster/thruster.tscn" id="10_wlx63"]
 [ext_resource type="Script" path="res://scenes/thruster/scripts/thrusters.gd" id="11_hhoku"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship_selection_area.gd" id="12_bsixf"]
@@ -28,12 +28,12 @@ height = 184.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hffab"]
 shader = ExtResource("6_hiljr")
 shader_parameter/emission = 0.8
-shader_parameter/emission_texture = ExtResource("7_ridrs")
-shader_parameter/specular_texture = ExtResource("8_pissw")
+shader_parameter/emission_texture = ExtResource("7_vaxwt")
+shader_parameter/specular_texture = ExtResource("8_dx7pu")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_lna7r"]
-diffuse_texture = ExtResource("6_l50uj")
-normal_texture = ExtResource("7_0w6ur")
+diffuse_texture = ExtResource("9_yvsbj")
+normal_texture = ExtResource("10_hb43x")
 
 [node name="Ship" type="RigidBody2D"]
 unique_name_in_owner = true
@@ -50,7 +50,7 @@ shape = SubResource("CapsuleShape2D_e8eu5")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
-polygon = PackedVector2Array(-64, -53, -22, -64, 61, -28, 64, -12, 64, 12, 61, 28, -22, 64, -64, 53)
+polygon = PackedVector2Array(64, 0, -25, 50, -32, 64, -49, 65, -64, 32, -64, -30, -49, -64, -33, -64, -24, -49)
 
 [node name="FlightAssistant" parent="." node_paths=PackedStringArray("_thrusters", "_main_thrusters") instance=ExtResource("16_avemu")]
 unique_name_in_owner = true
@@ -75,33 +75,33 @@ unique_name_in_owner = true
 script = ExtResource("11_hhoku")
 
 [node name="FL" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
-position = Vector2(64, -19)
+position = Vector2(16, -25)
 rotation = 3.14159
 
 [node name="FR" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
-position = Vector2(64, 18)
+position = Vector2(16, 25)
 rotation = 3.14159
 
 [node name="RF" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
-position = Vector2(52, 33)
+position = Vector2(31, 17)
 rotation = -1.5708
 
 [node name="RB" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
-position = Vector2(-22, 64)
+position = Vector2(-43, 65)
 rotation = -1.5708
 
 [node name="BR" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
-position = Vector2(-64, 53)
+position = Vector2(-64, 30)
 
 [node name="BL" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
-position = Vector2(-64, -53)
+position = Vector2(-64, -30)
 
 [node name="LB" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
-position = Vector2(-22, -64)
+position = Vector2(-43, -64)
 rotation = 1.5708
 
 [node name="LF" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
-position = Vector2(52, -33)
+position = Vector2(31, -17)
 rotation = 1.5708
 
 [node name="MainThrusters" type="Node2D" parent="PositionExtrapolation" node_paths=PackedStringArray("_body")]
@@ -114,7 +114,7 @@ position = Vector2(-64, 0)
 
 [node name="GunSlot" type="Marker2D" parent="PositionExtrapolation"]
 unique_name_in_owner = true
-position = Vector2(71, 0)
+position = Vector2(58, 0)
 script = ExtResource("13_n2hg0")
 
 [node name="DestroyEffectManager" parent="PositionExtrapolation" instance=ExtResource("14_4y0fi")]

@@ -23,11 +23,13 @@ func run(force: float):
 	run_sound(force)
 
 func run_effect(force: float):
-	_light.energy = force
 	if force < THRESHOLD:
+		_light.visible = false
 		smoke_effect.emitting = false
 		flame_effect.emitting = false
 	else:
+		_light.visible = true
+		_light.energy = force
 		modulate.a = force
 		smoke_effect.emitting = true
 		flame_effect.emitting = true

@@ -16,6 +16,7 @@ one_shot = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(-10, 0)
 rotation = 4.71239
 
 [node name="VelocityShifter" type="Node" parent="."]
@@ -24,8 +25,8 @@ script = ExtResource("4_ud3i3")
 [node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 light_mask = 0
-position = Vector2(-15, 0)
-scale = Vector2(0.4, 0.8)
+position = Vector2(-17, 0)
+scale = Vector2(0.2, 0.4)
 texture = ExtResource("4_u3vfw")
 
 [node name="Light" type="PointLight2D" parent="."]

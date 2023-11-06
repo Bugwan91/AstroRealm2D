@@ -7,14 +7,14 @@ uniform sampler2D specular_texture : filter_nearest, hint_default_black;
 
 vec3 light_normal_compute(vec3 light_vec, vec3 normal, vec3 base_color, vec3 light_color, vec4 specular) {
 	float cNdotL = max(0.0, dot(normal, light_vec));
-	vec3 view = vec3(0.0, 0.0, 1.0); // not great but good enough
-	vec3 spec_normal = normalize(normal + vec3(normal.x, normal.y, 0.0));
-	vec3 Lrefl = reflect(-light_vec, spec_normal);
-	float Lspec = max(0.0, dot(Lrefl, view));
-	float shininess = 1.0 / (1.0 - specular.r);
-	float spec = pow(Lspec, shininess) * specular.r * 2.0;
+	vec3 view = vec3(0.0, 0.0, 1.0);
+	light_vec = normalize(light_vec + view * 1.2);
+	vec3 refl = reflect(-light_vec, normal);
+	float reflDot = smoothstep(0.0, 1.0, dot(refl, view));
+	float shininess = pow(1.0 / (1.0 - specular.r), 2.0);
+	float spec = pow(reflDot, shininess) * pow(specular.r, 2.0) * 2.0;
 	vec3 norm_light = light_color * base_color * cNdotL;
-	vec3 spec_light = mix(light_color, base_color, 0.2) * spec;
+	vec3 spec_light = mix(light_color, base_color, 0.8) * spec;
 	return spec_light + norm_light;
 }
 
