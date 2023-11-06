@@ -4,9 +4,9 @@ extends Node2D
 signal shoot_recoil(force: float)
 
 @export var bullet_scene: PackedScene
-@export var bullet_color: Color = Color.PALE_GREEN
+@export var bullet_color: Color = Color.RED
 @export_range(0, 40) var fire_rate := 10.0
-@export_range(0, 5000) var range := 1600.0
+@export_range(0, 5000) var range := 2000.0
 @export_range(0, 10000) var bullet_speed := 3000.0
 @export_range(0, 100) var recoil := 1.0
 @export_range(0, 10) var overheat := 1.0

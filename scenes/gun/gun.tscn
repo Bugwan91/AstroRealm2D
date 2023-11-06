@@ -7,6 +7,8 @@
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_heu61")
 bullet_scene = ExtResource("2_gsief")
+range = 3000.0
+bullet_speed = 5000.0
 
 [node name="ChargeTimer" type="Timer" parent="."]
 unique_name_in_owner = true

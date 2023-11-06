@@ -50,9 +50,10 @@ func _ready():
 	battle_assistant.aim_accuracy = BA_accuracy
 	battle_assistant.aim_accuracy_damp = BA_accuracy_damp
 	battle_assistant.pointer_view = target_prediction_pointer
-	_gun_slot.add_gun(gun)
-	gun.shoot_recoil.connect(_on_shoot_recoil)
-	battle_assistant.gun = gun
+	if is_instance_valid(gun):
+		_gun_slot.add_gun(gun)
+		gun.shoot_recoil.connect(_on_shoot_recoil)
+		battle_assistant.gun = gun
 	connect_inputs(inputs)
 	setup_health()
 	if is_instance_valid(health):
@@ -63,7 +64,7 @@ func _ready():
 		destroy_effect.connect_health(health)
 		destroy_effect.destroy.connect(_destroy)
 	if _texture:
-		_view.texture = _texture
+		_view.texture.diffuse_texture = _texture
 
 func setup_health(new_health: Health = null):
 	if new_health:
@@ -75,6 +76,7 @@ func setup_health(new_health: Health = null):
 
 func connect_inputs(new_inputs: ShipInput):
 	inputs = new_inputs
+	if not is_instance_valid(new_inputs): return
 	if inputs is PlayerShipInput:
 		MainState.player_ship = self
 	flight_assistant.connect_inputs(inputs)
@@ -83,8 +85,10 @@ func connect_inputs(new_inputs: ShipInput):
 
 
 func _physics_process(delta):
-	_update_main_state(delta)
-	gun.velocity = real_velocity
+	if inputs is PlayerShipInput:
+		_update_main_state(delta)
+	if is_instance_valid(gun):
+		gun.velocity = real_velocity
 
 
 func _integrate_forces(state):

@@ -5,12 +5,14 @@ extends Node2D
 
 @onready var timer = %Timer
 @onready var particles: GPUParticles2D = %GPUParticles2D
+@onready var light = %Light
 
 var linear_velocity := Vector2.ZERO
 
 func _ready():
 	particles.process_material = particles.process_material.duplicate()
-	particles.process_material.color = color + color * 0.8
+	particles.process_material.color = color + color * 0.3
+	light.color = color
 	FloatingOrigin.add(self)
 	timer.timeout.connect(_self_destroy)
 	timer.start()

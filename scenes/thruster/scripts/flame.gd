@@ -6,12 +6,13 @@ const THRESHOLD := 0.01
 @onready var smoke_effect = %SmokeEffect
 @onready var flame_effect = %FlameEffect
 @onready var sound = %Sound
+@onready var _light = %Light
 
 var _max_volume := 0.0
 
 func _ready():
-	run_effect(0)
-	run_sound(0)
+	run_effect(0.0)
+	run_sound(0.0)
 
 func setup_sound(volume: float, pitch: float):
 	_max_volume = volume
@@ -22,6 +23,7 @@ func run(force: float):
 	run_sound(force)
 
 func run_effect(force: float):
+	_light.energy = force
 	if force < THRESHOLD:
 		smoke_effect.emitting = false
 		flame_effect.emitting = false

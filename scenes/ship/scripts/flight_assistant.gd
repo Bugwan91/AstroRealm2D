@@ -13,8 +13,8 @@ const ANGULAR_THRESHOLD = 0.01
 @export var autopilot_pointer_view: AssistantPointer
 
 var target: RigidBody2D
-var autopilot_speed := 100000.0
-var follow_distance := 500.0
+var autopilot_speed := 10000.0
+var follow_distance := 1000.0
 var direction := Vector2.ZERO
 var ignore_direction_update := false
 var is_follow := false
@@ -150,8 +150,6 @@ func move_to(target_point: Vector2, max_speed: float = 0.0, stop: bool = true):
 
 
 func turn_to(target_point: Vector2):
-	# TODO: Rethink and rework this algorythm.
-	# I don't like it and don't fully understand it.
 	if _angular_control != 0:
 		return
 	var error := _state.transform.x.angle_to(target_point - _state_position)

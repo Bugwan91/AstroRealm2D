@@ -6,6 +6,7 @@ extends Node2D
 @onready var timer: Timer = %Timer
 @onready var ray: RayCast2D = %RayCast2D
 @onready var sprite = %Sprite
+@onready var light = %Light
 
 var linear_velocity: Vector2 = Vector2.ZERO
 
@@ -22,12 +23,13 @@ func _process(delta):
 	position += linear_velocity * delta
 
 func _physics_process(delta):
-	ray.target_position.y = speed * delta + 8.0
+	ray.target_position.y = speed * delta
 	_collide()
 
 func update_material(color: Color):
 	_color = color
-	sprite.modulate = _color + _color * 0.5
+	sprite.modulate = _color + _color * 0.2
+	light.color = _color
 
 func start(lifetime: float):
 	timer.timeout.connect(_self_destroy)

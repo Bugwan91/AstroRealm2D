@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcjlidv1ftgrv"]
+[gd_scene load_steps=7 format=3 uid="uid://dcjlidv1ftgrv"]
 
 [ext_resource type="Script" path="res://scenes/gun/scripts/bullet_hit_effect.gd" id="1_27y4s"]
 [ext_resource type="AudioStream" uid="uid://cejv4j507tnti" path="res://assets/sounds/spacelord_hit2.wav" id="2_6t2pu"]
 [ext_resource type="Script" path="res://scenes/main/scripts/velocity_shifter.gd" id="3_u8joq"]
 [ext_resource type="Material" uid="uid://clufqa0vb1vo4" path="res://scenes/gun/assets/hit_effect_mat.tres" id="4_03671"]
 [ext_resource type="Texture2D" uid="uid://dbc8lck8ryqlr" path="res://assets/my/star.png" id="5_doqwm"]
+[ext_resource type="Texture2D" uid="uid://c388olp5jsja" path="res://assets/my/circle_texture_128.tres" id="6_dsq42"]
 
 [node name="HitEffect" type="Node2D"]
 script = ExtResource("1_27y4s")
@@ -24,11 +25,17 @@ script = ExtResource("3_u8joq")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
+light_mask = 0
 position = Vector2(0, 2)
-amount = 16
+amount = 32
 process_material = ExtResource("4_03671")
 texture = ExtResource("5_doqwm")
 lifetime = 0.3
-explosiveness = 0.8
+explosiveness = 0.9
 fract_delta = false
 local_coords = true
+
+[node name="Light" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("6_dsq42")
+texture_scale = 2.0

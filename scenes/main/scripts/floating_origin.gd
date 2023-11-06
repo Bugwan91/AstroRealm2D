@@ -1,6 +1,6 @@
 extends Node2D
 
-const GROUP_NAME = "FloatingOriginShiftable"
+const GROUP_NAME = "shiftable"
 
 @export var enabled := true
 

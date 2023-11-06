@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwdthpisfmojs"]
+[gd_scene load_steps=6 format=3 uid="uid://dwdthpisfmojs"]
 
 [ext_resource type="Script" path="res://scenes/gun/scripts/bullet.gd" id="1_gtbct"]
 [ext_resource type="PackedScene" uid="uid://dcjlidv1ftgrv" path="res://scenes/gun/hit_effect.tscn" id="2_m6c5x"]
 [ext_resource type="Texture2D" uid="uid://cyl63tih1p2em" path="res://assets/VFX_textures/Rotated/trace_01_rotated.png" id="4_u3vfw"]
 [ext_resource type="Script" path="res://scenes/main/scripts/velocity_shifter.gd" id="4_ud3i3"]
+[ext_resource type="Texture2D" uid="uid://c388olp5jsja" path="res://assets/my/circle_texture_128.tres" id="5_rn3vo"]
 
 [node name="Bullet" type="Node2D"]
 script = ExtResource("1_gtbct")
@@ -15,7 +16,6 @@ one_shot = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-4, 0)
 rotation = 4.71239
 
 [node name="VelocityShifter" type="Node" parent="."]
@@ -23,6 +23,12 @@ script = ExtResource("4_ud3i3")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+light_mask = 0
 position = Vector2(-15, 0)
-scale = Vector2(0.2, 0.4)
+scale = Vector2(0.4, 0.8)
 texture = ExtResource("4_u3vfw")
+
+[node name="Light" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("5_rn3vo")
+texture_scale = 2.0

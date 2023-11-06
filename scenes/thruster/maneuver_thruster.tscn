@@ -4,5 +4,5 @@
 [ext_resource type="Script" path="res://scenes/thruster/scripts/maneuver_thruster.gd" id="2_e25ev"]
 
 [node name="ManeuverThruster" instance=ExtResource("1_4tnod")]
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.2, 0.2)
 script = ExtResource("2_e25ev")
