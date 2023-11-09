@@ -3,17 +3,17 @@
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Texture2D" uid="uid://c0g0c4k4h83o" path="res://assets/my/icons/ship_s.png" id="2_e2mwk"]
 [ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="6_hiljr"]
-[ext_resource type="Texture2D" uid="uid://b8c4uqr34f2rw" path="res://scenes/ship/views/Kosa_emission.png" id="7_vaxwt"]
-[ext_resource type="Texture2D" uid="uid://dy0tuvhlwwbhp" path="res://scenes/ship/views/Kosa_specular.png" id="8_dx7pu"]
-[ext_resource type="Texture2D" uid="uid://cna1eb1a0fob5" path="res://scenes/ship/views/Kosa.png" id="9_yvsbj"]
-[ext_resource type="Texture2D" uid="uid://3ujfkf8os10d" path="res://scenes/ship/views/Kosa_normal.png" id="10_hb43x"]
 [ext_resource type="PackedScene" uid="uid://k6231xltcfhl" path="res://scenes/thruster/thruster.tscn" id="10_wlx63"]
 [ext_resource type="Script" path="res://scenes/thruster/scripts/thrusters.gd" id="11_hhoku"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship_selection_area.gd" id="12_bsixf"]
+[ext_resource type="Texture2D" uid="uid://boh3dd5t306px" path="res://scenes/ship/views/Vinok_emission.png" id="12_buti5"]
+[ext_resource type="Texture2D" uid="uid://mbbv266xour1" path="res://scenes/ship/views/Vinok_specular.png" id="13_7028l"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/gun_slot.gd" id="13_n2hg0"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/taking_damage.gd" id="13_o14b0"]
 [ext_resource type="PackedScene" uid="uid://bu6wjq2ioia27" path="res://scenes/ship/desctroy_effect_manager.tscn" id="14_4y0fi"]
+[ext_resource type="Texture2D" uid="uid://d2uh6mq66s1h2" path="res://scenes/ship/views/Vinok.png" id="14_pdg27"]
 [ext_resource type="PackedScene" uid="uid://s0kc0iwk14gt" path="res://scenes/ship/ui.tscn" id="15_m8yda"]
+[ext_resource type="Texture2D" uid="uid://b4gipgnkijqf" path="res://scenes/ship/views/Vinok_normal.png" id="15_oaomj"]
 [ext_resource type="PackedScene" uid="uid://t86wis3mvind" path="res://scenes/ship/flight_assistant.tscn" id="16_avemu"]
 [ext_resource type="PackedScene" uid="uid://bqiu3ng56ogjy" path="res://scenes/ship/battle_assistant.tscn" id="17_w8wag"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/radar_item.gd" id="18_cae74"]
@@ -27,19 +27,20 @@ height = 184.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hffab"]
 shader = ExtResource("6_hiljr")
-shader_parameter/emission = 0.8
-shader_parameter/emission_texture = ExtResource("7_vaxwt")
-shader_parameter/specular_texture = ExtResource("8_dx7pu")
+shader_parameter/emission = 2.0
+shader_parameter/emission_texture = ExtResource("12_buti5")
+shader_parameter/specular_texture = ExtResource("13_7028l")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_lna7r"]
-diffuse_texture = ExtResource("9_yvsbj")
-normal_texture = ExtResource("10_hb43x")
+diffuse_texture = ExtResource("14_pdg27")
+normal_texture = ExtResource("15_oaomj")
 
 [node name="Ship" type="RigidBody2D"]
 unique_name_in_owner = true
 script = ExtResource("1_5ckws")
 
 [node name="AreaSelection" type="Area2D" parent="."]
+visible = false
 collision_mask = 0
 script = ExtResource("12_bsixf")
 
@@ -50,7 +51,7 @@ shape = SubResource("CapsuleShape2D_e8eu5")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
-polygon = PackedVector2Array(64, 0, -25, 50, -32, 64, -49, 65, -64, 32, -64, -30, -49, -64, -33, -64, -24, -49)
+polygon = PackedVector2Array(64, 0, -25, 50, -33, 64, -49, 64, -64, 32, -64, -30, -49, -64, -33, -64, -24, -49)
 
 [node name="FlightAssistant" parent="." node_paths=PackedStringArray("_thrusters", "_main_thrusters") instance=ExtResource("16_avemu")]
 unique_name_in_owner = true

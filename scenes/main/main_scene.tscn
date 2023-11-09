@@ -126,11 +126,12 @@ unique_name_in_owner = false
 position = Vector2(-30000, 3000)
 inputs = NodePath("AIShipInput")
 gun = NodePath("Gun")
-FA_accuracy = 0.92
+FA_accuracy = 0.9
 FA_accuracy_damp = 0.2
 
 [node name="AIShipInput" type="Node2D" parent="ShipEnemy"]
 script = ExtResource("9_nd6tp")
+agressive = true
 keep_distance = 700.0
 
 [node name="Gun" parent="ShipEnemy" instance=ExtResource("8_cwv63")]

@@ -4,6 +4,8 @@ extends RigidBody2D
 signal got_hit(value: Vector2)
 signal dead()
 
+@export var res: ShipResource
+
 @export var inputs: ShipInput
 @export var gun: Gun
 @export_range(0, 10000) var max_speed := 2000.0
