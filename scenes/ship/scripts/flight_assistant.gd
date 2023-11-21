@@ -111,7 +111,7 @@ func follow_target(distance: float = 0.0):
 func match_velocity(dv: Vector2 = Vector2.ZERO, main_forced: bool = true):
 	_linear_control.x = _main_thrusters_control if _main_thrusters_control > 0 else _linear_control.x
 	var dv_len := dv.length()
-	if dv_len == 0:
+	if dv_len < LINEAR_THRESHOLD * 0.1:
 		return
 	dv = dv.rotated(-_state_rotation)
 	var dv_n := dv / dv_len
@@ -159,7 +159,7 @@ func turn_to(target_point: Vector2):
 	if a == 0:
 		return
 	var d: float = abs(error)
-	var n := int((sqrt(a*a + 8*a*d) - a) / (2*a))
+	var n := int((sqrt(a*(a + 8*d)) - a) / (2*a))
 	var wt: float = sign(error) * (d/(n+1) + 0.5*a*n)
 	var w := _state.angular_velocity * _state.step
 	_angular_control = (wt - w) / a

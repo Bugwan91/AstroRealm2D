@@ -8,7 +8,6 @@ extends ShipInput
 var player: ShipRigidBody
 
 func _ready():
-	print("AI READY")
 	MainState.player_ship_updated.connect(_on_update_player_ship)
 
 func _on_update_player_ship(player_ship: ShipRigidBody):

@@ -1,4 +1,6 @@
 shader_type canvas_item;
+render_mode blend_add;
+
 
 uniform vec2 scale;
 uniform float opacity = 0.1;
@@ -14,3 +16,6 @@ void fragment() {
 	COLOR = color * emission;
 }
 
+void light() {
+	LIGHT = vec4(0.0);
+}

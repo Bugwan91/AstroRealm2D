@@ -1,16 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bu6wjq2ioia27"]
+[gd_scene load_steps=4 format=3 uid="uid://bu6wjq2ioia27"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/desctroy_effect_manager.gd" id="1_mo52c"]
 [ext_resource type="PackedScene" uid="uid://cxaoyw4qxcd0p" path="res://scenes/ship/damage_effect.tscn" id="2_ee5ht"]
-[ext_resource type="PackedScene" uid="uid://b6or8cehcqbe5" path="res://scenes/ship/pre_destroy_effect.tscn" id="3_a638a"]
 [ext_resource type="PackedScene" uid="uid://dcy3g0684tgaa" path="res://scenes/ship/destroy_effect.tscn" id="4_otjbo"]
 
 [node name="DesctroyEffectManager" type="Node2D"]
 script = ExtResource("1_mo52c")
 _damage_effect_scene = ExtResource("2_ee5ht")
-_pre_destroy_effect_scene = ExtResource("3_a638a")
 _destroy_effect_scene = ExtResource("4_otjbo")
-
-[node name="Timer" type="Timer" parent="."]
-unique_name_in_owner = true
-one_shot = true

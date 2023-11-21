@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://t86wis3mvind"]
+[gd_scene load_steps=2 format=3 uid="uid://cuyaiemhv0gk3"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/flight_assistant.gd" id="1_7km3k"]
 

@@ -1,12 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://cxaoyw4qxcd0p"]
+[gd_scene load_steps=16 format=3 uid="uid://cxaoyw4qxcd0p"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/damage_effect.gd" id="1_mp2sa"]
 [ext_resource type="Texture2D" uid="uid://hnfioahelelc" path="res://assets/VFX_textures/fire_01.png" id="2_7r8uf"]
 [ext_resource type="Texture2D" uid="uid://crf347o6fh4jm" path="res://assets/VFX_textures/smoke_07.png" id="3_qucro"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oflux"]
+light_mode = 1
+
 [sub_resource type="Gradient" id="Gradient_ksgce"]
-offsets = PackedFloat32Array(0, 0.401408, 1)
-colors = PackedColorArray(1.1, 1, 0, 1, 1.5, 0.6, 0, 1, 1, 0.3, 0, 0)
+offsets = PackedFloat32Array(0, 0.409605, 1)
+colors = PackedColorArray(10, 5, 0, 1, 10, 2, 0, 1, 10, 1, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ft1rn"]
 gradient = SubResource("Gradient_ksgce")
@@ -36,6 +39,9 @@ scale_max = 0.2
 scale_curve = SubResource("CurveTexture_caox6")
 color_ramp = SubResource("GradientTexture1D_ft1rn")
 turbulence_enabled = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_opo5s"]
+light_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_378vb"]
 offsets = PackedFloat32Array(0.00234742, 0.0610329, 0.603286, 1)
@@ -74,6 +80,7 @@ fire = NodePath("Fire")
 smoke = NodePath("Smoke")
 
 [node name="Fire" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_oflux")
 process_material = SubResource("ParticleProcessMaterial_pcjcm")
 texture = ExtResource("2_7r8uf")
 lifetime = 0.2
@@ -82,6 +89,7 @@ interpolate = false
 local_coords = true
 
 [node name="Smoke" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_opo5s")
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_k28ba")
 texture = ExtResource("3_qucro")

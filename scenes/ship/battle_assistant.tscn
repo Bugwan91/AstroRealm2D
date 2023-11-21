@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqiu3ng56ogjy"]
-
-[ext_resource type="Script" path="res://scenes/ship/scripts/battle_assistant.gd" id="1_0q78c"]
-
-[node name="BattleAssistant" type="Node"]
-script = ExtResource("1_0q78c")

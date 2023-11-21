@@ -73,19 +73,26 @@ environment = ExtResource("4_h5iwh")
 [node name="InputReader" parent="." instance=ExtResource("13_epig2")]
 unique_name_in_owner = true
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+[node name="DarkAmbient" type="DirectionalLight2D" parent="."]
 position = Vector2(-330, -177)
 rotation = -1.20638
-energy = 0.99
+color = Color(0, 0, 0, 1)
+energy = 0.98
 blend_mode = 2
 shadow_enabled = true
 height = 0.05
 
-[node name="PointLight2D" type="PointLight2D" parent="." groups=["shiftable"]]
+[node name="DirectionalLight" type="DirectionalLight2D" parent="."]
+position = Vector2(-330, -177)
+rotation = -1.20638
+color = Color(0.745098, 0.65098, 0.376471, 1)
+
+[node name="PointLight" type="PointLight2D" parent="." groups=["shiftable"]]
+visible = false
 position = Vector2(-40, -358)
 color = Color(1, 0.6, 0, 1)
 texture = SubResource("GradientTexture2D_3cj2f")
-texture_scale = 5.0
+texture_scale = 10.0
 
 [node name="Grid" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_aip35")]
 light_mask = 0
@@ -100,6 +107,7 @@ script = ExtResource("10_nsy5m")
 
 [node name="Outline" type="Sprite2D" parent="Grid/RadarViewport"]
 modulate = Color(0, 0.5, 1, 0.8)
+light_mask = 0
 texture = SubResource("GradientTexture2D_4qutk")
 
 [node name="Camera" parent="." instance=ExtResource("11_2fp23")]
