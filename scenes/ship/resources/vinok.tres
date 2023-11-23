@@ -1,0 +1,67 @@
+[gd_resource type="Resource" script_class="ShipResource" load_steps=19 format=3 uid="uid://bth1ixgn5yk8q"]
+
+[ext_resource type="Texture2D" uid="uid://boh3dd5t306px" path="res://scenes/ship/views/Vinok_emission.png" id="1_huudx"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/resources/ship_resource.gd" id="1_vqm8w"]
+[ext_resource type="Texture2D" uid="uid://b4gipgnkijqf" path="res://scenes/ship/views/Vinok_normal.png" id="2_qmhx3"]
+[ext_resource type="Script" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="4_hglvo"]
+[ext_resource type="Texture2D" uid="uid://mbbv266xour1" path="res://scenes/ship/views/Vinok_specular.png" id="5_mswie"]
+[ext_resource type="Texture2D" uid="uid://d2uh6mq66s1h2" path="res://scenes/ship/views/Vinok.png" id="6_m2y4c"]
+[ext_resource type="Script" path="res://addons/points_resource_editor/point_resource.gd" id="7_2wdew"]
+[ext_resource type="Script" path="res://addons/points_resource_editor/points_array_resource.gd" id="8_f3tha"]
+
+[sub_resource type="Resource" id="Resource_osr7w"]
+script = ExtResource("4_hglvo")
+data = PackedVector2Array(64, -15, 64, 19, 61, 29, -18, 64, -24, 64, -64, 54, -64, -54, -24, -64, -18, -64, 61, -29)
+
+[sub_resource type="Resource" id="Resource_a8suf"]
+script = ExtResource("7_2wdew")
+position = Vector2(61, -27)
+rotation = 180.0
+
+[sub_resource type="Resource" id="Resource_0rkoe"]
+script = ExtResource("7_2wdew")
+position = Vector2(61, 27)
+rotation = 180.0
+
+[sub_resource type="Resource" id="Resource_a66nt"]
+script = ExtResource("7_2wdew")
+position = Vector2(54, 32)
+rotation = -90.0
+
+[sub_resource type="Resource" id="Resource_88hr2"]
+script = ExtResource("7_2wdew")
+position = Vector2(-48, 58)
+rotation = -90.0
+
+[sub_resource type="Resource" id="Resource_63w1j"]
+script = ExtResource("7_2wdew")
+position = Vector2(-64, 53)
+rotation = 0.0
+
+[sub_resource type="Resource" id="Resource_botd2"]
+script = ExtResource("7_2wdew")
+position = Vector2(-64, -53)
+rotation = 0.0
+
+[sub_resource type="Resource" id="Resource_tsq7h"]
+script = ExtResource("7_2wdew")
+position = Vector2(-48, -58)
+rotation = 90.0
+
+[sub_resource type="Resource" id="Resource_w33th"]
+script = ExtResource("7_2wdew")
+position = Vector2(53, -32)
+rotation = 90.0
+
+[sub_resource type="Resource" id="Resource_5sw30"]
+script = ExtResource("8_f3tha")
+points = Array[ExtResource("7_2wdew")]([SubResource("Resource_a8suf"), SubResource("Resource_0rkoe"), SubResource("Resource_a66nt"), SubResource("Resource_88hr2"), SubResource("Resource_63w1j"), SubResource("Resource_botd2"), SubResource("Resource_tsq7h"), SubResource("Resource_w33th")])
+
+[resource]
+script = ExtResource("1_vqm8w")
+texture = ExtResource("6_m2y4c")
+normal_map = ExtResource("2_qmhx3")
+emission_map = ExtResource("1_huudx")
+specular_map = ExtResource("5_mswie")
+shape = SubResource("Resource_osr7w")
+thrusters_position = SubResource("Resource_5sw30")

@@ -1,0 +1,67 @@
+[gd_resource type="Resource" script_class="ShipResource" load_steps=19 format=3 uid="uid://dphy32mctxvtp"]
+
+[ext_resource type="Texture2D" uid="uid://b8c4uqr34f2rw" path="res://scenes/ship/views/Kosa_emission.png" id="1_sf4aj"]
+[ext_resource type="Texture2D" uid="uid://3ujfkf8os10d" path="res://scenes/ship/views/Kosa_normal.png" id="2_t3417"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/resources/ship_resource.gd" id="3_w0b0e"]
+[ext_resource type="Script" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="4_rafx6"]
+[ext_resource type="Texture2D" uid="uid://dy0tuvhlwwbhp" path="res://scenes/ship/views/Kosa_specular.png" id="5_oxjoo"]
+[ext_resource type="Texture2D" uid="uid://cna1eb1a0fob5" path="res://scenes/ship/views/Kosa.png" id="6_o7ltn"]
+[ext_resource type="Script" path="res://addons/points_resource_editor/point_resource.gd" id="7_jcjxy"]
+[ext_resource type="Script" path="res://addons/points_resource_editor/points_array_resource.gd" id="8_5f8tf"]
+
+[sub_resource type="Resource" id="Resource_6qwy4"]
+script = ExtResource("4_rafx6")
+data = PackedVector2Array(64, 0, 57, 9, 28, 17, -24, 48, -33, 64, -49, 64, -64, 32, -64, -32, -49, -64, -33, -64, -24, -48, 28, -17, 57, -9)
+
+[sub_resource type="Resource" id="Resource_57ijh"]
+script = ExtResource("7_jcjxy")
+position = Vector2(28, -18)
+rotation = 180.0
+
+[sub_resource type="Resource" id="Resource_6m21u"]
+script = ExtResource("7_jcjxy")
+position = Vector2(28, 17)
+rotation = 180.0
+
+[sub_resource type="Resource" id="Resource_87o1i"]
+script = ExtResource("7_jcjxy")
+position = Vector2(54, 10)
+rotation = -90.0
+
+[sub_resource type="Resource" id="Resource_ntb2s"]
+script = ExtResource("7_jcjxy")
+position = Vector2(-45, 64)
+rotation = -90.0
+
+[sub_resource type="Resource" id="Resource_3bpny"]
+script = ExtResource("7_jcjxy")
+position = Vector2(-64, 30)
+rotation = 0.0
+
+[sub_resource type="Resource" id="Resource_c5j2y"]
+script = ExtResource("7_jcjxy")
+position = Vector2(-64, -30)
+rotation = 0.0
+
+[sub_resource type="Resource" id="Resource_du7lc"]
+script = ExtResource("7_jcjxy")
+position = Vector2(-45, -64)
+rotation = 90.0
+
+[sub_resource type="Resource" id="Resource_s7qbg"]
+script = ExtResource("7_jcjxy")
+position = Vector2(54, -10)
+rotation = 90.0
+
+[sub_resource type="Resource" id="Resource_mktfj"]
+script = ExtResource("8_5f8tf")
+points = Array[ExtResource("7_jcjxy")]([SubResource("Resource_57ijh"), SubResource("Resource_6m21u"), SubResource("Resource_87o1i"), SubResource("Resource_ntb2s"), SubResource("Resource_3bpny"), SubResource("Resource_c5j2y"), SubResource("Resource_du7lc"), SubResource("Resource_s7qbg")])
+
+[resource]
+script = ExtResource("3_w0b0e")
+texture = ExtResource("6_o7ltn")
+normal_map = ExtResource("2_t3417")
+emission_map = ExtResource("1_sf4aj")
+specular_map = ExtResource("5_oxjoo")
+shape = SubResource("Resource_6qwy4")
+thrusters_position = SubResource("Resource_mktfj")
