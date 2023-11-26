@@ -104,7 +104,6 @@ func follow_target(distance: float = 0.0):
 	var dp := target.position - _state_position
 	var dp_target := dp - dp.normalized() * distance
 	var vs = _get_stop_velocity(dp_target, -dv, 0)
-	printt(vs.length(), 1.0 - _velocity_error, (vs * (1.0 - _velocity_error)).length())
 	match_velocity(vs * (1.0 - _velocity_error))
 
 

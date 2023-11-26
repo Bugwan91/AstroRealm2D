@@ -2,6 +2,7 @@ extends Area2D
 
 func _ready():
 	input_event.connect(_selected)
+	printt("connected", input_event.is_connected(_selected))
 
 func _selected(_viewport, event, _shape_idx):
 	print("selected")

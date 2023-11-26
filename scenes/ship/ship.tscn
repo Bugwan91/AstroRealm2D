@@ -23,17 +23,16 @@
 [ext_resource type="Script" path="res://scenes/ship/scripts/position_extrapolation.gd" id="25_1c55w"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/main_thrusters.gd" id="25_fgofk"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e8eu5"]
-radius = 80.0
-height = 184.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_70byj"]
+radius = 87.023
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i7g7l"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5enes"]
 shader = ExtResource("7_byino")
 shader_parameter/emission = 2.0
 shader_parameter/emission_texture = ExtResource("8_c07dd")
 shader_parameter/specular_texture = ExtResource("10_7ek0h")
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_ll4d1"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_5bajo"]
 diffuse_texture = ExtResource("8_olsct")
 normal_texture = ExtResource("9_ouqgp")
 
@@ -41,18 +40,17 @@ normal_texture = ExtResource("9_ouqgp")
 script = ExtResource("1_5ckws")
 setup_data = ExtResource("2_sl4tc")
 
-[node name="AreaSelection" type="Area2D" parent="."]
-visible = false
+[node name="Area2D" type="Area2D" parent="."]
 collision_mask = 0
+monitoring = false
+monitorable = false
 script = ExtResource("12_bsixf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaSelection"]
-rotation = -1.5708
-shape = SubResource("CapsuleShape2D_e8eu5")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_70byj")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 unique_name_in_owner = true
-visible = false
 polygon = PackedVector2Array(64, -19, 64, 19, 61, 29, -18, 64, -25, 64, -64, 54, -64, -54, -25, -64, -18, -64, 59, -30)
 
 [node name="FlightAssistant" type="Node" parent="." node_paths=PackedStringArray("_thrusters", "_main_thrusters")]
@@ -71,9 +69,9 @@ script = ExtResource("25_1c55w")
 
 [node name="View" type="Sprite2D" parent="PositionExtrapolation"]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_i7g7l")
+material = SubResource("ShaderMaterial_5enes")
 rotation = 1.5708
-texture = SubResource("CanvasTexture_ll4d1")
+texture = SubResource("CanvasTexture_5bajo")
 script = ExtResource("12_h08yy")
 
 [node name="Thrusters" type="Node2D" parent="PositionExtrapolation"]
