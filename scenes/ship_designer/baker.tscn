@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bpk7twvn3ts7g" path="res://assets/spaceships/Vinok/vinok_mask.png" id="9_n28h3"]
 [ext_resource type="Texture2D" uid="uid://broadrkr3u6ot" path="res://assets/spaceships/_Modules/Cocpit/Mk4/Mk4_mask.png" id="10_fvtd0"]
 [ext_resource type="Texture2D" uid="uid://cmy8oymcuhmmb" path="res://assets/spaceships/_Modules/Engines/Mk1/mk1_mask.png" id="11_44j37"]
-[ext_resource type="Texture2D" uid="uid://bvq2yubuqfrwx" path="res://assets/spaceships/Vinok/vinok_normal.png" id="12_pgh2e"]
+[ext_resource type="Texture2D" uid="uid://ci2ap8mvvuoxv" path="res://assets/spaceships/Vinok/Vinok_sides_n.png" id="12_1huto"]
 [ext_resource type="Texture2D" uid="uid://dnkthbwaxvmgc" path="res://assets/spaceships/_Modules/Cocpit/Mk4/Mk4_poly_n.png" id="13_amxkf"]
 [ext_resource type="Texture2D" uid="uid://cnk8pw73e1b5a" path="res://assets/spaceships/_Modules/Engines/Mk1/mk1_normal_1.png" id="14_7yh2b"]
 [ext_resource type="Texture2D" uid="uid://cs1hhm1haxg2e" path="res://assets/spaceships/Vinok/vinok_spec.png" id="15_hoyyg"]
@@ -36,15 +36,15 @@ void fragment() {
 }"
 metadata/_edit_res_path = "res://scenes/ship_designer/baker.tscn::Shader_8fl5i"
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_b86fw"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_t5bvn"]
 viewport_path = NodePath("Control/HBoxContainer/Style/MaskBaker")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sayty"]
 shader = SubResource("Shader_8fl5i")
-shader_parameter/mask_texture = SubResource("ViewportTexture_b86fw")
+shader_parameter/mask_texture = SubResource("ViewportTexture_t5bvn")
 shader_parameter/style_texture = ExtResource("2_pcliy")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_bwhy0"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_1y17p"]
 viewport_path = NodePath("Control/HBoxContainer/Base/BaseBaker")
 
 [node name="Baker" type="Node"]
@@ -107,6 +107,7 @@ texture_filter = 1
 position = Vector2(64, 64)
 
 [node name="hull" type="Sprite2D" parent="Control/HBoxContainer/Emission/EmissionBaker/CanvasLayer/mask_view"]
+visible = false
 texture = ExtResource("6_k4i8b")
 
 [node name="cocpit" type="Sprite2D" parent="Control/HBoxContainer/Emission/EmissionBaker/CanvasLayer/mask_view"]
@@ -164,7 +165,7 @@ texture_filter = 1
 position = Vector2(64, 64)
 
 [node name="hull" type="Sprite2D" parent="Control/HBoxContainer/Normal/NormalBaker/CanvasLayer/mask_view"]
-texture = ExtResource("12_pgh2e")
+texture = ExtResource("12_1huto")
 
 [node name="cocpit" type="Sprite2D" parent="Control/HBoxContainer/Normal/NormalBaker/CanvasLayer/mask_view"]
 position = Vector2(0, -32)
@@ -222,4 +223,4 @@ position = Vector2(64, 64)
 [node name="StylizatorView" type="Sprite2D" parent="Control/HBoxContainer/Final/Stylizator/CanvasLayer/ShipStylization"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_sayty")
-texture = SubResource("ViewportTexture_bwhy0")
+texture = SubResource("ViewportTexture_1y17p")

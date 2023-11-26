@@ -13,3 +13,6 @@ signal follow_distance(value: float)
 signal autopilot_target_point(value: Vector2)
 signal fire(value: bool)
 signal auto_aim(value: bool)
+
+func init(ship: ShipRigidBody):
+	pass

@@ -1,11 +1,16 @@
 class_name Thrusters
 extends Node2D
 
+@export var thruster_scene: PackedScene
+
 var _thrusters: Array[ManeuverThruster] = []
 
-
-func setup(thrust: float):
-	for thruster in get_children() as Array[ManeuverThruster]:
+func setup(positions: PointsArrayResource, thrust: float):
+	for point in positions.points:
+		var thruster: ManeuverThruster = thruster_scene.instantiate()
+		thruster.position = point.position
+		thruster.rotation = point.radian
+		add_child(thruster)
 		thruster.setup(thrust)
 		_thrusters.append(thruster)
 

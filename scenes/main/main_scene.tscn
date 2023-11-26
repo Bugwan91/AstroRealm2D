@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=24 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -12,9 +12,10 @@
 [ext_resource type="Script" path="res://scenes/ui/scripts/radar_viewport.gd" id="10_nsy5m"]
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
 [ext_resource type="PackedScene" uid="uid://dt7wav32bva3j" path="res://scenes/player/input_reader.tscn" id="13_epig2"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/health.gd" id="14_cmupl"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/health.gd" id="15_1rksw"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="15_5xucn"]
 [ext_resource type="PackedScene" uid="uid://hhj5ip7is6r4" path="res://scenes/ship/radar.tscn" id="15_ln8xj"]
+[ext_resource type="Resource" uid="uid://dhd7okcixwm0y" path="res://scenes/ship/resources/kosa.tres" id="17_rd6pg"]
 
 [sub_resource type="Gradient" id="Gradient_owpx4"]
 offsets = PackedFloat32Array(0, 0.686529)
@@ -61,6 +62,7 @@ script = ExtResource("1_2ehlx")
 ship_scene = ExtResource("4_5rllk")
 gun_scene = ExtResource("8_cwv63")
 radar_scene = ExtResource("15_ln8xj")
+ship_data = ExtResource("17_rd6pg")
 
 [node name="Background" parent="." instance=ExtResource("1_b53p2")]
 unique_name_in_owner = true
@@ -88,8 +90,7 @@ rotation = -1.20638
 color = Color(0.745098, 0.65098, 0.376471, 1)
 
 [node name="PointLight" type="PointLight2D" parent="." groups=["shiftable"]]
-visible = false
-position = Vector2(-40, -358)
+position = Vector2(30, -188)
 color = Color(1, 0.6, 0, 1)
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 10.0
@@ -106,13 +107,14 @@ modulate = Color(1, 0, 0.3, 0.1)
 script = ExtResource("10_nsy5m")
 
 [node name="Outline" type="Sprite2D" parent="Grid/RadarViewport"]
-modulate = Color(0, 0.5, 1, 0.8)
+modulate = Color(0, 0.8, 2, 0.8)
 light_mask = 0
 texture = SubResource("GradientTexture2D_4qutk")
 
 [node name="Camera" parent="." instance=ExtResource("11_2fp23")]
 zoom = Vector2(1, 1)
-zoom_min = 0.2
+zoom_min = 0.1
+zoom_max = 2.0
 
 [node name="AutopilotPointer" parent="." instance=ExtResource("15_5xucn")]
 unique_name_in_owner = true
@@ -129,40 +131,20 @@ unique_name_in_owner = true
 in_range_color = Color(1, 1, 0, 0.1)
 out_range_color = Color(0.49, 0.49, 0, 0.1)
 
-[node name="ShipEnemy" parent="." node_paths=PackedStringArray("inputs", "gun") instance=ExtResource("4_5rllk")]
-unique_name_in_owner = false
-position = Vector2(-30000, 3000)
+[node name="Enemy" parent="." node_paths=PackedStringArray("inputs", "gun") instance=ExtResource("4_5rllk")]
+position = Vector2(-265, -228)
+rotation = -0.0583994
 inputs = NodePath("AIShipInput")
 gun = NodePath("Gun")
-FA_accuracy = 0.9
-FA_accuracy_damp = 0.2
 
-[node name="AIShipInput" type="Node2D" parent="ShipEnemy"]
+[node name="Gun" parent="Enemy" instance=ExtResource("8_cwv63")]
+bullet_color = Color(1, 0.188235, 0.184314, 1)
+recoil = 20.0
+
+[node name="AIShipInput" type="Node2D" parent="Enemy"]
 script = ExtResource("9_nd6tp")
 agressive = true
-keep_distance = 700.0
+keep_distance = 1000.0
 
-[node name="Gun" parent="ShipEnemy" instance=ExtResource("8_cwv63")]
-overheat = 0.2
-reload_time = 1.0
-
-[node name="Health" type="Node" parent="ShipEnemy"]
-script = ExtResource("14_cmupl")
-
-[node name="ShipPlayer" parent="." node_paths=PackedStringArray("inputs", "gun", "autopilot_pointer", "target_prediction_pointer") instance=ExtResource("4_5rllk")]
-mass = 0.5
-inputs = NodePath("../InputReader")
-gun = NodePath("Gun")
-max_speed = 2100.0
-FA_accuracy = 0.93
-autopilot_pointer = NodePath("../AutopilotPointer")
-target_prediction_pointer = NodePath("../TargetPointer")
-
-[node name="Gun" parent="ShipPlayer" instance=ExtResource("8_cwv63")]
-overheat = 0.0
-
-[node name="Health" type="Node" parent="ShipPlayer"]
-script = ExtResource("14_cmupl")
-
-[node name="Radar" parent="ShipPlayer" instance=ExtResource("15_ln8xj")]
-visible = false
+[node name="Health" type="Node" parent="Enemy"]
+script = ExtResource("15_1rksw")

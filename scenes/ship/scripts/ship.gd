@@ -1,25 +1,19 @@
+@tool
 class_name ShipRigidBody
 extends RigidBody2D
 
 signal got_hit(value: Vector2)
-signal dead()
+signal dead
 
-@export var res: ShipResource
+@export var setup_data: ShipResource: set = setup_view
 
 @export var inputs: ShipInput
 @export var gun: Gun
-@export_range(0, 10000) var max_speed := 2000.0
-@export_range(0, 1000) var main_thrust := 500.0
-@export_range(0, 500) var maneuver_thrust := 200.0
-
-@export_range(0, 1) var FA_accuracy := 1.0
-@export_range(0, 10) var FA_accuracy_damp := 0.1
-@export_range(0, 1) var BA_accuracy := 1.0
-@export_range(0, 10) var BA_accuracy_damp := 0.1
 
 @export var autopilot_pointer: AssistantPointer
 @export var target_prediction_pointer: AssistantPointer
 
+@onready var _collision_polygon = %CollisionPolygon2D
 @onready var flight_assistant: ShipFlightAssistant = %FlightAssistant
 @onready var battle_assistant: BattleAssistant = %BattleAssistant
 @onready var extrapolator: PositionExtrapolation = %PositionExtrapolation
@@ -28,8 +22,8 @@ signal dead()
 @onready var taking_damage = %TakingDamage
 @onready var ui = %UI
 
-@onready var destroy_effect: DestroyEffectManager = %DestroyEffectManager
-@onready var _view: Sprite2D = %View
+@onready var _destroy_effect: DestroyEffectManager = %DestroyEffectManager
+@onready var _view: ShipView = %View as ShipView
 @onready var _gun_slot: GunSlot = %GunSlot
 
 var real_velocity: Vector2: get = _real_velocity
@@ -39,17 +33,29 @@ var _impulses := Vector2.ZERO
 var _forces := Vector2.ZERO
 var _torque := 0.0
 
+func setup_view(resource: ShipResource = null):
+	setup_data = resource
+	if not is_instance_valid(_view):
+		return
+	_view.setup_textures(setup_data.texture,\
+		setup_data.normal_map,\
+		setup_data.emission_map,\
+		setup_data.specular_map)
+	_collision_polygon.polygon = setup_data.shape.data
+
+
 func _ready():
-	if inputs is PlayerShipInput:
-		MainState.player_ship = self
-	thrusters.setup(maneuver_thrust)
-	engines.setup(main_thrust, max_speed)
+	setup_view(setup_data)
+	if Engine.is_editor_hint(): return
+	thrusters.setup(setup_data.thrusters_position, setup_data.maneuver_thrust)
+	engines.setup(setup_data.main_thrust, setup_data.max_speed)
 	flight_assistant.setup()
-	flight_assistant.follow_accuracy = FA_accuracy
-	flight_assistant.follow_accuracy_damp = FA_accuracy_damp
+	flight_assistant.follow_accuracy = setup_data.FA_accuracy
+	flight_assistant.follow_accuracy_damp = setup_data.FA_accuracy_damp
+	battle_assistant.aim_accuracy = setup_data.BA_accuracy
+	battle_assistant.aim_accuracy_damp = setup_data.BA_accuracy_damp
+	
 	flight_assistant.autopilot_pointer_view = autopilot_pointer
-	battle_assistant.aim_accuracy = BA_accuracy
-	battle_assistant.aim_accuracy_damp = BA_accuracy_damp
 	battle_assistant.pointer_view = target_prediction_pointer
 	if is_instance_valid(gun):
 		_gun_slot.add_gun(gun)
@@ -61,9 +67,9 @@ func _ready():
 		taking_damage.health = health
 		ui.connect_health(health)
 		health.dying.connect(_die)
-		destroy_effect.ship = self
-		destroy_effect.connect_health(health)
-		destroy_effect.destroy.connect(_destroy)
+		_destroy_effect.ship = self
+		_destroy_effect.connect_health(health)
+		_destroy_effect.destroy.connect(_destroy)
 
 func setup_health(new_health: Health = null):
 	if new_health:
@@ -76,6 +82,7 @@ func setup_health(new_health: Health = null):
 func connect_inputs(new_inputs: ShipInput):
 	inputs = new_inputs
 	if not is_instance_valid(new_inputs): return
+	new_inputs.init(self)
 	if inputs is PlayerShipInput:
 		MainState.player_ship = self
 	flight_assistant.connect_inputs(inputs)
@@ -85,6 +92,7 @@ func connect_inputs(new_inputs: ShipInput):
 
 
 func _physics_process(delta):
+	if Engine.is_editor_hint(): return
 	if inputs is PlayerShipInput:
 		_update_main_state(delta)
 	if is_instance_valid(gun):
@@ -92,6 +100,7 @@ func _physics_process(delta):
 
 
 func _integrate_forces(state):
+	if Engine.is_editor_hint(): return
 	if inputs is PlayerShipInput:
 		FloatingOrigin.update_from_state(state)
 	FloatingOrigin.update_state(state)

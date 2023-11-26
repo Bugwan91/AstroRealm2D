@@ -17,6 +17,7 @@ var autopilot_speed := 10000.0
 var follow_distance := 1000.0
 var direction := Vector2.ZERO
 var ignore_direction_update := false
+var is_turn_enabled := true
 var is_follow := false
 var follow_accuracy := 1.0
 var follow_accuracy_damp := 0.1
@@ -86,15 +87,13 @@ func override_controls():
 	_angular_control = _rotation_input
 	if is_autopilot:
 		move_to(_autopilot_target_position - FloatingOrigin.origin, autopilot_speed, is_autopilot_stop)
-	else:
+	elif is_turn_enabled:
 		turn_to(direction)
 	if is_follow:
 		follow_target(follow_distance)
 
 
 func follow_target(distance: float = 0.0):
-	#DebugDraw2d.circle(_target_position, 2, 6, Color.GREEN)
-	#DebugDraw2d.line_vector(_target_position, _target_velocity, Color.GREEN)
 	if not is_instance_valid(target):
 		match_velocity(_get_delta_velocity())
 		return
@@ -105,21 +104,24 @@ func follow_target(distance: float = 0.0):
 	var dp := target.position - _state_position
 	var dp_target := dp - dp.normalized() * distance
 	var vs = _get_stop_velocity(dp_target, -dv, 0)
+	printt(vs.length(), 1.0 - _velocity_error, (vs * (1.0 - _velocity_error)).length())
 	match_velocity(vs * (1.0 - _velocity_error))
 
 
 func match_velocity(dv: Vector2 = Vector2.ZERO, main_forced: bool = true):
 	_linear_control.x = _main_thrusters_control if _main_thrusters_control > 0 else _linear_control.x
 	var dv_len := dv.length()
-	if dv_len < LINEAR_THRESHOLD * 0.1:
-		return
-	dv = dv.rotated(-_state_rotation)
-	var dv_n := dv / dv_len
-	if dv_len > LINEAR_THRESHOLD:
-		var a := _state.step * (_thrusters.estimated_strafe_force(dv * 100) * _state.inverse_mass)
+	if dv_len > LINEAR_THRESHOLD * 0.1:
+		dv = dv.rotated(-_state_rotation)
+		var dv_n := dv / dv_len
+		var a := _state.step * (_thrusters.estimated_strafe_force(dv_n) * _state.inverse_mass)
+		if a == 0:
+			return
 		var f := (dv_len / a)
 		_linear_control = 2 * max(1, f) * _linear_control + f * dv_n
-		# TODO: update with using effect of damping after speed cap
+		# TODO: (Low Priority)
+		# For better assistant precision,
+		# update this with using effect of damping after speed cap
 		if _linear_control.x - 1 > LINEAR_THRESHOLD\
 				and (main_forced or _linear_control.x / abs(_linear_control.y) > 0.5):
 			_main_thrusters_control = (_linear_control.x - 1) * _thrusters_ratio

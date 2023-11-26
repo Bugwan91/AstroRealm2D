@@ -28,12 +28,17 @@ var fa_autopilot_speed := 500.0
 func add_debug_info(key: String, value):
 	debug[key] = str(value)
 
+func connect_to_player(callback: Callable):
+	player_ship_updated.connect(callback)
+	callback.call(player_ship)
+
 func _update_player_ship(ship: ShipRigidBody):
 	player_ship = ship
 	player_ship_updated.emit(player_ship)
 	player_ship.dead.connect(_on_player_dead)
 
 func _update_player_target(ship: ShipRigidBody):
+	print(ship)
 	if ship == player_ship: return
 	player_target = ship
 	player_target_updated.emit(player_target)

@@ -1,18 +1,19 @@
-[gd_scene load_steps=25 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=26 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
-[ext_resource type="Resource" uid="uid://bth1ixgn5yk8q" path="res://scenes/ship/resources/vinok.tres" id="2_8cxav"]
 [ext_resource type="Texture2D" uid="uid://c0g0c4k4h83o" path="res://assets/my/icons/ship_s.png" id="2_e2mwk"]
+[ext_resource type="Resource" uid="uid://c4g6hinmncpsh" path="res://scenes/ship/resources/vinok.tres" id="2_sl4tc"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/flight_assistant.gd" id="3_m324h"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/battle_assistant.gd" id="4_yb6sw"]
-[ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="6_hiljr"]
-[ext_resource type="Texture2D" uid="uid://boh3dd5t306px" path="res://scenes/ship/views/Vinok_emission.png" id="8_umae6"]
-[ext_resource type="Texture2D" uid="uid://mbbv266xour1" path="res://scenes/ship/views/Vinok_specular.png" id="9_nuqiy"]
-[ext_resource type="Texture2D" uid="uid://d2uh6mq66s1h2" path="res://scenes/ship/views/Vinok.png" id="10_7ccup"]
+[ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="7_byino"]
+[ext_resource type="Texture2D" uid="uid://boh3dd5t306px" path="res://scenes/ship/views/Vinok_emission.png" id="8_c07dd"]
+[ext_resource type="Texture2D" uid="uid://d2uh6mq66s1h2" path="res://scenes/ship/views/Vinok.png" id="8_olsct"]
+[ext_resource type="Texture2D" uid="uid://b4gipgnkijqf" path="res://scenes/ship/views/Vinok_normal.png" id="9_ouqgp"]
+[ext_resource type="Texture2D" uid="uid://mbbv266xour1" path="res://scenes/ship/views/Vinok_specular.png" id="10_7ek0h"]
 [ext_resource type="PackedScene" uid="uid://k6231xltcfhl" path="res://scenes/thruster/thruster.tscn" id="10_wlx63"]
-[ext_resource type="Texture2D" uid="uid://b4gipgnkijqf" path="res://scenes/ship/views/Vinok_normal.png" id="11_7indn"]
 [ext_resource type="Script" path="res://scenes/thruster/scripts/thrusters.gd" id="11_hhoku"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship_selection_area.gd" id="12_bsixf"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/ship_view.gd" id="12_h08yy"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/gun_slot.gd" id="13_n2hg0"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/taking_damage.gd" id="13_o14b0"]
 [ext_resource type="PackedScene" uid="uid://bu6wjq2ioia27" path="res://scenes/ship/desctroy_effect_manager.tscn" id="14_4y0fi"]
@@ -26,20 +27,19 @@
 radius = 80.0
 height = 184.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hffab"]
-shader = ExtResource("6_hiljr")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i7g7l"]
+shader = ExtResource("7_byino")
 shader_parameter/emission = 2.0
-shader_parameter/emission_texture = ExtResource("8_umae6")
-shader_parameter/specular_texture = ExtResource("9_nuqiy")
+shader_parameter/emission_texture = ExtResource("8_c07dd")
+shader_parameter/specular_texture = ExtResource("10_7ek0h")
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_lna7r"]
-diffuse_texture = ExtResource("10_7ccup")
-normal_texture = ExtResource("11_7indn")
+[sub_resource type="CanvasTexture" id="CanvasTexture_ll4d1"]
+diffuse_texture = ExtResource("8_olsct")
+normal_texture = ExtResource("9_ouqgp")
 
 [node name="Ship" type="RigidBody2D"]
-unique_name_in_owner = true
 script = ExtResource("1_5ckws")
-res = ExtResource("2_8cxav")
+setup_data = ExtResource("2_sl4tc")
 
 [node name="AreaSelection" type="Area2D" parent="."]
 visible = false
@@ -51,8 +51,9 @@ rotation = -1.5708
 shape = SubResource("CapsuleShape2D_e8eu5")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+unique_name_in_owner = true
 visible = false
-polygon = PackedVector2Array(64, 0, -24, 48, -33, 64, -49, 64, -64, 32, -64, -32, -49, -64, -33, -64, -24, -48)
+polygon = PackedVector2Array(64, -19, 64, 19, 61, 29, -18, 64, -25, 64, -64, 54, -64, -54, -25, -64, -18, -64, 59, -30)
 
 [node name="FlightAssistant" type="Node" parent="." node_paths=PackedStringArray("_thrusters", "_main_thrusters")]
 unique_name_in_owner = true
@@ -70,43 +71,15 @@ script = ExtResource("25_1c55w")
 
 [node name="View" type="Sprite2D" parent="PositionExtrapolation"]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_hffab")
+material = SubResource("ShaderMaterial_i7g7l")
 rotation = 1.5708
-texture = SubResource("CanvasTexture_lna7r")
+texture = SubResource("CanvasTexture_ll4d1")
+script = ExtResource("12_h08yy")
 
 [node name="Thrusters" type="Node2D" parent="PositionExtrapolation"]
 unique_name_in_owner = true
 script = ExtResource("11_hhoku")
-
-[node name="FL" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
-position = Vector2(28, -18)
-rotation = 3.14159
-
-[node name="FR" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
-position = Vector2(28, 17)
-rotation = 3.14159
-
-[node name="RF" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
-position = Vector2(54, 10)
-rotation = -1.5708
-
-[node name="RB" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
-position = Vector2(-45, 64)
-rotation = -1.5708
-
-[node name="BR" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
-position = Vector2(-64, 30)
-
-[node name="BL" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
-position = Vector2(-64, -30)
-
-[node name="LB" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
-position = Vector2(-45, -64)
-rotation = 1.5708
-
-[node name="LF" parent="PositionExtrapolation/Thrusters" instance=ExtResource("21_bnxwn")]
-position = Vector2(54, -10)
-rotation = 1.5708
+thruster_scene = ExtResource("21_bnxwn")
 
 [node name="MainThrusters" type="Node2D" parent="PositionExtrapolation" node_paths=PackedStringArray("_body")]
 unique_name_in_owner = true
@@ -130,9 +103,7 @@ script = ExtResource("13_o14b0")
 
 [node name="UI" parent="." instance=ExtResource("15_m8yda")]
 unique_name_in_owner = true
-visible = false
 
 [node name="RadarItem" type="Node2D" parent="."]
-visible = false
 script = ExtResource("18_cae74")
 texture = ExtResource("2_e2mwk")

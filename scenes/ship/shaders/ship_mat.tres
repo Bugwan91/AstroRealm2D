@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://cqy56rhnpln3r"]
+
+[ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="1_04tic"]
+[ext_resource type="Texture2D" uid="uid://boh3dd5t306px" path="res://scenes/ship/views/Vinok_emission.png" id="2_8h0oy"]
+[ext_resource type="Texture2D" uid="uid://b4gipgnkijqf" path="res://scenes/ship/views/Vinok_normal.png" id="3_6wgtq"]
+[ext_resource type="Texture2D" uid="uid://mbbv266xour1" path="res://scenes/ship/views/Vinok_specular.png" id="4_0ven7"]
+
+[resource]
+shader = ExtResource("1_04tic")
+shader_parameter/emission = 2.0
+shader_parameter/normal_texture = ExtResource("3_6wgtq")
+shader_parameter/emission_texture = ExtResource("2_8h0oy")
+shader_parameter/specular_texture = ExtResource("4_0ven7")

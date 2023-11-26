@@ -4,7 +4,7 @@ extends PanelContainer
 @onready var respawn_button = %RespawnButton
 
 func _ready():
-	visible = false
+	visible = not is_instance_valid(MainState.player_ship)
 	MainState.player_dead.connect(_on_player_dead)
 	respawn_button.pressed.connect(_respawn_player)
 

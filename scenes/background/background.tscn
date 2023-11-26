@@ -419,7 +419,7 @@ color_ramp = SubResource("Gradient_tp70d")
 noise = SubResource("FastNoiseLite_80y8i")
 
 [sub_resource type="Gradient" id="Gradient_dee3d"]
-colors = PackedColorArray(0.21, 0.74, 0, 0, 0.21, 0.74, 0, 0.2)
+colors = PackedColorArray(0.596275, 0.541003, 1, 0, 0.556079, 0.557879, 1, 0.2)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ku3ox"]
 seed = 66243
@@ -448,7 +448,7 @@ noise = SubResource("FastNoiseLite_ewfyu")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x5hqi"]
 shader = ExtResource("3_pr640")
-shader_parameter/glow = 0.5
+shader_parameter/glow = 5.0
 shader_parameter/scale = 1.0
 shader_parameter/vp_size = Vector2(1, 1)
 shader_parameter/zoom = Vector2(1, 1)
@@ -516,7 +516,7 @@ noise = SubResource("FastNoiseLite_ylvbq")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_875ma"]
 shader = ExtResource("3_pr640")
-shader_parameter/glow = 0.5
+shader_parameter/glow = 3.0
 shader_parameter/scale = 1.0
 shader_parameter/vp_size = Vector2(1, 1)
 shader_parameter/zoom = Vector2(1, 1)

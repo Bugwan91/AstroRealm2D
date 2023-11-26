@@ -1,7 +1,7 @@
 class_name Radar
 extends Area2D
 
-@export var radius: float
+@export var radius: float: set = _set_radius
 
 @onready var covering_shape = %CoveringShape
 

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipResource" load_steps=19 format=3 uid="uid://bth1ixgn5yk8q"]
+[gd_resource type="Resource" script_class="ShipResource" load_steps=19 format=3 uid="uid://c4g6hinmncpsh"]
 
 [ext_resource type="Texture2D" uid="uid://boh3dd5t306px" path="res://scenes/ship/views/Vinok_emission.png" id="1_huudx"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/resources/ship_resource.gd" id="1_vqm8w"]
@@ -9,53 +9,53 @@
 [ext_resource type="Script" path="res://addons/points_resource_editor/point_resource.gd" id="7_2wdew"]
 [ext_resource type="Script" path="res://addons/points_resource_editor/points_array_resource.gd" id="8_f3tha"]
 
-[sub_resource type="Resource" id="Resource_osr7w"]
+[sub_resource type="Resource" id="Resource_gey2s"]
 script = ExtResource("4_hglvo")
-data = PackedVector2Array(64, -15, 64, 19, 61, 29, -18, 64, -24, 64, -64, 54, -64, -54, -24, -64, -18, -64, 61, -29)
+data = PackedVector2Array(64, -19, 64, 19, 61, 29, -18, 64, -25, 64, -64, 54, -64, -54, -25, -64, -18, -64, 59, -30)
 
-[sub_resource type="Resource" id="Resource_a8suf"]
+[sub_resource type="Resource" id="Resource_23hvf"]
 script = ExtResource("7_2wdew")
 position = Vector2(61, -27)
-rotation = 180.0
+rotation = -180.0
 
-[sub_resource type="Resource" id="Resource_0rkoe"]
+[sub_resource type="Resource" id="Resource_bgdv6"]
 script = ExtResource("7_2wdew")
 position = Vector2(61, 27)
 rotation = 180.0
 
-[sub_resource type="Resource" id="Resource_a66nt"]
+[sub_resource type="Resource" id="Resource_amffw"]
 script = ExtResource("7_2wdew")
-position = Vector2(54, 32)
+position = Vector2(53, 32)
 rotation = -90.0
 
-[sub_resource type="Resource" id="Resource_88hr2"]
-script = ExtResource("7_2wdew")
-position = Vector2(-48, 58)
-rotation = -90.0
-
-[sub_resource type="Resource" id="Resource_63w1j"]
-script = ExtResource("7_2wdew")
-position = Vector2(-64, 53)
-rotation = 0.0
-
-[sub_resource type="Resource" id="Resource_botd2"]
-script = ExtResource("7_2wdew")
-position = Vector2(-64, -53)
-rotation = 0.0
-
-[sub_resource type="Resource" id="Resource_tsq7h"]
-script = ExtResource("7_2wdew")
-position = Vector2(-48, -58)
-rotation = 90.0
-
-[sub_resource type="Resource" id="Resource_w33th"]
+[sub_resource type="Resource" id="Resource_uv1ys"]
 script = ExtResource("7_2wdew")
 position = Vector2(53, -32)
 rotation = 90.0
 
-[sub_resource type="Resource" id="Resource_5sw30"]
+[sub_resource type="Resource" id="Resource_046wu"]
+script = ExtResource("7_2wdew")
+position = Vector2(-23, 64)
+rotation = -90.0
+
+[sub_resource type="Resource" id="Resource_xy56w"]
+script = ExtResource("7_2wdew")
+position = Vector2(-23, -64)
+rotation = 90.0
+
+[sub_resource type="Resource" id="Resource_b4tjx"]
+script = ExtResource("7_2wdew")
+position = Vector2(-64, 52)
+rotation = 0.0
+
+[sub_resource type="Resource" id="Resource_ig8wr"]
+script = ExtResource("7_2wdew")
+position = Vector2(-64, -52)
+rotation = 0.0
+
+[sub_resource type="Resource" id="Resource_i63b8"]
 script = ExtResource("8_f3tha")
-points = Array[ExtResource("7_2wdew")]([SubResource("Resource_a8suf"), SubResource("Resource_0rkoe"), SubResource("Resource_a66nt"), SubResource("Resource_88hr2"), SubResource("Resource_63w1j"), SubResource("Resource_botd2"), SubResource("Resource_tsq7h"), SubResource("Resource_w33th")])
+points = Array[ExtResource("7_2wdew")]([SubResource("Resource_23hvf"), SubResource("Resource_bgdv6"), SubResource("Resource_amffw"), SubResource("Resource_uv1ys"), SubResource("Resource_046wu"), SubResource("Resource_xy56w"), SubResource("Resource_b4tjx"), SubResource("Resource_ig8wr")])
 
 [resource]
 script = ExtResource("1_vqm8w")
@@ -63,5 +63,12 @@ texture = ExtResource("6_m2y4c")
 normal_map = ExtResource("2_qmhx3")
 emission_map = ExtResource("1_huudx")
 specular_map = ExtResource("5_mswie")
-shape = SubResource("Resource_osr7w")
-thrusters_position = SubResource("Resource_5sw30")
+shape = SubResource("Resource_gey2s")
+thrusters_position = SubResource("Resource_i63b8")
+max_speed = 2000.0
+main_thrust = 1000.0
+maneuver_thrust = 400.0
+FA_accuracy = 0.95
+FA_accuracy_damp = 0.02
+BA_accuracy = 1.0
+BA_accuracy_damp = 0.1
