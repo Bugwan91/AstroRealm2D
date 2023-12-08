@@ -16,7 +16,6 @@ var speed := 0.0
 var _damage := 10.0
 
 func _ready():
-	FloatingOrigin.add(self)
 	linear_velocity += transform.x * speed
 
 func _process(delta):

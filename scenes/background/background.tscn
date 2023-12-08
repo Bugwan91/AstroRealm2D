@@ -196,7 +196,7 @@ noise = SubResource("FastNoiseLite_umkce")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b54vu"]
 shader = ExtResource("3_pr640")
-shader_parameter/glow = 100.0
+shader_parameter/glow = 10.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
 shader_parameter/mask_texture = SubResource("NoiseTexture2D_ai41f")
@@ -215,8 +215,8 @@ fractal_lacunarity = 3.0
 fractal_weighted_strength = 0.2
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dkien"]
-width = 2048
-height = 2048
+width = 1024
+height = 1024
 seamless = true
 color_ramp = SubResource("Gradient_1btgj")
 noise = SubResource("FastNoiseLite_li4ua")
@@ -337,9 +337,8 @@ offsets = PackedFloat32Array(0.373253, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qbmhn"]
 noise_type = 3
-fractal_octaves = 3
-fractal_lacunarity = 5.81
-fractal_gain = 0.465
+seed = 74453
+frequency = 0.004
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hpai5"]
 width = 1024
@@ -374,8 +373,8 @@ seed = 163
 frequency = 0.003
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4uw8y"]
-width = 1024
-height = 1024
+width = 2048
+height = 2048
 seamless = true
 color_ramp = SubResource("Gradient_nvkmc")
 noise = SubResource("FastNoiseLite_vdasg")
@@ -547,7 +546,7 @@ script = ExtResource("3_u112l")
 
 [node name="L0_5" type="Node" parent="Layers"]
 script = ExtResource("1_48uix")
-distance = 4000.0
+distance = 8000.0
 
 [node name="BackgroundSprite" type="Sprite2D" parent="Layers/L0_5"]
 texture_repeat = 2

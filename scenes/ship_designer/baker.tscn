@@ -35,15 +35,15 @@ void fragment() {
 }"
 metadata/_edit_res_path = "res://scenes/ship_designer/baker.tscn::Shader_8fl5i"
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_q4pl3"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_xg600"]
 viewport_path = NodePath(".")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sayty"]
 shader = SubResource("Shader_8fl5i")
-shader_parameter/mask_texture = SubResource("ViewportTexture_q4pl3")
+shader_parameter/mask_texture = SubResource("ViewportTexture_xg600")
 shader_parameter/style_texture = ExtResource("2_i0gfq")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_vxj2r"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_k7e4j"]
 viewport_path = NodePath(".")
 
 [node name="Baker" type="Node2D"]
@@ -123,7 +123,7 @@ position = Vector2(64, 64)
 [node name="StylizatorView" type="Sprite2D" parent="bakerView/Control/HBoxContainer/Final/Stylizator/CanvasLayer/ShipStylization"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_sayty")
-texture = SubResource("ViewportTexture_vxj2r")
+texture = SubResource("ViewportTexture_k7e4j")
 
 [node name="ResEditor" type="Node2D" parent="."]
 

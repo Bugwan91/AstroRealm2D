@@ -51,7 +51,7 @@ shader_parameter/mask = SubResource("GradientTexture2D_njkiq")
 
 [sub_resource type="Gradient" id="Gradient_fkijs"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0.633987, 0.703704, 0.708061)
+offsets = PackedFloat32Array(0.67167, 0.703704, 0.708061)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_4qutk"]
@@ -142,7 +142,7 @@ modulate = Color(1, 0, 0.3, 0.1)
 script = ExtResource("10_nsy5m")
 
 [node name="Outline" type="Sprite2D" parent="Grid/RadarViewport"]
-modulate = Color(0, 0.8, 2, 0.8)
+modulate = Color(0, 0.8, 2, 0.15)
 light_mask = 0
 texture = SubResource("GradientTexture2D_4qutk")
 
@@ -180,6 +180,7 @@ bullet_color = Color(1, 0.188235, 0.184314, 1)
 
 [node name="AIShipInput" type="Node2D" parent="Enemy"]
 script = ExtResource("9_nd6tp")
+agressive = true
 keep_distance = 1000.0
 
 [node name="Health" type="Node" parent="Enemy"]
@@ -197,6 +198,7 @@ bullet_color = Color(1, 0.137255, 0.541176, 1)
 
 [node name="AIShipInput" type="Node2D" parent="Enemy_2"]
 script = ExtResource("9_nd6tp")
+agressive = true
 keep_distance = 1000.0
 
 [node name="Health" type="Node" parent="Enemy_2"]

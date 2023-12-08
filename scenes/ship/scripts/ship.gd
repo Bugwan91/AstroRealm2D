@@ -94,7 +94,7 @@ func _physics_process(delta):
 	if inputs is PlayerShipInput:
 		_update_main_state(delta)
 	if is_instance_valid(gun):
-		gun.velocity = absolute_velocity
+		gun.velocity = linear_velocity
 
 
 func _integrate_forces(state):
