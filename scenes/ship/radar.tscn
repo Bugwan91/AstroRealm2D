@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/ship/scripts/radar.gd" id="1_xrteo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xcbjy"]
-radius = 104.235
+radius = 1000.0
 
 [node name="Radar" type="Area2D"]
 collision_layer = 0

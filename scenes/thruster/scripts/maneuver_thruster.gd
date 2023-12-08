@@ -29,7 +29,7 @@ func setup(value: float):
 	_flame.setup_sound(-20, 2)
 
 func _calculate_torgue():
-	var value = _thrust * (position.x * _force_direction.y - position.y * _force_direction.x) if enabled and _thrust > 0 else 0.0
+	var value = 0.5 * _thrust * (position.x * _force_direction.y - position.y * _force_direction.x) if enabled and _thrust > 0 else 0.0
 	_torque = value if abs(value) > TORQUE_THRESHOLD else 0.0
 
 func apply_strafe(value: Vector2):

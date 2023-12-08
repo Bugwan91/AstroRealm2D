@@ -27,6 +27,7 @@ script = ExtResource("4_ud3i3")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+modulate = Color(0, 2, 0, 1)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_8unas")
 position = Vector2(-17, 0)

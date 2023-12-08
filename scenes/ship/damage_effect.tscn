@@ -9,7 +9,7 @@ light_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_ksgce"]
 offsets = PackedFloat32Array(0, 0.409605, 1)
-colors = PackedColorArray(10, 5, 0, 1, 10, 2, 0, 1, 10, 1, 0, 0)
+colors = PackedColorArray(20, 10, 0, 1, 10, 2, 0, 1, 10, 1, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ft1rn"]
 gradient = SubResource("Gradient_ksgce")

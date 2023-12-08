@@ -1,6 +1,6 @@
 @tool
 class_name ShipRigidBody
-extends RigidBody2D
+extends FloatingOriginRigidBody
 
 signal got_hit(value: Vector2)
 signal dead
@@ -26,7 +26,7 @@ signal dead
 @onready var _view: ShipView = %View as ShipView
 @onready var _gun_slot: GunSlot = %GunSlot
 
-var real_velocity: Vector2: get = _real_velocity
+var absolute_velocity: Vector2: get = _absolute_velocity
 var health: Health
 
 var _impulses := Vector2.ZERO
@@ -37,18 +37,15 @@ func setup_view(resource: ShipResource = null):
 	setup_data = resource
 	if not is_instance_valid(_view):
 		return
-	_view.setup_textures(setup_data.texture,\
-		setup_data.normal_map,\
-		setup_data.emission_map,\
-		setup_data.specular_map)
-	_collision_polygon.polygon = setup_data.shape.data
+	_view.setup_textures(setup_data.textures)
+	_collision_polygon.polygon = setup_data.textures.polygon
 
 
 func _ready():
 	setup_view(setup_data)
 	if Engine.is_editor_hint(): return
-	thrusters.setup(setup_data.thrusters_position, setup_data.maneuver_thrust)
-	engines.setup(setup_data.main_thrust, setup_data.max_speed)
+	thrusters.setup(setup_data.textures.thrusters, setup_data.maneuver_thrust)
+	engines.setup(setup_data.textures.engines, setup_data.main_thrust, setup_data.max_speed)
 	flight_assistant.setup()
 	flight_assistant.follow_accuracy = setup_data.FA_accuracy
 	flight_assistant.follow_accuracy_damp = setup_data.FA_accuracy_damp
@@ -59,7 +56,7 @@ func _ready():
 	battle_assistant.pointer_view = target_prediction_pointer
 	if is_instance_valid(gun):
 		_gun_slot.add_gun(gun)
-		gun.shoot_recoil.connect(_on_shoot_recoil)
+		gun.shoot_recoil.connect(_on_impulse_local)
 		battle_assistant.gun = gun
 	connect_inputs(inputs)
 	setup_health()
@@ -85,6 +82,7 @@ func connect_inputs(new_inputs: ShipInput):
 	new_inputs.init(self)
 	if inputs is PlayerShipInput:
 		MainState.player_ship = self
+		flight_assistant.avoid_collisions = false
 	flight_assistant.connect_inputs(inputs)
 	battle_assistant.connect_inputs(inputs)
 	if is_instance_valid(gun):
@@ -96,14 +94,14 @@ func _physics_process(delta):
 	if inputs is PlayerShipInput:
 		_update_main_state(delta)
 	if is_instance_valid(gun):
-		gun.velocity = real_velocity
+		gun.velocity = absolute_velocity
 
 
 func _integrate_forces(state):
 	if Engine.is_editor_hint(): return
 	if inputs is PlayerShipInput:
 		FloatingOrigin.update_from_state(state)
-	FloatingOrigin.update_state(state)
+	super._integrate_forces(state)
 	flight_assistant.process(state)
 	_apply_forcces(state)
 
@@ -126,11 +124,14 @@ func _apply_forcces(state: PhysicsDirectBodyState2D):
 	_impulses = Vector2.ZERO
 	_torque = 0.0
 
-func _real_velocity() -> Vector2:
+func _absolute_velocity() -> Vector2:
 	return linear_velocity + FloatingOrigin.velocity
 
-func _on_shoot_recoil(force: float):
-	apply_central_impulse(-transform.x * force)
+func _on_impulse_local(force: Vector2):
+	apply_central_impulse(force.rotated(rotation))
+
+func _on_inpulse(force: Vector2):
+	apply_central_impulse(force)
 
 func _die():
 	flight_assistant.enabled = false
@@ -146,7 +147,7 @@ func _destroy():
 var _previous_v := Vector2.ZERO
 
 func _update_main_state(delta):
-	var v = real_velocity
+	var v = absolute_velocity
 	MainState.ship_position = position + FloatingOrigin.origin
 	MainState.ship_speed = v.length()
 	MainState.ship_acceleration = (v - _previous_v).length() / delta

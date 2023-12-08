@@ -23,6 +23,9 @@ func _physics_process(_delta):
 		_reset_velocity_delta = false
 		velocity_delta = Vector2.ZERO
 
+func absolute_position(node: Node2D) -> Vector2:
+	return node.position + origin
+
 func update_from_state(state: PhysicsDirectBodyState2D):
 	velocity_delta = state.linear_velocity
 	velocity += velocity_delta

@@ -15,7 +15,7 @@ var _damage_effect
 
 func _physics_process(_delta):
 	if is_instance_valid(_damage_effect):
-		_damage_effect.velocity = ship.real_velocity
+		_damage_effect.velocity = ship.absolute_velocity
 
 func connect_health(health: Health):
 	health.damaged.connect(_on_take_damage)
@@ -33,7 +33,8 @@ func _on_take_damage(hp, max_hp):
 		_get_damage_effect().intensity = intensity
 
 func _on_die():
-	var effect = _destroy_effect_scene.instantiate()
+	var effect: ShipDestroyEffect = _destroy_effect_scene.instantiate()
+	effect.linear_velocity = ship.absolute_velocity
 	effect.position = global_position
 	MainState.world_node.add_child(effect)
 	destroy.emit()

@@ -33,16 +33,16 @@ func _unhandled_input(event):
 
 func _process(delta):
 	if not is_instance_valid(target): return
+	zoom = lerp(zoom, _target_zoom, 5 * delta)
 	_required_look_position = lerp(_required_look_position, _get_look_position(), 2 * delta)
 	_hit_position = lerp(_hit_position, Vector2.ZERO, 0.1)
 	position = target.extrapolator.smooth_position + _required_acceleration_position + _required_look_position + _hit_position
-	zoom = lerp(zoom, _target_zoom, 5 * delta)
 
 func _physics_process(delta):
 	if not is_instance_valid(target): return
-	var acceleration = (_last_veocity - target.real_velocity) * (Vector2.ONE * acceleration_multiplyer / zoom)
+	var acceleration = (_last_veocity - target.absolute_velocity) * (Vector2.ONE * acceleration_multiplyer / zoom)
 	_required_acceleration_position = lerp(_required_acceleration_position, acceleration, _inverse_inertia * delta)
-	_last_veocity = target.real_velocity
+	_last_veocity = target.absolute_velocity
 
 func _init_zoom():
 	_zoom_min = Vector2(zoom_min, zoom_min)
@@ -62,4 +62,4 @@ func _on_update_player_ship(player_ship: ShipRigidBody):
 	target.got_hit.connect(_shake_on_hit)
 
 func _shake_on_hit(hit: Vector2):
-	_hit_position = -hit
+	_hit_position = -hit * 0.5

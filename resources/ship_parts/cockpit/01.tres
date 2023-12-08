@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ViewBakerResource" load_steps=8 format=3 uid="uid://drhm8p5kvv71k"]
+
+[ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/view_baker_resource.gd" id="1_5qtm7"]
+[ext_resource type="Texture2D" uid="uid://smq470vdik0f" path="res://assets/spaceships/cockpit/1.png" id="1_asoyj"]
+[ext_resource type="Texture2D" uid="uid://df5imbwixi3jl" path="res://assets/spaceships/cockpit/1_mask.png" id="2_8f0oc"]
+[ext_resource type="Texture2D" uid="uid://ckb6hbbm2jjti" path="res://assets/spaceships/cockpit/1_normal.png" id="3_tu7ta"]
+[ext_resource type="Script" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="4_ljx8q"]
+[ext_resource type="Texture2D" uid="uid://bwcbtej17k14y" path="res://assets/spaceships/cockpit/1_spec.png" id="6_xt5hf"]
+
+[sub_resource type="Resource" id="Resource_2was1"]
+script = ExtResource("4_ljx8q")
+data = PackedVector2Array(7, 32, -7, 32, -14, 10, -11, -19, -4, -32, 4, -32, 11, -19, 14, 10)
+
+[resource]
+script = ExtResource("1_5qtm7")
+diffuse = ExtResource("1_asoyj")
+mask = ExtResource("2_8f0oc")
+normal = ExtResource("3_tu7ta")
+specular = ExtResource("6_xt5hf")
+polygon = SubResource("Resource_2was1")
+ontop = false

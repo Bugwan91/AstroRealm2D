@@ -7,19 +7,23 @@ const LINEAR_THRESHOLD = 0.1
 const AUTOPILOT_THRESHOLD = 16
 const ANGULAR_THRESHOLD = 0.01
 
-@export var _thrusters: Thrusters
-@export var _main_thrusters: MainThrusters
+@export var avoid_collisions: bool = true
+
+@onready var _thrusters: Thrusters = %Thrusters
+@onready var _main_thrusters: MainThrusters = %MainThrusters
 
 @export var autopilot_pointer_view: AssistantPointer
 
-var target: RigidBody2D
+@onready var _pre_collision_detector: ShipPreCollisionDetector = %PreCollisionDetector
+
+var target: ShipRigidBody: set = _set_target
 var autopilot_speed := 10000.0
 var follow_distance := 1000.0
 var direction := Vector2.ZERO
 var ignore_direction_update := false
 var is_turn_enabled := true
 var is_follow := false
-var follow_accuracy := 1.0
+var follow_accuracy := 0.5
 var follow_accuracy_damp := 0.1
 var is_autopilot := false
 var is_autopilot_stop := true
@@ -28,17 +32,17 @@ var enabled := false
 var _state: PhysicsDirectBodyState2D
 var _state_position: Vector2
 var _state_rotation: float
-var _state_real_velocity: Vector2
-var _thrusters_ratio := 0.0
-var _main_thruster_input := 0
-var _main_thrusters_control := 0.0
-var _strafe_input := Vector2.ZERO
-var _linear_control := Vector2.ZERO
-var _rotation_input := 0.0
-var _angular_control := 0.0
-var _autopilot_target_position := Vector2.ZERO
-var _velocity_error := 0.0
-var _last_velocity := Vector2.ZERO
+var _state_absolute_velocity: Vector2
+var _thrusters_ratio: float
+var _main_thruster_input: int
+var _main_thrusters_control: float
+var _strafe_input: Vector2
+var _linear_control: Vector2
+var _rotation_input: float
+var _angular_control: float
+var _autopilot_target_position: Vector2
+var _velocity_error: float
+var _last_velocity: Vector2
 
 func _ready():
 	MainState.fa_tracking_distance = follow_distance
@@ -52,12 +56,18 @@ func process(state: PhysicsDirectBodyState2D):
 		_state = state
 		_state_position = _state.transform.origin
 		_state_rotation = _state.transform.x.angle()
-		_state_real_velocity = _state.linear_velocity + FloatingOrigin.velocity
+		_state_absolute_velocity = _state.linear_velocity + FloatingOrigin.velocity
 		_update_autopilot_pointer_view()
 		_update_error()
 		override_controls()
+		_avoid_colission()
 		_update_thrusters()
 	_apply_forces()
+
+func _avoid_colission():
+	if not avoid_collisions: return
+	_linear_control = _linear_control.clamp(Vector2(-1,-1), Vector2(1,1))\
+		- 2.0 * _pre_collision_detector.potential_collision_vector.rotated(-owner.rotation)
 
 func _update_autopilot_pointer_view():
 	if not is_instance_valid(autopilot_pointer_view): return
@@ -139,15 +149,15 @@ func move_to(target_point: Vector2, max_speed: float = 0.0, stop: bool = true):
 	var delta_position := target_point - _state_position
 	if not stop:
 		turn_to(target_point)
-		var dv: = delta_position.normalized() * max_speed - _state_real_velocity
+		var dv: = delta_position.normalized() * max_speed - _state_absolute_velocity
 		match_velocity(dv, false)
 		return
-	var velocity_l := _state_real_velocity.length()
+	var velocity_l := _state_absolute_velocity.length()
 	if delta_position.length() < AUTOPILOT_THRESHOLD and velocity_l < LINEAR_THRESHOLD:
 		match_rotation(0)
 		return
 	turn_to(target_point)
-	match_velocity(_get_stop_velocity(delta_position, _state_real_velocity, max_speed), false)
+	match_velocity(_get_stop_velocity(delta_position, _state_absolute_velocity, max_speed), false)
 
 
 func turn_to(target_point: Vector2):
@@ -170,12 +180,10 @@ func _apply_forces():
 	_main_thrusters.apply_forces()
 
 func _update_error():
+	#TODO: Refactor this. Possible division by 0 error
 	if is_instance_valid(target):
-		var acceleration : Vector2 = target.real_velocity - _last_velocity
-		_last_velocity = target.real_velocity
-		var rate = (acceleration / _get_delta_velocity()).length()
-		_velocity_error = clamp(_velocity_error + rate, 0, follow_accuracy)
-		_velocity_error = max(0.0, _velocity_error - (follow_accuracy_damp * _state.step))
+		_last_velocity = target.absolute_velocity
+		
 
 
 func _get_stop_velocity(position: Vector2, velocity: Vector2, max_speed: float = 0.0) -> Vector2:
@@ -192,13 +200,17 @@ func _get_delta_velocity() -> Vector2:
 	if is_instance_valid(target):
 		return target.linear_velocity - _state.linear_velocity
 	else:
-		return -_state_real_velocity
+		return -_state_absolute_velocity
 
 
 func _update_thrusters():
 	_thrusters.apply_strafe(_linear_control)
 	_thrusters.apply_rotation(_angular_control)
 	_main_thrusters.apply_throttle(_main_thrusters_control)
+
+func _set_target(value: ShipRigidBody):
+	target = value
+	_velocity_error = 1.0 - follow_accuracy
 
 func _main_thruster_input_changed(value: float):
 	_main_thruster_input = value

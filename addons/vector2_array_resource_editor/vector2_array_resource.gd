@@ -31,3 +31,11 @@ func remove(index: int):
 func update(index: int, vertex: Vector2):
 	data.set(index, vertex)
 	emit_changed()
+
+
+func rotate(rotation: float):
+	var points: Array[Vector2] = []
+	for point in data:
+		points.append(point.rotated(rotation))
+	data = PackedVector2Array(points)
+	emit_changed()

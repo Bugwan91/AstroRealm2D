@@ -38,7 +38,6 @@ func _update_player_ship(ship: ShipRigidBody):
 	player_ship.dead.connect(_on_player_dead)
 
 func _update_player_target(ship: ShipRigidBody):
-	print(ship)
 	if ship == player_ship: return
 	player_target = ship
 	player_target_updated.emit(player_target)

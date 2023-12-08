@@ -5,10 +5,11 @@ signal shoot_recoil(force: float)
 
 @export var bullet_scene: PackedScene
 @export var bullet_color: Color = Color.RED
+@export var accuracy: float = 0.02
 @export_range(0, 60) var fire_rate := 10.0
 @export_range(0, 5000) var range := 2000.0
 @export_range(0, 10000) var bullet_speed := 3000.0
-@export_range(0, 100) var recoil := 1.0
+@export_range(0, 1000) var recoil := 20.0
 @export_range(0, 10) var overheat := 1.0
 @export_range(0, 10) var reload_time := 2.0
 @export var marker: AssistantPointer
@@ -52,7 +53,6 @@ func _shoot(delta: float):
 			_spawn_bullet()
 			_charge_start()
 			_sound.play()
-			shoot_recoil.emit(recoil)
 		if overheat == 0: return
 		_firing_time += delta
 		if _firing_time > overheat:
@@ -70,8 +70,10 @@ func _charge_done():
 func _spawn_bullet():
 	var bullet = bullet_scene.instantiate() as Bullet
 	bullet.position = global_position
-	bullet.rotation = global_rotation
-	bullet.linear_velocity = velocity
+	var spear: float = accuracy * (pow(randf(), 2.0) * 2.0 - 0.5)
+	bullet.rotation = global_rotation + spear
+	bullet.linear_velocity = velocity.rotated(spear)
+	shoot_recoil.emit(-transform.x.rotated(spear) * recoil)
 	bullet.impulse = recoil
 	bullet.speed = bullet_speed
 	MainState.world_node.add_child(bullet)

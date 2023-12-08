@@ -27,12 +27,15 @@ func _process(_delta):
 		-velocity.y / speed,
 		0.0
 	)
+	speed = clamp(speed, 0.0, 2000.0)
 	_fire_material.set("direction", direction)
+	_fire_material.set("spread", max(180.0 - speed, 6.0))
 	_fire_material.set("initial_velocity_min", speed * fire_speed_multiplyer * 0.5)
-	_fire_material.set("initial_velocity_max", speed * fire_speed_multiplyer)
+	_fire_material.set("initial_velocity_max", speed * fire_speed_multiplyer + 100.0)
 	_smoke_material.set("direction", direction)
+	_smoke_material.set("spread", max(180.0 - speed, 2.0))
 	_smoke_material.set("initial_velocity_min", speed)
-	_smoke_material.set("initial_velocity_max", speed)
+	_smoke_material.set("initial_velocity_max", speed + 200.0)
 
 func _set_intensity(value: float):
 	intensity = value

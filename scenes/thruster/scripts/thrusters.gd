@@ -5,8 +5,8 @@ extends Node2D
 
 var _thrusters: Array[ManeuverThruster] = []
 
-func setup(positions: PointsArrayResource, thrust: float):
-	for point in positions.points:
+func setup(points: Array[PointResource], thrust: float):
+	for point in points:
 		var thruster: ManeuverThruster = thruster_scene.instantiate()
 		thruster.position = point.position
 		thruster.rotation = point.radian

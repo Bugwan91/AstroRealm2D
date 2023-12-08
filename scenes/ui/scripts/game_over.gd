@@ -2,6 +2,7 @@ class_name GameOverPanel
 extends PanelContainer
 
 @onready var respawn_button = %RespawnButton
+@onready var ship_editor_button = %ShipEditorButton
 
 func _ready():
 	visible = not is_instance_valid(MainState.player_ship)

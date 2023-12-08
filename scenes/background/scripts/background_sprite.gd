@@ -1,28 +1,36 @@
 class_name BackgroundSprite
 extends Sprite2D
 
-const UV_SIZE = 4096.0
+const UV_SIZE = 1.0 / 4096.0
 
-var base_shift_scale: float:
+@export var is_static: bool = false
+
+var distance: float:
 	set(value):
-		base_shift_scale = value
-		resize()
-var shift_scale: float 
-var _vp_to_uv_size: Vector2
+		distance = value
+		_d = distance * UV_SIZE
+
+
+var _vp_size: Vector2
+var _d: float
+var _vp_uv: Vector2
 
 func _ready():
+	if is_instance_valid(material):
+		var u_mat = material.duplicate()
+		material = u_mat
 	get_viewport().size_changed.connect(resize)
 	resize()
 
 func shift(shift_vector: Vector2, zoom: Vector2):
-	material.set("shader_parameter/scale", shift_scale)
-	material.set("shader_parameter/vp_size", _vp_to_uv_size)
-	material.set("shader_parameter/offset", shift_vector)
-	material.set("shader_parameter/zoom", zoom)
+	if is_static: return
+	var z := zoom.x
+	var vp := _vp_size * UV_SIZE
+	var _s := (_d * z + 1) / (_d * z + z)
+	material.set("shader_parameter/vp", vp * _s)
+	material.set("shader_parameter/offset", shift_vector * UV_SIZE / (_d + 1.0))
 
 func resize():
-	var vp_size := Vector2(get_viewport().size)
-	_vp_to_uv_size = vp_size / UV_SIZE
-	scale = Vector2.ONE * vp_size / texture.get_size()
-	position = vp_size * 0.5
-	shift_scale = base_shift_scale / UV_SIZE
+	_vp_size = Vector2(get_viewport().size)
+	scale = _vp_size / texture.get_size()
+	position = _vp_size * 0.5

@@ -22,11 +22,14 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	health.health = health.max_health
 	ship.setup_health(health)
 	var gun: Gun = gun_scene.instantiate() as Gun
+	gun.bullet_color = Color.GREEN
 	gun.overheat = 0.0
+	gun.recoil = 40.0
 	ship.gun = gun
 	var radar: Radar = radar_scene.instantiate() as Radar
 	ship.add_child(radar)
 	ship.autopilot_pointer = autopilot_pointer
 	ship.target_prediction_pointer = target_pointer
 	add_child(ship)
-	radar.radius = 20000.0
+	radar.radius = 10000.0
+	#ship.mass = 0.5

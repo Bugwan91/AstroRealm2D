@@ -6,6 +6,7 @@ var icon: Sprite2D
 
 func init():
 	icon = Sprite2D.new()
+	icon.material = material
 	icon.texture = texture
 	icon.scale = Vector2.ONE * 0.5
 

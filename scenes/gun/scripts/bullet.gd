@@ -2,6 +2,7 @@ class_name Bullet
 extends Node2D
 
 @export var hit_effect_scene: PackedScene
+@export var _color: Color
 
 @onready var timer: Timer = %Timer
 @onready var ray: RayCast2D = %RayCast2D
@@ -13,7 +14,6 @@ var linear_velocity: Vector2 = Vector2.ZERO
 var impulse := 0.0
 var speed := 0.0
 var _damage := 10.0
-var _color: Color
 
 func _ready():
 	FloatingOrigin.add(self)
@@ -28,7 +28,7 @@ func _physics_process(delta):
 
 func update_material(color: Color):
 	_color = color
-	sprite.modulate = _color + _color * 0.5
+	sprite.modulate = _color * 2.0
 	light.color = _color
 
 func start(lifetime: float):
@@ -46,7 +46,7 @@ func _on_hit(target):
 		damageTaker.damage(_create_damage())
 	var hit_effect = hit_effect_scene.instantiate() as BulletHitEffect
 	hit_effect.position = ray.get_collision_point()
-	hit_effect.linear_velocity = target.real_velocity
+	hit_effect.linear_velocity = target.absolute_velocity
 	hit_effect.color = _color
 	MainState.world_node.add_child(hit_effect)
 
@@ -57,5 +57,5 @@ func _create_damage() -> Damage:
 	var damage = Damage.new()
 	damage.amount = _damage
 	damage.position = ray.get_collision_point()
-	damage.impulse = transform.x * 10.0
+	damage.impulse = transform.x * impulse
 	return damage

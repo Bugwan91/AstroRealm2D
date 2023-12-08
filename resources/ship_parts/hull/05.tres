@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="HullBakerResource" load_steps=14 format=3 uid="uid://dcth4vvdyl5un"]
+
+[ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd" id="1_thv3v"]
+[ext_resource type="Resource" uid="uid://duih6enpumdqy" path="res://resources/ship_parts/hull/view/05.tres" id="2_oob5c"]
+[ext_resource type="Script" path="res://addons/points_resource_editor/point_resource.gd" id="2_quqq7"]
+[ext_resource type="Script" path="res://addons/points_resource_editor/points_array_resource.gd" id="3_kjtea"]
+
+[sub_resource type="Resource" id="Resource_uyyve"]
+script = ExtResource("2_quqq7")
+position = Vector2(64, 50)
+rotation = -180.0
+
+[sub_resource type="Resource" id="Resource_c7a4d"]
+script = ExtResource("2_quqq7")
+position = Vector2(64, 27)
+rotation = 180.0
+
+[sub_resource type="Resource" id="Resource_u8g8b"]
+script = ExtResource("2_quqq7")
+position = Vector2(-64, 27)
+rotation = 0.0
+
+[sub_resource type="Resource" id="Resource_afrio"]
+script = ExtResource("2_quqq7")
+position = Vector2(-64, 50)
+rotation = 0.0
+
+[sub_resource type="Resource" id="Resource_21l6k"]
+script = ExtResource("2_quqq7")
+position = Vector2(63, 26)
+rotation = 90.0
+
+[sub_resource type="Resource" id="Resource_u6ryf"]
+script = ExtResource("2_quqq7")
+position = Vector2(63, 51)
+rotation = -90.0
+
+[sub_resource type="Resource" id="Resource_xq7s6"]
+script = ExtResource("2_quqq7")
+position = Vector2(-63, 26)
+rotation = 90.0
+
+[sub_resource type="Resource" id="Resource_2quwy"]
+script = ExtResource("2_quqq7")
+position = Vector2(-63, 51)
+rotation = -90.0
+
+[sub_resource type="Resource" id="Resource_wfawo"]
+script = ExtResource("3_kjtea")
+points = Array[ExtResource("2_quqq7")]([SubResource("Resource_uyyve"), SubResource("Resource_c7a4d"), SubResource("Resource_u8g8b"), SubResource("Resource_afrio"), SubResource("Resource_21l6k"), SubResource("Resource_u6ryf"), SubResource("Resource_xq7s6"), SubResource("Resource_2quwy")])
+
+[resource]
+script = ExtResource("1_thv3v")
+view = ExtResource("2_oob5c")
+cockpit_slot = Vector2(0, 23)
+engine_slots = Array[Vector2]([Vector2(-40, 32), Vector2(40, 32)])
+thrusters = SubResource("Resource_wfawo")

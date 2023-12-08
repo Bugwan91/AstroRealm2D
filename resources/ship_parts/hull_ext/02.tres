@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ViewBakerResource" load_steps=7 format=3 uid="uid://c8ufqm2vr2xfy"]
+
+[ext_resource type="Texture2D" uid="uid://bgurtvowpx7o5" path="res://assets/spaceships/hull_ext/2.png" id="1_xvvwl"]
+[ext_resource type="Texture2D" uid="uid://bmnh0t72lsl8j" path="res://assets/spaceships/hull_ext/2_mask.png" id="2_hxk3c"]
+[ext_resource type="Texture2D" uid="uid://dosfdfog78d40" path="res://assets/spaceships/hull_ext/2_poly_n.png" id="3_fg74c"]
+[ext_resource type="Script" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="4_f6r65"]
+[ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/view_baker_resource.gd" id="4_oihfs"]
+
+[sub_resource type="Resource" id="Resource_c6nin"]
+script = ExtResource("4_f6r65")
+data = PackedVector2Array(0, 17, 33, 11, 46, -56, 64, -64, 64, 28, 0, 42, -64, 28, -64, -64, -46, -56, -33, 11)
+
+[resource]
+script = ExtResource("4_oihfs")
+diffuse = ExtResource("1_xvvwl")
+mask = ExtResource("2_hxk3c")
+normal = ExtResource("3_fg74c")
+polygon = SubResource("Resource_c6nin")
+ontop = false

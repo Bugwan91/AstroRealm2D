@@ -1,32 +1,36 @@
-[gd_scene load_steps=24 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=32 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
 [ext_resource type="PackedScene" uid="uid://ce1dw618jykrb" path="res://scenes/ship/ship.tscn" id="4_5rllk"]
 [ext_resource type="PackedScene" uid="uid://csufvxpfo8jbl" path="res://scenes/navigation_grid/grid.tscn" id="4_aip35"]
 [ext_resource type="Environment" uid="uid://chl1sjnqh1sa7" path="res://scenes/main/main_environment.tres" id="4_h5iwh"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/resources/ship_resource.gd" id="5_yqei1"]
+[ext_resource type="Resource" uid="uid://blsujt5rpfnef" path="res://resources/ships/views/3-4.tres" id="6_xcsqf"]
+[ext_resource type="Resource" uid="uid://dcbkbrwitc5nm" path="res://resources/ships/views/2-1.tres" id="6_yj0xe"]
 [ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="8_cwv63"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://scenes/ui/ui.tscn" id="8_myah8"]
 [ext_resource type="Script" path="res://scenes/ai/scripts/ship_input.gd" id="9_nd6tp"]
 [ext_resource type="Shader" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="10_7ps0f"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/radar_viewport.gd" id="10_nsy5m"]
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
+[ext_resource type="Texture2D" uid="uid://dk6yh8t55oncn" path="res://assets/VFX_textures/star_01.png" id="11_ahbhf"]
 [ext_resource type="PackedScene" uid="uid://dt7wav32bva3j" path="res://scenes/player/input_reader.tscn" id="13_epig2"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/health.gd" id="15_1rksw"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="15_5xucn"]
 [ext_resource type="PackedScene" uid="uid://hhj5ip7is6r4" path="res://scenes/ship/radar.tscn" id="15_ln8xj"]
-[ext_resource type="Resource" uid="uid://dhd7okcixwm0y" path="res://scenes/ship/resources/kosa.tres" id="17_rd6pg"]
+[ext_resource type="Resource" uid="uid://byoowq5hai2yf" path="res://resources/ships/views/4-3.tres" id="16_1udoj"]
 
-[sub_resource type="Gradient" id="Gradient_owpx4"]
-offsets = PackedFloat32Array(0, 0.686529)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_3cj2f"]
-gradient = SubResource("Gradient_owpx4")
-width = 512
-height = 512
-fill = 1
-fill_from = Vector2(0.5, 0.5)
+[sub_resource type="Resource" id="Resource_2k6wb"]
+script = ExtResource("5_yqei1")
+textures = ExtResource("6_xcsqf")
+max_speed = 200000.0
+main_thrust = 500.0
+maneuver_thrust = 200.0
+FA_accuracy = 0.9
+FA_accuracy_damp = 0.1
+BA_accuracy = 1.0
+BA_accuracy_damp = 0.1
 
 [sub_resource type="Gradient" id="Gradient_2be3f"]
 offsets = PackedFloat32Array(0, 0.746063)
@@ -57,12 +61,48 @@ height = 1024
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="Resource" id="Resource_8xg15"]
+script = ExtResource("5_yqei1")
+textures = ExtResource("16_1udoj")
+max_speed = 200000.0
+main_thrust = 500.0
+maneuver_thrust = 200.0
+FA_accuracy = 0.02
+FA_accuracy_damp = 0.1
+BA_accuracy = 1.0
+BA_accuracy_damp = 0.1
+
+[sub_resource type="Resource" id="Resource_cmuwi"]
+script = ExtResource("5_yqei1")
+textures = ExtResource("6_yj0xe")
+max_speed = 200000.0
+main_thrust = 500.0
+maneuver_thrust = 200.0
+FA_accuracy = 0.9
+FA_accuracy_damp = 0.1
+BA_accuracy = 1.0
+BA_accuracy_damp = 0.1
+
+[sub_resource type="Gradient" id="Gradient_owpx4"]
+offsets = PackedFloat32Array(0, 0.686529)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3cj2f"]
+gradient = SubResource("Gradient_owpx4")
+width = 1024
+height = 1024
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lkrwm"]
+light_mode = 1
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2ehlx")
 ship_scene = ExtResource("4_5rllk")
 gun_scene = ExtResource("8_cwv63")
 radar_scene = ExtResource("15_ln8xj")
-ship_data = ExtResource("17_rd6pg")
+ship_data = SubResource("Resource_2k6wb")
 
 [node name="Background" parent="." instance=ExtResource("1_b53p2")]
 unique_name_in_owner = true
@@ -79,21 +119,16 @@ unique_name_in_owner = true
 position = Vector2(-330, -177)
 rotation = -1.20638
 color = Color(0, 0, 0, 1)
-energy = 0.98
-blend_mode = 2
-shadow_enabled = true
-height = 0.05
+energy = 0.95
+blend_mode = 1
+height = 1.0
 
 [node name="DirectionalLight" type="DirectionalLight2D" parent="."]
 position = Vector2(-330, -177)
 rotation = -1.20638
-color = Color(0.745098, 0.65098, 0.376471, 1)
-
-[node name="PointLight" type="PointLight2D" parent="." groups=["shiftable"]]
-position = Vector2(30, -188)
-color = Color(1, 0.6, 0, 1)
-texture = SubResource("GradientTexture2D_3cj2f")
-texture_scale = 10.0
+color = Color(0.705882, 0.878431, 1, 1)
+energy = 0.8
+height = 0.1
 
 [node name="Grid" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_aip35")]
 light_mask = 0
@@ -113,6 +148,8 @@ texture = SubResource("GradientTexture2D_4qutk")
 
 [node name="Camera" parent="." instance=ExtResource("11_2fp23")]
 zoom = Vector2(1, 1)
+inertia = 0.5
+acceleration_multiplyer = 2.0
 zoom_min = 0.1
 zoom_max = 2.0
 
@@ -134,17 +171,47 @@ out_range_color = Color(0.49, 0.49, 0, 0.1)
 [node name="Enemy" parent="." node_paths=PackedStringArray("inputs", "gun") instance=ExtResource("4_5rllk")]
 position = Vector2(-265, -228)
 rotation = -0.0583994
+setup_data = SubResource("Resource_8xg15")
 inputs = NodePath("AIShipInput")
 gun = NodePath("Gun")
 
 [node name="Gun" parent="Enemy" instance=ExtResource("8_cwv63")]
 bullet_color = Color(1, 0.188235, 0.184314, 1)
-recoil = 20.0
 
 [node name="AIShipInput" type="Node2D" parent="Enemy"]
 script = ExtResource("9_nd6tp")
-agressive = true
 keep_distance = 1000.0
 
 [node name="Health" type="Node" parent="Enemy"]
 script = ExtResource("15_1rksw")
+
+[node name="Enemy_2" parent="." node_paths=PackedStringArray("inputs", "gun") instance=ExtResource("4_5rllk")]
+position = Vector2(-590, 671)
+rotation = -1.2551
+setup_data = SubResource("Resource_cmuwi")
+inputs = NodePath("AIShipInput")
+gun = NodePath("Gun")
+
+[node name="Gun" parent="Enemy_2" instance=ExtResource("8_cwv63")]
+bullet_color = Color(1, 0.137255, 0.541176, 1)
+
+[node name="AIShipInput" type="Node2D" parent="Enemy_2"]
+script = ExtResource("9_nd6tp")
+keep_distance = 1000.0
+
+[node name="Health" type="Node" parent="Enemy_2"]
+script = ExtResource("15_1rksw")
+
+[node name="PointLight" type="PointLight2D" parent="." groups=["shiftable"]]
+position = Vector2(-584, 74)
+color = Color(1, 0.211765, 0, 1)
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 3.0
+
+[node name="Star01" type="Sprite2D" parent="PointLight"]
+modulate = Color(20, 5, 1, 1)
+light_mask = 0
+z_index = 1
+material = SubResource("CanvasItemMaterial_lkrwm")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("11_ahbhf")

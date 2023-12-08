@@ -26,5 +26,14 @@ func move(index: int, position: Vector2):
 
 func rotate(index: int, rotation: float):
 	if points == null: return
-	points[index].rotate(rotation)
+	points[index].rotate_point(rotation)
 	emit_changed()
+
+func rotated(rotation: float) -> Array[PointResource]:
+	var result_points: Array[PointResource] = []
+	for point in points:
+		result_points.append(point.rotated(rotation))
+	return result_points
+
+func merge(new_points: PointsArrayResource):
+	points.append_array(new_points.points)
