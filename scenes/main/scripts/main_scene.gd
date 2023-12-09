@@ -19,7 +19,8 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	ship.position = -FloatingOrigin.origin
 	ship.inputs = input_reader
 	var health := Health.new()
-	health.health = 100000#health.max_health
+	health.max_health = 10000.0
+	health.health = health.max_health
 	ship.setup_health(health)
 	var gun: Gun = gun_scene.instantiate() as Gun
 	gun.bullet_color = Color.GREEN

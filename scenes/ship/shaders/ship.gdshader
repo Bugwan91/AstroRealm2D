@@ -33,7 +33,7 @@ void light() {
 		LIGHT = vec4(0.0);
 	} else {
 		if (LIGHT_COLOR.r == 0.0 && LIGHT_COLOR.g == 0.0 && LIGHT_COLOR.b == 0.0) {
-			LIGHT = COLOR;
+			LIGHT = COLOR * LIGHT_ENERGY;
 		} else {
 			LIGHT = vec4(light_normal_compute(LIGHT_DIRECTION, NORMAL, COLOR.rgb, LIGHT_COLOR.rgb * LIGHT_ENERGY, spec), LIGHT_COLOR.a);
 		}

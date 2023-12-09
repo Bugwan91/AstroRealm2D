@@ -67,8 +67,8 @@ textures = ExtResource("16_1udoj")
 max_speed = 200000.0
 main_thrust = 500.0
 maneuver_thrust = 200.0
-FA_accuracy = 0.02
-FA_accuracy_damp = 0.1
+FA_accuracy = 0.01
+FA_accuracy_damp = 0.01
 BA_accuracy = 1.0
 BA_accuracy_damp = 0.1
 
@@ -78,7 +78,7 @@ textures = ExtResource("6_yj0xe")
 max_speed = 200000.0
 main_thrust = 500.0
 maneuver_thrust = 200.0
-FA_accuracy = 0.9
+FA_accuracy = 0.02
 FA_accuracy_damp = 0.1
 BA_accuracy = 1.0
 BA_accuracy_damp = 0.1
@@ -119,7 +119,7 @@ unique_name_in_owner = true
 position = Vector2(-330, -177)
 rotation = -1.20638
 color = Color(0, 0, 0, 1)
-energy = 0.95
+energy = 0.97
 blend_mode = 1
 height = 1.0
 
@@ -157,16 +157,6 @@ unique_name_in_owner = true
 in_range_color = Color(0, 0, 1, 0.78)
 out_range_color = Color(0, 0, 0.486275, 0.784314)
 
-[node name="TargetPointer" parent="." instance=ExtResource("15_5xucn")]
-unique_name_in_owner = true
-in_range_color = Color(1, 0, 0, 0.2)
-out_range_color = Color(0.49, 0, 0, 0.2)
-
-[node name="ShootPointer" parent="." instance=ExtResource("15_5xucn")]
-unique_name_in_owner = true
-in_range_color = Color(1, 1, 0, 0.1)
-out_range_color = Color(0.49, 0.49, 0, 0.1)
-
 [node name="Enemy" parent="." node_paths=PackedStringArray("inputs", "gun") instance=ExtResource("4_5rllk")]
 position = Vector2(-265, -228)
 rotation = -0.0583994
@@ -181,6 +171,7 @@ bullet_speed = 2000.0
 
 [node name="AIShipInput" type="Node2D" parent="Enemy"]
 script = ExtResource("9_nd6tp")
+agressive = true
 keep_distance = 1000.0
 
 [node name="Health" type="Node" parent="Enemy"]
@@ -200,6 +191,7 @@ bullet_speed = 2000.0
 
 [node name="AIShipInput" type="Node2D" parent="Enemy_2"]
 script = ExtResource("9_nd6tp")
+agressive = true
 keep_distance = 1000.0
 
 [node name="Health" type="Node" parent="Enemy_2"]
