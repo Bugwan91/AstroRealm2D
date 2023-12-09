@@ -17,7 +17,7 @@ const ANGULAR_THRESHOLD = 0.01
 @onready var _pre_collision_detector: ShipPreCollisionDetector = %PreCollisionDetector
 
 var target: ShipRigidBody: set = _set_target
-var autopilot_speed := 10000.0
+var autopilot_speed := 100000.0
 var follow_distance := 1000.0
 var direction := Vector2.ZERO
 var ignore_direction_update := false

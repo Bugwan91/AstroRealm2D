@@ -149,7 +149,6 @@ texture = SubResource("GradientTexture2D_4qutk")
 [node name="Camera" parent="." instance=ExtResource("11_2fp23")]
 zoom = Vector2(1, 1)
 inertia = 0.5
-acceleration_multiplyer = 2.0
 zoom_min = 0.1
 zoom_max = 2.0
 
@@ -177,10 +176,11 @@ gun = NodePath("Gun")
 
 [node name="Gun" parent="Enemy" instance=ExtResource("8_cwv63")]
 bullet_color = Color(1, 0.188235, 0.184314, 1)
+fire_rate = 5.0
+bullet_speed = 2000.0
 
 [node name="AIShipInput" type="Node2D" parent="Enemy"]
 script = ExtResource("9_nd6tp")
-agressive = true
 keep_distance = 1000.0
 
 [node name="Health" type="Node" parent="Enemy"]
@@ -195,10 +195,11 @@ gun = NodePath("Gun")
 
 [node name="Gun" parent="Enemy_2" instance=ExtResource("8_cwv63")]
 bullet_color = Color(1, 0.137255, 0.541176, 1)
+fire_rate = 5.0
+bullet_speed = 2000.0
 
 [node name="AIShipInput" type="Node2D" parent="Enemy_2"]
 script = ExtResource("9_nd6tp")
-agressive = true
 keep_distance = 1000.0
 
 [node name="Health" type="Node" parent="Enemy_2"]

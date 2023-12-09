@@ -137,7 +137,7 @@ thruster_scene = ExtResource("10_wlx63")
 
 [node name="GunSlot" type="Marker2D" parent="PositionExtrapolation"]
 unique_name_in_owner = true
-position = Vector2(66, 0)
+position = Vector2(64, 0)
 script = ExtResource("13_n2hg0")
 
 [node name="DestroyEffectManager" parent="PositionExtrapolation" instance=ExtResource("14_4y0fi")]

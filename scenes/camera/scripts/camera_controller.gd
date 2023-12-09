@@ -40,7 +40,7 @@ func _process(delta):
 
 func _physics_process(delta):
 	if not is_instance_valid(target): return
-	var acceleration = (_last_veocity - target.absolute_velocity) * (Vector2.ONE * acceleration_multiplyer / zoom)
+	var acceleration = (_last_veocity - target.absolute_velocity) * (Vector2.ONE * acceleration_multiplyer)
 	_required_acceleration_position = lerp(_required_acceleration_position, acceleration, _inverse_inertia * delta)
 	_last_veocity = target.absolute_velocity
 
@@ -62,4 +62,4 @@ func _on_update_player_ship(player_ship: ShipRigidBody):
 	target.got_hit.connect(_shake_on_hit)
 
 func _shake_on_hit(hit: Vector2):
-	_hit_position = -hit * 0.5
+	_hit_position = -hit * 0.5 / zoom # TODO: Clamp for huge impulces

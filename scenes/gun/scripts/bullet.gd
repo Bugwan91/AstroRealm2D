@@ -18,11 +18,9 @@ var _damage := 10.0
 func _ready():
 	linear_velocity += transform.x * speed
 
-func _process(delta):
-	position += linear_velocity * delta
-
 func _physics_process(delta):
-	ray.target_position.y = speed * delta + 10.0
+	position += linear_velocity * delta
+	ray.target_position.y = speed * delta
 	_collide()
 
 func update_material(color: Color):

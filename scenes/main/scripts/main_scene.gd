@@ -24,12 +24,17 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	var gun: Gun = gun_scene.instantiate() as Gun
 	gun.bullet_color = Color.GREEN
 	gun.overheat = 0.0
-	gun.recoil = 40.0
+	gun.recoil = 20.0
+	gun.bullet_speed = 2000.0
+	gun.fire_rate = 5.0
 	ship.gun = gun
 	var radar: Radar = radar_scene.instantiate() as Radar
 	ship.add_child(radar)
 	ship.autopilot_pointer = autopilot_pointer
 	ship.target_prediction_pointer = target_pointer
+	var audio_listener = AudioListener2D.new()
+	ship.add_child(audio_listener)
+	audio_listener.make_current()
 	add_child(ship)
 	radar.radius = 10000.0
 	#ship.mass = 0.5
