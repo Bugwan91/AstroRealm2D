@@ -1,158 +1,40 @@
-[gd_scene load_steps=21 format=3 uid="uid://tulgf6ok78fw"]
+[gd_scene load_steps=7 format=3 uid="uid://cor2bkqrdl620"]
 
-[ext_resource type="Script" path="res://scenes/ship_designer/ship_baker_full.gd" id="1_hhwno"]
-[ext_resource type="Texture2D" uid="uid://brtabr5lpm864" path="res://assets/spaceships/Styles/01.png" id="2_i0gfq"]
-[ext_resource type="Resource" uid="uid://3tkl5v5g5r13" path="res://resources/ship_parts/hull/03.tres" id="4_jwwtv"]
-[ext_resource type="Resource" uid="uid://ssrq5m0n8xji" path="res://resources/ship_parts/hull_ext/04.tres" id="5_8fsrf"]
-[ext_resource type="Resource" uid="uid://drhm8p5kvv71k" path="res://resources/ship_parts/cockpit/01.tres" id="5_ekvbt"]
-[ext_resource type="Resource" uid="uid://dcth4vvdyl5un" path="res://resources/ship_parts/hull/05.tres" id="6_j8dig"]
-[ext_resource type="Resource" uid="uid://dgw6x6lr6gnk2" path="res://resources/ship_parts/engine/02.tres" id="6_njmuy"]
+[ext_resource type="Script" path="res://scenes/ship_designer/scripts/ship_blueprint_baker.gd" id="1_w34ns"]
+[ext_resource type="Script" path="res://scenes/ship_designer/scripts/ship_polygon_baker.gd" id="2_05kjf"]
+[ext_resource type="PackedScene" uid="uid://cllccy4uwm102" path="res://scenes/ship_designer/style_baker.tscn" id="5_n36rl"]
 [ext_resource type="PackedScene" uid="uid://pbokfmo8p4jh" path="res://scenes/ship_designer/baker_layer.tscn" id="7_yjkib"]
-[ext_resource type="Script" path="res://scenes/ship_designer/scripts/view_res_editor.gd" id="7_yr0dd"]
 [ext_resource type="Texture2D" uid="uid://d4is4xy8p0a0" path="res://assets/spaceships/mask.png" id="9_hbvso"]
-[ext_resource type="Resource" uid="uid://duih6enpumdqy" path="res://resources/ship_parts/hull/view/05.tres" id="9_rw0ek"]
-[ext_resource type="Texture2D" uid="uid://smq470vdik0f" path="res://assets/spaceships/cockpit/1.png" id="10_mwe88"]
-[ext_resource type="Texture2D" uid="uid://dhmwpt8r3b7ul" path="res://assets/spaceships/engine/2.png" id="11_1a78q"]
 [ext_resource type="Texture2D" uid="uid://bwslvp6xbqrt8" path="res://assets/spaceships/specular.png" id="21_cdafb"]
-[ext_resource type="Texture2D" uid="uid://viyf6wgnx0b2" path="res://assets/spaceships/hull/5.png" id="23_jsphw"]
-[ext_resource type="Script" path="res://scenes/ship_designer/scripts/hull_res_editor.gd" id="24_bpsnp"]
 
-[sub_resource type="Shader" id="Shader_8fl5i"]
-code = "shader_type canvas_item;
+[node name="Baker" type="Node"]
+script = ExtResource("1_w34ns")
 
-uniform sampler2D mask_texture : hint_default_transparent;
-uniform sampler2D style_texture : hint_default_transparent;
-
-void fragment() {
-	vec4 ship_color = texture(TEXTURE, UV);
-	vec4 style_color = texture(style_texture, UV);
-	vec4 mask_value = texture(mask_texture, UV);
-	if (mask_value.r > 0.0) {
-		COLOR = ship_color * style_color * mask_value.r;
-	} else {
-		COLOR = ship_color;
-	}
-}"
-metadata/_edit_res_path = "res://scenes/ship_designer/baker.tscn::Shader_8fl5i"
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_xg600"]
-viewport_path = NodePath(".")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sayty"]
-shader = SubResource("Shader_8fl5i")
-shader_parameter/mask_texture = SubResource("ViewportTexture_xg600")
-shader_parameter/style_texture = ExtResource("2_i0gfq")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_k7e4j"]
-viewport_path = NodePath(".")
-
-[node name="Baker" type="Node2D"]
-script = ExtResource("1_hhwno")
-filename = "3-4"
-style = ExtResource("2_i0gfq")
-base_specular = ExtResource("21_cdafb")
-hull = ExtResource("4_jwwtv")
-hull_ext = ExtResource("5_8fsrf")
-cockpit = ExtResource("5_ekvbt")
-engine = ExtResource("6_njmuy")
-
-[node name="bakerView" type="Node2D" parent="."]
-position = Vector2(0, 128)
-
-[node name="Control" type="Control" parent="bakerView"]
-layout_mode = 3
-anchors_preset = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="bakerView/Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Base" type="SubViewportContainer" parent="bakerView/Control/HBoxContainer"]
-layout_mode = 2
-
-[node name="BaseBaker" parent="bakerView/Control/HBoxContainer/Base" instance=ExtResource("7_yjkib")]
+[node name="Diffuse" parent="." instance=ExtResource("7_yjkib")]
 unique_name_in_owner = true
 
-[node name="Emission" type="SubViewportContainer" parent="bakerView/Control/HBoxContainer"]
-layout_mode = 2
+[node name="Mask" parent="." instance=ExtResource("7_yjkib")]
+unique_name_in_owner = true
+type = 1
+background = ExtResource("9_hbvso")
 
-[node name="EmissionBaker" parent="bakerView/Control/HBoxContainer/Emission" instance=ExtResource("7_yjkib")]
+[node name="Normal" parent="." instance=ExtResource("7_yjkib")]
+unique_name_in_owner = true
+type = 2
+
+[node name="Emission" parent="." instance=ExtResource("7_yjkib")]
 unique_name_in_owner = true
 type = 3
 background = ExtResource("9_hbvso")
 
-[node name="Mask" type="SubViewportContainer" parent="bakerView/Control/HBoxContainer"]
-layout_mode = 2
-
-[node name="MaskBaker" parent="bakerView/Control/HBoxContainer/Mask" instance=ExtResource("7_yjkib")]
-unique_name_in_owner = true
-type = 1
-
-[node name="Normal" type="SubViewportContainer" parent="bakerView/Control/HBoxContainer"]
-layout_mode = 2
-
-[node name="NormalBaker" parent="bakerView/Control/HBoxContainer/Normal" instance=ExtResource("7_yjkib")]
-unique_name_in_owner = true
-type = 2
-
-[node name="Specular" type="SubViewportContainer" parent="bakerView/Control/HBoxContainer"]
-layout_mode = 2
-
-[node name="SpecularBaker" parent="bakerView/Control/HBoxContainer/Specular" instance=ExtResource("7_yjkib")]
+[node name="Specular" parent="." instance=ExtResource("7_yjkib")]
 unique_name_in_owner = true
 type = 4
 background = ExtResource("21_cdafb")
 
-[node name="Final" type="SubViewportContainer" parent="bakerView/Control/HBoxContainer"]
-layout_mode = 2
-
-[node name="Stylizator" type="SubViewport" parent="bakerView/Control/HBoxContainer/Final"]
+[node name="Style" parent="." instance=ExtResource("5_n36rl")]
 unique_name_in_owner = true
-transparent_bg = true
-handle_input_locally = false
-canvas_item_default_texture_filter = 0
-size = Vector2i(128, 128)
-render_target_update_mode = 4
 
-[node name="CanvasLayer" type="CanvasLayer" parent="bakerView/Control/HBoxContainer/Final/Stylizator"]
-
-[node name="ShipStylization" type="Node2D" parent="bakerView/Control/HBoxContainer/Final/Stylizator/CanvasLayer"]
-position = Vector2(64, 64)
-
-[node name="StylizatorView" type="Sprite2D" parent="bakerView/Control/HBoxContainer/Final/Stylizator/CanvasLayer/ShipStylization"]
+[node name="Polygon" type="Node" parent="."]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_sayty")
-texture = SubResource("ViewportTexture_k7e4j")
-
-[node name="ResEditor" type="Node2D" parent="."]
-
-[node name="HullResourceEditor" type="Sprite2D" parent="ResEditor"]
-script = ExtResource("24_bpsnp")
-res = ExtResource("6_j8dig")
-
-[node name="ResourceEditor" type="Sprite2D" parent="ResEditor/HullResourceEditor"]
-unique_name_in_owner = true
-texture = ExtResource("23_jsphw")
-script = ExtResource("7_yr0dd")
-res = ExtResource("9_rw0ek")
-
-[node name="cockpit" type="Sprite2D" parent="ResEditor/HullResourceEditor"]
-visible = false
-position = Vector2(0, 23)
-texture = ExtResource("10_mwe88")
-
-[node name="eng_0" type="Sprite2D" parent="ResEditor/HullResourceEditor"]
-visible = false
-position = Vector2(0, 32)
-texture = ExtResource("11_1a78q")
-
-[node name="eng_R" type="Sprite2D" parent="ResEditor/HullResourceEditor"]
-visible = false
-position = Vector2(40, 32)
-texture = ExtResource("11_1a78q")
-
-[node name="eng_L" type="Sprite2D" parent="ResEditor/HullResourceEditor"]
-visible = false
-position = Vector2(-40, 32)
-texture = ExtResource("11_1a78q")
+script = ExtResource("2_05kjf")

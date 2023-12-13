@@ -7,4 +7,5 @@ extends Node2D
 
 func _set_resource(value: HullBakerResource):
 	res = value
-	resource_editor.res = res.view if res != null else null
+	if res == null: return
+	resource_editor.res = res

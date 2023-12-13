@@ -1,12 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://3cqmtymu5w3p"]
+[gd_scene load_steps=12 format=3 uid="uid://3cqmtymu5w3p"]
 
+[ext_resource type="Script" path="res://scenes/ui/scripts/main_ui.gd" id="1_bwtaq"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/position_label.gd" id="1_x4cxl"]
+[ext_resource type="Texture2D" uid="uid://c26bmc1q2hol4" path="res://assets/icons/cross.png" id="2_qw7hq"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/speed_label.gd" id="2_uarfg"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/acceleration_label.gd" id="3_ex1gd"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/flight_assistant_ui.gd" id="4_7x04l"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/fps.gd" id="5_8a6ql"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/debug_info.gd" id="5_u0tch"]
 [ext_resource type="PackedScene" uid="uid://dgf4ciui6fwt5" path="res://scenes/ui/game_over_container.tscn" id="7_vcp7q"]
+[ext_resource type="PackedScene" uid="uid://c7cafyhhy135a" path="res://scenes/ship_designer/ship_designer_ui.tscn" id="8_wmubr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1il4g"]
 font_size = 32
@@ -14,6 +17,8 @@ outline_size = 3
 outline_color = Color(0.305882, 0.698039, 0.839216, 1)
 
 [node name="UI" type="CanvasLayer"]
+script = ExtResource("1_bwtaq")
+_crosshair_image = ExtResource("2_qw7hq")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -24,7 +29,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
+[node name="GameUI" type="MarginContainer" parent="Control"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,101 +42,107 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/GameUI"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/GameUI/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/GameUI/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Position" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Position" type="Label" parent="Control/GameUI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 script = ExtResource("1_x4cxl")
 
-[node name="Speed" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Speed" type="Label" parent="Control/GameUI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 script = ExtResource("2_uarfg")
 
-[node name="Acceleration" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Acceleration" type="Label" parent="Control/GameUI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 script = ExtResource("3_ex1gd")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/GameUI"]
 layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("4_7x04l")
 
-[node name="DivederLeft" type="Control" parent="Control/MarginContainer/HBoxContainer"]
+[node name="DivederLeft" type="Control" parent="Control/GameUI/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/GameUI/HBoxContainer"]
 layout_mode = 2
 
-[node name="Tracking" type="Label" parent="Control/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Tracking" type="Label" parent="Control/GameUI/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Follow/Stop"
 label_settings = SubResource("LabelSettings_1il4g")
 horizontal_alignment = 1
 
-[node name="TrackingDistance" type="Label" parent="Control/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="TrackingDistance" type="Label" parent="Control/GameUI/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "TrackingDistance"
 label_settings = SubResource("LabelSettings_1il4g")
 horizontal_alignment = 1
 
-[node name="Autopilot" type="Label" parent="Control/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Autopilot" type="Label" parent="Control/GameUI/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Autopilot"
 label_settings = SubResource("LabelSettings_1il4g")
 horizontal_alignment = 1
 
-[node name="AutopilotSpeed" type="Label" parent="Control/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="AutopilotSpeed" type="Label" parent="Control/GameUI/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "AutopilotSpeed"
 label_settings = SubResource("LabelSettings_1il4g")
 horizontal_alignment = 1
 
-[node name="DIviderRight" type="Control" parent="Control/MarginContainer/HBoxContainer"]
+[node name="DIviderRight" type="Control" parent="Control/GameUI/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/GameUI/HBoxContainer"]
 layout_mode = 2
 
-[node name="FPS" type="Label" parent="Control/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="FPS" type="Label" parent="Control/GameUI/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 script = ExtResource("5_8a6ql")
 
-[node name="DebugInfo" type="PanelContainer" parent="Control/MarginContainer"]
+[node name="DebugInfo" type="PanelContainer" parent="Control/GameUI"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/DebugInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/GameUI/DebugInfo"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="DebugInfo" type="VBoxContainer" parent="Control/MarginContainer/DebugInfo/MarginContainer"]
+[node name="DebugInfo" type="VBoxContainer" parent="Control/GameUI/DebugInfo/MarginContainer"]
 layout_mode = 2
 script = ExtResource("5_u0tch")
 
-[node name="GameOverContainer" parent="Control/MarginContainer" instance=ExtResource("7_vcp7q")]
+[node name="GameOverContainer" parent="Control/GameUI" instance=ExtResource("7_vcp7q")]
+unique_name_in_owner = true
 layout_mode = 2
+
+[node name="ShipDesignerContainer" parent="Control" instance=ExtResource("8_wmubr")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1

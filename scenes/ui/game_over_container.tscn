@@ -30,10 +30,12 @@ label_settings = SubResource("LabelSettings_rh5g7")
 
 [node name="RespawnButton" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 text = "RESPAWN"
 
 [node name="ShipEditorButton" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 text = "SHIP EDITOR"

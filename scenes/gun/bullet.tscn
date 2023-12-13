@@ -28,6 +28,7 @@ script = ExtResource("4_ud3i3")
 [node name="Light" type="PointLight2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, 1)
+energy = 2.0
 texture = ExtResource("5_rn3vo")
 texture_scale = 2.0
 

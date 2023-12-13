@@ -14,12 +14,12 @@
 [ext_resource type="Shader" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="10_7ps0f"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/radar_viewport.gd" id="10_nsy5m"]
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
-[ext_resource type="Texture2D" uid="uid://dk6yh8t55oncn" path="res://assets/VFX_textures/star_01.png" id="11_ahbhf"]
 [ext_resource type="PackedScene" uid="uid://dt7wav32bva3j" path="res://scenes/player/input_reader.tscn" id="13_epig2"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/health.gd" id="15_1rksw"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="15_5xucn"]
 [ext_resource type="PackedScene" uid="uid://hhj5ip7is6r4" path="res://scenes/ship/radar.tscn" id="15_ln8xj"]
 [ext_resource type="Resource" uid="uid://byoowq5hai2yf" path="res://resources/ships/views/4-3.tres" id="16_1udoj"]
+[ext_resource type="Texture2D" uid="uid://bwr37r7vbwfq0" path="res://assets/VFX_textures/light_03.png" id="20_aq44u"]
 
 [sub_resource type="Resource" id="Resource_2k6wb"]
 script = ExtResource("5_yqei1")
@@ -119,16 +119,14 @@ unique_name_in_owner = true
 position = Vector2(-330, -177)
 rotation = -1.20638
 color = Color(0, 0, 0, 1)
-energy = 0.97
+energy = 0.98
 blend_mode = 1
-height = 1.0
 
 [node name="DirectionalLight" type="DirectionalLight2D" parent="."]
 position = Vector2(-330, -177)
 rotation = -1.20638
-color = Color(0.705882, 0.878431, 1, 1)
+color = Color(0.352941, 0.74902, 1, 1)
 energy = 0.8
-height = 0.1
 
 [node name="Grid" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_aip35")]
 light_mask = 0
@@ -158,7 +156,7 @@ in_range_color = Color(0, 0, 1, 0.78)
 out_range_color = Color(0, 0, 0.486275, 0.784314)
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("inputs", "gun") instance=ExtResource("4_5rllk")]
-position = Vector2(-265, -228)
+position = Vector2(-325, 71)
 rotation = -0.0583994
 setup_data = SubResource("Resource_8xg15")
 inputs = NodePath("AIShipInput")
@@ -167,11 +165,10 @@ gun = NodePath("Gun")
 [node name="Gun" parent="Enemy" instance=ExtResource("8_cwv63")]
 bullet_color = Color(1, 0.188235, 0.184314, 1)
 fire_rate = 5.0
-bullet_speed = 2000.0
+bullet_speed = 3000.0
 
 [node name="AIShipInput" type="Node2D" parent="Enemy"]
 script = ExtResource("9_nd6tp")
-agressive = true
 keep_distance = 1000.0
 
 [node name="Health" type="Node" parent="Enemy"]
@@ -187,26 +184,38 @@ gun = NodePath("Gun")
 [node name="Gun" parent="Enemy_2" instance=ExtResource("8_cwv63")]
 bullet_color = Color(1, 0.137255, 0.541176, 1)
 fire_rate = 5.0
-bullet_speed = 2000.0
+bullet_speed = 3000.0
 
 [node name="AIShipInput" type="Node2D" parent="Enemy_2"]
 script = ExtResource("9_nd6tp")
-agressive = true
 keep_distance = 1000.0
 
 [node name="Health" type="Node" parent="Enemy_2"]
 script = ExtResource("15_1rksw")
 
+[node name="PointLight2" type="PointLight2D" parent="." groups=["shiftable"]]
+position = Vector2(0, 100)
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 3.0
+
+[node name="Star01" type="Sprite2D" parent="PointLight2"]
+modulate = Color(3, 8, 20, 1)
+light_mask = 0
+z_index = 1
+material = SubResource("CanvasItemMaterial_lkrwm")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("20_aq44u")
+
 [node name="PointLight" type="PointLight2D" parent="." groups=["shiftable"]]
-position = Vector2(-584, 74)
+position = Vector2(800, 100)
 color = Color(1, 0.211765, 0, 1)
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 3.0
 
 [node name="Star01" type="Sprite2D" parent="PointLight"]
-modulate = Color(20, 5, 1, 1)
+modulate = Color(20, 8, 3, 1)
 light_mask = 0
 z_index = 1
 material = SubResource("CanvasItemMaterial_lkrwm")
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("11_ahbhf")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("20_aq44u")

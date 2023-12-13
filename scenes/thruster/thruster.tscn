@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/thruster/scripts/thruster.gd" id="1_esf7n"]
 [ext_resource type="Script" path="res://scenes/thruster/scripts/flame.gd" id="2_a1vau"]
+[ext_resource type="Texture2D" uid="uid://dsbg3e5xn8cd4" path="res://assets/VFX_textures/muzzle_04.png" id="3_rdjn0"]
 [ext_resource type="Texture2D" uid="uid://8iveh5gra6v3" path="res://assets/VFX_textures/smoke_01.png" id="4_rfruv"]
 [ext_resource type="Texture2D" uid="uid://c388olp5jsja" path="res://assets/my/circle_texture_128.tres" id="5_2krt3"]
 [ext_resource type="AudioStream" uid="uid://xn71bm7xult" path="res://assets/sounds/thruster_loop.wav" id="5_raf0x"]
@@ -11,7 +12,7 @@ light_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_direw"]
 offsets = PackedFloat32Array(0, 0.286041, 0.576046, 1)
-colors = PackedColorArray(1, 1, 0.15, 1, 1, 0.8, 0, 1, 1, 0.383333, 0, 0.780392, 1, 0.133333, 0, 0)
+colors = PackedColorArray(10, 10, 1, 1, 8, 5, 0, 1, 5, 1, 0, 0.78, 3, 0.2, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ulhdr"]
 gradient = SubResource("Gradient_direw")
@@ -26,16 +27,13 @@ curve = SubResource("Curve_3qwdg")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0q42v"]
 particle_flag_disable_z = true
-direction = Vector3(0, 1, 0)
+direction = Vector3(0, -1, 0)
 spread = 0.0
-initial_velocity_min = 200.0
-initial_velocity_max = 400.0
+initial_velocity_min = 500.0
+initial_velocity_max = 2000.0
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_ld446")
 color_ramp = SubResource("GradientTexture1D_ulhdr")
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jlpqg"]
-load_path = "res://.godot/imported/engine_flame_single.png-8bbd0bb7814d0bcc779ed218bbd5ebb8.ctex"
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1q8r7"]
 light_mode = 1
@@ -86,10 +84,11 @@ script = ExtResource("2_a1vau")
 unique_name_in_owner = true
 light_mask = 0
 material = SubResource("CanvasItemMaterial_hkf44")
-position = Vector2(0, 16)
-emitting = false
+position = Vector2(0.000152588, 40.5)
+rotation = 3.14159
+scale = Vector2(0.1, 0.2)
 process_material = SubResource("ParticleProcessMaterial_0q42v")
-texture = SubResource("CompressedTexture2D_jlpqg")
+texture = ExtResource("3_rdjn0")
 lifetime = 0.2
 randomness = 0.2
 local_coords = true
@@ -113,6 +112,7 @@ rotation = -1.5708
 color = Color(1, 0.717647, 0, 1)
 energy = 0.0
 texture = ExtResource("5_2krt3")
+texture_scale = 3.0
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Flame"]
 unique_name_in_owner = true

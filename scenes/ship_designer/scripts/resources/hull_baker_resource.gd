@@ -1,8 +1,6 @@
 @tool
 class_name HullBakerResource
-extends Resource
-
-@export var view: ViewBakerResource
+extends ViewBakerResource
 
 @export var cockpit_slot: Vector2
 @export var engine_slots: Array[Vector2]

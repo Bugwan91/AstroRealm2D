@@ -25,7 +25,7 @@ func _physics_process(delta):
 
 func update_material(color: Color):
 	_color = color
-	sprite.modulate = _color * 2.0
+	sprite.modulate = _color * 3.0
 	light.color = _color
 
 func start(lifetime: float):

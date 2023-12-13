@@ -1,0 +1,171 @@
+[gd_scene load_steps=27 format=3 uid="uid://c7cafyhhy135a"]
+
+[ext_resource type="Script" path="res://scenes/ship_designer/scripts/ship_designer_ui.gd" id="1_citlv"]
+[ext_resource type="PackedScene" uid="uid://jbw831e0e4ws" path="res://scenes/ship_designer/items_list.tscn" id="2_ji1w5"]
+[ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="2_jrjbv"]
+[ext_resource type="Resource" uid="uid://cmj8g20dbxwmh" path="res://resources/ship_parts/hull/01.tres" id="4_8xh0g"]
+[ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="5_alsfe"]
+[ext_resource type="Resource" uid="uid://n4x30t0f2gct" path="res://resources/ship_parts/hull/02.tres" id="5_uobv3"]
+[ext_resource type="Resource" uid="uid://lpuy2txkhyi2" path="res://resources/ship_parts/hull/03.tres" id="6_g040y"]
+[ext_resource type="Resource" uid="uid://dyeqdkm0axqab" path="res://resources/ship_parts/hull/04.tres" id="7_hnlph"]
+[ext_resource type="Resource" uid="uid://cc5dcgmqoxf2w" path="res://resources/ship_parts/hull/05.tres" id="8_enyfy"]
+[ext_resource type="Resource" uid="uid://l2vpnff51m0k" path="res://resources/ship_parts/hull_ext/01.tres" id="9_2mkpw"]
+[ext_resource type="Resource" uid="uid://c8ufqm2vr2xfy" path="res://resources/ship_parts/hull_ext/02.tres" id="10_5cgho"]
+[ext_resource type="Resource" uid="uid://mom4o82wgrea" path="res://resources/ship_parts/hull_ext/03.tres" id="11_nph1a"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/ship_view.gd" id="11_r583k"]
+[ext_resource type="Resource" uid="uid://ssrq5m0n8xji" path="res://resources/ship_parts/hull_ext/04.tres" id="12_7q74a"]
+[ext_resource type="Resource" uid="uid://bfqdtux105aav" path="res://resources/ship_parts/hull_ext/05.tres" id="13_6lksf"]
+[ext_resource type="Resource" uid="uid://drhm8p5kvv71k" path="res://resources/ship_parts/cockpit/01.tres" id="14_p45ui"]
+[ext_resource type="Resource" uid="uid://ddbus3emw7v04" path="res://resources/ship_parts/cockpit/02.tres" id="15_wvvyx"]
+[ext_resource type="Resource" uid="uid://c1xggcinljpje" path="res://resources/ship_parts/engine/01.tres" id="16_a0480"]
+[ext_resource type="Resource" uid="uid://dgw6x6lr6gnk2" path="res://resources/ship_parts/engine/02.tres" id="17_mupt7"]
+[ext_resource type="Texture2D" uid="uid://brtabr5lpm864" path="res://assets/spaceships/Styles/01.png" id="18_pkqg8"]
+[ext_resource type="Texture2D" uid="uid://dvxp714x3fp80" path="res://assets/spaceships/Styles/02.png" id="19_l5qn6"]
+[ext_resource type="Texture2D" uid="uid://bumhukr5exiwp" path="res://assets/spaceships/Styles/SF.png" id="20_23j08"]
+[ext_resource type="Texture2D" uid="uid://dh1ya4sfdur13" path="res://assets/spaceships/Styles/smile.png" id="21_26i24"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3y64e"]
+load_path = "res://.godot/imported/2-1_emission.png-67052bb7f4582c6df4039dee2c5765f9.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mx0cx"]
+load_path = "res://.godot/imported/2-1_specular.png-3332ab8fc7219c710df0c422e408e4de.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s2s6x"]
+shader = ExtResource("5_alsfe")
+shader_parameter/emission = 5.0
+shader_parameter/shininess = 0.0
+shader_parameter/emission_texture = SubResource("CompressedTexture2D_3y64e")
+shader_parameter/specular_texture = SubResource("CompressedTexture2D_mx0cx")
+
+[node name="ShipDesignerContainer" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_force_pass_scroll_events = false
+script = ExtResource("1_citlv")
+
+[node name="Baker" parent="." instance=ExtResource("2_jrjbv")]
+unique_name_in_owner = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+
+[node name="Hull" type="ScrollContainer" parent="HBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="HullSelector" parent="HBoxContainer/TabContainer/Hull" instance=ExtResource("2_ji1w5")]
+unique_name_in_owner = true
+layout_mode = 2
+resources = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("4_8xh0g"), ExtResource("5_uobv3"), ExtResource("6_g040y"), ExtResource("7_hnlph"), ExtResource("8_enyfy")])
+
+[node name="HullExt" type="ScrollContainer" parent="HBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HullExtSelector" parent="HBoxContainer/TabContainer/HullExt" instance=ExtResource("2_ji1w5")]
+unique_name_in_owner = true
+layout_mode = 2
+empty_allowed = true
+resources = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("9_2mkpw"), ExtResource("10_5cgho"), ExtResource("11_nph1a"), ExtResource("12_7q74a"), ExtResource("13_6lksf")])
+
+[node name="Cockpit" type="ScrollContainer" parent="HBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="CockpitSelector" parent="HBoxContainer/TabContainer/Cockpit" instance=ExtResource("2_ji1w5")]
+unique_name_in_owner = true
+layout_mode = 2
+resources = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("14_p45ui"), ExtResource("15_wvvyx")])
+
+[node name="Engine" type="ScrollContainer" parent="HBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="EngineSelector" parent="HBoxContainer/TabContainer/Engine" instance=ExtResource("2_ji1w5")]
+unique_name_in_owner = true
+layout_mode = 2
+resources = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("16_a0480"), ExtResource("17_mupt7")])
+
+[node name="Style" type="ScrollContainer" parent="HBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="StyleSelector" parent="HBoxContainer/TabContainer/Style" instance=ExtResource("2_ji1w5")]
+unique_name_in_owner = true
+layout_mode = 2
+empty_allowed = true
+textures = Array[Texture2D]([ExtResource("18_pkqg8"), ExtResource("19_l5qn6"), ExtResource("20_23j08"), ExtResource("21_26i24")])
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/CenterContainer/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="ShipPreview" type="Sprite2D" parent="HBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+texture_filter = 3
+material = SubResource("ShaderMaterial_s2s6x")
+position = Vector2(256, 265)
+scale = Vector2(4, 4)
+script = ExtResource("11_r583k")
+
+[node name="DarkAmbient" type="DirectionalLight2D" parent="HBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
+color = Color(0, 0, 0, 1)
+energy = 0.7
+blend_mode = 1
+
+[node name="Light" type="DirectionalLight2D" parent="HBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
+rotation = -0.785398
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Buttons"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="CancelButton" type="Button" parent="MarginContainer/Buttons/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+text = "Cancel"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/Buttons"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ConfirmButton" type="Button" parent="MarginContainer/Buttons/MarginContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+text = "Confirm"

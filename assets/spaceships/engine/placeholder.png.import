@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bchrw2kbn1q5f"
-path="res://.godot/imported/gold.png-08af138d09d9711d63abcf95e978aeaf.ctex"
+uid="uid://csaa8hvq7uu2a"
+path="res://.godot/imported/placeholder.png-21fffb7c0de6837a71c614e9298ca39e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spaceships/Styles/gold.png"
-dest_files=["res://.godot/imported/gold.png-08af138d09d9711d63abcf95e978aeaf.ctex"]
+source_file="res://assets/spaceships/engine/placeholder.png"
+dest_files=["res://.godot/imported/placeholder.png-21fffb7c0de6837a71c614e9298ca39e.ctex"]
 
 [params]
 

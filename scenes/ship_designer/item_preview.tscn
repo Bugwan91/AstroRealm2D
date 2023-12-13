@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://ccd02xr2sm762"]
+
+[ext_resource type="Script" path="res://scenes/ship_designer/scripts/item_preview.gd" id="1_kxcft"]
+[ext_resource type="Texture2D" uid="uid://cx4lexm1f7474" path="res://assets/red_cross_128.png" id="2_hmhjn"]
+[ext_resource type="Texture2D" uid="uid://b357u3xkav5lt" path="res://assets/spaceships/cockpit/placeholder.png" id="2_pteyy"]
+[ext_resource type="Texture2D" uid="uid://csaa8hvq7uu2a" path="res://assets/spaceships/engine/placeholder.png" id="3_u06sp"]
+[ext_resource type="StyleBox" uid="uid://ckcsvk51fucc0" path="res://scenes/ship_designer/styles/item_preview_selected.tres" id="4_2nhwd"]
+[ext_resource type="StyleBox" uid="uid://cnr53ytd7rlqo" path="res://scenes/ship_designer/styles/item_preview.tres" id="4_4exni"]
+[ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="7_cuats"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qiyum"]
+shader = ExtResource("7_cuats")
+shader_parameter/emission = 5.0
+shader_parameter/shininess = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_scc7c"]
+texture_filter = 3
+
+[node name="Item" type="CenterContainer"]
+size_flags_vertical = 3
+mouse_filter = 0
+script = ExtResource("1_kxcft")
+_empty_texture = ExtResource("2_hmhjn")
+_cockpit_image = ExtResource("2_pteyy")
+_engine_image = ExtResource("3_u06sp")
+_default_style = ExtResource("4_4exni")
+_selected_style = ExtResource("4_2nhwd")
+
+[node name="OutlinePanel" type="Panel" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(264, 264)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_4exni")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="OutlinePanel"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="SubViewport" type="SubViewport" parent="OutlinePanel/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="ItemView" type="Sprite2D" parent="OutlinePanel/SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+texture_filter = 3
+material = SubResource("ShaderMaterial_qiyum")
+position = Vector2(128, 128)
+scale = Vector2(2, 2)
+texture = SubResource("CanvasTexture_scc7c")
+
+[node name="DarkAmbient" type="DirectionalLight2D" parent="OutlinePanel/SubViewportContainer/SubViewport"]
+color = Color(0, 0, 0, 1)
+energy = 0.7
+blend_mode = 1
+
+[node name="Light" type="DirectionalLight2D" parent="OutlinePanel/SubViewportContainer/SubViewport"]
+rotation = -0.785398

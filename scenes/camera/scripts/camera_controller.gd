@@ -5,7 +5,7 @@ extends Camera2D
 @export var acceleration_multiplyer := 5.0
 @export var zoom_min := 0.5
 @export var zoom_max := 4.0
-@export var zoom_speed := 0.1
+@export var zoom_speed := 0.05
 
 var target: ShipRigidBody
 var _last_veocity: Vector2
@@ -26,14 +26,14 @@ func _ready():
 func _unhandled_input(event):
 	if Input.is_key_pressed(KEY_ALT): return
 	if event.is_action("zoom_in"):
-		_target_zoom += _zoom_speed
+		_target_zoom += _target_zoom * _zoom_speed
 	elif event.is_action("zoom_out"):
-		_target_zoom -= _zoom_speed
+		_target_zoom -= _target_zoom * _zoom_speed
 	_target_zoom = _target_zoom.clamp(_zoom_min, _zoom_max)
 
 func _process(delta):
 	if not is_instance_valid(target): return
-	zoom = lerp(zoom, _target_zoom, 5 * delta)
+	zoom = lerp(zoom, _target_zoom, 5.0 * delta)
 	_required_look_position = lerp(_required_look_position, _get_look_position(), 2 * delta)
 	_hit_position = lerp(_hit_position, Vector2.ZERO, 0.1)
 	position = target.extrapolator.smooth_position + _required_acceleration_position + _required_look_position + _hit_position

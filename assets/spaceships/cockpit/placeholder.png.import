@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c26bmc1q2hol4"
-path="res://.godot/imported/cross.png-64676f9f131dcfc6164e3669b752a291.ctex"
+uid="uid://b357u3xkav5lt"
+path="res://.godot/imported/placeholder.png-97f766af13043f98e61f53b528b38f5c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/my/icons/cross.png"
-dest_files=["res://.godot/imported/cross.png-64676f9f131dcfc6164e3669b752a291.ctex"]
+source_file="res://assets/spaceships/cockpit/placeholder.png"
+dest_files=["res://.godot/imported/placeholder.png-97f766af13043f98e61f53b528b38f5c.ctex"]
 
 [params]
 
