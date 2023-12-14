@@ -10,10 +10,17 @@ func _ready():
 	MainState.player_ship_updated.connect(_on_player_updated)
 	game_over_container.open_ship_designer.connect(open_ship_designer)
 	ship_designer_ui.closed.connect(show_game_ui)
+	ship_designer_ui.finished.connect(_on_ship_design_changed)
 
 func open_ship_designer():
 	hide_game_ui()
 	ship_designer_ui.open()
+	ship_designer_ui.set_blueprint(MainState.main_scene.ship_blueprint.duplicate())
+
+func _on_ship_design_changed(blueprint: ShipBlueprint, design: ShipTexturesRes):
+	MainState.main_scene.ship_blueprint = blueprint
+	MainState.main_scene.ship_data.textures = design
+	show_game_ui()
 
 func hide_game_ui():
 	game_ui.visible = false

@@ -2,6 +2,7 @@ class_name ShipDesignerUI
 extends PanelContainer
 
 signal closed
+signal finished(blueprint: ShipBlueprint, design: ShipTexturesRes)
 
 @export var ship_blueprint: ShipBlueprint
 
@@ -17,6 +18,7 @@ signal closed
 @onready var cancel_button: Button = %CancelButton
 
 func _ready():
+	MainState.ship_designer = self
 	cancel_button.pressed.connect(close)
 	confirm_button.pressed.connect(confirm)
 	hull_selector.update_blueprint = func(value: HullBakerResource):
@@ -31,6 +33,15 @@ func _ready():
 		baker.blueprint.style = value
 	baker.updated.connect(ship_preview.setup_textures)
 
+func set_blueprint(blueprint: ShipBlueprint):
+	baker.blueprint = blueprint
+	baker.bake()
+	hull_selector.init_selection(baker.blueprint.hull)
+	hull_ext_selector.init_selection(baker.blueprint.hull_ext)
+	cockpit_selector.init_selection(baker.blueprint.cockpit)
+	engine_selector.init_selection(baker.blueprint.engine)
+	style_selector.init_selection(baker.blueprint.style)
+
 func open():
 	visible = true
 
@@ -39,4 +50,5 @@ func close():
 	closed.emit()
 
 func confirm():
-	pass
+	visible = false
+	finished.emit(baker.blueprint, baker.design)

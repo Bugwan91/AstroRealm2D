@@ -8,6 +8,7 @@ signal radar_updated(radar: Radar)
 @onready var world_node: Node2D = get_node("/root/Main")
 
 var main_scene: MainScene
+var ship_designer: ShipDesignerUI
 
 var debug := {}
 

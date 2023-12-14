@@ -3,10 +3,7 @@ extends Node
 
 signal updated(design: ShipTexturesRes)
 
-@export var blueprint: ShipBlueprint:
-	set(value):
-		blueprint = value
-		blueprint.updated.connect(_on_blueprint_update)
+@export var blueprint: ShipBlueprint: set = _set_blueprint
 
 @onready var polygon: ShipPolygonBaker = %Polygon
 @onready var diffuse: ViewLayerBaker = %Diffuse
@@ -22,6 +19,10 @@ func _ready():
 	blueprint = ShipBlueprint.new()
 
 func _on_blueprint_update(type: ShipBlueprint.Type, value: Resource):
+	_update_blueprint_value(type, value)
+	bake()
+
+func _update_blueprint_value(type: ShipBlueprint.Type, value: Resource):
 	diffuse.update(type, value)
 	mask.update(type, value)
 	normal.update(type, value)
@@ -31,6 +32,17 @@ func _on_blueprint_update(type: ShipBlueprint.Type, value: Resource):
 		style.style = value
 	else:
 		polygon.update(type, value)
+
+func _set_blueprint(value: ShipBlueprint):
+	blueprint = value
+	blueprint.updated.connect(_on_blueprint_update)
+	_update_blueprint_value(ShipBlueprint.Type.HULL, value.hull)
+	_update_blueprint_value(ShipBlueprint.Type.HULL_EXT, value.hull_ext)
+	_update_blueprint_value(ShipBlueprint.Type.COCKPIT, value.cockpit)
+	_update_blueprint_value(ShipBlueprint.Type.ENGINE, value.engine)
+	_update_blueprint_value(ShipBlueprint.Type.STYLE, value.style)
+
+func bake():
 	_bake_textures()
 	_bake_polygon()
 	updated.emit(design)

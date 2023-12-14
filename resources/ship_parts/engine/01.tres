@@ -13,6 +13,7 @@ data = PackedVector2Array(15, 5, 15, 15, 9, 18, 9, 32, -9, 32, -9, 18, -15, 15, 
 
 [resource]
 script = ExtResource("1_tnxyh")
+type = 3
 diffuse = ExtResource("1_4046e")
 mask = ExtResource("2_11pm5")
 normal = ExtResource("3_s148i")

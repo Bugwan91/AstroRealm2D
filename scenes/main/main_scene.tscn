@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=39 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -8,12 +8,18 @@
 [ext_resource type="Script" path="res://scenes/ship/scripts/resources/ship_resource.gd" id="5_yqei1"]
 [ext_resource type="Resource" uid="uid://blsujt5rpfnef" path="res://resources/ships/views/3-4.tres" id="6_xcsqf"]
 [ext_resource type="Resource" uid="uid://dcbkbrwitc5nm" path="res://resources/ships/views/2-1.tres" id="6_yj0xe"]
+[ext_resource type="Resource" uid="uid://drhm8p5kvv71k" path="res://resources/ship_parts/cockpit/01.tres" id="7_onsy6"]
 [ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="8_cwv63"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://scenes/ui/ui.tscn" id="8_myah8"]
+[ext_resource type="Resource" uid="uid://dgw6x6lr6gnk2" path="res://resources/ship_parts/engine/02.tres" id="8_tstcm"]
 [ext_resource type="Script" path="res://scenes/ai/scripts/ship_input.gd" id="9_nd6tp"]
+[ext_resource type="Resource" uid="uid://n4x30t0f2gct" path="res://resources/ship_parts/hull/02.tres" id="9_xdu7g"]
+[ext_resource type="Resource" uid="uid://c8ufqm2vr2xfy" path="res://resources/ship_parts/hull_ext/02.tres" id="10_0j4h5"]
 [ext_resource type="Shader" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="10_7ps0f"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/radar_viewport.gd" id="10_nsy5m"]
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
+[ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/ship_blueprint.gd" id="11_fkpwp"]
+[ext_resource type="Texture2D" uid="uid://dvxp714x3fp80" path="res://assets/spaceships/Styles/02.png" id="12_k8me1"]
 [ext_resource type="PackedScene" uid="uid://dt7wav32bva3j" path="res://scenes/player/input_reader.tscn" id="13_epig2"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/health.gd" id="15_1rksw"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="15_5xucn"]
@@ -31,6 +37,14 @@ FA_accuracy = 0.9
 FA_accuracy_damp = 0.1
 BA_accuracy = 1.0
 BA_accuracy_damp = 0.1
+
+[sub_resource type="Resource" id="Resource_f0dtj"]
+script = ExtResource("11_fkpwp")
+hull = ExtResource("9_xdu7g")
+hull_ext = ExtResource("10_0j4h5")
+cockpit = ExtResource("7_onsy6")
+engine = ExtResource("8_tstcm")
+style = ExtResource("12_k8me1")
 
 [sub_resource type="Gradient" id="Gradient_2be3f"]
 offsets = PackedFloat32Array(0, 0.746063)
@@ -103,6 +117,7 @@ ship_scene = ExtResource("4_5rllk")
 gun_scene = ExtResource("8_cwv63")
 radar_scene = ExtResource("15_ln8xj")
 ship_data = SubResource("Resource_2k6wb")
+ship_blueprint = SubResource("Resource_f0dtj")
 
 [node name="Background" parent="." instance=ExtResource("1_b53p2")]
 unique_name_in_owner = true

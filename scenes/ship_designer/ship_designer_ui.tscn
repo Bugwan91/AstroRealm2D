@@ -112,14 +112,15 @@ layout_mode = 2
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/CenterContainer/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
+size = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="ShipPreview" type="Sprite2D" parent="HBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
 texture_filter = 3
 material = SubResource("ShaderMaterial_s2s6x")
-position = Vector2(256, 265)
-scale = Vector2(4, 4)
+position = Vector2(128, 128)
+scale = Vector2(2, 2)
 script = ExtResource("11_r583k")
 
 [node name="DarkAmbient" type="DirectionalLight2D" parent="HBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]

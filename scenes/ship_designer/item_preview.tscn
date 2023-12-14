@@ -17,6 +17,7 @@ shader_parameter/shininess = 0.0
 texture_filter = 3
 
 [node name="Item" type="CenterContainer"]
+size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 script = ExtResource("1_kxcft")
@@ -28,44 +29,41 @@ _selected_style = ExtResource("4_2nhwd")
 
 [node name="OutlinePanel" type="Panel" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(264, 264)
+custom_minimum_size = Vector2(134, 134)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_4exni")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="OutlinePanel"]
+[node name="MarginContainer" type="MarginContainer" parent="OutlinePanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="OutlinePanel/MarginContainer"]
 custom_minimum_size = Vector2(256, 256)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -128.0
-offset_right = 128.0
-offset_bottom = 128.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 size_flags_vertical = 4
 
-[node name="SubViewport" type="SubViewport" parent="OutlinePanel/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="OutlinePanel/MarginContainer/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(256, 256)
+size = Vector2i(128, 128)
 render_target_update_mode = 4
 
-[node name="ItemView" type="Sprite2D" parent="OutlinePanel/SubViewportContainer/SubViewport"]
+[node name="ItemView" type="Sprite2D" parent="OutlinePanel/MarginContainer/SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
 texture_filter = 3
 material = SubResource("ShaderMaterial_qiyum")
-position = Vector2(128, 128)
-scale = Vector2(2, 2)
+position = Vector2(64, 64)
 texture = SubResource("CanvasTexture_scc7c")
 
-[node name="DarkAmbient" type="DirectionalLight2D" parent="OutlinePanel/SubViewportContainer/SubViewport"]
+[node name="DarkAmbient" type="DirectionalLight2D" parent="OutlinePanel/MarginContainer/SubViewportContainer/SubViewport"]
 color = Color(0, 0, 0, 1)
 energy = 0.7
 blend_mode = 1
 
-[node name="Light" type="DirectionalLight2D" parent="OutlinePanel/SubViewportContainer/SubViewport"]
+[node name="Light" type="DirectionalLight2D" parent="OutlinePanel/MarginContainer/SubViewportContainer/SubViewport"]
 rotation = -0.785398

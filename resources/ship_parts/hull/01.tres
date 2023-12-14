@@ -61,6 +61,7 @@ script = ExtResource("1_dyciy")
 cockpit_slot = Vector2(0, -32)
 engine_slots = Array[Vector2]([Vector2(0, 32)])
 thrusters = SubResource("Resource_2nfqx")
+type = 0
 diffuse = ExtResource("1_u8quk")
 mask = ExtResource("2_1n42k")
 normal = ExtResource("3_xulmt")

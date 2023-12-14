@@ -1,5 +1,5 @@
 class_name ShipBakerItemSelector
-extends VBoxContainer
+extends GridContainer
 
 @export var empty_allowed := false
 @export var item_view_scene: PackedScene
@@ -17,8 +17,19 @@ func _ready():
 	elif not textures.is_empty():
 		_init_textures()
 
-func is_ok() -> bool:
-	return empty_allowed or (not empty_allowed and not selected_index == -1)
+func init_selection(data: Resource):
+	for index in range(0, resources.size()):
+		if resources[index].resource_path == data.resource_path:
+			_get_preview(selected_index).is_selected = false
+			selected_index = index
+			_get_preview(selected_index).is_selected = true
+			return
+	for index in range(0, textures.size()):
+		if textures[index].resource_path == data.resource_path:
+			_get_preview(selected_index).is_selected = false
+			selected_index = index
+			_get_preview(selected_index).is_selected = true
+			return
 
 func _init_textures():
 	for index in range(0, textures.size()):

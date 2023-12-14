@@ -2,8 +2,10 @@
 class_name ViewBakerResource
 extends Resource
 
+enum Type { HULL, HULL_EXT, COCKPIT, ENGINE } #TODO: use this type in ship designer
 enum TextureType { DIFFUSE, MASK, NORMAL, EMISSION, SPECULAR }
 
+@export var type: Type
 @export_group("textures")
 @export var diffuse: Texture2D
 @export var mask: Texture2D
