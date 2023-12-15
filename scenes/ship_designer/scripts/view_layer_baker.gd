@@ -15,7 +15,11 @@ func _ready():
 	_background.texture = background
 
 func bake() -> Texture2D:
-	return get_viewport().get_texture()
+	if not is_node_ready(): await ready
+	render_target_update_mode = SubViewport.UPDATE_ONCE
+	await RenderingServer.frame_post_draw
+	var texture = ImageTexture.new()
+	return texture.create_from_image(get_viewport().get_texture().get_image())
 
 func _set_background(texture: Texture2D):
 	background = texture

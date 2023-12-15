@@ -1,5 +1,6 @@
 extends Node
 
+signal main_scene_ready
 signal player_ship_updated(ship: ShipRigidBody)
 signal player_target_updated(ship: ShipRigidBody)
 signal player_dead
@@ -7,7 +8,10 @@ signal radar_updated(radar: Radar)
 
 @onready var world_node: Node2D = get_node("/root/Main")
 
-var main_scene: MainScene
+var main_scene: MainScene:
+	set(value):
+		main_scene = value
+		main_scene_ready.emit()
 var ship_designer: ShipDesignerUI
 
 var debug := {}

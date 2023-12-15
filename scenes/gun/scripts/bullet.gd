@@ -38,6 +38,7 @@ func _collide():
 		_self_destroy()
 
 func _on_hit(target):
+	if not is_instance_valid(target): return
 	var damageTaker = target.get_node("TakingDamage") as TakingDamage
 	if is_instance_valid(damageTaker):
 		damageTaker.damage(_create_damage())

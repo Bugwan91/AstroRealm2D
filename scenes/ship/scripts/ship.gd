@@ -3,7 +3,7 @@ class_name ShipRigidBody
 extends FloatingOriginRigidBody
 
 signal got_hit(value: Vector2)
-signal dead
+signal dead(ship: ShipRigidBody)
 
 @export var setup_data: ShipResource: set = setup_view
 
@@ -137,7 +137,7 @@ func _die():
 	flight_assistant.enabled = false
 	battle_assistant.enabled = false
 	gun.enabled = false
-	dead.emit()
+	dead.emit(self)
 
 func _destroy():
 	queue_free()

@@ -12,28 +12,34 @@ script = ExtResource("1_w34ns")
 
 [node name="Diffuse" parent="." instance=ExtResource("7_yjkib")]
 unique_name_in_owner = true
+render_target_update_mode = 0
 
 [node name="Mask" parent="." instance=ExtResource("7_yjkib")]
 unique_name_in_owner = true
+render_target_update_mode = 0
 type = 1
 background = ExtResource("9_hbvso")
 
 [node name="Normal" parent="." instance=ExtResource("7_yjkib")]
 unique_name_in_owner = true
+render_target_update_mode = 0
 type = 2
 
 [node name="Emission" parent="." instance=ExtResource("7_yjkib")]
 unique_name_in_owner = true
+render_target_update_mode = 0
 type = 3
 background = ExtResource("9_hbvso")
 
 [node name="Specular" parent="." instance=ExtResource("7_yjkib")]
 unique_name_in_owner = true
+render_target_update_mode = 0
 type = 4
 background = ExtResource("21_cdafb")
 
 [node name="Style" parent="." instance=ExtResource("5_n36rl")]
 unique_name_in_owner = true
+render_target_update_mode = 0
 
 [node name="Polygon" type="Node" parent="."]
 unique_name_in_owner = true

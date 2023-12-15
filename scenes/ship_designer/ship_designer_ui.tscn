@@ -48,6 +48,7 @@ script = ExtResource("1_citlv")
 
 [node name="Baker" parent="." instance=ExtResource("2_jrjbv")]
 unique_name_in_owner = true
+bake_on_updates = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2

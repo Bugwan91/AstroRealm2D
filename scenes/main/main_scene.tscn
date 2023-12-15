@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=49 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -7,25 +7,36 @@
 [ext_resource type="Environment" uid="uid://chl1sjnqh1sa7" path="res://scenes/main/main_environment.tres" id="4_h5iwh"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/resources/ship_resource.gd" id="5_yqei1"]
 [ext_resource type="Resource" uid="uid://blsujt5rpfnef" path="res://resources/ships/views/3-4.tres" id="6_xcsqf"]
-[ext_resource type="Resource" uid="uid://dcbkbrwitc5nm" path="res://resources/ships/views/2-1.tres" id="6_yj0xe"]
 [ext_resource type="Resource" uid="uid://drhm8p5kvv71k" path="res://resources/ship_parts/cockpit/01.tres" id="7_onsy6"]
 [ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="8_cwv63"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://scenes/ui/ui.tscn" id="8_myah8"]
 [ext_resource type="Resource" uid="uid://dgw6x6lr6gnk2" path="res://resources/ship_parts/engine/02.tres" id="8_tstcm"]
-[ext_resource type="Script" path="res://scenes/ai/scripts/ship_input.gd" id="9_nd6tp"]
 [ext_resource type="Resource" uid="uid://n4x30t0f2gct" path="res://resources/ship_parts/hull/02.tres" id="9_xdu7g"]
 [ext_resource type="Resource" uid="uid://c8ufqm2vr2xfy" path="res://resources/ship_parts/hull_ext/02.tres" id="10_0j4h5"]
 [ext_resource type="Shader" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="10_7ps0f"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/radar_viewport.gd" id="10_nsy5m"]
+[ext_resource type="Resource" uid="uid://mom4o82wgrea" path="res://resources/ship_parts/hull_ext/03.tres" id="10_pygr5"]
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/ship_blueprint.gd" id="11_fkpwp"]
 [ext_resource type="Texture2D" uid="uid://dvxp714x3fp80" path="res://assets/spaceships/Styles/02.png" id="12_k8me1"]
 [ext_resource type="PackedScene" uid="uid://dt7wav32bva3j" path="res://scenes/player/input_reader.tscn" id="13_epig2"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/health.gd" id="15_1rksw"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="15_5xucn"]
 [ext_resource type="PackedScene" uid="uid://hhj5ip7is6r4" path="res://scenes/ship/radar.tscn" id="15_ln8xj"]
-[ext_resource type="Resource" uid="uid://byoowq5hai2yf" path="res://resources/ships/views/4-3.tres" id="16_1udoj"]
 [ext_resource type="Texture2D" uid="uid://bwr37r7vbwfq0" path="res://assets/VFX_textures/light_03.png" id="20_aq44u"]
+[ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="24_7ks4m"]
+[ext_resource type="Script" path="res://scenes/main/scripts/enemy_spawner.gd" id="27_c6eb4"]
+[ext_resource type="Resource" uid="uid://cmj8g20dbxwmh" path="res://resources/ship_parts/hull/01.tres" id="28_gfjox"]
+[ext_resource type="Resource" uid="uid://lpuy2txkhyi2" path="res://resources/ship_parts/hull/03.tres" id="29_whd1v"]
+[ext_resource type="Resource" uid="uid://dyeqdkm0axqab" path="res://resources/ship_parts/hull/04.tres" id="30_vht31"]
+[ext_resource type="Resource" uid="uid://cc5dcgmqoxf2w" path="res://resources/ship_parts/hull/05.tres" id="31_jsqwn"]
+[ext_resource type="Resource" uid="uid://l2vpnff51m0k" path="res://resources/ship_parts/hull_ext/01.tres" id="32_y7rhy"]
+[ext_resource type="Resource" uid="uid://ssrq5m0n8xji" path="res://resources/ship_parts/hull_ext/04.tres" id="34_83ehe"]
+[ext_resource type="Resource" uid="uid://bfqdtux105aav" path="res://resources/ship_parts/hull_ext/05.tres" id="35_r6ynf"]
+[ext_resource type="Resource" uid="uid://ddbus3emw7v04" path="res://resources/ship_parts/cockpit/02.tres" id="36_ctgf4"]
+[ext_resource type="Resource" uid="uid://c1xggcinljpje" path="res://resources/ship_parts/engine/01.tres" id="37_j4y5n"]
+[ext_resource type="Texture2D" uid="uid://brtabr5lpm864" path="res://assets/spaceships/Styles/01.png" id="38_2gt40"]
+[ext_resource type="Texture2D" uid="uid://bumhukr5exiwp" path="res://assets/spaceships/Styles/SF.png" id="39_ums3d"]
+[ext_resource type="Texture2D" uid="uid://dh1ya4sfdur13" path="res://assets/spaceships/Styles/smile.png" id="40_sitdw"]
 
 [sub_resource type="Resource" id="Resource_2k6wb"]
 script = ExtResource("5_yqei1")
@@ -75,28 +86,6 @@ height = 1024
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="Resource" id="Resource_8xg15"]
-script = ExtResource("5_yqei1")
-textures = ExtResource("16_1udoj")
-max_speed = 200000.0
-main_thrust = 500.0
-maneuver_thrust = 200.0
-FA_accuracy = 0.01
-FA_accuracy_damp = 0.01
-BA_accuracy = 1.0
-BA_accuracy_damp = 0.1
-
-[sub_resource type="Resource" id="Resource_cmuwi"]
-script = ExtResource("5_yqei1")
-textures = ExtResource("6_yj0xe")
-max_speed = 200000.0
-main_thrust = 500.0
-maneuver_thrust = 200.0
-FA_accuracy = 0.02
-FA_accuracy_damp = 0.1
-BA_accuracy = 1.0
-BA_accuracy_damp = 0.1
-
 [sub_resource type="Gradient" id="Gradient_owpx4"]
 offsets = PackedFloat32Array(0, 0.686529)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -110,6 +99,16 @@ fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lkrwm"]
 light_mode = 1
+
+[sub_resource type="Resource" id="Resource_xjtty"]
+script = ExtResource("5_yqei1")
+max_speed = 100000.0
+main_thrust = 500.0
+maneuver_thrust = 200.0
+FA_accuracy = 0.02
+FA_accuracy_damp = 0.1
+BA_accuracy = 1.0
+BA_accuracy_damp = 0.1
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2ehlx")
@@ -170,44 +169,6 @@ unique_name_in_owner = true
 in_range_color = Color(0, 0, 1, 0.78)
 out_range_color = Color(0, 0, 0.486275, 0.784314)
 
-[node name="Enemy" parent="." node_paths=PackedStringArray("inputs", "gun") instance=ExtResource("4_5rllk")]
-position = Vector2(-325, 71)
-rotation = -0.0583994
-setup_data = SubResource("Resource_8xg15")
-inputs = NodePath("AIShipInput")
-gun = NodePath("Gun")
-
-[node name="Gun" parent="Enemy" instance=ExtResource("8_cwv63")]
-bullet_color = Color(1, 0.188235, 0.184314, 1)
-fire_rate = 5.0
-bullet_speed = 3000.0
-
-[node name="AIShipInput" type="Node2D" parent="Enemy"]
-script = ExtResource("9_nd6tp")
-keep_distance = 1000.0
-
-[node name="Health" type="Node" parent="Enemy"]
-script = ExtResource("15_1rksw")
-
-[node name="Enemy_2" parent="." node_paths=PackedStringArray("inputs", "gun") instance=ExtResource("4_5rllk")]
-position = Vector2(-590, 671)
-rotation = -1.2551
-setup_data = SubResource("Resource_cmuwi")
-inputs = NodePath("AIShipInput")
-gun = NodePath("Gun")
-
-[node name="Gun" parent="Enemy_2" instance=ExtResource("8_cwv63")]
-bullet_color = Color(1, 0.137255, 0.541176, 1)
-fire_rate = 5.0
-bullet_speed = 3000.0
-
-[node name="AIShipInput" type="Node2D" parent="Enemy_2"]
-script = ExtResource("9_nd6tp")
-keep_distance = 1000.0
-
-[node name="Health" type="Node" parent="Enemy_2"]
-script = ExtResource("15_1rksw")
-
 [node name="PointLight2" type="PointLight2D" parent="." groups=["shiftable"]]
 position = Vector2(0, 100)
 texture = SubResource("GradientTexture2D_3cj2f")
@@ -234,3 +195,24 @@ z_index = 1
 material = SubResource("CanvasItemMaterial_lkrwm")
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("20_aq44u")
+
+[node name="EnemySpawner" type="Node" parent="."]
+script = ExtResource("27_c6eb4")
+agressive = true
+max_count = 10
+ship_scene = ExtResource("4_5rllk")
+gun_scene = ExtResource("8_cwv63")
+ship_data = SubResource("Resource_xjtty")
+_hulls = Array[Resource("res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd")]([ExtResource("28_gfjox"), ExtResource("9_xdu7g"), ExtResource("29_whd1v"), ExtResource("30_vht31"), ExtResource("31_jsqwn")])
+_hulls_ext = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("32_y7rhy"), ExtResource("10_0j4h5"), ExtResource("10_pygr5"), ExtResource("34_83ehe"), ExtResource("35_r6ynf")])
+_cockpits = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("7_onsy6"), ExtResource("36_ctgf4")])
+_engines = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("37_j4y5n"), ExtResource("8_tstcm")])
+_styles = Array[Texture2D]([ExtResource("38_2gt40"), ExtResource("12_k8me1"), ExtResource("39_ums3d"), ExtResource("40_sitdw")])
+
+[node name="Baker" parent="EnemySpawner" instance=ExtResource("24_7ks4m")]
+unique_name_in_owner = true
+
+[node name="ShipSpawnTimer" type="Timer" parent="EnemySpawner"]
+unique_name_in_owner = true
+wait_time = 2.0
+autostart = true

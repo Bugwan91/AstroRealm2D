@@ -19,6 +19,7 @@ var _target_zoom: Vector2
 var _inverse_inertia: float
 
 func _ready():
+	process_priority = 999
 	MainState.player_ship_updated.connect(_on_update_player_ship)
 	_inverse_inertia = 1 / inertia
 	_init_zoom()

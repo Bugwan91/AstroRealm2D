@@ -1,8 +1,9 @@
 class_name ShipBlueprintBaker
 extends Node
-
+#TODO: Render viewports only on demand
 signal updated(design: ShipTexturesRes)
 
+@export var bake_on_updates := false
 @export var blueprint: ShipBlueprint: set = _set_blueprint
 
 @onready var polygon: ShipPolygonBaker = %Polygon
@@ -14,13 +15,14 @@ signal updated(design: ShipTexturesRes)
 @onready var style: ShipStyleBaker = %Style
 
 var design: ShipTexturesRes = ShipTexturesRes.new()
+var _is_baking := false
 
 func _ready():
 	blueprint = ShipBlueprint.new()
 
 func _on_blueprint_update(type: ShipBlueprint.Type, value: Resource):
 	_update_blueprint_value(type, value)
-	bake()
+	if bake_on_updates: bake()
 
 func _update_blueprint_value(type: ShipBlueprint.Type, value: Resource):
 	diffuse.update(type, value)
@@ -42,24 +44,31 @@ func _set_blueprint(value: ShipBlueprint):
 	_update_blueprint_value(ShipBlueprint.Type.ENGINE, value.engine)
 	_update_blueprint_value(ShipBlueprint.Type.STYLE, value.style)
 
-func bake():
-	_bake_textures()
+func bake() -> ShipTexturesRes:
+	if _is_baking: return
+	_is_baking = true
+	var des = await _bake_textures()
 	_bake_polygon()
 	updated.emit(design)
+	_is_baking = false
+	return design
 
 func _bake_polygon():
-	design.polygon = polygon.merge_polygons()
+	polygon.bake()
+	design.polygon = polygon.polygon
 	design.engines = polygon.engines
 	design.thrusters = polygon.thrusters
 
 func _bake_textures() -> ShipTexturesRes:
-	design.diffuse = _bake_diffuse()
-	design.normal = normal.bake()
-	design.emision = emission.bake()
-	design.specular = specular.bake()
+	printt("Baker: pre-bake", Engine.get_frames_drawn())
+	design.diffuse = await _bake_diffuse()
+	design.normal = await normal.bake()
+	design.emision = await emission.bake()
+	design.specular = await specular.bake()
+	printt("Baker: bake done", Engine.get_frames_drawn())
 	return design
 
 func _bake_diffuse() -> Texture2D:
-	style.texture = diffuse.bake()
-	style.mask = mask.bake()
-	return style.bake()
+	style.texture = await diffuse.bake()
+	style.mask = await mask.bake()
+	return await style.bake()

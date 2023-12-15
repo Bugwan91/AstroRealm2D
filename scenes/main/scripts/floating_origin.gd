@@ -18,6 +18,7 @@ func _ready():
 	MainState.player_ship_updated.connect(_on_update_player_ship)
 
 func _physics_process(_delta):
+	if not enabled: return
 	if _reset_reset:
 		_reset_reset = false
 		_reset_velocity_delta = false
@@ -27,14 +28,14 @@ func absolute_position(node: Node2D) -> Vector2:
 	return node.position + origin
 
 func update_from_state(state: PhysicsDirectBodyState2D):
+	if not enabled: return
 	velocity_delta = state.linear_velocity
 	velocity += velocity_delta
 	origin_delta = state.transform.origin
 	origin += velocity * state.step + origin_delta
-	for node in get_tree().get_nodes_in_group(GROUP_NAME):
-		node.position -= velocity * state.step - origin_delta
 
 func update_state(state: PhysicsDirectBodyState2D):
+	if not enabled: return
 	state.linear_velocity -= velocity_delta
 	state.transform.origin -= origin_delta
 	if _reset_velocity_delta:
@@ -44,11 +45,12 @@ func add(node: Node):
 	node.add_to_group(GROUP_NAME)
 
 func _process(delta):
+	if not enabled: return
 	MainState.add_debug_info("origin", origin)
 	MainState.add_debug_info("origin velocity", velocity)
-	#if not is_instance_valid(target): return
-	#for node in get_tree().get_nodes_in_group(GROUP_NAME):
-		#node.position -= velocity * delta - origin_delta
+	if not is_instance_valid(target): return
+	for node in get_tree().get_nodes_in_group(GROUP_NAME):
+		node.position -= velocity * delta# - origin_delta
 
 func _on_update_player_ship(player_ship: ShipRigidBody):
 	target = player_ship
