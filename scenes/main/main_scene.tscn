@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=50 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/ship_blueprint.gd" id="11_fkpwp"]
 [ext_resource type="Texture2D" uid="uid://dvxp714x3fp80" path="res://assets/spaceships/Styles/02.png" id="12_k8me1"]
+[ext_resource type="Texture2D" uid="uid://d1plve26u31ph" path="res://assets/spaceships/Styles/Bunblebee.png" id="12_vhchx"]
 [ext_resource type="PackedScene" uid="uid://dt7wav32bva3j" path="res://scenes/player/input_reader.tscn" id="13_epig2"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="15_5xucn"]
 [ext_resource type="PackedScene" uid="uid://hhj5ip7is6r4" path="res://scenes/ship/radar.tscn" id="15_ln8xj"]
@@ -52,10 +53,10 @@ BA_accuracy_damp = 0.1
 [sub_resource type="Resource" id="Resource_f0dtj"]
 script = ExtResource("11_fkpwp")
 hull = ExtResource("9_xdu7g")
-hull_ext = ExtResource("10_0j4h5")
+hull_ext = ExtResource("10_pygr5")
 cockpit = ExtResource("7_onsy6")
 engine = ExtResource("8_tstcm")
-style = ExtResource("12_k8me1")
+style = ExtResource("12_vhchx")
 
 [sub_resource type="Gradient" id="Gradient_2be3f"]
 offsets = PackedFloat32Array(0, 0.746063)
@@ -199,7 +200,7 @@ texture = ExtResource("20_aq44u")
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("27_c6eb4")
 agressive = true
-max_count = 10
+max_count = 1
 ship_scene = ExtResource("4_5rllk")
 gun_scene = ExtResource("8_cwv63")
 ship_data = SubResource("Resource_xjtty")
@@ -214,5 +215,5 @@ unique_name_in_owner = true
 
 [node name="ShipSpawnTimer" type="Timer" parent="EnemySpawner"]
 unique_name_in_owner = true
-wait_time = 2.0
+wait_time = 5.0
 autostart = true

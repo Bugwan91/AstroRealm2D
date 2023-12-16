@@ -28,7 +28,7 @@ func _ready():
 func spawn_ship():
 	var ship: ShipRigidBody = ship_scene.instantiate() as ShipRigidBody
 	ship.setup_data = await _create_ship_configuration()
-	ship.position = Vector2(randf_range(-2000, 2000), randf_range(-2000, 2000))
+	ship.position = Vector2(randf_range(-20000, 20000), randf_range(-20000, 20000))
 	ship.setup_health(_create_health())
 	ship.gun = _create_gun()
 	ships.append(ship)

@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://tulgf6ok78fw"]
 
-[ext_resource type="Resource" uid="uid://cc5dcgmqoxf2w" path="res://resources/ship_parts/hull/05.tres" id="6_j8dig"]
+[ext_resource type="Resource" uid="uid://cmj8g20dbxwmh" path="res://resources/ship_parts/hull/01.tres" id="2_xh04o"]
+[ext_resource type="Texture2D" uid="uid://2vhe7tg76sgc" path="res://assets/spaceships/hull/1.png" id="3_jfo11"]
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/view_res_editor.gd" id="7_yr0dd"]
 [ext_resource type="Texture2D" uid="uid://smq470vdik0f" path="res://assets/spaceships/cockpit/1.png" id="10_mwe88"]
 [ext_resource type="Texture2D" uid="uid://dhmwpt8r3b7ul" path="res://assets/spaceships/engine/2.png" id="11_1a78q"]
-[ext_resource type="Texture2D" uid="uid://viyf6wgnx0b2" path="res://assets/spaceships/hull/5.png" id="23_jsphw"]
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/hull_res_editor.gd" id="24_bpsnp"]
 
 [node name="Baker" type="Node2D"]
@@ -13,12 +13,13 @@
 
 [node name="HullResourceEditor" type="Sprite2D" parent="ResEditor"]
 script = ExtResource("24_bpsnp")
+res = ExtResource("2_xh04o")
 
 [node name="ResourceEditor" type="Sprite2D" parent="ResEditor/HullResourceEditor"]
 unique_name_in_owner = true
-texture = ExtResource("23_jsphw")
+texture = ExtResource("3_jfo11")
 script = ExtResource("7_yr0dd")
-res = ExtResource("6_j8dig")
+res = ExtResource("2_xh04o")
 
 [node name="cockpit" type="Sprite2D" parent="ResEditor/HullResourceEditor"]
 visible = false
