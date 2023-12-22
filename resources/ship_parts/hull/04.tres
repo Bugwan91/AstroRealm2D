@@ -11,30 +11,30 @@
 
 [sub_resource type="Resource" id="Resource_0ybjx"]
 script = ExtResource("4_x61cr")
-data = PackedVector2Array(0, -44, 8, -37, 11, -5, 23, -11, 64, 49, 55, 64, 0, 48, -55, 64, -64, 49, -23, -11, -11, -5, -8, -37)
+data = PackedVector2Array(0, -44, 11, -37, 17, -8, 27, -14, 64, 49, 55, 64, 0, 48, -55, 64, -64, 49, -27, -14, -17, -8, -11, -37)
 
 [sub_resource type="Resource" id="Resource_1b52j"]
 script = ExtResource("7_3y6r7")
 direction = 0
-position = Vector2(-21, -10)
+position = Vector2(-25, -13)
 rotation = 90.0
 
 [sub_resource type="Resource" id="Resource_2a566"]
 script = ExtResource("7_3y6r7")
 direction = 1
-position = Vector2(21, -10)
+position = Vector2(25, -13)
 rotation = 90.0
 
 [sub_resource type="Resource" id="Resource_5jm8v"]
 script = ExtResource("7_3y6r7")
 direction = 2
-position = Vector2(24, -9)
+position = Vector2(28, -12)
 rotation = 180.0
 
 [sub_resource type="Resource" id="Resource_gn0ec"]
 script = ExtResource("7_3y6r7")
 direction = 3
-position = Vector2(-24, -9)
+position = Vector2(-28, -12)
 rotation = 0.0
 
 [sub_resource type="Resource" id="Resource_h5mw2"]
