@@ -36,7 +36,8 @@ func spawn_ship():
 	ship.dead.connect(_on_ship_dead)
 	owner.add_child(ship)
 	ship.connect_inputs(_create_AI())
-	ship.inputs.update_target_ship(MainState.player_ship)
+	if is_instance_valid(MainState.player_ship):
+		ship.inputs.update_target_ship(MainState.player_ship)
 
 func _on_ship_dead(ship: ShipRigidBody):
 	ships.erase(ship)

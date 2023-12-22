@@ -5,6 +5,8 @@ extends FloatingOriginRigidBody
 signal got_hit(value: Vector2)
 signal dead(ship: ShipRigidBody)
 
+const SPEED_SLOWING_LIMIT := 0.8
+
 @export var setup_data: ShipResource: set = setup_view
 @export var group: String # TODO: Rework with implementation factions/groups system
 
@@ -30,6 +32,7 @@ signal dead(ship: ShipRigidBody)
 var absolute_velocity: Vector2: get = _absolute_velocity
 var health: Health
 
+var _max_speed_squared: float
 var _impulses := Vector2.ZERO
 var _forces := Vector2.ZERO
 var _torque := 0.0
@@ -44,6 +47,7 @@ func setup_view(resource: ShipResource = null):
 
 func _ready():
 	setup_view(setup_data)
+	_max_speed_squared = pow(setup_data.max_speed, 2)
 	if Engine.is_editor_hint(): return
 	thrusters.setup(setup_data.textures.thrusters, setup_data.maneuver_thrust)
 	engines.setup(setup_data.textures.engines, setup_data.main_thrust, setup_data.max_speed)
@@ -106,6 +110,7 @@ func _integrate_forces(state):
 	super._integrate_forces(state)
 	flight_assistant.process(state)
 	_apply_forcces(state)
+	_apply_drag(state)
 
 
 func set_target(target: RigidBody2D):
@@ -119,12 +124,21 @@ func add_torque(torque: float):
 	_torque += torque
 
 func _apply_forcces(state: PhysicsDirectBodyState2D):
-	state.apply_central_force(_forces)
-	state.apply_central_impulse(_impulses)
+	var multiplayer := _calculate_thrust_multiplyer()
+	state.apply_central_force(_forces * multiplayer)
+	state.apply_central_impulse(_impulses * multiplayer)
 	state.apply_torque(_torque)
 	_forces = Vector2.ZERO
 	_impulses = Vector2.ZERO
 	_torque = 0.0
+
+func _calculate_thrust_multiplyer() -> float:
+	return 1.0 - clamp(0.0, SPEED_SLOWING_LIMIT, absolute_velocity.length_squared()/_max_speed_squared)
+
+func _apply_drag(state: PhysicsDirectBodyState2D):
+	var delta = absolute_velocity.length() - setup_data.max_speed
+	if delta > 0:
+		state.apply_central_force(delta * mass * -absolute_velocity.normalized())
 
 func _absolute_velocity() -> Vector2:
 	return linear_velocity + FloatingOrigin.velocity
