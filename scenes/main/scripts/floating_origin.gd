@@ -11,6 +11,7 @@ var origin_delta := Vector2.ZERO
 var velocity := Vector2.ZERO
 var velocity_delta: Vector2
 
+var _process_origin_delta: Vector2
 var _reset_velocity_delta := false
 var _reset_reset := false
 
@@ -32,6 +33,7 @@ func update_from_state(state: PhysicsDirectBodyState2D):
 	velocity_delta = state.linear_velocity
 	velocity += velocity_delta
 	origin_delta = state.transform.origin
+	_process_origin_delta = origin_delta
 	origin += velocity * state.step + origin_delta
 
 func update_state(state: PhysicsDirectBodyState2D):
@@ -50,7 +52,8 @@ func _process(delta):
 	MainState.add_debug_info("origin velocity", velocity)
 	if not is_instance_valid(target): return
 	for node in get_tree().get_nodes_in_group(GROUP_NAME):
-		node.position -= velocity * delta# - origin_delta
+		node.position -= velocity * delta + _process_origin_delta
+	_process_origin_delta = Vector2.ZERO
 
 func _on_update_player_ship(player_ship: ShipRigidBody):
 	target = player_ship
