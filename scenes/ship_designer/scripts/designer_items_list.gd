@@ -18,6 +18,7 @@ func _ready():
 		_init_textures()
 
 func init_selection(data: Resource):
+	if data == null: return
 	for index in range(0, resources.size()):
 		if resources[index].resource_path == data.resource_path:
 			_get_preview(selected_index).is_selected = false

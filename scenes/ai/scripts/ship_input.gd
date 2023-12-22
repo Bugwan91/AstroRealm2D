@@ -10,6 +10,7 @@ var _target: ShipRigidBody
 
 func init(ship: ShipRigidBody):
 	_ship = ship
+	_ship.dead.connect(_on_dead)
 	MainState.player_ship_updated.connect(update_target_ship)
 	_ship.flight_assistant.is_turn_enabled = false
 
@@ -28,3 +29,5 @@ func update_target_ship(target_ship: ShipRigidBody):
 	_ship.battle_assistant._is_auto_aim = true
 	_ship.battle_assistant.is_auto_shoot = agressive
 
+func _on_dead(_pass):
+	MainState.player_ship_updated.disconnect(update_target_ship)
