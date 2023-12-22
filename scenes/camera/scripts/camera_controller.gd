@@ -1,6 +1,8 @@
 class_name CameraController
 extends Camera2D
 
+signal zoomed(zoom: float)
+
 @export var inertia := 1.0
 @export var acceleration_multiplyer := 5.0
 @export var zoom_min := 0.5
@@ -34,7 +36,9 @@ func _unhandled_input(event):
 
 func _process(delta):
 	if not is_instance_valid(target): return
-	zoom = lerp(zoom, _target_zoom, 5.0 * delta)
+	if _target_zoom != zoom:
+		zoom = lerp(zoom, _target_zoom, 5.0 * delta)
+		zoomed.emit(zoom.x)
 	_required_look_position = lerp(_required_look_position, _get_look_position(), 2 * delta)
 	_hit_position = lerp(_hit_position, Vector2.ZERO, 0.1)
 	position = target.extrapolator.smooth_position + _required_acceleration_position + _required_look_position + _hit_position

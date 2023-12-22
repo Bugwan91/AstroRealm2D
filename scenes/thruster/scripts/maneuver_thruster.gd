@@ -30,6 +30,7 @@ func setup(value: float):
 	_calculate_torgue()
 	_flame.setup_sound(-20, 2)
 	_flame.show_flame = false
+	_flame.show_zoom = 0.5
 
 func _calculate_torgue():
 	var value = TORQUE_MULT * _thrust * (position.x * _force_direction.y - position.y * _force_direction.x) if enabled and _thrust > 0 else 0.0
