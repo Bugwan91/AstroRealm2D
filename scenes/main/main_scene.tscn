@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=53 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -37,7 +37,9 @@
 [ext_resource type="Resource" uid="uid://c1xggcinljpje" path="res://resources/ship_parts/engine/01.tres" id="37_j4y5n"]
 [ext_resource type="Resource" uid="uid://dvaj7ll214jot" path="res://resources/ship_parts/hull_ext/06.tres" id="37_q2q5y"]
 [ext_resource type="Texture2D" uid="uid://brtabr5lpm864" path="res://assets/spaceships/Styles/01.png" id="38_2gt40"]
+[ext_resource type="Texture2D" uid="uid://bogly506o6gqw" path="res://assets/spaceships/Styles/red_and_white.png" id="39_nkrga"]
 [ext_resource type="Texture2D" uid="uid://bumhukr5exiwp" path="res://assets/spaceships/Styles/SF.png" id="39_ums3d"]
+[ext_resource type="Texture2D" uid="uid://chybabpei4ali" path="res://assets/spaceships/Styles/red_lines.png" id="40_nye8q"]
 [ext_resource type="Texture2D" uid="uid://dh1ya4sfdur13" path="res://assets/spaceships/Styles/smile.png" id="40_sitdw"]
 
 [sub_resource type="Resource" id="Resource_2k6wb"]
@@ -209,7 +211,7 @@ _hulls = Array[Resource("res://scenes/ship_designer/scripts/resources/hull_baker
 _hulls_ext = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("32_y7rhy"), ExtResource("10_0j4h5"), ExtResource("10_pygr5"), ExtResource("34_83ehe"), ExtResource("35_r6ynf"), ExtResource("37_q2q5y"), null])
 _cockpits = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("7_onsy6"), ExtResource("36_ctgf4")])
 _engines = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("37_j4y5n"), ExtResource("8_tstcm")])
-_styles = Array[Texture2D]([ExtResource("38_2gt40"), ExtResource("12_k8me1"), ExtResource("39_ums3d"), ExtResource("40_sitdw")])
+_styles = Array[Texture2D]([ExtResource("38_2gt40"), ExtResource("12_k8me1"), ExtResource("39_ums3d"), ExtResource("40_sitdw"), ExtResource("39_nkrga"), ExtResource("40_nye8q")])
 
 [node name="Baker" parent="EnemySpawner" instance=ExtResource("24_7ks4m")]
 unique_name_in_owner = true

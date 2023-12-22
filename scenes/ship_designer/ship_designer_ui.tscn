@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c7cafyhhy135a"]
+[gd_scene load_steps=31 format=3 uid="uid://c7cafyhhy135a"]
 
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/ship_designer_ui.gd" id="1_citlv"]
 [ext_resource type="PackedScene" uid="uid://jbw831e0e4ws" path="res://scenes/ship_designer/items_list.tscn" id="2_ji1w5"]
@@ -25,6 +25,8 @@
 [ext_resource type="Texture2D" uid="uid://bumhukr5exiwp" path="res://assets/spaceships/Styles/SF.png" id="20_23j08"]
 [ext_resource type="Texture2D" uid="uid://dh1ya4sfdur13" path="res://assets/spaceships/Styles/smile.png" id="21_26i24"]
 [ext_resource type="Texture2D" uid="uid://d1plve26u31ph" path="res://assets/spaceships/Styles/Bunblebee.png" id="22_wrpc1"]
+[ext_resource type="Texture2D" uid="uid://bogly506o6gqw" path="res://assets/spaceships/Styles/red_and_white.png" id="24_01ajo"]
+[ext_resource type="Texture2D" uid="uid://chybabpei4ali" path="res://assets/spaceships/Styles/red_lines.png" id="25_aday5"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3y64e"]
 load_path = "res://.godot/imported/2-1_emission.png-67052bb7f4582c6df4039dee2c5765f9.ctex"
@@ -103,7 +105,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 empty_allowed = true
-textures = Array[Texture2D]([ExtResource("18_pkqg8"), ExtResource("19_l5qn6"), ExtResource("20_23j08"), ExtResource("21_26i24"), ExtResource("22_wrpc1")])
+textures = Array[Texture2D]([ExtResource("18_pkqg8"), ExtResource("19_l5qn6"), ExtResource("20_23j08"), ExtResource("21_26i24"), ExtResource("22_wrpc1"), ExtResource("24_01ajo"), ExtResource("25_aday5")])
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
 layout_mode = 2
