@@ -119,3 +119,4 @@ unique_name_in_owner = true
 stream = ExtResource("5_raf0x")
 volume_db = -0.07
 pitch_scale = 1.25
+max_distance = 4000.0

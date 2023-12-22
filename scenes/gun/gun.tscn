@@ -31,6 +31,7 @@ unique_name_in_owner = true
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("3_twgen")
+max_distance = 4000.0
 
 [node name="ReloadingTimer" type="Timer" parent="."]
 unique_name_in_owner = true

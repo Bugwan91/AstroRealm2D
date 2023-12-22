@@ -45,7 +45,7 @@
 [sub_resource type="Resource" id="Resource_2k6wb"]
 script = ExtResource("5_yqei1")
 textures = ExtResource("6_xcsqf")
-max_speed = 200000.0
+max_speed = 10000.0
 main_thrust = 500.0
 maneuver_thrust = 500.0
 FA_accuracy = 0.9

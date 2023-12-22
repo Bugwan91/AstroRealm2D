@@ -6,3 +6,6 @@
 [node name="ManeuverThruster" instance=ExtResource("1_4tnod")]
 scale = Vector2(0.2, 0.2)
 script = ExtResource("2_e25ev")
+
+[node name="Sound" parent="Flame" index="3"]
+max_distance = 1000.0
