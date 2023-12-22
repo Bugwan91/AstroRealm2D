@@ -41,5 +41,5 @@ modulate = Color(0, 2, 0, 1)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_8unas")
 position = Vector2(-17, 0)
-scale = Vector2(0.2, 0.4)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_u3vfw")

@@ -1,69 +1,79 @@
-[gd_resource type="Resource" script_class="HullBakerResource" load_steps=18 format=3 uid="uid://dyeqdkm0axqab"]
+[gd_resource type="Resource" script_class="HullBakerResource" load_steps=19 format=3 uid="uid://dyeqdkm0axqab"]
 
 [ext_resource type="Texture2D" uid="uid://dmm7jf50tafoa" path="res://assets/spaceships/hull/4.png" id="1_1xnx4"]
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd" id="1_70664"]
-[ext_resource type="Script" path="res://addons/points_resource_editor/point_resource.gd" id="2_3brmo"]
+[ext_resource type="Texture2D" uid="uid://df56iw7whnn4t" path="res://assets/spaceships/hull/4_emission.png" id="2_frhv5"]
 [ext_resource type="Texture2D" uid="uid://ye652wm6nqrf" path="res://assets/spaceships/hull/4_mask.png" id="2_paugo"]
-[ext_resource type="Script" path="res://addons/points_resource_editor/points_array_resource.gd" id="3_0sjcl"]
 [ext_resource type="Texture2D" uid="uid://rwie8y77oc1r" path="res://assets/spaceships/hull/4_poly_n.png" id="3_utgjr"]
 [ext_resource type="Script" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="4_x61cr"]
+[ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/thruster_positions_resource.gd" id="7_3y6r7"]
+[ext_resource type="Script" path="res://addons/points_resource_editor/points_array_resource.gd" id="8_6nlle"]
 
 [sub_resource type="Resource" id="Resource_0ybjx"]
 script = ExtResource("4_x61cr")
 data = PackedVector2Array(0, -44, 8, -37, 11, -5, 23, -11, 64, 49, 55, 64, 0, 48, -55, 64, -64, 49, -23, -11, -11, -5, -8, -37)
 
-[sub_resource type="Resource" id="Resource_7vkmd"]
-script = ExtResource("2_3brmo")
-position = Vector2(-64, 50)
-rotation = 0.0
-
-[sub_resource type="Resource" id="Resource_k1d70"]
-script = ExtResource("2_3brmo")
-position = Vector2(64, 50)
-rotation = -180.0
-
-[sub_resource type="Resource" id="Resource_1cd1s"]
-script = ExtResource("2_3brmo")
-position = Vector2(-55, 64)
-rotation = -90.0
-
-[sub_resource type="Resource" id="Resource_rln4r"]
-script = ExtResource("2_3brmo")
-position = Vector2(55, 64)
-rotation = -90.0
-
-[sub_resource type="Resource" id="Resource_xta17"]
-script = ExtResource("2_3brmo")
-position = Vector2(-22, -10)
+[sub_resource type="Resource" id="Resource_1b52j"]
+script = ExtResource("7_3y6r7")
+direction = 0
+position = Vector2(-21, -10)
 rotation = 90.0
 
-[sub_resource type="Resource" id="Resource_fqmmv"]
-script = ExtResource("2_3brmo")
-position = Vector2(22, -10)
+[sub_resource type="Resource" id="Resource_2a566"]
+script = ExtResource("7_3y6r7")
+direction = 1
+position = Vector2(21, -10)
 rotation = 90.0
 
-[sub_resource type="Resource" id="Resource_agv5i"]
-script = ExtResource("2_3brmo")
+[sub_resource type="Resource" id="Resource_5jm8v"]
+script = ExtResource("7_3y6r7")
+direction = 2
 position = Vector2(24, -9)
-rotation = -180.0
+rotation = 180.0
 
-[sub_resource type="Resource" id="Resource_2p3iu"]
-script = ExtResource("2_3brmo")
+[sub_resource type="Resource" id="Resource_gn0ec"]
+script = ExtResource("7_3y6r7")
+direction = 3
 position = Vector2(-24, -9)
 rotation = 0.0
 
-[sub_resource type="Resource" id="Resource_2mbmt"]
-script = ExtResource("3_0sjcl")
-points = Array[ExtResource("2_3brmo")]([SubResource("Resource_7vkmd"), SubResource("Resource_k1d70"), SubResource("Resource_1cd1s"), SubResource("Resource_rln4r"), SubResource("Resource_xta17"), SubResource("Resource_fqmmv"), SubResource("Resource_agv5i"), SubResource("Resource_2p3iu")])
+[sub_resource type="Resource" id="Resource_h5mw2"]
+script = ExtResource("7_3y6r7")
+direction = 4
+position = Vector2(64, 50)
+rotation = 180.0
+
+[sub_resource type="Resource" id="Resource_gxs70"]
+script = ExtResource("7_3y6r7")
+direction = 5
+position = Vector2(-64, 50)
+rotation = 0.0
+
+[sub_resource type="Resource" id="Resource_xaoop"]
+script = ExtResource("7_3y6r7")
+direction = 6
+position = Vector2(-55, 64)
+rotation = -90.0
+
+[sub_resource type="Resource" id="Resource_lxf20"]
+script = ExtResource("7_3y6r7")
+direction = 7
+position = Vector2(55, 64)
+rotation = -90.0
+
+[sub_resource type="Resource" id="Resource_e618j"]
+script = ExtResource("8_6nlle")
+points = Array[Resource("res://addons/points_resource_editor/point_resource.gd")]([SubResource("Resource_1b52j"), SubResource("Resource_2a566"), SubResource("Resource_5jm8v"), SubResource("Resource_gn0ec"), SubResource("Resource_h5mw2"), SubResource("Resource_gxs70"), SubResource("Resource_xaoop"), SubResource("Resource_lxf20")])
 
 [resource]
 script = ExtResource("1_70664")
 cockpit_slot = Vector2(0, -32)
 engine_slots = Array[Vector2]([Vector2(0, 32)])
-thrusters = SubResource("Resource_2mbmt")
+thrusters = SubResource("Resource_e618j")
 type = 0
 diffuse = ExtResource("1_1xnx4")
 mask = ExtResource("2_paugo")
 normal = ExtResource("3_utgjr")
+emission = ExtResource("2_frhv5")
 polygon = SubResource("Resource_0ybjx")
 ontop = false

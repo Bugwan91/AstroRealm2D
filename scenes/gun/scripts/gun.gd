@@ -17,6 +17,7 @@ signal shoot_recoil(force: float)
 @onready var _charge_timer = %ChargeTimer
 @onready var _sound = %Sound
 @onready var reloading_timer: Timer = %ReloadingTimer
+@onready var _shoot_point: Node2D = %ShootPoint
 
 var enabled := false
 var velocity := Vector2.ZERO
@@ -69,7 +70,7 @@ func _charge_done():
 
 func _spawn_bullet():
 	var bullet = bullet_scene.instantiate() as Bullet
-	bullet.position = global_position
+	bullet.position = _shoot_point.global_position
 	var spear: float = accuracy * (pow(randf(), 2.0) * 2.0 - 0.5)
 	bullet.rotation = global_rotation + spear
 	bullet.linear_velocity = velocity.rotated(spear)

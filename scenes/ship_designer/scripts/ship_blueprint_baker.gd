@@ -60,12 +60,10 @@ func _bake_polygon():
 	design.thrusters = polygon.thrusters
 
 func _bake_textures() -> ShipTexturesRes:
-	printt("Baker: pre-bake", Engine.get_frames_drawn())
 	design.diffuse = await _bake_diffuse()
 	design.normal = await normal.bake()
 	design.emision = await emission.bake()
 	design.specular = await specular.bake()
-	printt("Baker: bake done", Engine.get_frames_drawn())
 	return design
 
 func _bake_diffuse() -> Texture2D:

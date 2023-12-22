@@ -1,15 +1,15 @@
 @tool
 extends EditorPlugin
 
-const CURSOR_THRESHOLD := 6.0
+const CURSOR_THRESHOLD := 12.0
 
-const POINT_RADIUS := 6.0
+const POINT_RADIUS := 12.0
 
-const POINT_COLOR := Color(1.0, 1.0, 0.0, 0.5)
+const POINT_COLOR := Color(1.0, 0.5, 0.0, 0.7)
 
-const POINT_HOVER_COLOR := Color(1.0, 1.0, 1.0)
+const POINT_HOVER_COLOR := Color(1.0, 0.0, 0.2)
 
-const ARROW_COLOR := Color(1.0, 0.5, 0.0, 0.5)
+const ARROW_COLOR := Color(1.0, 0.0, 0.0, 0.7)
 
 
 var _editable: PointsArrayResource
@@ -149,13 +149,18 @@ func _rotate():
 func _draw_point(overlay: Control, index: int):
 	var position = _transform_to_view * _editable.position(index)
 	overlay.draw_circle(position, POINT_RADIUS, POINT_COLOR)
+	var font := overlay.get_theme_font("font")
 	if index == _index:
 		overlay.draw_circle(position, POINT_RADIUS - 1.0, POINT_HOVER_COLOR)
 	if index == _index and _is_rotating:
 		var rotation := _editable.rotation(index) + _transform_to_view.get_rotation()
+		overlay.draw_string_outline(overlay.get_theme_font("font"),\
+			position + Vector2(-16.0, -16.0), str(rotation), 1, 64.0, 16, 2, Color.BLACK)
 		overlay.draw_string(overlay.get_theme_font("font"),\
 			position + Vector2(-16.0, -16.0), str(rotation), 1, 64.0, 16, Color.RED)
 	else:
+		overlay.draw_string_outline(overlay.get_theme_font("font"),\
+			position + Vector2(-16.0, -16.0), str(index), 1, 64.0, 16, 2, Color.BLACK)
 		overlay.draw_string(overlay.get_theme_font("font"),\
 			position + Vector2(-16.0, -16.0), str(index), 1, 64.0)
 
@@ -164,9 +169,9 @@ func _draw_arrow(overlay: Control, index: int):
 	var position := _transform_to_view * _editable.position(index)
 	var rotation := _editable.rotation(index) + _transform_to_view.get_rotation()
 	rotation = deg_to_rad(rotation)
-	var top := Vector2(32.0, 0.0).rotated(rotation) + position
-	var left := Vector2(0.0, -6.0).rotated(rotation) + position
-	var right := Vector2(0.0, 6.0).rotated(rotation) + position
+	var top := Vector2(64.0, 0.0).rotated(rotation) + position
+	var left := Vector2(0.0, -12.0).rotated(rotation) + position
+	var right := Vector2(0.0, 12.0).rotated(rotation) + position
 	overlay.draw_colored_polygon(PackedVector2Array([top, right, left]), ARROW_COLOR)
 
 ## Get transform of parent node of the editable resource and updates transforms from/to view

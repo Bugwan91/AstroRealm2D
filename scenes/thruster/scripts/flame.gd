@@ -3,9 +3,11 @@ extends Node2D
 
 const THRESHOLD := 0.01
 
-@onready var smoke_effect = %SmokeEffect
-@onready var flame_effect = %FlameEffect
-@onready var sound = %Sound
+@export var show_flame := true
+
+@onready var _smoke_effect = %SmokeEffect
+@onready var _flame_effect = %FlameEffect
+@onready var _sound = %Sound
 @onready var _light = %Light
 
 var _max_volume := 0.0
@@ -24,19 +26,21 @@ func run(force: float):
 
 func run_effect(force: float):
 	if force < THRESHOLD:
-		_light.visible = false
-		smoke_effect.emitting = false
-		flame_effect.emitting = false
+		_smoke_effect.emitting = false
+		if show_flame:
+			_light.visible = false
+			_flame_effect.emitting = false
 	else:
-		_light.visible = true
-		_light.energy = force
 		modulate.a = force
-		smoke_effect.emitting = true
-		flame_effect.emitting = true
+		_smoke_effect.emitting = true
+		if show_flame:
+			_light.visible = true
+			_light.energy = force
+			_flame_effect.emitting = true
 
 func run_sound(force: float):
-	sound.volume_db = _max_volume - (40 - 40 * force)
+	_sound.volume_db = _max_volume - (40 - 40 * force)
 	if force < THRESHOLD:
-		sound.stop()
-	elif not sound.playing:
-		sound.play()
+		_sound.stop()
+	elif not _sound.playing:
+		_sound.play()

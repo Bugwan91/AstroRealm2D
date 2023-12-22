@@ -19,7 +19,7 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	ship.position = -FloatingOrigin.origin
 	ship.inputs = input_reader
 	var health := Health.new()
-	health.max_health = 100000.0
+	health.max_health = 500.0
 	health.health = health.max_health
 	ship.setup_health(health)
 	var gun: Gun = gun_scene.instantiate() as Gun
@@ -27,7 +27,7 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	gun.overheat = 0.0
 	gun.recoil = 20.0
 	gun.bullet_speed = 3000.0
-	gun.fire_rate = 5.0
+	gun.fire_rate = 10.0
 	ship.gun = gun
 	var radar: Radar = radar_scene.instantiate() as Radar
 	ship.add_child(radar)
@@ -37,4 +37,3 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	audio_listener.make_current()
 	add_child(ship)
 	radar.radius = 10000.0
-	#ship.mass = 0.5

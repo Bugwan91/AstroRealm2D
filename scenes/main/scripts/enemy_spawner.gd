@@ -1,7 +1,7 @@
 extends Node
 
 @export var agressive := false
-@export_range(0, 10) var max_count := 2
+@export_range(0, 200) var max_count := 2
 @export var ship_scene: PackedScene
 @export var gun_scene: PackedScene
 @export var ship_data: ShipResource
@@ -36,7 +36,6 @@ func spawn_ship():
 	owner.add_child(ship)
 	ship.connect_inputs(_create_AI())
 	ship.inputs.update_target_ship(MainState.player_ship)
-	prints("Enemy spawned: ", ship.position)
 
 func _on_ship_dead(ship: ShipRigidBody):
 	ships.erase(ship)
@@ -64,7 +63,7 @@ func _create_gun() -> Gun:
 
 func _create_health() -> Health:
 	var health := Health.new()
-	health.max_health = 1000.0
+	health.max_health = 200.0
 	health.health = health.max_health
 	return health
 

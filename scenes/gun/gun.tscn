@@ -1,8 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://f787xuov3u4t"]
+[gd_scene load_steps=10 format=3 uid="uid://f787xuov3u4t"]
 
 [ext_resource type="Script" path="res://scenes/gun/scripts/gun.gd" id="1_heu61"]
 [ext_resource type="PackedScene" uid="uid://dwdthpisfmojs" path="res://scenes/gun/bullet.tscn" id="2_gsief"]
-[ext_resource type="AudioStream" uid="uid://c6bvxn0m82uha" path="res://assets/sounds/tripleshot.wav" id="3_jnxdh"]
+[ext_resource type="AudioStream" uid="uid://dv5bnmfo6yfcs" path="res://assets/sounds/BLLTRico_Metallic_11.wav" id="3_twgen"]
+[ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="4_cqrqv"]
+[ext_resource type="Texture2D" uid="uid://s8avto3bxxv8" path="res://assets/spaceships/gun/2.png" id="5_60ba6"]
+[ext_resource type="Texture2D" uid="uid://bwslvp6xbqrt8" path="res://assets/spaceships/specular.png" id="5_72wv2"]
+[ext_resource type="Texture2D" uid="uid://din3g5k0m0c8k" path="res://assets/spaceships/gun/2_poly_n.png" id="6_err6b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_whwpl"]
+shader = ExtResource("4_cqrqv")
+shader_parameter/emission = 5.0
+shader_parameter/shininess = 0.95
+shader_parameter/specular_texture = ExtResource("5_72wv2")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1kdxr"]
+diffuse_texture = ExtResource("5_60ba6")
+normal_texture = ExtResource("6_err6b")
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_heu61")
@@ -16,10 +30,19 @@ unique_name_in_owner = true
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("3_jnxdh")
-volume_db = -10.0
+stream = ExtResource("3_twgen")
 
 [node name="ReloadingTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 3.0
 one_shot = true
+
+[node name="View" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_whwpl")
+rotation = 1.5708
+texture = SubResource("CanvasTexture_1kdxr")
+
+[node name="ShootPoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(16, 0)

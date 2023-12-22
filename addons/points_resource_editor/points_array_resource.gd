@@ -36,4 +36,8 @@ func rotated(rotation: float) -> Array[PointResource]:
 	return result_points
 
 func merge(new_points: PointsArrayResource):
+	if new_points == null or new_points.points == null: return
 	points.append_array(new_points.points)
+
+func is_empty() -> bool:
+	return points.is_empty()

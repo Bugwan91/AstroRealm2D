@@ -173,7 +173,7 @@ func turn_to(target_point: Vector2):
 	var n := int((sqrt(a*(a + 8*d)) - a) / (2*a))
 	var wt: float = sign(error) * (d/(n+1) + 0.5*a*n)
 	var w := _state.angular_velocity * _state.step
-	_angular_control = (wt - w) / a
+	_angular_control = 0.9 * (wt - w) / a
 
 func _apply_forces():
 	_thrusters.apply_forces()

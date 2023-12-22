@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c7cafyhhy135a"]
+[gd_scene load_steps=29 format=3 uid="uid://c7cafyhhy135a"]
 
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/ship_designer_ui.gd" id="1_citlv"]
 [ext_resource type="PackedScene" uid="uid://jbw831e0e4ws" path="res://scenes/ship_designer/items_list.tscn" id="2_ji1w5"]
@@ -9,12 +9,13 @@
 [ext_resource type="Resource" uid="uid://lpuy2txkhyi2" path="res://resources/ship_parts/hull/03.tres" id="6_g040y"]
 [ext_resource type="Resource" uid="uid://dyeqdkm0axqab" path="res://resources/ship_parts/hull/04.tres" id="7_hnlph"]
 [ext_resource type="Resource" uid="uid://cc5dcgmqoxf2w" path="res://resources/ship_parts/hull/05.tres" id="8_enyfy"]
-[ext_resource type="Resource" uid="uid://l2vpnff51m0k" path="res://resources/ship_parts/hull_ext/01.tres" id="9_2mkpw"]
-[ext_resource type="Resource" uid="uid://c8ufqm2vr2xfy" path="res://resources/ship_parts/hull_ext/02.tres" id="10_5cgho"]
-[ext_resource type="Resource" uid="uid://mom4o82wgrea" path="res://resources/ship_parts/hull_ext/03.tres" id="11_nph1a"]
+[ext_resource type="Resource" uid="uid://cc4jaoixhp0lr" path="res://resources/ship_parts/hull_ext/01.tres" id="9_2mkpw"]
+[ext_resource type="Resource" uid="uid://db7b7e1yfehii" path="res://resources/ship_parts/hull_ext/02.tres" id="10_5cgho"]
+[ext_resource type="Resource" uid="uid://hh36wpy2mflt" path="res://resources/ship_parts/hull_ext/03.tres" id="11_nph1a"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship_view.gd" id="11_r583k"]
-[ext_resource type="Resource" uid="uid://ssrq5m0n8xji" path="res://resources/ship_parts/hull_ext/04.tres" id="12_7q74a"]
-[ext_resource type="Resource" uid="uid://bfqdtux105aav" path="res://resources/ship_parts/hull_ext/05.tres" id="13_6lksf"]
+[ext_resource type="Resource" uid="uid://c52i1koxg6csi" path="res://resources/ship_parts/hull_ext/04.tres" id="12_7q74a"]
+[ext_resource type="Resource" uid="uid://dmnyhbemwyorc" path="res://resources/ship_parts/hull_ext/05.tres" id="13_6lksf"]
+[ext_resource type="Resource" uid="uid://dvaj7ll214jot" path="res://resources/ship_parts/hull_ext/06.tres" id="14_3vaqw"]
 [ext_resource type="Resource" uid="uid://drhm8p5kvv71k" path="res://resources/ship_parts/cockpit/01.tres" id="14_p45ui"]
 [ext_resource type="Resource" uid="uid://ddbus3emw7v04" path="res://resources/ship_parts/cockpit/02.tres" id="15_wvvyx"]
 [ext_resource type="Resource" uid="uid://c1xggcinljpje" path="res://resources/ship_parts/engine/01.tres" id="16_a0480"]
@@ -74,7 +75,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 empty_allowed = true
-resources = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("9_2mkpw"), ExtResource("10_5cgho"), ExtResource("11_nph1a"), ExtResource("12_7q74a"), ExtResource("13_6lksf")])
+resources = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("9_2mkpw"), ExtResource("10_5cgho"), ExtResource("11_nph1a"), ExtResource("12_7q74a"), ExtResource("13_6lksf"), ExtResource("14_3vaqw")])
 
 [node name="Cockpit" type="ScrollContainer" parent="HBoxContainer/TabContainer"]
 visible = false
