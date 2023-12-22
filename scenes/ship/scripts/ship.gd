@@ -6,6 +6,7 @@ signal got_hit(value: Vector2)
 signal dead(ship: ShipRigidBody)
 
 @export var setup_data: ShipResource: set = setup_view
+@export var group: String # TODO: Rework with implementation factions/groups system
 
 @export var inputs: ShipInput
 @export var gun: Gun
@@ -55,6 +56,7 @@ func _ready():
 	flight_assistant.autopilot_pointer_view = autopilot_pointer
 	battle_assistant.pointer_view = target_prediction_pointer
 	if is_instance_valid(gun):
+		gun.group = group
 		_gun_slot.add_gun(gun)
 		gun.shoot_recoil.connect(_on_impulse_local)
 		battle_assistant.gun = gun

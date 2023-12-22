@@ -3,6 +3,7 @@ extends Node2D
 
 signal shoot_recoil(force: float)
 
+@export var group: String
 @export var bullet_scene: PackedScene
 @export var bullet_color: Color = Color.RED
 @export var accuracy: float = 0.02
@@ -70,6 +71,7 @@ func _charge_done():
 
 func _spawn_bullet():
 	var bullet = bullet_scene.instantiate() as Bullet
+	bullet.group = group
 	bullet.position = _shoot_point.global_position
 	var spear: float = accuracy * (pow(randf(), 2.0) * 2.0 - 0.5)
 	bullet.rotation = global_rotation + spear

@@ -15,6 +15,7 @@ func _ready():
 
 func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	var ship: ShipRigidBody = ship_scene.instantiate() as ShipRigidBody
+	ship.group = "player"
 	ship.setup_data = ship_data
 	ship.position = -FloatingOrigin.origin
 	ship.inputs = input_reader

@@ -1,6 +1,7 @@
 class_name Bullet
 extends Node2D
 
+@export var group: String
 @export var hit_effect_scene: PackedScene
 @export var _color: Color
 
@@ -29,26 +30,25 @@ func update_material(color: Color):
 	light.color = _color
 
 func start(lifetime: float):
-	timer.timeout.connect(_self_destroy)
+	timer.timeout.connect(queue_free)
 	timer.start(lifetime)
 
 func _collide():
 	if ray.is_colliding():
 		_on_hit(ray.get_collider())
-		_self_destroy()
 
 func _on_hit(target):
 	if not is_instance_valid(target): return
 	var damageTaker = target.get_node("TakingDamage") as TakingDamage
 	if is_instance_valid(damageTaker):
+		if damageTaker.check_group(group):
+			return
 		damageTaker.damage(_create_damage())
 	var hit_effect = hit_effect_scene.instantiate() as BulletHitEffect
 	hit_effect.position = ray.get_collision_point()
 	hit_effect.linear_velocity = target.absolute_velocity
 	hit_effect.color = _color
 	MainState.world_node.add_child(hit_effect)
-
-func _self_destroy():
 	queue_free()
 
 func _create_damage() -> Damage:

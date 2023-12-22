@@ -47,7 +47,7 @@ func _update_player_target(ship: ShipRigidBody):
 	player_target = ship
 	player_target_updated.emit(player_target)
 
-func _on_player_dead():
+func _on_player_dead(_pass):
 	_update_player_target(null)
 	player_ship_updated.emit(null)
 	player_dead.emit()

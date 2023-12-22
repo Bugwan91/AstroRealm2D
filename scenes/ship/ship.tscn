@@ -92,6 +92,7 @@ light_mode = 1
 rotation = 0.0103668
 script = ExtResource("1_5ckws")
 setup_data = ExtResource("2_fymd7")
+group = null
 
 [node name="SelectionArea" type="Area2D" parent="."]
 collision_mask = 0

@@ -201,7 +201,7 @@ texture = ExtResource("20_aq44u")
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("27_c6eb4")
 agressive = true
-max_count = 5
+max_count = 10
 ship_scene = ExtResource("4_5rllk")
 gun_scene = ExtResource("8_cwv63")
 ship_data = SubResource("Resource_xjtty")
