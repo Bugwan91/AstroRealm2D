@@ -137,6 +137,7 @@ func _calculate_thrust_multiplyer():
 	var v_sq: float = absolute_velocity.length_squared()
 	var c_sq: float = _max_speed_squared
 	v_sq = min(v_sq, c_sq)
+	# Graph: https://www.desmos.com/calculator/vhojpofhoa
 	var a_mult: float = 1.0 - v_sq/c_sq + SPEED_SLOWING_LIMIT
 	thrust_multiplyer = clampf(a_mult, 0.0, 1.0)
 
