@@ -22,6 +22,7 @@ normal_texture = ExtResource("6_err6b")
 script = ExtResource("1_heu61")
 bullet_scene = ExtResource("2_gsief")
 bullet_color = Color(1, 0.905882, 0.317647, 1)
+accuracy = 0.08
 range = 3000.0
 bullet_speed = 4000.0
 

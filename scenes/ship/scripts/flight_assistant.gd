@@ -16,6 +16,7 @@ const ANGULAR_THRESHOLD = 0.01
 
 @onready var _pre_collision_detector: ShipPreCollisionDetector = %PreCollisionDetector
 
+var ship: ShipRigidBody
 var target: ShipRigidBody: set = _set_target
 var autopilot_speed := 100000.0
 var follow_distance := 1000.0
@@ -50,6 +51,7 @@ func _ready():
 
 func setup():
 	_thrusters_ratio = _thrusters.estimated_strafe_force(Vector2.RIGHT) / _main_thrusters.estimated_force()
+	ship = owner
 
 func process(state: PhysicsDirectBodyState2D):
 	if enabled:
@@ -67,13 +69,13 @@ func process(state: PhysicsDirectBodyState2D):
 func _avoid_colission():
 	if not avoid_collisions: return
 	_linear_control = _linear_control.clamp(Vector2(-1,-1), Vector2(1,1))\
-		- 2.0 * _pre_collision_detector.potential_collision_vector.rotated(-owner.rotation)
+		- 2.0 * _pre_collision_detector.potential_collision_vector.rotated(-ship.rotation)
 
 func _update_autopilot_pointer_view():
 	if not is_instance_valid(autopilot_pointer_view): return
 	if is_autopilot:
-		var point = _autopilot_target_position - owner.extrapolator.global_position - FloatingOrigin.origin
-		autopilot_pointer_view.update(point, owner.extrapolator.canvas_position)
+		var point = _autopilot_target_position - ship.extrapolator.global_position - FloatingOrigin.origin
+		autopilot_pointer_view.update(point, ship.extrapolator.canvas_position)
 	else:
 		autopilot_pointer_view.disable()
 
@@ -190,7 +192,7 @@ func _get_stop_velocity(position: Vector2, velocity: Vector2, max_speed: float =
 	var current_speed = velocity.length()
 	if position.length() < AUTOPILOT_THRESHOLD and current_speed < LINEAR_THRESHOLD:
 		return Vector2.ZERO
-	var a := _thrusters.estimated_strafe_force(position)
+	var a: float = _thrusters.estimated_strafe_force(position) * ship.thrust_multiplyer
 	var v := sqrt((2 * a * position.length())/3)
 	v = v if max_speed == 0 else min(max_speed, v)
 	return v * position.normalized() - velocity

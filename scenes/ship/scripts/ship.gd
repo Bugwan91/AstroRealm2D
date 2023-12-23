@@ -5,7 +5,7 @@ extends FloatingOriginRigidBody
 signal got_hit(value: Vector2)
 signal dead(ship: ShipRigidBody)
 
-const SPEED_SLOWING_LIMIT := 0.8
+const SPEED_SLOWING_LIMIT := 0.2
 
 @export var setup_data: ShipResource: set = setup_view
 @export var group: String # TODO: Rework with implementation factions/groups system
@@ -31,6 +31,7 @@ const SPEED_SLOWING_LIMIT := 0.8
 
 var absolute_velocity: Vector2: get = _absolute_velocity
 var health: Health
+var thrust_multiplyer: float
 
 var _max_speed_squared: float
 var _impulses := Vector2.ZERO
@@ -108,6 +109,7 @@ func _integrate_forces(state):
 	if inputs is PlayerShipInput:
 		FloatingOrigin.update_from_state(state)
 	super._integrate_forces(state)
+	_calculate_thrust_multiplyer()
 	flight_assistant.process(state)
 	_apply_forcces(state)
 	_apply_drag(state)
@@ -124,16 +126,19 @@ func add_torque(torque: float):
 	_torque += torque
 
 func _apply_forcces(state: PhysicsDirectBodyState2D):
-	var multiplayer := _calculate_thrust_multiplyer()
-	state.apply_central_force(_forces * multiplayer)
-	state.apply_central_impulse(_impulses * multiplayer)
+	state.apply_central_force(_forces * thrust_multiplyer)
+	state.apply_central_impulse(_impulses * thrust_multiplyer)
 	state.apply_torque(_torque)
 	_forces = Vector2.ZERO
 	_impulses = Vector2.ZERO
 	_torque = 0.0
 
-func _calculate_thrust_multiplyer() -> float:
-	return 1.0 - clamp(0.0, SPEED_SLOWING_LIMIT, absolute_velocity.length_squared()/_max_speed_squared)
+func _calculate_thrust_multiplyer():
+	var v_sq: float = absolute_velocity.length_squared()
+	var c_sq: float = _max_speed_squared
+	v_sq = min(v_sq, c_sq)
+	var a_mult: float = 1.0 - v_sq/c_sq + SPEED_SLOWING_LIMIT
+	thrust_multiplyer = clampf(a_mult, 0.0, 1.0)
 
 func _apply_drag(state: PhysicsDirectBodyState2D):
 	var delta = absolute_velocity.length() - setup_data.max_speed
