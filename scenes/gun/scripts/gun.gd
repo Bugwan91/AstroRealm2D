@@ -6,7 +6,7 @@ signal shoot_recoil(force: float)
 @export var group: String
 @export var bullet_scene: PackedScene
 @export var bullet_color: Color = Color.RED
-@export var accuracy: float = 0.02
+@export var accuracy: float = 0.05
 @export_range(0, 60) var fire_rate := 10.0
 @export_range(0, 5000) var range := 2000.0
 @export_range(0, 10000) var bullet_speed := 3000.0
@@ -73,7 +73,7 @@ func _spawn_bullet():
 	var bullet = bullet_scene.instantiate() as Bullet
 	bullet.group = group
 	bullet.position = _shoot_point.global_position
-	var spear: float = accuracy * (pow(randf(), 2.0) * 2.0 - 0.5)
+	var spear: float = accuracy * pow(2.0 * (randf() - 0.5), 2.0) * sign(randf() - 0.5)
 	bullet.rotation = global_rotation + spear
 	bullet.linear_velocity = velocity.rotated(spear)
 	shoot_recoil.emit(-transform.x.rotated(spear) * recoil)
