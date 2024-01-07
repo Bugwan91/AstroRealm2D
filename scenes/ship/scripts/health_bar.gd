@@ -9,3 +9,6 @@ func show_as_player():
 
 func show_as_enemy():
 	add_theme_stylebox_override("fill", enemy_fill_style)
+
+func _ready():
+	show_as_player()

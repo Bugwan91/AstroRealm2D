@@ -1,10 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://3cqmtymu5w3p"]
+[gd_scene load_steps=10 format=3 uid="uid://3cqmtymu5w3p"]
 
 [ext_resource type="Script" path="res://scenes/ui/scripts/main_ui.gd" id="1_bwtaq"]
-[ext_resource type="Script" path="res://scenes/ui/scripts/position_label.gd" id="1_x4cxl"]
 [ext_resource type="Texture2D" uid="uid://c26bmc1q2hol4" path="res://assets/icons/cross.png" id="2_qw7hq"]
-[ext_resource type="Script" path="res://scenes/ui/scripts/speed_label.gd" id="2_uarfg"]
-[ext_resource type="Script" path="res://scenes/ui/scripts/acceleration_label.gd" id="3_ex1gd"]
+[ext_resource type="PackedScene" uid="uid://bi8060cxyiqd7" path="res://scenes/ui/player_ship_status_ui.tscn" id="3_gp6mq"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/flight_assistant_ui.gd" id="4_7x04l"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/fps.gd" id="5_8a6ql"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/debug_info.gd" id="5_u0tch"]
@@ -42,32 +40,9 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/GameUI"]
+[node name="PlayerShipStatusUI" parent="Control/GameUI" instance=ExtResource("3_gp6mq")]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="Control/GameUI/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/GameUI/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Position" type="Label" parent="Control/GameUI/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-script = ExtResource("1_x4cxl")
-
-[node name="Speed" type="Label" parent="Control/GameUI/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-script = ExtResource("2_uarfg")
-
-[node name="Acceleration" type="Label" parent="Control/GameUI/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-script = ExtResource("3_ex1gd")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/GameUI"]
 layout_mode = 2

@@ -11,54 +11,54 @@
 
 [sub_resource type="Resource" id="Resource_msaru"]
 script = ExtResource("4_ji7wg")
-data = PackedVector2Array(0, 1, 64, 26, 64, 51, 28, 51, 0, 64, -28, 51, -64, 51, -64, 26)
+data = PackedVector2Array(0, 16, 55, 5, 64, 35, 0, 64, -64, 35, -55, 5)
 
 [sub_resource type="Resource" id="Resource_3jahr"]
 script = ExtResource("7_3pn2x")
 direction = 0
-position = Vector2(-63, 26)
+position = Vector2(-53, 5)
 rotation = 90.0
 
 [sub_resource type="Resource" id="Resource_tcnso"]
 script = ExtResource("7_3pn2x")
 direction = 1
-position = Vector2(63, 26)
+position = Vector2(53, 5)
 rotation = 90.0
 
 [sub_resource type="Resource" id="Resource_0lxxh"]
 script = ExtResource("7_3pn2x")
 direction = 2
-position = Vector2(64, 27)
+position = Vector2(55, 6)
 rotation = 180.0
 
 [sub_resource type="Resource" id="Resource_aq5dn"]
 script = ExtResource("7_3pn2x")
 direction = 3
-position = Vector2(-64, 27)
+position = Vector2(-55, 6)
 rotation = 0.0
 
 [sub_resource type="Resource" id="Resource_2hpfv"]
 script = ExtResource("7_3pn2x")
 direction = 4
-position = Vector2(64, 50)
+position = Vector2(64, 34)
 rotation = 180.0
 
 [sub_resource type="Resource" id="Resource_14oty"]
 script = ExtResource("7_3pn2x")
 direction = 5
-position = Vector2(-64, 50)
+position = Vector2(-64, 34)
 rotation = 0.0
 
 [sub_resource type="Resource" id="Resource_2a4vo"]
 script = ExtResource("7_3pn2x")
 direction = 6
-position = Vector2(-63, 51)
+position = Vector2(-63, 35)
 rotation = -90.0
 
 [sub_resource type="Resource" id="Resource_7mtss"]
 script = ExtResource("7_3pn2x")
 direction = 7
-position = Vector2(63, 51)
+position = Vector2(63, 35)
 rotation = -90.0
 
 [sub_resource type="Resource" id="Resource_n6y0x"]

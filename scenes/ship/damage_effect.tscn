@@ -4,6 +4,40 @@
 [ext_resource type="Texture2D" uid="uid://hnfioahelelc" path="res://assets/VFX_textures/fire_01.png" id="2_7r8uf"]
 [ext_resource type="Texture2D" uid="uid://crf347o6fh4jm" path="res://assets/VFX_textures/smoke_07.png" id="3_qucro"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_opo5s"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_378vb"]
+offsets = PackedFloat32Array(0.00234742, 0.0610329, 0.603286, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dj3qi"]
+gradient = SubResource("Gradient_378vb")
+
+[sub_resource type="Curve" id="Curve_n4m7n"]
+_data = [Vector2(0, 0.101536), 0.0, 1.86048, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qfxxv"]
+curve = SubResource("Curve_n4m7n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k28ba"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 16.0
+spread = 2.0
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_qfxxv")
+color = Color(0.21, 0.21, 0.21, 0.5)
+color_ramp = SubResource("GradientTexture1D_dj3qi")
+turbulence_enabled = true
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oflux"]
 light_mode = 1
 
@@ -40,53 +74,10 @@ scale_curve = SubResource("CurveTexture_caox6")
 color_ramp = SubResource("GradientTexture1D_ft1rn")
 turbulence_enabled = true
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_opo5s"]
-light_mode = 1
-
-[sub_resource type="Gradient" id="Gradient_378vb"]
-offsets = PackedFloat32Array(0.00234742, 0.0610329, 0.603286, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_dj3qi"]
-gradient = SubResource("Gradient_378vb")
-
-[sub_resource type="Curve" id="Curve_n4m7n"]
-_data = [Vector2(0, 0.101536), 0.0, 1.86048, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_qfxxv"]
-curve = SubResource("Curve_n4m7n")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k28ba"]
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 16.0
-spread = 2.0
-initial_velocity_min = 1000.0
-initial_velocity_max = 1000.0
-angular_velocity_min = -90.0
-angular_velocity_max = 90.0
-gravity = Vector3(0, 0, 0)
-scale_min = 0.5
-scale_max = 2.0
-scale_curve = SubResource("CurveTexture_qfxxv")
-color = Color(0.21, 0.21, 0.21, 0.5)
-color_ramp = SubResource("GradientTexture1D_dj3qi")
-turbulence_enabled = true
-
 [node name="DamageEffect" type="Node2D" node_paths=PackedStringArray("fire", "smoke")]
 script = ExtResource("1_mp2sa")
 fire = NodePath("Fire")
 smoke = NodePath("Smoke")
-
-[node name="Fire" type="GPUParticles2D" parent="."]
-material = SubResource("CanvasItemMaterial_oflux")
-process_material = SubResource("ParticleProcessMaterial_pcjcm")
-texture = ExtResource("2_7r8uf")
-lifetime = 0.2
-fixed_fps = 60
-interpolate = false
-local_coords = true
 
 [node name="Smoke" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_opo5s")
@@ -94,6 +85,15 @@ amount = 16
 process_material = SubResource("ParticleProcessMaterial_k28ba")
 texture = ExtResource("3_qucro")
 randomness = 0.5
+fixed_fps = 60
+interpolate = false
+local_coords = true
+
+[node name="Fire" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_oflux")
+process_material = SubResource("ParticleProcessMaterial_pcjcm")
+texture = ExtResource("2_7r8uf")
+lifetime = 0.2
 fixed_fps = 60
 interpolate = false
 local_coords = true

@@ -21,9 +21,6 @@ var player_target: ShipRigidBody: set = _update_player_target
 var player_radar: Radar: set = _set_radar
 
 ### TODO # REMOVE ### REFACTOR ###
-var ship_position := Vector2.ZERO
-var ship_speed := 0
-var ship_acceleration := 0
 var fa_tracking := false
 var fa_tracking_distance := 0.0
 var fa_autopilot := false
