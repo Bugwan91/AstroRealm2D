@@ -135,11 +135,6 @@ func _apply_forcces(state: PhysicsDirectBodyState2D):
 	_torque = 0.0
 
 func _calculate_thrust_multiplyer():
-	#var v_sq: float = absolute_velocity.length_squared()
-	#var c_sq: float = _max_speed_squared
-	#v_sq = min(v_sq, c_sq)
-	# Graph: https://www.desmos.com/calculator/vhojpofhoa
-	#var t_mult: float = 1.0 - v_sq/c_sq + SPEED_SLOWING_LIMIT
 	var v: float = absolute_velocity.length()
 	var v_m: float = max_speed
 	v = min(v, v_m)
