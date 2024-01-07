@@ -23,7 +23,6 @@ const SPEED_SLOWING_LIMIT := 0.2
 @onready var thrusters: Thrusters = %Thrusters
 @onready var engines: MainThrusters = %MainThrusters
 @onready var taking_damage = %TakingDamage
-@onready var ui = %UI
 
 @onready var _destroy_effect: DestroyEffectManager = %DestroyEffectManager
 @onready var _view: ShipView = %View as ShipView
@@ -72,7 +71,6 @@ func _ready():
 	setup_health()
 	if is_instance_valid(health):
 		taking_damage.health = health
-		ui.connect_health(health)
 		health.dying.connect(_die)
 		_destroy_effect.ship = self
 		_destroy_effect.connect_health(health)

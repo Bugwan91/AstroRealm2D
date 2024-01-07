@@ -17,6 +17,7 @@ var smooth_rotation: float:
 		return owner.rotation + rotation
 
 func _ready():
+	process_priority = -999
 	_last_tick = Time.get_unix_time_from_system()
 
 func _process(_delta):

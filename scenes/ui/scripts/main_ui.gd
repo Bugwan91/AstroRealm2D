@@ -7,6 +7,7 @@ extends CanvasLayer
 @onready var ship_designer_ui: ShipDesignerUI = %ShipDesignerContainer
 
 func _ready():
+	process_priority = 999
 	MainState.player_ship_updated.connect(_on_player_updated)
 	game_over_container.open_ship_designer.connect(open_ship_designer)
 	ship_designer_ui.closed.connect(show_game_ui)

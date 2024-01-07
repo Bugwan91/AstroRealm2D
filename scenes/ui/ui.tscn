@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://3cqmtymu5w3p"]
+[gd_scene load_steps=11 format=3 uid="uid://3cqmtymu5w3p"]
 
 [ext_resource type="Script" path="res://scenes/ui/scripts/main_ui.gd" id="1_bwtaq"]
 [ext_resource type="Texture2D" uid="uid://c26bmc1q2hol4" path="res://assets/icons/cross.png" id="2_qw7hq"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scenes/ui/scripts/debug_info.gd" id="5_u0tch"]
 [ext_resource type="PackedScene" uid="uid://dgf4ciui6fwt5" path="res://scenes/ui/game_over_container.tscn" id="7_vcp7q"]
 [ext_resource type="PackedScene" uid="uid://c7cafyhhy135a" path="res://scenes/ship_designer/ship_designer_ui.tscn" id="8_wmubr"]
+[ext_resource type="PackedScene" uid="uid://s0kc0iwk14gt" path="res://scenes/ui/ship_selection.tscn" id="9_nq28h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1il4g"]
 font_size = 32
@@ -121,3 +122,5 @@ layout_mode = 2
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
+
+[node name="TargetShipSelection" parent="." instance=ExtResource("9_nq28h")]

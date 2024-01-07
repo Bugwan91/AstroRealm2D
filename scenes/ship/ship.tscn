@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=32 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Texture2D" uid="uid://c0g0c4k4h83o" path="res://assets/my/icons/ship_s.png" id="2_e2mwk"]
@@ -14,7 +14,6 @@
 [ext_resource type="Script" path="res://scenes/ship/scripts/gun_slot.gd" id="13_n2hg0"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/taking_damage.gd" id="13_o14b0"]
 [ext_resource type="PackedScene" uid="uid://bu6wjq2ioia27" path="res://scenes/ship/desctroy_effect_manager.tscn" id="14_4y0fi"]
-[ext_resource type="PackedScene" uid="uid://s0kc0iwk14gt" path="res://scenes/ship/ui.tscn" id="15_m8yda"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/radar_item.gd" id="18_cae74"]
 [ext_resource type="PackedScene" uid="uid://bxhk5f3ir05ad" path="res://scenes/thruster/maneuver_thruster.tscn" id="21_bnxwn"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/position_extrapolation.gd" id="25_1c55w"]
@@ -155,9 +154,6 @@ script = ExtResource("4_yb6sw")
 [node name="TakingDamage" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("13_o14b0")
-
-[node name="UI" parent="." instance=ExtResource("15_m8yda")]
-unique_name_in_owner = true
 
 [node name="RadarItem" type="Node2D" parent="."]
 material = SubResource("CanvasItemMaterial_qbdui")
