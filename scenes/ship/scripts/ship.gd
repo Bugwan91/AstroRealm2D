@@ -31,6 +31,7 @@ const SPEED_SLOWING_LIMIT := 0.2
 
 var absolute_velocity: Vector2: get = _absolute_velocity
 var health: Health
+var thrust_multiplyer_threshold: float = 0.5
 var thrust_multiplyer: float
 var max_speed: float
 
@@ -134,12 +135,17 @@ func _apply_forcces(state: PhysicsDirectBodyState2D):
 	_torque = 0.0
 
 func _calculate_thrust_multiplyer():
-	var v_sq: float = absolute_velocity.length_squared()
-	var c_sq: float = _max_speed_squared
-	v_sq = min(v_sq, c_sq)
+	#var v_sq: float = absolute_velocity.length_squared()
+	#var c_sq: float = _max_speed_squared
+	#v_sq = min(v_sq, c_sq)
 	# Graph: https://www.desmos.com/calculator/vhojpofhoa
-	var a_mult: float = 1.0 - v_sq/c_sq + SPEED_SLOWING_LIMIT
-	thrust_multiplyer = clampf(a_mult, 0.0, 1.0)
+	#var t_mult: float = 1.0 - v_sq/c_sq + SPEED_SLOWING_LIMIT
+	var v: float = absolute_velocity.length()
+	var v_m: float = max_speed
+	v = min(v, v_m)
+	var t_mult: float = -((v - v_m) * (1.0 - SPEED_SLOWING_LIMIT))\
+			/ (v_m * (1.0 - thrust_multiplyer_threshold)) + SPEED_SLOWING_LIMIT
+	thrust_multiplyer = clampf(t_mult, 0.0, 1.0)
 
 func _apply_drag(state: PhysicsDirectBodyState2D):
 	var delta = absolute_velocity.length() - setup_data.max_speed
