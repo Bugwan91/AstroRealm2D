@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmqm4dm8rpi0l"]
+
+[ext_resource type="Shader" path="res://scenes/background/shaders/sun.gdshader" id="1_2mbac"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bdry2"]
+shader = ExtResource("1_2mbac")
+shader_parameter/color = Color(0.0666667, 0.247059, 1, 1)
+shader_parameter/brightness = 10.0
+shader_parameter/rotation_speed = 0.02
+
+[sub_resource type="Gradient" id="Gradient_j18vj"]
+offsets = PackedFloat32Array(0.085443, 1)
+colors = PackedColorArray(0.215902, 0.215902, 0.215902, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jx1q7"]
+noise_type = 2
+frequency = 0.05
+fractal_type = 0
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2ywoa"]
+seamless = true
+color_ramp = SubResource("Gradient_j18vj")
+noise = SubResource("FastNoiseLite_jx1q7")
+
+[node name="Sun" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_bdry2")
+texture = SubResource("NoiseTexture2D_2ywoa")

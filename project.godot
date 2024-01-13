@@ -36,6 +36,32 @@ project/assembly_name="Astro2D"
 
 enabled=PackedStringArray("res://addons/points_resource_editor/plugin.cfg", "res://addons/tool_button/plugin.cfg", "res://addons/vector2_array_resource_editor/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "red",
+"res://resources/": "yellow",
+"res://scenes/": "gray",
+"res://scenes/ai/scripts/": "blue",
+"res://scenes/background/scripts/": "blue",
+"res://scenes/background/shaders/": "purple",
+"res://scenes/background/starfields/": "red",
+"res://scenes/camera/scripts/": "blue",
+"res://scenes/gun/assets/": "red",
+"res://scenes/gun/scripts/": "blue",
+"res://scenes/main/scripts/": "blue",
+"res://scenes/navigation_grid/scripts/": "blue",
+"res://scenes/navigation_grid/shaders/": "purple",
+"res://scenes/player/scripts/": "blue",
+"res://scenes/ship/scripts/": "blue",
+"res://scenes/ship/shaders/": "purple",
+"res://scenes/ship_designer/scripts/": "blue",
+"res://scenes/ship_designer/shaders/": "purple",
+"res://scenes/ship_designer/styles/": "red",
+"res://scenes/thruster/scripts/": "blue",
+"res://scenes/ui/scripts/": "blue"
+}
+
 [filesystem]
 
 import/blender/enabled=false

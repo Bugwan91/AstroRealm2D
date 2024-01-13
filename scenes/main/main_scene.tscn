@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=58 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -45,6 +45,7 @@
 [ext_resource type="Texture2D" uid="uid://cf84vntqw4fqs" path="res://assets/spaceships/experimantal_hulls/256_256.png" id="43_g84bi"]
 [ext_resource type="Texture2D" uid="uid://b34plybxjjec4" path="res://assets/spaceships/experimantal_hulls/256_512.png" id="44_8ykws"]
 [ext_resource type="Texture2D" uid="uid://ksiny6gtw6n5" path="res://assets/spaceships/experimantal_hulls/256_1024.png" id="45_xiox1"]
+[ext_resource type="PackedScene" uid="uid://cmqm4dm8rpi0l" path="res://scenes/background/sun.tscn" id="46_aihwc"]
 
 [sub_resource type="Resource" id="Resource_2k6wb"]
 script = ExtResource("5_yqei1")
@@ -206,7 +207,6 @@ texture = ExtResource("20_aq44u")
 
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("27_c6eb4")
-agressive = true
 max_count = 3
 ship_scene = ExtResource("4_5rllk")
 gun_scene = ExtResource("8_cwv63")
@@ -241,3 +241,6 @@ modulate = Color(0.5, 0.5, 0.5, 0.5)
 light_mask = 0
 position = Vector2(1982, 706)
 texture = ExtResource("45_xiox1")
+
+[node name="Sun" parent="." groups=["shiftable"] instance=ExtResource("46_aihwc")]
+position = Vector2(1000, 0)
