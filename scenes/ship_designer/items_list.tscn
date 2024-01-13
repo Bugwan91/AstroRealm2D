@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://jbw831e0e4ws"]
 
-[ext_resource type="Script" path="res://scenes/ship_designer/scripts/designer_items_list.gd" id="1_aj8ok"]
+[ext_resource type="Script" path="res://scenes/ship_designer/scripts/designer_items_selector.gd" id="1_kixbh"]
 [ext_resource type="PackedScene" uid="uid://ccd02xr2sm762" path="res://scenes/ship_designer/item_preview.tscn" id="2_xx8l5"]
 
 [node name="ShipPartSelector" type="GridContainer"]
@@ -9,5 +9,5 @@ anchor_right = 1.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 columns = 2
-script = ExtResource("1_aj8ok")
+script = ExtResource("1_kixbh")
 item_view_scene = ExtResource("2_xx8l5")

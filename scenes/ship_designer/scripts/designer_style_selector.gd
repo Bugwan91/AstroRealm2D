@@ -1,10 +1,12 @@
-class_name ShipBakerItemSelector
+class_name ShipBakerStyleSelector
 extends GridContainer
 
 @export var empty_allowed := false
-@export var item_view_scene: PackedScene
-@export var resources: Array[ViewBakerResource]
-@export var textures: Array[Texture2D]
+@export var item_view_scene: PackedScene = preload("res://scenes/ship_designer/item_preview.tscn")
+@export var textures: Array[Texture2D]:
+		set(value):
+			textures = value
+			_init_textures()
 
 var update_blueprint: Callable
 
@@ -12,22 +14,15 @@ var selected_index: int = -1
 
 func _ready():
 	_init_empty_item()
-	if not resources.is_empty():
-		_init_items()
-	elif not textures.is_empty():
+	if not textures.is_empty():
 		_init_textures()
 
 func init_selection(data: Resource):
 	if data == null: return
-	for index in range(0, resources.size()):
-		if resources[index].resource_path == data.resource_path:
-			_get_preview(selected_index).is_selected = false
-			selected_index = index
-			_get_preview(selected_index).is_selected = true
-			return
 	for index in range(0, textures.size()):
 		if textures[index].resource_path == data.resource_path:
-			_get_preview(selected_index).is_selected = false
+			if selected_index != -1:
+				_get_preview(selected_index).is_selected = false
 			selected_index = index
 			_get_preview(selected_index).is_selected = true
 			return
@@ -36,12 +31,6 @@ func _init_textures():
 	for index in range(0, textures.size()):
 		var item_view = _init_item_preview(index)
 		item_view.texture = textures[index]
-		item_view.update_view()
-
-func _init_items():
-	for index in range(0, resources.size()):
-		var item_view = _init_item_preview(index)
-		item_view.resource = resources[index]
 		item_view.update_view()
 
 func _init_item_preview(index: int) -> ShipDesignerItemPreview:
@@ -63,7 +52,5 @@ func _on_selection(index: int):
 	if index == selected_index: return
 	_get_preview(selected_index).is_selected = false
 	selected_index = index
-	if not resources.is_empty():
-		update_blueprint.call(resources[selected_index] if selected_index != -1 else null)
-	elif not textures.is_empty():
+	if not textures.is_empty():
 		update_blueprint.call(textures[selected_index] if selected_index != -1 else null)

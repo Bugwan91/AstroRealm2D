@@ -5,13 +5,7 @@ extends Node
 @export var ship_scene: PackedScene
 @export var gun_scene: PackedScene
 @export var ship_data: ShipResource
-
-@export_group("Ship parts")
-@export var _hulls: Array[HullBakerResource]
-@export var _hulls_ext: Array[ViewBakerResource]
-@export var _cockpits: Array[ViewBakerResource]
-@export var _engines: Array[ViewBakerResource]
-@export var _styles: Array[Texture2D]
+@export var ship_parts: ShipDesignerParts = preload("res://resources/ship_parts/all_parts.tres")
 
 @onready var _baker: ShipBlueprintBaker = %Baker
 @onready var _ship_spawn_timer = %ShipSpawnTimer
@@ -46,11 +40,13 @@ func _create_ship_configuration() -> ShipResource:
 	var ship_configuration: ShipResource = ship_data.duplicate()
 	_baker.design = ShipTexturesRes.new()
 	_baker.blueprint = ShipBlueprint.new()
-	_baker.blueprint.hull = _hulls[randi_range(0, _hulls.size() - 1)]
-	_baker.blueprint.hull_ext = _hulls_ext[randi_range(0, _hulls_ext.size() - 1)]
-	_baker.blueprint.cockpit = _cockpits[randi_range(0, _cockpits.size() - 1)]
-	_baker.blueprint.engine = _engines[randi_range(0, _engines.size() - 1)]
-	_baker.blueprint.style = _styles[randi_range(0, _styles.size() - 1)]
+	_baker.blueprint.hull = ship_parts.hulls[randi_range(0, ship_parts.hulls.size() - 1)]
+	_baker.blueprint.hull_ext = ship_parts.hulls_ext[randi_range(0, ship_parts.hulls_ext.size() - 1)]\
+		if randf() > 0.2 else null
+	_baker.blueprint.cockpit = ship_parts.cockpits[randi_range(0, ship_parts.cockpits.size() - 1)]
+	_baker.blueprint.engine = ship_parts.engines[randi_range(0, ship_parts.engines.size() - 1)]
+	_baker.blueprint.style = ship_parts.styles[randi_range(0, ship_parts.styles.size() - 1)]\
+		if randf() > 0.2 else null
 	_baker.design = await _baker.bake()
 	_baker.design.shininess = randf_range(-0.9, 0.9)
 	ship_configuration.textures = _baker.design

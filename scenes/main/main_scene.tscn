@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=40 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -12,13 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://scenes/ui/ui.tscn" id="8_myah8"]
 [ext_resource type="Resource" uid="uid://dgw6x6lr6gnk2" path="res://resources/ship_parts/engine/02.tres" id="8_tstcm"]
 [ext_resource type="Resource" uid="uid://n4x30t0f2gct" path="res://resources/ship_parts/hull/02.tres" id="9_xdu7g"]
-[ext_resource type="Resource" uid="uid://db7b7e1yfehii" path="res://resources/ship_parts/hull_ext/02.tres" id="10_0j4h5"]
 [ext_resource type="Shader" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="10_7ps0f"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/radar_viewport.gd" id="10_nsy5m"]
 [ext_resource type="Resource" uid="uid://hh36wpy2mflt" path="res://resources/ship_parts/hull_ext/03.tres" id="10_pygr5"]
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/ship_blueprint.gd" id="11_fkpwp"]
-[ext_resource type="Texture2D" uid="uid://dvxp714x3fp80" path="res://assets/spaceships/Styles/02.png" id="12_k8me1"]
 [ext_resource type="Texture2D" uid="uid://d1plve26u31ph" path="res://assets/spaceships/Styles/Bunblebee.png" id="12_vhchx"]
 [ext_resource type="PackedScene" uid="uid://dt7wav32bva3j" path="res://scenes/player/input_reader.tscn" id="13_epig2"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="15_5xucn"]
@@ -26,22 +24,6 @@
 [ext_resource type="Texture2D" uid="uid://bwr37r7vbwfq0" path="res://assets/VFX_textures/light_03.png" id="20_aq44u"]
 [ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="24_7ks4m"]
 [ext_resource type="Script" path="res://scenes/main/scripts/enemy_spawner.gd" id="27_c6eb4"]
-[ext_resource type="Resource" uid="uid://cmj8g20dbxwmh" path="res://resources/ship_parts/hull/01.tres" id="28_gfjox"]
-[ext_resource type="Resource" uid="uid://cqt1qvadxeig3" path="res://resources/ship_parts/hull/06.tres" id="28_p18s6"]
-[ext_resource type="Resource" uid="uid://lpuy2txkhyi2" path="res://resources/ship_parts/hull/03.tres" id="29_whd1v"]
-[ext_resource type="Resource" uid="uid://dyeqdkm0axqab" path="res://resources/ship_parts/hull/04.tres" id="30_vht31"]
-[ext_resource type="Resource" uid="uid://cc5dcgmqoxf2w" path="res://resources/ship_parts/hull/05.tres" id="31_jsqwn"]
-[ext_resource type="Resource" uid="uid://cc4jaoixhp0lr" path="res://resources/ship_parts/hull_ext/01.tres" id="32_y7rhy"]
-[ext_resource type="Resource" uid="uid://c52i1koxg6csi" path="res://resources/ship_parts/hull_ext/04.tres" id="34_83ehe"]
-[ext_resource type="Resource" uid="uid://dmnyhbemwyorc" path="res://resources/ship_parts/hull_ext/05.tres" id="35_r6ynf"]
-[ext_resource type="Resource" uid="uid://ddbus3emw7v04" path="res://resources/ship_parts/cockpit/02.tres" id="36_ctgf4"]
-[ext_resource type="Resource" uid="uid://c1xggcinljpje" path="res://resources/ship_parts/engine/01.tres" id="37_j4y5n"]
-[ext_resource type="Resource" uid="uid://dvaj7ll214jot" path="res://resources/ship_parts/hull_ext/06.tres" id="37_q2q5y"]
-[ext_resource type="Texture2D" uid="uid://brtabr5lpm864" path="res://assets/spaceships/Styles/01.png" id="38_2gt40"]
-[ext_resource type="Texture2D" uid="uid://bogly506o6gqw" path="res://assets/spaceships/Styles/red_and_white.png" id="39_nkrga"]
-[ext_resource type="Texture2D" uid="uid://bumhukr5exiwp" path="res://assets/spaceships/Styles/SF.png" id="39_ums3d"]
-[ext_resource type="Texture2D" uid="uid://chybabpei4ali" path="res://assets/spaceships/Styles/red_lines.png" id="40_nye8q"]
-[ext_resource type="Texture2D" uid="uid://dh1ya4sfdur13" path="res://assets/spaceships/Styles/smile.png" id="40_sitdw"]
 [ext_resource type="Texture2D" uid="uid://cf84vntqw4fqs" path="res://assets/spaceships/experimantal_hulls/256_256.png" id="43_g84bi"]
 [ext_resource type="Texture2D" uid="uid://b34plybxjjec4" path="res://assets/spaceships/experimantal_hulls/256_512.png" id="44_8ykws"]
 [ext_resource type="Texture2D" uid="uid://ksiny6gtw6n5" path="res://assets/spaceships/experimantal_hulls/256_1024.png" id="45_xiox1"]
@@ -207,15 +189,10 @@ texture = ExtResource("20_aq44u")
 
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("27_c6eb4")
-max_count = 3
+max_count = 10
 ship_scene = ExtResource("4_5rllk")
 gun_scene = ExtResource("8_cwv63")
 ship_data = SubResource("Resource_xjtty")
-_hulls = Array[Resource("res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd")]([ExtResource("28_gfjox"), ExtResource("9_xdu7g"), ExtResource("29_whd1v"), ExtResource("30_vht31"), ExtResource("31_jsqwn"), ExtResource("28_p18s6")])
-_hulls_ext = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("32_y7rhy"), ExtResource("10_0j4h5"), ExtResource("10_pygr5"), ExtResource("34_83ehe"), ExtResource("35_r6ynf"), ExtResource("37_q2q5y"), null])
-_cockpits = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("7_onsy6"), ExtResource("36_ctgf4")])
-_engines = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("37_j4y5n"), ExtResource("8_tstcm")])
-_styles = Array[Texture2D]([ExtResource("38_2gt40"), ExtResource("12_k8me1"), ExtResource("39_ums3d"), ExtResource("40_sitdw"), ExtResource("39_nkrga"), ExtResource("40_nye8q")])
 
 [node name="Baker" parent="EnemySpawner" instance=ExtResource("24_7ks4m")]
 unique_name_in_owner = true
@@ -243,4 +220,5 @@ position = Vector2(1982, 706)
 texture = ExtResource("45_xiox1")
 
 [node name="Sun" parent="." groups=["shiftable"] instance=ExtResource("46_aihwc")]
+visible = false
 position = Vector2(1000, 0)
