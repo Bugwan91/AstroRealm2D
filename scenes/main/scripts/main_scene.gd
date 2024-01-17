@@ -1,14 +1,16 @@
 class_name MainScene
 extends Node2D
 
-@export var ship_scene: PackedScene
-@export var gun_scene: PackedScene
-@export var radar_scene: PackedScene
+@export var gun_scene: PackedScene = preload("res://scenes/gun/gun.tscn")
+@export var radar_scene: PackedScene = preload("res://scenes/ship/radar.tscn")
 @export var ship_data: ShipResource
 @export var ship_blueprint: ShipBlueprint
+@onready var player_ship_baker: ShipBlueprintBaker = %PlayerShipBaker
 
 @onready var input_reader = %InputReader
 @onready var autopilot_pointer = %AutopilotPointer
+
+var ship_scene: PackedScene = preload("res://scenes/ship/ship.tscn")
 
 func _ready():
 	MainState.main_scene = self
@@ -16,7 +18,7 @@ func _ready():
 func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	var ship: ShipRigidBody = ship_scene.instantiate() as ShipRigidBody
 	ship.group = "player"
-	ship.setup_data = ship_data
+	ship.setup_data = await _create_ship_configuration()
 	ship.position = -FloatingOrigin.origin
 	ship.inputs = input_reader
 	var health := Health.new()
@@ -38,3 +40,9 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	audio_listener.make_current()
 	add_child(ship)
 	radar.radius = 10000.0
+
+func _create_ship_configuration() -> ShipResource:
+	player_ship_baker.blueprint = ship_blueprint
+	player_ship_baker.design = await player_ship_baker.bake()
+	ship_data.textures = player_ship_baker.design
+	return ship_data

@@ -9,12 +9,12 @@ shader_parameter/brightness = 10.0
 shader_parameter/rotation_speed = 0.02
 
 [sub_resource type="Gradient" id="Gradient_j18vj"]
-offsets = PackedFloat32Array(0.085443, 1)
-colors = PackedColorArray(0.215902, 0.215902, 0.215902, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0, 0.838608)
+colors = PackedColorArray(1, 1, 1, 1, 0.215902, 0.215902, 0.215902, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jx1q7"]
 noise_type = 2
-frequency = 0.05
+frequency = 0.08
 fractal_type = 0
 fractal_octaves = 1
 

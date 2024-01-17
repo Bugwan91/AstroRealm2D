@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="ShipResource" load_steps=3 format=3 uid="uid://dg1wwe8h4v1tc"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/resources/ship_resource.gd" id="1_7u4yw"]
-[ext_resource type="Resource" uid="uid://ky0x5irn5aj3" path="res://resources/ships/views/5-5.tres" id="2_aiq23"]
+[ext_resource type="Resource" uid="uid://blsujt5rpfnef" path="res://resources/ships/views/3-4.tres" id="2_5qhnn"]
 
 [resource]
 script = ExtResource("1_7u4yw")
-textures = ExtResource("2_aiq23")
+textures = ExtResource("2_5qhnn")
 max_speed = 200000.0
 main_thrust = 500.0
 maneuver_thrust = 200.0

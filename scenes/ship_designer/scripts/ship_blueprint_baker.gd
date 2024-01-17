@@ -47,7 +47,7 @@ func _set_blueprint(value: ShipBlueprint):
 func bake() -> ShipTexturesRes:
 	if _is_baking: return
 	_is_baking = true
-	var des = await _bake_textures()
+	design = await _bake_textures()
 	_bake_polygon()
 	updated.emit(design)
 	_is_baking = false

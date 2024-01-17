@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://quedtaqrahh5"]
+
+[ext_resource type="Script" path="res://scenes/main/scripts/enemy_spawner.gd" id="1_wvamj"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/resources/ship_resource.gd" id="2_1321e"]
+[ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="3_u47jv"]
+
+[sub_resource type="Resource" id="Resource_xjtty"]
+script = ExtResource("2_1321e")
+max_speed = 10000.0
+main_thrust = 500.0
+maneuver_thrust = 500.0
+FA_accuracy = 0.02
+FA_accuracy_damp = 0.1
+BA_accuracy = 1.0
+BA_accuracy_damp = 0.1
+
+[node name="EnemySpawner" type="Node"]
+script = ExtResource("1_wvamj")
+max_count = 10
+ship_data = SubResource("Resource_xjtty")
+
+[node name="Baker" parent="." instance=ExtResource("3_u47jv")]
+unique_name_in_owner = true
+
+[node name="ShipSpawnTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+autostart = true

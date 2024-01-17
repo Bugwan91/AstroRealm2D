@@ -2,14 +2,14 @@ extends Node
 
 @export var agressive := false
 @export_range(0, 200) var max_count := 2
-@export var ship_scene: PackedScene
-@export var gun_scene: PackedScene
+@export var gun_scene: PackedScene = preload("res://scenes/gun/gun.tscn")
 @export var ship_data: ShipResource
 @export var ship_parts: ShipDesignerParts = preload("res://resources/ship_parts/all_parts.tres")
 
 @onready var _baker: ShipBlueprintBaker = %Baker
 @onready var _ship_spawn_timer = %ShipSpawnTimer
 
+var ship_scene: PackedScene = preload("res://scenes/ship/ship.tscn")
 var ships: Array[ShipRigidBody]
 
 func _ready():
