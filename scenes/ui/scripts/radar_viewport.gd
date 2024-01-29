@@ -1,8 +1,7 @@
 class_name RadarViewport
-extends Node2D
+extends Control
 
-@export var view_radius := 512.0
-@onready var outline = $Outline
+@export var view_radius := 256.0
 
 var radar: Radar
 
@@ -10,8 +9,6 @@ var _items: Array[RadarItem] = []
 
 func _ready():
 	MainState.radar_updated.connect(_radar_updated)
-	global_scale = Vector2.ONE
-	outline.global_scale = Vector2.ONE
 
 func _physics_process(_delta):
 	if not is_instance_valid(radar): return

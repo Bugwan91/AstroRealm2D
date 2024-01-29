@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://3cqmtymu5w3p"]
+[gd_scene load_steps=14 format=3 uid="uid://3cqmtymu5w3p"]
 
 [ext_resource type="Script" path="res://scenes/ui/scripts/main_ui.gd" id="1_bwtaq"]
 [ext_resource type="Texture2D" uid="uid://c26bmc1q2hol4" path="res://assets/icons/cross.png" id="2_qw7hq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/ui/scripts/flight_assistant_ui.gd" id="4_7x04l"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/fps.gd" id="5_8a6ql"]
 [ext_resource type="Script" path="res://scenes/ui/scripts/debug_info.gd" id="5_u0tch"]
+[ext_resource type="Script" path="res://scenes/ui/scripts/radar_viewport.gd" id="7_8clra"]
 [ext_resource type="PackedScene" uid="uid://dgf4ciui6fwt5" path="res://scenes/ui/game_over_container.tscn" id="7_vcp7q"]
 [ext_resource type="PackedScene" uid="uid://c7cafyhhy135a" path="res://scenes/ship_designer/ship_designer_ui.tscn" id="8_wmubr"]
 [ext_resource type="PackedScene" uid="uid://s0kc0iwk14gt" path="res://scenes/ui/ship_selection.tscn" id="9_nq28h"]
@@ -14,6 +15,18 @@
 font_size = 32
 outline_size = 3
 outline_color = Color(0.305882, 0.698039, 0.839216, 1)
+
+[sub_resource type="Gradient" id="Gradient_uycc6"]
+offsets = PackedFloat32Array(0.684211, 0.70614, 0.712389)
+colors = PackedColorArray(1, 1, 1, 0.2, 1, 1, 1, 0.5, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f2him"]
+gradient = SubResource("Gradient_uycc6")
+width = 512
+height = 512
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_bwtaq")
@@ -113,6 +126,23 @@ theme_override_constants/margin_bottom = 10
 [node name="DebugInfo" type="VBoxContainer" parent="Control/GameUI/DebugInfo/MarginContainer"]
 layout_mode = 2
 script = ExtResource("5_u0tch")
+
+[node name="RadarContainer" type="Control" parent="Control/GameUI"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+script = ExtResource("7_8clra")
+
+[node name="TextureRect" type="TextureRect" parent="Control/GameUI/RadarContainer"]
+modulate = Color(0, 0.8, 1.2, 0.08)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_f2him")
 
 [node name="GameOverContainer" parent="Control/GameUI" instance=ExtResource("7_vcp7q")]
 unique_name_in_owner = true

@@ -16,18 +16,20 @@ const SPEED_SLOWING_LIMIT := 0.2
 @export var autopilot_pointer: AssistantPointer
 @export var target_prediction_pointer: AssistantPointer
 
-@onready var _collision_polygon = %CollisionPolygon2D
+@onready var _collision_polygon: CollisionPolygon2D = %CollisionPolygon2D
 @onready var flight_assistant: ShipFlightAssistant = %FlightAssistant
 @onready var battle_assistant: BattleAssistant = %BattleAssistant
 @onready var extrapolator: PositionExtrapolation = %PositionExtrapolation
 @onready var thrusters: Thrusters = %Thrusters
 @onready var engines: MainThrusters = %MainThrusters
-@onready var taking_damage = %TakingDamage
+@onready var taking_damage: TakingDamage = %TakingDamage
+@onready var radar_item: RadarItem = %RadarItem
 
 @onready var _destroy_effect: DestroyEffectManager = %DestroyEffectManager
 @onready var _view: ShipView = %View as ShipView
 @onready var _gun_slot: GunSlot = %GunSlot
 
+var is_player: bool = false
 var absolute_velocity: Vector2: get = _absolute_velocity
 var health: Health
 var thrust_multiplyer_threshold: float = 0.5
@@ -143,7 +145,7 @@ func _calculate_thrust_multiplyer():
 func _apply_drag(state: PhysicsDirectBodyState2D):
 	var delta = absolute_velocity.length() - setup_data.max_speed
 	if delta > 0:
-		state.apply_central_force(delta * mass * -absolute_velocity.normalized())
+		state.apply_centrasZal_force(delta * mass * -absolute_velocity.normalized())
 
 func _absolute_velocity() -> Vector2:
 	return linear_velocity + FloatingOrigin.velocity

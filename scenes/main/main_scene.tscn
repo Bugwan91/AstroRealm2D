@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=31 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -10,7 +10,6 @@
 [ext_resource type="Resource" uid="uid://drhm8p5kvv71k" path="res://resources/ship_parts/cockpit/01.tres" id="7_onsy6"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://scenes/ui/ui.tscn" id="8_myah8"]
 [ext_resource type="Shader" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="10_7ps0f"]
-[ext_resource type="Script" path="res://scenes/ui/scripts/radar_viewport.gd" id="10_nsy5m"]
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/ship_blueprint.gd" id="11_fkpwp"]
 [ext_resource type="Texture2D" uid="uid://d1plve26u31ph" path="res://assets/spaceships/Styles/Bunblebee.png" id="12_vhchx"]
@@ -57,18 +56,6 @@ shader_parameter/opacity = 0.031
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/emission = Color(0, 0.301961, 1, 1)
 shader_parameter/mask = SubResource("GradientTexture2D_njkiq")
-
-[sub_resource type="Gradient" id="Gradient_fkijs"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0.67167, 0.703704, 0.708061)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_4qutk"]
-gradient = SubResource("Gradient_fkijs")
-width = 1024
-height = 1024
-fill = 1
-fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="Gradient" id="Gradient_owpx4"]
 offsets = PackedFloat32Array(0, 0.686529)
@@ -123,15 +110,6 @@ base_opacity = 0.01
 speed_limit = 12000.0
 camera = NodePath("../Camera")
 
-[node name="RadarViewport" type="Node2D" parent="Grid"]
-modulate = Color(1, 0, 0.3, 0.1)
-script = ExtResource("10_nsy5m")
-
-[node name="Outline" type="Sprite2D" parent="Grid/RadarViewport"]
-modulate = Color(0, 0.8, 2, 0.15)
-light_mask = 0
-texture = SubResource("GradientTexture2D_4qutk")
-
 [node name="Camera" parent="." instance=ExtResource("11_2fp23")]
 zoom = Vector2(1, 1)
 inertia = 0.5
@@ -171,20 +149,24 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("20_aq44u")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("13_bxi2x")]
+max_count = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["shiftable"]]
+visible = false
 modulate = Color(0.5, 0.5, 0.5, 0.5)
 light_mask = 0
 position = Vector2(601, 712)
 texture = ExtResource("43_g84bi")
 
 [node name="Sprite2D2" type="Sprite2D" parent="." groups=["shiftable"]]
+visible = false
 modulate = Color(0.5, 0.5, 0.5, 0.5)
 light_mask = 0
 position = Vector2(1293, 706)
 texture = ExtResource("44_8ykws")
 
 [node name="Sprite2D3" type="Sprite2D" parent="." groups=["shiftable"]]
+visible = false
 modulate = Color(0.5, 0.5, 0.5, 0.5)
 light_mask = 0
 position = Vector2(1982, 706)

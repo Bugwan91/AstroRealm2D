@@ -3,7 +3,7 @@ extends Area2D
 
 @export var radius: float: set = _set_radius
 
-@onready var covering_shape = %CoveringShape
+@onready var covering_shape: CollisionShape2D = %CoveringShape
 
 #TODO: store detected objects here
 # use area entered and exited for updated detected objects list
