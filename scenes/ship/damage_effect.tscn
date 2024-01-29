@@ -87,6 +87,7 @@ texture = ExtResource("3_qucro")
 randomness = 0.5
 fixed_fps = 60
 interpolate = false
+visibility_rect = Rect2(-500, -500, 1000, 1000)
 local_coords = true
 
 [node name="Fire" type="GPUParticles2D" parent="."]
@@ -96,4 +97,5 @@ texture = ExtResource("2_7r8uf")
 lifetime = 0.2
 fixed_fps = 60
 interpolate = false
+visibility_rect = Rect2(-500, -500, 1000, 1000)
 local_coords = true

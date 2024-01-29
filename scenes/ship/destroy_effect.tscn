@@ -136,6 +136,7 @@ texture = ExtResource("2_e5hvd")
 one_shot = true
 explosiveness = 0.8
 randomness = 0.3
+visibility_rect = Rect2(-200, -200, 400, 400)
 local_coords = true
 
 [node name="Fire" type="GPUParticles2D" parent="."]
@@ -147,6 +148,7 @@ texture = ExtResource("3_n2ne6")
 lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
+visibility_rect = Rect2(-200, -200, 400, 400)
 local_coords = true
 
 [node name="Sparcles" type="GPUParticles2D" parent="."]
@@ -160,6 +162,7 @@ lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 randomness = 0.5
+visibility_rect = Rect2(-200, -200, 400, 400)
 local_coords = true
 trail_enabled = true
 
