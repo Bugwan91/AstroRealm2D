@@ -58,6 +58,7 @@ func _bake_polygon():
 	design.polygon = polygon.polygon
 	design.engines = polygon.engines
 	design.thrusters = polygon.thrusters
+	design.weapon_slots = polygon.weapons
 
 func _bake_textures() -> ShipTexturesRes:
 	design.diffuse = await _bake_diffuse()

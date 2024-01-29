@@ -27,7 +27,7 @@ const SPEED_SLOWING_LIMIT := 0.2
 
 @onready var _destroy_effect: DestroyEffectManager = %DestroyEffectManager
 @onready var _view: ShipView = %View as ShipView
-@onready var _gun_slot: GunSlot = %GunSlot
+@onready var _weapon_slots: WeaponSlots = %WeaponSlots
 
 var is_player: bool = false
 var absolute_velocity: Vector2: get = _absolute_velocity
@@ -56,6 +56,7 @@ func _ready():
 	if Engine.is_editor_hint(): return
 	thrusters.setup(setup_data.textures.thrusters, setup_data.maneuver_thrust)
 	engines.setup(setup_data.textures.engines, setup_data.main_thrust, setup_data.max_speed)
+	_weapon_slots.setup(setup_data.textures)
 	flight_assistant.setup()
 	flight_assistant.follow_accuracy = setup_data.FA_accuracy
 	flight_assistant.follow_accuracy_damp = setup_data.FA_accuracy_damp
@@ -66,7 +67,7 @@ func _ready():
 	battle_assistant.pointer_view = target_prediction_pointer
 	if is_instance_valid(gun):
 		gun.group = group
-		_gun_slot.add_gun(gun)
+		_weapon_slots.add_weapon(gun)
 		gun.shoot_recoil.connect(_on_impulse_local)
 		battle_assistant.gun = gun
 	connect_inputs(inputs)
@@ -145,7 +146,7 @@ func _calculate_thrust_multiplyer():
 func _apply_drag(state: PhysicsDirectBodyState2D):
 	var delta = absolute_velocity.length() - setup_data.max_speed
 	if delta > 0:
-		state.apply_centrasZal_force(delta * mass * -absolute_velocity.normalized())
+		state.apply_central_force(delta * mass * -absolute_velocity.normalized())
 
 func _absolute_velocity() -> Vector2:
 	return linear_velocity + FloatingOrigin.velocity

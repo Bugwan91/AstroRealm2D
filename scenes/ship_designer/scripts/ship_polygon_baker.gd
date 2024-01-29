@@ -11,15 +11,18 @@ var _engine_positions: Array[Vector2]
 var _hull_thrusters: PointsArrayResource
 var _hull_ext_thrusters: PointsArrayResource
 var _engines: PackedVector2Array
+var _weapons: PointsArrayResource
 
 var polygon: PackedVector2Array
 var thrusters: Array[PointResource]
 var engines: PackedVector2Array
+var weapons: Array[PointResource]
 
 func bake():
 	polygon = _rotate_polygon(merge_polygons(), 0.5 * PI)
 	thrusters = _override_thrusters().rotated(0.5 * PI)
 	engines = _rotate_polygon(_engines, 0.5 * PI)
+	weapons = _weapons.rotated(0.5 * PI)
 
 func merge_polygons() -> PackedVector2Array:
 	if _hull.is_empty(): return _hull
@@ -44,6 +47,7 @@ func _update_hull(hull: HullBakerResource):
 	_engine_positions = hull.engine_slots
 	_hull_thrusters = hull.thrusters
 	_engines = hull.get_engines_points()
+	_weapons = hull.weapon_slots
 
 func _update_hull_ext(hull: HullBakerResource):
 	if hull == null:

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HullBakerResource" load_steps=19 format=3 uid="uid://dyeqdkm0axqab"]
+[gd_resource type="Resource" script_class="HullBakerResource" load_steps=22 format=3 uid="uid://dyeqdkm0axqab"]
 
 [ext_resource type="Texture2D" uid="uid://dmm7jf50tafoa" path="res://assets/spaceships/hull/4.png" id="1_1xnx4"]
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd" id="1_70664"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="4_x61cr"]
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/thruster_positions_resource.gd" id="7_3y6r7"]
 [ext_resource type="Script" path="res://addons/points_resource_editor/points_array_resource.gd" id="8_6nlle"]
+[ext_resource type="Script" path="res://addons/points_resource_editor/point_resource.gd" id="9_buk1j"]
 
 [sub_resource type="Resource" id="Resource_0ybjx"]
 script = ExtResource("4_x61cr")
@@ -63,13 +64,23 @@ rotation = -90.0
 
 [sub_resource type="Resource" id="Resource_e618j"]
 script = ExtResource("8_6nlle")
-points = Array[Resource("res://addons/points_resource_editor/point_resource.gd")]([SubResource("Resource_1b52j"), SubResource("Resource_2a566"), SubResource("Resource_5jm8v"), SubResource("Resource_gn0ec"), SubResource("Resource_h5mw2"), SubResource("Resource_gxs70"), SubResource("Resource_xaoop"), SubResource("Resource_lxf20")])
+points = Array[ExtResource("9_buk1j")]([SubResource("Resource_1b52j"), SubResource("Resource_2a566"), SubResource("Resource_5jm8v"), SubResource("Resource_gn0ec"), SubResource("Resource_h5mw2"), SubResource("Resource_gxs70"), SubResource("Resource_xaoop"), SubResource("Resource_lxf20")])
+
+[sub_resource type="Resource" id="Resource_q8u2n"]
+script = ExtResource("9_buk1j")
+position = Vector2(0, -44)
+rotation = -90.0
+
+[sub_resource type="Resource" id="Resource_lq5oe"]
+script = ExtResource("8_6nlle")
+points = Array[ExtResource("9_buk1j")]([SubResource("Resource_q8u2n")])
 
 [resource]
 script = ExtResource("1_70664")
 cockpit_slot = Vector2(0, -32)
 engine_slots = Array[Vector2]([Vector2(0, 32)])
 thrusters = SubResource("Resource_e618j")
+weapon_slots = SubResource("Resource_lq5oe")
 type = 0
 diffuse = ExtResource("1_1xnx4")
 mask = ExtResource("2_paugo")

@@ -11,7 +11,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_whwpl"]
 shader = ExtResource("4_cqrqv")
 shader_parameter/emission = 5.0
-shader_parameter/shininess = 0.95
+shader_parameter/shininess = 0.8
 shader_parameter/specular_texture = ExtResource("5_72wv2")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_1kdxr"]
@@ -39,7 +39,6 @@ wait_time = 3.0
 one_shot = true
 
 [node name="View" type="Sprite2D" parent="."]
-visible = false
 material = SubResource("ShaderMaterial_whwpl")
 rotation = 1.5708
 texture = SubResource("CanvasTexture_1kdxr")
