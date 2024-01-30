@@ -3,9 +3,9 @@ extends Node
 
 enum Action {STOP, LOOK_TO}
 
-const LINEAR_THRESHOLD = 0.1
+const LINEAR_THRESHOLD = 1.0
 const AUTOPILOT_THRESHOLD = 16
-const ANGULAR_THRESHOLD = 0.01
+const ANGULAR_THRESHOLD = 0.02
 
 @export var avoid_collisions: bool = true
 

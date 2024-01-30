@@ -139,7 +139,6 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("20_aq44u")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("13_bxi2x")]
-agressive = true
 max_count = 4
 ship_data = ExtResource("2_ohp2x")
 

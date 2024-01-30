@@ -4,9 +4,7 @@ extends Node2D
 @export var _body: RigidBody2D
 @export var thruster_scene: PackedScene
 
-var _velocity_limit: float = 1000.0
 var _thrusters: Array[Thruster] = []
-
 
 func _get_configuration_warnings():
 	var warnings: Array[String] = []
@@ -15,8 +13,7 @@ func _get_configuration_warnings():
 	return warnings
 
 
-func setup(positions: PackedVector2Array, thrust: float, max_speed: float):
-	_velocity_limit = max_speed
+func setup(positions: PackedVector2Array, thrust: float):
 	for point in positions:
 		var thruster: Thruster = thruster_scene.instantiate()
 		thruster.position = point

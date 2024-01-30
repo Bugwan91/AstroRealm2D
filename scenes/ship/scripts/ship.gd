@@ -31,9 +31,7 @@ var is_player: bool = false:
 	get:
 		return inputs is PlayerShipInput
 var health: Health
-var max_speed: float
 
-var _max_speed_squared: float
 var _impulses := Vector2.ZERO
 var _forces := Vector2.ZERO
 var _torque := 0.0
@@ -48,11 +46,9 @@ func setup_view(resource: ShipResource = null):
 
 func _ready():
 	setup_view(setup_data)
-	max_speed = setup_data.max_speed
-	_max_speed_squared = pow(max_speed, 2)
 	if Engine.is_editor_hint(): return
 	thrusters.setup(setup_data.textures.thrusters, setup_data.maneuver_thrust)
-	engines.setup(setup_data.textures.engines, setup_data.main_thrust, setup_data.max_speed)
+	engines.setup(setup_data.textures.engines, setup_data.main_thrust)
 	_weapon_slots.setup(setup_data.textures)
 	flight_assistant.setup()
 	
@@ -106,7 +102,6 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	super._integrate_forces(state)
 	flight_assistant.process(state)
 	_apply_forcces(state)
-	_apply_drag(state)
 
 
 func set_target(target: RigidBody2D):
@@ -126,11 +121,6 @@ func _apply_forcces(state: PhysicsDirectBodyState2D):
 	_forces = Vector2.ZERO
 	_impulses = Vector2.ZERO
 	_torque = 0.0
-
-func _apply_drag(state: PhysicsDirectBodyState2D):
-	var delta = absolute_velocity.length() - setup_data.max_speed
-	if delta > 0:
-		state.apply_central_force(delta * mass * -absolute_velocity.normalized())
 
 func _on_impulse_local(force: Vector2):
 	apply_central_impulse(force.rotated(rotation))

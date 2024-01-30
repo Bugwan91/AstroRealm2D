@@ -57,7 +57,6 @@ theme_override_constants/margin_bottom = 10
 [node name="PlayerShipStatusUI" parent="Control/GameUI" instance=ExtResource("3_gp6mq")]
 unique_name_in_owner = true
 layout_mode = 2
-mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/GameUI"]
 layout_mode = 2

@@ -4,12 +4,13 @@ extends Node2D
 const THRESHOLD := 0.01
 
 @export var show_flame := true
+@export var flame_strength := 1.0
 @export var show_zoom := 0.1
 
-@onready var _smoke_effect = %SmokeEffect
-@onready var _flame_effect = %FlameEffect
-@onready var _sound = %Sound
-@onready var _light = %Light
+@onready var _smoke_effect: GPUParticles2D = %SmokeEffect
+@onready var _flame_effect: GPUParticles2D = %FlameEffect
+@onready var _sound: AudioStreamPlayer2D = %Sound
+@onready var _light: PointLight2D = %Light
 
 var _max_volume := 0.0
 
@@ -36,12 +37,13 @@ func run_effect(force: float):
 			_light.visible = false
 			_flame_effect.emitting = false
 	else:
-		modulate.a = force
 		_smoke_effect.emitting = true
+		_smoke_effect.modulate.a = force
 		if show_flame:
 			_light.visible = true
-			_light.energy = force
+			_light.energy = force * flame_strength
 			_flame_effect.emitting = true
+			_flame_effect.modulate.a = force * flame_strength
 
 func run_sound(force: float):
 	_sound.volume_db = _max_volume - (40 - 40 * force)

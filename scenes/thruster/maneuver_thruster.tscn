@@ -7,5 +7,9 @@
 scale = Vector2(0.2, 0.2)
 script = ExtResource("2_e25ev")
 
+[node name="Flame" parent="." index="0"]
+flame_strength = 0.1
+show_zoom = 0.5
+
 [node name="Sound" parent="Flame" index="3"]
 max_distance = 1000.0
