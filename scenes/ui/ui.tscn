@@ -57,19 +57,22 @@ theme_override_constants/margin_bottom = 10
 [node name="PlayerShipStatusUI" parent="Control/GameUI" instance=ExtResource("3_gp6mq")]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/GameUI"]
 layout_mode = 2
 size_flags_vertical = 0
+mouse_filter = 2
 script = ExtResource("4_7x04l")
 
 [node name="DivederLeft" type="Control" parent="Control/GameUI/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/GameUI/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Tracking" type="Label" parent="Control/GameUI/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -102,10 +105,11 @@ horizontal_alignment = 1
 [node name="DIviderRight" type="Control" parent="Control/GameUI/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Control/GameUI/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="FPS" type="Label" parent="Control/GameUI/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -115,6 +119,7 @@ script = ExtResource("5_8a6ql")
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/GameUI/DebugInfo"]
 layout_mode = 2
@@ -132,6 +137,7 @@ custom_minimum_size = Vector2(512, 512)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+mouse_filter = 2
 script = ExtResource("7_8clra")
 
 [node name="TextureRect" type="TextureRect" parent="Control/GameUI/RadarContainer"]
@@ -142,6 +148,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = SubResource("GradientTexture2D_f2him")
 
 [node name="GameOverContainer" parent="Control/GameUI" instance=ExtResource("7_vcp7q")]

@@ -40,12 +40,17 @@ func _update_player_ship(ship: ShipRigidBody):
 	player_ship.dead.connect(_on_player_dead)
 
 func _update_player_target(ship: ShipRigidBody):
-	if ship == player_ship: return
+	if not is_instance_valid(player_ship) or ship == player_ship: return
 	player_target = ship
 	player_target_updated.emit(player_target)
+	if is_instance_valid(player_target):
+		player_target.dead.connect(_on_target_dead)
+
+func _on_target_dead(_pass):
+	player_target = null
 
 func _on_player_dead(_pass):
-	_update_player_target(null)
+	player_target = null
 	player_ship_updated.emit(null)
 	player_dead.emit()
 

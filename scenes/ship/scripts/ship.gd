@@ -5,8 +5,6 @@ extends FloatingOriginRigidBody
 signal got_hit(value: Vector2)
 signal dead(ship: ShipRigidBody)
 
-const SPEED_SLOWING_LIMIT := 0.2
-
 @export var setup_data: ShipResource: set = setup_view
 @export var group: String # TODO: Rework with implementation factions/groups system
 
@@ -32,8 +30,6 @@ const SPEED_SLOWING_LIMIT := 0.2
 var is_player: bool = false
 var absolute_velocity: Vector2: get = _absolute_velocity
 var health: Health
-var thrust_multiplyer_threshold: float = 0.5
-var thrust_multiplyer: float
 var max_speed: float
 
 var _max_speed_squared: float
@@ -58,10 +54,6 @@ func _ready():
 	engines.setup(setup_data.textures.engines, setup_data.main_thrust, setup_data.max_speed)
 	_weapon_slots.setup(setup_data.textures)
 	flight_assistant.setup()
-	flight_assistant.follow_accuracy = setup_data.FA_accuracy
-	flight_assistant.follow_accuracy_damp = setup_data.FA_accuracy_damp
-	battle_assistant.aim_accuracy = setup_data.BA_accuracy
-	battle_assistant.aim_accuracy_damp = setup_data.BA_accuracy_damp
 	
 	flight_assistant.autopilot_pointer_view = autopilot_pointer
 	battle_assistant.pointer_view = target_prediction_pointer
@@ -111,7 +103,6 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	if inputs is PlayerShipInput:
 		FloatingOrigin.update_from_state(state)
 	super._integrate_forces(state)
-	_calculate_thrust_multiplyer()
 	flight_assistant.process(state)
 	_apply_forcces(state)
 	_apply_drag(state)
@@ -128,20 +119,12 @@ func add_torque(torque: float):
 	_torque += torque
 
 func _apply_forcces(state: PhysicsDirectBodyState2D):
-	state.apply_central_force(_forces * thrust_multiplyer)
-	state.apply_central_impulse(_impulses * thrust_multiplyer)
+	state.apply_central_force(_forces)
+	state.apply_central_impulse(_impulses)
 	state.apply_torque(_torque)
 	_forces = Vector2.ZERO
 	_impulses = Vector2.ZERO
 	_torque = 0.0
-
-func _calculate_thrust_multiplyer():
-	var v: float = absolute_velocity.length()
-	var v_m: float = max_speed
-	v = min(v, v_m)
-	var t_mult: float = -((v - v_m) * (1.0 - SPEED_SLOWING_LIMIT))\
-			/ (v_m * (1.0 - thrust_multiplyer_threshold)) + SPEED_SLOWING_LIMIT
-	thrust_multiplyer = clampf(t_mult, 0.0, 1.0)
 
 func _apply_drag(state: PhysicsDirectBodyState2D):
 	var delta = absolute_velocity.length() - setup_data.max_speed

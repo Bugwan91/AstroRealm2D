@@ -16,7 +16,6 @@ func _unhandled_input(event):
 		fa_follow.emit(true)
 	if event.is_action_pressed("target_reset"):
 		MainState.player_target = null
-		#reset_target.emit(true)
 	if event.is_action_pressed("autopilot"):
 		fa_autopilot.emit(true)
 	if event.is_action_pressed("distance_up"):

@@ -1,7 +1,8 @@
-[gd_scene load_steps=31 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=32 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
+[ext_resource type="Resource" uid="uid://dg1wwe8h4v1tc" path="res://resources/ships/0.tres" id="2_ohp2x"]
 [ext_resource type="PackedScene" uid="uid://csufvxpfo8jbl" path="res://scenes/navigation_grid/grid.tscn" id="4_aip35"]
 [ext_resource type="Environment" uid="uid://chl1sjnqh1sa7" path="res://scenes/main/main_environment.tres" id="4_h5iwh"]
 [ext_resource type="Resource" uid="uid://c1xggcinljpje" path="res://resources/ship_parts/engine/01.tres" id="4_vbcmv"]
@@ -22,16 +23,6 @@
 [ext_resource type="Texture2D" uid="uid://b34plybxjjec4" path="res://assets/spaceships/experimantal_hulls/256_512.png" id="44_8ykws"]
 [ext_resource type="Texture2D" uid="uid://ksiny6gtw6n5" path="res://assets/spaceships/experimantal_hulls/256_1024.png" id="45_xiox1"]
 [ext_resource type="PackedScene" uid="uid://cmqm4dm8rpi0l" path="res://scenes/background/sun.tscn" id="46_aihwc"]
-
-[sub_resource type="Resource" id="Resource_pf6ep"]
-script = ExtResource("5_yqei1")
-max_speed = 10000.0
-main_thrust = 500.0
-maneuver_thrust = 200.0
-FA_accuracy = 0.9
-FA_accuracy_damp = 0.1
-BA_accuracy = 1.0
-BA_accuracy_damp = 0.1
 
 [sub_resource type="Resource" id="Resource_in7ib"]
 script = ExtResource("11_fkpwp")
@@ -71,9 +62,15 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lkrwm"]
 light_mode = 1
 
+[sub_resource type="Resource" id="Resource_bnpqr"]
+script = ExtResource("5_yqei1")
+max_speed = 100000.0
+main_thrust = 400.0
+maneuver_thrust = 180.0
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2ehlx")
-ship_data = SubResource("Resource_pf6ep")
+ship_data = ExtResource("2_ohp2x")
 ship_blueprint = SubResource("Resource_in7ib")
 
 [node name="PlayerShipBaker" parent="." instance=ExtResource("24_7ks4m")]
@@ -151,6 +148,7 @@ texture = ExtResource("20_aq44u")
 [node name="EnemySpawner" parent="." instance=ExtResource("13_bxi2x")]
 agressive = true
 max_count = 4
+ship_data = SubResource("Resource_bnpqr")
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["shiftable"]]
 visible = false

@@ -55,7 +55,6 @@ func _create_ship_configuration() -> ShipResource:
 func _create_gun() -> Gun:
 	var gun: Gun = gun_scene.instantiate() as Gun
 	gun.bullet_color = Color.RED
-	gun.bullet_speed = 3000.0
 	gun.fire_rate = 5.0
 	return gun
 

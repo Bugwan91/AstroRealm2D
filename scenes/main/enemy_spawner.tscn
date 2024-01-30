@@ -9,10 +9,6 @@ script = ExtResource("2_1321e")
 max_speed = 10000.0
 main_thrust = 500.0
 maneuver_thrust = 500.0
-FA_accuracy = 0.02
-FA_accuracy_damp = 0.1
-BA_accuracy = 1.0
-BA_accuracy_damp = 0.1
 
 [node name="EnemySpawner" type="Node"]
 script = ExtResource("1_wvamj")

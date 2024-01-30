@@ -24,8 +24,6 @@ var direction := Vector2.ZERO
 var ignore_direction_update := false
 var is_turn_enabled := true
 var is_follow := false
-var follow_accuracy := 0.5
-var follow_accuracy_damp := 0.1
 var is_autopilot := false
 var is_autopilot_stop := true
 
@@ -42,7 +40,7 @@ var _linear_control: Vector2
 var _rotation_input: float
 var _angular_control: float
 var _autopilot_target_position: Vector2
-var _velocity_error: float
+var _velocity_error: float = 0.0
 var _last_velocity: Vector2
 
 func _ready():
@@ -187,12 +185,12 @@ func _update_error():
 		_last_velocity = target.absolute_velocity
 		
 
-
+# TODO: Consider target acceleration
 func _get_stop_velocity(position: Vector2, velocity: Vector2, max_speed: float = 0.0) -> Vector2:
 	var current_speed = velocity.length()
 	if position.length() < AUTOPILOT_THRESHOLD and current_speed < LINEAR_THRESHOLD:
 		return Vector2.ZERO
-	var a: float = _thrusters.estimated_strafe_force(position) * ship.thrust_multiplyer
+	var a: float = _thrusters.estimated_strafe_force(position)
 	var v := sqrt((2 * a * position.length())/3)
 	v = v if max_speed == 0 else min(max_speed, v)
 	return v * position.normalized() - velocity
@@ -212,7 +210,6 @@ func _update_thrusters():
 
 func _set_target(value: ShipRigidBody):
 	target = value
-	_velocity_error = 1.0 - follow_accuracy
 
 func _main_thruster_input_changed(value: float):
 	_main_thruster_input = value

@@ -8,23 +8,11 @@ extends Node
 var gun: Gun
 var target: ShipRigidBody
 var shoot_point := Vector2.ZERO
-var aim_accuracy := 1.0
-var aim_accuracy_damp := 0.1
 var _is_auto_aim := false
 var is_auto_shoot := false
 
 var enabled := false
 var _last_delta_velocity := Vector2.ZERO
-var _aim_error := 0.0
-
-func _update_aim_error(_delta: float):
-	if is_instance_valid(target):
-		var dv := target.linear_velocity - ship.linear_velocity
-		var dv_a := dv - _last_delta_velocity
-		_last_delta_velocity = dv
-		var rate = (dv_a / dv).length() * 0.1 # too large
-		_aim_error = clamp(_aim_error + rate, 0.0, 1.0)
-		_aim_error = max(0.0, _aim_error - 0.01)
 
 func _ready():
 	_disable_pointer()
@@ -35,9 +23,6 @@ func _process(_delta):
 	_calculate_bullet_intersection()
 	auto_aim()
 	auto_shoot()
-
-func _physics_process(delta):
-	_update_aim_error(delta)
 
 
 func connect_inputs(inputs: ShipInput):
