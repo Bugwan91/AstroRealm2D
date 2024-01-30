@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvk41nvaytl0v"]
+
+[ext_resource type="Texture2D" uid="uid://c0x2xkfvw2g2x" path="res://assets/backgrounds/0.tres" id="1_k04qs"]
+[ext_resource type="Script" path="res://scenes/main/scripts/texture_saver.gd" id="2_qns5p"]
+
+[node name="TextureSaver" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_k04qs")
+script = ExtResource("2_qns5p")
