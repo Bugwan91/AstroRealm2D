@@ -66,6 +66,6 @@ func _create_health() -> Health:
 
 func _create_AI() -> ShipInput:
 	var ship_AI = AIShipInput.new()
-	ship_AI.keep_distance = 1000.0
+	ship_AI.keep_distance = 2000.0
 	ship_AI.agressive = agressive
 	return ship_AI

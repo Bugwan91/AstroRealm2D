@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=33 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Texture2D" uid="uid://c0g0c4k4h83o" path="res://assets/my/icons/ship_s.png" id="2_e2mwk"]
@@ -18,6 +18,10 @@
 [ext_resource type="PackedScene" uid="uid://bxhk5f3ir05ad" path="res://scenes/thruster/maneuver_thruster.tscn" id="21_bnxwn"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/position_extrapolation.gd" id="25_1c55w"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/main_thrusters.gd" id="25_fgofk"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vnpcs"]
+friction = 0.5
+bounce = 0.2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_70byj"]
 radius = 76.0592
@@ -89,6 +93,8 @@ light_mode = 1
 
 [node name="Ship" type="RigidBody2D"]
 rotation = 0.0103668
+physics_material_override = SubResource("PhysicsMaterial_vnpcs")
+continuous_cd = 1
 script = ExtResource("1_5ckws")
 setup_data = ExtResource("2_fymd7")
 

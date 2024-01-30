@@ -27,8 +27,9 @@ signal dead(ship: ShipRigidBody)
 @onready var _view: ShipView = %View as ShipView
 @onready var _weapon_slots: WeaponSlots = %WeaponSlots
 
-var is_player: bool = false
-var absolute_velocity: Vector2: get = _absolute_velocity
+var is_player: bool = false:
+	get:
+		return inputs is PlayerShipInput
 var health: Health
 var max_speed: float
 
@@ -83,7 +84,7 @@ func connect_inputs(new_inputs: ShipInput):
 	inputs = new_inputs
 	if not is_instance_valid(new_inputs): return
 	new_inputs.init(self)
-	if inputs is PlayerShipInput:
+	if is_player:
 		MainState.player_ship = self
 		flight_assistant.avoid_collisions = false
 	flight_assistant.connect_inputs(inputs)
@@ -100,7 +101,7 @@ func _physics_process(delta):
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
 	if Engine.is_editor_hint(): return
-	if inputs is PlayerShipInput:
+	if is_player:
 		FloatingOrigin.update_from_state(state)
 	super._integrate_forces(state)
 	flight_assistant.process(state)
@@ -130,9 +131,6 @@ func _apply_drag(state: PhysicsDirectBodyState2D):
 	var delta = absolute_velocity.length() - setup_data.max_speed
 	if delta > 0:
 		state.apply_central_force(delta * mass * -absolute_velocity.normalized())
-
-func _absolute_velocity() -> Vector2:
-	return linear_velocity + FloatingOrigin.velocity
 
 func _on_impulse_local(force: Vector2):
 	apply_central_impulse(force.rotated(rotation))
