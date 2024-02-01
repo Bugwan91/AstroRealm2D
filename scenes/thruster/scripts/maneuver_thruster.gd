@@ -1,7 +1,7 @@
 class_name ManeuverThruster
 extends Thruster
 
-const TORQUE_MULT := 0.01
+const TORQUE_MULT := 0.05
 
 var _torque: float = 0
 var torque_throttle: float = 0 : set = _set_torque_throttle

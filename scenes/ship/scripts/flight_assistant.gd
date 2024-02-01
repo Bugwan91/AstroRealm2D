@@ -113,8 +113,8 @@ func follow_target(distance: float = 0.0):
 		return
 	var dp := target.position - _state_position
 	var dp_target := dp - dp.normalized() * distance
-	var vs = _get_stop_velocity(dp_target, -dv, 0)
-	match_velocity(vs * (1.0 - _velocity_error))
+	var needed_velocity = _get_stop_velocity(dp_target, -dv, target.acceleration, 0)
+	match_velocity(needed_velocity)
 
 
 func match_velocity(dv: Vector2 = Vector2.ZERO, main_forced: bool = true):
@@ -157,7 +157,7 @@ func move_to(target_point: Vector2, max_speed: float = 0.0, stop: bool = true):
 		match_rotation(0)
 		return
 	turn_to(target_point)
-	match_velocity(_get_stop_velocity(delta_position, _state_absolute_velocity, max_speed), false)
+	match_velocity(_get_stop_velocity(delta_position, _state_absolute_velocity, Vector2.ZERO, max_speed), false)
 
 
 func turn_to(target_point: Vector2):
@@ -185,15 +185,20 @@ func _update_error():
 		_last_velocity = target.absolute_velocity
 		
 
-# TODO: Consider target acceleration
-func _get_stop_velocity(position: Vector2, velocity: Vector2, max_speed: float = 0.0) -> Vector2:
-	var current_speed = velocity.length()
-	if position.length() < AUTOPILOT_THRESHOLD and current_speed < LINEAR_THRESHOLD:
+
+func _get_stop_velocity(direction: Vector2, v_delta: Vector2, a_target: Vector2 = Vector2.ZERO, max_speed: float = 0.0) -> Vector2:
+	var speed = v_delta.project(direction).length()
+	var distance = direction.length()
+	var dir_n = direction.normalized()
+	if distance < AUTOPILOT_THRESHOLD and speed < LINEAR_THRESHOLD:
 		return Vector2.ZERO
-	var a: float = _thrusters.estimated_strafe_force(position)
-	var v := sqrt((2 * a * position.length())/3)
-	v = v if max_speed == 0 else min(max_speed, v)
-	return v * position.normalized() - velocity
+	var a_self: float = _thrusters.estimated_strafe_force(direction)
+	var a_total: Vector2 = a_target + a_self * dir_n
+	var a_sum: float = a_total.project(direction).length()
+	if a_sum < LINEAR_THRESHOLD:
+		return MainState.MAX_SPEED * dir_n
+	var v := sqrt(a_sum * distance * 0.66666666666) # 2/3
+	return v * dir_n - v_delta
 
 
 func _get_delta_velocity() -> Vector2:

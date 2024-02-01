@@ -2,6 +2,7 @@ class_name ThrusterFlame
 extends Node2D
 
 const THRESHOLD := 0.01
+const SOUND_THRESHOLD := 0.1
 
 @export var show_flame := true
 @export var flame_strength := 1.0
@@ -46,8 +47,8 @@ func run_effect(force: float):
 			_flame_effect.modulate.a = force * flame_strength
 
 func run_sound(force: float):
-	_sound.volume_db = _max_volume - (40 - 40 * force)
-	if force < THRESHOLD:
+	_sound.volume_db = _max_volume - (100 - 100 * force)
+	if force < SOUND_THRESHOLD:
 		_sound.stop()
 	elif not _sound.playing:
 		_sound.play()

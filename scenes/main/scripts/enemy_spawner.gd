@@ -2,6 +2,7 @@ extends Node
 
 @export var agressive := false
 @export_range(0, 200) var max_count := 2
+@export_range(0.5, 100) var interval := 3.0 
 @export var gun_scene: PackedScene = preload("res://scenes/gun/gun.tscn")
 @export var ship_data: ShipResource
 @export var ship_parts: ShipDesignerParts = preload("res://resources/ship_parts/all_parts.tres")
@@ -14,6 +15,7 @@ var ships: Array[ShipRigidBody]
 
 func _ready():
 	await MainState.main_scene_ready
+	_ship_spawn_timer.wait_time = interval
 	_ship_spawn_timer.timeout.connect(func():
 		if ships.size() < max_count:
 			spawn_ship()
