@@ -82,7 +82,7 @@ func connect_inputs(new_inputs: ShipInput):
 	new_inputs.init(self)
 	if is_player:
 		MainState.player_ship = self
-		flight_assistant.avoid_collisions = false
+		flight_assistant.collision_detector.enabled = false
 	flight_assistant.connect_inputs(inputs)
 	battle_assistant.connect_inputs(inputs)
 	if is_instance_valid(gun):

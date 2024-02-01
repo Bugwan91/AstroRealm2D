@@ -7,14 +7,12 @@ const LINEAR_THRESHOLD = 1.0
 const AUTOPILOT_THRESHOLD = 16
 const ANGULAR_THRESHOLD = 0.02
 
-@export var avoid_collisions: bool = true
-
 @onready var _thrusters: Thrusters = %Thrusters
 @onready var _main_thrusters: MainThrusters = %MainThrusters
 
 @export var autopilot_pointer_view: AssistantPointer
 
-@onready var _pre_collision_detector: ShipPreCollisionDetector = %PreCollisionDetector
+@onready var collision_detector: ShipCollisionDetector = %CollisionDetector
 
 var ship: ShipRigidBody
 var target: ShipRigidBody: set = _set_target
@@ -42,10 +40,14 @@ var _angular_control: float
 var _autopilot_target_position: Vector2
 var _velocity_error: float = 0.0
 var _last_velocity: Vector2
+var _anti_collision_control: Vector2
+
 
 func _ready():
 	MainState.fa_tracking_distance = follow_distance
 	MainState.fa_autopilot_speed = autopilot_speed
+	collision_detector.close_collision.connect(_avoid_close_collision)
+	collision_detector.potential_collision.connect(_avoid_potential_collision)
 
 func setup():
 	_thrusters_ratio = _thrusters.estimated_strafe_force(Vector2.RIGHT) / _main_thrusters.estimated_force()
@@ -64,10 +66,18 @@ func process(state: PhysicsDirectBodyState2D):
 		_update_thrusters()
 	_apply_forces()
 
+func _avoid_close_collision(direction: Vector2):
+	_anti_collision_control += (-direction).rotated(-ship.rotation)
+
+func _avoid_potential_collision(direction: Vector2):
+	# Strafe only to the right so far. TODO: improve it
+	_anti_collision_control += direction.rotated(90.0 - ship.rotation)
+
 func _avoid_colission():
-	if not avoid_collisions: return
+	if not collision_detector.enabled: return
 	_linear_control = _linear_control.clamp(Vector2(-1,-1), Vector2(1,1))\
-		- 2.0 * _pre_collision_detector.potential_collision_vector.rotated(-ship.rotation)
+		+ 2.0 * _anti_collision_control.clamp(Vector2(-1,-1), Vector2(1,1))
+	_anti_collision_control = Vector2.ZERO
 
 func _update_autopilot_pointer_view():
 	if not is_instance_valid(autopilot_pointer_view): return
@@ -128,9 +138,6 @@ func match_velocity(dv: Vector2 = Vector2.ZERO, main_forced: bool = true):
 			return
 		var f := (dv_len / a)
 		_linear_control = 2 * max(1, f) * _linear_control + f * dv_n
-		# TODO: (Low Priority)
-		# For better assistant precision,
-		# update this with using effect of damping after speed cap
 		if _linear_control.x - 1 > LINEAR_THRESHOLD\
 				and (main_forced or _linear_control.x / abs(_linear_control.y) > 0.5):
 			_main_thrusters_control = (_linear_control.x - 1) * _thrusters_ratio

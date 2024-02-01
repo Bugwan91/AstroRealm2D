@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c0g0c4k4h83o" path="res://assets/my/icons/ship_s.png" id="2_e2mwk"]
 [ext_resource type="Resource" uid="uid://dg1wwe8h4v1tc" path="res://resources/ships/0.tres" id="2_fymd7"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/flight_assistant.gd" id="3_m324h"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/pre_collision_detector.gd" id="4_ejlr6"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/collision_detector.gd" id="4_andhm"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/battle_assistant.gd" id="4_yb6sw"]
 [ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="7_byino"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/weapons_slots.gd" id="8_4fwa5"]
@@ -24,10 +24,10 @@ friction = 0.01
 bounce = 0.2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_70byj"]
-radius = 76.0592
+radius = 80.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b6sdf"]
-radius = 200.0
+radius = 5000.0
 
 [sub_resource type="Image" id="Image_esub0"]
 data = {
@@ -93,8 +93,8 @@ light_mode = 1
 
 [node name="Ship" type="RigidBody2D"]
 rotation = 0.0103668
-collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_vnpcs")
+inertia = 20000.0
 continuous_cd = 1
 script = ExtResource("1_5ckws")
 setup_data = ExtResource("2_fymd7")
@@ -108,11 +108,12 @@ script = ExtResource("12_bsixf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionArea"]
 shape = SubResource("CircleShape2D_70byj")
 
-[node name="PreCollisionDetector" type="Area2D" parent="."]
+[node name="CollisionDetector" type="Area2D" parent="."]
 unique_name_in_owner = true
-script = ExtResource("4_ejlr6")
+monitorable = false
+script = ExtResource("4_andhm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PreCollisionDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
 shape = SubResource("CircleShape2D_b6sdf")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
@@ -167,5 +168,5 @@ material = SubResource("CanvasItemMaterial_qbdui")
 script = ExtResource("18_cae74")
 texture = ExtResource("2_e2mwk")
 
-[connection signal="body_entered" from="PreCollisionDetector" to="PreCollisionDetector" method="_on_body_entered"]
-[connection signal="body_exited" from="PreCollisionDetector" to="PreCollisionDetector" method="_on_body_exited"]
+[connection signal="body_entered" from="CollisionDetector" to="CollisionDetector" method="_on_body_entered"]
+[connection signal="body_exited" from="CollisionDetector" to="CollisionDetector" method="_on_body_exited"]
