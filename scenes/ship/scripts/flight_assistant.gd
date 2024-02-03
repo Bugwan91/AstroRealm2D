@@ -7,16 +7,15 @@ const LINEAR_THRESHOLD = 1.0
 const AUTOPILOT_THRESHOLD = 16
 const ANGULAR_THRESHOLD = 0.02
 
-@onready var _thrusters: Thrusters = %Thrusters
-@onready var _main_thrusters: MainThrusters = %MainThrusters
-
 @export var autopilot_pointer_view: AssistantPointer
 
-@onready var collision_detector: ShipCollisionDetector = %CollisionDetector
+@onready var _thrusters: Thrusters = %Thrusters
+@onready var _main_thrusters: MainThrusters = %MainThrusters
+@onready var collision_detector: CollisionDetector = %CollisionDetector
 
 var ship: ShipRigidBody
 var target: ShipRigidBody: set = _set_target
-var autopilot_speed := 100000.0
+var autopilot_speed := 10000.0
 var follow_distance := 1000.0
 var direction := Vector2.ZERO
 var ignore_direction_update := false
@@ -46,8 +45,7 @@ var _anti_collision_control: Vector2
 func _ready():
 	MainState.fa_tracking_distance = follow_distance
 	MainState.fa_autopilot_speed = autopilot_speed
-	collision_detector.close_collision.connect(_avoid_close_collision)
-	collision_detector.potential_collision.connect(_avoid_potential_collision)
+	collision_detector.predicted_collision.connect(_update_potential_collision)
 
 func setup():
 	_thrusters_ratio = _thrusters.estimated_strafe_force(Vector2.RIGHT) / _main_thrusters.estimated_force()
@@ -66,17 +64,15 @@ func process(state: PhysicsDirectBodyState2D):
 		_update_thrusters()
 	_apply_forces()
 
-func _avoid_close_collision(direction: Vector2):
-	_anti_collision_control += (-direction).rotated(-ship.rotation)
-
-func _avoid_potential_collision(direction: Vector2):
-	# Strafe only to the right so far. TODO: improve it
-	_anti_collision_control += direction.rotated(90.0 - ship.rotation)
+func _update_potential_collision(direction: Vector2):
+	_anti_collision_control = direction
 
 func _avoid_colission():
 	if not collision_detector.enabled: return
-	_linear_control = _linear_control.clamp(Vector2(-1,-1), Vector2(1,1))\
-		+ 2.0 * _anti_collision_control.clamp(Vector2(-1,-1), Vector2(1,1))
+	if _anti_collision_control.is_zero_approx(): return
+	#DebugDraw2d.line_vector(ship.position, _anti_collision_control.rotated(ship.rotation) * 200.0, Color.RED, 12.0, 0.2)
+	_linear_control = _anti_collision_control.clamp(Vector2(-1,-1), Vector2(1,1))
+	#DebugDraw2d.line_vector(ship.position, _linear_control.rotated(ship.rotation) * 200.0, Color.PURPLE, 12.0, 0.2)
 	_anti_collision_control = Vector2.ZERO
 
 func _update_autopilot_pointer_view():

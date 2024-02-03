@@ -12,7 +12,7 @@ func _ready():
 
 func _process(delta):
 	if player == null: return
-	speed.value = player.absolute_velocity.length() / MainState.MAX_SPEED
+	speed.value = player.absolute_velocity.length() / player.max_speed
 
 func _on_player_ship_updated(new_player_ship: ShipRigidBody):
 	player = new_player_ship

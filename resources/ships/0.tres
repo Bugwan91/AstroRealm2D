@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_7u4yw")
-max_speed = 100000.0
-main_thrust = 800.0
+max_speed = 10000.0
+main_thrust = 1000.0
 maneuver_thrust = 400.0

@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://vr472sgwb7rs"]
+
+[ext_resource type="Script" path="res://scenes/ship/scripts/collision_detector.gd" id="1_rg2pn"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/velocity_raycast.gd" id="2_hjp8h"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/velocity_line.gd" id="3_ey3hq"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/predicted_position_area.gd" id="3_wt52v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n4bsv"]
+radius = 240.0
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6y507"]
+b = Vector2(100, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4bjjo"]
+b = Vector2(100, 0)
+
+[node name="CollisionDetector" type="Node2D"]
+script = ExtResource("1_rg2pn")
+
+[node name="RayBase" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="PredictedPosition" type="Area2D" parent="RayBase"]
+unique_name_in_owner = true
+collision_layer = 6
+collision_mask = 4
+script = ExtResource("3_wt52v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RayBase/PredictedPosition"]
+shape = SubResource("CircleShape2D_n4bsv")
+debug_color = Color(0, 0.647059, 0.239216, 0.419608)
+
+[node name="VelocityLineLeft" type="Area2D" parent="RayBase"]
+unique_name_in_owner = true
+position = Vector2(0, -100)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("3_ey3hq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RayBase/VelocityLineLeft"]
+shape = SubResource("SegmentShape2D_6y507")
+debug_color = Color(0, 0.647059, 0.239216, 0.419608)
+
+[node name="VelocityLineRight" type="Area2D" parent="RayBase"]
+unique_name_in_owner = true
+position = Vector2(0, 100)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("3_ey3hq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RayBase/VelocityLineRight"]
+shape = SubResource("SegmentShape2D_4bjjo")
+debug_color = Color(0, 0.647059, 0.239216, 0.419608)
+
+[node name="RayLeft" type="RayCast2D" parent="RayBase"]
+unique_name_in_owner = true
+position = Vector2(0, -100)
+target_position = Vector2(100, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("2_hjp8h")
+
+[node name="RayRight" type="RayCast2D" parent="RayBase"]
+unique_name_in_owner = true
+position = Vector2(0, 100)
+target_position = Vector2(100, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("2_hjp8h")

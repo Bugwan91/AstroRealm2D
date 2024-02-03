@@ -222,6 +222,7 @@ script = ExtResource("1_48uix")
 distance = 1.024e+06
 
 [node name="BackgroundSprite2" type="Sprite2D" parent="Layers/1024"]
+visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_022s5")
 texture = ExtResource("12_41078")
@@ -240,6 +241,7 @@ script = ExtResource("1_48uix")
 distance = 256000.0
 
 [node name="BackgroundSprite2" type="Sprite2D" parent="Layers/256"]
+visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_b54vu")
 scale = Vector2(0.5, 0.5)
@@ -259,6 +261,7 @@ script = ExtResource("1_48uix")
 distance = 64000.0
 
 [node name="BackgroundSprite2" type="Sprite2D" parent="Layers/64"]
+visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_lh6as")
 texture = ExtResource("20_ahac3")
@@ -277,6 +280,7 @@ script = ExtResource("1_48uix")
 distance = 16000.0
 
 [node name="BackgroundSprite2" type="Sprite2D" parent="Layers/16"]
+visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_e3wy6")
 texture = ExtResource("24_t06r1")
@@ -295,6 +299,7 @@ script = ExtResource("1_48uix")
 distance = 8000.0
 
 [node name="BackgroundSprite" type="Sprite2D" parent="Layers/8"]
+visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_t82sx")
 texture = ExtResource("28_fvo3f")

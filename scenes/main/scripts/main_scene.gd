@@ -23,7 +23,7 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	ship.position = -FloatingOrigin.origin
 	ship.inputs = input_reader
 	var health := Health.new()
-	health.max_health = 10000.0
+	health.max_health = 1000000.0
 	health.health = health.max_health
 	ship.setup_health(health)
 	var gun: Gun = gun_scene.instantiate() as Gun
@@ -38,7 +38,7 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	ship.add_child(audio_listener)
 	audio_listener.make_current()
 	add_child(ship)
-	radar.radius = 10000.0
+	radar.radius = 20000.0
 
 func _create_ship_configuration() -> ShipResource:
 	player_ship_baker.blueprint = ship_blueprint
