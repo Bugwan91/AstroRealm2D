@@ -1,12 +1,10 @@
 extends VBoxContainer
 
-@onready var _main_state: MainState = get_node("/root/MainState")
-
 var labels := {}
 
 func _process(_delta):
-	for key in _main_state.debug:
-		set_label(key, _main_state.debug[key])
+	for key in MainState.debug_messages:
+		set_label(key, MainState.debug_messages[key])
 
 func set_label(key, value):
 	if not labels.has(key):

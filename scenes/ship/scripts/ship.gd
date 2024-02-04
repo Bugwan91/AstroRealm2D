@@ -43,7 +43,7 @@ func setup_view(resource: ShipResource = null):
 	if not is_instance_valid(_view):
 		return
 	_view.setup_textures(setup_data.textures)
-	_collision_polygon.polygon = setup_data.textures.polygon
+	#_collision_polygon.polygon = setup_data.textures.polygon
 
 
 func _ready():
@@ -98,7 +98,6 @@ func _physics_process(delta):
 	if is_instance_valid(gun):
 		gun.velocity = linear_velocity
 
-
 func _integrate_forces(state: PhysicsDirectBodyState2D):
 	if Engine.is_editor_hint(): return
 	if is_player:
@@ -120,9 +119,12 @@ func add_torque(torque: float):
 	_torque += torque
 
 func _apply_forcces(state: PhysicsDirectBodyState2D):
-	state.apply_central_force(_forces)
-	state.apply_central_impulse(_impulses)
-	state.apply_torque(_torque)
+	if not _forces.is_zero_approx():
+		state.apply_central_force(_forces)
+	if not _impulses.is_zero_approx():
+		state.apply_central_impulse(_impulses)
+	if abs(_torque) > 0.01:
+		state.apply_torque(_torque)
 	_forces = Vector2.ZERO
 	_impulses = Vector2.ZERO
 	_torque = 0.0
@@ -132,12 +134,11 @@ func _apply_drag(state: PhysicsDirectBodyState2D):
 	if delta > 0:
 		state.apply_central_force(delta * mass * -absolute_velocity.normalized())
 
-
 func _on_impulse_local(force: Vector2):
-	apply_central_impulse(force.rotated(rotation))
+	_impulses += force.rotated(rotation)
 
 func _on_inpulse(force: Vector2):
-	apply_central_impulse(force)
+	_impulses += force
 
 func _die():
 	flight_assistant.enabled = false

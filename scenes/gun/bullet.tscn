@@ -43,3 +43,8 @@ material = SubResource("CanvasItemMaterial_8unas")
 position = Vector2(-11, 0)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_u3vfw")
+
+[node name="LongRay" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+rotation = -1.5708
+collision_mask = 2

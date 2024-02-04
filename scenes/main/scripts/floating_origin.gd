@@ -48,8 +48,8 @@ func add(node: Node):
 
 func _process(delta):
 	if not enabled: return
-	MainState.add_debug_info("origin", origin)
-	MainState.add_debug_info("origin velocity", velocity)
+	MainState.debug("origin", origin)
+	MainState.debug("origin velocity", velocity)
 	if not is_instance_valid(target): return
 	for node in get_tree().get_nodes_in_group(GROUP_NAME):
 		node.position -= velocity * delta + _process_origin_delta

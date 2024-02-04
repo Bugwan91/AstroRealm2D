@@ -21,6 +21,7 @@ signal predicted_collision(escape_direction: Vector2)
 @onready var line_left: VelocityLine = %VelocityLineLeft
 @onready var line_right: VelocityLine = %VelocityLineRight
 @onready var predicted_position: PredictedPositionArea = %PredictedPosition
+@onready var predicted_position_close: PredictedPositionArea = %PredictedClosePosition
 @onready var ray_left: VelocityRayCast = %RayLeft
 @onready var ray_right: VelocityRayCast = %RayRight
 
@@ -29,6 +30,8 @@ var _speed: float
 
 func _ready():
 	_ship = owner as ShipRigidBody
+	predicted_position_close.radius = 100.0
+	exclude(predicted_position_close)
 	exclude(predicted_position)
 	exclude(line_left)
 	exclude(line_right)
@@ -40,7 +43,7 @@ func exclude(object: CollisionObject2D):
 	ray_right.add_exception(object)
 
 func _physics_process(_delta):
-	_speed = _ship.linear_velocity.length()
+	_speed = _ship.absolute_velocity.length()#_ship.linear_velocity.length()
 	_check_collisions()
 	_update_predicted_position()
 
@@ -49,7 +52,9 @@ func _check_collisions():
 	var collision_direction := predicted_position.check_potential_collision()
 	if not collision_direction.is_zero_approx():
 		predicted_collision.emit((-collision_direction).rotated(-_ship.rotation))
+		_enable_rays(false)
 		return
+	_enable_rays()
 	if _speed < SPEED_THRESHOLD: return
 	var left := ray_left.is_colliding()
 	var right := ray_right.is_colliding()
@@ -65,11 +70,17 @@ func _check_collisions():
 		predicted_collision.emit(d)
 
 func _update_predicted_position():
-	ray_base.global_rotation = _ship.linear_velocity.angle()
-	var end := delta_time * ((_speed * 0.04) ** 2.0)
+	ray_base.global_rotation = _ship.absolute_velocity.angle()# _ship.linear_velocity.angle()
+	var end := delta_time * _speed
+	#var end := delta_time * ((_speed * 0.04) ** 2.0)
 	line_left.update(end)
 	line_right.update(end)
 	predicted_position.update(end)
+	predicted_position_close.update(end)
 	ray_left.update(end)
 	ray_right.update(end)
+
+func _enable_rays(is_enabled: bool = true):
+	ray_left.enabled = is_enabled
+	ray_right.enabled = is_enabled
 

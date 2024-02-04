@@ -4,11 +4,14 @@ extends Node2D
 @export var group: String
 @export var hit_effect_scene: PackedScene
 @export var _color: Color
+@export_range(0, 5) var time_prediction := 2.0
 
 @onready var timer: Timer = %Timer
 @onready var ray: RayCast2D = %RayCast2D
+@onready var long_ray: RayCast2D = %LongRay
 @onready var sprite = %Sprite
 @onready var light = %Light
+
 
 var linear_velocity: Vector2 = Vector2.ZERO
 
@@ -22,6 +25,7 @@ func _ready():
 func _physics_process(delta):
 	position += linear_velocity * delta
 	ray.target_position.y = speed * delta
+	long_ray.target_position.y = speed * time_prediction
 	_collide()
 
 func update_material(color: Color):
@@ -57,3 +61,7 @@ func _create_damage() -> Damage:
 	damage.position = ray.get_collision_point()
 	damage.impulse = transform.x * impulse
 	return damage
+
+func _predict_hit():
+	if not long_ray.is_colliding(): return
+	pass

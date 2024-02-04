@@ -28,6 +28,7 @@ func setup_sound(volume: float, pitch: float):
 	pitch = pitch
 
 func run(force: float):
+	return
 	run_effect(force)
 	run_sound(force)
 

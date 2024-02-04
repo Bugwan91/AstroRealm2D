@@ -1,7 +1,7 @@
 class_name PredictedPositionArea
 extends Area2D
 
-@export_range(10, 1000) var radius := 240.0:
+@export_range(10, 1000) var radius := 512.0:
 	set(value):
 		radius = value
 		_shape.radius = value
@@ -24,5 +24,5 @@ func check_potential_collision() -> Vector2:
 		if area is PredictedPositionArea:
 			var delta := area.global_position - global_position
 			var dist := delta.length() * 0.5
-			vec += delta.normalized() * (radius - dist)
+			vec += delta.normalized() * ((radius - dist) ** 2.0)
 	return Vector2.ZERO if vec.length() == 0.0 else vec.normalized()

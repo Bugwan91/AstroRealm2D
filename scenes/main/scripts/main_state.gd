@@ -16,7 +16,7 @@ var main_scene: MainScene:
 		main_scene_ready.emit()
 var ship_designer: ShipDesignerUI
 
-var debug := {}
+var debug_messages := {}
 
 var player_ship: ShipRigidBody: set = _update_player_ship
 var player_target: ShipRigidBody: set = _update_player_target
@@ -29,8 +29,8 @@ var fa_autopilot := false
 var fa_autopilot_speed := 500.0
 ### TODO # REMOVE ### REFACTOR ###
 
-func add_debug_info(key: String, value):
-	debug[key] = str(value)
+func debug(key: String, value):
+	debug_messages[key] = str(value)
 
 func connect_to_player(callback: Callable):
 	player_ship_updated.connect(callback)

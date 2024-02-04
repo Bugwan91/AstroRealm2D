@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://vr472sgwb7rs"]
+[gd_scene load_steps=9 format=3 uid="uid://vr472sgwb7rs"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/collision_detector.gd" id="1_rg2pn"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/velocity_raycast.gd" id="2_hjp8h"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n4bsv"]
 radius = 240.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cq4pq"]
+radius = 100.0
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_6y507"]
 b = Vector2(100, 0)
@@ -22,7 +25,8 @@ unique_name_in_owner = true
 
 [node name="PredictedPosition" type="Area2D" parent="RayBase"]
 unique_name_in_owner = true
-collision_layer = 6
+visible = false
+collision_layer = 4
 collision_mask = 4
 script = ExtResource("3_wt52v")
 
@@ -30,8 +34,22 @@ script = ExtResource("3_wt52v")
 shape = SubResource("CircleShape2D_n4bsv")
 debug_color = Color(0, 0.647059, 0.239216, 0.419608)
 
+[node name="PredictedClosePosition" type="Area2D" parent="RayBase"]
+unique_name_in_owner = true
+visible = false
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("3_wt52v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RayBase/PredictedClosePosition"]
+shape = SubResource("CircleShape2D_cq4pq")
+debug_color = Color(0.835294, 0.388235, 0, 0.419608)
+
 [node name="VelocityLineLeft" type="Area2D" parent="RayBase"]
 unique_name_in_owner = true
+visible = false
 position = Vector2(0, -100)
 collision_layer = 2
 collision_mask = 0
@@ -44,6 +62,7 @@ debug_color = Color(0, 0.647059, 0.239216, 0.419608)
 
 [node name="VelocityLineRight" type="Area2D" parent="RayBase"]
 unique_name_in_owner = true
+visible = false
 position = Vector2(0, 100)
 collision_layer = 2
 collision_mask = 0
@@ -56,18 +75,20 @@ debug_color = Color(0, 0.647059, 0.239216, 0.419608)
 
 [node name="RayLeft" type="RayCast2D" parent="RayBase"]
 unique_name_in_owner = true
+visible = false
 position = Vector2(0, -100)
 target_position = Vector2(100, 0)
-collision_mask = 2
+collision_mask = 6
 collide_with_areas = true
 collide_with_bodies = false
 script = ExtResource("2_hjp8h")
 
 [node name="RayRight" type="RayCast2D" parent="RayBase"]
 unique_name_in_owner = true
+visible = false
 position = Vector2(0, 100)
 target_position = Vector2(100, 0)
-collision_mask = 2
+collision_mask = 6
 collide_with_areas = true
 collide_with_bodies = false
 script = ExtResource("2_hjp8h")
