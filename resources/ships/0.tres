@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="ShipResource" load_steps=2 format=3 uid="uid://dg1wwe8h4v1tc"]
-
-[ext_resource type="Script" path="res://scenes/ship/scripts/resources/ship_resource.gd" id="1_7u4yw"]
-
-[resource]
-script = ExtResource("1_7u4yw")
-max_speed = 5000.0
-main_thrust = 1000.0
-maneuver_thrust = 500.0

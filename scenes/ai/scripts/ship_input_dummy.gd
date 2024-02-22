@@ -1,10 +1,10 @@
 class_name AIDummyShipInput
 extends ShipInput
 
-@export var player: ShipRigidBody
+@export var player: Spaceship
 @export var agressive := false
 
-@onready var ship: ShipRigidBody = get_parent()
+@onready var ship: Spaceship = get_parent()
 
 func _ready():
 	ship.flight_assistant.target_body = player
@@ -19,8 +19,8 @@ func _physics_process(delta):
 	var target_position = ship.battle_assistant.shoot_point
 	if (player.position - ship.position).length() < 300:
 		ship.flight_assistant.is_autopilot = false
-		target_point.emit(target_position)
+		data.target = target_position
 	else:
 		ship.flight_assistant.is_autopilot = true
-		autopilot_target_point.emit(ship.position + FloatingOrigin.origin + target_position)
-	strafe.emit(0, 0.5)
+		data.autopilot_target = ship.position + FloatingOrigin.origin + target_position
+	data.strafe = Vector2(0.0, 0.5)

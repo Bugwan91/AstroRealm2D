@@ -3,10 +3,10 @@ extends Node
 
 @export var pointer_view: AssistantPointer
 
-@onready var ship: ShipRigidBody = owner
+@onready var ship: Spaceship = owner
 
 var gun: Gun
-var target: ShipRigidBody
+var target: Spaceship
 var shoot_point := Vector2.ZERO
 var _is_auto_aim := false
 var is_auto_shoot := false

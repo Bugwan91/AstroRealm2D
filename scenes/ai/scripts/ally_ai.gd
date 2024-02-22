@@ -1,11 +1,11 @@
 class_name AIAllyShipInput
 extends ShipInput
 
-@export var player: ShipRigidBody
+@export var player: Spaceship
 @export var agressive := false
 @export var keep_distance := 500.0
 
-@onready var ship: ShipRigidBody = get_parent()
+@onready var ship: Spaceship = get_parent()
 
 func _ready():
 	ship.flight_assistant.target_body = player

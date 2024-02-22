@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="HullBakerResource" load_steps=17 format=3 uid="uid://dcjyhgkwiqjvv"]
+
+[ext_resource type="Resource" uid="uid://cdp7415qyadan" path="res://resources/ship_parts/hull/01/01.tres" id="1_aff3o"]
+[ext_resource type="Resource" uid="uid://bobgpeam3e5tj" path="res://resources/ship_parts/hull/01/02.tres" id="2_wjp4q"]
+[ext_resource type="Texture2D" uid="uid://bea7rivp36lx3" path="res://assets/spaceships/hull/01/03_base.png" id="3_0o4ko"]
+[ext_resource type="Texture2D" uid="uid://cdc0wkamkehrq" path="res://assets/spaceships/hull/01/03_emission.png" id="4_t6fsw"]
+[ext_resource type="Texture2D" uid="uid://dcos2ocracmtu" path="res://assets/spaceships/hull/01/03_heat.png" id="5_c7qqy"]
+[ext_resource type="Texture2D" uid="uid://frxkqmurbbl8" path="res://assets/spaceships/hull/01/03_mask.png" id="6_hjcrd"]
+[ext_resource type="Texture2D" uid="uid://bea45tlsbwneu" path="res://assets/spaceships/hull/01/03_normal.png" id="7_03lov"]
+[ext_resource type="Resource" uid="uid://c83n3ib0kufjx" path="res://resources/ship_parts/hull/01/hull.tres" id="8_lkmky"]
+[ext_resource type="Script" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="9_4jv0g"]
+[ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd" id="10_1b5nu"]
+[ext_resource type="Script" path="res://addons/points_resource_editor/point_resource.gd" id="11_y8qjs"]
+[ext_resource type="Script" path="res://addons/points_resource_editor/points_array_resource.gd" id="12_2ntgp"]
+
+[sub_resource type="Resource" id="Resource_xwb07"]
+script = ExtResource("9_4jv0g")
+data = PackedVector2Array(63, 10, 63, 50, 49, 64, 17.0527, 64.089, 17, 43, -17, 43, -17, 64, -49, 64, -63, 50, -63, 10, -39, -40, 39, -40)
+
+[sub_resource type="Resource" id="Resource_fm0a2"]
+script = ExtResource("11_y8qjs")
+position = Vector2(-32, -46)
+rotation = -90.0
+
+[sub_resource type="Resource" id="Resource_e56df"]
+script = ExtResource("11_y8qjs")
+position = Vector2(32, -46)
+rotation = -90.0
+
+[sub_resource type="Resource" id="Resource_aj45n"]
+script = ExtResource("12_2ntgp")
+points = Array[ExtResource("11_y8qjs")]([SubResource("Resource_fm0a2"), SubResource("Resource_e56df")])
+
+[resource]
+script = ExtResource("10_1b5nu")
+parent = ExtResource("8_lkmky")
+engine_slots = Array[Vector2]([])
+weapon_slots = SubResource("Resource_aj45n")
+mass = 1.0
+type = 0
+allowed_ext = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("1_aff3o"), ExtResource("2_wjp4q"), null])
+diffuse = ExtResource("3_0o4ko")
+normal = ExtResource("7_03lov")
+mask = ExtResource("6_hjcrd")
+emission = ExtResource("4_t6fsw")
+heat = ExtResource("5_c7qqy")
+shininess = 0.5
+pivot_point = Vector2(0, -12)
+polygon = SubResource("Resource_xwb07")

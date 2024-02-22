@@ -2,9 +2,11 @@ extends PanelContainer
 
 @onready var health: ProgressBar = %HealthProgressBar
 @onready var shield: ProgressBar = %ShieldProgressBar
+@onready var heat: TextureProgressBar = %HeatProgressBar
 @onready var speed: ProgressBar = %SpeedProgressBar
 
-var player: ShipRigidBody
+
+var player: Spaceship
 
 func _ready():
 	visible = false
@@ -12,9 +14,10 @@ func _ready():
 
 func _process(delta):
 	if player == null: return
-	speed.value = player.absolute_velocity.length() / player.max_speed
+	heat.value = player.heat.temperature
+	#speed.value = player.absolute_velocity.length() / player.max_speed # TODO fix speed bar
 
-func _on_player_ship_updated(new_player_ship: ShipRigidBody):
+func _on_player_ship_updated(new_player_ship: Spaceship):
 	player = new_player_ship
 	if player == null:
 		visible = false

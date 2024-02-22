@@ -1,22 +1,22 @@
-[gd_scene load_steps=32 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=40 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
-[ext_resource type="Resource" uid="uid://dg1wwe8h4v1tc" path="res://resources/ships/0.tres" id="2_ohp2x"]
+[ext_resource type="Resource" uid="uid://cahse1ttns3br" path="res://resources/ships/base_flight_model.tres" id="2_3s1kf"]
+[ext_resource type="Resource" uid="uid://brpfjpxetwlmd" path="res://resources/ship_parts/engine/1.tres" id="3_xpkda"]
 [ext_resource type="PackedScene" uid="uid://csufvxpfo8jbl" path="res://scenes/navigation_grid/grid.tscn" id="4_aip35"]
 [ext_resource type="Environment" uid="uid://chl1sjnqh1sa7" path="res://scenes/main/main_environment.tres" id="4_h5iwh"]
-[ext_resource type="Resource" uid="uid://c1xggcinljpje" path="res://resources/ship_parts/engine/01.tres" id="4_vbcmv"]
-[ext_resource type="Resource" uid="uid://lpuy2txkhyi2" path="res://resources/ship_parts/hull/03.tres" id="5_rofhx"]
-[ext_resource type="Resource" uid="uid://drhm8p5kvv71k" path="res://resources/ship_parts/cockpit/01.tres" id="7_onsy6"]
+[ext_resource type="Resource" uid="uid://c83n3ib0kufjx" path="res://resources/ship_parts/hull/01/hull.tres" id="5_62ybw"]
+[ext_resource type="Resource" uid="uid://dcjyhgkwiqjvv" path="res://resources/ship_parts/hull/01/03.tres" id="5_j3f4g"]
+[ext_resource type="Texture2D" uid="uid://dvxp714x3fp80" path="res://assets/spaceships/Styles/02.png" id="7_lo2oh"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://scenes/ui/ui.tscn" id="8_myah8"]
 [ext_resource type="Shader" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="10_7ps0f"]
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/ship_blueprint.gd" id="11_fkpwp"]
-[ext_resource type="Texture2D" uid="uid://d1plve26u31ph" path="res://assets/spaceships/Styles/Bunblebee.png" id="12_vhchx"]
-[ext_resource type="PackedScene" uid="uid://quedtaqrahh5" path="res://scenes/main/enemy_spawner.tscn" id="13_bxi2x"]
-[ext_resource type="PackedScene" uid="uid://dt7wav32bva3j" path="res://scenes/player/input_reader.tscn" id="13_epig2"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/player_ship_input.gd" id="12_c6lr5"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="15_5xucn"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/resources/ship_resource.gd" id="19_i2lmv"]
+[ext_resource type="Texture2D" uid="uid://bdcrgonof28mh" path="res://assets/spaceships/temperature.tres" id="18_mc64c"]
+[ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="18_u6aof"]
 [ext_resource type="Texture2D" uid="uid://bwr37r7vbwfq0" path="res://assets/VFX_textures/light_03.png" id="20_aq44u"]
 [ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="24_7ks4m"]
 [ext_resource type="Texture2D" uid="uid://cf84vntqw4fqs" path="res://assets/spaceships/experimantal_hulls/256_256.png" id="43_g84bi"]
@@ -26,10 +26,10 @@
 
 [sub_resource type="Resource" id="Resource_in7ib"]
 script = ExtResource("11_fkpwp")
-hull = ExtResource("5_rofhx")
-cockpit = ExtResource("7_onsy6")
-engine = ExtResource("4_vbcmv")
-style = ExtResource("12_vhchx")
+hull = ExtResource("5_62ybw")
+hull_ext = ExtResource("5_j3f4g")
+engine = ExtResource("3_xpkda")
+style = ExtResource("7_lo2oh")
 
 [sub_resource type="Gradient" id="Gradient_2be3f"]
 offsets = PackedFloat32Array(0, 0.746063)
@@ -48,6 +48,37 @@ shader_parameter/offset = Vector2(0, 0)
 shader_parameter/emission = Color(0, 0.301961, 1, 1)
 shader_parameter/mask = SubResource("GradientTexture2D_njkiq")
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_h2ts8"]
+load_path = "res://.godot/imported/01_emission.png-1e8d36474527d5998fe65ab26384a8a4.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ra4c2"]
+load_path = "res://.godot/imported/01_mask.png-53fe66126779dd41e5d208b4b8f935a8.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2r5c0"]
+shader = ExtResource("18_u6aof")
+shader_parameter/heat = 0.0
+shader_parameter/emission = 2.0
+shader_parameter/shininess = 0.0
+shader_parameter/mask_texture = SubResource("CompressedTexture2D_ra4c2")
+shader_parameter/emission_texture = SubResource("CompressedTexture2D_h2ts8")
+shader_parameter/temperature_texture = ExtResource("18_mc64c")
+
+[sub_resource type="Gradient" id="Gradient_c116d"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fn2lx"]
+gradient = SubResource("Gradient_c116d")
+width = 2056
+height = 2056
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7gw38"]
+load_path = "res://.godot/imported/01_normal.png-d227dc398208031a328d516fcd1c8557.ctex"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_q83t3"]
+diffuse_texture = SubResource("GradientTexture2D_fn2lx")
+normal_texture = SubResource("CompressedTexture2D_7gw38")
+
 [sub_resource type="Gradient" id="Gradient_owpx4"]
 offsets = PackedFloat32Array(0, 0.686529)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -62,19 +93,28 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lkrwm"]
 light_mode = 1
 
-[sub_resource type="Resource" id="Resource_bouil"]
-script = ExtResource("19_i2lmv")
-max_speed = 5000.0
-main_thrust = 800.0
-maneuver_thrust = 400.0
+[sub_resource type="Gradient" id="Gradient_lst00"]
+offsets = PackedFloat32Array(0.54047, 0.587467)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="Main" type="Node2D"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_76frv"]
+gradient = SubResource("Gradient_lst00")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.470085, 0.440171)
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("input_reader")]
+position = Vector2(50, 6)
 script = ExtResource("1_2ehlx")
-ship_data = ExtResource("2_ohp2x")
+ship_flight_model = ExtResource("2_3s1kf")
 ship_blueprint = SubResource("Resource_in7ib")
+input_reader = NodePath("PlayerInputReader")
 
 [node name="PlayerShipBaker" parent="." instance=ExtResource("24_7ks4m")]
 unique_name_in_owner = true
+
+[node name="PlayerInputReader" type="Node2D" parent="."]
+script = ExtResource("12_c6lr5")
 
 [node name="Background" parent="." instance=ExtResource("1_b53p2")]
 unique_name_in_owner = true
@@ -84,33 +124,38 @@ unique_name_in_owner = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_h5iwh")
 
-[node name="InputReader" parent="." instance=ExtResource("13_epig2")]
-unique_name_in_owner = true
-
 [node name="DarkAmbient" type="DirectionalLight2D" parent="."]
 position = Vector2(-330, -177)
 rotation = -1.20638
 color = Color(0, 0, 0, 1)
-energy = 0.98
+energy = 0.99
 blend_mode = 1
 
 [node name="DirectionalLight" type="DirectionalLight2D" parent="."]
 position = Vector2(-330, -177)
-rotation = -1.20638
-color = Color(0.352941, 0.74902, 1, 1)
-energy = 0.8
+rotation = 1.11876
+color = Color(0.294118, 0.52549, 1, 1)
+energy = 0.6
+blend_mode = 2
+height = 0.4
 
 [node name="Grid" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_aip35")]
 light_mask = 0
 material = SubResource("ShaderMaterial_bh3nw")
 base_opacity = 0.01
+grid_offset = null
 speed_limit = 12000.0
 camera = NodePath("../Camera")
 
-[node name="Camera" parent="." instance=ExtResource("11_2fp23")]
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_2r5c0")
+position = Vector2(-101, -169)
+texture = SubResource("CanvasTexture_q83t3")
+
+[node name="Camera" parent="." groups=["shiftable"] instance=ExtResource("11_2fp23")]
 zoom = Vector2(1, 1)
-inertia = 0.5
-acceleration_multiplyer = 2.0
+acceleration_multiplyer = 1.0
 zoom_min = 0.1
 zoom_max = 2.0
 
@@ -120,12 +165,16 @@ in_range_color = Color(0, 0, 1, 0.78)
 out_range_color = Color(0, 0, 0.486275, 0.784314)
 
 [node name="PointLight2" type="PointLight2D" parent="." groups=["shiftable"]]
-position = Vector2(-500, 0)
+position = Vector2(-636, -203)
+color = Color(0.519993, 0.999531, 0.706112, 1)
+energy = 0.7
+blend_mode = 2
 texture = SubResource("GradientTexture2D_3cj2f")
-texture_scale = 3.0
+texture_scale = 4.0
+height = 500.0
 
 [node name="Star01" type="Sprite2D" parent="PointLight2"]
-modulate = Color(3, 8, 20, 1)
+modulate = Color(0, 5, 3, 1)
 light_mask = 0
 z_index = 1
 material = SubResource("CanvasItemMaterial_lkrwm")
@@ -133,46 +182,87 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("20_aq44u")
 
 [node name="PointLight" type="PointLight2D" parent="." groups=["shiftable"]]
-position = Vector2(500, 0)
+position = Vector2(530, -49)
 color = Color(1, 0.211765, 0, 1)
+energy = 0.7
+blend_mode = 2
 texture = SubResource("GradientTexture2D_3cj2f")
-texture_scale = 3.0
+texture_scale = 4.0
+height = 500.0
 
-[node name="Star01" type="Sprite2D" parent="PointLight"]
-modulate = Color(20, 8, 3, 1)
+[node name="Star08" type="Sprite2D" parent="PointLight"]
+modulate = Color(32, 6.4, 2.4, 1)
 light_mask = 0
 z_index = 1
 material = SubResource("CanvasItemMaterial_lkrwm")
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("20_aq44u")
+position = Vector2(-15, -1)
+texture = SubResource("GradientTexture2D_76frv")
 
-[node name="EnemySpawner" parent="." instance=ExtResource("13_bxi2x")]
-max_count = 150
-interval = 0.5
-distance = 1000.0
-ship_data = SubResource("Resource_bouil")
+[node name="Star02" type="Sprite2D" parent="PointLight"]
+modulate = Color(16, 3.2, 1.2, 1)
+light_mask = 0
+z_index = 1
+material = SubResource("CanvasItemMaterial_lkrwm")
+position = Vector2(118, 3)
+texture = SubResource("GradientTexture2D_76frv")
+
+[node name="Star05" type="Sprite2D" parent="PointLight"]
+modulate = Color(8, 1.6, 0.6, 1)
+light_mask = 0
+z_index = 1
+material = SubResource("CanvasItemMaterial_lkrwm")
+position = Vector2(249, 4)
+texture = SubResource("GradientTexture2D_76frv")
+
+[node name="Star04" type="Sprite2D" parent="PointLight"]
+modulate = Color(4, 0.8, 0.3, 1)
+light_mask = 0
+z_index = 1
+material = SubResource("CanvasItemMaterial_lkrwm")
+position = Vector2(379, 3)
+texture = SubResource("GradientTexture2D_76frv")
+
+[node name="Star03" type="Sprite2D" parent="PointLight"]
+modulate = Color(2, 0.4, 0.15, 1)
+light_mask = 0
+z_index = 1
+material = SubResource("CanvasItemMaterial_lkrwm")
+position = Vector2(507, 2)
+texture = SubResource("GradientTexture2D_76frv")
+
+[node name="Star06" type="Sprite2D" parent="PointLight"]
+modulate = Color(1.5, 0.3, 0.1, 1)
+light_mask = 0
+z_index = 1
+material = SubResource("CanvasItemMaterial_lkrwm")
+position = Vector2(613, 1)
+texture = SubResource("GradientTexture2D_76frv")
+
+[node name="Star07" type="Sprite2D" parent="PointLight"]
+modulate = Color(1, 0.2, 0.0705882, 1)
+light_mask = 0
+z_index = 1
+material = SubResource("CanvasItemMaterial_lkrwm")
+position = Vector2(713, 0)
+texture = SubResource("GradientTexture2D_76frv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["shiftable"]]
-visible = false
 modulate = Color(0.5, 0.5, 0.5, 0.5)
 light_mask = 0
 position = Vector2(601, 712)
 texture = ExtResource("43_g84bi")
 
 [node name="Sprite2D2" type="Sprite2D" parent="." groups=["shiftable"]]
-visible = false
 modulate = Color(0.5, 0.5, 0.5, 0.5)
 light_mask = 0
 position = Vector2(1293, 706)
 texture = ExtResource("44_8ykws")
 
 [node name="Sprite2D3" type="Sprite2D" parent="." groups=["shiftable"]]
-visible = false
 modulate = Color(0.5, 0.5, 0.5, 0.5)
 light_mask = 0
 position = Vector2(1982, 706)
 texture = ExtResource("45_xiox1")
 
 [node name="Sun" parent="." groups=["shiftable"] instance=ExtResource("46_aihwc")]
-visible = false
-position = Vector2(1000, 0)
+position = Vector2(-159, -816)

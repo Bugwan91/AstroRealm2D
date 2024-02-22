@@ -1,10 +1,13 @@
 class_name Health
-extends Node
+extends Resource
 
 signal damaged(health: float, max: float)
 signal dying
 
-@export_range(0, 1000000) var max_health: = 1000.0
+@export_range(0, 1000000) var max_health: = 1000.0:
+	set(value):
+		max_health = value if value > 0.0 else 0.0 
+		health = max_health
 
 var health: float
 

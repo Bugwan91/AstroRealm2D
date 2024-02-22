@@ -1,150 +1,120 @@
-@tool
-class_name ShipRigidBody
+class_name Spaceship
 extends FloatingOriginRigidBody
 
-signal got_hit(value: Vector2)
-signal dead(ship: ShipRigidBody)
+signal got_hit(impulse: Vector2)
+signal dead(ship: Spaceship)
 
-@export var setup_data: ShipResource: set = setup_view
+@export var data: ShipData: set = _set_ship_data
 @export var group: String # TODO: Rework with implementation factions/groups system
 
-@export var inputs: ShipInput
-@export var gun: Gun
+@export var gun: Gun #TODO: update with more flexible system
+
+@export var input_reader: ShipInput
 
 @export var autopilot_pointer: AssistantPointer
 @export var target_prediction_pointer: AssistantPointer
 
-@onready var _collision_polygon: CollisionPolygon2D = %CollisionPolygon2D
 @onready var flight_assistant: ShipFlightAssistant = %FlightAssistant
-@onready var battle_assistant: BattleAssistant = %BattleAssistant
+@onready var flight_controller: FlightController = %FlightController
+
 @onready var extrapolator: PositionExtrapolation = %PositionExtrapolation
-@onready var thrusters: Thrusters = %Thrusters
-@onready var engines: MainThrusters = %MainThrusters
 @onready var taking_damage: TakingDamage = %TakingDamage
+@onready var heat: Heat = %Heat
+
 @onready var radar_item: RadarItem = %RadarItem
 
-@onready var _destroy_effect: DestroyEffectManager = %DestroyEffectManager
-@onready var _view: ShipView = %View as ShipView
+@onready var _view: ShipView = %View
 @onready var _weapon_slots: WeaponSlots = %WeaponSlots
+@onready var _destroy_effect: DestroyEffectManager = %DestroyEffectManager
+
+var health: Health
 
 var is_player: bool = false:
 	get:
-		return inputs is PlayerShipInput
-var health: Health
-var max_speed: float
-
-var _max_speed_squared: float
-var _impulses := Vector2.ZERO
-var _forces := Vector2.ZERO
-var _torque := 0.0
-
-func setup_view(resource: ShipResource = null):
-	setup_data = resource
-	if not is_instance_valid(_view):
-		return
-	_view.setup_textures(setup_data.textures)
-	#_collision_polygon.polygon = setup_data.textures.polygon
-
+		return input_reader is PlayerShipInput
 
 func _ready():
-	setup_view(setup_data)
-	max_speed = setup_data.max_speed
-	_max_speed_squared = pow(max_speed, 2)
-	if Engine.is_editor_hint(): return
-	thrusters.setup(setup_data.textures.thrusters, setup_data.maneuver_thrust)
-	engines.setup(setup_data.textures.engines, setup_data.main_thrust)
-	_weapon_slots.setup(setup_data.textures)
-	flight_assistant.setup()
-	
-	flight_assistant.autopilot_pointer_view = autopilot_pointer
-	battle_assistant.pointer_view = target_prediction_pointer
-	if is_instance_valid(gun):
-		gun.group = group
-		_weapon_slots.add_weapon(gun)
-		gun.shoot_recoil.connect(_on_impulse_local)
-		battle_assistant.gun = gun
-	connect_inputs(inputs)
-	setup_health()
-	if is_instance_valid(health):
-		taking_damage.health = health
-		health.dying.connect(_die)
-		_destroy_effect.ship = self
-		_destroy_effect.connect_health(health)
-		_destroy_effect.destroy.connect(_destroy)
+	_setup_view()
+	_setup_flight_controller()
+	_setup_health()
+	_setup_weapon()
+	connect_inputs(input_reader)
 
-func setup_health(new_health: Health = null):
-	if new_health:
-		health = new_health
-	else:
-		var nodes = find_children("*", "Health", false)
-		if not nodes.is_empty():
-			health = nodes[0]
+func _setup_flight_controller():
+	flight_assistant.setup(self)
+	flight_controller.setup(self)
+	flight_assistant.autopilot_pointer_view = autopilot_pointer
+
+func _setup_health():
+	if not is_instance_valid(health): return
+	taking_damage.setup(health, data.design.polygon)
+	_destroy_effect.setup(self)
+	_destroy_effect.destroy.connect(_destroy)
+	health.dying.connect(_die)
+
+func _setup_weapon():
+	_weapon_slots.setup(data.design)
+	if not is_instance_valid(gun): return
+	gun.group = group
+	for slot_index in _weapon_slots.slots.size():
+		var new_gun = gun.duplicate()
+		new_gun.shoot_recoil.connect(_on_weapon_shoot)
+		_weapon_slots.add_weapon(new_gun, slot_index)
 
 func connect_inputs(new_inputs: ShipInput):
-	inputs = new_inputs
+	input_reader = new_inputs
 	if not is_instance_valid(new_inputs): return
-	new_inputs.init(self)
-	if is_player:
-		MainState.player_ship = self
-		flight_assistant.collision_detector.enabled = false
-	flight_assistant.connect_inputs(inputs)
-	battle_assistant.connect_inputs(inputs)
-	if is_instance_valid(gun):
-		gun.connect_inputs(inputs)
+	input_reader.setup(self)
+	flight_assistant.connect_inputs(input_reader)
+	_connect_player_inputs()
+	_connect_weapon_inputs()
+	_connect_flight_controller_inputs()
 
+func _connect_player_inputs():
+	if not is_player: return
+	MainState.player_ship = self
+	flight_assistant.collision_detector.enabled = false
+
+func _connect_flight_controller_inputs():
+	flight_controller.inputs = input_reader.data
+
+func _connect_weapon_inputs():
+	_weapon_slots.connect_inputs(input_reader)
 
 func _physics_process(delta):
-	if Engine.is_editor_hint(): return
-	if is_instance_valid(gun):
-		gun.velocity = linear_velocity
+	pass
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
-	if Engine.is_editor_hint(): return
 	if is_player:
 		FloatingOrigin.update_from_state(state)
 	super._integrate_forces(state)
-	flight_assistant.process(state)
-	_apply_forcces(state)
-	_apply_drag(state)
+	_update_velocity_for_weapons()
+	#flight_assistant.process()
+	flight_controller.process(state)
 
+func _update_velocity_for_weapons():
+	if is_instance_valid(gun):
+		gun.velocity = linear_velocity
 
 func set_target(target: RigidBody2D):
 	flight_assistant.target_body = target
-	battle_assistant.set_target(target)
-
-func add_force(force: Vector2):
-	_forces += force
-
-func add_torque(torque: float):
-	_torque += torque
-
-func _apply_forcces(state: PhysicsDirectBodyState2D):
-	if not _forces.is_zero_approx():
-		state.apply_central_force(_forces)
-	if not _impulses.is_zero_approx():
-		state.apply_central_impulse(_impulses)
-	if abs(_torque) > 0.01:
-		state.apply_torque(_torque)
-	_forces = Vector2.ZERO
-	_impulses = Vector2.ZERO
-	_torque = 0.0
-
-func _apply_drag(state: PhysicsDirectBodyState2D):
-	var delta = absolute_velocity.length() - setup_data.max_speed
-	if delta > 0:
-		state.apply_central_force(delta * mass * -absolute_velocity.normalized())
-
-func _on_impulse_local(force: Vector2):
-	_impulses += force.rotated(rotation)
-
-func _on_inpulse(force: Vector2):
-	_impulses += force
 
 func _die():
 	flight_assistant.enabled = false
-	battle_assistant.enabled = false
 	gun.enabled = false
 	dead.emit(self)
 
 func _destroy():
 	queue_free()
+
+func _setup_view():
+	_view.setup_textures(data.design)
+
+func _set_ship_data(new_data: ShipData):
+	assert(new_data != null, "ShipData missed")
+	data = new_data
+	mass = data.flight_model.mass
+	inertia = data.flight_model.inertia
+
+func _on_weapon_shoot(_recoil: Vector2):
+	heat.add_heat(5.0)

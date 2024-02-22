@@ -1,15 +1,11 @@
 shader_type canvas_item;
 
-uniform sampler2D mask_texture : hint_default_black;
-uniform sampler2D style_texture : hint_default_white;
+uniform sampler2D mask_texture : filter_nearest, hint_default_black;
+uniform sampler2D style_texture : filter_nearest, hint_default_white;
 
 void fragment() {
-	vec4 ship_color = texture(TEXTURE, UV);
-	vec4 style_color = texture(style_texture, UV);
-	vec4 mask_value = texture(mask_texture, UV);
-	if (mask_value.r == 0.0) {
-		COLOR = ship_color;
-	} else {
-		COLOR = ship_color * style_color * mask_value.r;
-	}
+	vec4 base = texture(TEXTURE, UV);
+	float mask = texture(mask_texture, UV).r;
+	vec4 style = texture(style_texture, UV);
+	COLOR = mix(base, style, mask);
 }

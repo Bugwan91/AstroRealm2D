@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="HullBakerResource" load_steps=10 format=3 uid="uid://bobgpeam3e5tj"]
+
+[ext_resource type="Texture2D" uid="uid://24po85mnu3r8" path="res://assets/spaceships/hull/01/02_base.png" id="1_oxy3k"]
+[ext_resource type="Texture2D" uid="uid://clfi12m05ae2g" path="res://assets/spaceships/hull/01/02_emission.png" id="2_aydes"]
+[ext_resource type="Texture2D" uid="uid://b4in8dwx8b33m" path="res://assets/spaceships/hull/01/02_heat.png" id="3_vrooe"]
+[ext_resource type="Texture2D" uid="uid://cygyhec31bd3x" path="res://assets/spaceships/hull/01/02_mask.png" id="4_pk7y7"]
+[ext_resource type="Texture2D" uid="uid://cwqdttek1lvxn" path="res://assets/spaceships/hull/01/02_normal.png" id="5_78v33"]
+[ext_resource type="Resource" uid="uid://c83n3ib0kufjx" path="res://resources/ship_parts/hull/01/hull.tres" id="6_8w03c"]
+[ext_resource type="Script" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="7_tbjya"]
+[ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd" id="8_luh3g"]
+
+[sub_resource type="Resource" id="Resource_si244"]
+script = ExtResource("7_tbjya")
+data = PackedVector2Array(59, 9, 59, 41, 18, 64, 17, 45, -17, 44, -18, 64, -59, 41, -59, 9, -17, -45, 17, -45)
+
+[resource]
+script = ExtResource("8_luh3g")
+parent = ExtResource("6_8w03c")
+engine_slots = Array[Vector2]([])
+mass = 1.0
+type = 0
+allowed_ext = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([])
+diffuse = ExtResource("1_oxy3k")
+normal = ExtResource("5_78v33")
+mask = ExtResource("4_pk7y7")
+emission = ExtResource("2_aydes")
+heat = ExtResource("3_vrooe")
+shininess = 0.5
+pivot_point = Vector2(0, -9)
+polygon = SubResource("Resource_si244")

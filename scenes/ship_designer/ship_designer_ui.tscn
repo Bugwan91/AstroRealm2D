@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c7cafyhhy135a"]
+[gd_scene load_steps=10 format=3 uid="uid://c7cafyhhy135a"]
 
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/ship_designer_ui.gd" id="1_citlv"]
 [ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="2_jrjbv"]
@@ -6,20 +6,17 @@
 [ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="5_alsfe"]
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/designer_part_selector.gd" id="6_vknnf"]
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/designer_style_selector.gd" id="7_nka4o"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/ship_view.gd" id="11_r583k"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/view_ship.gd" id="7_wj4q0"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3y64e"]
 load_path = "res://.godot/imported/2-1_emission.png-67052bb7f4582c6df4039dee2c5765f9.ctex"
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mx0cx"]
-load_path = "res://.godot/imported/2-1_specular.png-3332ab8fc7219c710df0c422e408e4de.ctex"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s2s6x"]
 shader = ExtResource("5_alsfe")
+shader_parameter/heat = 0.0
 shader_parameter/emission = 5.0
 shader_parameter/shininess = 0.0
 shader_parameter/emission_texture = SubResource("CompressedTexture2D_3y64e")
-shader_parameter/specular_texture = SubResource("CompressedTexture2D_mx0cx")
 
 [node name="ShipDesignerContainer" type="PanelContainer"]
 anchors_preset = 15
@@ -29,10 +26,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_force_pass_scroll_events = false
 script = ExtResource("1_citlv")
-
-[node name="Baker" parent="." instance=ExtResource("2_jrjbv")]
-unique_name_in_owner = true
-bake_on_updates = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -62,17 +55,6 @@ size_flags_horizontal = 3
 columns = 2
 script = ExtResource("4_q4t2f")
 empty_allowed = true
-
-[node name="Cockpit" type="ScrollContainer" parent="HBoxContainer/TabContainer"]
-visible = false
-layout_mode = 2
-
-[node name="CockpitSelector" type="GridContainer" parent="HBoxContainer/TabContainer/Cockpit"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-columns = 2
-script = ExtResource("6_vknnf")
 
 [node name="Engine" type="ScrollContainer" parent="HBoxContainer/TabContainer"]
 visible = false
@@ -116,7 +98,7 @@ texture_filter = 3
 material = SubResource("ShaderMaterial_s2s6x")
 position = Vector2(128, 128)
 scale = Vector2(2, 2)
-script = ExtResource("11_r583k")
+script = ExtResource("7_wj4q0")
 
 [node name="DarkAmbient" type="DirectionalLight2D" parent="HBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
 color = Color(0, 0, 0, 1)
@@ -165,3 +147,10 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 text = "Confirm"
+
+[node name="Baker" parent="." instance=ExtResource("2_jrjbv")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+bake_on_updates = true
+debug_visible = true

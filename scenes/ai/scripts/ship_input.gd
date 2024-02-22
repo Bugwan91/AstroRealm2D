@@ -4,18 +4,18 @@ extends ShipInput
 @export var agressive := false
 @export var keep_distance := 500.0
 
-var _ship: ShipRigidBody
-var _target: ShipRigidBody
+var _ship: Spaceship
+var _target: Spaceship
 
 
-func init(ship: ShipRigidBody):
+func init(ship: Spaceship):
 	_ship = ship
 	_ship.dead.connect(_on_dead)
 	MainState.player_ship_updated.connect(update_target_ship)
 	_ship.flight_assistant.is_turn_enabled = false
 
 
-func update_target_ship(target_ship: ShipRigidBody):
+func update_target_ship(target_ship: Spaceship):
 	_target = target_ship
 	if not is_instance_valid(_target):
 		_ship.flight_assistant.is_follow = false

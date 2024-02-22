@@ -8,7 +8,6 @@ signal selected(index)
 @export var texture: Texture2D: set = _set_texture
 
 @export var _empty_texture: Texture2D
-@export var _cockpit_image: Texture2D
 @export var _engine_image: Texture2D
 
 @export_group("style")
@@ -20,7 +19,6 @@ signal selected(index)
 
 var is_selected: bool = false: set = _set_selection
 
-var _cockpit: Sprite2D
 var _engines: Array[Sprite2D]
 
 func _ready():
@@ -60,29 +58,19 @@ func _update_with_resource():
 	_item_view.texture.diffuse_texture = resource.diffuse
 	_item_view.texture.normal_texture = resource.normal
 	_item_view.material.set("shader_parameter/emission_texture", resource.emission)
-	_item_view.material.set("shader_parameter/specular_texture", resource.specular)
-	#_item_view.material.set("shader_parameter/shininess", resource.shininess)
+	_item_view.material.set("shader_parameter/mask_texture", resource.mask)
+	_item_view.material.set("shader_parameter/shininess", resource.shininess)
 	_update_placeholders()
 
 func _update_placeholders():
 	if resource != null and resource is HullBakerResource:
-		_add_cockpit(resource)
 		_add_engines(resource)
 	else:
 		_clear_placeholders()
 
 func _clear_placeholders():
-	if is_instance_valid(_cockpit):
-		_cockpit.queue_free()
 	for engine in _engines:
 		engine.queue_free()
-
-func _add_cockpit(hull: HullBakerResource):
-	_cockpit = Sprite2D.new()
-	_cockpit.texture = _cockpit_image
-	_cockpit.modulate = Color(0.0, 0.2, 1.0, 0.7)
-	_item_view.add_child(_cockpit)
-	_cockpit.position = hull.cockpit_slot
 
 func _add_engines(hull: HullBakerResource):
 	for engine_slot in hull.engine_slots:

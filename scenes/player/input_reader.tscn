@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dt7wav32bva3j"]
-
-[ext_resource type="Script" path="res://scenes/player/scripts/ship_input.gd" id="1_jxh1c"]
-
-[node name="InputReader" type="Node2D"]
-script = ExtResource("1_jxh1c")

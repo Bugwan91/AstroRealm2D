@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ShipFlightModelData" load_steps=2 format=3 uid="uid://cahse1ttns3br"]
+
+[ext_resource type="Script" path="res://scenes/ship/scripts/resources/ship_flignt_model_data.gd" id="1_cd5we"]
+
+[resource]
+script = ExtResource("1_cd5we")
+mass = 1.0
+speed = 2000.0
+boost_base = 200.0
+strafe_base = 1000.0
+turn_base = 0.3

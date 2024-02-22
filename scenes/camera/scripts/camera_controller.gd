@@ -9,7 +9,7 @@ signal zoomed(zoom: float)
 @export var zoom_max := 4.0
 @export var zoom_speed := 0.05
 
-var target: ShipRigidBody
+var target: Spaceship
 var _last_veocity: Vector2
 var _required_acceleration_position: Vector2
 var _required_look_position: Vector2
@@ -46,6 +46,7 @@ func _process(delta):
 func _physics_process(delta):
 	if not is_instance_valid(target): return
 	var acceleration = (_last_veocity - target.absolute_velocity) * (Vector2.ONE * acceleration_multiplyer)
+	acceleration = target.acceleration * (Vector2.ONE * acceleration_multiplyer)
 	_required_acceleration_position = lerp(_required_acceleration_position, acceleration, _inverse_inertia * delta)
 	_last_veocity = target.absolute_velocity
 
@@ -61,7 +62,7 @@ func _get_look_position() -> Vector2:
 	var delta = get_global_mouse_position() - target.extrapolator.smooth_position
 	return delta.clamp(-deadzone, deadzone) / 2
 
-func _on_update_player_ship(player_ship: ShipRigidBody):
+func _on_update_player_ship(player_ship: Spaceship):
 	target = player_ship
 	if not target: return
 	target.got_hit.connect(_shake_on_hit)

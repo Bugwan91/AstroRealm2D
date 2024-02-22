@@ -2,14 +2,13 @@ class_name ShipDesignerUI
 extends PanelContainer
 
 signal closed
-signal finished(blueprint: ShipBlueprint, design: ShipTexturesRes)
+signal finished(blueprint: ShipBlueprint, design: ShipDesignData)
 
 @export var ship_blueprint: ShipBlueprint
 @export var all_parts: ShipDesignerParts = preload("res://resources/ship_parts/all_parts.tres")
 
 @onready var hull_selector: ShipBakerHullSelector = %HullSelector
 @onready var hull_ext_selector: ShipBakerHullSelector = %HullExtSelector
-@onready var cockpit_selector: ShipBakerPartSelector = %CockpitSelector
 @onready var engine_selector: ShipBakerPartSelector = %EngineSelector
 @onready var style_selector: ShipBakerStyleSelector = %StyleSelector
 @onready var baker: ShipBlueprintBaker = %Baker
@@ -27,8 +26,6 @@ func _ready():
 		baker.blueprint.hull = value
 	hull_ext_selector.update_blueprint = func(value: HullBakerResource):
 		baker.blueprint.hull_ext = value
-	cockpit_selector.update_blueprint = func(value: ViewBakerResource):
-		baker.blueprint.cockpit = value
 	engine_selector.update_blueprint = func(value: ViewBakerResource):
 		baker.blueprint.engine = value
 	style_selector.update_blueprint = func(value: Texture2D):
@@ -38,7 +35,6 @@ func _ready():
 func _setup_selectors_data():
 	hull_selector.resources = all_parts.hulls
 	hull_ext_selector.resources = all_parts.hulls_ext
-	cockpit_selector.resources = all_parts.cockpits
 	engine_selector.resources = all_parts.engines
 	style_selector.textures = all_parts.styles
 
@@ -47,7 +43,6 @@ func set_blueprint(blueprint: ShipBlueprint):
 	baker.bake()
 	hull_selector.init_selection(baker.blueprint.hull)
 	hull_ext_selector.init_selection(baker.blueprint.hull_ext)
-	cockpit_selector.init_selection(baker.blueprint.cockpit)
 	engine_selector.init_selection(baker.blueprint.engine)
 	style_selector.init_selection(baker.blueprint.style)
 

@@ -27,8 +27,6 @@ script = ExtResource("4_ud3i3")
 
 [node name="Light" type="PointLight2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, 1)
-energy = 4.0
 texture = ExtResource("5_rn3vo")
 texture_scale = 2.0
 
@@ -37,11 +35,11 @@ script = ExtResource("5_voj54")
 
 [node name="Sprite" type="Sprite2D" parent="PositionExtrapolation"]
 unique_name_in_owner = true
-modulate = Color(0, 2, 0, 1)
+modulate = Color(0, 8, 0, 1)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_8unas")
-position = Vector2(-11, 0)
-scale = Vector2(0.2, 0.2)
+position = Vector2(-7, 0)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_u3vfw")
 
 [node name="LongRay" type="RayCast2D" parent="."]

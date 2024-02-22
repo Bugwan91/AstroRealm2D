@@ -9,9 +9,13 @@ signal destroy
 @export var _damage_effect_scene: PackedScene
 @export var _destroy_effect_scene: PackedScene
 
-var ship: ShipRigidBody
+var ship: Spaceship
 
 var _damage_effect
+
+func setup(spaceship: Spaceship):
+	ship = spaceship
+	connect_health(ship.health)
 
 func _physics_process(_delta):
 	if is_instance_valid(_damage_effect):

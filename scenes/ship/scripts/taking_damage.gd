@@ -1,7 +1,13 @@
 class_name TakingDamage
-extends Node
+extends Area2D
 
 var health: Health
+
+@onready var polygon: CollisionPolygon2D = %Polygon
+
+func setup(_health: Health, polygon_data: PackedVector2Array):
+	health = _health
+	polygon.polygon = polygon_data
 
 func check_group(group: String) -> bool:
 	return owner.group == group

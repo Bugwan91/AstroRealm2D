@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn1oqdsdmn74r"]
+
+[ext_resource type="Script" path="res://addons/ship_editor_tool/controls.gd" id="1_l2ber"]
+
+[node name="Controls" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 0
+script = ExtResource("1_l2ber")
+
+[node name="First" type="Button" parent="."]
+layout_mode = 2
+text = "First"
+
+[node name="Second" type="Button" parent="."]
+layout_mode = 2
+text = "Second"
+
+[node name="OptionButton" type="OptionButton" parent="."]
+layout_mode = 2

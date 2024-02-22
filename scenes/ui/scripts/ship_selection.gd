@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var pivot: Control = %Pivot
 @onready var selection: TextureRect = %Selection
 
-var _selected_ship: ShipRigidBody:
+var _selected_ship: Spaceship:
 	set(value):
 		_selected_ship = value
 		selection.visible = _selected_ship != null
@@ -25,5 +25,5 @@ func _process(_delta):
 	pivot.position = position + viewport
 	pivot.scale = 1.5 * get_viewport().get_camera_2d().zoom
 
-func _target_updated(target: ShipRigidBody):
+func _target_updated(target: Spaceship):
 	_selected_ship = target

@@ -3,7 +3,7 @@ extends Resource
 
 signal updated(type: Type, value: Resource)
 
-enum Type { HULL, HULL_EXT, COCKPIT, ENGINE, STYLE }
+enum Type { HULL, HULL_EXT, ENGINE, STYLE }
 
 @export var hull: HullBakerResource:
 	set(value):
@@ -14,11 +14,6 @@ enum Type { HULL, HULL_EXT, COCKPIT, ENGINE, STYLE }
 	set(value):
 		hull_ext = value
 		updated.emit(Type.HULL_EXT, hull_ext)
-
-@export var cockpit: ViewBakerResource:
-	set(value):
-		cockpit = value
-		updated.emit(Type.COCKPIT, cockpit)
 
 @export var engine: ViewBakerResource:
 	set(value):

@@ -15,6 +15,7 @@ show_default_buttons=false
 config/name="AstroRealm"
 run/main_scene="res://scenes/main/main_scene.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
+run/max_fps=60
 config/icon="res://AR_icon.png"
 
 [autoload]
@@ -22,6 +23,7 @@ config/icon="res://AR_icon.png"
 MainState="*res://scenes/main/scripts/main_state.gd"
 DebugDraw2d="*res://addons/debugdraw2d/DebugDraw2D.gd"
 FloatingOrigin="*res://scenes/main/scripts/floating_origin.gd"
+MyDebug="*res://scenes/main/scripts/debug.gd"
 
 [display]
 
@@ -34,7 +36,7 @@ project/assembly_name="Astro2D"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/points_resource_editor/plugin.cfg", "res://addons/tool_button/plugin.cfg", "res://addons/vector2_array_resource_editor/plugin.cfg")
+enabled=PackedStringArray("res://addons/points_resource_editor/plugin.cfg", "res://addons/ship_editor_tool/plugin.cfg", "res://addons/tool_button/plugin.cfg", "res://addons/vector2_array_resource_editor/plugin.cfg")
 
 [file_customization]
 
@@ -49,6 +51,7 @@ folder_colors={
 "res://scenes/camera/scripts/": "blue",
 "res://scenes/gun/assets/": "red",
 "res://scenes/gun/scripts/": "blue",
+"res://scenes/heat/scripts/": "blue",
 "res://scenes/main/scripts/": "blue",
 "res://scenes/navigation_grid/scripts/": "blue",
 "res://scenes/navigation_grid/shaders/": "purple",
@@ -58,6 +61,7 @@ folder_colors={
 "res://scenes/ship_designer/scripts/": "blue",
 "res://scenes/ship_designer/shaders/": "purple",
 "res://scenes/ship_designer/styles/": "red",
+"res://scenes/ship_designer/tool/": "yellow",
 "res://scenes/thruster/scripts/": "blue",
 "res://scenes/ui/scripts/": "blue"
 }
@@ -177,11 +181,12 @@ follow={
 [physics]
 
 2d/run_on_separate_thread=true
-common/physics_ticks_per_second=20
+common/physics_ticks_per_second=30
 2d/physics_engine="GodotPhysics2D"
 2d/default_gravity=0.0
 2d/default_linear_damp=0.0
 2d/default_angular_damp=0.0
+2d/solver/solver_iterations=8
 
 [rendering]
 

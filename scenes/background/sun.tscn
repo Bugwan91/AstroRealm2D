@@ -5,7 +5,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bdry2"]
 shader = ExtResource("1_2mbac")
 shader_parameter/color = Color(0.0666667, 0.247059, 1, 1)
-shader_parameter/brightness = 10.0
+shader_parameter/brightness = 4.0
 shader_parameter/rotation_speed = 0.02
 
 [sub_resource type="Gradient" id="Gradient_j18vj"]

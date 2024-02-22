@@ -19,6 +19,8 @@ b = Vector2(100, 0)
 
 [node name="CollisionDetector" type="Node2D"]
 script = ExtResource("1_rg2pn")
+enabled = null
+delta_time = null
 
 [node name="RayBase" type="Node2D" parent="."]
 unique_name_in_owner = true

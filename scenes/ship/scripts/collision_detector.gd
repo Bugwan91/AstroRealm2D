@@ -25,11 +25,11 @@ signal predicted_collision(escape_direction: Vector2)
 @onready var ray_left: VelocityRayCast = %RayLeft
 @onready var ray_right: VelocityRayCast = %RayRight
 
-var _ship: ShipRigidBody
+var _ship: Spaceship
 var _speed: float
 
 func _ready():
-	_ship = owner as ShipRigidBody
+	_ship = owner as Spaceship
 	predicted_position_close.radius = 100.0
 	exclude(predicted_position_close)
 	exclude(predicted_position)

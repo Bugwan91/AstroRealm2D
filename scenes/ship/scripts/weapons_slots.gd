@@ -1,16 +1,21 @@
 class_name WeaponSlots
 extends Node2D
 
-var slots: Array[Node2D]
+var slots: Array[WeaponSlot]
 
-func setup(data: ShipTexturesRes):
+func setup(data: ShipDesignData):
 	for slot_point in data.weapon_slots:
-		var slot = Node2D.new()
+		var slot = WeaponSlot.new()
 		slot.position = slot_point.position
 		slot.rotation = slot_point.radian
-		add_child(slot)
 		slots.append(slot)
+		add_child(slot)
 
-func add_weapon(weapon: Gun):
+func add_weapon(weapon: Gun, index: int):
+	assert(index < slots.size(), "Invalid weapon slot index")
+	weapon.position = Vector2.ZERO
+	slots[index].add(weapon)
+
+func connect_inputs(inputs: ShipInput):
 	for slot in slots:
-		slot.add_child(weapon) # TODO: wil not work for multyweapons
+		slot.connect_input(inputs.data.firing_toggled)

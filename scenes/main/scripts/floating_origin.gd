@@ -4,12 +4,13 @@ const GROUP_NAME = "shiftable"
 
 @export var enabled := true
 
-@onready var target: ShipRigidBody = MainState.player_ship
+@onready var target: Spaceship = MainState.player_ship
 
 var origin := Vector2.ZERO
 var origin_delta := Vector2.ZERO
 var velocity := Vector2.ZERO
 var velocity_delta: Vector2
+var last_update_time: float
 
 var _process_origin_delta: Vector2
 var _reset_velocity_delta := false
@@ -35,6 +36,7 @@ func update_from_state(state: PhysicsDirectBodyState2D):
 	origin_delta = state.transform.origin
 	_process_origin_delta = origin_delta
 	origin += velocity * state.step + origin_delta
+	last_update_time = Time.get_unix_time_from_system()
 
 func update_state(state: PhysicsDirectBodyState2D):
 	if not enabled: return
@@ -48,14 +50,14 @@ func add(node: Node):
 
 func _process(delta):
 	if not enabled: return
-	MainState.debug("origin", origin)
-	MainState.debug("origin velocity", velocity)
+	MyDebug.info("origin", origin)
+	MyDebug.info("origin velocity", velocity)
 	if not is_instance_valid(target): return
 	for node in get_tree().get_nodes_in_group(GROUP_NAME):
 		node.position -= velocity * delta + _process_origin_delta
 	_process_origin_delta = Vector2.ZERO
 
-func _on_update_player_ship(player_ship: ShipRigidBody):
+func _on_update_player_ship(player_ship: Spaceship):
 	target = player_ship
 	if not target:
 		velocity_delta = -velocity

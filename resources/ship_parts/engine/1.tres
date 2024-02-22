@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ViewBakerResource" load_steps=7 format=3 uid="uid://brpfjpxetwlmd"]
+
+[ext_resource type="Texture2D" uid="uid://c5x5n5yj54ek0" path="res://assets/spaceships/engine/1_base.png" id="1_o5ide"]
+[ext_resource type="Texture2D" uid="uid://cgw8dfoonc63v" path="res://assets/spaceships/engine/1_emission.png" id="2_3mxa1"]
+[ext_resource type="Texture2D" uid="uid://ctvlxh425iyr1" path="res://assets/spaceships/engine/1_mask.png" id="3_n2y5t"]
+[ext_resource type="Texture2D" uid="uid://6pvqbeb71p0w" path="res://assets/spaceships/engine/1_heat.png" id="3_nan1c"]
+[ext_resource type="Texture2D" uid="uid://dj58ecvykxj5l" path="res://assets/spaceships/engine/1_normal.png" id="5_i2kdh"]
+[ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/view_baker_resource.gd" id="6_otow5"]
+
+[resource]
+script = ExtResource("6_otow5")
+type = 2
+allowed_ext = Array[ExtResource("6_otow5")]([])
+diffuse = ExtResource("1_o5ide")
+normal = ExtResource("5_i2kdh")
+mask = ExtResource("3_n2y5t")
+emission = ExtResource("2_3mxa1")
+heat = ExtResource("3_nan1c")
+shininess = 0.5
+pivot_point = Vector2(0, 0)

@@ -3,6 +3,7 @@ extends RigidBody2D
 
 var absolute_velocity: Vector2
 var acceleration: Vector2
+
 var _last_velocity: Vector2
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):

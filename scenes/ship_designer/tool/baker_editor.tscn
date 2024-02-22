@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://tulgf6ok78fw"]
+
+[ext_resource type="Script" path="res://scenes/ship_designer/tool/hull_res_editor.gd" id="1_bjnxi"]
+[ext_resource type="Resource" uid="uid://f7ckmary6jm8" path="res://resources/ship_parts/hull/02/03.tres" id="2_pmu7d"]
+[ext_resource type="Texture2D" uid="uid://dniawmfa8aif6" path="res://assets/spaceships/hull/02/03_base.png" id="3_e5ijr"]
+[ext_resource type="Texture2D" uid="uid://bqx61atmdag5g" path="res://assets/spaceships/hull/02/_base.png" id="4_exi7b"]
+[ext_resource type="Texture2D" uid="uid://csaa8hvq7uu2a" path="res://assets/spaceships/engine/placeholder.png" id="4_lgvaj"]
+[ext_resource type="Texture2D" uid="uid://b5uejhd6j04e5" path="res://assets/spaceships/weapons/01_base.png" id="5_5cuof"]
+
+[sub_resource type="Gradient" id="Gradient_g1l1x"]
+offsets = PackedFloat32Array(0, 0.874323, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bfkg3"]
+gradient = SubResource("Gradient_g1l1x")
+
+[node name="Baker" type="Node2D"]
+script = ExtResource("1_bjnxi")
+res = ExtResource("2_pmu7d")
+heat_gradient = SubResource("GradientTexture1D_bfkg3")
+
+[node name="ResourceView" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 7)
+texture = ExtResource("3_e5ijr")
+
+[node name="Placeholders" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.325)
+
+[node name="hull_placceholder" type="Sprite2D" parent="Placeholders"]
+unique_name_in_owner = true
+modulate = Color(0.5, 0.7, 1, 1)
+texture = ExtResource("4_exi7b")
+
+[node name="eng_0" type="Sprite2D" parent="Placeholders"]
+modulate = Color(1, 0.5, 0, 1)
+position = Vector2(0, 32)
+texture = ExtResource("4_lgvaj")
+
+[node name="eng_R" type="Sprite2D" parent="Placeholders"]
+visible = false
+modulate = Color(1, 0, 0, 1)
+position = Vector2(40, 32)
+texture = ExtResource("4_lgvaj")
+
+[node name="eng_L" type="Sprite2D" parent="Placeholders"]
+visible = false
+modulate = Color(0, 1, 0.2, 1)
+position = Vector2(-40, 32)
+texture = ExtResource("4_lgvaj")
+
+[node name="weapon" type="Sprite2D" parent="Placeholders"]
+position = Vector2(0, -63)
+texture = ExtResource("5_5cuof")

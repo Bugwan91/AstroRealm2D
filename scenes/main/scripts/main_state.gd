@@ -1,8 +1,8 @@
 extends Node
 
 signal main_scene_ready
-signal player_ship_updated(ship: ShipRigidBody)
-signal player_target_updated(ship: ShipRigidBody)
+signal player_ship_updated(ship: Spaceship)
+signal player_target_updated(ship: Spaceship)
 signal player_dead
 signal radar_updated(radar: Radar)
 
@@ -16,10 +16,8 @@ var main_scene: MainScene:
 		main_scene_ready.emit()
 var ship_designer: ShipDesignerUI
 
-var debug_messages := {}
-
-var player_ship: ShipRigidBody: set = _update_player_ship
-var player_target: ShipRigidBody: set = _update_player_target
+var player_ship: Spaceship: set = _update_player_ship
+var player_target: Spaceship: set = _update_player_target
 var player_radar: Radar: set = _set_radar
 
 ### TODO # REMOVE ### REFACTOR ###
@@ -29,19 +27,16 @@ var fa_autopilot := false
 var fa_autopilot_speed := 500.0
 ### TODO # REMOVE ### REFACTOR ###
 
-func debug(key: String, value):
-	debug_messages[key] = str(value)
-
 func connect_to_player(callback: Callable):
 	player_ship_updated.connect(callback)
 	callback.call(player_ship)
 
-func _update_player_ship(ship: ShipRigidBody):
+func _update_player_ship(ship: Spaceship):
 	player_ship = ship
 	player_ship_updated.emit(player_ship)
 	player_ship.dead.connect(_on_player_dead)
 
-func _update_player_target(ship: ShipRigidBody):
+func _update_player_target(ship: Spaceship):
 	if not is_instance_valid(player_ship) or ship == player_ship: return
 	player_target = ship
 	player_target_updated.emit(player_target)

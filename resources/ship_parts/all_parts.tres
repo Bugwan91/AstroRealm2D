@@ -1,34 +1,28 @@
-[gd_resource type="Resource" script_class="ShipDesignerParts" load_steps=25 format=3 uid="uid://cvlsxe0yl8o1a"]
+[gd_resource type="Resource" script_class="ShipDesignerParts" load_steps=20 format=3 uid="uid://dso44ig5a2xx4"]
 
-[ext_resource type="Resource" uid="uid://drhm8p5kvv71k" path="res://resources/ship_parts/cockpit/01.tres" id="1_8pfcu"]
-[ext_resource type="Resource" uid="uid://cmj8g20dbxwmh" path="res://resources/ship_parts/hull/01.tres" id="1_swgrv"]
-[ext_resource type="Resource" uid="uid://ddbus3emw7v04" path="res://resources/ship_parts/cockpit/02.tres" id="2_iid3v"]
-[ext_resource type="Resource" uid="uid://n4x30t0f2gct" path="res://resources/ship_parts/hull/02.tres" id="2_ip4nh"]
-[ext_resource type="Resource" uid="uid://c1xggcinljpje" path="res://resources/ship_parts/engine/01.tres" id="3_0ck4f"]
-[ext_resource type="Resource" uid="uid://lpuy2txkhyi2" path="res://resources/ship_parts/hull/03.tres" id="3_8owdr"]
-[ext_resource type="Resource" uid="uid://dyeqdkm0axqab" path="res://resources/ship_parts/hull/04.tres" id="4_2rmdk"]
-[ext_resource type="Resource" uid="uid://dgw6x6lr6gnk2" path="res://resources/ship_parts/engine/02.tres" id="4_ogj36"]
-[ext_resource type="Resource" uid="uid://cc5dcgmqoxf2w" path="res://resources/ship_parts/hull/05.tres" id="5_emqpv"]
-[ext_resource type="Resource" uid="uid://cqt1qvadxeig3" path="res://resources/ship_parts/hull/06.tres" id="6_6co0j"]
-[ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/ship_parts_list.gd" id="7_0bm2c"]
-[ext_resource type="Resource" uid="uid://cc4jaoixhp0lr" path="res://resources/ship_parts/hull_ext/01.tres" id="11_dphrt"]
-[ext_resource type="Resource" uid="uid://db7b7e1yfehii" path="res://resources/ship_parts/hull_ext/02.tres" id="12_41yf7"]
-[ext_resource type="Resource" uid="uid://hh36wpy2mflt" path="res://resources/ship_parts/hull_ext/03.tres" id="13_he6tr"]
-[ext_resource type="Resource" uid="uid://c52i1koxg6csi" path="res://resources/ship_parts/hull_ext/04.tres" id="14_jbdot"]
-[ext_resource type="Resource" uid="uid://dmnyhbemwyorc" path="res://resources/ship_parts/hull_ext/05.tres" id="15_w7mcf"]
-[ext_resource type="Resource" uid="uid://dvaj7ll214jot" path="res://resources/ship_parts/hull_ext/06.tres" id="16_fg1bc"]
-[ext_resource type="Texture2D" uid="uid://brtabr5lpm864" path="res://assets/spaceships/Styles/01.png" id="18_2xgxi"]
-[ext_resource type="Texture2D" uid="uid://dvxp714x3fp80" path="res://assets/spaceships/Styles/02.png" id="19_p6hfe"]
-[ext_resource type="Texture2D" uid="uid://d1plve26u31ph" path="res://assets/spaceships/Styles/Bunblebee.png" id="20_6jxbm"]
-[ext_resource type="Texture2D" uid="uid://bogly506o6gqw" path="res://assets/spaceships/Styles/red_and_white.png" id="21_coev0"]
-[ext_resource type="Texture2D" uid="uid://chybabpei4ali" path="res://assets/spaceships/Styles/red_lines.png" id="22_0457c"]
-[ext_resource type="Texture2D" uid="uid://bumhukr5exiwp" path="res://assets/spaceships/Styles/SF.png" id="23_ed1pu"]
-[ext_resource type="Texture2D" uid="uid://dh1ya4sfdur13" path="res://assets/spaceships/Styles/smile.png" id="24_md3pv"]
+[ext_resource type="Resource" uid="uid://c33swp4vn5c51" path="res://resources/ship_parts/engine/0.tres" id="1_f6783"]
+[ext_resource type="Resource" uid="uid://brpfjpxetwlmd" path="res://resources/ship_parts/engine/1.tres" id="2_bex6w"]
+[ext_resource type="Resource" uid="uid://c83n3ib0kufjx" path="res://resources/ship_parts/hull/01/hull.tres" id="3_ns6b6"]
+[ext_resource type="Resource" uid="uid://dkfenlyktvckf" path="res://resources/ship_parts/hull/02/hull.tres" id="4_16dyl"]
+[ext_resource type="Resource" uid="uid://cdp7415qyadan" path="res://resources/ship_parts/hull/01/01.tres" id="5_m7vfw"]
+[ext_resource type="Resource" uid="uid://bobgpeam3e5tj" path="res://resources/ship_parts/hull/01/02.tres" id="6_xyliv"]
+[ext_resource type="Resource" uid="uid://dcjyhgkwiqjvv" path="res://resources/ship_parts/hull/01/03.tres" id="7_t1vdd"]
+[ext_resource type="Resource" uid="uid://div8hfpepavgd" path="res://resources/ship_parts/hull/02/01.tres" id="8_3mr3y"]
+[ext_resource type="Resource" uid="uid://fyg17m44vogd" path="res://resources/ship_parts/hull/02/02.tres" id="9_ca4ac"]
+[ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/ship_parts_list.gd" id="9_oee7v"]
+[ext_resource type="Resource" uid="uid://f7ckmary6jm8" path="res://resources/ship_parts/hull/02/03.tres" id="10_kl2f0"]
+[ext_resource type="Texture2D" uid="uid://brtabr5lpm864" path="res://assets/spaceships/Styles/01.png" id="10_llqbd"]
+[ext_resource type="Texture2D" uid="uid://dvxp714x3fp80" path="res://assets/spaceships/Styles/02.png" id="11_clk7m"]
+[ext_resource type="Texture2D" uid="uid://d1plve26u31ph" path="res://assets/spaceships/Styles/Bunblebee.png" id="12_6h25f"]
+[ext_resource type="Texture2D" uid="uid://bogly506o6gqw" path="res://assets/spaceships/Styles/red_and_white.png" id="13_nfpt5"]
+[ext_resource type="Texture2D" uid="uid://chybabpei4ali" path="res://assets/spaceships/Styles/red_lines.png" id="14_hsl0j"]
+[ext_resource type="Texture2D" uid="uid://bumhukr5exiwp" path="res://assets/spaceships/Styles/SF.png" id="15_lylw5"]
+[ext_resource type="Texture2D" uid="uid://dh1ya4sfdur13" path="res://assets/spaceships/Styles/smile.png" id="16_s7xt2"]
+[ext_resource type="Texture2D" uid="uid://dy6bvyf7tmyw7" path="res://assets/spaceships/Styles/URA.png" id="17_fxyt1"]
 
 [resource]
-script = ExtResource("7_0bm2c")
-hulls = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("1_swgrv"), ExtResource("2_ip4nh"), ExtResource("3_8owdr"), ExtResource("4_2rmdk"), ExtResource("5_emqpv"), ExtResource("6_6co0j")])
-hulls_ext = Array[Resource("res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd")]([ExtResource("11_dphrt"), ExtResource("12_41yf7"), ExtResource("13_he6tr"), ExtResource("14_jbdot"), ExtResource("15_w7mcf"), ExtResource("16_fg1bc")])
-cockpits = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("1_8pfcu"), ExtResource("2_iid3v")])
-engines = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("3_0ck4f"), ExtResource("4_ogj36")])
-styles = Array[Texture2D]([ExtResource("18_2xgxi"), ExtResource("19_p6hfe"), ExtResource("20_6jxbm"), ExtResource("21_coev0"), ExtResource("22_0457c"), ExtResource("23_ed1pu"), ExtResource("24_md3pv")])
+script = ExtResource("9_oee7v")
+hulls = Array[Resource("res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd")]([ExtResource("3_ns6b6"), ExtResource("4_16dyl")])
+hulls_ext = Array[Resource("res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd")]([ExtResource("5_m7vfw"), ExtResource("6_xyliv"), ExtResource("7_t1vdd"), ExtResource("8_3mr3y"), ExtResource("9_ca4ac"), ExtResource("10_kl2f0")])
+engines = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("1_f6783"), ExtResource("2_bex6w")])
+styles = Array[Texture2D]([ExtResource("10_llqbd"), ExtResource("11_clk7m"), ExtResource("12_6h25f"), ExtResource("13_nfpt5"), ExtResource("14_hsl0j"), ExtResource("15_lylw5"), ExtResource("16_s7xt2"), ExtResource("17_fxyt1")])

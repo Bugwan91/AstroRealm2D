@@ -8,7 +8,6 @@ extends SubViewport
 @onready var _background: Sprite2D = %background
 @onready var _hull: Sprite2D = %hull
 @onready var _hull_ext: Sprite2D = %hull_ext
-@onready var _cockpit: Sprite2D = %cockpit
 @onready var _engines: Node2D = %engines
 
 func _ready():
@@ -30,15 +29,13 @@ func update(type: ShipBlueprint.Type, value: Resource):
 	match  type:
 		ShipBlueprint.Type.HULL: set_hull(value)
 		ShipBlueprint.Type.HULL_EXT: set_hull_ext(value)
-		ShipBlueprint.Type.COCKPIT: set_cockpit(value)
 		ShipBlueprint.Type.ENGINE: set_engine(value)
 
 func set_hull(resource: HullBakerResource):
 	if resource == null: return # Hull is mandatory, can't be completely romoved
-	# TODO: cockpit and engine should be made mandatory as well
+	# TODO: engine should be made mandatory as well
 	_hull.texture = resource.texture(type)
-	_cockpit.position = resource.cockpit_slot
-	_cockpit.position = resource.cockpit_slot
+	_hull.position = -resource.pivot_point
 	_create_engines(resource.engine_slots, _clear_engines())
 
 
@@ -47,10 +44,7 @@ func set_hull_ext(resource: ViewBakerResource):
 		_hull_ext.texture = null
 	else:
 		_hull_ext.texture = resource.texture(type)
-		_views.move_child(_hull_ext, 2 if resource.ontop else 1)
-
-func set_cockpit(resource: ViewBakerResource):
-	_cockpit.texture = resource.texture(type) if resource != null else null
+		_hull_ext.position = -resource.pivot_point
 
 func set_engine(resource: ViewBakerResource):
 	for engine in _engines.get_children() as Array[Sprite2D]:

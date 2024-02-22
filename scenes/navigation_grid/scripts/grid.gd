@@ -8,7 +8,7 @@ extends Sprite2D
 
 @onready var subgrid = %Subgrid
 
-var target: ShipRigidBody
+var target: Spaceship
 var opacity: float
 var _start_scale: Vector2
 var _start_grid_scale: float
@@ -46,5 +46,5 @@ func update_scale(value: float = 0.0):
 	material.set("shader_parameter/scale", scale / grid_scale)
 	subgrid.material.set("shader_parameter/scale", 5 * scale / grid_scale)
 
-func _on_update_player_ship(player_ship: ShipRigidBody):
+func _on_update_player_ship(player_ship: Spaceship):
 	target = player_ship

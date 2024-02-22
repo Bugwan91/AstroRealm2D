@@ -18,9 +18,8 @@ func open_ship_designer():
 	ship_designer_ui.open()
 	ship_designer_ui.set_blueprint(MainState.main_scene.ship_blueprint.duplicate())
 
-func _on_ship_design_changed(blueprint: ShipBlueprint, design: ShipTexturesRes):
+func _on_ship_design_changed(blueprint: ShipBlueprint, design: ShipDesignData):
 	MainState.main_scene.ship_blueprint = blueprint
-	MainState.main_scene.ship_data.textures = design
 	show_game_ui()
 
 func hide_game_ui():

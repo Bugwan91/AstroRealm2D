@@ -3,12 +3,12 @@ extends ShipInput
 
 @export var points: Array[Vector2]
 
-@onready var ship: ShipRigidBody
+@onready var ship: Spaceship
 @onready var timer = $Timer
 
 var current_point: int = 0
 
-func init(_ship: ShipRigidBody):
+func init(_ship: Spaceship):
 	ship = _ship
 	ship.flight_assistant.is_autopilot = true
 	ship.flight_assistant.is_autopilot_stop = false
