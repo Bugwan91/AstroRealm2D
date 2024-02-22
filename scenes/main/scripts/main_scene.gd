@@ -27,9 +27,10 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	health.max_health = 1000.0
 	health.health = health.max_health
 	ship.health = health
-	var gun: Gun = gun_scene.instantiate() as Gun
-	gun.bullet_color = Color.GREEN
-	ship.gun = gun
+	#var gun: Gun = gun_scene.instantiate() as Gun
+	#gun.bullet_color = Color.GREEN
+	#ship.gun = gun
+	ship.gun_scene = gun_scene
 	var radar: Radar = radar_scene.instantiate() as Radar
 	ship.add_child(radar)
 	ship.autopilot_pointer = autopilot_pointer

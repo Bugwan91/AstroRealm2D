@@ -2,6 +2,7 @@ shader_type canvas_item;
 
 uniform float heat : hint_range(0, 1) = 0.0;
 uniform float emission : hint_range(0, 10)= 2.0;
+uniform vec3 emission_color : source_color;
 uniform float shininess : hint_range(-1, 1) = 0.0;
 uniform sampler2D mask_texture : filter_nearest_mipmap, hint_default_black;
 uniform sampler2D emission_texture : filter_nearest_mipmap, hint_default_black;
@@ -43,7 +44,7 @@ void fragment() {
 		ht_val = pow(ht_color, vec3(2.0)) * pow(ht_base, 2.0) * 16.0;
 	}
 	// EMISSION
-	vec3 em_val = texture(emission_texture, UV).rgb * emission;
+	vec3 em_val = texture(emission_texture, UV).rgb * emission_color * emission;
 	em_val = pow(em_val, vec3(1.0 + emission));
 	// TOTAL COLOR
 	COLOR = vec4(color.rgb + ht_val + em_val, color.a);
@@ -59,7 +60,7 @@ void light() {
 			ht_val = pow(ht_color, vec3(2.0)) * pow(ht_base, 2.0) * 16.0;
 		}
 		// EMISSION
-		vec3 em_val = texture(emission_texture, UV).rgb * emission;
+		vec3 em_val = texture(emission_texture, UV).rgb * emission_color * emission;
 		// TOTAL BASE LIGHT
 		LIGHT = -(COLOR * smoothstep(0.0, 1.0, LIGHT_ENERGY))
 			+ vec4(em_val + ht_val, 0.0);

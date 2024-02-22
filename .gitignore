@@ -4,3 +4,5 @@
 *.PNG~
 
 .vscode/
+addons/godot-box2d
+addons/godot-rapier2d

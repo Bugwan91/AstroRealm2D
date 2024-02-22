@@ -7,7 +7,7 @@ signal dead(ship: Spaceship)
 @export var data: ShipData: set = _set_ship_data
 @export var group: String # TODO: Rework with implementation factions/groups system
 
-@export var gun: Gun #TODO: update with more flexible system
+@export var gun_scene: PackedScene
 
 @export var input_reader: ShipInput
 
@@ -54,12 +54,11 @@ func _setup_health():
 
 func _setup_weapon():
 	_weapon_slots.setup(data.design)
-	if not is_instance_valid(gun): return
-	gun.group = group
 	for slot_index in _weapon_slots.slots.size():
-		var new_gun = gun.duplicate()
-		new_gun.shoot_recoil.connect(_on_weapon_shoot)
-		_weapon_slots.add_weapon(new_gun, slot_index)
+		var gun: Gun = gun_scene.instantiate() as Gun
+		gun.group = group
+		gun.shoot_recoil.connect(_on_weapon_shoot)
+		_weapon_slots.add_weapon(gun, slot_index)
 
 func connect_inputs(new_inputs: ShipInput):
 	input_reader = new_inputs
@@ -81,8 +80,6 @@ func _connect_flight_controller_inputs():
 func _connect_weapon_inputs():
 	_weapon_slots.connect_inputs(input_reader)
 
-func _physics_process(delta):
-	pass
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
 	if is_player:
@@ -93,15 +90,14 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	flight_controller.process(state)
 
 func _update_velocity_for_weapons():
-	if is_instance_valid(gun):
-		gun.velocity = linear_velocity
+	_weapon_slots.update_velocity(linear_velocity)
 
 func set_target(target: RigidBody2D):
 	flight_assistant.target_body = target
 
 func _die():
 	flight_assistant.enabled = false
-	gun.enabled = false
+	_weapon_slots.enabled = false
 	dead.emit(self)
 
 func _destroy():

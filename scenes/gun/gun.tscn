@@ -32,7 +32,8 @@ texture_filter = 3
 script = ExtResource("1_heu61")
 bullet_scene = ExtResource("2_gsief")
 bullet_color = Color(1, 0.905882, 0.317647, 1)
-range = 3000.0
+range = 1000.0
+bullet_speed = 1000.0
 recoil = 10.0
 
 [node name="ChargeTimer" type="Timer" parent="."]

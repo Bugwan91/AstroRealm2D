@@ -37,6 +37,7 @@ load_path = "res://.godot/imported/01_mask.png-53fe66126779dd41e5d208b4b8f935a8.
 shader = ExtResource("7_byino")
 shader_parameter/heat = 0.3
 shader_parameter/emission = 2.0
+shader_parameter/emission_color = null
 shader_parameter/shininess = 0.0
 shader_parameter/mask_texture = SubResource("CompressedTexture2D_ra4c2")
 shader_parameter/emission_texture = SubResource("CompressedTexture2D_h2ts8")

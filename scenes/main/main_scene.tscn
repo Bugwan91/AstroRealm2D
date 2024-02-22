@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=41 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://csufvxpfo8jbl" path="res://scenes/navigation_grid/grid.tscn" id="4_aip35"]
 [ext_resource type="Environment" uid="uid://chl1sjnqh1sa7" path="res://scenes/main/main_environment.tres" id="4_h5iwh"]
 [ext_resource type="Resource" uid="uid://c83n3ib0kufjx" path="res://resources/ship_parts/hull/01/hull.tres" id="5_62ybw"]
-[ext_resource type="Resource" uid="uid://dcjyhgkwiqjvv" path="res://resources/ship_parts/hull/01/03.tres" id="5_j3f4g"]
 [ext_resource type="Texture2D" uid="uid://dvxp714x3fp80" path="res://assets/spaceships/Styles/02.png" id="7_lo2oh"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://scenes/ui/ui.tscn" id="8_myah8"]
 [ext_resource type="Shader" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="10_7ps0f"]
@@ -19,6 +18,8 @@
 [ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="18_u6aof"]
 [ext_resource type="Texture2D" uid="uid://bwr37r7vbwfq0" path="res://assets/VFX_textures/light_03.png" id="20_aq44u"]
 [ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="24_7ks4m"]
+[ext_resource type="Texture2D" uid="uid://cyq7shk5k0udu" path="res://assets/my/pointer.png" id="24_lcrqg"]
+[ext_resource type="Script" path="res://scenes/main/scripts/debug_pointer.gd" id="25_ojc3k"]
 [ext_resource type="Texture2D" uid="uid://cf84vntqw4fqs" path="res://assets/spaceships/experimantal_hulls/256_256.png" id="43_g84bi"]
 [ext_resource type="Texture2D" uid="uid://b34plybxjjec4" path="res://assets/spaceships/experimantal_hulls/256_512.png" id="44_8ykws"]
 [ext_resource type="Texture2D" uid="uid://ksiny6gtw6n5" path="res://assets/spaceships/experimantal_hulls/256_1024.png" id="45_xiox1"]
@@ -27,7 +28,6 @@
 [sub_resource type="Resource" id="Resource_in7ib"]
 script = ExtResource("11_fkpwp")
 hull = ExtResource("5_62ybw")
-hull_ext = ExtResource("5_j3f4g")
 engine = ExtResource("3_xpkda")
 style = ExtResource("7_lo2oh")
 
@@ -58,6 +58,7 @@ load_path = "res://.godot/imported/01_mask.png-53fe66126779dd41e5d208b4b8f935a8.
 shader = ExtResource("18_u6aof")
 shader_parameter/heat = 0.0
 shader_parameter/emission = 2.0
+shader_parameter/emission_color = null
 shader_parameter/shininess = 0.0
 shader_parameter/mask_texture = SubResource("CompressedTexture2D_ra4c2")
 shader_parameter/emission_texture = SubResource("CompressedTexture2D_h2ts8")
@@ -104,11 +105,19 @@ fill = 1
 fill_from = Vector2(0.470085, 0.440171)
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("input_reader")]
-position = Vector2(50, 6)
 script = ExtResource("1_2ehlx")
 ship_flight_model = ExtResource("2_3s1kf")
 ship_blueprint = SubResource("Resource_in7ib")
 input_reader = NodePath("PlayerInputReader")
+metadata/_edit_lock_ = true
+
+[node name="DebugPointer" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+top_level = true
+position = Vector2(-133, -165)
+texture = ExtResource("24_lcrqg")
+script = ExtResource("25_ojc3k")
 
 [node name="PlayerShipBaker" parent="." instance=ExtResource("24_7ks4m")]
 unique_name_in_owner = true
@@ -146,6 +155,7 @@ base_opacity = 0.01
 grid_offset = null
 speed_limit = 12000.0
 camera = NodePath("../Camera")
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D4" type="Sprite2D" parent="."]
 visible = false

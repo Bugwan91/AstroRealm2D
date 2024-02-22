@@ -67,8 +67,8 @@ func _charge_done():
 func _spawn_bullet():
 	var bullet = bullet_scene.instantiate() as Bullet
 	bullet.group = group
-	bullet.position = _shoot_point.global_position
 	var spear: float = accuracy * pow(2.0 * (randf() - 0.5), 2.0) * sign(randf() - 0.5)
+	bullet.position = _shoot_point.global_position
 	bullet.rotation = global_rotation + spear
 	bullet.linear_velocity = velocity.rotated(spear)
 	shoot_recoil.emit(-transform.x.rotated(spear) * recoil)
