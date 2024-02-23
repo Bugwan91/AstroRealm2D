@@ -5,12 +5,11 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bdry2"]
 shader = ExtResource("1_2mbac")
 shader_parameter/color = Color(0.0666667, 0.247059, 1, 1)
-shader_parameter/brightness = 4.0
+shader_parameter/brightness = 8.0
 shader_parameter/rotation_speed = 0.02
 
 [sub_resource type="Gradient" id="Gradient_j18vj"]
-offsets = PackedFloat32Array(0, 0.838608)
-colors = PackedColorArray(1, 1, 1, 1, 0.215902, 0.215902, 0.215902, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.306923, 0.306923, 0.306923, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jx1q7"]
 noise_type = 2
@@ -26,6 +25,7 @@ noise = SubResource("FastNoiseLite_jx1q7")
 [node name="Sun" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 0
 texture_repeat = 2
 material = SubResource("ShaderMaterial_bdry2")
 texture = SubResource("NoiseTexture2D_2ywoa")

@@ -17,7 +17,9 @@
 shader = ExtResource("4_cqrqv")
 shader_parameter/heat = 0.0
 shader_parameter/emission = 0.0
-shader_parameter/shininess = 0.8
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/shininess = 0.9
+shader_parameter/metallic = 0.0
 shader_parameter/mask_texture = ExtResource("6_1ulvv")
 shader_parameter/emission_texture = ExtResource("5_7c33b")
 shader_parameter/heat_texture = ExtResource("6_2v8rv")
@@ -31,7 +33,7 @@ texture_filter = 3
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_heu61")
 bullet_scene = ExtResource("2_gsief")
-bullet_color = Color(1, 0.905882, 0.317647, 1)
+bullet_color = Color(1, 0.8, 0, 1)
 range = 1000.0
 bullet_speed = 1000.0
 recoil = 10.0
@@ -56,7 +58,7 @@ material = SubResource("ShaderMaterial_whwpl")
 rotation = 1.5708
 texture = SubResource("CanvasTexture_c5j27")
 script = ExtResource("10_3kf55")
-max_emission = 4.0
+max_emission = 6.0
 
 [node name="ShootPoint" type="Marker2D" parent="."]
 unique_name_in_owner = true

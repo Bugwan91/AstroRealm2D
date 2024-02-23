@@ -21,7 +21,6 @@ var _damage := 10.0
 
 func _ready():
 	linear_velocity += transform.x * speed
-	MyDebug.info("bullet_st", position)
 
 var printed := false
 func _physics_process(delta):
@@ -30,7 +29,6 @@ func _physics_process(delta):
 	long_ray.target_position.y = speed * time_prediction
 	_collide()
 	if not printed:
-		MyDebug.info("bullet_lf", position)
 		printed = true
 
 func update_material(color: Color):

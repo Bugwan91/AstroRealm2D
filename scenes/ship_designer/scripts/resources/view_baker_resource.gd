@@ -3,11 +3,11 @@ class_name ViewBakerResource #TODO rename to ShipModule
 extends Resource
 
 enum Type { HULL, HULL_EXT, ENGINE } #TODO: use this type in ship designer
-enum TextureType { DIFFUSE, NORMAL, MASK, HEAT,EMISSION }
+enum TextureType { DIFFUSE, NORMAL, MASK, HEAT, EMISSION }
 
 @export var type: Type
 @export var allowed_ext: Array[ViewBakerResource] = []
-@export var active_ext: ViewBakerResource
+
 @export_group("textures")
 @export var diffuse: Texture2D
 @export var normal: Texture2D
@@ -15,9 +15,16 @@ enum TextureType { DIFFUSE, NORMAL, MASK, HEAT,EMISSION }
 @export var emission: Texture2D
 @export var heat: Texture2D
 @export_range(0, 1) var shininess: float = 0.5
-@export_group("behaviour")
+@export var mergeable := true
+
+@export_group("physics")
 @export var pivot_point: Vector2
 @export var polygon: Vector2ArrayResource # TODO: update to allow multiple polygons
+
+@export_group("stats")
+#@export var mass: float = 1.0
+@export var heat_capacity: float = 500.0
+@export var heat_radiation: float = 20.0
 
 func texture(type: TextureType):
 	match type:

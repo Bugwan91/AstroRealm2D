@@ -10,4 +10,7 @@ func set_emission(emission: float):
 	set_emission_absolute(emission * max_emission)
 
 func set_emission_absolute(emission: float):
-	material.set("shader_parameter/emission", emission)#clampf(emission, 0.0, max_emission))
+	material.set("shader_parameter/emission", emission)
+
+func set_emission_color(color: Color):
+	material.set("shader_parameter/emission_color", color)

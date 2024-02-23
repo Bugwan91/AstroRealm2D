@@ -36,7 +36,7 @@ enabled = false
 
 [node name="Sprite" type="Sprite2D" parent="PositionExtrapolation"]
 unique_name_in_owner = true
-modulate = Color(0, 8, 0, 1)
+modulate = Color(0, 8, 0, 0.5)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_8unas")
 position = Vector2(-7, 0)

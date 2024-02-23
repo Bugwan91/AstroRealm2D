@@ -15,8 +15,9 @@ load_path = "res://.godot/imported/2-1_emission.png-67052bb7f4582c6df4039dee2c57
 shader = ExtResource("5_alsfe")
 shader_parameter/heat = 0.0
 shader_parameter/emission = 5.0
-shader_parameter/emission_color = null
+shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/shininess = 0.0
+shader_parameter/metallic = 0.0
 shader_parameter/emission_texture = SubResource("CompressedTexture2D_3y64e")
 
 [node name="ShipDesignerContainer" type="PanelContainer"]

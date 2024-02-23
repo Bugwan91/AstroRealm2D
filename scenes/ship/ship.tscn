@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=28 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Texture2D" uid="uid://c0g0c4k4h83o" path="res://assets/my/icons/ship_s.png" id="2_e2mwk"]
@@ -8,7 +8,12 @@
 [ext_resource type="Script" path="res://scenes/ship/scripts/weapons_slots.gd" id="8_4fwa5"]
 [ext_resource type="Texture2D" uid="uid://bdcrgonof28mh" path="res://assets/spaceships/temperature.tres" id="8_ts42t"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/view_ship.gd" id="9_cprq3"]
+[ext_resource type="Texture2D" uid="uid://dvtnerb2k0qle" path="res://assets/spaceships/hull/02/_emission.png" id="9_vptip"]
+[ext_resource type="Texture2D" uid="uid://bsf8bix50mxto" path="res://assets/spaceships/hull/02/_heat.png" id="10_dhdk5"]
+[ext_resource type="Texture2D" uid="uid://vaw1wyhai2wf" path="res://assets/spaceships/hull/02/_mask.png" id="11_jl7kr"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship_selection_area.gd" id="12_bsixf"]
+[ext_resource type="Texture2D" uid="uid://bqx61atmdag5g" path="res://assets/spaceships/hull/02/_base.png" id="13_3b4ap"]
+[ext_resource type="Texture2D" uid="uid://bi8g2s363ai44" path="res://assets/spaceships/hull/02/_normal.png" id="14_2c5v6"]
 [ext_resource type="PackedScene" uid="uid://bu6wjq2ioia27" path="res://scenes/ship/desctroy_effect_manager.tscn" id="14_4y0fi"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship_controller.gd" id="14_5nufi"]
 [ext_resource type="PackedScene" uid="uid://vp7ygncoxsax" path="res://scenes/ship/taking_damage.tscn" id="14_hg64s"]
@@ -27,31 +32,21 @@ radius = 70.1783
 [sub_resource type="CircleShape2D" id="CircleShape2D_70byj"]
 radius = 80.0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_h2ts8"]
-load_path = "res://.godot/imported/01_emission.png-1e8d36474527d5998fe65ab26384a8a4.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ra4c2"]
-load_path = "res://.godot/imported/01_mask.png-53fe66126779dd41e5d208b4b8f935a8.ctex"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ma44e"]
 shader = ExtResource("7_byino")
 shader_parameter/heat = 0.3
 shader_parameter/emission = 2.0
-shader_parameter/emission_color = null
+shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/shininess = 0.0
-shader_parameter/mask_texture = SubResource("CompressedTexture2D_ra4c2")
-shader_parameter/emission_texture = SubResource("CompressedTexture2D_h2ts8")
+shader_parameter/metallic = 0.0
+shader_parameter/mask_texture = ExtResource("11_jl7kr")
+shader_parameter/emission_texture = ExtResource("9_vptip")
+shader_parameter/heat_texture = ExtResource("10_dhdk5")
 shader_parameter/temperature_texture = ExtResource("8_ts42t")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mwndk"]
-load_path = "res://.godot/imported/01_base.png-128da25420d03d0b06c57fe2796bc06d.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7gw38"]
-load_path = "res://.godot/imported/01_normal.png-d227dc398208031a328d516fcd1c8557.ctex"
-
 [sub_resource type="CanvasTexture" id="CanvasTexture_fknoo"]
-diffuse_texture = SubResource("CompressedTexture2D_mwndk")
-normal_texture = SubResource("CompressedTexture2D_7gw38")
+diffuse_texture = ExtResource("13_3b4ap")
+normal_texture = ExtResource("14_2c5v6")
 texture_filter = 3
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qbdui"]

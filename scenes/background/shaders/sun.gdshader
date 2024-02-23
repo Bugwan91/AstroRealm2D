@@ -11,15 +11,18 @@ void fragment() {
 	if (px * px + py * py > 1.0) {
 		COLOR.a = 0.0;
 	} else {
-		px = asin(px / sqrt(1.0 - py * py)) * 2.0 / PI;
-		py = asin(py) * 2.0 / PI;
+		float dx = asin(px / sqrt(1.0 - py * py)) * 2.0 / PI;
+		float dy = asin(py / sqrt(1.0 - px * px)) * 2.0 / PI;
+		//float dy = asin(py) * 2.0 / PI;
 		
 		float tex_color = texture(TEXTURE, vec2(
-			0.5 * (px + 1.0) - TIME * rotation_speed,
-			0.5 * (py + 1.0))).r + texture(TEXTURE, vec2(
-				0.5 * (px + 1.0) - sin(TIME * rotation_speed),
-				0.5 * (py + 1.0) + sin(TIME * rotation_speed)
+			0.5 * (dx + 1.0) - TIME * rotation_speed,
+			0.5 * (dy + 1.0))).r + texture(TEXTURE, vec2(
+				0.5 * (dx + 1.0) - sin(TIME * rotation_speed),
+				0.5 * (dy + 1.0) + sin(TIME * rotation_speed)
 			)).r;
-		COLOR = color * tex_color + color * tex_color * brightness;
+		vec4 sun_color = color * tex_color;
+		vec4 sun_shine = sun_color * brightness;
+		COLOR = sun_color + 0.5 * sun_shine + sun_shine * pow(px * px + py * py, 4.0);
 	}
 }

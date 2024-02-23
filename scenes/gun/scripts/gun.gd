@@ -37,6 +37,7 @@ func _ready():
 	_charge_timer.wait_time = 1.0 / fire_rate
 	_charge_timer.timeout.connect(_charge_done)
 	_bullet_lifetime = range / bullet_speed
+	view.set_emission_color(bullet_color)
 
 func on_fire_input(value: bool):
 	_is_firing = value

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=38 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -20,9 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="24_7ks4m"]
 [ext_resource type="Texture2D" uid="uid://cyq7shk5k0udu" path="res://assets/my/pointer.png" id="24_lcrqg"]
 [ext_resource type="Script" path="res://scenes/main/scripts/debug_pointer.gd" id="25_ojc3k"]
-[ext_resource type="Texture2D" uid="uid://cf84vntqw4fqs" path="res://assets/spaceships/experimantal_hulls/256_256.png" id="43_g84bi"]
-[ext_resource type="Texture2D" uid="uid://b34plybxjjec4" path="res://assets/spaceships/experimantal_hulls/256_512.png" id="44_8ykws"]
-[ext_resource type="Texture2D" uid="uid://ksiny6gtw6n5" path="res://assets/spaceships/experimantal_hulls/256_1024.png" id="45_xiox1"]
 [ext_resource type="PackedScene" uid="uid://cmqm4dm8rpi0l" path="res://scenes/background/sun.tscn" id="46_aihwc"]
 
 [sub_resource type="Resource" id="Resource_in7ib"]
@@ -58,8 +55,9 @@ load_path = "res://.godot/imported/01_mask.png-53fe66126779dd41e5d208b4b8f935a8.
 shader = ExtResource("18_u6aof")
 shader_parameter/heat = 0.0
 shader_parameter/emission = 2.0
-shader_parameter/emission_color = null
+shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/shininess = 0.0
+shader_parameter/metallic = 0.0
 shader_parameter/mask_texture = SubResource("CompressedTexture2D_ra4c2")
 shader_parameter/emission_texture = SubResource("CompressedTexture2D_h2ts8")
 shader_parameter/temperature_texture = ExtResource("18_mc64c")
@@ -174,8 +172,8 @@ unique_name_in_owner = true
 in_range_color = Color(0, 0, 1, 0.78)
 out_range_color = Color(0, 0, 0.486275, 0.784314)
 
-[node name="PointLight2" type="PointLight2D" parent="." groups=["shiftable"]]
-position = Vector2(-636, -203)
+[node name="PointLightGreen" type="PointLight2D" parent="." groups=["shiftable"]]
+position = Vector2(-1174, -239)
 color = Color(0.519993, 0.999531, 0.706112, 1)
 energy = 0.7
 blend_mode = 2
@@ -183,96 +181,118 @@ texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 4.0
 height = 500.0
 
-[node name="Star01" type="Sprite2D" parent="PointLight2"]
-modulate = Color(0, 5, 3, 1)
+[node name="Star01" type="Sprite2D" parent="PointLightGreen"]
+modulate = Color(0, 15, 9, 1)
 light_mask = 0
-z_index = 1
 material = SubResource("CanvasItemMaterial_lkrwm")
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("20_aq44u")
 
-[node name="PointLight" type="PointLight2D" parent="." groups=["shiftable"]]
-position = Vector2(530, -49)
+[node name="RedLight" type="Node2D" parent="." groups=["shiftable"]]
+position = Vector2(161, -247)
+
+[node name="PointLight1" type="PointLight2D" parent="RedLight"]
 color = Color(1, 0.211765, 0, 1)
-energy = 0.7
+energy = 3.2
+blend_mode = 2
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 8.0
+height = 500.0
+
+[node name="Star08" type="Sprite2D" parent="RedLight/PointLight1"]
+modulate = Color(32, 6.4, 2.4, 1)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_lkrwm")
+texture = SubResource("GradientTexture2D_76frv")
+
+[node name="PointLight2" type="PointLight2D" parent="RedLight"]
+position = Vector2(500, 0)
+color = Color(1, 0.211765, 0, 1)
+energy = 1.6
 blend_mode = 2
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 4.0
 height = 500.0
 
-[node name="Star08" type="Sprite2D" parent="PointLight"]
-modulate = Color(32, 6.4, 2.4, 1)
-light_mask = 0
-z_index = 1
-material = SubResource("CanvasItemMaterial_lkrwm")
-position = Vector2(-15, -1)
-texture = SubResource("GradientTexture2D_76frv")
-
-[node name="Star02" type="Sprite2D" parent="PointLight"]
+[node name="Star02" type="Sprite2D" parent="RedLight/PointLight2"]
 modulate = Color(16, 3.2, 1.2, 1)
 light_mask = 0
-z_index = 1
 material = SubResource("CanvasItemMaterial_lkrwm")
-position = Vector2(118, 3)
 texture = SubResource("GradientTexture2D_76frv")
 
-[node name="Star05" type="Sprite2D" parent="PointLight"]
+[node name="PointLight3" type="PointLight2D" parent="RedLight"]
+position = Vector2(1000, 0)
+color = Color(1, 0.211765, 0, 1)
+energy = 0.8
+blend_mode = 2
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 2.0
+height = 500.0
+
+[node name="Star05" type="Sprite2D" parent="RedLight/PointLight3"]
 modulate = Color(8, 1.6, 0.6, 1)
 light_mask = 0
-z_index = 1
 material = SubResource("CanvasItemMaterial_lkrwm")
-position = Vector2(249, 4)
 texture = SubResource("GradientTexture2D_76frv")
 
-[node name="Star04" type="Sprite2D" parent="PointLight"]
+[node name="PointLight4" type="PointLight2D" parent="RedLight"]
+position = Vector2(1500, 0)
+color = Color(1, 0.211765, 0, 1)
+energy = 0.4
+blend_mode = 2
+texture = SubResource("GradientTexture2D_3cj2f")
+height = 500.0
+
+[node name="Star04" type="Sprite2D" parent="RedLight/PointLight4"]
 modulate = Color(4, 0.8, 0.3, 1)
 light_mask = 0
-z_index = 1
 material = SubResource("CanvasItemMaterial_lkrwm")
-position = Vector2(379, 3)
 texture = SubResource("GradientTexture2D_76frv")
 
-[node name="Star03" type="Sprite2D" parent="PointLight"]
+[node name="PointLight5" type="PointLight2D" parent="RedLight"]
+position = Vector2(2000, 0)
+color = Color(1, 0.211765, 0, 1)
+energy = 0.2
+blend_mode = 2
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 0.5
+height = 500.0
+
+[node name="Star03" type="Sprite2D" parent="RedLight/PointLight5"]
 modulate = Color(2, 0.4, 0.15, 1)
 light_mask = 0
-z_index = 1
 material = SubResource("CanvasItemMaterial_lkrwm")
-position = Vector2(507, 2)
 texture = SubResource("GradientTexture2D_76frv")
 
-[node name="Star06" type="Sprite2D" parent="PointLight"]
+[node name="PointLight6" type="PointLight2D" parent="RedLight"]
+position = Vector2(2500, 0)
+color = Color(1, 0.211765, 0, 1)
+energy = 0.1
+blend_mode = 2
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 0.25
+height = 500.0
+
+[node name="Star06" type="Sprite2D" parent="RedLight/PointLight6"]
 modulate = Color(1.5, 0.3, 0.1, 1)
 light_mask = 0
-z_index = 1
 material = SubResource("CanvasItemMaterial_lkrwm")
-position = Vector2(613, 1)
 texture = SubResource("GradientTexture2D_76frv")
 
-[node name="Star07" type="Sprite2D" parent="PointLight"]
+[node name="Star07" type="Sprite2D" parent="RedLight"]
 modulate = Color(1, 0.2, 0.0705882, 1)
 light_mask = 0
-z_index = 1
 material = SubResource("CanvasItemMaterial_lkrwm")
-position = Vector2(713, 0)
+position = Vector2(3000, 0)
 texture = SubResource("GradientTexture2D_76frv")
 
-[node name="Sprite2D" type="Sprite2D" parent="." groups=["shiftable"]]
-modulate = Color(0.5, 0.5, 0.5, 0.5)
-light_mask = 0
-position = Vector2(601, 712)
-texture = ExtResource("43_g84bi")
-
-[node name="Sprite2D2" type="Sprite2D" parent="." groups=["shiftable"]]
-modulate = Color(0.5, 0.5, 0.5, 0.5)
-light_mask = 0
-position = Vector2(1293, 706)
-texture = ExtResource("44_8ykws")
-
-[node name="Sprite2D3" type="Sprite2D" parent="." groups=["shiftable"]]
-modulate = Color(0.5, 0.5, 0.5, 0.5)
-light_mask = 0
-position = Vector2(1982, 706)
-texture = ExtResource("45_xiox1")
-
 [node name="Sun" parent="." groups=["shiftable"] instance=ExtResource("46_aihwc")]
-position = Vector2(-159, -816)
+position = Vector2(-1365, -1293)
+
+[node name="PointLightSun" type="PointLight2D" parent="Sun"]
+color = Color(0.2, 0.5, 1, 1)
+energy = 4.0
+blend_mode = 2
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 16.0
+height = 500.0

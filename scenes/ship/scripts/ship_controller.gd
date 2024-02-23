@@ -33,6 +33,7 @@ func _apply_controls(state: PhysicsDirectBodyState2D):
 	_strafe(state)
 	_rotate(state)
 	_boost(state)
+	_apply_drag(state)
 
 func _apply_impulse(state: PhysicsDirectBodyState2D):
 	if _impulses.is_zero_approx(): return
@@ -46,8 +47,9 @@ func _apply_drag(state: PhysicsDirectBodyState2D):
 		state.apply_central_force(delta_v * flight_model.mass * -absolute_v.normalized())
 
 func _strafe(state: PhysicsDirectBodyState2D):
-	state.linear_velocity += inputs.strafe.rotated(ship.rotation)\
-			* flight_model.strafe * state.step
+	var strafe_a := inputs.strafe.rotated(ship.rotation) * flight_model.strafe
+	strafe_a = 2.0 * strafe_a - state.linear_velocity
+	state.linear_velocity += strafe_a * state.step
 
 func _rotate(state: PhysicsDirectBodyState2D):
 	var d := state.transform.x.angle_to(inputs.target_point - state.transform.origin)
