@@ -19,20 +19,18 @@ func _radar_updated(value: Radar):
 	_items.clear()
 	radar = value
 	if not is_instance_valid(radar): return
-	radar.body_entered.connect(_radar_entered)
-	radar.body_exited.connect(_radar_exited)
+	radar.area_entered.connect(_radar_entered)
+	radar.area_exited.connect(_radar_exited)
 
-func _radar_entered(detected_item: Node2D):
-	var item: RadarItem = detected_item.get_node("RadarItem")
-	if not is_instance_valid(item): return
+func _radar_entered(item: Area2D):
+	if not item is RadarItem: return
 	_items.append(item)
 	item.init()
 	item.update(view_radius, radar.radius)
 	add_child(item.icon)
 
-func _radar_exited(detected_item):
-	var item: RadarItem = detected_item.get_node("RadarItem")
-	if not is_instance_valid(item): return
+func _radar_exited(item):
+	if not item is RadarItem: return
 	_items.erase(item)
 	remove_child(item.icon)
 	item.clear()

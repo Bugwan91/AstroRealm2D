@@ -15,6 +15,7 @@ unique_name_in_owner = true
 script = ExtResource("2_05kjf")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -24,12 +25,14 @@ layout_mode = 2
 
 [node name="Diffuse" parent="HBoxContainer/SubViewportDiffuse" instance=ExtResource("7_yjkib")]
 unique_name_in_owner = true
+render_target_update_mode = 0
 
 [node name="SubViewportNormal" type="SubViewportContainer" parent="HBoxContainer"]
 layout_mode = 2
 
 [node name="Normal" parent="HBoxContainer/SubViewportNormal" instance=ExtResource("7_yjkib")]
 unique_name_in_owner = true
+render_target_update_mode = 0
 type = 1
 
 [node name="SubViewportEmission" type="SubViewportContainer" parent="HBoxContainer"]
@@ -37,6 +40,7 @@ layout_mode = 2
 
 [node name="Emission" parent="HBoxContainer/SubViewportEmission" instance=ExtResource("7_yjkib")]
 unique_name_in_owner = true
+render_target_update_mode = 0
 type = 4
 
 [node name="SubViewportMask" type="SubViewportContainer" parent="HBoxContainer"]
@@ -44,6 +48,7 @@ layout_mode = 2
 
 [node name="Mask" parent="HBoxContainer/SubViewportMask" instance=ExtResource("7_yjkib")]
 unique_name_in_owner = true
+render_target_update_mode = 0
 type = 2
 
 [node name="SubViewportStyleMask" type="SubViewportContainer" parent="HBoxContainer"]
@@ -51,6 +56,7 @@ layout_mode = 2
 
 [node name="Heat" parent="HBoxContainer/SubViewportStyleMask" instance=ExtResource("7_yjkib")]
 unique_name_in_owner = true
+render_target_update_mode = 0
 type = 3
 
 [node name="SubViewportStyle" type="SubViewportContainer" parent="HBoxContainer"]
@@ -59,3 +65,4 @@ layout_mode = 2
 [node name="Style" parent="HBoxContainer/SubViewportStyle" instance=ExtResource("5_n36rl")]
 unique_name_in_owner = true
 handle_input_locally = false
+render_target_update_mode = 0

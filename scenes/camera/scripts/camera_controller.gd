@@ -3,14 +3,14 @@ extends Camera2D
 
 signal zoomed(zoom: float)
 
-@export var inertia := 1.0
-@export var acceleration_multiplyer := 5.0
-@export var zoom_min := 0.5
-@export var zoom_max := 4.0
+@export var camera_acceleration := 60.0
+@export var zoom_min := 0.1
+@export var zoom_max := 2.0
 @export var zoom_speed := 0.05
 
+var ignore_floating := true
 var target: Spaceship
-var _last_veocity: Vector2
+var _acceleration: Vector2
 var _required_acceleration_position: Vector2
 var _required_look_position: Vector2
 var _hit_position: Vector2
@@ -18,12 +18,10 @@ var _zoom_min: Vector2
 var _zoom_max: Vector2
 var _zoom_speed: Vector2
 var _target_zoom: Vector2
-var _inverse_inertia: float
 
 func _ready():
 	process_priority = 999
 	MainState.player_ship_updated.connect(_on_update_player_ship)
-	_inverse_inertia = 1 / inertia
 	_init_zoom()
 
 func _unhandled_input(event):
@@ -41,14 +39,17 @@ func _process(delta):
 		zoomed.emit(zoom.x)
 	_required_look_position = lerp(_required_look_position, _get_look_position(), 2 * delta)
 	_hit_position = lerp(_hit_position, Vector2.ZERO, 0.1)
-	position = target.extrapolator.smooth_position + _required_acceleration_position + _required_look_position + _hit_position
+	_update_acceleration(delta)
+	position = target.extrapolator.smooth_position# + _acceleration + _required_look_position + _hit_position
 
-func _physics_process(delta):
+func _update_acceleration(delta: float):
 	if not is_instance_valid(target): return
-	var acceleration = (_last_veocity - target.absolute_velocity) * (Vector2.ONE * acceleration_multiplyer)
-	acceleration = target.acceleration * (Vector2.ONE * acceleration_multiplyer)
-	_required_acceleration_position = lerp(_required_acceleration_position, acceleration, _inverse_inertia * delta)
-	_last_veocity = target.absolute_velocity
+	var a_delta := target.acceleration - _acceleration
+	var a_delta_l := a_delta.length()
+	if is_zero_approx(a_delta_l): return
+	var a_delta_n := a_delta / a_delta_l
+	var a_delta_max := clampf(a_delta_l, 0.0, camera_acceleration * delta / zoom.x)
+	_acceleration += a_delta_max * a_delta_n
 
 func _init_zoom():
 	_zoom_min = Vector2(zoom_min, zoom_min)
@@ -57,9 +58,9 @@ func _init_zoom():
 	_target_zoom = zoom
 
 func _get_look_position() -> Vector2:
-	var screen = Vector2(get_viewport().size) / zoom
-	var deadzone = screen * 0.4 # 0.5 * 0.8 => half_screen * (1 - margins)
-	var delta = get_global_mouse_position() - target.extrapolator.smooth_position
+	var screen := Vector2(get_viewport().size) / zoom
+	var deadzone := screen * 0.4 # 0.5 * 0.8 => half_screen * (1 - margins)
+	var delta := get_global_mouse_position() - target.extrapolator.smooth_position
 	return delta.clamp(-deadzone, deadzone) / 2
 
 func _on_update_player_ship(player_ship: Spaceship):

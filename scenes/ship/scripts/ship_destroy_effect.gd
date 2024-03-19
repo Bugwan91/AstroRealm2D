@@ -6,10 +6,10 @@ extends Node2D
 @onready var sparcles = %Sparcles
 @onready var explosion_audio = %ExplosionAudio
 
+# TODO replace with VelocityComponent
 var linear_velocity := Vector2.ZERO
 
 func _ready():
-	FloatingOrigin.add(self)
 	smoke.emitting = true
 	fire.emitting = true
 	sparcles.emitting = true

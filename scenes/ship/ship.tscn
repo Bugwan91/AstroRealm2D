@@ -1,7 +1,6 @@
-[gd_scene load_steps=28 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=26 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
-[ext_resource type="Texture2D" uid="uid://c0g0c4k4h83o" path="res://assets/my/icons/ship_s.png" id="2_e2mwk"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/flight_assistant.gd" id="3_m324h"]
 [ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="7_byino"]
@@ -17,9 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://bu6wjq2ioia27" path="res://scenes/ship/desctroy_effect_manager.tscn" id="14_4y0fi"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship_controller.gd" id="14_5nufi"]
 [ext_resource type="PackedScene" uid="uid://vp7ygncoxsax" path="res://scenes/ship/taking_damage.tscn" id="14_hg64s"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/radar_item.gd" id="18_cae74"]
 [ext_resource type="PackedScene" uid="uid://vr472sgwb7rs" path="res://scenes/ship/collision_detector.tscn" id="18_hhqrk"]
 [ext_resource type="Script" path="res://scenes/heat/scripts/Heat.gd" id="20_1gdyl"]
+[ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="20_w3y8g"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/position_extrapolation.gd" id="25_1c55w"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vnpcs"]
@@ -28,9 +27,6 @@ bounce = 0.1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3ypi3"]
 radius = 70.1783
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_70byj"]
-radius = 80.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ma44e"]
 shader = ExtResource("7_byino")
@@ -49,8 +45,8 @@ diffuse_texture = ExtResource("13_3b4ap")
 normal_texture = ExtResource("14_2c5v6")
 texture_filter = 3
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qbdui"]
-light_mode = 1
+[sub_resource type="CircleShape2D" id="CircleShape2D_70byj"]
+radius = 80.0
 
 [node name="Ship" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_vnpcs")
@@ -59,24 +55,8 @@ script = ExtResource("1_5ckws")
 data = ExtResource("2_uwj24")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_3ypi3")
-debug_color = Color(0, 0.560784, 0.870588, 0.101961)
-
-[node name="SelectionArea" type="Area2D" parent="."]
-visible = false
-collision_layer = 2
-collision_mask = 0
-monitoring = false
-monitorable = false
-script = ExtResource("12_bsixf")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionArea"]
-shape = SubResource("CircleShape2D_70byj")
-debug_color = Color(0, 0.631, 0.475, 0.1)
-
-[node name="TakingDamage" parent="." instance=ExtResource("14_hg64s")]
-unique_name_in_owner = true
+debug_color = Color(0.988235, 0, 0.243137, 0.101961)
 
 [node name="CollisionDetector" parent="." instance=ExtResource("18_hhqrk")]
 unique_name_in_owner = true
@@ -100,6 +80,21 @@ script = ExtResource("9_cprq3")
 [node name="DestroyEffectManager" parent="PositionExtrapolation" instance=ExtResource("14_4y0fi")]
 unique_name_in_owner = true
 
+[node name="TakingDamage" parent="PositionExtrapolation" instance=ExtResource("14_hg64s")]
+unique_name_in_owner = true
+
+[node name="SelectionArea" type="Area2D" parent="PositionExtrapolation"]
+visible = false
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("12_bsixf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PositionExtrapolation/SelectionArea"]
+shape = SubResource("CircleShape2D_70byj")
+debug_color = Color(0, 0.631, 0.475, 0.1)
+
 [node name="FlightAssistant" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_m324h")
@@ -108,14 +103,12 @@ script = ExtResource("3_m324h")
 unique_name_in_owner = true
 script = ExtResource("14_5nufi")
 
-[node name="RadarItem" type="Node2D" parent="."]
-unique_name_in_owner = true
-material = SubResource("CanvasItemMaterial_qbdui")
-script = ExtResource("18_cae74")
-texture = ExtResource("2_e2mwk")
-
 [node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view")]
 unique_name_in_owner = true
 script = ExtResource("20_1gdyl")
 capacity = 1000.0
 view = NodePath("../PositionExtrapolation/View")
+
+[node name="RadarItem" parent="." instance=ExtResource("20_w3y8g")]
+unique_name_in_owner = true
+icon_scale = 0.5

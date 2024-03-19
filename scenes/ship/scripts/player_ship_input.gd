@@ -16,8 +16,10 @@ func _process(_delta):
 		data.autopilot_target = get_global_mouse_position() + FloatingOrigin.origin
 
 func _unhandled_input(event):
-	if event.is_action_pressed("follow_target"):
-		data.is_follow = not data.is_follow
+	if event.is_action_pressed("stop"):
+		data.stop = true
+	if event.is_action_released("stop"):
+		data.stop = false
 	if event.is_action_pressed("target_reset"):
 		data.target = null
 	if event.is_action_pressed("autopilot"):

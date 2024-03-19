@@ -7,13 +7,13 @@ extends Node2D
 @onready var particles: GPUParticles2D = %GPUParticles2D
 @onready var light = %Light
 
+# TODO replace with VelocityComponent
 var linear_velocity := Vector2.ZERO
 
 func _ready():
 	particles.process_material = particles.process_material.duplicate()
 	particles.process_material.color = color * 3.0
 	light.color = color
-	FloatingOrigin.add(self)
 	timer.timeout.connect(_self_destroy)
 	timer.start()
 

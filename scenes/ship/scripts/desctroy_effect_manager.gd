@@ -40,6 +40,6 @@ func _on_die():
 	var effect: ShipDestroyEffect = _destroy_effect_scene.instantiate()
 	effect.linear_velocity = ship.absolute_velocity
 	effect.position = global_position
-	MainState.world_node.add_child(effect)
+	MainState.main_scene.add_child(effect)
 	destroy.emit()
 

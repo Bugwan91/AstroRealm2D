@@ -71,11 +71,11 @@ func _spawn_bullet():
 	var spear: float = accuracy * pow(2.0 * (randf() - 0.5), 2.0) * sign(randf() - 0.5)
 	bullet.position = _shoot_point.global_position
 	bullet.rotation = global_rotation + spear
-	bullet.linear_velocity = velocity.rotated(spear)
+	bullet.start_velocity = velocity.rotated(spear)
 	shoot_recoil.emit(-transform.x.rotated(spear) * recoil)
 	bullet.impulse = recoil
 	bullet.speed = bullet_speed
-	MainState.world_node.add_child(bullet)
+	MainState.main_scene.add_child(bullet)
 	bullet.update_material(bullet_color)
 	bullet.start(_bullet_lifetime)
 	_heat.add_heat(heat_per_shoot)

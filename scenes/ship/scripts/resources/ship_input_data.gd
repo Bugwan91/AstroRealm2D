@@ -3,6 +3,7 @@ extends Resource
 
 signal boost_changed(float)
 signal strafe_changed(Vector2)
+signal stop_changed(bool)
 signal target_changed(Spaceship)
 signal target_point_changed(Vector2)
 signal is_follow_toggled(bool)
@@ -13,19 +14,21 @@ signal autopilot_speed_changed(float)
 signal firing_toggled(bool)
 signal auto_aim_toggled(bool)
 
-var control := ShipControlData.new()
-
 var boost: float:
 	set(value):
 		boost = clampf(value, -1.0, 1.0)
-		control.boost = boost
 		boost_changed.emit(boost)
 
 var strafe: Vector2:
 	set(value):
 		strafe = value.normalized()
-		control.strafe = strafe
 		strafe_changed.emit(strafe)
+
+var stop: bool:
+	set(value):
+		if stop == value: return
+		stop = value
+		stop_changed.emit(stop)
 
 var target_point: Vector2:
 	set(value):

@@ -104,11 +104,14 @@ script = ExtResource("7_wj4q0")
 
 [node name="DarkAmbient" type="DirectionalLight2D" parent="HBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
 color = Color(0, 0, 0, 1)
-energy = 0.7
+energy = 0.4
 blend_mode = 1
 
 [node name="Light" type="DirectionalLight2D" parent="HBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
 rotation = -0.785398
+energy = 0.7
+blend_mode = 2
+height = 0.4
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

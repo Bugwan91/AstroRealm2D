@@ -5,7 +5,6 @@ extends Node2D
 @onready var fire = %Fire
 
 func _ready():
-	FloatingOrigin.add(self)
 	initial.emitting = true
 	smoke.emitting = true
 	fire.emitting = true

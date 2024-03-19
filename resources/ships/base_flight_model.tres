@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_cd5we")
 mass = 1.0
-speed = 800.0
-boost_base = 200.0
-strafe_base = 400.0
+speed = 2500.0
+boost_base = 0.5
+strafe_base = 5000.0
 turn_base = 0.2

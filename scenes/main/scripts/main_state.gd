@@ -8,8 +8,6 @@ signal radar_updated(radar: Radar)
 
 const MAX_SPEED: float = 100000.0
 
-@onready var world_node: Node2D = get_node("/root/Main")
-
 var main_scene: MainScene:
 	set(value):
 		main_scene = value

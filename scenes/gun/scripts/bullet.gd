@@ -12,24 +12,21 @@ extends Node2D
 @onready var sprite = %Sprite
 @onready var light = %Light
 
+@onready var _velocity_component: VelocityConponent = %VelocityComponent
 
-var linear_velocity: Vector2 = Vector2.ZERO
+var start_velocity: Vector2 = Vector2.ZERO
 
 var impulse := 0.0
 var speed := 0.0
 var _damage := 10.0
 
 func _ready():
-	linear_velocity += transform.x * speed
+	_velocity_component.velocity = -FloatingOrigin.velocity + start_velocity + transform.x * speed
 
-var printed := false
 func _physics_process(delta):
-	position += linear_velocity * delta
 	ray.target_position.y = speed * delta
 	long_ray.target_position.y = speed * time_prediction
 	_collide()
-	if not printed:
-		printed = true
 
 func update_material(color: Color):
 	_color = color
@@ -46,6 +43,7 @@ func _collide():
 
 func _on_hit(target):
 	if not is_instance_valid(target): return
+	# TODO: update to hitting TakingDamage directly
 	var damageTaker = target.get_node("TakingDamage") as TakingDamage
 	if is_instance_valid(damageTaker):
 		if damageTaker.check_group(group):
@@ -55,7 +53,7 @@ func _on_hit(target):
 	hit_effect.position = ray.get_collision_point()
 	hit_effect.linear_velocity = target.absolute_velocity
 	hit_effect.color = _color
-	MainState.world_node.add_child(hit_effect)
+	MainState.main_scene.add_child(hit_effect)
 	queue_free()
 
 func _create_damage() -> Damage:
