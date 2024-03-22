@@ -61,8 +61,8 @@ func _avoid_colission():
 func _update_autopilot_pointer_view():
 	if not is_instance_valid(autopilot_pointer_view): return
 	if inputs.is_autopilot:
-		var point = inputs.autopilot_target - ship.extrapolator.global_position - FloatingOrigin.origin
-		autopilot_pointer_view.update(point, ship.extrapolator.canvas_position)
+		var point = inputs.autopilot_target - FloatingOrigin.origin
+		autopilot_pointer_view.update(point, ship.canvas_position)
 	else:
 		autopilot_pointer_view.disable()
 

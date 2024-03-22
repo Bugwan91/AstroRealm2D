@@ -1,7 +1,7 @@
 class_name Backgroung
 extends Node2D
 
-@onready var layers_container = %Layers
+@onready var layers_container: CanvasLayer = %Layers
 
 var _camera: Camera2D
 var _layers: Array[BackgroundLayer]

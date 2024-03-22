@@ -5,9 +5,6 @@ extends Area2D
 
 @onready var covering_shape: CollisionShape2D = %CoveringShape
 
-#TODO: store detected objects here
-# use area entered and exited for updated detected objects list
-
 func _ready():
 	_set_radius()
 	monitorable = false

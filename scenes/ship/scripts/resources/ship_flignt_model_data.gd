@@ -11,7 +11,7 @@ signal strafe_changed(new_strafe: float)
 signal turn_changed(new_turn: float)
 
 @export_range(0.01, 1000.0) var mass: float = 1.0: set = _set_mass
-@export_range(1.0, 10000.0) var speed: float = 2000.0: set = _set_speed
+@export_range(1.0, 50000.0) var speed: float = 2000.0: set = _set_speed
 @export_range(0.0, 10.0) var boost_base: float = 0.5: set = _update_boost
 @export_range(0.0, 10000.0) var strafe_base: float = 100.0: set = _update_strafe
 @export_range(0.0, 15.0) var turn_base: float = 1.0: set = _update_turn

@@ -68,7 +68,7 @@ func _calculate_bullet_intersection():
 		return
 	#var Pd = target.extrapolator.position - ship.extrapolator.position
 	#var t = 
-	var to_target = target.extrapolator.smooth_position - ship.extrapolator.smooth_position
+	var to_target = target.position - ship.position
 	var b = 2 * to_target.dot(dv)
 	var c = to_target.length_squared()
 	var discriminant = b * b - 4 * a * c
@@ -93,7 +93,7 @@ func _disable_pointer():
 
 func _update_pointer(point: Vector2, in_range: bool):
 	if is_instance_valid(pointer_view):
-		pointer_view.update(point, ship.extrapolator.canvas_position, in_range)
+		pointer_view.update(point, ship.canvas_position, in_range)
 
 func _auto_aim_toggle(value: bool):
 	if not value: return

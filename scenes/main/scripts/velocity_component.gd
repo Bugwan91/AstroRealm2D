@@ -7,6 +7,7 @@ extends Node
 
 func _ready():
 	parent = get_parent() as Node2D
+	parent.add_to_group("ignore_floating")
 
 func _process(delta):
-	parent.position += velocity * delta
+	parent.position += (FloatingOrigin.velocity + velocity) * delta

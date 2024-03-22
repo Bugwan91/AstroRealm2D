@@ -39,7 +39,7 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	ship.add_child(audio_listener)
 	audio_listener.make_current()
 	add_child(ship)
-	radar.radius = 20000.0
+	radar.radius = 50000.0
 
 func _create_ship_configuration() -> ShipData:
 	var ship_data = ShipData.new()

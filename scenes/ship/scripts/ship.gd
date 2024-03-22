@@ -1,5 +1,5 @@
 class_name Spaceship
-extends FloatingOriginRigidBody
+extends FloatingOriginBody
 
 signal got_hit(impulse: Vector2)
 signal dead(ship: Spaceship)
@@ -17,7 +17,6 @@ signal dead(ship: Spaceship)
 @onready var flight_assistant: ShipFlightAssistant = %FlightAssistant
 @onready var flight_controller: FlightController = %FlightController
 
-@onready var extrapolator: PositionExtrapolation = %PositionExtrapolation
 @onready var taking_damage: TakingDamage = %TakingDamage
 @onready var heat: Heat = %Heat
 
@@ -39,7 +38,6 @@ func _ready():
 	_setup_health()
 	_setup_weapon()
 	connect_inputs(input_reader)
-	flight_controller.move_world = true
 
 func _setup_flight_controller():
 	flight_assistant.setup(self)
@@ -72,11 +70,9 @@ func connect_inputs(new_inputs: ShipInput):
 
 func _connect_player_inputs():
 	if not is_player: return
-	origin = true
 	_radar_item.color = Color(0.2, 0.8, 1.0)
 	MainState.player_ship = self
 	flight_assistant.collision_detector.enabled = false
-	
 
 func _connect_flight_controller_inputs():
 	flight_controller.inputs = input_reader.data
@@ -84,13 +80,11 @@ func _connect_flight_controller_inputs():
 func _connect_weapon_inputs():
 	_weapon_slots.connect_inputs(input_reader)
 
-func _integrate_forces(state: PhysicsDirectBodyState2D):
-	flight_controller.process(state)
-	super._integrate_forces(state)
-	_update_velocity_for_weapons(state)
+func _physics_process(_delta):
+	_update_velocity_for_weapons()
 
-func _update_velocity_for_weapons(state: PhysicsDirectBodyState2D):
-	_weapon_slots.update_velocity(state.linear_velocity)
+func _update_velocity_for_weapons():
+	_weapon_slots.update_velocity(linear_velocity)
 
 func set_target(target: RigidBody2D):
 	flight_assistant.target_body = target

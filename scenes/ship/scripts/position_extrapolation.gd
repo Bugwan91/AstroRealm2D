@@ -15,15 +15,17 @@ var smooth_rotation: float:
 	get:
 		return owner.rotation + rotation
 
+var body: FloatingOriginBody
+
 func _ready():
 	process_priority = -999
+	body = get_parent() as FloatingOriginBody
 
 func _process(_delta):
 	if not enabled: return
 	var delta = Time.get_ticks_usec() * 0.000001
-	if "angular_velocity" in owner:
-		rotation = owner.angular_velocity * (delta - FloatingOrigin.last_physic_time)
-	position = owner.linear_velocity.rotated(-owner.rotation) * (delta - FloatingOrigin.last_physic_time)
+	rotation = body.angular_velocity * (delta - FloatingOrigin.last_physic_time)
+	position = body.linear_velocity.rotated(-body.rotation) * (delta - FloatingOrigin.last_physic_time)
 
 func _physics_process(_delta):
 	if not enabled: return

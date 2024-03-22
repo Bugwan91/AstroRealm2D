@@ -1,8 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://sgnvwpsrs0xa"]
+[gd_scene load_steps=6 format=3 uid="uid://sgnvwpsrs0xa"]
 
 [ext_resource type="Script" path="res://scenes/camera/scripts/camera_controller.gd" id="1_gmqix"]
+[ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="2_2ctbd"]
+[ext_resource type="Script" path="res://scenes/camera/scripts/viewport_radar_manager.gd" id="3_td7tu"]
 
-[node name="Camera" type="Camera2D"]
+[sub_resource type="Gradient" id="Gradient_tykp1"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0.8, 1.2, 0.02)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8clkx"]
+gradient = SubResource("Gradient_tykp1")
+width = 1
+height = 1
+use_hdr = true
+
+[node name="Camera" type="Camera2D" groups=["ignore_floating"]]
+ignore_rotation = false
 zoom = Vector2(2, 2)
 position_smoothing_speed = 10.0
 script = ExtResource("1_gmqix")
+
+[node name="RadarItem" parent="." instance=ExtResource("2_2ctbd")]
+unique_name_in_owner = true
+texture = SubResource("GradientTexture2D_8clkx")
+relative_scale = true
+color = Color(1, 1, 1, 1)
+
+[node name="ViewportRadarManager" type="Node" parent="."]
+script = ExtResource("3_td7tu")

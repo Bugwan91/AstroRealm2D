@@ -21,7 +21,8 @@ var boost: float:
 
 var strafe: Vector2:
 	set(value):
-		strafe = value.normalized()
+		var len := value.length()
+		strafe = value if len < 1.0 else value / len
 		strafe_changed.emit(strafe)
 
 var stop: bool:

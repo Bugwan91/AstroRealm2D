@@ -7,10 +7,10 @@ const SUBGRID_SCALE := 5.0
 @export var grid_offset: Vector2
 @export var grid_scale := 1.0
 @export var speed_limit := 10000.0
-@export var camera: Camera2D
 
 @onready var _subgrid: Sprite2D = %Subgrid
 
+var camera: Camera2D
 var ignore_floating := true
 var target: Spaceship
 var opacity: float
@@ -21,6 +21,7 @@ var _start_grid_scale: float
 func _ready():
 	process_priority = -100
 	MainState.player_ship_updated.connect(_on_update_player_ship)
+	camera = get_viewport().get_camera_2d()
 	_start_scale = scale
 	_start_grid_scale = grid_scale
 	update_opacity(base_opacity)

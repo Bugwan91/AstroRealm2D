@@ -3,7 +3,7 @@ extends Camera2D
 
 signal zoomed(zoom: float)
 
-@export var camera_acceleration := 60.0
+@export var acceleration := 2.0
 @export var zoom_min := 0.1
 @export var zoom_max := 2.0
 @export var zoom_speed := 0.05
@@ -20,7 +20,7 @@ var _zoom_speed: Vector2
 var _target_zoom: Vector2
 
 func _ready():
-	process_priority = 999
+	process_priority = 1000
 	MainState.player_ship_updated.connect(_on_update_player_ship)
 	_init_zoom()
 
@@ -37,19 +37,10 @@ func _process(delta):
 	if _target_zoom != zoom:
 		zoom = lerp(zoom, _target_zoom, 5.0 * delta)
 		zoomed.emit(zoom.x)
-	_required_look_position = lerp(_required_look_position, _get_look_position(), 2 * delta)
-	_hit_position = lerp(_hit_position, Vector2.ZERO, 0.1)
-	_update_acceleration(delta)
-	position = target.extrapolator.smooth_position# + _acceleration + _required_look_position + _hit_position
-
-func _update_acceleration(delta: float):
-	if not is_instance_valid(target): return
-	var a_delta := target.acceleration - _acceleration
-	var a_delta_l := a_delta.length()
-	if is_zero_approx(a_delta_l): return
-	var a_delta_n := a_delta / a_delta_l
-	var a_delta_max := clampf(a_delta_l, 0.0, camera_acceleration * delta / zoom.x)
-	_acceleration += a_delta_max * a_delta_n
+	_required_look_position = lerp(_required_look_position, _get_look_position(), 2.0 * delta)
+	_hit_position = lerp(_hit_position, Vector2.ZERO, 10.0 * delta)
+	_acceleration = lerp(_acceleration, target.acceleration, acceleration * delta)
+	position = target.position + _acceleration + _required_look_position + _hit_position
 
 func _init_zoom():
 	_zoom_min = Vector2(zoom_min, zoom_min)
@@ -60,7 +51,7 @@ func _init_zoom():
 func _get_look_position() -> Vector2:
 	var screen := Vector2(get_viewport().size) / zoom
 	var deadzone := screen * 0.4 # 0.5 * 0.8 => half_screen * (1 - margins)
-	var delta := get_global_mouse_position() - target.extrapolator.smooth_position
+	var delta := get_global_mouse_position() - target.position
 	return delta.clamp(-deadzone, deadzone) / 2
 
 func _on_update_player_ship(player_ship: Spaceship):
@@ -69,4 +60,4 @@ func _on_update_player_ship(player_ship: Spaceship):
 	target.got_hit.connect(_shake_on_hit)
 
 func _shake_on_hit(hit: Vector2):
-	_hit_position = -hit * 0.5 / zoom # TODO: Clamp for huge impulces
+	_hit_position = -hit * 0.5 / zoom # TODO: Clamp for huge impulses

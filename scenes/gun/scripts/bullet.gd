@@ -1,9 +1,10 @@
 class_name Bullet
-extends Node2D
+extends FloatingOriginBody
 
 @export var group: String
 @export var hit_effect_scene: PackedScene
 @export var _color: Color
+@export var glow := 3.0
 @export_range(0, 5) var time_prediction := 2.0
 
 @onready var timer: Timer = %Timer
@@ -12,8 +13,6 @@ extends Node2D
 @onready var sprite = %Sprite
 @onready var light = %Light
 
-@onready var _velocity_component: VelocityConponent = %VelocityComponent
-
 var start_velocity: Vector2 = Vector2.ZERO
 
 var impulse := 0.0
@@ -21,7 +20,7 @@ var speed := 0.0
 var _damage := 10.0
 
 func _ready():
-	_velocity_component.velocity = -FloatingOrigin.velocity + start_velocity + transform.x * speed
+	linear_velocity = -FloatingOrigin.velocity + start_velocity + transform.x * speed
 
 func _physics_process(delta):
 	ray.target_position.y = speed * delta
@@ -30,7 +29,7 @@ func _physics_process(delta):
 
 func update_material(color: Color):
 	_color = color
-	sprite.modulate = _color * 3.0
+	sprite.modulate = _color * glow
 	light.color = _color
 
 func start(lifetime: float):

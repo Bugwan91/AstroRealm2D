@@ -18,15 +18,15 @@
 [ext_resource type="PackedScene" uid="uid://vp7ygncoxsax" path="res://scenes/ship/taking_damage.tscn" id="14_hg64s"]
 [ext_resource type="PackedScene" uid="uid://vr472sgwb7rs" path="res://scenes/ship/collision_detector.tscn" id="18_hhqrk"]
 [ext_resource type="Script" path="res://scenes/heat/scripts/Heat.gd" id="20_1gdyl"]
+[ext_resource type="Script" path="res://scenes/vfx/scripts/trail.gd" id="20_q0150"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="20_w3y8g"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/position_extrapolation.gd" id="25_1c55w"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vnpcs"]
-friction = 0.01
-bounce = 0.1
+[sub_resource type="Curve" id="Curve_p4pb7"]
+_data = [Vector2(0, 1), 0.0, -0.322088, 0, 0, Vector2(1, 0), -1.16987, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3ypi3"]
-radius = 70.1783
+[sub_resource type="Gradient" id="Gradient_sdsuv"]
+colors = PackedColorArray(1, 1, 1, 0.5, 1, 1, 1, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ma44e"]
 shader = ExtResource("7_byino")
@@ -48,28 +48,36 @@ texture_filter = 3
 [sub_resource type="CircleShape2D" id="CircleShape2D_70byj"]
 radius = 80.0
 
-[node name="Ship" type="RigidBody2D"]
-physics_material_override = SubResource("PhysicsMaterial_vnpcs")
-inertia = 5000.0
+[node name="Ship" type="Node2D"]
 script = ExtResource("1_5ckws")
 data = ExtResource("2_uwj24")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_3ypi3")
-debug_color = Color(0.988235, 0, 0.243137, 0.101961)
 
 [node name="CollisionDetector" parent="." instance=ExtResource("18_hhqrk")]
 unique_name_in_owner = true
 
-[node name="PositionExtrapolation" type="Node2D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("25_1c55w")
-
-[node name="WeaponSlots" type="Node2D" parent="PositionExtrapolation"]
+[node name="WeaponSlots" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("8_4fwa5")
 
-[node name="View" type="Sprite2D" parent="PositionExtrapolation"]
+[node name="TrailEffect" type="Line2D" parent="."]
+position = Vector2(-38, -47)
+width = 2.0
+width_curve = SubResource("Curve_p4pb7")
+gradient = SubResource("Gradient_sdsuv")
+script = ExtResource("20_q0150")
+color = Color(0.3, 0.8, 2, 0.5)
+lifetime = 0.5
+
+[node name="TrailEffect2" type="Line2D" parent="."]
+position = Vector2(-38, 47)
+width = 2.0
+width_curve = SubResource("Curve_p4pb7")
+gradient = SubResource("Gradient_sdsuv")
+script = ExtResource("20_q0150")
+color = Color(0.3, 0.8, 2, 0.5)
+lifetime = 0.5
+
+[node name="View" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 texture_filter = 3
 material = SubResource("ShaderMaterial_ma44e")
@@ -77,13 +85,13 @@ rotation = 1.5708
 texture = SubResource("CanvasTexture_fknoo")
 script = ExtResource("9_cprq3")
 
-[node name="DestroyEffectManager" parent="PositionExtrapolation" instance=ExtResource("14_4y0fi")]
+[node name="DestroyEffectManager" parent="." instance=ExtResource("14_4y0fi")]
 unique_name_in_owner = true
 
-[node name="TakingDamage" parent="PositionExtrapolation" instance=ExtResource("14_hg64s")]
+[node name="TakingDamage" parent="." instance=ExtResource("14_hg64s")]
 unique_name_in_owner = true
 
-[node name="SelectionArea" type="Area2D" parent="PositionExtrapolation"]
+[node name="SelectionArea" type="Area2D" parent="."]
 visible = false
 collision_layer = 2
 collision_mask = 0
@@ -91,7 +99,7 @@ monitoring = false
 monitorable = false
 script = ExtResource("12_bsixf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PositionExtrapolation/SelectionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionArea"]
 shape = SubResource("CircleShape2D_70byj")
 debug_color = Color(0, 0.631, 0.475, 0.1)
 
@@ -107,7 +115,7 @@ script = ExtResource("14_5nufi")
 unique_name_in_owner = true
 script = ExtResource("20_1gdyl")
 capacity = 1000.0
-view = NodePath("../PositionExtrapolation/View")
+view = NodePath("../View")
 
 [node name="RadarItem" parent="." instance=ExtResource("20_w3y8g")]
 unique_name_in_owner = true

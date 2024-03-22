@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scenes/gun/scripts/bullet.gd" id="1_gtbct"]
 [ext_resource type="PackedScene" uid="uid://dcjlidv1ftgrv" path="res://scenes/gun/hit_effect.tscn" id="2_m6c5x"]
-[ext_resource type="Texture2D" uid="uid://cyl63tih1p2em" path="res://assets/VFX_textures/Rotated/trace_01_rotated.png" id="4_u3vfw"]
+[ext_resource type="Texture2D" uid="uid://c5jb4kvkgd8ux" path="res://assets/bullets/laser_16.png" id="4_0sbfp"]
 [ext_resource type="Texture2D" uid="uid://c388olp5jsja" path="res://assets/my/circle_texture_128.tres" id="5_rn3vo"]
-[ext_resource type="Script" path="res://scenes/main/scripts/velocity_component.gd" id="7_a3t6r"]
+[ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="6_h12vt"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8unas"]
 light_mode = 1
@@ -31,15 +31,14 @@ unique_name_in_owner = true
 modulate = Color(0, 8, 0, 0.5)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_8unas")
-position = Vector2(-7, 0)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_u3vfw")
+scale = Vector2(4, 1)
+texture = ExtResource("4_0sbfp")
 
 [node name="LongRay" type="RayCast2D" parent="."]
 unique_name_in_owner = true
 rotation = -1.5708
 collision_mask = 2
 
-[node name="VelocityComponent" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("7_a3t6r")
+[node name="RadarItem" parent="." instance=ExtResource("6_h12vt")]
+texture = ExtResource("4_0sbfp")
+icon_scale = 0.5
