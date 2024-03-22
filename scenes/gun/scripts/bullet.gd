@@ -10,8 +10,9 @@ extends FloatingOriginBody
 @onready var timer: Timer = %Timer
 @onready var ray: RayCast2D = %RayCast2D
 @onready var long_ray: RayCast2D = %LongRay
-@onready var sprite = %Sprite
-@onready var light = %Light
+@onready var sprite: Sprite2D = %Sprite
+@onready var light: Light2D = %Light
+@onready var trail: TrailEffect = %Trail
 
 var start_velocity: Vector2 = Vector2.ZERO
 
@@ -29,7 +30,9 @@ func _physics_process(delta):
 
 func update_material(color: Color):
 	_color = color
-	sprite.modulate = _color * glow
+	var color_hdr := _color * glow
+	sprite.modulate = color_hdr
+	trail.color = color_hdr
 	light.color = _color
 
 func start(lifetime: float):

@@ -34,10 +34,4 @@ func update(view_r: float, radar_r: float):
 
 func _update_scale(view_scale: float = 1.0):
 	if not is_instance_valid(icon): return
-	if relative_scale:
-		MyDebug.list({
-			"view_scale": view_scale,
-			"icon_scale": icon_scale,
-			"final_scale": view_scale * icon_scale
-		})
 	icon.scale = icon_scale * view_scale * Vector2(1.0, icon_aspect)
