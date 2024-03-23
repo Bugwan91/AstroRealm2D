@@ -52,7 +52,7 @@ func _physics_process(delta):
 func _shoot(delta: float):
 	if _is_firing and not _heat.is_max():
 		if not _is_charging:
-			_spawn_bullet()
+			_spawn_bullet(delta)
 			_charge_start()
 			_sound.play()
 		_firing_time += delta
@@ -65,7 +65,7 @@ func _charge_done():
 	_is_charging = false
 	_charge_timer.stop()
 
-func _spawn_bullet():
+func _spawn_bullet(delta: float):
 	var bullet = bullet_scene.instantiate() as Bullet
 	bullet.group = group
 	var spear: float = accuracy * pow(2.0 * (randf() - 0.5), 2.0) * sign(randf() - 0.5)
@@ -77,7 +77,7 @@ func _spawn_bullet():
 	bullet.speed = bullet_speed
 	MainState.main_scene.add_child(bullet)
 	bullet.update_material(bullet_color)
-	bullet.start(_bullet_lifetime)
+	bullet.start(_bullet_lifetime, delta)
 	_heat.add_heat(heat_per_shoot)
 	view.emit_max()
 

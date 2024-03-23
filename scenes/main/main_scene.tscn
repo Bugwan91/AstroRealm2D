@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=40 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -23,6 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="24_7ks4m"]
 [ext_resource type="Texture2D" uid="uid://cyq7shk5k0udu" path="res://assets/my/pointer.png" id="24_lcrqg"]
 [ext_resource type="Script" path="res://scenes/main/scripts/debug_pointer.gd" id="25_ojc3k"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/taking_damage.gd" id="25_w4u30"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/health.gd" id="26_som4q"]
 [ext_resource type="PackedScene" uid="uid://cmqm4dm8rpi0l" path="res://scenes/background/sun.tscn" id="46_aihwc"]
 
 [sub_resource type="Resource" id="Resource_in7ib"]
@@ -72,12 +74,19 @@ use_hdr = true
 fill = 1
 fill_from = Vector2(0.470085, 0.440171)
 
-[sub_resource type="Curve" id="Curve_tje5x"]
-_data = [Vector2(0.00726392, 1), 0.0, -2.32895, 0, 0, Vector2(0.997579, 0), -0.352871, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_dfui5"]
+_data = [Vector2(0, 1), 0.0, -1.97111, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_ubv7a"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 1, 0.2, 1, 1, 1, 0)
+
+[sub_resource type="Resource" id="Resource_moct4"]
+script = ExtResource("26_som4q")
+max_health = 186520.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7jflm"]
+radius = 32.0
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("input_reader")]
 script = ExtResource("1_2ehlx")
@@ -298,15 +307,24 @@ linear_velocity = Vector2(200, 100)
 
 [node name="RadarItem" parent="FloatingOriginBody" instance=ExtResource("22_yvbma")]
 texture = ExtResource("23_8hm4j")
-icon_scale = 0.05
+icon_scale = 0.1
 color = Color(1, 1, 1, 1)
 
 [node name="Polygon2D" type="Polygon2D" parent="FloatingOriginBody"]
-polygon = PackedVector2Array(0, 6, -6, 0, 0, -6, 6, 0)
+color = Color(0, 0.705882, 0.847059, 1)
+polygon = PackedVector2Array(0.707092, 31.8198, -22.6274, 22.6274, -31.8198, -0.707123, -22.6274, -22.6274, 0.707123, -31.8198, 22.6274, -22.6274, 32.5269, 0, 22.6274, 22.6274)
 
 [node name="TrailEffect" type="Line2D" parent="FloatingOriginBody"]
-width = 12.0
-width_curve = SubResource("Curve_tje5x")
+width = 32.0
+width_curve = SubResource("Curve_dfui5")
 gradient = SubResource("Gradient_ubv7a")
 script = ExtResource("23_26w4f")
-lifetime = 2.0
+color = Color(0, 0.705882, 0.847059, 1)
+lifetime = 5.0
+
+[node name="TakingDamage" type="Area2D" parent="FloatingOriginBody"]
+script = ExtResource("25_w4u30")
+health = SubResource("Resource_moct4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloatingOriginBody/TakingDamage"]
+shape = SubResource("CircleShape2D_7jflm")

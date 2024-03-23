@@ -7,7 +7,6 @@ extends Node2D
 @onready var particles: GPUParticles2D = %GPUParticles2D
 @onready var light = %Light
 
-# TODO replace with VelocityComponent
 var linear_velocity := Vector2.ZERO
 
 func _ready():

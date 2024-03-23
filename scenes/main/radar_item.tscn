@@ -7,6 +7,7 @@
 radius = 100.0
 
 [node name="RadarItem" type="Area2D"]
+visible = false
 collision_layer = 128
 collision_mask = 0
 monitoring = false
@@ -15,4 +16,4 @@ texture = ExtResource("2_5um02")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_q4wfc")
-debug_color = Color(0, 0, 1, 0.1)
+debug_color = Color(0, 0, 1, 0)

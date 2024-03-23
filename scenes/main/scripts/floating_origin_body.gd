@@ -1,6 +1,8 @@
 class_name FloatingOriginBody
 extends Node2D
 
+signal got_hit(impulse: Vector2)
+
 @export var mass: float
 @export var inertia: float
 
@@ -41,6 +43,9 @@ func _process(delta):
 	rotation += angular_velocity * delta
 	if self == FloatingOrigin.origin_body:
 		shift = -FloatingOrigin.shift
+
+func _physics_process(_delta):
+	last_velocity = linear_velocity
 
 func apply_impulse(impulse: Vector2):
 	linear_velocity += impulse * _mass_inv

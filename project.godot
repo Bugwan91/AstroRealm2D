@@ -174,9 +174,10 @@ follow={
 
 [layer_names]
 
-2d_physics/layer_1="Base"
+2d_physics/layer_1="Physics"
 2d_physics/layer_2="Prediction"
 2d_physics/layer_8="Radar"
+2d_physics/layer_32="Mouse"
 
 [physics]
 

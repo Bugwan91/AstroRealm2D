@@ -1,7 +1,6 @@
 class_name Spaceship
 extends FloatingOriginBody
 
-signal got_hit(impulse: Vector2)
 signal dead(ship: Spaceship)
 
 @export var data: ShipData: set = _set_ship_data
@@ -46,7 +45,7 @@ func _setup_flight_controller():
 
 func _setup_health():
 	if not is_instance_valid(health): return
-	taking_damage.setup(health, data.design.polygon)
+	taking_damage.setup_polygon(health, data.design.polygon)
 	_destroy_effect.setup(self)
 	_destroy_effect.destroy.connect(_destroy)
 	health.dying.connect(_die)
