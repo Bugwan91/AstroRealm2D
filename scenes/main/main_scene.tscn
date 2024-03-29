@@ -86,7 +86,7 @@ script = ExtResource("26_som4q")
 max_health = 186520.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7jflm"]
-radius = 32.0
+radius = 64.0
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("input_reader")]
 script = ExtResource("1_2ehlx")
@@ -125,6 +125,7 @@ energy = 0.99
 blend_mode = 1
 
 [node name="DirectionalLight" type="DirectionalLight2D" parent="."]
+visible = false
 position = Vector2(-330, -177)
 rotation = 1.11876
 color = Color(0.294118, 0.52549, 1, 1)
@@ -301,9 +302,8 @@ color = Color(0, 0.8, 2, 1)
 position = Vector2(-391, -180)
 rotation = 0.785398
 script = ExtResource("22_dgxb5")
-mass = 5.0
+mass = 500.0
 inertia = 5.0
-linear_velocity = Vector2(200, 100)
 
 [node name="RadarItem" parent="FloatingOriginBody" instance=ExtResource("22_yvbma")]
 texture = ExtResource("23_8hm4j")
@@ -311,8 +311,8 @@ icon_scale = 0.1
 color = Color(1, 1, 1, 1)
 
 [node name="Polygon2D" type="Polygon2D" parent="FloatingOriginBody"]
-color = Color(0, 0.705882, 0.847059, 1)
-polygon = PackedVector2Array(0.707092, 31.8198, -22.6274, 22.6274, -31.8198, -0.707123, -22.6274, -22.6274, 0.707123, -31.8198, 22.6274, -22.6274, 32.5269, 0, 22.6274, 22.6274)
+color = Color(0.5, 0.5, 0.5, 1)
+polygon = PackedVector2Array(-0.707092, 64.3467, -45.2549, 45.2548, -65.0538, 0, -45.9619, -45.9619, 0.707123, -64.3467, 45.2549, -45.2548, 65.0538, 1.52588e-05, 45.2548, 45.2548)
 
 [node name="TrailEffect" type="Line2D" parent="FloatingOriginBody"]
 width = 32.0

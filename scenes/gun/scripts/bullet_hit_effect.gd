@@ -1,23 +1,15 @@
 class_name BulletHitEffect
-extends Node2D
+extends FloatingOriginKinetic
 
 @export var color: Color
 
-@onready var timer = %Timer
 @onready var particles: GPUParticles2D = %GPUParticles2D
-@onready var light = %Light
-
-var linear_velocity := Vector2.ZERO
+@onready var light: PointLight2D = %Light
+@onready var sound: AudioStreamPlayer2D = %Sound
 
 func _ready():
 	particles.process_material = particles.process_material.duplicate()
-	particles.process_material.color = color * 3.0
+	particles.process_material.color = color * 6.0
+	particles.emitting = true
 	light.color = color
-	timer.timeout.connect(_self_destroy)
-	timer.start()
-
-func _process(delta):
-	position += linear_velocity * delta
-
-func _self_destroy():
-	queue_free()
+	sound.finished.connect(queue_free)

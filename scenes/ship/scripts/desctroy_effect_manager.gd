@@ -38,7 +38,7 @@ func _on_take_damage(hp, max_hp):
 
 func _on_die():
 	var effect: ShipDestroyEffect = _destroy_effect_scene.instantiate()
-	effect.linear_velocity = ship.absolute_velocity
+	effect.absolute_velocity = ship.absolute_velocity
 	effect.position = global_position
 	MainState.main_scene.add_child(effect)
 	destroy.emit()

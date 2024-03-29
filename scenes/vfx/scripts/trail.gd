@@ -8,7 +8,7 @@ extends Line2D
 		modulate = color
 @export_range(0, 5.0) var lifetime := 1.0
 
-@onready var _parent: FloatingOriginBody = get_parent()
+@onready var _parent: FloatingOriginKinetic = get_parent()
 
 var _life := 0.0
 var _points: PackedVector2Array
@@ -36,6 +36,6 @@ func _process(delta):
 
 func _get_shift(delta: float) -> Vector2:
 	if local:
-		return ((_parent.linear_velocity + _start_floating) * delta)
+		return ((_parent.absolute_velocity + _start_floating) * delta)
 	else:
 		return _parent.shift

@@ -43,7 +43,7 @@ func exclude(object: CollisionObject2D):
 	ray_right.add_exception(object)
 
 func _physics_process(_delta):
-	_speed = _ship.absolute_velocity.length()#_ship.linear_velocity.length()
+	_speed = _ship.absolute_velocity.length()
 	_check_collisions()
 	_update_predicted_position()
 
@@ -59,20 +59,18 @@ func _check_collisions():
 	var left := ray_left.is_colliding()
 	var right := ray_right.is_colliding()
 	if left and right:
-		#var d := -_ship.linear_velocity.rotated(-_ship.rotation).normalized()
-		var d := -_ship.linear_velocity.rotated(-_ship.rotation + 0.5).normalized()
+		var d := -_ship.absolute_velocity.rotated(-_ship.rotation + 0.5).normalized()
 		predicted_collision.emit(d)
 	elif left:
-		var d := _ship.linear_velocity.rotated(-_ship.rotation + ANGLE).normalized()
+		var d := _ship.absolute_velocity.rotated(-_ship.rotation + ANGLE).normalized()
 		predicted_collision.emit(d)
 	elif right:
-		var d := _ship.linear_velocity.rotated(-_ship.rotation - ANGLE).normalized()
+		var d := _ship.absolute_velocity.rotated(-_ship.rotation - ANGLE).normalized()
 		predicted_collision.emit(d)
 
 func _update_predicted_position():
-	ray_base.global_rotation = _ship.absolute_velocity.angle()# _ship.linear_velocity.angle()
+	ray_base.global_rotation = _ship.absolute_velocity.angle()
 	var end := delta_time * _speed
-	#var end := delta_time * ((_speed * 0.04) ** 2.0)
 	line_left.update(end)
 	line_right.update(end)
 	predicted_position.update(end)

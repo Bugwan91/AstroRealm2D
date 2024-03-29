@@ -85,7 +85,7 @@ func _calculate_bullet_intersection():
 	_disable_pointer()
 
 func _get_delta_v() -> Vector2:
-	return target.linear_velocity - ship.linear_velocity
+	return target.absolute_velocity - ship.absolute_velocity
 
 func _disable_pointer():
 	if is_instance_valid(pointer_view):

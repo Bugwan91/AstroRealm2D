@@ -25,7 +25,7 @@ func _process(_delta):
 	if not enabled: return
 	var delta = Time.get_ticks_usec() * 0.000001
 	rotation = body.angular_velocity * (delta - FloatingOrigin.last_physic_time)
-	position = body.linear_velocity.rotated(-body.rotation) * (delta - FloatingOrigin.last_physic_time)
+	position = body.absolute_velocity.rotated(-body.rotation) * (delta - FloatingOrigin.last_physic_time)
 
 func _physics_process(_delta):
 	if not enabled: return

@@ -152,6 +152,6 @@ func override_controls():
 
 func _get_delta_velocity() -> Vector2:
 	if is_instance_valid(target):
-		return target.linear_velocity - _state.linear_velocity
+		return target.absolute_velocity - _state.linear_velocity
 	else:
 		return -ship.absolute_velocity

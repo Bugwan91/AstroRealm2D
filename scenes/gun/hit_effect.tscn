@@ -12,12 +12,8 @@ light_mode = 1
 [node name="HitEffect" type="Node2D"]
 script = ExtResource("1_27y4s")
 
-[node name="Timer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 0.2
-one_shot = true
-
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("2_6t2pu")
 volume_db = 4.0
 autoplay = true
@@ -28,10 +24,12 @@ unique_name_in_owner = true
 light_mask = 0
 material = SubResource("CanvasItemMaterial_mfmu8")
 position = Vector2(0, 2)
+emitting = false
 amount = 32
 process_material = ExtResource("4_03671")
 texture = ExtResource("5_doqwm")
-lifetime = 0.3
+lifetime = 0.1
+one_shot = true
 explosiveness = 0.9
 fract_delta = false
 local_coords = true

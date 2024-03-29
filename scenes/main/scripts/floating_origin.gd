@@ -2,7 +2,7 @@ extends Node2D
 
 @export var enabled := true
 
-@onready var origin_body: FloatingOriginBody = MainState.player_ship
+@onready var origin_body: FloatingOriginKinetic = MainState.player_ship
 
 ## Position of current (0,0)
 var origin := Vector2.ZERO
@@ -57,7 +57,7 @@ func _shift_objects():
 	phys_shift -= shift
 	last_update_time = time
 
-func reset_origin(body: FloatingOriginBody):
+func reset_origin(body: FloatingOriginKinetic):
 	origin_body = body
 	if not origin_body:
 		velocity_delta = -velocity

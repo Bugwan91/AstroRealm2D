@@ -13,7 +13,6 @@ signal dead(ship: Spaceship)
 @export var autopilot_pointer: AssistantPointer
 @export var target_prediction_pointer: AssistantPointer
 
-@onready var flight_assistant: ShipFlightAssistant = %FlightAssistant
 @onready var flight_controller: FlightController = %FlightController
 
 @onready var taking_damage: TakingDamage = %TakingDamage
@@ -44,9 +43,7 @@ func _physics_process(delta):
 	_update_velocity_for_weapons()
 
 func _setup_flight_controller():
-	flight_assistant.setup(self)
 	flight_controller.setup(self)
-	flight_assistant.autopilot_pointer_view = autopilot_pointer
 
 func _setup_health():
 	if not is_instance_valid(health): return
@@ -67,7 +64,6 @@ func connect_inputs(new_inputs: ShipInput):
 	input_reader = new_inputs
 	if not is_instance_valid(new_inputs): return
 	input_reader.setup(self)
-	flight_assistant.connect_inputs(input_reader)
 	_connect_player_inputs()
 	_connect_weapon_inputs()
 	_connect_flight_controller_inputs()
@@ -76,7 +72,6 @@ func _connect_player_inputs():
 	if not is_player: return
 	_radar_item.color = Color(0.2, 0.8, 1.0)
 	MainState.player_ship = self
-	flight_assistant.collision_detector.enabled = false
 
 func _connect_flight_controller_inputs():
 	flight_controller.inputs = input_reader.data
@@ -85,13 +80,12 @@ func _connect_weapon_inputs():
 	_weapon_slots.connect_inputs(input_reader)
 
 func _update_velocity_for_weapons():
-	_weapon_slots.update_velocity(linear_velocity)
+	_weapon_slots.update_velocity(absolute_velocity)
 
 func set_target(target: RigidBody2D):
-	flight_assistant.target_body = target
+	pass
 
 func _die():
-	flight_assistant.enabled = false
 	_weapon_slots.enabled = false
 	dead.emit(self)
 

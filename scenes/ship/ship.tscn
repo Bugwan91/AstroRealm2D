@@ -1,8 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=24 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/flight_assistant.gd" id="3_m324h"]
 [ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="7_byino"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/weapons_slots.gd" id="8_4fwa5"]
 [ext_resource type="Texture2D" uid="uid://bdcrgonof28mh" path="res://assets/spaceships/temperature.tres" id="8_ts42t"]
@@ -16,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://bu6wjq2ioia27" path="res://scenes/ship/desctroy_effect_manager.tscn" id="14_4y0fi"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship_controller.gd" id="14_5nufi"]
 [ext_resource type="Script" path="res://scenes/ship/scripts/taking_damage.gd" id="15_bq7ks"]
-[ext_resource type="PackedScene" uid="uid://vr472sgwb7rs" path="res://scenes/ship/collision_detector.tscn" id="18_hhqrk"]
 [ext_resource type="Script" path="res://scenes/heat/scripts/Heat.gd" id="20_1gdyl"]
 [ext_resource type="Script" path="res://scenes/vfx/scripts/trail.gd" id="20_q0150"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="20_w3y8g"]
@@ -51,9 +49,6 @@ radius = 80.0
 [node name="Ship" type="Node2D"]
 script = ExtResource("1_5ckws")
 data = ExtResource("2_uwj24")
-
-[node name="CollisionDetector" parent="." instance=ExtResource("18_hhqrk")]
-unique_name_in_owner = true
 
 [node name="WeaponSlots" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -103,10 +98,6 @@ script = ExtResource("12_bsixf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionArea"]
 shape = SubResource("CircleShape2D_70byj")
 debug_color = Color(0, 0.631, 0.475, 0.1)
-
-[node name="FlightAssistant" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("3_m324h")
 
 [node name="FlightController" type="Node" parent="."]
 unique_name_in_owner = true

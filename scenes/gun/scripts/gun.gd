@@ -24,7 +24,6 @@ signal shoot_recoil(force: float)
 var emission = 0.0
 var emission_reduction = 10.0
 
-var enabled := false
 var velocity := Vector2.ZERO
 
 var _is_firing := false
@@ -43,11 +42,8 @@ func on_fire_input(value: bool):
 	_is_firing = value
 
 func _process(delta):
-	if not enabled: return
-	_update_marker()
-
-func _physics_process(delta):
 	_shoot(delta)
+	_update_marker()
 
 func _shoot(delta: float):
 	if _is_firing and not _heat.is_max():

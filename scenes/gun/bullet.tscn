@@ -36,7 +36,7 @@ unique_name_in_owner = true
 modulate = Color(0, 8, 0, 0.5)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_8unas")
-scale = Vector2(4, 1)
+scale = Vector2(2, 1)
 texture = ExtResource("4_0sbfp")
 
 [node name="Light" type="PointLight2D" parent="."]

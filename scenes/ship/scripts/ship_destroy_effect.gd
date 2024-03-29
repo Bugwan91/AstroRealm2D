@@ -7,7 +7,7 @@ extends Node2D
 @onready var explosion_audio = %ExplosionAudio
 
 # TODO replace with VelocityComponent
-var linear_velocity := Vector2.ZERO
+var absolute_velocity := Vector2.ZERO
 
 func _ready():
 	smoke.emitting = true
@@ -17,7 +17,7 @@ func _ready():
 	smoke.finished.connect(_destroy)
 
 func _process(delta):
-	position += linear_velocity * delta
+	position += absolute_velocity * delta
 
 func _destroy():
 	queue_free()

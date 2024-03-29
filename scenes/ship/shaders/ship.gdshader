@@ -35,10 +35,10 @@ void fragment() {
 		vec3 ht_color = texture(temperature_texture, vec2(ht_base)).rgb;
 		ht_val = pow(ht_color, vec3(2.0)) * pow(ht_base, 2.0) * 16.0;
 	}
-	// EMISSION
+	//// EMISSION
 	vec3 em_val = texture(emission_texture, UV).rgb * emission_color.rgb * emission;
 	em_val = pow(em_val, vec3(1.0 + emission));
-	// TOTAL COLOR
+	//// TOTAL COLOR
 	COLOR = vec4(color.rgb + ht_val + em_val, color.a);
 }
 
