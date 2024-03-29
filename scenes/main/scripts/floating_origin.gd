@@ -2,14 +2,25 @@ extends Node2D
 
 @export var enabled := true
 
-@onready var origin_body: Spaceship = MainState.player_ship
+@onready var origin_body: FloatingOriginBody = MainState.player_ship
 
+## Position of current (0,0)
 var origin := Vector2.ZERO
+
+## Delta position of current (0,0) from last frame
 var shift := Vector2.ZERO
+
+## Delta position of current (0,0) from last physics tick
 var phys_shift := Vector2.ZERO
 
-var velocity := Vector2.ZERO
-var velocity_shift := Vector2.ZERO
+## Current velocity of world
+var velocity := Vector2.ZERO:
+	set(value):
+		velocity_delta += value - velocity
+		velocity = value
+
+## Delta velocity of world from last frame
+var velocity_delta := Vector2.ZERO
 
 var last_update_time: float
 var last_physic_time: float
@@ -26,38 +37,15 @@ func _process(delta):
 
 func _physics_process(delta):
 	if not enabled: return
-	phys_shift = Vector2.ZERO
 	last_physic_time = Time.get_ticks_usec() * 0.000001
+	phys_shift = Vector2.ZERO
+	velocity_delta = Vector2.ZERO
 	MyDebug.info("origin", origin)
 	MyDebug.info("origin velocity", velocity)
 	MyDebug.info("speed", velocity.length())
-	_float_bodies()
-
-func add_velocity(v: Vector2):
-	velocity_shift -= v
-	velocity += velocity_shift
 
 func absolute_position(node: Node2D) -> Vector2:
 	return node.position + origin
-
-func reset_velocity_delta():
-	velocity_shift = Vector2.ZERO
-
-func update_origin():
-	last_physic_time = Time.get_ticks_usec() * 0.000001
-	origin_body.last_velocity = -velocity_shift
-
-func update_body(body: FloatingOriginBody):
-	#body.linear_velocity += velocity_delta
-	body.last_velocity = body.linear_velocity
-
-func _float_bodies():
-	if not is_instance_valid(origin_body): return
-	update_origin()
-	for body in MainState.main_scene.get_children():
-		if body is FloatingOriginBody and not body == origin_body:
-			update_body(body)
-	reset_velocity_delta()
 
 func _shift_objects():
 	var time := Time.get_ticks_usec() * 0.000001
@@ -65,12 +53,12 @@ func _shift_objects():
 	origin += shift
 	for node in MainState.main_scene.get_children():
 		if node is Node2D and not node == origin_body and not node.is_in_group("ignore_floating"):
-			node.position += shift
-	phys_shift += shift
+			node.position -= shift
+	phys_shift -= shift
 	last_update_time = time
 
 func reset_origin(body: FloatingOriginBody):
 	origin_body = body
 	if not origin_body:
-		velocity_shift = -velocity
+		velocity_delta = -velocity
 		velocity = Vector2.ZERO

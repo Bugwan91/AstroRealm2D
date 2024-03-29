@@ -20,5 +20,5 @@ func check_group(group: String) -> bool:
 func damage(damage: Damage):
 	if is_instance_valid(health):
 		health.damage(damage.amount)
-		body.apply_impulse(damage.impulse)
+		body.add_impulse(damage.impulse)
 		body.got_hit.emit(damage.impulse)

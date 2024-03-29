@@ -21,7 +21,7 @@ func _ready():
 	_points = points
 	_offset = position
 	position = Vector2.ZERO
-	if local: _start_floating = FloatingOrigin.velocity
+	if local: _start_floating = -FloatingOrigin.velocity
 
 func _process(delta):
 	_life += delta

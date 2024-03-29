@@ -38,6 +38,11 @@ func _ready():
 	_setup_weapon()
 	connect_inputs(input_reader)
 
+func _physics_process(delta):
+	flight_controller.physics_process(delta)
+	super._physics_process(delta)
+	_update_velocity_for_weapons()
+
 func _setup_flight_controller():
 	flight_assistant.setup(self)
 	flight_controller.setup(self)
@@ -78,9 +83,6 @@ func _connect_flight_controller_inputs():
 
 func _connect_weapon_inputs():
 	_weapon_slots.connect_inputs(input_reader)
-
-func _physics_process(_delta):
-	_update_velocity_for_weapons()
 
 func _update_velocity_for_weapons():
 	_weapon_slots.update_velocity(linear_velocity)

@@ -13,7 +13,7 @@ func _ready():
 			_layers.append(layer)
 
 func _process(_delta):
-	var shift = -FloatingOrigin.origin + _camera.position
+	var shift = FloatingOrigin.origin + _camera.position
 	for layer in _layers:
 		layer.shift(shift, _camera.zoom)
 

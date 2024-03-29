@@ -18,8 +18,8 @@ void fragment() {
 		float tex_color = texture(TEXTURE, vec2(
 			0.5 * (dx + 1.0) - TIME * rotation_speed,
 			0.5 * (dy + 1.0))).r + texture(TEXTURE, vec2(
-				0.5 * (dx + 1.0) - sin(TIME * rotation_speed),
-				0.5 * (dy + 1.0) + sin(TIME * rotation_speed)
+				0.5 * (0.5 * dx + 1.0) - sin(TIME * rotation_speed * 0.5),
+				0.5 * (0.5 * dy + 1.0) + sin(TIME * rotation_speed * 0.5)
 			)).r;
 		vec4 sun_color = color * tex_color;
 		vec4 sun_shine = sun_color * brightness;
