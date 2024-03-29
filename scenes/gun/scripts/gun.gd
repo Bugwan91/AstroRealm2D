@@ -70,7 +70,7 @@ func _spawn_bullet(delta: float):
 	bullet.start_velocity = velocity.rotated(spear)
 	shoot_recoil.emit(-transform.x.rotated(spear) * recoil)
 	bullet.impulse = recoil
-	bullet.speed = bullet_speed
+	bullet.bullet_speed = bullet_speed
 	MainState.main_scene.add_child(bullet)
 	bullet.update_material(bullet_color)
 	bullet.start(_bullet_lifetime, delta)

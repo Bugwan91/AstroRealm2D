@@ -10,7 +10,7 @@ func _ready():
 	_velocity_curve.curve_y.min_value = -1
 
 func _process(_delta):
-	var speed := FloatingOrigin.velocity.length()
+	var speed := FloatingOrigin.speed
 	process_material.directional_velocity_min = speed
 	process_material.directional_velocity_max = speed
 	_velocity_curve.curve_x.set_point_value(0, -FloatingOrigin.velocity.x / speed)

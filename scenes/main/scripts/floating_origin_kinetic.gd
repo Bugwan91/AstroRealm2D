@@ -18,6 +18,10 @@ var _velocity: Vector2
 var acceleration: Vector2
 var _acceleration_next_tick: Vector2
 
+var speed: float:
+	get:
+		return absolute_velocity.x + absolute_velocity.y
+
 var relative_velocity: Vector2:
 	get:
 		return Vector2.ZERO if is_origin() else absolute_velocity - FloatingOrigin.velocity

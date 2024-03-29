@@ -33,7 +33,7 @@ void fragment() {
 	vec3 ht_val = vec3(0.0);
 	if (ht_base > 0.0) {
 		vec3 ht_color = texture(temperature_texture, vec2(ht_base)).rgb;
-		ht_val = pow(ht_color, vec3(2.0)) * pow(ht_base, 2.0) * 16.0;
+		ht_val = pow(ht_color, vec3(2.0)) * pow(ht_base, 2.0) * 32.0;
 	}
 	//// EMISSION
 	vec3 em_val = texture(emission_texture, UV).rgb * emission_color.rgb * emission;
@@ -49,7 +49,7 @@ void light() {
 		vec3 ht_val = vec3(0.0);
 		if (ht_base > 0.0) {
 			vec3 ht_color = texture(temperature_texture, vec2(ht_base)).rgb;
-			ht_val = pow(ht_color, vec3(2.0)) * pow(ht_base, 2.0) * 16.0;
+			ht_val = pow(ht_color, vec3(2.0)) * pow(ht_base, 2.0) * 32.0;
 		}
 		// EMISSION
 		vec3 em_val = texture(emission_texture, UV).rgb * emission_color.rgb * emission;

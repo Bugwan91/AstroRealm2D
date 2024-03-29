@@ -42,7 +42,7 @@ func _apply_impulse():
 
 func _stop(delta: float):
 	if not inputs.stop: return
-	var speed := ship.absolute_velocity.length()
+	var speed := ship.speed
 	if speed < STOP_THRESHOLD: return
 	var stop_vector := -ship.absolute_velocity.rotated(-ship.rotation).normalized()
 	var result_delta_v := _calculate_strafe_delta_v(stop_vector, delta)

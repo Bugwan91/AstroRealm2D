@@ -19,7 +19,7 @@ func setup(spaceship: Spaceship):
 
 func _physics_process(_delta):
 	if is_instance_valid(_damage_effect):
-		_damage_effect.velocity = ship.absolute_velocity
+		_damage_effect.absolute_velocity = ship.absolute_velocity
 
 func connect_health(health: Health):
 	health.damaged.connect(_on_take_damage)

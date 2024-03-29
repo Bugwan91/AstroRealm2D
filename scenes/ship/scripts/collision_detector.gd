@@ -43,7 +43,7 @@ func exclude(object: CollisionObject2D):
 	ray_right.add_exception(object)
 
 func _physics_process(_delta):
-	_speed = _ship.absolute_velocity.length()
+	_speed = _ship.speed
 	_check_collisions()
 	_update_predicted_position()
 

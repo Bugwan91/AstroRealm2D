@@ -8,6 +8,7 @@ signal got_hit(impulse: Vector2)
 
 @onready var _mass_inv := 1.0 / mass
 @onready var _inertia_inv := 1.0 / inertia
+@onready var _main_collider: TakingDamage = $TakingDamage
 
 func add_impulse(impulse: Vector2):
 	add_velocity(impulse * _mass_inv)

@@ -19,6 +19,10 @@ var velocity := Vector2.ZERO:
 		velocity_delta += value - velocity
 		velocity = value
 
+var speed: float:
+	get:
+		return velocity.x + velocity.y
+
 ## Delta velocity of world from last frame
 var velocity_delta := Vector2.ZERO
 
@@ -42,7 +46,7 @@ func _physics_process(delta):
 	velocity_delta = Vector2.ZERO
 	MyDebug.info("origin", origin)
 	MyDebug.info("origin velocity", velocity)
-	MyDebug.info("speed", velocity.length())
+	MyDebug.info("speed", speed)
 
 func absolute_position(node: Node2D) -> Vector2:
 	return node.position + origin

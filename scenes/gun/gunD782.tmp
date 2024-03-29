@@ -1,0 +1,75 @@
+[gd_scene load_steps=15 format=3 uid="uid://f787xuov3u4t"]
+
+[ext_resource type="Script" path="res://scenes/gun/scripts/gun.gd" id="1_heu61"]
+[ext_resource type="PackedScene" uid="uid://dwdthpisfmojs" path="res://scenes/gun/bullet.tscn" id="2_gsief"]
+[ext_resource type="AudioStream" uid="uid://dv5bnmfo6yfcs" path="res://assets/sounds/BLLTRico_Metallic_11.wav" id="3_twgen"]
+[ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="4_cqrqv"]
+[ext_resource type="Texture2D" uid="uid://crv840up43nn7" path="res://assets/spaceships/weapons/01_emission.png" id="5_7c33b"]
+[ext_resource type="Texture2D" uid="uid://v65up786al4o" path="res://assets/spaceships/weapons/01_mask.png" id="6_1ulvv"]
+[ext_resource type="Texture2D" uid="uid://e1hf68e0dm4l" path="res://assets/spaceships/weapons/01_heat.png" id="6_2v8rv"]
+[ext_resource type="Texture2D" uid="uid://bdcrgonof28mh" path="res://assets/spaceships/temperature.tres" id="8_lcisn"]
+[ext_resource type="Texture2D" uid="uid://b5uejhd6j04e5" path="res://assets/spaceships/weapons/01_base.png" id="9_gdpxm"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/view_weapon.gd" id="10_3kf55"]
+[ext_resource type="Texture2D" uid="uid://bycsfl6wbsu8g" path="res://assets/spaceships/weapons/01_normal.png" id="10_pmh73"]
+[ext_resource type="Script" path="res://scenes/heat/scripts/Heat.gd" id="11_7n2e0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_whwpl"]
+shader = ExtResource("4_cqrqv")
+shader_parameter/heat = 0.0
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/shininess = 0.9
+shader_parameter/metallic = 0.0
+shader_parameter/mask_texture = ExtResource("6_1ulvv")
+shader_parameter/emission_texture = ExtResource("5_7c33b")
+shader_parameter/heat_texture = ExtResource("6_2v8rv")
+shader_parameter/temperature_texture = ExtResource("8_lcisn")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_c5j27"]
+diffuse_texture = ExtResource("9_gdpxm")
+normal_texture = ExtResource("10_pmh73")
+texture_filter = 3
+
+[node name="Gun" type="Node2D"]
+script = ExtResource("1_heu61")
+bullet_scene = ExtResource("2_gsief")
+bullet_color = Color(1, 0, 0.2, 1)
+fire_rate = 20.0
+range = 5000.0
+bullet_speed = 2000.0
+recoil = 10.0
+
+[node name="ChargeTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_twgen")
+max_distance = 4000.0
+
+[node name="ReloadingTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[node name="View" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 3
+material = SubResource("ShaderMaterial_whwpl")
+rotation = 1.5708
+texture = SubResource("CanvasTexture_c5j27")
+script = ExtResource("10_3kf55")
+max_emission = 6.0
+
+[node name="ShootPoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(16, 0)
+
+[node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view")]
+unique_name_in_owner = true
+script = ExtResource("11_7n2e0")
+capacity = 200.0
+cooling = 40.0
+view = NodePath("../View")
+
+[node name="Prediction" type="Line2D" parent="."]

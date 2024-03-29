@@ -1,11 +1,10 @@
 class_name DamageEffect
-extends Node2D
+extends FloatingOriginKinetic
 
 @export var fire_speed_multiplyer := 0.2
 @export var fire: GPUParticles2D
 @export var smoke: GPUParticles2D
 
-var velocity: Vector2
 var intensity := 0.0: set = _set_intensity
 
 var _fire_material: ParticleProcessMaterial
@@ -21,10 +20,9 @@ func _ready():
 func _process(_delta):
 	if intensity == 0.0: return
 	global_rotation = 0.0
-	var speed = velocity.length()
 	var direction = Vector3(
-		-velocity.x / speed,
-		-velocity.y / speed,
+		-absolute_velocity.x / speed,
+		-absolute_velocity.y / speed,
 		0.0
 	)
 	speed = clamp(speed, 0.0, 2000.0)

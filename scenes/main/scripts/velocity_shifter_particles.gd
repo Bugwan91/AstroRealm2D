@@ -13,7 +13,7 @@ func _ready():
 
 func _process(_delta):
 	global_rotation = 0.0
-	var speed = FloatingOrigin.velocity.length()
+	var speed = FloatingOrigin.speed
 	var direction = Vector3(
 		-FloatingOrigin.velocity.x / speed,
 		-FloatingOrigin.velocity.y / speed,

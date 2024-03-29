@@ -17,11 +17,11 @@ extends FloatingOriginKinetic
 var start_velocity: Vector2 = Vector2.ZERO
 
 var impulse := 0.0
-var speed := 0.0
+var bullet_speed := 0.0
 var _damage := 10.0
 
 func _ready():
-	absolute_velocity = start_velocity + transform.x * speed
+	absolute_velocity = start_velocity + transform.x * bullet_speed
 
 func _physics_process(delta: float):
 	_update_ray(delta)
@@ -37,12 +37,10 @@ func update_material(color: Color):
 func start(lifetime: float, delta: float):
 	timer.timeout.connect(queue_free)
 	timer.start(lifetime)
-	_update_ray(delta)
-	_collide(true)
 
 func _update_ray(delta: float):
-	ray.target_position.y = speed * delta
-	prediction_ray.target_position.y = speed * time_prediction
+	ray.target_position.y = bullet_speed * delta
+	prediction_ray.target_position.y = bullet_speed * time_prediction
 
 func _collide(force: bool = false):
 	if force: ray.force_raycast_update()
@@ -56,7 +54,7 @@ func _on_hit(target: TakingDamage):
 	target.damage(_create_damage())
 	var hit_effect := hit_effect_scene.instantiate() as BulletHitEffect
 	hit_effect.position = ray.get_collision_point()
-	hit_effect.absolute_velocity = start_velocity + transform.x * speed * 0.5
+	hit_effect.absolute_velocity = start_velocity + transform.x * bullet_speed * 0.5
 	hit_effect.color = _color
 	MainState.main_scene.add_child(hit_effect)
 	queue_free()
