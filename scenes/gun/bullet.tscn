@@ -28,6 +28,8 @@ one_shot = true
 [node name="RayCast2D" type="RayCast2D" parent="."]
 unique_name_in_owner = true
 rotation = 4.71239
+collision_mask = 4
+hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
@@ -48,7 +50,7 @@ texture_scale = 2.0
 unique_name_in_owner = true
 visible = false
 rotation = -1.5708
-collision_mask = 2
+collision_mask = 64
 collide_with_areas = true
 collide_with_bodies = false
 

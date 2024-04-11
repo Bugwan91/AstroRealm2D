@@ -15,6 +15,7 @@ show_default_buttons=false
 config/name="AstroRealm"
 run/main_scene="res://scenes/main/main_scene.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
+run/max_fps=60
 config/icon="res://AR_icon.png"
 
 [autoload]
@@ -175,14 +176,16 @@ follow={
 [layer_names]
 
 2d_physics/layer_1="Physics"
-2d_physics/layer_2="Prediction"
+2d_physics/layer_2="FastCollisions"
+2d_physics/layer_3="Damage"
+2d_physics/layer_7="CollisionPrediction"
 2d_physics/layer_8="Radar"
 2d_physics/layer_32="Mouse"
 
 [physics]
 
 2d/run_on_separate_thread=true
-common/physics_ticks_per_second=30
+common/physics_ticks_per_second=20
 2d/physics_engine="GodotPhysics2D"
 2d/default_gravity=0.0
 2d/default_linear_damp=0.0

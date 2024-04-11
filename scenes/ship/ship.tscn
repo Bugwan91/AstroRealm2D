@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=25 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://scenes/ship/scripts/taking_damage.gd" id="15_bq7ks"]
 [ext_resource type="Script" path="res://scenes/heat/scripts/Heat.gd" id="20_1gdyl"]
 [ext_resource type="Script" path="res://scenes/vfx/scripts/trail.gd" id="20_q0150"]
+[ext_resource type="Script" path="res://scenes/main/scripts/collider.gd" id="20_vb7t8"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="20_w3y8g"]
 
 [sub_resource type="Curve" id="Curve_p4pb7"]
@@ -61,7 +62,6 @@ width_curve = SubResource("Curve_p4pb7")
 gradient = SubResource("Gradient_sdsuv")
 script = ExtResource("20_q0150")
 color = Color(0.3, 0.8, 2, 0.5)
-lifetime = 0.5
 
 [node name="TrailEffect2" type="Line2D" parent="."]
 position = Vector2(-38, 47)
@@ -70,7 +70,6 @@ width_curve = SubResource("Curve_p4pb7")
 gradient = SubResource("Gradient_sdsuv")
 script = ExtResource("20_q0150")
 color = Color(0.3, 0.8, 2, 0.5)
-lifetime = 0.5
 
 [node name="View" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -85,6 +84,8 @@ unique_name_in_owner = true
 
 [node name="TakingDamage" type="Area2D" parent="."]
 unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("15_bq7ks")
 
 [node name="SelectionArea" type="Area2D" parent="."]
@@ -107,8 +108,12 @@ script = ExtResource("14_5nufi")
 unique_name_in_owner = true
 script = ExtResource("20_1gdyl")
 capacity = 1000.0
+cooling = 50.0
 view = NodePath("../View")
 
 [node name="RadarItem" parent="." instance=ExtResource("20_w3y8g")]
 unique_name_in_owner = true
 icon_scale = 0.5
+
+[node name="Collider" type="Node2D" parent="."]
+script = ExtResource("20_vb7t8")

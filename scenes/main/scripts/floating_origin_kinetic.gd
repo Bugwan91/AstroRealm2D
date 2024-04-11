@@ -10,6 +10,7 @@ var _velocity: Vector2
 			FloatingOrigin.velocity = value
 		else:
 			_velocity = value
+		speed = value.length()
 	get:
 		return FloatingOrigin.velocity if is_origin() else _velocity
 
@@ -18,9 +19,11 @@ var _velocity: Vector2
 var acceleration: Vector2
 var _acceleration_next_tick: Vector2
 
-var speed: float:
+var speed: float
+
+var relative_speed: float:
 	get:
-		return absolute_velocity.x + absolute_velocity.y
+		return relative_velocity.length()
 
 var relative_velocity: Vector2:
 	get:
@@ -39,13 +42,13 @@ var shift: Vector2
 func _ready():
 	process_priority = -1
 
-func _process(delta):
-	shift = absolute_velocity * delta
+func _process(delta: float):
+	shift = _velocity * delta
 	if not is_origin():
 		position += shift
 	rotation += angular_velocity * delta
 
-func _physics_process(_delta):
+func _physics_process(_delta: float):
 	acceleration = _acceleration_next_tick
 	absolute_velocity += acceleration
 	_acceleration_next_tick = Vector2.ZERO
@@ -55,3 +58,10 @@ func add_velocity(delta_v: Vector2):
 
 func is_origin() -> bool:
 	return self == FloatingOrigin.origin_body
+
+func move(delta: Vector2):
+	if is_origin():
+		FloatingOrigin.origin += delta
+	else:
+		position += delta
+	

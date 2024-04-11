@@ -7,6 +7,8 @@ extends Area2D
 
 func _ready():
 	monitoring = false
+	#collision_layer = 3
+	#collision_mask = 0
 
 func setup_polygon(hp: Health, polygon_data: PackedVector2Array):
 	health = hp

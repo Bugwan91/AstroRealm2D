@@ -22,6 +22,8 @@ var _damage := 10.0
 
 func _ready():
 	absolute_velocity = start_velocity + transform.x * bullet_speed
+	#ray.collision_mask = 3
+	#prediction_ray.collision_mask = 7
 
 func _physics_process(delta: float):
 	_update_ray(delta)
