@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=33 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -15,28 +15,13 @@
 [ext_resource type="Script" path="res://scenes/ship/scripts/player_ship_input.gd" id="12_c6lr5"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="15_5xucn"]
 [ext_resource type="Texture2D" uid="uid://bwr37r7vbwfq0" path="res://assets/VFX_textures/light_03.png" id="19_1qnda"]
-[ext_resource type="Script" path="res://scenes/main/scripts/floating_origin_body.gd" id="22_dgxb5"]
+[ext_resource type="PackedScene" uid="uid://cr27c2clsfmu6" path="res://scenes/main/test_floating_origin_body.tscn" id="22_mxxp3"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="22_yvbma"]
-[ext_resource type="Texture2D" uid="uid://bb62gsoi2haxa" path="res://assets/VFX_textures/star_06.png" id="23_8hm4j"]
-[ext_resource type="Script" path="res://scenes/vfx/scripts/trail.gd" id="23_26w4f"]
+[ext_resource type="Script" path="res://scenes/main/test_asteroid_field.gd" id="23_26xvs"]
 [ext_resource type="Texture2D" uid="uid://dbc8lck8ryqlr" path="res://assets/my/star.png" id="23_xsmvb"]
 [ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="24_7ks4m"]
 [ext_resource type="Texture2D" uid="uid://cyq7shk5k0udu" path="res://assets/my/pointer.png" id="24_lcrqg"]
 [ext_resource type="Script" path="res://scenes/main/scripts/debug_pointer.gd" id="25_ojc3k"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/taking_damage.gd" id="25_w4u30"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/health.gd" id="26_som4q"]
-[ext_resource type="Script" path="res://scenes/main/scripts/collider.gd" id="28_sxao8"]
-[ext_resource type="PackedScene" uid="uid://ce1dw618jykrb" path="res://scenes/ship/ship.tscn" id="29_b2d2w"]
-[ext_resource type="Resource" uid="uid://c33swp4vn5c51" path="res://resources/ship_parts/engine/0.tres" id="30_eptod"]
-[ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="30_s86s7"]
-[ext_resource type="Resource" uid="uid://dkfenlyktvckf" path="res://resources/ship_parts/hull/02/hull.tres" id="31_vklu0"]
-[ext_resource type="Texture2D" uid="uid://bqx61atmdag5g" path="res://assets/spaceships/hull/02/_base.png" id="32_6sciw"]
-[ext_resource type="Texture2D" uid="uid://dvtnerb2k0qle" path="res://assets/spaceships/hull/02/_emission.png" id="33_tr8rq"]
-[ext_resource type="Texture2D" uid="uid://bsf8bix50mxto" path="res://assets/spaceships/hull/02/_heat.png" id="34_6ucco"]
-[ext_resource type="Texture2D" uid="uid://vaw1wyhai2wf" path="res://assets/spaceships/hull/02/_mask.png" id="35_ieaat"]
-[ext_resource type="Texture2D" uid="uid://bi8g2s363ai44" path="res://assets/spaceships/hull/02/_normal.png" id="36_hrfm7"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/resources/ship_design_data.gd" id="37_1nkel"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/resources/ship_data.gd" id="38_1c7vr"]
 [ext_resource type="PackedScene" uid="uid://cmqm4dm8rpi0l" path="res://scenes/background/sun.tscn" id="46_aihwc"]
 
 [sub_resource type="Resource" id="Resource_in7ib"]
@@ -85,46 +70,6 @@ gradient = SubResource("Gradient_lst00")
 use_hdr = true
 fill = 1
 fill_from = Vector2(0.470085, 0.440171)
-
-[sub_resource type="Curve" id="Curve_dfui5"]
-_data = [Vector2(0, 1), 0.0, -1.97111, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="Gradient_ubv7a"]
-colors = PackedColorArray(1, 1, 1, 0.2, 1, 1, 1, 0)
-
-[sub_resource type="Resource" id="Resource_moct4"]
-script = ExtResource("26_som4q")
-max_health = 186520.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_7jflm"]
-radius = 64.0
-
-[sub_resource type="Resource" id="Resource_oxjkg"]
-script = ExtResource("11_fkpwp")
-hull = ExtResource("31_vklu0")
-engine = ExtResource("30_eptod")
-style = ExtResource("7_lo2oh")
-
-[sub_resource type="Resource" id="Resource_akl7k"]
-script = ExtResource("37_1nkel")
-diffuse = ExtResource("32_6sciw")
-normal = ExtResource("36_hrfm7")
-mask = ExtResource("35_ieaat")
-emision = ExtResource("33_tr8rq")
-heat = ExtResource("34_6ucco")
-shininess = -0.8
-metallic = 0.0
-polygon = PackedVector2Array()
-thrusters = Array[Resource("res://addons/points_resource_editor/point_resource.gd")]([])
-engines = PackedVector2Array()
-weapon_slots = Array[Resource("res://addons/points_resource_editor/point_resource.gd")]([])
-
-[sub_resource type="Resource" id="Resource_tdyuj"]
-script = ExtResource("38_1c7vr")
-flight_model = ExtResource("2_3s1kf")
-design = SubResource("Resource_akl7k")
-blueprint = SubResource("Resource_oxjkg")
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("input_reader")]
 script = ExtResource("1_2ehlx")
@@ -336,50 +281,9 @@ texture = ExtResource("23_xsmvb")
 icon_scale = 4.0
 color = Color(0, 0.8, 2, 1)
 
-[node name="FloatingOriginBody" type="Node2D" parent="."]
-position = Vector2(-391, -180)
-rotation = 0.785398
-script = ExtResource("22_dgxb5")
-mass = 100.0
-inertia = 5.0
-absolute_velocity = Vector2(300, 0)
+[node name="FloatingOriginBody" parent="." instance=ExtResource("22_mxxp3")]
 
-[node name="RadarItem" parent="FloatingOriginBody" instance=ExtResource("22_yvbma")]
-texture = ExtResource("23_8hm4j")
-icon_scale = 0.1
-color = Color(1, 1, 1, 1)
-
-[node name="Polygon2D" type="Polygon2D" parent="FloatingOriginBody"]
-scale = Vector2(0.5, 0.5)
-color = Color(0.428956, 0.551978, 0.888885, 1)
-polygon = PackedVector2Array(0, 127.279, -90.5097, 90.5096, -127.279, -3.05176e-05, -90.5096, -90.5097, 0, -127.279, 90.5097, -90.5097, 127.279, 3.05176e-05, 90.5096, 90.5097)
-
-[node name="TrailEffect" type="Line2D" parent="FloatingOriginBody"]
-width = 64.0
-width_curve = SubResource("Curve_dfui5")
-gradient = SubResource("Gradient_ubv7a")
-script = ExtResource("23_26w4f")
-color = Color(0, 0.705882, 0.847059, 1)
-lifetime = 5.0
-
-[node name="TakingDamage" type="Area2D" parent="FloatingOriginBody"]
-collision_layer = 4
-collision_mask = 4
-script = ExtResource("25_w4u30")
-health = SubResource("Resource_moct4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FloatingOriginBody/TakingDamage"]
-shape = SubResource("CircleShape2D_7jflm")
-
-[node name="Collider" type="Node2D" parent="FloatingOriginBody"]
-script = ExtResource("28_sxao8")
-elasticity = 0.1
-
-[node name="Ship" parent="." instance=ExtResource("29_b2d2w")]
-position = Vector2(-385, 237)
-data = SubResource("Resource_tdyuj")
-group = "enemy"
-gun_scene = ExtResource("30_s86s7")
-mass = 1.0
-inertia = 1.0
-absolute_velocity = Vector2(300, 0)
+[node name="Field" type="Node" parent="."]
+script = ExtResource("23_26xvs")
+body_scene = ExtResource("22_mxxp3")
+max_count = 500

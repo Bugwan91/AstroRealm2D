@@ -61,7 +61,7 @@ func is_origin() -> bool:
 
 func move(delta: Vector2):
 	if is_origin():
-		FloatingOrigin.origin += delta
+		FloatingOrigin.move(delta)
 	else:
 		position += delta
 	

@@ -9,6 +9,8 @@ var origin := Vector2.ZERO
 
 ## Delta position of current (0,0) from last frame
 var shift := Vector2.ZERO
+### Hard set delta position of current (0,0)
+var _extra_shift := Vector2.ZERO
 
 ## Delta position of current (0,0) from last physics tick
 var phys_shift := Vector2.ZERO
@@ -53,7 +55,8 @@ func absolute_position(node: Node2D) -> Vector2:
 
 func _shift_objects():
 	var time := Time.get_ticks_usec() * 0.000001
-	shift = velocity * (time - last_update_time)
+	shift = velocity * (time - last_update_time) + _extra_shift
+	_extra_shift = Vector2.ZERO
 	origin += shift
 	for node in MainState.main_scene.get_children():
 		if node is Node2D and not node == origin_body and not node.is_in_group("ignore_floating"):
@@ -66,3 +69,6 @@ func reset_origin(body: FloatingOriginKinetic):
 	if not origin_body:
 		velocity_delta = -velocity
 		velocity = Vector2.ZERO
+
+func move(delta: Vector2):
+	_extra_shift += delta

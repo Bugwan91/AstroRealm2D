@@ -1,6 +1,7 @@
 class_name RadarItem
 extends Area2D
 
+@export var active := true
 @export var texture: Texture2D
 @export var icon_scale := 1.0
 @export var icon_aspect := 1.0
@@ -10,6 +11,7 @@ var icon: Sprite2D
 
 func _ready():
 	monitoring = false
+	monitorable = active
 	collision_layer = 8
 	collision_mask = 0
 

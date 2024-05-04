@@ -71,9 +71,7 @@ func _rotate(delta: float):
 		ship.angular_velocity = 0.0
 		return
 	var a := flight_model.turn * delta
-	var s := absf(d)
-	var n := 0.5 * (sqrt(a * (a + 8.0 * s)) / a - 1.0)
-	var vt := 0.5 * (sqrt(a * (a + 8.0 * s)) - a) * signf(d) / delta
+	var vt := 0.5 * (sqrt(a * (a + 8.0 * absf(d))) - a) * signf(d) / delta
 	ship.angular_velocity = vt
 
 func _boost(delta: float):

@@ -1,0 +1,64 @@
+[gd_scene load_steps=12 format=3 uid="uid://cr27c2clsfmu6"]
+
+[ext_resource type="Script" path="res://scenes/main/scripts/floating_origin_body.gd" id="1_ajadg"]
+[ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="2_56gtl"]
+[ext_resource type="Texture2D" uid="uid://bb62gsoi2haxa" path="res://assets/VFX_textures/star_06.png" id="3_njcjg"]
+[ext_resource type="Script" path="res://scenes/vfx/scripts/trail.gd" id="4_u22mx"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/taking_damage.gd" id="5_xn3bw"]
+[ext_resource type="Script" path="res://scenes/ship/scripts/health.gd" id="6_fcb6e"]
+[ext_resource type="Script" path="res://scenes/main/scripts/collider.gd" id="7_urpje"]
+
+[sub_resource type="Curve" id="Curve_dfui5"]
+_data = [Vector2(0, 1), 0.0, -1.97111, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ubv7a"]
+colors = PackedColorArray(1, 1, 1, 0.2, 1, 1, 1, 0)
+
+[sub_resource type="Resource" id="Resource_moct4"]
+script = ExtResource("6_fcb6e")
+max_health = 186520.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7jflm"]
+radius = 64.0
+
+[node name="FloatingOriginBody" type="Node2D"]
+position = Vector2(-391, -180)
+rotation = 0.785398
+script = ExtResource("1_ajadg")
+mass = 2.0
+inertia = 5.0
+absolute_velocity = Vector2(300, 0)
+
+[node name="RadarItem" parent="." instance=ExtResource("2_56gtl")]
+texture = ExtResource("3_njcjg")
+icon_scale = 0.1
+color = Color(1, 1, 1, 1)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+scale = Vector2(0.5, 0.5)
+color = Color(0.428956, 0.551978, 0.888885, 1)
+polygon = PackedVector2Array(0, 127.279, -90.5097, 90.5096, -127.279, -3.05176e-05, -90.5096, -90.5097, 0, -127.279, 90.5097, -90.5097, 127.279, 3.05176e-05, 90.5096, 90.5097)
+
+[node name="TrailEffect" type="Line2D" parent="."]
+visible = false
+width = 64.0
+width_curve = SubResource("Curve_dfui5")
+gradient = SubResource("Gradient_ubv7a")
+script = ExtResource("4_u22mx")
+color = Color(0, 0.705882, 0.847059, 1)
+lifetime = 5.0
+
+[node name="TakingDamage" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+monitoring = false
+monitorable = false
+script = ExtResource("5_xn3bw")
+health = SubResource("Resource_moct4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TakingDamage"]
+shape = SubResource("CircleShape2D_7jflm")
+
+[node name="Collider" type="Node2D" parent="."]
+script = ExtResource("7_urpje")
