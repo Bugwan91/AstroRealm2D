@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ctsl5rfkacuoq" path="res://assets/spaceships/hull/02/01_mask.png" id="4_8n75i"]
 [ext_resource type="Texture2D" uid="uid://bnddgbdtp3guk" path="res://assets/spaceships/hull/02/01_normal.png" id="5_1d7fu"]
 [ext_resource type="Resource" uid="uid://dkfenlyktvckf" path="res://resources/ship_parts/hull/02/hull.tres" id="6_j5jop"]
-[ext_resource type="Script" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="7_tvphm"]
+[ext_resource type="Script" uid="uid://b6lilmuq78cd7" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="7_tvphm"]
 
 [sub_resource type="Resource" id="Resource_yr41p"]
 script = ExtResource("7_tvphm")

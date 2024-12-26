@@ -1,9 +1,9 @@
 [gd_scene load_steps=59 format=3 uid="uid://cxdkw4g14655c"]
 
-[ext_resource type="Script" path="res://scenes/background/scripts/background_layer.gd" id="1_48uix"]
+[ext_resource type="Script" uid="uid://dnfwwkxxxljjo" path="res://scenes/background/scripts/background_layer.gd" id="1_48uix"]
 [ext_resource type="Script" path="res://scenes/background/scripts/background.gd" id="1_lpf5v"]
 [ext_resource type="Shader" path="res://scenes/background/shaders/space_background.gdshader" id="3_pr640"]
-[ext_resource type="Script" path="res://scenes/background/scripts/background_sprite.gd" id="3_u112l"]
+[ext_resource type="Script" uid="uid://cp3abb07sco0t" path="res://scenes/background/scripts/background_sprite.gd" id="3_u112l"]
 [ext_resource type="Texture2D" uid="uid://coown8jbg4bf8" path="res://assets/backgrounds/noise/4096_mask.png" id="5_3nfay"]
 [ext_resource type="Shader" path="res://scenes/background/shaders/space_background_stars_prebaked.gdshader" id="6_gdvqf"]
 [ext_resource type="Texture2D" uid="uid://3mfqbpktey4v" path="res://assets/backgrounds/noise/4096_shift.png" id="6_j364p"]

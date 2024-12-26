@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://qp7d7lr8ovga" path="res://assets/spaceships/hull/02/02_mask.png" id="4_ox15c"]
 [ext_resource type="Texture2D" uid="uid://dq6m14gu6tldv" path="res://assets/spaceships/hull/02/02_normal.png" id="5_pc6ok"]
 [ext_resource type="Resource" uid="uid://dkfenlyktvckf" path="res://resources/ship_parts/hull/02/hull.tres" id="6_27svm"]
-[ext_resource type="Script" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="7_bq7ne"]
+[ext_resource type="Script" uid="uid://b6lilmuq78cd7" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="7_bq7ne"]
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd" id="8_yngsl"]
 
 [sub_resource type="Resource" id="Resource_yr41p"]

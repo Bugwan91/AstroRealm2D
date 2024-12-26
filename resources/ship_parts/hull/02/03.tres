@@ -6,10 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://548enygy2841" path="res://assets/spaceships/hull/02/03_mask.png" id="4_be3qv"]
 [ext_resource type="Texture2D" uid="uid://bnkl4yvq0um62" path="res://assets/spaceships/hull/02/03_normal.png" id="5_wrlym"]
 [ext_resource type="Resource" uid="uid://dkfenlyktvckf" path="res://resources/ship_parts/hull/02/hull.tres" id="6_3udhd"]
-[ext_resource type="Script" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="7_12f8x"]
+[ext_resource type="Script" uid="uid://b6lilmuq78cd7" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="7_12f8x"]
 [ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd" id="8_mfier"]
-[ext_resource type="Script" path="res://addons/points_resource_editor/point_resource.gd" id="9_wk06o"]
-[ext_resource type="Script" path="res://addons/points_resource_editor/points_array_resource.gd" id="10_vmby2"]
+[ext_resource type="Script" uid="uid://dysuxiql8stb1" path="res://addons/points_resource_editor/point_resource.gd" id="9_wk06o"]
+[ext_resource type="Script" uid="uid://b1cyik4ucr2m" path="res://addons/points_resource_editor/points_array_resource.gd" id="10_vmby2"]
 
 [sub_resource type="Resource" id="Resource_yr41p"]
 script = ExtResource("7_12f8x")
