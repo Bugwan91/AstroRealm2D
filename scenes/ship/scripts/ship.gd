@@ -87,12 +87,11 @@ func _set_ship_data(new_data: ShipData):
 #endregion
 
 func _physics_process(delta):
-	flight_controller.physics_process(delta)
-	#super._physics_process(delta)
 	_update_velocity_for_weapons()
+	super._physics_process(delta)
 
 func _integrate_forces(state):
-	pass
+	flight_controller.integrate_forces(state)
 
 func _update_velocity_for_weapons():
 	pass

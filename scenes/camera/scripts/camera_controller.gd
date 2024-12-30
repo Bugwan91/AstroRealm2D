@@ -4,6 +4,7 @@ extends Camera2D
 signal zoomed(zoom: float)
 
 @export var acceleration := 2.0
+@export var acceleration_mult := 5.0
 @export var zoom_min := 0.1
 @export var zoom_max := 2.0
 @export var zoom_speed := 0.05
@@ -39,8 +40,8 @@ func _process(delta):
 		zoomed.emit(zoom.x)
 	_required_look_position = lerp(_required_look_position, _get_look_position(), 2.0 * delta)
 	_hit_position = lerp(_hit_position, Vector2.ZERO, 10.0 * delta)
-	_acceleration = lerp(_acceleration, target.acceleration, acceleration * delta)
-	position = target.position + _acceleration + _required_look_position + _hit_position
+	_acceleration = lerp(_acceleration, -target.tick_acceleration, acceleration * delta)
+	position = target.position + _acceleration * acceleration_mult + _required_look_position + _hit_position
 
 func _init_zoom():
 	_zoom_min = Vector2(zoom_min, zoom_min)

@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://dwdthpisfmojs"]
 
-[ext_resource type="Script" path="res://scenes/gun/scripts/bullet.gd" id="1_gtbct"]
+[ext_resource type="Script" uid="uid://bq8lsn2eb5ur1" path="res://scenes/gun/scripts/bullet.gd" id="1_gtbct"]
 [ext_resource type="PackedScene" uid="uid://dcjlidv1ftgrv" path="res://scenes/gun/hit_effect.tscn" id="2_m6c5x"]
 [ext_resource type="Texture2D" uid="uid://c5jb4kvkgd8ux" path="res://assets/bullets/laser_16.png" id="4_0sbfp"]
 [ext_resource type="Texture2D" uid="uid://c388olp5jsja" path="res://assets/my/circle_texture_128.tres" id="5_rn3vo"]
-[ext_resource type="Script" path="res://scenes/vfx/scripts/trail.gd" id="6_51oes"]
+[ext_resource type="Script" uid="uid://w8vsnqoourdh" path="res://scenes/vfx/scripts/trail.gd" id="6_51oes"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="6_h12vt"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8unas"]
@@ -60,6 +60,7 @@ icon_scale = 0.5
 
 [node name="Trail" type="Line2D" parent="."]
 unique_name_in_owner = true
+visible = false
 width = 2.0
 width_curve = SubResource("Curve_i0wtl")
 gradient = SubResource("Gradient_7dx5m")

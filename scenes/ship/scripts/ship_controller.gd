@@ -13,67 +13,51 @@ var ship: Spaceship:
 var flight_model: ShipFlightModelData
 var inputs: ShipInputData
 
-var _impulses := Vector2.ZERO
-
 func setup(spaceship: Spaceship):
 	ship = spaceship
 
-func add_impulse(impulse: Vector2):
-	add_impulse_absolute(impulse.rotated(-ship.rotation))
-
-func add_impulse_absolute(impulse: Vector2):
-	_impulses += impulse
-
-func physics_process(delta: float):
-	_apply_impulse()
-	_apply_controls(delta)
-
-func _apply_controls(delta: float):
+func integrate_forces(state: PhysicsDirectBodyState2D):
 	if not is_instance_valid(inputs): return
-	_stop(delta)
-	_strafe(delta)
-	_rotate(delta)
-	_boost(delta)
-
-func _apply_impulse():
-	if _impulses.is_zero_approx(): return
-	ship.add_impulse(_impulses) # ???
-	_impulses = Vector2.ZERO
-
-func _stop(delta: float):
+	_stop(state)
+	_strafe(state)
+	_rotate(state)
+	_boost(state)
+	
+func _stop(state: PhysicsDirectBodyState2D):
 	if not inputs.stop: return
-	#var speed := ship.speed
-	var speed := ship.linear_velocity.length()
-	if speed < STOP_THRESHOLD: return
+	var d := ship.speed
 	var stop_vector := -ship.linear_velocity.normalized()
-	var result_delta_v := _calculate_strafe_delta_v(stop_vector, delta)
-	var result_delta_speed := result_delta_v.length()
-	var limiter := speed / result_delta_speed
-	limiter = clampf(limiter, 0.0, 1.0)
-	inputs.strafe += stop_vector * limiter
+	var f := _calculate_strafe_force(stop_vector).length()
+	var stop_d := f * state.inverse_mass * state.step
+	if d < stop_d:
+		ship.linear_velocity = Vector2.ZERO
+	else:
+		# CAUTION Will work only for inputs 0 or 1, no .2, .3, .5...
+		inputs.strafe += inputs.strafe + (stop_vector).rotated(-ship.rotation)
 
-func _strafe(delta: float):
+func _strafe(state: PhysicsDirectBodyState2D):
+	if inputs.strafe.is_zero_approx(): return
 	var str_input := inputs.strafe.rotated(ship.rotation)
-	if str_input.is_zero_approx(): return
-	ship.add_velocity(_calculate_strafe_delta_v(str_input, delta))
+	ship.apply_force(_calculate_strafe_force(str_input))
 
-func _calculate_strafe_delta_v(input: Vector2, delta: float) -> Vector2:
+func _calculate_strafe_force(input: Vector2) -> Vector2:
 	var target_v := input * flight_model.speed
 	var delta_v := target_v - ship.linear_velocity
-	var delta_l := delta_v.length()
-	var delta_n = delta_v / delta_l
-	var strafe_mult := delta_l / flight_model.speed
-	strafe_mult = smoothstep(0.0, 1.0, strafe_mult)
-	return delta_n * strafe_mult * flight_model.strafe * delta
+	var delta_v_l := delta_v.length()
+	var delta_dir = delta_v / delta_v_l
+	var strafe_mult := delta_v_l / flight_model.speed
+	strafe_mult = smoothstep(0.0, 0.2, strafe_mult)
+	return delta_dir * strafe_mult * flight_model.strafe
 
-func _rotate(delta: float):
+func _rotate(state: PhysicsDirectBodyState2D):
 	var d := ship.transform.x.angle_to(inputs.target_point - ship.position)
 	if abs(d) < ANGULAR_THRESHOLD and abs(ship.angular_velocity) < ANGULAR_THRESHOLD:
 		ship.angular_velocity = 0.0
 		return
-	var a := flight_model.turn * delta
-	var vt := 0.5 * (sqrt(a * (a + 8.0 * absf(d))) - a) * signf(d) / delta
+	var a := flight_model.turn * state.step
+	var vt := 0.5 * (sqrt(a * (a + 8.0 * absf(d))) - a) * signf(d) / state.step
+	# TODO: reimplemet this with apply_torque()
 	ship.angular_velocity = vt
 
-func _boost(delta: float):
+func _boost(state: PhysicsDirectBodyState2D):
 	pass

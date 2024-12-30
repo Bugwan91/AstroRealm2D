@@ -1,7 +1,7 @@
 class_name ShipFlightModelData
 extends Resource
 
-const INERTIA_MULTIPLYER: float = 2500.0
+const INERTIA_MULTIPLYER: float = 2500.0 # TODO CRITICAL remove inertia from here
 
 signal mass_changed(new_mass: float)
 signal inertia_changed(new_inertia: float)
@@ -10,7 +10,7 @@ signal boost_changed(new_boost: float)
 signal strafe_changed(new_strafe: float)
 signal turn_changed(new_turn: float)
 
-@export_range(0.01, 1000.0) var mass: float = 1.0: set = _set_mass
+@export_range(0.01, 1000.0) var mass: float = 1.0: set = _set_mass # TODO CRITICAL remove mass from here
 @export_range(1.0, 50000.0) var speed: float = 2000.0: set = _set_speed
 @export_range(0.0, 10.0) var boost_base: float = 0.5: set = _update_boost
 @export_range(0.0, 10000.0) var strafe_base: float = 100.0: set = _update_strafe
@@ -18,7 +18,7 @@ signal turn_changed(new_turn: float)
 
 var inertia: float
 var boost: float
-var strafe: float
+var strafe: float # strafe acceleration
 var turn: float
 
 var ship: Spaceship
