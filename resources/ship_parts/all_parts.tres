@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="ShipDesignerParts" load_steps=20 format=3 uid="uid://dso44ig5a2xx4"]
+[gd_resource type="Resource" script_class="ShipDesignerParts" load_steps=22 format=3 uid="uid://dso44ig5a2xx4"]
 
+[ext_resource type="Script" uid="uid://p47ksddy7fs0" path="res://scenes/ship_designer/scripts/resources/view_baker_resource.gd" id="1_bqqy7"]
 [ext_resource type="Resource" uid="uid://c33swp4vn5c51" path="res://resources/ship_parts/engine/0.tres" id="1_f6783"]
 [ext_resource type="Resource" uid="uid://brpfjpxetwlmd" path="res://resources/ship_parts/engine/1.tres" id="2_bex6w"]
 [ext_resource type="Resource" uid="uid://c83n3ib0kufjx" path="res://resources/ship_parts/hull/01/hull.tres" id="3_ns6b6"]
+[ext_resource type="Script" uid="uid://n101buc5ybpd" path="res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd" id="4_8h3hf"]
 [ext_resource type="Resource" uid="uid://dkfenlyktvckf" path="res://resources/ship_parts/hull/02/hull.tres" id="4_16dyl"]
 [ext_resource type="Resource" uid="uid://cdp7415qyadan" path="res://resources/ship_parts/hull/01/01.tres" id="5_m7vfw"]
 [ext_resource type="Resource" uid="uid://bobgpeam3e5tj" path="res://resources/ship_parts/hull/01/02.tres" id="6_xyliv"]
 [ext_resource type="Resource" uid="uid://dcjyhgkwiqjvv" path="res://resources/ship_parts/hull/01/03.tres" id="7_t1vdd"]
 [ext_resource type="Resource" uid="uid://div8hfpepavgd" path="res://resources/ship_parts/hull/02/01.tres" id="8_3mr3y"]
 [ext_resource type="Resource" uid="uid://fyg17m44vogd" path="res://resources/ship_parts/hull/02/02.tres" id="9_ca4ac"]
-[ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/ship_parts_list.gd" id="9_oee7v"]
+[ext_resource type="Script" uid="uid://bbkguhgv4whgl" path="res://scenes/ship_designer/scripts/resources/ship_parts_list.gd" id="9_oee7v"]
 [ext_resource type="Resource" uid="uid://f7ckmary6jm8" path="res://resources/ship_parts/hull/02/03.tres" id="10_kl2f0"]
 [ext_resource type="Texture2D" uid="uid://brtabr5lpm864" path="res://assets/spaceships/Styles/01.png" id="10_llqbd"]
 [ext_resource type="Texture2D" uid="uid://dvxp714x3fp80" path="res://assets/spaceships/Styles/02.png" id="11_clk7m"]
@@ -22,7 +24,7 @@
 
 [resource]
 script = ExtResource("9_oee7v")
-hulls = Array[Resource("res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd")]([ExtResource("3_ns6b6"), ExtResource("4_16dyl")])
-hulls_ext = Array[Resource("res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd")]([ExtResource("5_m7vfw"), ExtResource("6_xyliv"), ExtResource("7_t1vdd"), ExtResource("8_3mr3y"), ExtResource("9_ca4ac"), ExtResource("10_kl2f0")])
-engines = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([ExtResource("1_f6783"), ExtResource("2_bex6w")])
+hulls = Array[ExtResource("4_8h3hf")]([ExtResource("3_ns6b6"), ExtResource("4_16dyl")])
+hulls_ext = Array[ExtResource("4_8h3hf")]([ExtResource("5_m7vfw"), ExtResource("6_xyliv"), ExtResource("7_t1vdd"), ExtResource("8_3mr3y"), ExtResource("9_ca4ac"), ExtResource("10_kl2f0")])
+engines = Array[ExtResource("1_bqqy7")]([ExtResource("1_f6783"), ExtResource("2_bex6w")])
 styles = Array[Texture2D]([ExtResource("10_llqbd"), ExtResource("11_clk7m"), ExtResource("12_6h25f"), ExtResource("13_nfpt5"), ExtResource("14_hsl0j"), ExtResource("15_lylw5"), ExtResource("16_s7xt2"), ExtResource("17_fxyt1")])

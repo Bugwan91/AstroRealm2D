@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="HullBakerResource" load_steps=15 format=3 uid="uid://f7ckmary6jm8"]
+[gd_resource type="Resource" script_class="HullBakerResource" load_steps=16 format=3 uid="uid://f7ckmary6jm8"]
 
 [ext_resource type="Texture2D" uid="uid://dniawmfa8aif6" path="res://assets/spaceships/hull/02/03_base.png" id="1_2c8e5"]
+[ext_resource type="Script" uid="uid://p47ksddy7fs0" path="res://scenes/ship_designer/scripts/resources/view_baker_resource.gd" id="1_lh0q2"]
 [ext_resource type="Texture2D" uid="uid://dyemq2fl4xkg3" path="res://assets/spaceships/hull/02/03_emisison.png" id="2_3j0o8"]
 [ext_resource type="Texture2D" uid="uid://xe02io0kcmnt" path="res://assets/spaceships/hull/02/03_heat.png" id="3_85rml"]
 [ext_resource type="Texture2D" uid="uid://548enygy2841" path="res://assets/spaceships/hull/02/03_mask.png" id="4_be3qv"]
 [ext_resource type="Texture2D" uid="uid://bnkl4yvq0um62" path="res://assets/spaceships/hull/02/03_normal.png" id="5_wrlym"]
 [ext_resource type="Resource" uid="uid://dkfenlyktvckf" path="res://resources/ship_parts/hull/02/hull.tres" id="6_3udhd"]
 [ext_resource type="Script" uid="uid://b6lilmuq78cd7" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="7_12f8x"]
-[ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd" id="8_mfier"]
+[ext_resource type="Script" uid="uid://n101buc5ybpd" path="res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd" id="8_mfier"]
 [ext_resource type="Script" uid="uid://dysuxiql8stb1" path="res://addons/points_resource_editor/point_resource.gd" id="9_wk06o"]
 [ext_resource type="Script" uid="uid://b1cyik4ucr2m" path="res://addons/points_resource_editor/points_array_resource.gd" id="10_vmby2"]
 
@@ -36,7 +37,7 @@ engine_slots = Array[Vector2]([])
 weapon_slots = SubResource("Resource_iig6i")
 mass = 1.0
 type = 1
-allowed_ext = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([])
+allowed_ext = Array[ExtResource("1_lh0q2")]([])
 diffuse = ExtResource("1_2c8e5")
 normal = ExtResource("5_wrlym")
 mask = ExtResource("4_be3qv")

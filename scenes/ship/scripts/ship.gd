@@ -1,5 +1,5 @@
 class_name Spaceship
-extends FloatingOriginBody
+extends RigidBody
 
 signal dead(ship: Spaceship)
 
@@ -15,7 +15,7 @@ signal dead(ship: Spaceship)
 
 @onready var flight_controller: FlightController = %FlightController
 
-@onready var taking_damage: TakingDamage = %TakingDamage
+#@onready var taking_damage: TakingDamage = %TakingDamage
 @onready var heat: Heat = %Heat
 
 @onready var _view: ShipView = %View
@@ -29,6 +29,7 @@ var is_player: bool = false:
 	get:
 		return input_reader is PlayerShipInput
 
+#region Initialization
 func _ready():
 	assert(data != null, "Ship Data is missed")
 	_setup_view()
@@ -37,17 +38,12 @@ func _ready():
 	_setup_weapon()
 	connect_inputs(input_reader)
 
-func _physics_process(delta):
-	flight_controller.physics_process(delta)
-	super._physics_process(delta)
-	_update_velocity_for_weapons()
-
 func _setup_flight_controller():
 	flight_controller.setup(self)
 
 func _setup_health():
 	if not is_instance_valid(health): return
-	taking_damage.setup_polygon(health, data.design.polygon)
+	#taking_damage.setup_polygon(health, data.design.polygon)
 	_destroy_effect.setup(self)
 	_destroy_effect.destroy.connect(_destroy)
 	health.dying.connect(_die)
@@ -79,8 +75,28 @@ func _connect_flight_controller_inputs():
 func _connect_weapon_inputs():
 	_weapon_slots.connect_inputs(input_reader)
 
+func _setup_view():
+	_view.setup_textures(data.design)
+
+func _set_ship_data(new_data: ShipData):
+	if new_data == null: return
+	data = new_data
+	mass = data.flight_model.mass
+	inertia = data.flight_model.inertia
+
+#endregion
+
+func _physics_process(delta):
+	flight_controller.physics_process(delta)
+	#super._physics_process(delta)
+	_update_velocity_for_weapons()
+
+func _integrate_forces(state):
+	pass
+
 func _update_velocity_for_weapons():
-	_weapon_slots.update_velocity(absolute_velocity)
+	pass
+	#_weapon_slots.update_velocity(absolute_velocity)
 
 func set_target(target: RigidBody2D):
 	pass
@@ -91,15 +107,6 @@ func _die():
 
 func _destroy():
 	queue_free()
-
-func _setup_view():
-	_view.setup_textures(data.design)
-
-func _set_ship_data(new_data: ShipData):
-	if new_data == null: return
-	data = new_data
-	mass = data.flight_model.mass
-	inertia = data.flight_model.inertia
 
 func _on_weapon_shoot(_recoil: Vector2):
 	heat.add_heat(5.0)

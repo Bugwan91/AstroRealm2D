@@ -1,11 +1,11 @@
 [gd_scene load_steps=59 format=3 uid="uid://cxdkw4g14655c"]
 
-[ext_resource type="Script" uid="uid://dnfwwkxxxljjo" path="res://scenes/background/scripts/background_layer.gd" id="1_48uix"]
-[ext_resource type="Script" path="res://scenes/background/scripts/background.gd" id="1_lpf5v"]
-[ext_resource type="Shader" path="res://scenes/background/shaders/space_background.gdshader" id="3_pr640"]
-[ext_resource type="Script" uid="uid://cp3abb07sco0t" path="res://scenes/background/scripts/background_sprite.gd" id="3_u112l"]
+[ext_resource type="Script" uid="uid://d3snixmvgwv1q" path="res://scenes/background/scripts/background_layer.gd" id="1_48uix"]
+[ext_resource type="Script" uid="uid://cn1j1corr1vun" path="res://scenes/background/scripts/background.gd" id="1_lpf5v"]
+[ext_resource type="Shader" uid="uid://cr7tls63s2ipa" path="res://scenes/background/shaders/space_background.gdshader" id="3_pr640"]
+[ext_resource type="Script" uid="uid://d1jcv52xf1gc1" path="res://scenes/background/scripts/background_sprite.gd" id="3_u112l"]
 [ext_resource type="Texture2D" uid="uid://coown8jbg4bf8" path="res://assets/backgrounds/noise/4096_mask.png" id="5_3nfay"]
-[ext_resource type="Shader" path="res://scenes/background/shaders/space_background_stars_prebaked.gdshader" id="6_gdvqf"]
+[ext_resource type="Shader" uid="uid://sgu5icdbxaix" path="res://scenes/background/shaders/space_background_stars_prebaked.gdshader" id="6_gdvqf"]
 [ext_resource type="Texture2D" uid="uid://3mfqbpktey4v" path="res://assets/backgrounds/noise/4096_shift.png" id="6_j364p"]
 [ext_resource type="Texture2D" uid="uid://1swugkpq4ua2" path="res://assets/my/debug_texture.jpeg" id="6_ody0m"]
 [ext_resource type="Texture2D" uid="uid://du3et7im4u6i5" path="res://assets/backgrounds/noise/4096.png" id="7_bc73e"]
@@ -41,11 +41,11 @@ size = Vector2(10, 10)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0cqxu"]
 shader = ExtResource("3_pr640")
+shader_parameter/mask_texture = ExtResource("5_3nfay")
+shader_parameter/shift_texture_x = ExtResource("6_j364p")
 shader_parameter/glow = 0.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
-shader_parameter/mask_texture = ExtResource("5_3nfay")
-shader_parameter/shift_texture_x = ExtResource("6_j364p")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vnm3e"]
 shader = ExtResource("6_gdvqf")
@@ -55,11 +55,11 @@ shader_parameter/offset = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_022s5"]
 shader = ExtResource("3_pr640")
+shader_parameter/mask_texture = ExtResource("10_1glsp")
+shader_parameter/shift_texture_x = ExtResource("11_2iny1")
 shader_parameter/glow = 0.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
-shader_parameter/mask_texture = ExtResource("10_1glsp")
-shader_parameter/shift_texture_x = ExtResource("11_2iny1")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_abxdr"]
 shader = ExtResource("6_gdvqf")
@@ -69,11 +69,11 @@ shader_parameter/offset = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b54vu"]
 shader = ExtResource("3_pr640")
+shader_parameter/mask_texture = ExtResource("14_xc4n7")
+shader_parameter/shift_texture_x = ExtResource("15_bn0bt")
 shader_parameter/glow = 0.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
-shader_parameter/mask_texture = ExtResource("14_xc4n7")
-shader_parameter/shift_texture_x = ExtResource("15_bn0bt")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_04u48"]
 shader = ExtResource("6_gdvqf")
@@ -83,11 +83,11 @@ shader_parameter/offset = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lh6as"]
 shader = ExtResource("3_pr640")
+shader_parameter/mask_texture = ExtResource("18_t6ein")
+shader_parameter/shift_texture_x = ExtResource("19_ljsmy")
 shader_parameter/glow = 1.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
-shader_parameter/mask_texture = ExtResource("18_t6ein")
-shader_parameter/shift_texture_x = ExtResource("19_ljsmy")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_edfsm"]
 shader = ExtResource("6_gdvqf")
@@ -97,11 +97,11 @@ shader_parameter/offset = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e3wy6"]
 shader = ExtResource("3_pr640")
+shader_parameter/mask_texture = ExtResource("22_fputy")
+shader_parameter/shift_texture_x = ExtResource("23_usip3")
 shader_parameter/glow = 0.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
-shader_parameter/mask_texture = ExtResource("22_fputy")
-shader_parameter/shift_texture_x = ExtResource("23_usip3")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uya4s"]
 shader = ExtResource("6_gdvqf")
@@ -111,19 +111,19 @@ shader_parameter/offset = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t82sx"]
 shader = ExtResource("3_pr640")
+shader_parameter/mask_texture = ExtResource("26_vpfgx")
+shader_parameter/shift_texture_x = ExtResource("27_osf1t")
 shader_parameter/glow = 0.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
-shader_parameter/mask_texture = ExtResource("26_vpfgx")
-shader_parameter/shift_texture_x = ExtResource("27_osf1t")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qaupf"]
 shader = ExtResource("3_pr640")
+shader_parameter/mask_texture = ExtResource("29_gghpb")
+shader_parameter/shift_texture_x = ExtResource("30_oem1p")
 shader_parameter/glow = 0.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
-shader_parameter/mask_texture = ExtResource("29_gghpb")
-shader_parameter/shift_texture_x = ExtResource("30_oem1p")
 
 [sub_resource type="Gradient" id="Gradient_lirhd"]
 offsets = PackedFloat32Array(0.562874, 1)
@@ -147,11 +147,11 @@ noise = SubResource("FastNoiseLite_lsq7y")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o7yh2"]
 shader = ExtResource("3_pr640")
+shader_parameter/mask_texture = SubResource("NoiseTexture2D_l3umk")
+shader_parameter/shift_texture_x = SubResource("NoiseTexture2D_ciakk")
 shader_parameter/glow = 0.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
-shader_parameter/mask_texture = SubResource("NoiseTexture2D_l3umk")
-shader_parameter/shift_texture_x = SubResource("NoiseTexture2D_ciakk")
 
 [sub_resource type="Gradient" id="Gradient_kh73o"]
 offsets = PackedFloat32Array(0, 0.49501)
@@ -175,11 +175,11 @@ noise = SubResource("FastNoiseLite_2ludj")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bgctr"]
 shader = ExtResource("3_pr640")
+shader_parameter/mask_texture = SubResource("NoiseTexture2D_tjyfp")
+shader_parameter/shift_texture_x = SubResource("NoiseTexture2D_ockv8")
 shader_parameter/glow = 0.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
-shader_parameter/mask_texture = SubResource("NoiseTexture2D_tjyfp")
-shader_parameter/shift_texture_x = SubResource("NoiseTexture2D_ockv8")
 
 [node name="Background" type="Node2D"]
 script = ExtResource("1_lpf5v")

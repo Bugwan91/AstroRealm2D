@@ -22,5 +22,5 @@ func _physics_process(delta):
 		data.target = target_position
 	else:
 		ship.flight_assistant.is_autopilot = true
-		data.autopilot_target = ship.position + FloatingOrigin.origin + target_position
+		data.autopilot_target = ship.position + target_position
 	data.strafe = Vector2(0.0, 0.5)

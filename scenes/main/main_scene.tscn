@@ -1,6 +1,6 @@
-[gd_scene load_steps=32 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=31 format=3 uid="uid://fn4ucxsb1i6t"]
 
-[ext_resource type="Script" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
+[ext_resource type="Script" uid="uid://dn170a8jtfbql" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
 [ext_resource type="Resource" uid="uid://cahse1ttns3br" path="res://resources/ships/base_flight_model.tres" id="2_3s1kf"]
 [ext_resource type="Resource" uid="uid://brpfjpxetwlmd" path="res://resources/ship_parts/engine/1.tres" id="3_xpkda"]
@@ -9,18 +9,17 @@
 [ext_resource type="Resource" uid="uid://c83n3ib0kufjx" path="res://resources/ship_parts/hull/01/hull.tres" id="5_62ybw"]
 [ext_resource type="Texture2D" uid="uid://dvxp714x3fp80" path="res://assets/spaceships/Styles/02.png" id="7_lo2oh"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://scenes/ui/ui.tscn" id="8_myah8"]
-[ext_resource type="Shader" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="10_7ps0f"]
+[ext_resource type="Shader" uid="uid://dpw7iewn6mbbt" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="10_7ps0f"]
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
-[ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/ship_blueprint.gd" id="11_fkpwp"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/player_ship_input.gd" id="12_c6lr5"]
+[ext_resource type="Script" uid="uid://bnl3gx1nvuvom" path="res://scenes/ship_designer/scripts/resources/ship_blueprint.gd" id="11_fkpwp"]
+[ext_resource type="Script" uid="uid://bf40adi1hd26f" path="res://scenes/ship/scripts/player_ship_input.gd" id="12_c6lr5"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/ship/pointer.tscn" id="15_5xucn"]
 [ext_resource type="Texture2D" uid="uid://bwr37r7vbwfq0" path="res://assets/VFX_textures/light_03.png" id="19_1qnda"]
-[ext_resource type="PackedScene" uid="uid://cr27c2clsfmu6" path="res://scenes/main/test_floating_origin_body.tscn" id="22_mxxp3"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="22_yvbma"]
 [ext_resource type="Texture2D" uid="uid://dbc8lck8ryqlr" path="res://assets/my/star.png" id="23_xsmvb"]
 [ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="24_7ks4m"]
 [ext_resource type="Texture2D" uid="uid://cyq7shk5k0udu" path="res://assets/my/pointer.png" id="24_lcrqg"]
-[ext_resource type="Script" path="res://scenes/main/scripts/debug_pointer.gd" id="25_ojc3k"]
+[ext_resource type="Script" uid="uid://biindt7p1ohss" path="res://scenes/main/scripts/debug_pointer.gd" id="25_ojc3k"]
 [ext_resource type="PackedScene" uid="uid://cmqm4dm8rpi0l" path="res://scenes/background/sun.tscn" id="46_aihwc"]
 
 [sub_resource type="Resource" id="Resource_in7ib"]
@@ -279,5 +278,3 @@ height = 1000.0
 texture = ExtResource("23_xsmvb")
 icon_scale = 4.0
 color = Color(0, 0.8, 2, 1)
-
-[node name="FloatingOriginBody" parent="." instance=ExtResource("22_mxxp3")]

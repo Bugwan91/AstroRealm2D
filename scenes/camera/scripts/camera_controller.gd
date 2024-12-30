@@ -50,6 +50,7 @@ func _init_zoom():
 
 func _get_look_position() -> Vector2:
 	var screen := Vector2(get_viewport().size) / zoom
+	# TODO: check what is wrong with this deadzone
 	var deadzone := screen * 0.4 # 0.5 * 0.8 => half_screen * (1 - margins)
 	var delta := get_global_mouse_position() - target.position
 	return delta.clamp(-deadzone, deadzone) / 2
@@ -57,7 +58,7 @@ func _get_look_position() -> Vector2:
 func _on_update_player_ship(player_ship: Spaceship):
 	target = player_ship
 	if not target: return
-	target.got_hit.connect(_shake_on_hit)
+	#target.got_hit.connect(_shake_on_hit) # TODO: fix
 
 func _shake_on_hit(hit: Vector2):
 	_hit_position = -hit * 0.5 / zoom # TODO: Clamp for huge impulses

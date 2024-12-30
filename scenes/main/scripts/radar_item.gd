@@ -16,6 +16,7 @@ func _ready():
 	collision_mask = 0
 
 func init():
+	#TODO: Optimization: create sprite only when it needed
 	icon = Sprite2D.new()
 	icon.material = material
 	icon.texture = texture

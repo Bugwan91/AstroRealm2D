@@ -8,7 +8,7 @@ uniform vec2 offset;
 
 void fragment() {
 	vec2 base_uv = (UV - vec2(0.5, 0.5)) * vp + offset + vec2(0.5, 0.5);
-	
+
 	float mult_base = 0.5;
 	float mult = 0.3;
 	vec2 shift_total = vec2(0.0);

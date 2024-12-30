@@ -8,8 +8,6 @@ const ANGULAR_THRESHOLD = 0.02
 @export var enabled := false
 @export var autopilot_pointer_view: AssistantPointer
 
-@onready var collision_detector: CollisionDetector = %CollisionDetector
-
 var ship: Spaceship:
 	set(value):
 		ship = value
@@ -28,7 +26,7 @@ var _anti_collision_control: Vector2
 var _state: PhysicsDirectBodyState2D
 
 func _ready():
-	collision_detector.predicted_collision.connect(_update_potential_collision)
+	pass
 
 func setup(spaceship: Spaceship):
 	ship = spaceship
@@ -50,8 +48,9 @@ func _update_potential_collision(direction: Vector2):
 	_anti_collision_control = direction
 
 func _avoid_colission():
+	return
 	# TODO check
-	if not collision_detector.enabled: return
+	#if not collision_detector.enabled: return
 	if _anti_collision_control.is_zero_approx(): return
 	#DebugDraw2d.line_vector(ship.position, _anti_collision_control.rotated(ship.rotation) * 200.0, Color.RED, 12.0, 0.2)
 	inputs.control.strafe = _anti_collision_control.clamp(Vector2(-1,-1), Vector2(1,1))
@@ -61,7 +60,7 @@ func _avoid_colission():
 func _update_autopilot_pointer_view():
 	if not is_instance_valid(autopilot_pointer_view): return
 	if inputs.is_autopilot:
-		var point = inputs.autopilot_target - FloatingOrigin.origin
+		var point = inputs.autopilot_target
 		autopilot_pointer_view.update(point, ship.canvas_position)
 	else:
 		autopilot_pointer_view.disable()
@@ -69,7 +68,7 @@ func _update_autopilot_pointer_view():
 func override_controls():
 	pass
 	#if is_autopilot:
-		#move_to(_autopilot_target_position - FloatingOrigin.origin, autopilot_speed, is_autopilot_stop)
+		#move_to(_autopilot_target_position, autopilot_speed, is_autopilot_stop)
 	#if is_follow:
 		#follow_target(follow_distance)
 

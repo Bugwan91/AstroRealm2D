@@ -8,12 +8,11 @@ extends Line2D
 		modulate = color
 @export_range(0, 5.0) var lifetime := 1.0
 
-@onready var _parent: FloatingOriginKinetic = get_parent()
+@onready var _parent: Node2D = get_parent()
 
 var _life := 0.0
 var _points: PackedVector2Array
 var _offset: Vector2
-var _start_floating: Vector2
 
 func _ready():
 	process_priority = 999
@@ -21,21 +20,15 @@ func _ready():
 	_points = points
 	_offset = position
 	position = Vector2.ZERO
-	if _parent.is_origin(): _start_floating = -FloatingOrigin.velocity
 
 func _process(delta):
 	_life += delta
 	global_rotation = 0.0
-	var shift := _get_shift(delta)
+	# TODO: fix this to work without floating origin
+	var shift := _parent.position
 	for index in range(0, points.size()):
 		_points[index] -= shift
 	_points.insert(0, _offset.rotated(_parent.rotation))
 	if _life > lifetime:
 		_points.remove_at(_points.size() - 1)
 	points = _points
-
-func _get_shift(delta: float) -> Vector2:
-	if _parent.is_origin():
-		return ((_parent.absolute_velocity + _start_floating) * delta)
-	else:
-		return _parent.shift

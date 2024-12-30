@@ -3,7 +3,7 @@ extends Node
 
 @export var capacity: float = 100.0
 @export var cooling: float = 10.0
-@export var view: BaseView
+@export var view: BaseView # TODO: should be optional
 
 var _heat := 0.0:
 	set(value):

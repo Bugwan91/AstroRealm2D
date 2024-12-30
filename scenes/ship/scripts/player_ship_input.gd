@@ -13,7 +13,7 @@ func _process(_delta):
 	data.strafe = Vector2(Input.get_axis("manuever_back", "manuever_forward"), Input.get_axis("manuever_left", "manuever_right"))
 	data.target_point = get_global_mouse_position()
 	if Input.is_action_pressed("set_target"):
-		data.autopilot_target = get_global_mouse_position() + FloatingOrigin.origin
+		data.autopilot_target = get_global_mouse_position()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("stop"):

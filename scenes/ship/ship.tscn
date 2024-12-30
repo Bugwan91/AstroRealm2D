@@ -1,23 +1,20 @@
-[gd_scene load_steps=25 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=23 format=3 uid="uid://ce1dw618jykrb"]
 
-[ext_resource type="Script" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
+[ext_resource type="Script" uid="uid://b2ih5uxk3qw0h" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
-[ext_resource type="Shader" path="res://scenes/ship/shaders/ship.gdshader" id="7_byino"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/weapons_slots.gd" id="8_4fwa5"]
-[ext_resource type="Texture2D" uid="uid://bdcrgonof28mh" path="res://assets/spaceships/temperature.tres" id="8_ts42t"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/view_ship.gd" id="9_cprq3"]
+[ext_resource type="Shader" uid="uid://balef3jw7dwu" path="res://scenes/ship/shaders/ship.gdshader" id="7_byino"]
+[ext_resource type="Script" uid="uid://dyv36awovo4v7" path="res://scenes/ship/scripts/weapons_slots.gd" id="8_4fwa5"]
 [ext_resource type="Texture2D" uid="uid://dvtnerb2k0qle" path="res://assets/spaceships/hull/02/_emission.png" id="9_vptip"]
 [ext_resource type="Texture2D" uid="uid://bsf8bix50mxto" path="res://assets/spaceships/hull/02/_heat.png" id="10_dhdk5"]
+[ext_resource type="Script" uid="uid://cw01a0apshsem" path="res://scenes/ship/scripts/view_ship.gd" id="11_d8ncc"]
 [ext_resource type="Texture2D" uid="uid://vaw1wyhai2wf" path="res://assets/spaceships/hull/02/_mask.png" id="11_jl7kr"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/ship_selection_area.gd" id="12_bsixf"]
+[ext_resource type="Script" uid="uid://cvo7a3u08pliv" path="res://scenes/ship/scripts/ship_selection_area.gd" id="12_bsixf"]
 [ext_resource type="Texture2D" uid="uid://bqx61atmdag5g" path="res://assets/spaceships/hull/02/_base.png" id="13_3b4ap"]
 [ext_resource type="Texture2D" uid="uid://bi8g2s363ai44" path="res://assets/spaceships/hull/02/_normal.png" id="14_2c5v6"]
 [ext_resource type="PackedScene" uid="uid://bu6wjq2ioia27" path="res://scenes/ship/desctroy_effect_manager.tscn" id="14_4y0fi"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/ship_controller.gd" id="14_5nufi"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/taking_damage.gd" id="15_bq7ks"]
-[ext_resource type="Script" path="res://scenes/heat/scripts/Heat.gd" id="20_1gdyl"]
-[ext_resource type="Script" path="res://scenes/vfx/scripts/trail.gd" id="20_q0150"]
-[ext_resource type="Script" path="res://scenes/main/scripts/collider.gd" id="20_vb7t8"]
+[ext_resource type="Script" uid="uid://dlnqyio8ujqvd" path="res://scenes/ship/scripts/ship_controller.gd" id="14_5nufi"]
+[ext_resource type="Script" uid="uid://liqs1h6x4e1p" path="res://scenes/heat/scripts/Heat.gd" id="20_1gdyl"]
+[ext_resource type="Script" uid="uid://w8vsnqoourdh" path="res://scenes/vfx/scripts/trail.gd" id="20_q0150"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="20_w3y8g"]
 
 [sub_resource type="Curve" id="Curve_p4pb7"]
@@ -37,7 +34,6 @@ shader_parameter/metallic = 0.0
 shader_parameter/mask_texture = ExtResource("11_jl7kr")
 shader_parameter/emission_texture = ExtResource("9_vptip")
 shader_parameter/heat_texture = ExtResource("10_dhdk5")
-shader_parameter/temperature_texture = ExtResource("8_ts42t")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_fknoo"]
 diffuse_texture = ExtResource("13_3b4ap")
@@ -47,7 +43,11 @@ texture_filter = 3
 [sub_resource type="CircleShape2D" id="CircleShape2D_70byj"]
 radius = 80.0
 
-[node name="Ship" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w2dh3"]
+radius = 42.0
+height = 128.31
+
+[node name="Ship" type="RigidBody2D"]
 script = ExtResource("1_5ckws")
 data = ExtResource("2_uwj24")
 
@@ -77,19 +77,12 @@ texture_filter = 3
 material = SubResource("ShaderMaterial_ma44e")
 rotation = 1.5708
 texture = SubResource("CanvasTexture_fknoo")
-script = ExtResource("9_cprq3")
+script = ExtResource("11_d8ncc")
 
 [node name="DestroyEffectManager" parent="." instance=ExtResource("14_4y0fi")]
 unique_name_in_owner = true
 
-[node name="TakingDamage" type="Area2D" parent="."]
-unique_name_in_owner = true
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("15_bq7ks")
-
 [node name="SelectionArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 2147483648
 collision_mask = 0
 monitoring = false
@@ -98,7 +91,7 @@ script = ExtResource("12_bsixf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionArea"]
 shape = SubResource("CircleShape2D_70byj")
-debug_color = Color(0, 0.631, 0.475, 0.1)
+debug_color = Color(0, 0.631373, 0.47451, 0.101961)
 
 [node name="FlightController" type="Node" parent="."]
 unique_name_in_owner = true
@@ -113,7 +106,10 @@ view = NodePath("../View")
 
 [node name="RadarItem" parent="." instance=ExtResource("20_w3y8g")]
 unique_name_in_owner = true
+visible = true
 icon_scale = 0.5
 
-[node name="Collider" type="Node2D" parent="."]
-script = ExtResource("20_vb7t8")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6, 0)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_w2dh3")

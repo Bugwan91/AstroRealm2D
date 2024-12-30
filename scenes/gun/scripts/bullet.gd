@@ -1,5 +1,5 @@
 class_name Bullet
-extends FloatingOriginKinetic
+extends Node2D
 
 @export var group: String
 @export var hit_effect_scene: PackedScene
@@ -21,7 +21,10 @@ var bullet_speed := 0.0
 var _damage := 10.0
 
 func _ready():
-	absolute_velocity = start_velocity + transform.x * bullet_speed
+	pass
+	# CRITICAL
+	# fix this to work without floating origin
+	# absolute_velocity = start_velocity + transform.x * bullet_speed
 	#ray.collision_mask = 3
 	#prediction_ray.collision_mask = 7
 

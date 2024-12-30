@@ -33,9 +33,10 @@ func _process(_delta):
 		update_opacity(0.0)
 		return
 	scale = _start_scale / camera.zoom
-	update_offset((-FloatingOrigin.origin) / (texture.get_size() * grid_scale))
+	#TODO: fix this to work without floating origin
+	# update_offset((-FloatingOrigin.origin) / (texture.get_size() * grid_scale))
 	update_scale(grid_scale)
-	update_opacity(base_opacity * clamp((speed_limit - target.speed) / speed_limit, 0, 1))
+	update_opacity(base_opacity * clamp((speed_limit - target.linear_velocity.length()) / speed_limit, 0, 1))
 
 func update_opacity(value: float = 0.0):
 	opacity = value

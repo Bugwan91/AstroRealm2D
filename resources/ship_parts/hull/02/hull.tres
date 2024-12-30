@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="HullBakerResource" load_steps=14 format=3 uid="uid://dkfenlyktvckf"]
+[gd_resource type="Resource" script_class="HullBakerResource" load_steps=15 format=3 uid="uid://dkfenlyktvckf"]
 
-[ext_resource type="Script" path="res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd" id="1_e164m"]
+[ext_resource type="Script" uid="uid://p47ksddy7fs0" path="res://scenes/ship_designer/scripts/resources/view_baker_resource.gd" id="1_avnuu"]
+[ext_resource type="Script" uid="uid://n101buc5ybpd" path="res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd" id="1_e164m"]
 [ext_resource type="Texture2D" uid="uid://bqx61atmdag5g" path="res://assets/spaceships/hull/02/_base.png" id="1_i25dp"]
 [ext_resource type="Texture2D" uid="uid://dvtnerb2k0qle" path="res://assets/spaceships/hull/02/_emission.png" id="2_fsg1o"]
 [ext_resource type="Texture2D" uid="uid://bsf8bix50mxto" path="res://assets/spaceships/hull/02/_heat.png" id="3_l7o3d"]
@@ -34,7 +35,7 @@ thrusters = SubResource("Resource_jdnh7")
 weapon_slots = SubResource("Resource_2fruw")
 mass = 1.0
 type = 0
-allowed_ext = Array[Resource("res://scenes/ship_designer/scripts/resources/view_baker_resource.gd")]([])
+allowed_ext = Array[ExtResource("1_avnuu")]([])
 diffuse = ExtResource("1_i25dp")
 normal = ExtResource("5_pbu5r")
 mask = ExtResource("4_b2kjs")

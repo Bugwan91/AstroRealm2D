@@ -66,8 +66,6 @@ func _calculate_bullet_intersection():
 	if a == 0.0:
 		_disable_pointer()
 		return
-	#var Pd = target.extrapolator.position - ship.extrapolator.position
-	#var t = 
 	var to_target = target.position - ship.position
 	var b = 2 * to_target.dot(dv)
 	var c = to_target.length_squared()

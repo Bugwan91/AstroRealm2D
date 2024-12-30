@@ -37,14 +37,15 @@ func _apply_controls(delta: float):
 
 func _apply_impulse():
 	if _impulses.is_zero_approx(): return
-	ship.add_impulse(_impulses)
+	ship.add_impulse(_impulses) # ???
 	_impulses = Vector2.ZERO
 
 func _stop(delta: float):
 	if not inputs.stop: return
-	var speed := ship.speed
+	#var speed := ship.speed
+	var speed := ship.linear_velocity.length()
 	if speed < STOP_THRESHOLD: return
-	var stop_vector := -ship.absolute_velocity.rotated(-ship.rotation).normalized()
+	var stop_vector := -ship.linear_velocity.normalized()
 	var result_delta_v := _calculate_strafe_delta_v(stop_vector, delta)
 	var result_delta_speed := result_delta_v.length()
 	var limiter := speed / result_delta_speed
@@ -58,7 +59,7 @@ func _strafe(delta: float):
 
 func _calculate_strafe_delta_v(input: Vector2, delta: float) -> Vector2:
 	var target_v := input * flight_model.speed
-	var delta_v := target_v - ship.absolute_velocity
+	var delta_v := target_v - ship.linear_velocity
 	var delta_l := delta_v.length()
 	var delta_n = delta_v / delta_l
 	var strafe_mult := delta_l / flight_model.speed

@@ -3,7 +3,7 @@ extends Area2D
 
 @export var health: Health
 
-@onready var body: FloatingOriginBody = get_parent()
+@onready var body: RigidBody2D = get_parent()
 
 func _ready():
 	monitoring = false
@@ -20,6 +20,7 @@ func check_group(group: String) -> bool:
 	return body.is_in_group(group)
 
 func damage(damage: Damage):
+	# TODO: fix this with correct implementation of ship physics
 	if is_instance_valid(health):
 		health.damage(damage.amount)
 		body.add_impulse(damage.impulse)

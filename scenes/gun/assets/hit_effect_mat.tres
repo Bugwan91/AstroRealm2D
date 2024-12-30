@@ -9,7 +9,7 @@ gradient = SubResource("Gradient_20v6f")
 use_hdr = true
 
 [sub_resource type="Curve" id="Curve_tltay"]
-max_value = 100.0
+_limits = [0.0, 100.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -26,19 +26,17 @@ curve = SubResource("Curve_hve1c")
 [resource]
 lifetime_randomness = 0.5
 particle_flag_disable_z = true
+angle_min = -90.0
+angle_max = 90.0
 spread = 180.0
-gravity = Vector3(0, 0, 0)
 initial_velocity_min = 400.0
 initial_velocity_max = 800.0
 angular_velocity_min = -180.0
 angular_velocity_max = 180.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(0, 0, 0)
 damping_min = 20.0
 damping_max = 20.0
 damping_curve = SubResource("CurveTexture_p12bm")
-angle_min = -90.0
-angle_max = 90.0
 scale_min = 0.2
 scale_max = 3.0
 scale_curve = SubResource("CurveTexture_ru7eh")
