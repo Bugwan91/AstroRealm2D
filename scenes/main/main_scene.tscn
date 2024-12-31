@@ -115,6 +115,7 @@ blend_mode = 2
 height = 0.2
 
 [node name="Camera" parent="." instance=ExtResource("11_2fp23")]
+zoom_min = 0.5
 
 [node name="Grid" parent="." groups=["ignore_floating"] instance=ExtResource("4_aip35")]
 light_mask = 0
