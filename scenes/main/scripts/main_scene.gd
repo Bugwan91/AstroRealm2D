@@ -18,7 +18,6 @@ func _ready():
 func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	var ship: Spaceship = ship_scene.instantiate() as Spaceship
 	ship.group = "player"
-	ship.is_player = true
 	ship.data = await _create_ship_configuration()
 	ship.data.design.shininess = 0.6
 	ship.data.design.metallic = 0.3

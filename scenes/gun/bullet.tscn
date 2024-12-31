@@ -20,6 +20,7 @@ colors = PackedColorArray(1, 1, 1, 0.5, 1, 1, 1, 0)
 [node name="Bullet" type="Node2D"]
 script = ExtResource("1_gtbct")
 hit_effect_scene = ExtResource("2_m6c5x")
+glow = 2.0
 
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true

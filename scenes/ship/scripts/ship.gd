@@ -2,7 +2,7 @@ class_name Spaceship
 extends RigidBody
 
 signal dead(ship: Spaceship)
-
+#region Export properties
 @export var data: ShipData: set = _set_ship_data
 @export var group: String # TODO: Rework with implementation factions/groups system
 
@@ -12,7 +12,9 @@ signal dead(ship: Spaceship)
 
 @export var autopilot_pointer: AssistantPointer
 @export var target_prediction_pointer: AssistantPointer
+#endregion
 
+#region Onready propeties
 @onready var flight_controller: FlightController = %FlightController
 
 #@onready var taking_damage: TakingDamage = %TakingDamage
@@ -22,12 +24,12 @@ signal dead(ship: Spaceship)
 @onready var _weapon_slots: WeaponSlots = %WeaponSlots
 @onready var _radar_item: RadarItem = %RadarItem
 @onready var _destroy_effect: DestroyEffectManager = %DestroyEffectManager
-
 var health: Health
+#endregion
 
-var is_player: bool = false:
-	get:
-		return input_reader is PlayerShipInput
+#region Private properties
+var _impulces := Vector2.ZERO
+#endregion
 
 #region Initialization
 func _ready():
@@ -65,7 +67,7 @@ func connect_inputs(new_inputs: ShipInput):
 	_connect_flight_controller_inputs()
 
 func _connect_player_inputs():
-	if not is_player: return
+	if not _is_player(): return
 	_radar_item.color = Color(0.2, 0.8, 1.0)
 	MainState.player_ship = self
 
@@ -86,16 +88,20 @@ func _set_ship_data(new_data: ShipData):
 
 #endregion
 
+#region Physics
 func _physics_process(delta):
 	_update_velocity_for_weapons()
 	super._physics_process(delta)
 
 func _integrate_forces(state):
 	flight_controller.integrate_forces(state)
+	_apply_impulces(state)
 
 func _update_velocity_for_weapons():
 	_weapon_slots.update_velocity(linear_velocity)
+#endregion
 
+#region Events
 func set_target(target: RigidBody2D):
 	pass
 
@@ -106,5 +112,15 @@ func _die():
 func _destroy():
 	queue_free()
 
-func _on_weapon_shoot(_recoil: Vector2):
+func _on_weapon_shoot(recoil: Vector2):
+	_impulces += recoil
 	heat.add_heat(5.0)
+#endregion
+
+func _is_player() -> bool:
+	return input_reader is PlayerShipInput
+
+func _apply_impulces(state: PhysicsDirectBodyState2D):
+	if is_zero_approx(_impulces.x) and is_zero_approx(_impulces.y): return
+	state.apply_impulse(_impulces)
+	_impulces = Vector2.ZERO

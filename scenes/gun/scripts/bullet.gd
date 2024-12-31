@@ -4,7 +4,7 @@ extends MovingNode
 @export var group: String
 @export var hit_effect_scene: PackedScene
 @export var _color: Color
-@export var glow := 3.0
+@export_range(0.0, 10.0) var glow := 1.0
 @export_range(0, 5) var time_prediction := 2.0
 
 @onready var timer: Timer = %Timer
