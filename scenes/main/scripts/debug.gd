@@ -7,6 +7,6 @@ var debug_pointer: Node2D
 func info(key: String, value):
 	debug_messages[key] = str(value)
 
-func list(list):
+func list(list: Dictionary[String, Variant]):
 	for key in list:
 		debug_messages[key] = list[key]
