@@ -15,4 +15,3 @@ func _ready():
 func _set_radius(value: float = 10000.0):
 	radius = value
 	covering_shape.shape.radius = radius
-

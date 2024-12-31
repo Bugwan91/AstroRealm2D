@@ -13,12 +13,13 @@ func _ready():
 func _physics_process(_delta):
 	if not is_instance_valid(radar): return
 	for item in _items:
-		item.update(view_radius, radar.radius)
+		item.update(radar.global_position, view_radius, radar.radius)
 
 func _radar_updated(value: Radar):
 	_items.clear()
 	radar = value
 	if not is_instance_valid(radar): return
+	# TODO: remove radar logic from UI
 	radar.area_entered.connect(_radar_entered)
 	radar.area_exited.connect(_radar_exited)
 
@@ -26,7 +27,7 @@ func _radar_entered(item: Area2D):
 	if not item is RadarItem: return
 	_items.append(item)
 	item.init()
-	item.update(view_radius, radar.radius)
+	item.update(radar.global_position, view_radius, radar.radius)
 	add_child(item.icon)
 
 func _radar_exited(item):
