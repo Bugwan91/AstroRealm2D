@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=24 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" uid="uid://b2ih5uxk3qw0h" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
 [ext_resource type="Shader" uid="uid://balef3jw7dwu" path="res://scenes/ship/shaders/ship.gdshader" id="7_byino"]
 [ext_resource type="Script" uid="uid://dyv36awovo4v7" path="res://scenes/ship/scripts/weapons_slots.gd" id="8_4fwa5"]
+[ext_resource type="Texture2D" uid="uid://bdcrgonof28mh" path="res://assets/spaceships/temperature.tres" id="9_r75st"]
 [ext_resource type="Texture2D" uid="uid://dvtnerb2k0qle" path="res://assets/spaceships/hull/02/_emission.png" id="9_vptip"]
 [ext_resource type="Texture2D" uid="uid://bsf8bix50mxto" path="res://assets/spaceships/hull/02/_heat.png" id="10_dhdk5"]
 [ext_resource type="Script" uid="uid://cw01a0apshsem" path="res://scenes/ship/scripts/view_ship.gd" id="11_d8ncc"]
@@ -26,7 +27,7 @@ colors = PackedColorArray(1, 1, 1, 0.5, 1, 1, 1, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ma44e"]
 shader = ExtResource("7_byino")
-shader_parameter/heat = 0.3
+shader_parameter/heat = 0.0
 shader_parameter/emission = 2.0
 shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/shininess = 0.0
@@ -34,6 +35,7 @@ shader_parameter/metallic = 0.0
 shader_parameter/mask_texture = ExtResource("11_jl7kr")
 shader_parameter/emission_texture = ExtResource("9_vptip")
 shader_parameter/heat_texture = ExtResource("10_dhdk5")
+shader_parameter/temperature_texture = ExtResource("9_r75st")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_fknoo"]
 diffuse_texture = ExtResource("13_3b4ap")
@@ -63,7 +65,7 @@ width_curve = SubResource("Curve_p4pb7")
 gradient = SubResource("Gradient_sdsuv")
 script = ExtResource("20_q0150")
 color = Color(0.3, 0.8, 2, 0.5)
-lifetime = 0.5
+lifetime = 0.2
 
 [node name="TrailEffect2" type="Line2D" parent="."]
 position = Vector2(-60, 32)
@@ -72,7 +74,7 @@ width_curve = SubResource("Curve_p4pb7")
 gradient = SubResource("Gradient_sdsuv")
 script = ExtResource("20_q0150")
 color = Color(0.3, 0.8, 2, 0.5)
-lifetime = 0.5
+lifetime = 0.2
 
 [node name="View" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -103,8 +105,8 @@ script = ExtResource("14_5nufi")
 [node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view")]
 unique_name_in_owner = true
 script = ExtResource("20_1gdyl")
-capacity = 1000.0
-cooling = 50.0
+cooling = 3.0
+transfer_efficiency = 0.0
 view = NodePath("../View")
 
 [node name="RadarItem" parent="." instance=ExtResource("20_w3y8g")]

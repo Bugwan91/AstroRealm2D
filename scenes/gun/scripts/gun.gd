@@ -2,6 +2,7 @@ class_name Gun
 extends Node2D
 
 signal shoot_recoil(force: float)
+signal tranfser_heat(heat: float)
 
 @export var group: String
 @export var bullet_scene: PackedScene
@@ -44,6 +45,9 @@ func on_fire_input(value: bool):
 func _process(delta):
 	_shoot(delta)
 	_update_marker()
+
+func _physics_process(delta: float) -> void:
+	tranfser_heat.emit(_heat.transfer(delta))
 
 func _shoot(delta: float):
 	if _is_firing and not _heat.is_max():

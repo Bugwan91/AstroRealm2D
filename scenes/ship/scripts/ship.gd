@@ -24,7 +24,7 @@ signal dead(ship: Spaceship)
 @onready var _weapon_slots: WeaponSlots = %WeaponSlots
 @onready var _radar_item: RadarItem = %RadarItem
 @onready var _destroy_effect: DestroyEffectManager = %DestroyEffectManager
-var health: Health
+@onready var health: Health # TODO: should be movet to TakingDamage component
 #endregion
 
 #region Private properties
@@ -56,6 +56,7 @@ func _setup_weapon():
 		var gun: Gun = gun_scene.instantiate() as Gun
 		gun.group = group
 		gun.shoot_recoil.connect(_on_weapon_shoot)
+		gun.tranfser_heat.connect(_on_transfered_heat)
 		_weapon_slots.add_weapon(gun, slot_index)
 
 func connect_inputs(new_inputs: ShipInput):
@@ -96,7 +97,6 @@ func _physics_process(delta):
 func _integrate_forces(state):
 	flight_controller.integrate_forces(state)
 	MyDebug.info("spd", speed)
-	MyDebug.info("---", "---")
 	_apply_impulces(state)
 
 func _update_velocity_for_weapons():
@@ -116,7 +116,9 @@ func _destroy():
 
 func _on_weapon_shoot(recoil: Vector2):
 	_impulces += recoil
-	heat.add_heat(5.0)
+
+func _on_transfered_heat(transfered_heat: float):
+	heat.add_heat(transfered_heat)
 #endregion
 
 func _is_player() -> bool:
