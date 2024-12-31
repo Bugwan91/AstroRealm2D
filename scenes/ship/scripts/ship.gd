@@ -94,8 +94,7 @@ func _integrate_forces(state):
 	flight_controller.integrate_forces(state)
 
 func _update_velocity_for_weapons():
-	pass
-	#_weapon_slots.update_velocity(absolute_velocity)
+	_weapon_slots.update_velocity(linear_velocity)
 
 func set_target(target: RigidBody2D):
 	pass
