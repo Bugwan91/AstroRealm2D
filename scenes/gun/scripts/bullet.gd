@@ -1,5 +1,5 @@
 class_name Bullet
-extends Node2D
+extends MovingNode
 
 @export var group: String
 @export var hit_effect_scene: PackedScene
@@ -19,18 +19,19 @@ var start_velocity: Vector2 = Vector2.ZERO
 var impulse := 0.0
 var bullet_speed := 0.0
 var _damage := 10.0
+var _base_velocity: Vector2
 
 func _ready():
-	pass
-	# CRITICAL
-	# fix this to work without floating origin
-	# absolute_velocity = start_velocity + transform.x * bullet_speed
-	#ray.collision_mask = 3
+	_base_velocity = transform.x * bullet_speed
+	velocity = start_velocity + _base_velocity
+	trail.velocity = _base_velocity
+	ray.collision_mask = 3
 	#prediction_ray.collision_mask = 7
 
 func _physics_process(delta: float):
 	_update_ray(delta)
 	_collide()
+	super._physics_process(delta)
 
 func update_material(color: Color):
 	_color = color

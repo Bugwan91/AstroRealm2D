@@ -56,22 +56,23 @@ unique_name_in_owner = true
 script = ExtResource("8_4fwa5")
 
 [node name="TrailEffect" type="Line2D" parent="."]
-visible = false
-position = Vector2(-38, -47)
+position = Vector2(-60, -32)
+points = PackedVector2Array(-1, -1)
 width = 2.0
 width_curve = SubResource("Curve_p4pb7")
 gradient = SubResource("Gradient_sdsuv")
 script = ExtResource("20_q0150")
 color = Color(0.3, 0.8, 2, 0.5)
+lifetime = 0.5
 
 [node name="TrailEffect2" type="Line2D" parent="."]
-visible = false
-position = Vector2(-38, 47)
+position = Vector2(-60, 32)
 width = 2.0
 width_curve = SubResource("Curve_p4pb7")
 gradient = SubResource("Gradient_sdsuv")
 script = ExtResource("20_q0150")
 color = Color(0.3, 0.8, 2, 0.5)
+lifetime = 0.5
 
 [node name="View" type="Sprite2D" parent="."]
 unique_name_in_owner = true

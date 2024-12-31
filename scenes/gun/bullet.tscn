@@ -60,10 +60,8 @@ icon_scale = 0.5
 
 [node name="Trail" type="Line2D" parent="."]
 unique_name_in_owner = true
-visible = false
 width = 2.0
 width_curve = SubResource("Curve_i0wtl")
 gradient = SubResource("Gradient_7dx5m")
 script = ExtResource("6_51oes")
-local = true
-lifetime = 0.1
+lifetime = 0.2
