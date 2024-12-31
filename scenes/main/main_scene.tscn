@@ -263,7 +263,7 @@ icon_scale = 0.01
 color = Color(0.945098, 0.286275, 0, 1)
 
 [node name="Sun" parent="." instance=ExtResource("46_aihwc")]
-position = Vector2(-2325, -3663)
+position = Vector2(-2325, -20000)
 scale = Vector2(5, 5)
 
 [node name="PointLightSun" type="PointLight2D" parent="Sun"]
