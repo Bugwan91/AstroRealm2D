@@ -72,7 +72,7 @@ func _spawn_bullet(delta: float):
 	bullet.impulse = recoil
 	bullet.bullet_speed = bullet_speed
 	MainState.main_scene.add_child(bullet)
-	bullet.update_material(bullet_color)
+	bullet.update_material(bullet_color) # TODO: incapsulate this
 	bullet.start(_bullet_lifetime, delta)
 	_heat.add_heat(heat_per_shoot)
 	view.emit_max()

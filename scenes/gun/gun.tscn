@@ -17,7 +17,7 @@
 shader = ExtResource("4_cqrqv")
 shader_parameter/heat = 0.0
 shader_parameter/emission = 0.0
-shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 0.686275, 0.184314, 1)
 shader_parameter/shininess = 0.9
 shader_parameter/metallic = 0.0
 shader_parameter/mask_texture = ExtResource("6_1ulvv")
@@ -33,7 +33,7 @@ texture_filter = 3
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_heu61")
 bullet_scene = ExtResource("2_gsief")
-bullet_color = Color(1, 0, 0.2, 1)
+bullet_color = Color(1, 0.686275, 0.184314, 1)
 fire_rate = 20.0
 range = 5000.0
 bullet_speed = 2000.0
