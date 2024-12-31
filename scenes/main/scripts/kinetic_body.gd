@@ -1,4 +1,4 @@
-class_name KineticBody
+class_name MovingNode
 extends Node2D
 
 @export var velocity := Vector2.ZERO

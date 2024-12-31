@@ -1,5 +1,5 @@
 class_name Bullet
-extends MovingNode
+extends KineticBody
 
 @export var group: String
 @export var hit_effect_scene: PackedScene

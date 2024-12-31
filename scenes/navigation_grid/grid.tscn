@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://csufvxpfo8jbl"]
 
-[ext_resource type="Shader" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="1_lgcud"]
+[ext_resource type="Shader" uid="uid://dpw7iewn6mbbt" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="1_lgcud"]
 [ext_resource type="Texture2D" uid="uid://ctxhmtvm80a2o" path="res://assets/my/grid.png" id="2_t5ss0"]
-[ext_resource type="Script" path="res://scenes/navigation_grid/scripts/grid.gd" id="3_w55vd"]
+[ext_resource type="Script" uid="uid://d273vdbscvdwu" path="res://scenes/navigation_grid/scripts/grid.gd" id="3_w55vd"]
 
 [sub_resource type="Gradient" id="Gradient_8l20h"]
 offsets = PackedFloat32Array(0, 0.746063)

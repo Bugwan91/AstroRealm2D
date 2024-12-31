@@ -121,7 +121,6 @@ zoom_min = 0.5
 light_mask = 0
 material = SubResource("ShaderMaterial_bh3nw")
 base_opacity = 0.05
-speed_limit = 12000.0
 metadata/_edit_lock_ = true
 
 [node name="AutopilotPointer" parent="." instance=ExtResource("15_5xucn")]

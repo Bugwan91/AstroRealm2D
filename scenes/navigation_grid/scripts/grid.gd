@@ -6,7 +6,7 @@ const SUBGRID_SCALE := 5.0
 @export_range(0, 1) var base_opacity := 0.5
 @export var grid_offset: Vector2
 @export var grid_scale := 1.0
-@export var speed_limit := 10000.0
+@export var speed_limit := 3000.0
 
 @onready var _subgrid: Sprite2D = %Subgrid
 
