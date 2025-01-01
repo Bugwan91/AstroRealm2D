@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxfs261rvppuv"
-path="res://.godot/imported/01_normal_bkup.png-a8f37cc01e620f53501d2d24d0f7b825.ctex"
+uid="uid://cvxi68vnebqle"
+path="res://.godot/imported/02_normal_bkp.png-5210fcdeb2d61c62e2c9d7146a3af25c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spaceships/hull/02/01_normal_bkup.png"
-dest_files=["res://.godot/imported/01_normal_bkup.png-a8f37cc01e620f53501d2d24d0f7b825.ctex"]
+source_file="res://assets/spaceships/hull/02/02_normal_bkp.png"
+dest_files=["res://.godot/imported/02_normal_bkp.png-5210fcdeb2d61c62e2c9d7146a3af25c.ctex"]
 
 [params]
 
