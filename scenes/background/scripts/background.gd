@@ -16,4 +16,3 @@ func _process(_delta):
 	var shift = _camera.position
 	for layer in _layers:
 		layer.shift(shift, _camera.zoom)
-
