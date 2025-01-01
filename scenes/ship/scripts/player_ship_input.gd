@@ -4,18 +4,25 @@ extends ShipInput
 const DISTANCE_STEP := 100.0
 const SPEED_STEP := 100.0
 
+@onready var _camera_controller: CameraController = %Camera
+
+var _camera_shift: Vector2
+
 func _ready():
+	process_priority = -999
 	MainState.player_target_updated.connect(_target_updated)
 
 func _process(_delta):
-	pass
+	_camera_shift = _camera_controller.update(_delta)
+	update_target_point()
 	data.boost = 1 if Input.is_action_pressed("throttle_main") else 0
 	data.strafe = Vector2(Input.get_axis("manuever_back", "manuever_forward"), Input.get_axis("manuever_left", "manuever_right"))
-	data.target_point = get_global_mouse_position()
 	if Input.is_action_pressed("set_target"):
 		data.autopilot_target = get_global_mouse_position()
 
 func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		update_target_point()
 	if event.is_action_pressed("stop"):
 		data.stop = true
 	if event.is_action_released("stop"):
@@ -44,3 +51,7 @@ func _target_updated(target: Spaceship):
 	if is_instance_valid(player):
 		player.flight_assistant.target = target
 		player.battle_assistant.target = target
+
+func update_target_point() -> Vector2:
+	data.target_point = get_global_mouse_position() + _camera_shift
+	return data.target_point

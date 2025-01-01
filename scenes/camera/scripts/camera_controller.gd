@@ -21,7 +21,7 @@ var _zoom_speed: Vector2
 var _target_zoom: Vector2
 
 func _ready():
-	process_priority = 1000
+	process_priority = -1000
 	MainState.player_ship_updated.connect(_on_update_player_ship)
 	_init_zoom()
 
@@ -33,15 +33,18 @@ func _unhandled_input(event):
 		_target_zoom -= _target_zoom * _zoom_speed
 	_target_zoom = _target_zoom.clamp(_zoom_min, _zoom_max)
 
-func _process(delta):
-	if not is_instance_valid(target): return
+func update(delta: float) -> Vector2:
+	if not is_instance_valid(target): return Vector2.ZERO
 	if _target_zoom != zoom:
 		zoom = lerp(zoom, _target_zoom, 5.0 * delta)
 		zoomed.emit(zoom.x)
 	_required_look_position = lerp(_required_look_position, _get_look_position(), 2.0 * delta)
 	_hit_position = lerp(_hit_position, Vector2.ZERO, 10.0 * delta)
 	_acceleration = lerp(_acceleration, -target.tick_acceleration, acceleration * delta)
-	position = target.position + _acceleration * acceleration_mult + _required_look_position + _hit_position
+	var new_position = target.position + _acceleration * acceleration_mult + _required_look_position + _hit_position
+	var shift = new_position - position
+	position = new_position
+	return shift
 
 func _init_zoom():
 	_zoom_min = Vector2(zoom_min, zoom_min)
@@ -60,6 +63,7 @@ func _on_update_player_ship(player_ship: Spaceship):
 	target = player_ship
 	if not target: return
 	#target.got_hit.connect(_shake_on_hit) # TODO: fix
+	# OR give projectiles abbility to transfer inpulse to target and skip this at all
 
 func _shake_on_hit(hit: Vector2):
 	_hit_position = -hit * 0.5 / zoom # TODO: Clamp for huge impulses

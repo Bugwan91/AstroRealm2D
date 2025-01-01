@@ -73,7 +73,7 @@ func _connect_player_inputs():
 	MainState.player_ship = self
 
 func _connect_flight_controller_inputs():
-	flight_controller.inputs = input_reader.data
+	flight_controller.inputs = input_reader
 
 func _connect_weapon_inputs():
 	_weapon_slots.connect_inputs(input_reader)

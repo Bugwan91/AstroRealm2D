@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=29 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" uid="uid://dn170a8jtfbql" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -18,8 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="22_yvbma"]
 [ext_resource type="Texture2D" uid="uid://dbc8lck8ryqlr" path="res://assets/my/star.png" id="23_xsmvb"]
 [ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="24_7ks4m"]
-[ext_resource type="Texture2D" uid="uid://cyq7shk5k0udu" path="res://assets/my/pointer.png" id="24_lcrqg"]
-[ext_resource type="Script" uid="uid://biindt7p1ohss" path="res://scenes/main/scripts/debug_pointer.gd" id="25_ojc3k"]
 [ext_resource type="PackedScene" uid="uid://cmqm4dm8rpi0l" path="res://scenes/background/sun.tscn" id="46_aihwc"]
 
 [sub_resource type="Resource" id="Resource_in7ib"]
@@ -77,16 +75,12 @@ ship_blueprint = SubResource("Resource_in7ib")
 input_reader = NodePath("PlayerInputReader")
 metadata/_edit_lock_ = true
 
-[node name="DebugPointer" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-visible = false
-top_level = true
-position = Vector2(-133, -165)
-texture = ExtResource("24_lcrqg")
-script = ExtResource("25_ojc3k")
-
 [node name="PlayerShipBaker" parent="." instance=ExtResource("24_7ks4m")]
 unique_name_in_owner = true
+
+[node name="Camera" parent="." instance=ExtResource("11_2fp23")]
+unique_name_in_owner = true
+zoom_min = 0.5
 
 [node name="PlayerInputReader" type="Node2D" parent="."]
 script = ExtResource("12_c6lr5")
@@ -115,9 +109,6 @@ energy = 0.6
 blend_mode = 2
 height = 0.2
 
-[node name="Camera" parent="." instance=ExtResource("11_2fp23")]
-zoom_min = 0.5
-
 [node name="Grid" parent="." groups=["ignore_floating"] instance=ExtResource("4_aip35")]
 light_mask = 0
 material = SubResource("ShaderMaterial_bh3nw")
@@ -134,7 +125,7 @@ out_range_color = Color(0, 0, 0.486275, 0.784314)
 [node name="32" type="PointLight2D" parent="RedLight"]
 position = Vector2(6000, 0)
 color = Color(1, 0.211765, 0, 1)
-energy = 3.2
+energy = 6.4
 blend_mode = 2
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 8.0
@@ -154,7 +145,7 @@ color = Color(0.945098, 0.286275, 0, 1)
 [node name="16" type="PointLight2D" parent="RedLight"]
 position = Vector2(5000, 0)
 color = Color(1, 0.211765, 0, 1)
-energy = 1.6
+energy = 3.2
 blend_mode = 2
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 4.0
@@ -174,7 +165,7 @@ color = Color(0.945098, 0.286275, 0, 1)
 [node name="8" type="PointLight2D" parent="RedLight"]
 position = Vector2(4000, 0)
 color = Color(1, 0.211765, 0, 1)
-energy = 0.8
+energy = 1.6
 blend_mode = 2
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 2.0
@@ -194,7 +185,7 @@ color = Color(0.945098, 0.286275, 0, 1)
 [node name="4" type="PointLight2D" parent="RedLight"]
 position = Vector2(3000, 0)
 color = Color(1, 0.211765, 0, 1)
-energy = 0.4
+energy = 0.8
 blend_mode = 2
 texture = SubResource("GradientTexture2D_3cj2f")
 height = 500.0
@@ -213,7 +204,7 @@ color = Color(0.945098, 0.286275, 0, 1)
 [node name="2" type="PointLight2D" parent="RedLight"]
 position = Vector2(2000, 0)
 color = Color(1, 0.211765, 0, 1)
-energy = 0.2
+energy = 0.4
 blend_mode = 2
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 0.5
@@ -233,7 +224,7 @@ color = Color(0.945098, 0.286275, 0, 1)
 [node name="1_5" type="PointLight2D" parent="RedLight"]
 position = Vector2(1000, 0)
 color = Color(1, 0.211765, 0, 1)
-energy = 0.1
+energy = 0.2
 blend_mode = 2
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 0.25

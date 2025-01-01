@@ -11,20 +11,22 @@ var ship: Spaceship:
 		flight_model = ship.data.flight_model
 
 var flight_model: ShipFlightModelData
-var inputs: ShipInputData
+var inputs: ShipInput
+var _input_data: ShipInputData
 
 func setup(spaceship: Spaceship):
 	ship = spaceship
 
 func integrate_forces(state: PhysicsDirectBodyState2D):
 	if not is_instance_valid(inputs): return
+	_input_data = inputs.data
 	_stop(state)
 	_strafe(state)
 	_rotate(state)
 	_boost(state)
 	
 func _stop(state: PhysicsDirectBodyState2D):
-	if not inputs.stop: return
+	if not _input_data.stop: return
 	var d := ship.speed
 	var stop_vector := -ship.linear_velocity.normalized()
 	var f := _calculate_strafe_force(stop_vector).length()
@@ -33,11 +35,12 @@ func _stop(state: PhysicsDirectBodyState2D):
 		ship.linear_velocity = Vector2.ZERO
 	else:
 		# CAUTION Will work only for inputs 0 or 1, no .2, .3, .5...
-		inputs.strafe += inputs.strafe + (stop_vector).rotated(-ship.rotation)
+		# CAUTION Probably it's now sync safe, as inputs.data.strafe also updates in ShipInput
+		_input_data.strafe += _input_data.strafe + (stop_vector).rotated(-ship.rotation)
 
 func _strafe(state: PhysicsDirectBodyState2D):
-	if inputs.strafe.is_zero_approx(): return
-	var str_input := inputs.strafe.rotated(ship.rotation)
+	if _input_data.strafe.is_zero_approx(): return
+	var str_input := _input_data.strafe.rotated(ship.rotation)
 	ship.apply_force(_calculate_strafe_force(str_input))
 
 func _calculate_strafe_force(input: Vector2) -> Vector2:
@@ -50,7 +53,7 @@ func _calculate_strafe_force(input: Vector2) -> Vector2:
 	return delta_dir * strafe_mult * flight_model.strafe
 
 func _rotate(state: PhysicsDirectBodyState2D):
-	var d := ship.transform.x.angle_to(inputs.target_point - ship.position)
+	var d := state.transform.x.angle_to(inputs.update_target_point() - state.transform.origin)
 	if abs(d) < ANGULAR_THRESHOLD and abs(ship.angular_velocity) < ANGULAR_THRESHOLD:
 		ship.angular_velocity = 0.0
 		return
