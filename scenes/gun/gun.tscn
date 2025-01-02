@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dtkhtyoen3ad2" path="res://scenes/gun/scripts/gun.gd" id="1_heu61"]
 [ext_resource type="PackedScene" uid="uid://dwdthpisfmojs" path="res://scenes/gun/bullet.tscn" id="2_gsief"]
-[ext_resource type="AudioStream" uid="uid://dv5bnmfo6yfcs" path="res://assets/sounds/BLLTRico_Metallic_11.wav" id="3_twgen"]
+[ext_resource type="AudioStream" uid="uid://b7l0adkxjo4xi" path="res://assets/sounds/shoot_1.wav" id="3_hyqnp"]
 [ext_resource type="Shader" uid="uid://balef3jw7dwu" path="res://scenes/ship/shaders/ship.gdshader" id="4_cqrqv"]
 [ext_resource type="Texture2D" uid="uid://crv840up43nn7" path="res://assets/spaceships/weapons/01_emission.png" id="5_7c33b"]
 [ext_resource type="Texture2D" uid="uid://v65up786al4o" path="res://assets/spaceships/weapons/01_mask.png" id="6_1ulvv"]
@@ -44,7 +44,7 @@ unique_name_in_owner = true
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("3_twgen")
+stream = ExtResource("3_hyqnp")
 max_distance = 4000.0
 
 [node name="ReloadingTimer" type="Timer" parent="."]
@@ -68,9 +68,9 @@ position = Vector2(16, 0)
 [node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view")]
 unique_name_in_owner = true
 script = ExtResource("11_7n2e0")
-capacity = 10.0
-cooling = 0.5
-transfer_efficiency = 2.5
+capacity = 12.0
+cooling = 2.0
+transfer_efficiency = 3.0
 view = NodePath("../View")
 
 [node name="Prediction" type="Line2D" parent="."]

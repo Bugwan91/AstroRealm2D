@@ -56,11 +56,11 @@ func _collide(force: bool = false):
 func _on_hit(target: TakingDamage):
 	if not target is TakingDamage: return
 	target = target as TakingDamage
-	if target.check_group(group): return
+	#if target.check_group(group): return
 	target.damage(_create_damage())
 	var hit_effect := hit_effect_scene.instantiate() as BulletHitEffect
 	hit_effect.position = ray.get_collision_point()
-	hit_effect.absolute_velocity = velocity
+	hit_effect.velocity = velocity
 	hit_effect.color = _color
 	MainState.main_scene.add_child(hit_effect)
 	queue_free()

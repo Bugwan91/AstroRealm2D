@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://dcjlidv1ftgrv"]
 
-[ext_resource type="Script" path="res://scenes/gun/scripts/bullet_hit_effect.gd" id="1_27y4s"]
+[ext_resource type="Script" uid="uid://bpls80k7m83ak" path="res://scenes/gun/scripts/bullet_hit_effect.gd" id="1_27y4s"]
 [ext_resource type="AudioStream" uid="uid://cejv4j507tnti" path="res://assets/sounds/spacelord_hit2.wav" id="2_6t2pu"]
+[ext_resource type="Texture2D" uid="uid://1nvctn7w0agl" path="res://assets/VFX_textures/spark_04.png" id="3_ug1on"]
 [ext_resource type="Material" uid="uid://clufqa0vb1vo4" path="res://scenes/gun/assets/hit_effect_mat.tres" id="4_03671"]
-[ext_resource type="Texture2D" uid="uid://dbc8lck8ryqlr" path="res://assets/my/star.png" id="5_doqwm"]
 [ext_resource type="Texture2D" uid="uid://c388olp5jsja" path="res://assets/my/circle_texture_128.tres" id="6_dsq42"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mfmu8"]
@@ -24,15 +24,15 @@ unique_name_in_owner = true
 light_mask = 0
 material = SubResource("CanvasItemMaterial_mfmu8")
 position = Vector2(0, 2)
+scale = Vector2(0.5, 0.5)
 emitting = false
-amount = 32
-process_material = ExtResource("4_03671")
-texture = ExtResource("5_doqwm")
 lifetime = 0.1
 one_shot = true
 explosiveness = 0.9
 fract_delta = false
 local_coords = true
+texture = ExtResource("3_ug1on")
+process_material = ExtResource("4_03671")
 
 [node name="Light" type="PointLight2D" parent="."]
 unique_name_in_owner = true

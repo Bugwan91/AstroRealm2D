@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://c48f2sdpasbwy"]
+
+[ext_resource type="Script" uid="uid://bex3ademjp5yw" path="res://scenes/ship/scripts/rigid_body.gd" id="1_xn8ob"]
+[ext_resource type="Script" uid="uid://ce7t5qymrq553" path="res://scenes/ship/scripts/taking_damage.gd" id="2_i3arg"]
+[ext_resource type="Script" uid="uid://clrdqrh8dbwau" path="res://scenes/ship/scripts/health.gd" id="3_6cbl0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_65871"]
+radius = 64.0
+
+[sub_resource type="Resource" id="Resource_xb7x4"]
+script = ExtResource("3_6cbl0")
+max_health = 500.0
+metadata/_custom_type_script = ExtResource("3_6cbl0")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hvh45"]
+radius = 64.0
+
+[node name="RigidBody" type="RigidBody2D"]
+mass = 5.0
+script = ExtResource("1_xn8ob")
+metadata/_custom_type_script = ExtResource("1_xn8ob")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_65871")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.542318, 0.542318, 0.542318, 1)
+polygon = PackedVector2Array(64, 0, 62, 17, 56, 32, 45, 45, 32, 56, 18, 62, 0, 64, -16, 62, -32, 56, -45, 45, -56, 32, -62, 18, -64, 2, -62, -17, -55, -33, -45, -46, -32, -55, -16, -62, 0, -64, 17, -62, 32, -56, 46, -45, 56, -32, 62, -17)
+
+[node name="TakingDamage" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+monitoring = false
+script = ExtResource("2_i3arg")
+health = SubResource("Resource_xb7x4")
+metadata/_custom_type_script = ExtResource("2_i3arg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TakingDamage"]
+shape = SubResource("CircleShape2D_hvh45")

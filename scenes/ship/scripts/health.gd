@@ -14,8 +14,9 @@ var health: float
 func _ready():
 	health = max_health
 
-func damage(damage: float):
+func damage(damage: float) -> float:
 	health = max(0.0, health - damage)
 	damaged.emit(health, max_health)
 	if health <= 0.0:
 		dying.emit()
+	return health

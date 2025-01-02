@@ -1,5 +1,5 @@
 class_name BulletHitEffect
-extends Node2D
+extends KineticBody
 
 @export var color: Color
 
@@ -12,4 +12,5 @@ func _ready():
 	particles.process_material.color = color * 6.0
 	particles.emitting = true
 	light.color = color
+	sound.pitch_scale = randf_range(0.9, 1.1)
 	sound.finished.connect(queue_free)

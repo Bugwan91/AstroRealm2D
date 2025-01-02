@@ -5,6 +5,8 @@ var _last_velocity: Vector2
 
 var tick_acceleration: Vector2
 
+
+
 var speed: float:
 	get:
 		return linear_velocity.length()

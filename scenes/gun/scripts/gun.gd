@@ -55,6 +55,7 @@ func _shoot(delta: float):
 		if not _is_charging:
 			_spawn_bullet(delta)
 			_charge_start()
+			_sound.pitch_scale = randf_range(0.95, 1.05)
 			_sound.play()
 		_firing_time += delta
 
