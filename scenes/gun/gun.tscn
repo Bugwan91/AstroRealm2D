@@ -69,8 +69,8 @@ position = Vector2(16, 0)
 unique_name_in_owner = true
 script = ExtResource("11_7n2e0")
 capacity = 10.0
-cooling = 1.0
-transfer_efficiency = 2.0
+cooling = 0.5
+transfer_efficiency = 2.5
 view = NodePath("../View")
 
 [node name="Prediction" type="Line2D" parent="."]

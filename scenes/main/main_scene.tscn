@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=30 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" uid="uid://dn170a8jtfbql" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://csufvxpfo8jbl" path="res://scenes/navigation_grid/grid.tscn" id="4_aip35"]
 [ext_resource type="Environment" uid="uid://chl1sjnqh1sa7" path="res://scenes/main/main_environment.tres" id="4_h5iwh"]
 [ext_resource type="Resource" uid="uid://c83n3ib0kufjx" path="res://resources/ship_parts/hull/01/hull.tres" id="5_62ybw"]
+[ext_resource type="Resource" uid="uid://bobgpeam3e5tj" path="res://resources/ship_parts/hull/01/02.tres" id="5_meece"]
 [ext_resource type="Texture2D" uid="uid://dvxp714x3fp80" path="res://assets/spaceships/Styles/02.png" id="7_lo2oh"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://scenes/ui/ui.tscn" id="8_myah8"]
 [ext_resource type="Shader" uid="uid://dpw7iewn6mbbt" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="10_7ps0f"]
@@ -23,6 +24,7 @@
 [sub_resource type="Resource" id="Resource_in7ib"]
 script = ExtResource("11_fkpwp")
 hull = ExtResource("5_62ybw")
+hull_ext = ExtResource("5_meece")
 engine = ExtResource("3_xpkda")
 style = ExtResource("7_lo2oh")
 
@@ -102,7 +104,7 @@ blend_mode = 1
 
 [node name="DirectionalLight" type="DirectionalLight2D" parent="."]
 position = Vector2(-330, -177)
-rotation = 3.9235
+rotation = 0.949459
 color = Color(1, 0.741176, 0.313726, 1)
 energy = 0.1
 height = 0.6
@@ -252,7 +254,7 @@ icon_scale = 0.01
 color = Color(0.945098, 0.286275, 0, 1)
 
 [node name="Sun" parent="." instance=ExtResource("46_aihwc")]
-position = Vector2(-2325, -20000)
+position = Vector2(-20000, 0)
 scale = Vector2(5, 5)
 
 [node name="PointLightSun" type="PointLight2D" parent="Sun"]
