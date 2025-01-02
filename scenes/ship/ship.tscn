@@ -64,7 +64,7 @@ width = 2.0
 width_curve = SubResource("Curve_p4pb7")
 gradient = SubResource("Gradient_sdsuv")
 script = ExtResource("20_q0150")
-color = Color(0.3, 0.8, 2, 0.5)
+color = Color(0.301961, 0.8, 2, 0.0784314)
 lifetime = 0.2
 
 [node name="TrailEffect2" type="Line2D" parent="."]
@@ -73,7 +73,7 @@ width = 2.0
 width_curve = SubResource("Curve_p4pb7")
 gradient = SubResource("Gradient_sdsuv")
 script = ExtResource("20_q0150")
-color = Color(0.3, 0.8, 2, 0.5)
+color = Color(0.301961, 0.8, 2, 0.0784314)
 lifetime = 0.2
 
 [node name="View" type="Sprite2D" parent="."]
@@ -105,6 +105,7 @@ script = ExtResource("14_5nufi")
 [node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view")]
 unique_name_in_owner = true
 script = ExtResource("20_1gdyl")
+capacity = 80.0
 cooling = 3.0
 transfer_efficiency = 0.0
 view = NodePath("../View")

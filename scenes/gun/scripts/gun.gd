@@ -7,7 +7,8 @@ signal tranfser_heat(heat: float)
 @export var group: String
 @export var bullet_scene: PackedScene
 @export var bullet_color: Color = Color.RED
-@export var accuracy: float = 0.05
+@export var accuracy: float = 0.02
+@export var heat_spread: float = 0.04
 @export_range(0, 60) var fire_rate := 10.0
 @export_range(0, 5000) var range := 2000.0
 @export_range(0, 10000) var bullet_speed := 3000.0
@@ -68,7 +69,7 @@ func _charge_done():
 func _spawn_bullet(delta: float):
 	var bullet = bullet_scene.instantiate() as Bullet
 	bullet.group = group
-	var spear: float = accuracy * pow(2.0 * (randf() - 0.5), 2.0) * sign(randf() - 0.5)
+	var spear: float = (accuracy + heat_spread * _heat.temperature) * pow(2.0 * (randf() - 0.5), 2.0) * sign(randf() - 0.5)
 	bullet.position = _shoot_point.global_position
 	bullet.rotation = _shoot_point.global_rotation + spear
 	bullet.start_velocity = velocity
