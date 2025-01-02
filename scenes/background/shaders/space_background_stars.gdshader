@@ -22,9 +22,9 @@ void fragment() {
 	vec2 zoom_factor = ((zoom - vec2(1.0, 1.0)) * 0.5 + vec2(1.0, 1.0));
 	vec2 base_zoomed_uv = (UV - vec2(0.5, 0.5)) * vp_size / (zoom_factor) + vec2(0.5, 0.5);
 	vec2 base_uv = base_zoomed_uv + scale * offset;
-	
+
 	vec4 color = vec4(0.0);
-	
+
 	float intensity = 0.0;
 	float t_noise = texture(temperature_mask, 1.0 - base_uv).r;
 	float radius = ceil(t_noise * 3.0);
@@ -35,14 +35,14 @@ void fragment() {
 			float mask = texture(mask_texture, star_uv).r;
 			float noise = base * mask;
 			noise = pow(noise, 5.0);
-			
+
             if (noise > density) {
 				intensity += 1.0 - smoothstep(0.0, 1.0, dot(vec2(x,y),vec2(x,y)) * radius );
 				intensity *= intensity + (noise - density) * 5.0 * (2.0 - density);
 			}
 		}
 	}
-	
+
 	//intensity += intensity * sin(TIME * 100.0 * t_noise + t_noise) * 0.3 * t_noise;
 	float temperature = texture(temperature_mask, base_uv).r;
 	color = getStarColor(temperature) * intensity;

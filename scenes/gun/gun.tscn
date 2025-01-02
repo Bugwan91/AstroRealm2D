@@ -68,8 +68,8 @@ position = Vector2(16, 0)
 [node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view")]
 unique_name_in_owner = true
 script = ExtResource("11_7n2e0")
-capacity = 8.0
-cooling = 2.0
+capacity = 10.0
+cooling = 1.0
 transfer_efficiency = 2.0
 view = NodePath("../View")
 

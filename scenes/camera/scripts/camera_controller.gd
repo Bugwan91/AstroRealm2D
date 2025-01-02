@@ -12,7 +12,6 @@ signal zoomed(zoom: float)
 var ignore_floating := true
 var target: Spaceship
 var _acceleration: Vector2
-var _required_acceleration_position: Vector2
 var _required_look_position: Vector2
 var _hit_position: Vector2
 var _zoom_min: Vector2

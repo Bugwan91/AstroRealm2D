@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" uid="uid://b2ih5uxk3qw0h" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
+[ext_resource type="Texture2D" uid="uid://c4su0423xfs6g" path="res://assets/spaceships/hull/01/_emission.png" id="6_r75st"]
 [ext_resource type="Shader" uid="uid://balef3jw7dwu" path="res://scenes/ship/shaders/ship.gdshader" id="7_byino"]
+[ext_resource type="Texture2D" uid="uid://da8c67h3oaq7j" path="res://assets/spaceships/hull/01/_heat.png" id="7_q6f52"]
 [ext_resource type="Script" uid="uid://dyv36awovo4v7" path="res://scenes/ship/scripts/weapons_slots.gd" id="8_4fwa5"]
+[ext_resource type="Texture2D" uid="uid://b4grjooukm1dd" path="res://assets/spaceships/hull/01/_mask.png" id="8_xvsf7"]
 [ext_resource type="Texture2D" uid="uid://bdcrgonof28mh" path="res://assets/spaceships/temperature.tres" id="9_r75st"]
-[ext_resource type="Texture2D" uid="uid://dvtnerb2k0qle" path="res://assets/spaceships/hull/02/_emission.png" id="9_vptip"]
-[ext_resource type="Texture2D" uid="uid://bsf8bix50mxto" path="res://assets/spaceships/hull/02/_heat.png" id="10_dhdk5"]
+[ext_resource type="Texture2D" uid="uid://dsl72b3dwxid4" path="res://assets/spaceships/hull/01/_base.png" id="10_r75st"]
+[ext_resource type="Texture2D" uid="uid://dg5ceqg02tvgu" path="res://assets/spaceships/hull/01/_normal.png" id="11_6qm8q"]
 [ext_resource type="Script" uid="uid://cw01a0apshsem" path="res://scenes/ship/scripts/view_ship.gd" id="11_d8ncc"]
-[ext_resource type="Texture2D" uid="uid://vaw1wyhai2wf" path="res://assets/spaceships/hull/02/_mask.png" id="11_jl7kr"]
 [ext_resource type="Script" uid="uid://cvo7a3u08pliv" path="res://scenes/ship/scripts/ship_selection_area.gd" id="12_bsixf"]
-[ext_resource type="Texture2D" uid="uid://bqx61atmdag5g" path="res://assets/spaceships/hull/02/_base.png" id="13_3b4ap"]
-[ext_resource type="Texture2D" uid="uid://bi8g2s363ai44" path="res://assets/spaceships/hull/02/_normal.png" id="14_2c5v6"]
 [ext_resource type="PackedScene" uid="uid://bu6wjq2ioia27" path="res://scenes/ship/desctroy_effect_manager.tscn" id="14_4y0fi"]
 [ext_resource type="Script" uid="uid://dlnqyio8ujqvd" path="res://scenes/ship/scripts/ship_controller.gd" id="14_5nufi"]
 [ext_resource type="Script" uid="uid://liqs1h6x4e1p" path="res://scenes/heat/scripts/Heat.gd" id="20_1gdyl"]
@@ -32,14 +32,14 @@ shader_parameter/emission = 2.0
 shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/shininess = 0.0
 shader_parameter/metallic = 0.0
-shader_parameter/mask_texture = ExtResource("11_jl7kr")
-shader_parameter/emission_texture = ExtResource("9_vptip")
-shader_parameter/heat_texture = ExtResource("10_dhdk5")
+shader_parameter/mask_texture = ExtResource("8_xvsf7")
+shader_parameter/emission_texture = ExtResource("6_r75st")
+shader_parameter/heat_texture = ExtResource("7_q6f52")
 shader_parameter/temperature_texture = ExtResource("9_r75st")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_fknoo"]
-diffuse_texture = ExtResource("13_3b4ap")
-normal_texture = ExtResource("14_2c5v6")
+diffuse_texture = ExtResource("10_r75st")
+normal_texture = ExtResource("11_6qm8q")
 texture_filter = 3
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_70byj"]
