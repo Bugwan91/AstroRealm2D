@@ -17,6 +17,12 @@ signal finished(blueprint: ShipBlueprint, design: ShipDesignData)
 @onready var confirm_button: Button = %ConfirmButton
 @onready var cancel_button: Button = %CancelButton
 
+@onready var debug_diffuse: TextureRect = %DiffuseDebug
+@onready var debug_normal: TextureRect = %NormalDebug
+@onready var debug_mask: TextureRect = %MaskDebug
+@onready var debug_emission: TextureRect = %EmissionDebug
+@onready var debug_heat: TextureRect = %HeatDebug
+
 func _ready():
 	_setup_selectors_data()
 	MainState.ship_designer = self
@@ -30,7 +36,7 @@ func _ready():
 		baker.blueprint.engine = value
 	style_selector.update_blueprint = func(value: Texture2D):
 		baker.blueprint.style = value
-	baker.updated.connect(ship_preview.setup_textures)
+	baker.updated.connect(_on_baker_updates)
 
 func _setup_selectors_data():
 	hull_selector.resources = all_parts.hulls
@@ -56,3 +62,11 @@ func close():
 func confirm():
 	visible = false
 	finished.emit(baker.blueprint, baker.design)
+
+func _on_baker_updates(baked_design: ShipDesignData):
+	ship_preview.setup_textures(baked_design)
+	debug_diffuse.texture = baked_design.diffuse
+	debug_normal.texture = baked_design.normal
+	debug_mask.texture = baked_design.mask
+	debug_emission.texture = baked_design.emision
+	debug_heat.texture = baked_design.heat

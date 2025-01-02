@@ -46,6 +46,7 @@ texture = ExtResource("4_0sbfp")
 unique_name_in_owner = true
 texture = ExtResource("5_rn3vo")
 texture_scale = 2.0
+height = 20.0
 
 [node name="PredictionRay" type="RayCast2D" parent="."]
 unique_name_in_owner = true

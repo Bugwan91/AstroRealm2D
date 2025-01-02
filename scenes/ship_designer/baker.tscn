@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cor2bkqrdl620"]
 
-[ext_resource type="Script" path="res://scenes/ship_designer/scripts/ship_blueprint_baker.gd" id="1_w34ns"]
-[ext_resource type="Script" path="res://scenes/ship_designer/scripts/ship_polygon_baker.gd" id="2_05kjf"]
+[ext_resource type="Script" uid="uid://c04mv8300gfe" path="res://scenes/ship_designer/scripts/ship_blueprint_baker.gd" id="1_w34ns"]
+[ext_resource type="Script" uid="uid://ovspgfqxe8q5" path="res://scenes/ship_designer/scripts/ship_polygon_baker.gd" id="2_05kjf"]
 [ext_resource type="PackedScene" uid="uid://cllccy4uwm102" path="res://scenes/ship_designer/style_baker.tscn" id="5_n36rl"]
 [ext_resource type="PackedScene" uid="uid://pbokfmo8p4jh" path="res://scenes/ship_designer/baker_layer.tscn" id="7_yjkib"]
 

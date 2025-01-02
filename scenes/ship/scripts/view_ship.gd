@@ -7,6 +7,7 @@ func _ready():
 
 func setup_textures(design: ShipDesignData):
 	if design == null: return
+	texture = CanvasTexture.new()
 	texture.diffuse_texture = design.diffuse
 	texture.normal_texture = design.normal
 	material.set("shader_parameter/shininess", design.shininess)
