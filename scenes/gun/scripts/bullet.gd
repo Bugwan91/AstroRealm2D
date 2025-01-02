@@ -17,12 +17,12 @@ extends KineticBody
 var start_velocity: Vector2 = Vector2.ZERO
 
 var impulse := 0.0
-var bullet_speed := 0.0
+var relative_speed := 0.0
 var _damage := 10.0
 var _base_velocity: Vector2
 
 func _ready():
-	_base_velocity = transform.x * bullet_speed
+	_base_velocity = transform.x * relative_speed
 	velocity = start_velocity + _base_velocity
 	trail.velocity = _base_velocity
 	ray.collision_mask = 3
@@ -45,8 +45,8 @@ func start(lifetime: float, delta: float):
 	timer.start(lifetime)
 
 func _update_ray(delta: float):
-	ray.target_position.y = bullet_speed * delta
-	prediction_ray.target_position.y = bullet_speed * time_prediction
+	ray.target_position.y = speed * delta
+	prediction_ray.target_position.y = speed * time_prediction
 
 func _collide(force: bool = false):
 	if force: ray.force_raycast_update()
@@ -60,7 +60,7 @@ func _on_hit(target: TakingDamage):
 	target.damage(_create_damage())
 	var hit_effect := hit_effect_scene.instantiate() as BulletHitEffect
 	hit_effect.position = ray.get_collision_point()
-	hit_effect.absolute_velocity = start_velocity + transform.x * bullet_speed * 0.5
+	hit_effect.absolute_velocity = velocity
 	hit_effect.color = _color
 	MainState.main_scene.add_child(hit_effect)
 	queue_free()

@@ -36,7 +36,6 @@ bullet_scene = ExtResource("2_gsief")
 bullet_color = Color(1, 0.686275, 0.184314, 1)
 fire_rate = 20.0
 range = 3000.0
-bullet_speed = 2000.0
 recoil = 10.0
 heat_per_shoot = 1.0
 

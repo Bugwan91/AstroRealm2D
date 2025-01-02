@@ -70,11 +70,11 @@ func _spawn_bullet(delta: float):
 	bullet.group = group
 	var spear: float = accuracy * pow(2.0 * (randf() - 0.5), 2.0) * sign(randf() - 0.5)
 	bullet.position = _shoot_point.global_position
-	bullet.rotation = global_rotation + spear
-	bullet.start_velocity = velocity.rotated(spear)
+	bullet.rotation = _shoot_point.global_rotation + spear
+	bullet.start_velocity = velocity
 	shoot_recoil.emit(-transform.x.rotated(global_rotation + spear) * recoil)
 	bullet.impulse = recoil
-	bullet.bullet_speed = bullet_speed
+	bullet.relative_speed = bullet_speed
 	MainState.main_scene.add_child(bullet)
 	bullet.update_material(bullet_color) # TODO: incapsulate this
 	bullet.start(_bullet_lifetime, delta)
