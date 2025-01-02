@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bi8060cxyiqd7"]
 
-[ext_resource type="Script" path="res://scenes/ui/scripts/player_ship_status_ui.gd" id="1_06tjq"]
+[ext_resource type="Script" uid="uid://fhto7emshvcd" path="res://scenes/ui/scripts/player_ship_status_ui.gd" id="1_06tjq"]
 [ext_resource type="Texture2D" uid="uid://bdcrgonof28mh" path="res://assets/spaceships/temperature.tres" id="2_3bl0r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48qji"]

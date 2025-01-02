@@ -128,3 +128,6 @@ func _apply_impulces(state: PhysicsDirectBodyState2D):
 	if is_zero_approx(_impulces.x) and is_zero_approx(_impulces.y): return
 	state.apply_impulse(_impulces)
 	_impulces = Vector2.ZERO
+
+func get_max_speed() -> float:
+	return data.flight_model.speed

@@ -15,7 +15,7 @@ func _ready():
 func _process(delta):
 	if player == null: return
 	heat.value = player.heat.temperature
-	#speed.value = player.speed / player.max_speed # TODO fix speed bar
+	speed.value = player.speed / player.get_max_speed()
 
 func _on_player_ship_updated(new_player_ship: Spaceship):
 	player = new_player_ship

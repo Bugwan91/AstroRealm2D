@@ -24,6 +24,7 @@ func integrate_forces(state: PhysicsDirectBodyState2D):
 	_strafe(state)
 	_rotate(state)
 	_boost(state)
+	# TODO: implement drag from speeds > max_speed
 	
 func _stop(state: PhysicsDirectBodyState2D):
 	if not _input_data.stop: return
