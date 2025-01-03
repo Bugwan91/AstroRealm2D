@@ -271,4 +271,5 @@ icon_scale = 4.0
 color = Color(0, 0.8, 2, 1)
 
 [node name="AsteroidField" parent="." instance=ExtResource("21_vo0go")]
-position = Vector2(-1595, -1237)
+unique_name_in_owner = true
+count = 100

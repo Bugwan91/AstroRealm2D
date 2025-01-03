@@ -9,11 +9,12 @@ extends Node2D
 
 @onready var player_ship_baker: ShipBlueprintBaker = %PlayerShipBaker
 @onready var autopilot_pointer = %AutopilotPointer
-
+@onready var asteroid_field = %AsteroidField
 var ship_scene: PackedScene = preload("res://scenes/ship/ship.tscn")
 
 func _ready():
 	MainState.main_scene = self
+	asteroid_field.spawn()
 
 func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	var ship: Spaceship = ship_scene.instantiate() as Spaceship
