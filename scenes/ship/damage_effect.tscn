@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://cxaoyw4qxcd0p"]
 
-[ext_resource type="Script" path="res://scenes/ship/scripts/damage_effect.gd" id="1_mp2sa"]
+[ext_resource type="Script" uid="uid://m5ied82h272a" path="res://scenes/ship/scripts/damage_effect.gd" id="1_mp2sa"]
 [ext_resource type="Texture2D" uid="uid://hnfioahelelc" path="res://assets/VFX_textures/fire_01.png" id="2_7r8uf"]
 [ext_resource type="Texture2D" uid="uid://crf347o6fh4jm" path="res://assets/VFX_textures/smoke_07.png" id="3_qucro"]
 
@@ -26,8 +26,7 @@ particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 16.0
 spread = 2.0
-initial_velocity_min = 1000.0
-initial_velocity_max = 1000.0
+initial_velocity_max = 500.0
 angular_velocity_min = -90.0
 angular_velocity_max = 90.0
 gravity = Vector3(0, 0, 0)
@@ -62,9 +61,8 @@ emission_shape = 1
 emission_sphere_radius = 8.0
 angle_min = -90.0
 angle_max = 90.0
-spread = 6.0
-initial_velocity_min = 250.0
-initial_velocity_max = 500.0
+spread = 180.0
+initial_velocity_max = 250.0
 angular_velocity_min = -90.0
 angular_velocity_max = 90.0
 gravity = Vector3(0, 0, 0)
@@ -72,6 +70,8 @@ scale_min = 0.1
 scale_max = 0.2
 scale_curve = SubResource("CurveTexture_caox6")
 color_ramp = SubResource("GradientTexture1D_ft1rn")
+hue_variation_min = -0.01
+hue_variation_max = 0.00999998
 turbulence_enabled = true
 
 [node name="DamageEffect" type="Node2D" node_paths=PackedStringArray("fire", "smoke")]
@@ -82,20 +82,15 @@ smoke = NodePath("Smoke")
 [node name="Smoke" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_opo5s")
 amount = 16
-process_material = SubResource("ParticleProcessMaterial_k28ba")
-texture = ExtResource("3_qucro")
 randomness = 0.5
-fixed_fps = 60
-interpolate = false
 visibility_rect = Rect2(-500, -500, 1000, 1000)
-local_coords = true
+texture = ExtResource("3_qucro")
+process_material = SubResource("ParticleProcessMaterial_k28ba")
 
 [node name="Fire" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_oflux")
-process_material = SubResource("ParticleProcessMaterial_pcjcm")
-texture = ExtResource("2_7r8uf")
 lifetime = 0.2
-fixed_fps = 60
-interpolate = false
 visibility_rect = Rect2(-500, -500, 1000, 1000)
 local_coords = true
+texture = ExtResource("2_7r8uf")
+process_material = SubResource("ParticleProcessMaterial_pcjcm")

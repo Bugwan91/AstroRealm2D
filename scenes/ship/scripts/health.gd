@@ -10,6 +10,8 @@ signal dying
 		health = max_health
 
 var health: float
+var is_dead: bool:
+	get: return is_zero_approx(health)
 
 func _ready():
 	health = max_health

@@ -17,14 +17,12 @@ signal dead(ship: Spaceship)
 #region Onready propeties
 @onready var flight_controller: FlightController = %FlightController
 
-#@onready var taking_damage: TakingDamage = %TakingDamage
+@onready var taking_damage: TakingDamage = %TakingDamage
 @onready var heat: Heat = %Heat
 
 @onready var _view: ShipView = %View
 @onready var _weapon_slots: WeaponSlots = %WeaponSlots
 @onready var _radar_item: RadarItem = %RadarItem
-@onready var _destroy_effect: DestroyEffectManager = %DestroyEffectManager
-@onready var health: Health # TODO: should be movet to TakingDamage component
 #endregion
 
 #region Private properties
@@ -36,19 +34,11 @@ func _ready():
 	assert(data != null, "Ship Data is missed")
 	_setup_view()
 	_setup_flight_controller()
-	_setup_health()
 	_setup_weapon()
 	connect_inputs(input_reader)
 
 func _setup_flight_controller():
 	flight_controller.setup(self)
-
-func _setup_health():
-	if not is_instance_valid(health): return
-	#taking_damage.setup_polygon(health, data.design.polygon)
-	_destroy_effect.setup(self)
-	_destroy_effect.destroy.connect(_destroy)
-	health.dying.connect(_die)
 
 func _setup_weapon():
 	_weapon_slots.setup(data.design)
@@ -128,6 +118,9 @@ func _apply_impulces(state: PhysicsDirectBodyState2D):
 	if is_zero_approx(_impulces.x) and is_zero_approx(_impulces.y): return
 	state.apply_impulse(_impulces)
 	_impulces = Vector2.ZERO
+
+func setup_health(value: float):
+	taking_damage.setup_health(value)
 
 func get_max_speed() -> float:
 	return data.flight_model.speed

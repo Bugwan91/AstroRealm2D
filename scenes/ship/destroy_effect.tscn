@@ -1,6 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://dcy3g0684tgaa"]
 
-[ext_resource type="Script" path="res://scenes/ship/scripts/ship_destroy_effect.gd" id="1_l4mfa"]
+[ext_resource type="Script" uid="uid://dxhoxwmvlcgtp" path="res://scenes/ship/scripts/ship_destroy_effect.gd" id="1_l4mfa"]
 [ext_resource type="Texture2D" uid="uid://balodvxn3doji" path="res://assets/VFX_textures/smoke_05.png" id="2_e5hvd"]
 [ext_resource type="Texture2D" uid="uid://b2ihxapw1fwpv" path="res://assets/VFX_textures/smoke_02.png" id="3_n2ne6"]
 [ext_resource type="Texture2D" uid="uid://ct5hytm7xe6po" path="res://assets/my/star2.png" id="4_02x4f"]
@@ -17,7 +17,7 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 gradient = SubResource("Gradient_gr4v4")
 
 [sub_resource type="Curve" id="Curve_rfmss"]
-max_value = 100.0
+_limits = [0.0, 100.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.837054, 52.1814), 181.165, 181.165, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
 point_count = 3
 
@@ -96,7 +96,7 @@ gradient = SubResource("Gradient_l6u6l")
 use_hdr = true
 
 [sub_resource type="Curve" id="Curve_41y5a"]
-max_value = 100.0
+_limits = [0.0, 100.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 56.6296), 147.904, 0.0, 0, 0]
 point_count = 2
 
@@ -131,33 +131,31 @@ script = ExtResource("1_l4mfa")
 unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_5cxbh")
 emitting = false
-process_material = SubResource("ParticleProcessMaterial_is74h")
-texture = ExtResource("2_e5hvd")
 one_shot = true
 explosiveness = 0.8
 randomness = 0.3
 visibility_rect = Rect2(-200, -200, 400, 400)
 local_coords = true
+texture = ExtResource("2_e5hvd")
+process_material = SubResource("ParticleProcessMaterial_is74h")
 
 [node name="Fire" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_k17ep")
 emitting = false
-process_material = SubResource("ParticleProcessMaterial_4iykj")
-texture = ExtResource("3_n2ne6")
 lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 visibility_rect = Rect2(-200, -200, 400, 400)
 local_coords = true
+texture = ExtResource("3_n2ne6")
+process_material = SubResource("ParticleProcessMaterial_4iykj")
 
 [node name="Sparcles" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_trnaj")
 emitting = false
 amount = 32
-process_material = SubResource("ParticleProcessMaterial_wtsvi")
-texture = ExtResource("4_02x4f")
 lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
@@ -165,6 +163,8 @@ randomness = 0.5
 visibility_rect = Rect2(-200, -200, 400, 400)
 local_coords = true
 trail_enabled = true
+texture = ExtResource("4_02x4f")
+process_material = SubResource("ParticleProcessMaterial_wtsvi")
 
 [node name="ExplosionAudio" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true

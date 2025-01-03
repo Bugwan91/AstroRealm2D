@@ -23,10 +23,6 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	ship.data.design.metallic = 0.3
 	ship.position = Vector2.ZERO
 	ship.input_reader = input_reader
-	var health := Health.new()
-	health.max_health = 1000.0
-	health.health = health.max_health
-	ship.health = health
 	ship.gun_scene = gun_scene
 	var radar: Radar = radar_scene.instantiate() as Radar
 	ship.add_child(radar)
@@ -35,6 +31,7 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	ship.add_child(audio_listener)
 	audio_listener.make_current()
 	add_child(ship)
+	ship.setup_health(1000.0)
 	radar.radius = 10000.0
 
 func _create_ship_configuration() -> ShipData:

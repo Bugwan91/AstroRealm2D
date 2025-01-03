@@ -1,13 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://c48f2sdpasbwy"]
+[gd_scene load_steps=9 format=3 uid="uid://c48f2sdpasbwy"]
 
 [ext_resource type="Script" uid="uid://bex3ademjp5yw" path="res://scenes/ship/scripts/rigid_body.gd" id="1_xn8ob"]
 [ext_resource type="Script" uid="uid://ce7t5qymrq553" path="res://scenes/ship/scripts/taking_damage.gd" id="2_i3arg"]
 [ext_resource type="Script" uid="uid://clrdqrh8dbwau" path="res://scenes/ship/scripts/health.gd" id="3_6cbl0"]
+[ext_resource type="PackedScene" uid="uid://cxaoyw4qxcd0p" path="res://scenes/ship/damage_effect.tscn" id="4_6cbl0"]
+[ext_resource type="PackedScene" uid="uid://dcy3g0684tgaa" path="res://scenes/ship/destroy_effect.tscn" id="5_yhpvr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_65871"]
 radius = 64.0
 
 [sub_resource type="Resource" id="Resource_xb7x4"]
+resource_local_to_scene = true
 script = ExtResource("3_6cbl0")
 max_health = 500.0
 metadata/_custom_type_script = ExtResource("3_6cbl0")
@@ -33,6 +36,8 @@ collision_mask = 4
 monitoring = false
 script = ExtResource("2_i3arg")
 health = SubResource("Resource_xb7x4")
+_damaged_effect_scene = ExtResource("4_6cbl0")
+_destroy_effect_scene = ExtResource("5_yhpvr")
 metadata/_custom_type_script = ExtResource("2_i3arg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TakingDamage"]

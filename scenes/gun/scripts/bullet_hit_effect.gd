@@ -3,14 +3,14 @@ extends KineticBody
 
 @export var color: Color
 
-@onready var particles: GPUParticles2D = %GPUParticles2D
-@onready var light: PointLight2D = %Light
-@onready var sound: AudioStreamPlayer2D = %Sound
+@onready var _particles: GPUParticles2D = %GPUParticles2D
+@onready var _light: PointLight2D = %Light
+@onready var _sound: AudioStreamPlayer2D = %Sound
 
 func _ready():
-	particles.process_material = particles.process_material.duplicate()
-	particles.process_material.color = color * 6.0
-	particles.emitting = true
-	light.color = color
-	sound.pitch_scale = randf_range(0.9, 1.1)
-	sound.finished.connect(queue_free)
+	_particles.process_material = _particles.process_material.duplicate()
+	_particles.process_material.color = color * 6.0
+	_particles.emitting = true
+	_light.color = color
+	_sound.pitch_scale = randf_range(0.9, 1.1)
+	_sound.finished.connect(queue_free)

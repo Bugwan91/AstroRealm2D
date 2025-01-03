@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=26 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" uid="uid://b2ih5uxk3qw0h" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
@@ -12,11 +12,16 @@
 [ext_resource type="Texture2D" uid="uid://dg5ceqg02tvgu" path="res://assets/spaceships/hull/01/_normal.png" id="11_6qm8q"]
 [ext_resource type="Script" uid="uid://cw01a0apshsem" path="res://scenes/ship/scripts/view_ship.gd" id="11_d8ncc"]
 [ext_resource type="Script" uid="uid://cvo7a3u08pliv" path="res://scenes/ship/scripts/ship_selection_area.gd" id="12_bsixf"]
-[ext_resource type="PackedScene" uid="uid://bu6wjq2ioia27" path="res://scenes/ship/desctroy_effect_manager.tscn" id="14_4y0fi"]
 [ext_resource type="Script" uid="uid://dlnqyio8ujqvd" path="res://scenes/ship/scripts/ship_controller.gd" id="14_5nufi"]
+[ext_resource type="Script" uid="uid://ce7t5qymrq553" path="res://scenes/ship/scripts/taking_damage.gd" id="17_6qm8q"]
+[ext_resource type="Script" uid="uid://clrdqrh8dbwau" path="res://scenes/ship/scripts/health.gd" id="18_woufe"]
 [ext_resource type="Script" uid="uid://liqs1h6x4e1p" path="res://scenes/heat/scripts/Heat.gd" id="20_1gdyl"]
 [ext_resource type="Script" uid="uid://w8vsnqoourdh" path="res://scenes/vfx/scripts/trail.gd" id="20_q0150"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="20_w3y8g"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w2dh3"]
+radius = 42.0
+height = 128.31
 
 [sub_resource type="Curve" id="Curve_p4pb7"]
 _data = [Vector2(0, 1), 0.0, -0.322088, 0, 0, Vector2(1, 0), -1.16987, 0.0, 0, 0]
@@ -45,13 +50,20 @@ texture_filter = 3
 [sub_resource type="CircleShape2D" id="CircleShape2D_70byj"]
 radius = 80.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w2dh3"]
-radius = 42.0
-height = 128.31
+[sub_resource type="Resource" id="Resource_sakv4"]
+resource_local_to_scene = true
+script = ExtResource("18_woufe")
+max_health = 1000.0
+metadata/_custom_type_script = ExtResource("18_woufe")
 
 [node name="Ship" type="RigidBody2D"]
 script = ExtResource("1_5ckws")
 data = ExtResource("2_uwj24")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6, 0)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_w2dh3")
 
 [node name="WeaponSlots" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -84,9 +96,6 @@ rotation = 1.5708
 texture = SubResource("CanvasTexture_fknoo")
 script = ExtResource("11_d8ncc")
 
-[node name="DestroyEffectManager" parent="." instance=ExtResource("14_4y0fi")]
-unique_name_in_owner = true
-
 [node name="SelectionArea" type="Area2D" parent="."]
 collision_layer = 2147483648
 collision_mask = 0
@@ -110,12 +119,19 @@ cooling = 3.0
 transfer_efficiency = 0.0
 view = NodePath("../View")
 
+[node name="TakingDamage" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 4
+script = ExtResource("17_6qm8q")
+health = SubResource("Resource_sakv4")
+metadata/_custom_type_script = ExtResource("17_6qm8q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TakingDamage"]
+position = Vector2(-6, 0)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_w2dh3")
+
 [node name="RadarItem" parent="." instance=ExtResource("20_w3y8g")]
 unique_name_in_owner = true
 visible = true
 icon_scale = 0.5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-6, 0)
-rotation = -1.5708
-shape = SubResource("CapsuleShape2D_w2dh3")

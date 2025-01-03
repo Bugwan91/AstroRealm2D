@@ -7,3 +7,13 @@
 script = ExtResource("1_cbedk")
 
 [node name="Asteroid" parent="." instance=ExtResource("2_hwyii")]
+position = Vector2(-568, -514)
+
+[node name="Asteroid2" parent="." instance=ExtResource("2_hwyii")]
+position = Vector2(633, -445)
+
+[node name="Asteroid3" parent="." instance=ExtResource("2_hwyii")]
+position = Vector2(-414, 191)
+
+[node name="Asteroid4" parent="." instance=ExtResource("2_hwyii")]
+position = Vector2(422, 203)

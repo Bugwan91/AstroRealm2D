@@ -1,23 +1,14 @@
 class_name ShipDestroyEffect
-extends Node2D
+extends KineticBody
 
-@onready var smoke: GPUParticles2D = %Smoke
-@onready var fire = %Fire
-@onready var sparcles = %Sparcles
-@onready var explosion_audio = %ExplosionAudio
-
-# TODO replace with VelocityComponent
-var absolute_velocity := Vector2.ZERO
+@onready var _smoke: GPUParticles2D = %Smoke
+@onready var _fire = %Fire
+@onready var _sparcles = %Sparcles
+@onready var _explosion_audio = %ExplosionAudio
 
 func _ready():
-	smoke.emitting = true
-	fire.emitting = true
-	sparcles.emitting = true
-	explosion_audio.play()
-	smoke.finished.connect(_destroy)
-
-func _process(delta):
-	position += absolute_velocity * delta
-
-func _destroy():
-	queue_free()
+	_smoke.emitting = true
+	_fire.emitting = true
+	_sparcles.emitting = true
+	_explosion_audio.play()
+	_smoke.finished.connect(queue_free)
