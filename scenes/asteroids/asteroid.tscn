@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://c48f2sdpasbwy"]
+[gd_scene load_steps=16 format=3 uid="uid://c48f2sdpasbwy"]
 
+[ext_resource type="Script" uid="uid://cousmnn4iqib7" path="res://scenes/asteroids/scripts/asteroid.gd" id="1_vucqq"]
 [ext_resource type="Script" uid="uid://bex3ademjp5yw" path="res://scenes/ship/scripts/rigid_body.gd" id="1_xn8ob"]
 [ext_resource type="Script" uid="uid://ce7t5qymrq553" path="res://scenes/ship/scripts/taking_damage.gd" id="2_i3arg"]
 [ext_resource type="Script" uid="uid://clrdqrh8dbwau" path="res://scenes/ship/scripts/health.gd" id="3_6cbl0"]
@@ -7,6 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://dcy3g0684tgaa" path="res://scenes/ship/destroy_effect.tscn" id="5_yhpvr"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="6_yhpvr"]
 [ext_resource type="Texture2D" uid="uid://dsbihdsh386qu" path="res://assets/VFX_textures/circle_05.png" id="7_b76nm"]
+[ext_resource type="Material" uid="uid://cqy56rhnpln3r" path="res://scenes/ship/shaders/ship_mat.tres" id="8_34a3x"]
+[ext_resource type="Texture2D" uid="uid://k1hayj4vudgv" path="res://assets/asteroids/asteroid_0.png" id="8_rqga2"]
+[ext_resource type="Texture2D" uid="uid://bg5fwnx0tuxi5" path="res://assets/asteroids/asteroid_0_n.png" id="10_xwdrs"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_xwdrs"]
+diffuse_texture = ExtResource("8_rqga2")
+normal_texture = ExtResource("10_xwdrs")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_65871"]
 radius = 64.0
@@ -20,23 +28,26 @@ metadata/_custom_type_script = ExtResource("3_6cbl0")
 [sub_resource type="CircleShape2D" id="CircleShape2D_hvh45"]
 radius = 64.0
 
-[node name="RigidBody" type="RigidBody2D"]
+[node name="Asteroid" type="RigidBody2D"]
 mass = 5.0
 linear_damp_mode = 1
 linear_damp = 0.1
 angular_damp_mode = 1
 angular_damp = 0.1
-script = ExtResource("1_xn8ob")
+script = ExtResource("1_vucqq")
 metadata/_custom_type_script = ExtResource("1_xn8ob")
 
+[node name="View" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+material = ExtResource("8_34a3x")
+texture = SubResource("CanvasTexture_xwdrs")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
 shape = SubResource("CircleShape2D_65871")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.542318, 0.542318, 0.542318, 1)
-polygon = PackedVector2Array(64, 0, 62, 17, 56, 32, 45, 45, 32, 56, 18, 62, 0, 64, -16, 62, -32, 56, -45, 45, -56, 32, -62, 18, -64, 2, -62, -17, -55, -33, -45, -46, -32, -55, -16, -62, 0, -64, 17, -62, 32, -56, 46, -45, 56, -32, 62, -17)
-
 [node name="TakingDamage" type="Area2D" parent="."]
+unique_name_in_owner = true
 collision_layer = 4
 collision_mask = 4
 monitoring = false
@@ -46,7 +57,8 @@ _damaged_effect_scene = ExtResource("4_6cbl0")
 _destroy_effect_scene = ExtResource("5_yhpvr")
 metadata/_custom_type_script = ExtResource("2_i3arg")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TakingDamage"]
+[node name="DamageCollisionShape2D" type="CollisionShape2D" parent="TakingDamage"]
+unique_name_in_owner = true
 shape = SubResource("CircleShape2D_hvh45")
 
 [node name="RadarItem" parent="." instance=ExtResource("6_yhpvr")]

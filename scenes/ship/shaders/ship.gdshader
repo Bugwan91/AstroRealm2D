@@ -5,6 +5,7 @@ uniform float emission : hint_range(0, 10) = 2.0;
 uniform vec4 emission_color : source_color = vec4(1.0);
 uniform float shininess : hint_range(-1, 1) = 0.0;
 uniform float metallic : hint_range(-1, 1) = 0.0;
+uniform float specularity : hint_range(0, 1) = 1.0;
 uniform sampler2D mask_texture : filter_nearest_mipmap, hint_default_black;
 uniform sampler2D emission_texture : filter_nearest_mipmap, hint_default_black;
 uniform sampler2D heat_texture : filter_nearest_mipmap, hint_default_black;
@@ -15,15 +16,15 @@ vec3 light_normal_compute(vec3 L, vec3 N, vec3 B_color, vec3 L_color, float Spec
 	vec3 Color = L_color * B_color;
 		// Diffuse light
 	float NdotL = clamp(dot(N, L), 0.0, 1.0);
-	vec3 Diffuse = NdotL * Color;
+	vec3 Diffuse = (1.0 - specularity * 0.5) * NdotL * Color;
 		// Specular
 	vec3 R = reflect(-L, N);
 	float RdotV = clamp(dot(R, V), 0.0, 1.0);
-	float shini = 1.0 / (1.0 - Spec * 0.99);
+	float shini = 1.0 / (1.0 - Spec * 0.999);
 	float area = pow(RdotV, shini);
-	vec3 Specular = 0.5 * (Color + mix(L_color, B_color, Met)) * area * shini;
+	vec3 Specular = 0.5 * specularity * (Color + mix(L_color, B_color, Met)) * area * shini;
 		// Total light
-	return Diffuse + Specular;
+	return (Diffuse + Specular);
 }
 
 void fragment() {

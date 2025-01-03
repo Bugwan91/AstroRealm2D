@@ -33,7 +33,7 @@ func damage(damage: Damage, effect: BulletHitEffect):
 	_handle_death()
 
 func _apply_impulse(damage: Damage):
-	if _parent is RigidBody2D: _parent.apply_impulse(damage.impulse, damage.position)
+	if _parent is RigidBody2D: _parent.apply_central_impulse(damage.impulse)
 
 func _apply_hit_effetcs(damage: Damage, effect: BulletHitEffect):
 	effect.position = damage.position

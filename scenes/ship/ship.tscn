@@ -37,6 +37,7 @@ shader_parameter/emission = 2.0
 shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/shininess = 0.0
 shader_parameter/metallic = 0.0
+shader_parameter/specularity = 1.0
 shader_parameter/mask_texture = ExtResource("8_xvsf7")
 shader_parameter/emission_texture = ExtResource("6_r75st")
 shader_parameter/heat_texture = ExtResource("7_q6f52")
