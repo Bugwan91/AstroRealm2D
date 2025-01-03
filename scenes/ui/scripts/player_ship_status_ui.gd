@@ -5,7 +5,6 @@ extends PanelContainer
 @onready var heat: TextureProgressBar = %HeatProgressBar
 @onready var speed: ProgressBar = %SpeedProgressBar
 
-
 var player: Spaceship
 
 func _ready():
@@ -22,9 +21,9 @@ func _on_player_ship_updated(new_player_ship: Spaceship):
 	if player == null:
 		visible = false
 		return
-	health.value = player.health.health / player.health.max_health
+	health.value = player.taking_damage.health.hp
 	visible = true
-	player.health.damaged.connect(_on_health_update)
+	player.taking_damage.health.damaged.connect(_on_health_update)
 
 func _on_health_update(value: float, max: float):
 	health.value = value / max
