@@ -3,7 +3,8 @@ extends Camera2D
 
 signal zoomed(zoom: float)
 
-@export var acceleration := 2.0
+@export var acceleration := 256.0
+@export var acceleration_limit := 64.0
 @export var zoom_min := 0.1
 @export var zoom_max := 2.0
 @export var zoom_speed := 0.05
@@ -38,8 +39,14 @@ func update(delta: float) -> Vector2:
 		zoomed.emit(zoom.x)
 	_required_look_position = lerp(_required_look_position, _get_look_position(), 2.0 * delta)
 	_hit_position = lerp(_hit_position, Vector2.ZERO, 10.0 * delta)
-	_acceleration = lerp(_acceleration, -target.tick_acceleration, acceleration * delta)
-	var new_position = target.position + _acceleration + _required_look_position + _hit_position
+	var d_a := target.tick_acceleration - _acceleration * delta
+	var a := d_a.length()
+	a = minf(a, acceleration * delta)
+	_acceleration += d_a.normalized() * a
+	a = minf(_acceleration.length(), acceleration_limit)
+	_acceleration = _acceleration.normalized() * a
+	#DebugDraw2d.line_vector(target.position, - _acceleration, Color.GREEN, 2.0)
+	var new_position = target.position - _acceleration #+ _required_look_position + _hit_position
 	var shift = new_position - position
 	position = new_position
 	return shift
