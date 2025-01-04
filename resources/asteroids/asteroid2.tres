@@ -1,7 +1,7 @@
-[gd_resource type="CanvasTexture" load_steps=3 format=3 uid="uid://ckmt6wjmbmr2b"]
+[gd_resource type="CanvasTexture" load_steps=3 format=3 uid="uid://vp3omvdokq06"]
 
 [ext_resource type="Texture2D" uid="uid://k1hayj4vudgv" path="res://assets/asteroids/asteroid_0.png" id="1_k0fwh"]
-[ext_resource type="Texture2D" uid="uid://bg5fwnx0tuxi5" path="res://assets/asteroids/asteroid_0_n2.png" id="2_40hux"]
+[ext_resource type="Texture2D" uid="uid://ds7luyrpo6xdv" path="res://assets/asteroids/asteroid_0_n2.png" id="2_40hux"]
 
 [resource]
 diffuse_texture = ExtResource("1_k0fwh")
