@@ -3,6 +3,7 @@ extends RigidBody
 
 @export var size: float
 @export var health: float = 500.0
+@export var variants: Array[CanvasTexture]
 
 @onready var _view: Sprite2D = %View
 @onready var _collider: CollisionShape2D = %CollisionShape2D
@@ -20,3 +21,7 @@ func _ready() -> void:
 	_collider.shape = shape
 	_damage_collider.shape = shape
 	_taking_damage.setup_health(health * size)
+	_set_variant()
+
+func _set_variant():
+	_view.texture = variants.pick_random()

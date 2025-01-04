@@ -15,4 +15,3 @@ extends Resource
 @export var thrusters: Array[PointResource]
 @export var engines: PackedVector2Array
 @export var weapon_slots: Array[PointResource] 
-
