@@ -186,7 +186,7 @@ follow={
 2d/run_on_separate_thread=true
 2d/default_gravity=0.0
 2d/default_linear_damp=0.0
-2d/default_angular_damp=0.01
+2d/default_angular_damp=0.0
 2d/solver/solver_iterations=4
 
 [rendering]
