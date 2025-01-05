@@ -1,6 +1,8 @@
 class_name SelectionItem
 extends Area2D
 
+@export var size: float
+
 var item: Node2D
 
 func _ready():

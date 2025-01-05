@@ -11,6 +11,7 @@ extends RigidBody
 @onready var _selection_area: CollisionShape2D = %SelectionCollisionShape2D
 @onready var _taking_damage: TakingDamage = %TakingDamage
 @onready var _radar_icon: RadarItem = %RadarItem
+@onready var _selection: SelectionItem = %SelectionItem
 
 var _base_radius := 64
 
@@ -23,6 +24,7 @@ func _ready() -> void:
 	_selection_area.shape = shape
 	_taking_damage.setup_health(health * size)
 	_radar_icon.icon_scale *= size
+	_selection.size = 2.0 * shape.radius
 	_set_variant()
 
 func _set_variant():

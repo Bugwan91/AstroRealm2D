@@ -3,20 +3,22 @@ class_name ShipSelectionUI
 extends CanvasLayer
 
 @onready var pivot: Control = %Pivot
-@onready var selection: TextureRect = %Selection
+@onready var container: Control = %Container
+
+const MIN_SIZE := 40.0
 
 var _selected_target: SelectionItem:
 	set(value):
 		_selected_target = value
-		selection.visible = _selected_target != null
+		container.visible = _selected_target != null
 
 func _ready():
 	process_priority = 999
-	selection.visible = false
+	container.visible = false
 	MainState.player_target_updated.connect(_target_updated)
 
 func _process(_delta):
-	if not selection.visible or _selected_target == null: return
+	if not container.visible or _selected_target == null: return
 	var viewport = Vector2(get_viewport().get_size()) * 0.5
 	var position = _selected_target.canvas_position() - viewport
 	position = Vector2(
@@ -25,6 +27,13 @@ func _process(_delta):
 	)
 	pivot.position = position + viewport
 	pivot.scale = 1.5 * get_viewport().get_camera_2d().zoom
+	_update_size()
 
 func _target_updated(target: SelectionItem):
 	_selected_target = target
+
+func _update_size():
+	var icon_size: float = max(MIN_SIZE, _selected_target.size)
+	var size_v = Vector2(icon_size, icon_size)
+	container.size = size_v
+	container.position = -0.5 * size_v
