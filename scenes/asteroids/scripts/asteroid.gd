@@ -13,7 +13,7 @@ extends RigidBody
 @onready var _radar_icon: RadarItem = %RadarItem
 @onready var _selection: SelectionItem = %SelectionItem
 
-var _base_radius := 64
+var _base_radius := 64.0
 
 func _ready() -> void:
 	_view.scale = Vector2(size, size)

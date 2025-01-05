@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var container: Control = %Container
 
 const MIN_SIZE := 40.0
+const PADDING := 16.0
 
 var _selected_target: SelectionItem:
 	set(value):
@@ -26,14 +27,16 @@ func _process(_delta):
 		min(abs(position.y * min(abs(viewport.x / position.x), 1.0)), viewport.y) * sign(position.y)
 	)
 	pivot.position = position + viewport
-	pivot.scale = 1.5 * get_viewport().get_camera_2d().zoom
 	_update_size()
 
 func _target_updated(target: SelectionItem):
 	_selected_target = target
 
 func _update_size():
-	var icon_size: float = max(MIN_SIZE, _selected_target.size)
+	var zoom := get_viewport().get_camera_2d().zoom.x
+	var icon_size: float = max(MIN_SIZE, _selected_target.size * zoom) + PADDING
 	var size_v = Vector2(icon_size, icon_size)
+	MyDebug.info("sel_size", icon_size)
+	pivot.size = size_v
 	container.size = size_v
 	container.position = -0.5 * size_v
