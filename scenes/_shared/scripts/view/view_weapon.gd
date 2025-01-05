@@ -1,3 +1,4 @@
+#TODO: Refactor: move to another location
 class_name WeaponView
 extends BaseView
 

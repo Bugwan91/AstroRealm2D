@@ -31,7 +31,11 @@ func update(radar_p: Vector2, view_r: float, radar_r: float):
 	if not is_instance_valid(icon): return
 	icon.rotation = global_rotation
 	var view_scale := view_r / radar_r
-	icon.position = (global_position - radar_p) * view_scale + view_r * Vector2.ONE
+	#var view_scale := view_r / sqrt(radar_r)
+	var i_pos = global_position - radar_p
+	#var dist = i_pos.length()
+	#var draw_pos = pos.normalized() * sqrt(dist)
+	icon.position = i_pos * view_scale * 0.98 + view_r * Vector2.ONE
 	if relative_scale:
 		_update_scale(view_scale)
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://sgnvwpsrs0xa"]
 
-[ext_resource type="Script" path="res://scenes/camera/scripts/camera_controller.gd" id="1_gmqix"]
-[ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="2_2ctbd"]
-[ext_resource type="Script" path="res://scenes/camera/scripts/viewport_radar_manager.gd" id="3_td7tu"]
+[ext_resource type="Script" uid="uid://dmeyffknuya8c" path="res://scenes/camera/scripts/camera_controller.gd" id="1_gmqix"]
+[ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="2_2ctbd"]
+[ext_resource type="Script" uid="uid://c0noelhebcmc6" path="res://scenes/camera/scripts/viewport_radar_manager.gd" id="3_td7tu"]
 
 [sub_resource type="Gradient" id="Gradient_tykp1"]
 offsets = PackedFloat32Array(1)

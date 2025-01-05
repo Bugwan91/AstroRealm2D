@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://hhj5ip7is6r4"]
 
-[ext_resource type="Script" uid="uid://dorshqv3d3poh" path="res://scenes/ship/scripts/radar.gd" id="1_xrteo"]
+[ext_resource type="Script" uid="uid://dorshqv3d3poh" path="res://scenes/radar/scripts/radar.gd" id="1_xrteo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xcbjy"]
 radius = 1000.0

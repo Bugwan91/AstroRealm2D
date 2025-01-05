@@ -36,7 +36,7 @@ var target_point: Vector2:
 		target_point = value
 		target_point_changed.emit(target_point)
 
-var target: Spaceship:
+var target: SelectionItem:
 	set(value):
 		target = value
 		MainState.player_target = target

@@ -45,8 +45,7 @@ func update(delta: float) -> Vector2:
 	_acceleration += d_a.normalized() * a
 	a = minf(_acceleration.length(), acceleration_limit)
 	_acceleration = _acceleration.normalized() * a
-	#DebugDraw2d.line_vector(target.position, - _acceleration, Color.GREEN, 2.0)
-	var new_position = target.position - _acceleration #+ _required_look_position + _hit_position
+	var new_position = target.position - _acceleration + _required_look_position + _hit_position
 	var shift = new_position - position
 	position = new_position
 	return shift

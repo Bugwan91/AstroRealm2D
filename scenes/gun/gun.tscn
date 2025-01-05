@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://e1hf68e0dm4l" path="res://assets/spaceships/weapons/01_heat.png" id="6_2v8rv"]
 [ext_resource type="Texture2D" uid="uid://bdcrgonof28mh" path="res://assets/spaceships/temperature.tres" id="8_lcisn"]
 [ext_resource type="Texture2D" uid="uid://b5uejhd6j04e5" path="res://assets/spaceships/weapons/01_base.png" id="9_gdpxm"]
-[ext_resource type="Script" uid="uid://dybegsvrepwwy" path="res://scenes/ship/scripts/view_weapon.gd" id="10_3kf55"]
+[ext_resource type="Script" uid="uid://dybegsvrepwwy" path="res://scenes/_shared/scripts/view/view_weapon.gd" id="10_3kf55"]
 [ext_resource type="Texture2D" uid="uid://bycsfl6wbsu8g" path="res://assets/spaceships/weapons/01_normal.png" id="10_pmh73"]
 [ext_resource type="Script" uid="uid://liqs1h6x4e1p" path="res://scenes/heat/scripts/Heat.gd" id="11_7n2e0"]
 
@@ -36,7 +36,7 @@ script = ExtResource("1_heu61")
 bullet_scene = ExtResource("2_gsief")
 bullet_color = Color(0.479839, 0.863858, 0.475553, 1)
 fire_rate = 8.0
-range = 3000.0
+bullet_speed = 1000.0
 recoil = 10.0
 heat_per_shoot = 1.0
 

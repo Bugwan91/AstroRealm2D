@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://s0kc0iwk14gt"]
 
-[ext_resource type="Script" path="res://scenes/ui/scripts/ship_selection.gd" id="1_3cokm"]
+[ext_resource type="Script" uid="uid://bso0vhchiala3" path="res://scenes/ui/scripts/ship_selection.gd" id="1_3cokm"]
 [ext_resource type="Texture2D" uid="uid://bd08kqu7l1pb4" path="res://assets/my/target_selection.png" id="2_o00vp"]
 
 [node name="UI" type="CanvasLayer"]

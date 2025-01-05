@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c5jb4kvkgd8ux" path="res://assets/bullets/laser_16.png" id="4_0sbfp"]
 [ext_resource type="Texture2D" uid="uid://c388olp5jsja" path="res://assets/my/circle_texture_128.tres" id="5_rn3vo"]
 [ext_resource type="Script" uid="uid://w8vsnqoourdh" path="res://scenes/vfx/scripts/trail.gd" id="6_51oes"]
-[ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="6_h12vt"]
+[ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="6_h12vt"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8unas"]
 light_mode = 1

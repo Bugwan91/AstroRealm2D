@@ -1,33 +1,28 @@
-[gd_scene load_steps=18 format=3 uid="uid://c48f2sdpasbwy"]
+[gd_scene load_steps=17 format=3 uid="uid://c48f2sdpasbwy"]
 
 [ext_resource type="Script" uid="uid://cousmnn4iqib7" path="res://scenes/asteroids/scripts/asteroid.gd" id="1_vucqq"]
-[ext_resource type="Script" uid="uid://bex3ademjp5yw" path="res://scenes/ship/scripts/rigid_body.gd" id="1_xn8ob"]
-[ext_resource type="Script" uid="uid://ce7t5qymrq553" path="res://scenes/ship/scripts/taking_damage.gd" id="2_i3arg"]
-[ext_resource type="Script" uid="uid://clrdqrh8dbwau" path="res://scenes/ship/scripts/health.gd" id="3_6cbl0"]
+[ext_resource type="Script" uid="uid://bex3ademjp5yw" path="res://scenes/_shared/scripts/rigid_body.gd" id="1_xn8ob"]
+[ext_resource type="Script" uid="uid://ce7t5qymrq553" path="res://scenes/_shared/scripts/taking_damage.gd" id="2_i3arg"]
+[ext_resource type="Script" uid="uid://clrdqrh8dbwau" path="res://scenes/_shared/scripts/health.gd" id="3_6cbl0"]
 [ext_resource type="Texture2D" uid="uid://b0wtgcdy54unw" path="res://resources/asteroids/asteroid1.tres" id="3_8vt2t"]
 [ext_resource type="Texture2D" uid="uid://vp3omvdokq06" path="res://resources/asteroids/asteroid2.tres" id="4_0wnxl"]
 [ext_resource type="PackedScene" uid="uid://cxaoyw4qxcd0p" path="res://scenes/ship/damage_effect.tscn" id="4_6cbl0"]
 [ext_resource type="Texture2D" uid="uid://dlgsccwgvpbc0" path="res://resources/asteroids/asteroid3.tres" id="5_0wnxl"]
 [ext_resource type="PackedScene" uid="uid://dcy3g0684tgaa" path="res://scenes/ship/destroy_effect.tscn" id="5_yhpvr"]
-[ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/main/radar_item.tscn" id="6_yhpvr"]
+[ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="6_yhpvr"]
 [ext_resource type="Texture2D" uid="uid://cpfovyi2ew0n3" path="res://resources/asteroids/asteroid0.tres" id="7_0wnxl"]
 [ext_resource type="Texture2D" uid="uid://dsbihdsh386qu" path="res://assets/VFX_textures/circle_05.png" id="7_b76nm"]
 [ext_resource type="Material" uid="uid://cqy56rhnpln3r" path="res://scenes/ship/shaders/ship_mat.tres" id="8_34a3x"]
+[ext_resource type="Script" uid="uid://cvo7a3u08pliv" path="res://scenes/_shared/scripts/selection_item.gd" id="14_d48al"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8vt2t"]
 bounce = 0.3
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_65871"]
-radius = 64.0
 
 [sub_resource type="Resource" id="Resource_xb7x4"]
 resource_local_to_scene = true
 script = ExtResource("3_6cbl0")
 max_health = 500.0
 metadata/_custom_type_script = ExtResource("3_6cbl0")
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hvh45"]
-radius = 64.0
 
 [node name="Asteroid" type="RigidBody2D"]
 mass = 5.0
@@ -36,14 +31,13 @@ script = ExtResource("1_vucqq")
 variants = Array[CanvasTexture]([ExtResource("7_0wnxl"), ExtResource("3_8vt2t"), ExtResource("4_0wnxl"), ExtResource("5_0wnxl")])
 metadata/_custom_type_script = ExtResource("1_xn8ob")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+
 [node name="View" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 material = ExtResource("8_34a3x")
 texture = ExtResource("7_0wnxl")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-unique_name_in_owner = true
-shape = SubResource("CircleShape2D_65871")
 
 [node name="TakingDamage" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -58,10 +52,18 @@ metadata/_custom_type_script = ExtResource("2_i3arg")
 
 [node name="DamageCollisionShape2D" type="CollisionShape2D" parent="TakingDamage"]
 unique_name_in_owner = true
-shape = SubResource("CircleShape2D_hvh45")
 
 [node name="RadarItem" parent="." instance=ExtResource("6_yhpvr")]
 unique_name_in_owner = true
 texture = ExtResource("7_b76nm")
 icon_scale = 0.05
 color = Color(0.515867, 0.515867, 0.515867, 1)
+
+[node name="SelectionItem" type="Area2D" parent="."]
+collision_layer = 2147483648
+collision_mask = 2147483648
+monitoring = false
+script = ExtResource("14_d48al")
+
+[node name="SelectionCollisionShape2D" type="CollisionShape2D" parent="SelectionItem"]
+unique_name_in_owner = true

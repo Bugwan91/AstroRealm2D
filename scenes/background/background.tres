@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://dmiug4j6lc0ey"]
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://dmiug4j6lc0ey"]
 
-[ext_resource type="Shader" path="res://scenes/background/shaders/space_background.gdshader" id="1_nnlbi"]
+[ext_resource type="Shader" uid="uid://cr7tls63s2ipa" path="res://scenes/background/shaders/space_background.gdshader" id="1_nnlbi"]
 
 [sub_resource type="Gradient" id="Gradient_k3mub"]
 offsets = PackedFloat32Array(0.224806, 1)
@@ -24,19 +24,10 @@ seed = 51623
 seamless = true
 noise = SubResource("FastNoiseLite_4n6f4")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_bptoh"]
-noise_type = 3
-seed = 98179783
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xnb55"]
-seamless = true
-noise = SubResource("FastNoiseLite_bptoh")
-
 [resource]
 shader = ExtResource("1_nnlbi")
-shader_parameter/scale = 1.0
-shader_parameter/zoom = 1.0
-shader_parameter/offset = null
 shader_parameter/mask_texture = SubResource("NoiseTexture2D_82ana")
 shader_parameter/shift_texture_x = SubResource("NoiseTexture2D_ovbpg")
-shader_parameter/shift_texture_y = SubResource("NoiseTexture2D_xnb55")
+shader_parameter/glow = 0.0
+shader_parameter/vp = Vector2(1, 1)
+shader_parameter/offset = null

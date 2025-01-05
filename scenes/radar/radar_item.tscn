@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dwdaypca54j40"]
 
-[ext_resource type="Script" uid="uid://bxq8vurbbdqgr" path="res://scenes/main/scripts/radar_item.gd" id="1_0k3eo"]
-[ext_resource type="Texture2D" uid="uid://c0g0c4k4h83o" path="res://assets/my/icons/ship_s.png" id="2_5um02"]
+[ext_resource type="Script" uid="uid://bxq8vurbbdqgr" path="res://scenes/radar/scripts/radar_item.gd" id="1_qgcs5"]
+[ext_resource type="Texture2D" uid="uid://c0g0c4k4h83o" path="res://assets/my/icons/ship_s.png" id="2_ktxn5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q4wfc"]
 radius = 100.0
@@ -11,8 +11,8 @@ visible = false
 collision_layer = 128
 collision_mask = 0
 monitoring = false
-script = ExtResource("1_0k3eo")
-texture = ExtResource("2_5um02")
+script = ExtResource("1_qgcs5")
+texture = ExtResource("2_ktxn5")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_q4wfc")

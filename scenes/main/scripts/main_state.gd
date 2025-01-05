@@ -2,7 +2,7 @@ extends Node
 
 signal main_scene_ready
 signal player_ship_updated(ship: Spaceship)
-signal player_target_updated(ship: Spaceship)
+signal player_target_updated(target: SelectionItem)
 signal player_dead
 signal radar_updated(radar: Radar)
 
@@ -15,7 +15,7 @@ var main_scene: MainScene:
 var ship_designer: ShipDesignerUI
 
 var player_ship: Spaceship: set = _update_player_ship
-var player_target: Spaceship: set = _update_player_target
+var player_target: SelectionItem: set = _update_player_target
 var player_radar: Radar: set = _set_radar
 
 ### TODO # REMOVE ### REFACTOR ###
@@ -34,12 +34,14 @@ func _update_player_ship(ship: Spaceship):
 	player_ship_updated.emit(player_ship)
 	player_ship.dead.connect(_on_player_dead)
 
-func _update_player_target(ship: Spaceship):
-	if not is_instance_valid(player_ship) or ship == player_ship: return
-	player_target = ship
+func _update_player_target(target: SelectionItem):
+	if not is_instance_valid(player_ship) or target.item == player_ship: return
+	player_target = target
 	player_target_updated.emit(player_target)
 	if is_instance_valid(player_target):
-		player_target.dead.connect(_on_target_dead)
+		pass
+		# TODO: fix resetting selection on destroying target
+		#player_target.dead.connect(_on_target_dead)
 
 func _on_target_dead(_pass):
 	player_target = null

@@ -1,3 +1,4 @@
+#TODO: Refactor to ObjectView or something
 class_name ShipView
 extends BaseView
 

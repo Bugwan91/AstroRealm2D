@@ -8,4 +8,3 @@ script = ExtResource("1_cbedk")
 count = 100
 dimensions = Vector2(30000, 30000)
 _asteroid_scene = ExtResource("2_hwyii")
-speed_variation = 500.0

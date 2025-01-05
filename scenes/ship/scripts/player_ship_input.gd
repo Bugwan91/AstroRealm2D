@@ -17,6 +17,7 @@ func _process(_delta):
 	update_target_point()
 	data.boost = 1 if Input.is_action_pressed("throttle_main") else 0
 	data.strafe = Vector2(Input.get_axis("manuever_back", "manuever_forward"), Input.get_axis("manuever_left", "manuever_right"))
+	# CAUTION: Doesn't work. Controls is hardcoded is SelectionArea
 	if Input.is_action_pressed("set_target"):
 		data.autopilot_target = get_global_mouse_position()
 
@@ -46,11 +47,13 @@ func _unhandled_input(event):
 
 #TODO: InputReader shouldn't know about flight assistant
 # inverse this dependency
-func _target_updated(target: Spaceship):
+func _target_updated(target: SelectionItem):
 	var player: Spaceship = MainState.player_ship
-	if is_instance_valid(player):
-		player.flight_assistant.target = target
-		player.battle_assistant.target = target
+	return
+	# TODO: fix passing selected target to the flight assistant
+	#if is_instance_valid(player):
+		#player.flight_assistant.target = target
+		#player.battle_assistant.target = target
 
 func update_target_point() -> Vector2:
 	data.target_point = get_global_mouse_position() + _camera_shift
