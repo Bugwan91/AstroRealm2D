@@ -35,6 +35,10 @@ func _update_player_ship(ship: Spaceship):
 	player_ship.dead.connect(_on_player_dead)
 
 func _update_player_target(target: SelectionItem):
+	if not is_instance_valid(target):
+		player_target = null
+		player_target_updated.emit(null)
+		return
 	if not is_instance_valid(player_ship) or target.item == player_ship: return
 	player_target = target
 	player_target_updated.emit(player_target)
