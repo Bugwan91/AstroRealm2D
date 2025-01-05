@@ -9,6 +9,8 @@ signal zoomed(zoom: float)
 @export var zoom_max := 2.0
 @export var zoom_speed := 0.05
 
+var shift := Vector2.ZERO
+
 var ignore_floating := true
 var target: Spaceship
 var _acceleration: Vector2
@@ -21,6 +23,7 @@ var _target_zoom: Vector2
 
 func _ready():
 	process_priority = -1000
+	MainState.camera_controller = self
 	MainState.player_ship_updated.connect(_on_update_player_ship)
 	_init_zoom()
 
@@ -46,7 +49,7 @@ func update(delta: float) -> Vector2:
 	a = minf(_acceleration.length(), acceleration_limit)
 	_acceleration = _acceleration.normalized() * a
 	var new_position = target.position - _acceleration + _required_look_position + _hit_position
-	var shift = new_position - position
+	shift = new_position - position
 	position = new_position
 	return shift
 

@@ -12,6 +12,9 @@ var main_scene: MainScene:
 	set(value):
 		main_scene = value
 		main_scene_ready.emit()
+
+var camera_controller: CameraController
+
 var ship_designer: ShipDesignerUI
 
 var player_ship: Spaceship: set = _update_player_ship
