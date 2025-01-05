@@ -10,6 +10,15 @@ void fragment() {
 
 	if (px * px + py * py > 1.0) {
 		COLOR.a = 0.0;
+	}
+}
+
+void light() {
+	float px = 2.0 * (UV.x - 0.5);
+	float py = 2.0 * (UV.y - 0.5);
+
+	if (px * px + py * py > 1.0) {
+		LIGHT.a = 0.0;
 	} else {
 		float dx = asin(px / sqrt(1.0 - py * py)) * 2.0 / PI;
 		float dy = asin(py / sqrt(1.0 - px * px)) * 2.0 / PI;
@@ -22,7 +31,6 @@ void fragment() {
 				0.5 * (0.5 * dy + 1.0) + sin(TIME * rotation_speed * 0.5)
 			)).r;
 		vec4 sun_color = color * tex_color;
-		vec4 sun_shine = sun_color * brightness;
-		COLOR = sun_color + 0.5 * sun_shine + sun_shine * pow(px * px + py * py, 4.0);
+		LIGHT = (sun_color + sun_color * pow(px * px + py * py, 2.0)) * brightness;
 	}
 }

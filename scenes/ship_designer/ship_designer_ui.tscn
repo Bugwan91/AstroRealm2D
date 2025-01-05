@@ -17,8 +17,8 @@
 
 [sub_resource type="Gradient" id="Gradient_owpx4"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.686529)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.705882)
+offsets = PackedFloat32Array(0, 0.686529, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_2mr7a"]
 gradient = SubResource("Gradient_owpx4")
@@ -168,23 +168,20 @@ handle_input_locally = false
 size = Vector2i(256, 256)
 render_target_update_mode = 4
 
-[node name="DarkAmbient" type="DirectionalLight2D" parent="HBoxContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
-rotation = -1.20638
-color = Color(0, 0, 0, 1)
-energy = 0.8
-blend_mode = 1
+[node name="CanvasModulate" type="CanvasModulate" parent="HBoxContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
+color = Color(0.1, 0.1, 0.1, 1)
 
 [node name="Light" type="DirectionalLight2D" parent="HBoxContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
 position = Vector2(-64, -214)
 rotation = -0.785398
-energy = 0.2
-height = 0.6
+energy = 0.4
+height = 0.3
 
 [node name="PointLightCursor" type="PointLight2D" parent="HBoxContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
-position = Vector2(-422, 46)
-energy = 0.2
+position = Vector2(-122, 16)
+color = Color(1, 0.945, 0.45, 1)
+energy = 0.5
 texture = SubResource("GradientTexture2D_2mr7a")
-texture_scale = 50.0
 height = 40.0
 script = ExtResource("10_ob45u")
 

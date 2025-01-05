@@ -36,7 +36,6 @@ func _update_size():
 	var zoom := get_viewport().get_camera_2d().zoom.x
 	var icon_size: float = max(MIN_SIZE, _selected_target.size * zoom) + PADDING
 	var size_v = Vector2(icon_size, icon_size)
-	MyDebug.info("sel_size", icon_size)
 	pivot.size = size_v
 	container.size = size_v
 	container.position = -0.5 * size_v

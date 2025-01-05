@@ -20,7 +20,6 @@ shader_parameter/emission = 0.0
 shader_parameter/emission_color = Color(0.478431, 0.862745, 0.47451, 1)
 shader_parameter/shininess = 0.9
 shader_parameter/metallic = 0.8
-shader_parameter/specularity = 1.0
 shader_parameter/mask_texture = ExtResource("6_1ulvv")
 shader_parameter/emission_texture = ExtResource("5_7c33b")
 shader_parameter/heat_texture = ExtResource("6_2v8rv")
@@ -38,7 +37,6 @@ bullet_color = Color(0.479839, 0.863858, 0.475553, 1)
 fire_rate = 8.0
 bullet_speed = 1000.0
 recoil = 10.0
-heat_per_shoot = 1.0
 
 [node name="ChargeTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -69,9 +67,9 @@ position = Vector2(16, 0)
 [node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view")]
 unique_name_in_owner = true
 script = ExtResource("11_7n2e0")
-capacity = 12.0
+capacity = 120.0
 cooling = 2.0
-transfer_efficiency = 3.0
+transfer_efficiency = 9.0
 view = NodePath("../View")
 
 [node name="Prediction" type="Line2D" parent="."]

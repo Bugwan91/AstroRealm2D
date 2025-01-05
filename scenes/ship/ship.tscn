@@ -33,11 +33,10 @@ colors = PackedColorArray(1, 1, 1, 0.5, 1, 1, 1, 0)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ma44e"]
 shader = ExtResource("7_byino")
 shader_parameter/heat = 0.0
-shader_parameter/emission = 2.0
+shader_parameter/emission = 8.0
 shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/shininess = 0.0
 shader_parameter/metallic = 0.0
-shader_parameter/specularity = 1.0
 shader_parameter/mask_texture = ExtResource("8_xvsf7")
 shader_parameter/emission_texture = ExtResource("6_r75st")
 shader_parameter/heat_texture = ExtResource("7_q6f52")
