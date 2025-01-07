@@ -42,7 +42,6 @@ func _strafe(state: PhysicsDirectBodyState2D):
 	if _input_data.strafe.is_zero_approx(): return
 	var str_input := _input_data.strafe.rotated(ship.rotation)
 	str_input += str_input * _strafe_bonus(state)
-	DebugDraw2d.line_vector(ship.position, str_input * flight_model.strafe, Color.YELLOW, 2)
 	state.apply_central_force(str_input * flight_model.strafe)
 
 func _strafe_bonus(state: PhysicsDirectBodyState2D) -> float:
@@ -69,5 +68,4 @@ func _drag(state: PhysicsDirectBodyState2D):
 	var extra_speed := state.linear_velocity.length_squared() - flight_model.speed_sq
 	if extra_speed < 0.0: return
 	var stop_force := sqrt(extra_speed) * DRAG * -state.linear_velocity.normalized()
-	DebugDraw2d.line_vector(ship.position, stop_force, Color.GREEN, 2)
 	state.apply_central_force(stop_force)

@@ -261,5 +261,4 @@ color = Color(0, 0.8, 2, 1)
 
 [node name="AsteroidField" parent="." instance=ExtResource("21_vo0go")]
 unique_name_in_owner = true
-active = false
 count = 1000
