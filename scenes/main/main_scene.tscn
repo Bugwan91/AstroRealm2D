@@ -43,7 +43,7 @@ shader = ExtResource("10_7ps0f")
 shader_parameter/scale = Vector2(4, 4)
 shader_parameter/opacity = 0.031
 shader_parameter/offset = Vector2(0, 0)
-shader_parameter/emission = Color(0, 0.301961, 1, 1)
+shader_parameter/emission = Color(0.554273, 0.827548, 1, 1)
 shader_parameter/mask = SubResource("GradientTexture2D_njkiq")
 
 [sub_resource type="Gradient" id="Gradient_3co8r"]
@@ -108,7 +108,7 @@ height = 0.6
 [node name="Grid" parent="." groups=["ignore_floating"] instance=ExtResource("4_aip35")]
 light_mask = 0
 material = SubResource("ShaderMaterial_bh3nw")
-base_opacity = 0.05
+base_opacity = 0.02
 metadata/_edit_lock_ = true
 
 [node name="AutopilotPointer" parent="." instance=ExtResource("15_5xucn")]
@@ -261,4 +261,5 @@ color = Color(0, 0.8, 2, 1)
 
 [node name="AsteroidField" parent="." instance=ExtResource("21_vo0go")]
 unique_name_in_owner = true
+active = false
 count = 1000
