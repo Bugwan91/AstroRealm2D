@@ -1,5 +1,5 @@
 extends Node2D
-
+@export var active := true
 @export_range(0, 1000) var count: int = 10
 @export var dimensions: Vector2 = Vector2(10000, 10000)
 @export var _asteroid_scene: PackedScene
@@ -15,6 +15,7 @@ var _desired_energy := 0.0
 var _delta_energy := 0.0
 
 func spawn():
+	if not active: return
 	for i in count:
 		var size := randf_range(1.0 - size_variation, 1.0 + size_variation)
 		var asteroid: Asteroid = _asteroid_scene.instantiate()
@@ -35,6 +36,7 @@ func spawn():
 		MainState.main_scene.add_child(asteroid)
 
 func _process(delta: float) -> void:
+	if not active: return
 	_ac_delta += delta
 	if _ac_delta > update_interval:
 		_add_energy()
