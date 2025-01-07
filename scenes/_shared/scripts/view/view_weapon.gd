@@ -2,7 +2,10 @@
 class_name WeaponView
 extends BaseView
 
-@export_range(0, 100) var emission_reduction := 8.0
+const EMISSION_THRESHOLD := 0.01
+
+## Part of emission reduction each seccond: 0.5 is 2 sec, 1 is 1 sec, 2 is 0.5 sec
+@export_range(0, 50) var emission_reduction := 0.5
 
 var _current_emission := 0.0:
 	set(value):
@@ -10,8 +13,10 @@ var _current_emission := 0.0:
 		set_emission(_current_emission)
 
 func emit_max():
-	_current_emission = 1.0
+	_current_emission = max_emission
 
-func _process(delta):
-	if _current_emission > 0.0:
-		_current_emission -= delta * emission_reduction
+func _process(delta): 
+	if _current_emission > EMISSION_THRESHOLD:
+		_current_emission -= _current_emission * delta * emission_reduction
+	else:
+		_current_emission = 0.0

@@ -37,6 +37,7 @@ bullet_color = Color(0.479839, 0.863858, 0.475553, 1)
 fire_rate = 8.0
 bullet_speed = 1000.0
 recoil = 10.0
+heat_per_shoot = 1.0
 
 [node name="ChargeTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -58,7 +59,8 @@ material = SubResource("ShaderMaterial_whwpl")
 rotation = 1.5708
 texture = SubResource("CanvasTexture_c5j27")
 script = ExtResource("10_3kf55")
-max_emission = 6.0
+emission_reduction = 2.0
+max_emission = 16.0
 
 [node name="ShootPoint" type="Marker2D" parent="."]
 unique_name_in_owner = true
@@ -67,9 +69,9 @@ position = Vector2(16, 0)
 [node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view")]
 unique_name_in_owner = true
 script = ExtResource("11_7n2e0")
-capacity = 120.0
+capacity = 12.0
 cooling = 2.0
-transfer_efficiency = 9.0
+transfer_efficiency = 3.0
 view = NodePath("../View")
 
 [node name="Prediction" type="Line2D" parent="."]
