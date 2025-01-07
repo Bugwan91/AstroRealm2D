@@ -35,7 +35,7 @@ shader = ExtResource("1_lgcud")
 shader_parameter/scale = Vector2(10, 10)
 shader_parameter/opacity = 0.02
 shader_parameter/offset = null
-shader_parameter/emission = Color(0, 0.301961, 1, 1)
+shader_parameter/emission = Color(4.04298e-06, 0.616243, 0.883859, 1)
 shader_parameter/mask = SubResource("GradientTexture2D_01ymm")
 
 [node name="Grid" type="Sprite2D"]

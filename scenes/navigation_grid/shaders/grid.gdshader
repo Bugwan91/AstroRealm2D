@@ -16,5 +16,5 @@ void fragment() {
 }
 
 void light() {
-	LIGHT = vec4(0.0);
+	LIGHT = emission;
 }
