@@ -115,7 +115,7 @@ script = ExtResource("14_5nufi")
 unique_name_in_owner = true
 script = ExtResource("20_1gdyl")
 capacity = 80.0
-cooling = 3.0
+cooling = 2.0
 transfer_efficiency = 0.0
 view = NodePath("../View")
 

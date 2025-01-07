@@ -3,7 +3,8 @@ extends Node
 
 const ANGULAR_THRESHOLD := 0.01
 const STOP_THRESHOLD := 1.0
-const DRAG := 0.01
+const DRAG := 0.5
+const STRAFE_LOW_SPEED_BONUS := 2.0
 
 var ship: Spaceship:
 	set(value):
@@ -24,34 +25,30 @@ func integrate_forces(state: PhysicsDirectBodyState2D):
 	_strafe(state)
 	_rotate(state)
 	_boost(state)
-	# TODO: implement drag from speeds > max_speed
+	_drag(state)
 	
 func _stop(state: PhysicsDirectBodyState2D):
 	if not _input_data.stop: return
-	var d := ship.speed
 	var stop_vector := -ship.linear_velocity.normalized()
-	var f := _calculate_strafe_force(stop_vector).length()
-	var stop_d := f * state.inverse_mass * state.step
-	if d < stop_d:
+	var step_distance := flight_model.strafe * (1.0 + _strafe_bonus(state)) * state.step
+	if ship.speed < step_distance:
 		ship.linear_velocity = Vector2.ZERO
 	else:
-		# CAUTION Will work only for inputs 0 or 1, no .2, .3, .5...
-		# CAUTION Probably it's now sync safe, as inputs.data.strafe also updates in ShipInput
-		_input_data.strafe += _input_data.strafe + (stop_vector).rotated(-ship.rotation)
+		# CAUTION Probably it's not sync safe, as inputs.data.strafe also updates in ShipInput
+		# But probably it doesn't mater as long as strafe input diesn't changing every frame
+		_input_data.strafe += 2.0 * (stop_vector).rotated(-ship.rotation)
 
 func _strafe(state: PhysicsDirectBodyState2D):
 	if _input_data.strafe.is_zero_approx(): return
 	var str_input := _input_data.strafe.rotated(ship.rotation)
-	ship.apply_force(_calculate_strafe_force(str_input))
+	str_input += str_input * _strafe_bonus(state)
+	DebugDraw2d.line_vector(ship.position, str_input * flight_model.strafe, Color.YELLOW, 2)
+	state.apply_central_force(str_input * flight_model.strafe)
 
-func _calculate_strafe_force(input: Vector2) -> Vector2:
-	var target_v := input * flight_model.speed
-	var delta_v := target_v - ship.linear_velocity
-	var delta_v_l := delta_v.length()
-	var delta_dir = delta_v / delta_v_l
-	var strafe_mult := delta_v_l / flight_model.speed
-	strafe_mult = smoothstep(0.0, 0.2, strafe_mult)
-	return delta_dir * strafe_mult * flight_model.strafe
+func _strafe_bonus(state: PhysicsDirectBodyState2D) -> float:
+	var s := state.linear_velocity.length()
+	var d := minf(s / flight_model.speed, 1.0)
+	return pow((1.0 - d), 2.0) * STRAFE_LOW_SPEED_BONUS
 
 func _rotate(state: PhysicsDirectBodyState2D):
 	var d := state.transform.x.angle_to(inputs.update_target_point() - state.transform.origin)
@@ -64,4 +61,13 @@ func _rotate(state: PhysicsDirectBodyState2D):
 	ship.angular_velocity = vt
 
 func _boost(state: PhysicsDirectBodyState2D):
-	pass
+	if not _input_data.boost: return
+	var boost := _input_data.boost * flight_model.boost * state.transform.x
+	state.apply_central_force(boost)
+
+func _drag(state: PhysicsDirectBodyState2D):
+	var extra_speed := state.linear_velocity.length_squared() - flight_model.speed_sq
+	if extra_speed < 0.0: return
+	var stop_force := sqrt(extra_speed) * DRAG * -state.linear_velocity.normalized()
+	DebugDraw2d.line_vector(ship.position, stop_force, Color.GREEN, 2)
+	state.apply_central_force(stop_force)

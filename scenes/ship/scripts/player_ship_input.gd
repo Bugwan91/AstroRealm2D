@@ -15,7 +15,6 @@ func _ready():
 func _process(_delta):
 	_camera_shift = _camera_controller.update(_delta)
 	update_target_point()
-	data.boost = 1 if Input.is_action_pressed("throttle_main") else 0
 	data.strafe = Vector2(Input.get_axis("manuever_back", "manuever_forward"), Input.get_axis("manuever_left", "manuever_right"))
 	# CAUTION: Doesn't work. Controls is hardcoded is SelectionArea
 	if Input.is_action_pressed("set_target"):
@@ -28,6 +27,10 @@ func _unhandled_input(event):
 		data.stop = true
 	if event.is_action_released("stop"):
 		data.stop = false
+	if event.is_action_pressed("boost"):
+		data.boost = true
+	if event.is_action_released("boost"):
+		data.boost = false
 	if event.is_action_pressed("target_reset"):
 		data.target = null
 	if event.is_action_pressed("autopilot"):

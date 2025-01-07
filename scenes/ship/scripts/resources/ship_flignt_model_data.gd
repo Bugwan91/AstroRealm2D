@@ -12,7 +12,7 @@ signal turn_changed(new_turn: float)
 
 @export_range(0.01, 1000.0) var mass: float = 1.0: set = _set_mass # TODO CRITICAL remove mass from here
 @export_range(1.0, 50000.0) var speed: float = 2000.0: set = _set_speed
-@export_range(0.0, 10.0) var boost_base: float = 0.5: set = _update_boost
+@export_range(0.0, 10000.0) var boost_base: float = 0.5: set = _update_boost
 @export_range(0.0, 10000.0) var strafe_base: float = 100.0: set = _update_strafe
 @export_range(0.0, 15.0) var turn_base: float = 1.0: set = _update_turn
 
@@ -20,6 +20,7 @@ var inertia: float
 var boost: float
 var strafe: float # strafe acceleration
 var turn: float
+var speed_sq: float
 
 var ship: Spaceship
 
@@ -42,6 +43,7 @@ func _set_mass(new_mass: float):
 
 func _set_speed(new_speed: float):
 	speed = new_speed if new_speed > 0.0 else 0.0
+	speed_sq = speed * speed
 	speed_changed.emit(speed)
 
 func _update_boost(new_boost: float):
