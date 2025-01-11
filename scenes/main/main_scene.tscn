@@ -109,7 +109,7 @@ environment = ExtResource("4_h5iwh")
 position = Vector2(-330, -177)
 rotation = 0.949459
 color = Color(0.196078, 0.741176, 1, 1)
-energy = 0.2
+energy = 0.4
 height = 0.6
 
 [node name="Grid" parent="." instance=ExtResource("4_aip35")]
@@ -255,3 +255,4 @@ config = SubResource("Resource_1xx6e")
 unique_name_in_owner = true
 count = 600
 dimensions = Vector2(20000, 20000)
+speed_variation = 800.0

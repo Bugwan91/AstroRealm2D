@@ -12,8 +12,15 @@ var ship: Spaceship:
 		flight_model = ship.data.flight_model
 
 var flight_model: ShipFlightModelData
-var inputs: ShipInput
+
+var inputs: ShipInput:
+	set(value):
+		inputs = value
+		_closee_navigator.input_data = inputs.data
+		
 var _input_data: ShipInputData
+
+var _closee_navigator: CloseNavigator = CloseNavigator.new()
 
 func setup(spaceship: Spaceship):
 	ship = spaceship
@@ -21,12 +28,16 @@ func setup(spaceship: Spaceship):
 func integrate_forces(state: PhysicsDirectBodyState2D):
 	if not is_instance_valid(inputs): return
 	_input_data = inputs.data
+	inputs.data.strafe += _closee_navigator.update_course(
+		state.step,
+		state.transform.origin,
+		state.linear_velocity).rotated(-ship.rotation) * 2.0
 	_stop(state)
 	_strafe(state)
 	_rotate(state)
 	_boost(state)
 	_drag(state)
-	
+
 func _stop(state: PhysicsDirectBodyState2D):
 	if not _input_data.stop: return
 	var stop_vector := -ship.linear_velocity.normalized()

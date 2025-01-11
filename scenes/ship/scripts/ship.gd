@@ -84,7 +84,7 @@ var _deb_time := 0.0
 func _process(delta: float) -> void:
 	_deb_time += delta
 	if _deb_time > 0.2:
-		MainState.world_grid.draw_debug(position, 4)
+		#MainState.world_grid.draw_debug(position, 4)
 		_deb_time = 0.0
 
 func _physics_process(delta):
