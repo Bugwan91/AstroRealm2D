@@ -253,6 +253,6 @@ config = SubResource("Resource_1xx6e")
 
 [node name="AsteroidField" parent="." instance=ExtResource("21_vo0go")]
 unique_name_in_owner = true
-count = 600
+count = 200
 dimensions = Vector2(20000, 20000)
-speed_variation = 800.0
+speed_variation = 200.0

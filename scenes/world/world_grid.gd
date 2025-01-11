@@ -1,8 +1,9 @@
 class_name WorldGrid
 extends Node
 
-const CELL_SIZE := 500
+const CELL_SIZE := 1000
 const META_NAME := "world_cell"
+const DELTA := 0.2
 
 var grid: Dictionary[Vector2, Array]
 
@@ -13,8 +14,6 @@ func add_or_update(item: Node2D, shift: Vector2 = Vector2.ZERO):
 		# Remove from old cell
 		if old_cell in grid and item in grid[old_cell]:
 			grid[old_cell].erase(item)
-			if grid[old_cell].is_empty():
-				grid.erase(old_cell)
 		# Add to new cell
 		if new_cell not in grid:
 			grid[new_cell] = []
@@ -28,7 +27,7 @@ func draw_debug(position: Vector2, offset: int = 2):
 	for x_offset in range(1-offset, 1+offset):
 		for y_offset in range(1-offset, 1+offset):
 			var neighbor_cell := cell + Vector2(x_offset, y_offset)
-			if neighbor_cell in grid:
+			if neighbor_cell in grid and not grid[neighbor_cell].is_empty():
 				DebugDraw2d.rect(
 					neighbor_cell * CELL_SIZE + Vector2.ONE * CELL_SIZE * 0.5,
 					Vector2.ONE * CELL_SIZE,
@@ -40,7 +39,7 @@ func get_nearby(position: Vector2, offset: int = 2) -> Array[Node2D]:
 	for x_offset in range(1-offset, 1+offset):
 		for y_offset in range(1-offset, 1+offset):
 			var neighbor_cell := cell + Vector2(x_offset, y_offset)
-			if neighbor_cell in grid:
+			if neighbor_cell in grid and not grid[neighbor_cell].is_empty():
 				nearby_items.append_array(grid[neighbor_cell])
 	return nearby_items
 

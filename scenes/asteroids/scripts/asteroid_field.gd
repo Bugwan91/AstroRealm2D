@@ -3,7 +3,7 @@ extends Node2D
 @export_range(0, 1000) var count: int = 10
 @export var dimensions: Vector2 = Vector2(10000, 10000)
 @export var _asteroid_scene: PackedScene
-@export_range(0, 0.5) var size_variation: float = 0.5
+@export_range(0, 0.99) var size_variation: float = 0.5
 @export_range(0.01, 1000.0) var asteroid_mass: float = 5.0
 @export_range(0, 5000) var speed_variation: float = 256.0
 @export_range(0, PI) var angular_variation: float = 1

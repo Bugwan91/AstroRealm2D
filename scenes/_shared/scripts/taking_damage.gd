@@ -66,5 +66,5 @@ func _get_damage_effect():
 func _handle_death_effect():
 	var effect: ShipDestroyEffect = _destroy_effect_scene.instantiate()
 	effect.position = _parent.global_position
-	effect.velocity = _get_velocity()
+	effect.linear_velocity = _get_velocity()
 	MainState.main_scene.add_child(effect)

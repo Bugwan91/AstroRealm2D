@@ -1,7 +1,7 @@
 class_name CloseNavigator
 extends Node
 
-const DELTA := 0.01
+const DELTA := 0.05
 const MAX_TIME_TO_APPROACH := 3.0
 const DIST_THRESHOLD := 180.0
 
@@ -24,7 +24,7 @@ func update_course(delta: float, position: Vector2, velocity: Vector2) -> Vector
 	return _course
 
 func _update_avoidance_course():
-	var items := MainState.world_grid.get_nearby(_position, 4)
+	var items := MainState.world_grid.get_nearby(_position)
 	var t_min := MAX_TIME_TO_APPROACH
 	_course = Vector2.ZERO
 	for item in items:
@@ -37,7 +37,7 @@ func _update_avoidance_course():
 				var dist := d.length()
 				if dist < DIST_THRESHOLD:
 					t_min = t
-					_course = -d.normalized()
+					_course = _course * 0.5 - d.normalized()
 					DebugDraw2d.line_vector(
 						_position,
 						_velocity * t_min,
@@ -52,6 +52,6 @@ func _update_avoidance_course():
 						dist, 16, Color(item._debug_color, ints), DELTA)
 					DebugDraw2d.line_vector(
 						_position + _velocity * t_min,
-						-d.normalized() * v.length(),
+						_course * v.length(),
 						item._debug_color, 4, DELTA)
 					DebugDraw2d.circle(item.global_position, 64.0, 16, item._debug_color, 2, DELTA)

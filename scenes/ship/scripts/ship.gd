@@ -83,8 +83,8 @@ func _set_ship_data(new_data: ShipData):
 var _deb_time := 0.0
 func _process(delta: float) -> void:
 	_deb_time += delta
-	if _deb_time > 0.2:
-		#MainState.world_grid.draw_debug(position, 4)
+	if _deb_time > MainState.world_grid.DELTA:
+		MainState.world_grid.draw_debug(position)
 		_deb_time = 0.0
 
 func _physics_process(delta):

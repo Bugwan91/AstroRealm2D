@@ -1,11 +1,9 @@
 class_name KineticBody
 extends Node2D
 
-const GRID_UPDATE_DELTA := 0.2
-const GRID_TIME_SHIFT := 0.2
-
 @export var linear_velocity := Vector2.ZERO
 @export var include_on_grid := false
+@export var grid_time_shift := 0.2
 
 var _last_grid_update_delta := 0.0
 
@@ -19,6 +17,6 @@ func _physics_process(delta: float):
 
 func _update_on_grid(delta: float):
 	_last_grid_update_delta += delta
-	if _last_grid_update_delta > GRID_UPDATE_DELTA:
-		MainState.world_grid.add_or_update(self, linear_velocity * GRID_TIME_SHIFT)
+	if _last_grid_update_delta > MainState.world_grid.DELTA:
+		MainState.world_grid.add_or_update(self, linear_velocity * grid_time_shift)
 		_last_grid_update_delta = 0.0

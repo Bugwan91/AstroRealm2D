@@ -23,6 +23,7 @@ script = ExtResource("1_gtbct")
 hit_effect_scene = ExtResource("2_m6c5x")
 glow = 2.0
 include_on_grid = true
+grid_time_shift = 0.5
 
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
