@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RadarItemConfig" load_steps=3 format=3 uid="uid://b1q7bv30m17g"]
+
+[ext_resource type="Resource" uid="uid://dcpvcj872hjms" path="res://scenes/radar/_res/icons/star_icon.tres" id="1_giq6v"]
+[ext_resource type="Script" uid="uid://bfy4thm52835j" path="res://scenes/radar/scripts/resources/radar_item_config.gd" id="2_nqa65"]
+
+[resource]
+script = ExtResource("2_nqa65")
+radius = 64.0
+icon = ExtResource("1_giq6v")
+metadata/_custom_type_script = ExtResource("2_nqa65")

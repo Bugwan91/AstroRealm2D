@@ -54,7 +54,9 @@ func _add_energy():
 
 func _get_asteroids_back():
 	for asteroid in _asteroids:
-		var vector := asteroid.linear_velocity.normalized().rotated(randf_range(-1.5, 1.5)) if _delta_energy > 0 else Vector2.ZERO
+		var vector := Vector2.ZERO
+		if _delta_energy > 0:
+			vector = asteroid.linear_velocity.normalized().rotated(randf_range(-1.5, 1.5))
 		if absf(asteroid.position.x) > dimensions.x * 0.5:
 			vector.x = sign(position.x - asteroid.position.x)
 		if absf(asteroid.position.y) > dimensions.y * 0.5:

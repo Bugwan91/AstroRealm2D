@@ -10,7 +10,7 @@ var _camera_shift: Vector2
 
 func _ready():
 	process_priority = -999
-	MainState.player_target_updated.connect(_target_updated)
+	MainState.radar_manager.selected.connect(_target_updated)
 
 func _process(_delta):
 	_camera_shift = _camera_controller.update(_delta)
@@ -32,7 +32,7 @@ func _unhandled_input(event):
 	if event.is_action_released("boost"):
 		data.boost = false
 	if event.is_action_pressed("target_reset"):
-		data.target = null
+		MainState.radar_manager.reselect(null)
 	if event.is_action_pressed("autopilot"):
 		data.is_autopilot = not data.is_autopilot
 	if event.is_action_pressed("distance_up"):
@@ -48,15 +48,8 @@ func _unhandled_input(event):
 	if event.is_action_pressed("auto_aim"):
 		data.auto_aim = not data.auto_aim
 
-#TODO: InputReader shouldn't know about flight assistant
-# inverse this dependency
-func _target_updated(target: SelectionItem):
-	var player: Spaceship = MainState.player_ship
-	return
-	# TODO: fix passing selected target to the flight assistant
-	#if is_instance_valid(player):
-		#player.flight_assistant.target = target
-		#player.battle_assistant.target = target
+func _target_updated(target: RadarItem):
+	data.target = target
 
 func update_target_point() -> Vector2:
 	data.target_point = get_global_mouse_position() + _camera_shift

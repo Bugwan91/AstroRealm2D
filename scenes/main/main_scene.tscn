@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=33 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" uid="uid://dn170a8jtfbql" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -15,10 +15,11 @@
 [ext_resource type="Script" uid="uid://bnl3gx1nvuvom" path="res://scenes/ship_designer/scripts/resources/ship_blueprint.gd" id="11_fkpwp"]
 [ext_resource type="Script" uid="uid://bf40adi1hd26f" path="res://scenes/ship/scripts/player_ship_input.gd" id="12_c6lr5"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/_shared/pointer.tscn" id="15_5xucn"]
-[ext_resource type="Texture2D" uid="uid://bwr37r7vbwfq0" path="res://assets/VFX_textures/light_03.png" id="19_1qnda"]
+[ext_resource type="Resource" uid="uid://bdbghva0843vk" path="res://scenes/radar/_res/red_dot.tres" id="18_o5677"]
+[ext_resource type="Resource" uid="uid://dcpvcj872hjms" path="res://scenes/radar/_res/icons/star_icon.tres" id="20_o5677"]
+[ext_resource type="Script" uid="uid://bfy4thm52835j" path="res://scenes/radar/scripts/resources/radar_item_config.gd" id="21_d8uwl"]
 [ext_resource type="PackedScene" uid="uid://cnlbsjrkk8tq3" path="res://scenes/asteroids/asteroid_field.tscn" id="21_vo0go"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="22_yvbma"]
-[ext_resource type="Texture2D" uid="uid://dbc8lck8ryqlr" path="res://assets/my/star.png" id="23_xsmvb"]
 [ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="24_7ks4m"]
 [ext_resource type="PackedScene" uid="uid://cmqm4dm8rpi0l" path="res://scenes/background/sun.tscn" id="46_aihwc"]
 
@@ -70,6 +71,12 @@ use_hdr = true
 fill = 1
 fill_from = Vector2(0.470085, 0.440171)
 
+[sub_resource type="Resource" id="Resource_1xx6e"]
+script = ExtResource("21_d8uwl")
+radius = 64.0
+icon = ExtResource("20_o5677")
+metadata/_custom_type_script = ExtResource("21_d8uwl")
+
 [node name="Main" type="Node2D" node_paths=PackedStringArray("input_reader")]
 script = ExtResource("1_2ehlx")
 ship_flight_model = ExtResource("2_3s1kf")
@@ -105,7 +112,7 @@ color = Color(0.196078, 0.741176, 1, 1)
 energy = 0.2
 height = 0.6
 
-[node name="Grid" parent="." groups=["ignore_floating"] instance=ExtResource("4_aip35")]
+[node name="Grid" parent="." instance=ExtResource("4_aip35")]
 light_mask = 0
 material = SubResource("ShaderMaterial_bh3nw")
 base_opacity = 0.02
@@ -124,7 +131,7 @@ color = Color(1, 0.211765, 0, 1)
 energy = 1.6
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 8.0
-height = 40.0
+height = 160.0
 
 [node name="Star08" type="Sprite2D" parent="RedLight/32"]
 modulate = Color(32, 6.4, 2.4, 1)
@@ -133,9 +140,7 @@ material = SubResource("CanvasItemMaterial_lkrwm")
 texture = SubResource("GradientTexture2D_76frv")
 
 [node name="RadarItem" parent="RedLight/32" instance=ExtResource("22_yvbma")]
-texture = ExtResource("19_1qnda")
-icon_scale = 0.01
-color = Color(0.945098, 0.286275, 0, 1)
+config = ExtResource("18_o5677")
 
 [node name="16" type="PointLight2D" parent="RedLight"]
 position = Vector2(5000, 0)
@@ -143,7 +148,7 @@ color = Color(1, 0.211765, 0, 1)
 energy = 0.8
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 4.0
-height = 40.0
+height = 80.0
 
 [node name="Star02" type="Sprite2D" parent="RedLight/16"]
 modulate = Color(16, 3.2, 1.2, 1)
@@ -152,9 +157,7 @@ material = SubResource("CanvasItemMaterial_lkrwm")
 texture = SubResource("GradientTexture2D_76frv")
 
 [node name="RadarItem2" parent="RedLight/16" instance=ExtResource("22_yvbma")]
-texture = ExtResource("19_1qnda")
-icon_scale = 0.01
-color = Color(0.945098, 0.286275, 0, 1)
+config = ExtResource("18_o5677")
 
 [node name="8" type="PointLight2D" parent="RedLight"]
 position = Vector2(4000, 0)
@@ -171,16 +174,14 @@ material = SubResource("CanvasItemMaterial_lkrwm")
 texture = SubResource("GradientTexture2D_76frv")
 
 [node name="RadarItem3" parent="RedLight/8" instance=ExtResource("22_yvbma")]
-texture = ExtResource("19_1qnda")
-icon_scale = 0.01
-color = Color(0.945098, 0.286275, 0, 1)
+config = ExtResource("18_o5677")
 
 [node name="4" type="PointLight2D" parent="RedLight"]
 position = Vector2(3000, 0)
 color = Color(1, 0.211765, 0, 1)
 energy = 0.2
 texture = SubResource("GradientTexture2D_3cj2f")
-height = 40.0
+height = 20.0
 
 [node name="Star04" type="Sprite2D" parent="RedLight/4"]
 modulate = Color(4, 0.8, 0.3, 1)
@@ -189,9 +190,7 @@ material = SubResource("CanvasItemMaterial_lkrwm")
 texture = SubResource("GradientTexture2D_76frv")
 
 [node name="RadarItem4" parent="RedLight/4" instance=ExtResource("22_yvbma")]
-texture = ExtResource("19_1qnda")
-icon_scale = 0.01
-color = Color(0.945098, 0.286275, 0, 1)
+config = ExtResource("18_o5677")
 
 [node name="2" type="PointLight2D" parent="RedLight"]
 position = Vector2(2000, 0)
@@ -199,7 +198,7 @@ color = Color(1, 0.211765, 0, 1)
 energy = 0.1
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 0.5
-height = 40.0
+height = 10.0
 
 [node name="Star03" type="Sprite2D" parent="RedLight/2"]
 modulate = Color(2, 0.4, 0.15, 1)
@@ -208,9 +207,7 @@ material = SubResource("CanvasItemMaterial_lkrwm")
 texture = SubResource("GradientTexture2D_76frv")
 
 [node name="RadarItem5" parent="RedLight/2" instance=ExtResource("22_yvbma")]
-texture = ExtResource("19_1qnda")
-icon_scale = 0.01
-color = Color(0.945098, 0.286275, 0, 1)
+config = ExtResource("18_o5677")
 
 [node name="1_5" type="PointLight2D" parent="RedLight"]
 position = Vector2(1000, 0)
@@ -218,7 +215,7 @@ color = Color(1, 0.211765, 0, 1)
 energy = 0.05
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 0.25
-height = 40.0
+height = 5.0
 
 [node name="Star06" type="Sprite2D" parent="RedLight/1_5"]
 modulate = Color(1.5, 0.3, 0.1, 1)
@@ -227,9 +224,7 @@ material = SubResource("CanvasItemMaterial_lkrwm")
 texture = SubResource("GradientTexture2D_76frv")
 
 [node name="RadarItem2" parent="RedLight/1_5" instance=ExtResource("22_yvbma")]
-texture = ExtResource("19_1qnda")
-icon_scale = 0.01
-color = Color(0.945098, 0.286275, 0, 1)
+config = ExtResource("18_o5677")
 
 [node name="1" type="Sprite2D" parent="RedLight"]
 modulate = Color(1, 0.2, 0.0705882, 1)
@@ -239,9 +234,7 @@ texture = SubResource("GradientTexture2D_76frv")
 
 [node name="RadarItem2" parent="RedLight/1" instance=ExtResource("22_yvbma")]
 position = Vector2(6000, 0)
-texture = ExtResource("19_1qnda")
-icon_scale = 0.01
-color = Color(0.945098, 0.286275, 0, 1)
+config = ExtResource("18_o5677")
 
 [node name="Sun" parent="." instance=ExtResource("46_aihwc")]
 position = Vector2(-20000, 0)
@@ -252,13 +245,12 @@ color = Color(1, 0.741176, 0.313726, 1)
 energy = 2.0
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 34.0
-height = 500.0
+height = 3000.0
 
 [node name="RadarItem" parent="Sun" instance=ExtResource("22_yvbma")]
-texture = ExtResource("23_xsmvb")
-icon_scale = 4.0
-color = Color(0, 0.8, 2, 1)
+config = SubResource("Resource_1xx6e")
 
 [node name="AsteroidField" parent="." instance=ExtResource("21_vo0go")]
 unique_name_in_owner = true
 count = 1000
+dimensions = Vector2(20000, 20000)

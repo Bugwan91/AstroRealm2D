@@ -140,7 +140,7 @@ mouse_filter = 2
 script = ExtResource("7_8clra")
 
 [node name="TextureRect" type="TextureRect" parent="Control/GameUI/RadarContainer"]
-modulate = Color(0, 0.8, 1.2, 0.08)
+modulate = Color(0, 0.8, 1.2, 0.156863)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

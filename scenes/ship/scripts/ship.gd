@@ -59,7 +59,7 @@ func connect_inputs(new_inputs: ShipInput):
 
 func _connect_player_inputs():
 	if not _is_player(): return
-	_radar_item.color = Color(0.2, 0.8, 1.0)
+	_radar_item.config.icon.color = Color(0.2, 0.8, 1.0)
 	MainState.player_ship = self
 
 func _connect_flight_controller_inputs():

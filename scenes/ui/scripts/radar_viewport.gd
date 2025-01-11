@@ -1,37 +1,29 @@
 class_name RadarViewport
 extends Control
 
-@export var view_radius := 256.0
+@export var radius := 256.0
 
-var radar: Radar
+# TODO: do I need this array?
+var _icons: Array[RadarIcon] = []
 
-var _items: Array[RadarItem] = []
+func _ready() -> void:
+	MainState.radar_manager.radar_view = self
 
-func _ready():
-	MainState.radar_updated.connect(_radar_updated)
+func _physics_process(delta: float) -> void:
+	MainState.radar_manager.update_icons()
 
-func _physics_process(_delta):
-	if not is_instance_valid(radar): return
-	for item in _items:
-		item.update(radar.global_position, view_radius, radar.radius)
+func add_icon(icon: RadarIcon):
+	if not is_instance_valid(icon): return
+	if not _icons.has(icon):
+		_icons.append(icon)
+		add_child(icon)
 
-func _radar_updated(value: Radar):
-	_items.clear()
-	radar = value
-	if not is_instance_valid(radar): return
-	# TODO: remove radar logic from UI
-	radar.area_entered.connect(_radar_entered)
-	radar.area_exited.connect(_radar_exited)
+func remove_icon(icon: RadarIcon):
+	if not is_instance_valid(icon): return
+	_icons.erase(icon)
+	remove_child(icon)
 
-func _radar_entered(item: Area2D):
-	if not item is RadarItem: return
-	_items.append(item)
-	item.init()
-	item.update(radar.global_position, view_radius, radar.radius)
-	add_child(item.icon)
-
-func _radar_exited(item):
-	if not item is RadarItem: return
-	_items.erase(item)
-	remove_child(item.icon)
-	item.clear()
+func reset():
+	for icon in _icons:
+		remove_child(icon)
+	_icons.clear()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c48f2sdpasbwy"]
+[gd_scene load_steps=21 format=3 uid="uid://c48f2sdpasbwy"]
 
 [ext_resource type="Script" uid="uid://cousmnn4iqib7" path="res://scenes/asteroids/scripts/asteroid.gd" id="1_vucqq"]
 [ext_resource type="Script" uid="uid://bex3ademjp5yw" path="res://scenes/_shared/scripts/rigid_body.gd" id="1_xn8ob"]
@@ -12,13 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://dxu6faqbeepkn" path="res://resources/asteroids/asteroid01.tres" id="6_l4sdg"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="6_yhpvr"]
 [ext_resource type="Texture2D" uid="uid://cpfovyi2ew0n3" path="res://resources/asteroids/asteroid00.tres" id="7_0wnxl"]
-[ext_resource type="Texture2D" uid="uid://dsbihdsh386qu" path="res://assets/VFX_textures/circle_05.png" id="7_b76nm"]
 [ext_resource type="Texture2D" uid="uid://phllsaowvfrj" path="res://resources/asteroids/asteroid11.tres" id="7_g0deq"]
 [ext_resource type="Material" uid="uid://cqy56rhnpln3r" path="res://scenes/ship/shaders/ship_mat.tres" id="8_34a3x"]
 [ext_resource type="Texture2D" uid="uid://brkdv7jwjlb07" path="res://assets/asteroids/asteroid_0_b.png" id="8_bey2v"]
 [ext_resource type="Texture2D" uid="uid://dp5pxxwnnt0qu" path="res://resources/asteroids/asteroid21.tres" id="8_vufhy"]
 [ext_resource type="Texture2D" uid="uid://cgea3l10flrym" path="res://resources/asteroids/asteroid31.tres" id="9_ma54s"]
-[ext_resource type="Script" uid="uid://cvo7a3u08pliv" path="res://scenes/_shared/scripts/selection_item.gd" id="14_d48al"]
+[ext_resource type="Resource" uid="uid://ci5yk7wngo6ue" path="res://scenes/radar/_res/asteroid.tres" id="18_l4sdg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8vt2t"]
 bounce = 0.3
@@ -60,16 +59,5 @@ unique_name_in_owner = true
 
 [node name="RadarItem" parent="." instance=ExtResource("6_yhpvr")]
 unique_name_in_owner = true
-texture = ExtResource("7_b76nm")
-icon_scale = 0.05
-color = Color(0.515867, 0.515867, 0.515867, 1)
-
-[node name="SelectionItem" type="Area2D" parent="."]
-unique_name_in_owner = true
-collision_layer = 2147483648
-collision_mask = 2147483648
-monitoring = false
-script = ExtResource("14_d48al")
-
-[node name="SelectionCollisionShape2D" type="CollisionShape2D" parent="SelectionItem"]
-unique_name_in_owner = true
+selectable = true
+config = ExtResource("18_l4sdg")

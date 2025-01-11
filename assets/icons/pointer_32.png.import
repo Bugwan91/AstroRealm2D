@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dntuyagyuurn7"
-path="res://.godot/imported/hulls_Mk1_icon.png-24ff89f91937cdb641413fec38913b0b.ctex"
+uid="uid://b0k320qpn4nh"
+path="res://.godot/imported/pointer_32.png-fed12ea876fb2c88b653d86fb96b2a49.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/my/icons/hulls_Mk1_icon.png"
-dest_files=["res://.godot/imported/hulls_Mk1_icon.png-24ff89f91937cdb641413fec38913b0b.ctex"]
+source_file="res://assets/icons/pointer_32.png"
+dest_files=["res://.godot/imported/pointer_32.png-fed12ea876fb2c88b653d86fb96b2a49.ctex"]
 
 [params]
 

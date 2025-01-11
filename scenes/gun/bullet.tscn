@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwdthpisfmojs"]
+[gd_scene load_steps=11 format=3 uid="uid://dwdthpisfmojs"]
 
 [ext_resource type="Script" uid="uid://bq8lsn2eb5ur1" path="res://scenes/gun/scripts/bullet.gd" id="1_gtbct"]
 [ext_resource type="PackedScene" uid="uid://dcjlidv1ftgrv" path="res://scenes/gun/hit_effect.tscn" id="2_m6c5x"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c388olp5jsja" path="res://assets/my/circle_texture_128.tres" id="5_rn3vo"]
 [ext_resource type="Script" uid="uid://w8vsnqoourdh" path="res://scenes/vfx/scripts/trail.gd" id="6_51oes"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="6_h12vt"]
+[ext_resource type="Resource" uid="uid://bm0f8nu5dn68n" path="res://scenes/radar/_res/projectile.tres" id="6_irsm5"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8unas"]
 light_mode = 1
@@ -57,8 +58,7 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="RadarItem" parent="." instance=ExtResource("6_h12vt")]
-texture = ExtResource("4_0sbfp")
-icon_scale = 0.5
+config = ExtResource("6_irsm5")
 
 [node name="Trail" type="Line2D" parent="."]
 unique_name_in_owner = true

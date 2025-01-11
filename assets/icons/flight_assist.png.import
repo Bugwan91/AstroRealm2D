@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ck0awuodqj23r"
-path="res://.godot/imported/bullet_01.png-a3129e330c69d49536c641a56bb7e05f.ctex"
+uid="uid://dd8y1mqjs3fwp"
+path="res://.godot/imported/flight_assist.png-0e7a59d0f71679f0fe9b657acb3f412f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/my/bullet_01.png"
-dest_files=["res://.godot/imported/bullet_01.png-a3129e330c69d49536c641a56bb7e05f.ctex"]
+source_file="res://assets/icons/flight_assist.png"
+dest_files=["res://.godot/imported/flight_assist.png-0e7a59d0f71679f0fe9b657acb3f412f.ctex"]
 
 [params]
 

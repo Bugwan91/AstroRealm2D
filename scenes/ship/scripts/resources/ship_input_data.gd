@@ -4,7 +4,7 @@ extends Resource
 signal boost_changed(float)
 signal strafe_changed(Vector2)
 signal stop_changed(bool)
-signal target_changed(Spaceship)
+signal target_changed(RadarItem)
 signal target_point_changed(Vector2)
 signal is_follow_toggled(bool)
 signal follow_distance_changed(float)
@@ -36,10 +36,9 @@ var target_point: Vector2:
 		target_point = value
 		target_point_changed.emit(target_point)
 
-var target: SelectionItem:
+var target: RadarItem:
 	set(value):
 		target = value
-		MainState.player_target = target
 		target_changed.emit(target)
 
 var is_follow: bool:

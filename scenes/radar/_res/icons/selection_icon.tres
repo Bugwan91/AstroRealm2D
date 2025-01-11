@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RadarIconConfig" load_steps=3 format=3 uid="uid://b3vvrqjsupl6c"]
+
+[ext_resource type="Script" uid="uid://c5xv8rqbdj611" path="res://scenes/radar/scripts/resources/radar_icon_config.gd" id="1_g42ox"]
+[ext_resource type="Texture2D" uid="uid://b4w32ldb408kq" path="res://assets/icons/pointer_8.png" id="2_dye0k"]
+
+[resource]
+script = ExtResource("1_g42ox")
+texture = ExtResource("2_dye0k")
+color = Color(1, 0.1, 0.3, 1)
+base_size = 16.0
+scale = 1.0
+aspect = 1.0
+dynamic_scale = false
+free_rotation = false
+unique = false
+metadata/_custom_type_script = ExtResource("1_g42ox")

@@ -1,44 +1,59 @@
 class_name RadarItem
 extends Area2D
 
-@export var active := true
-@export var texture: Texture2D
-@export var icon_scale := 1.0
-@export var icon_aspect := 1.0
-@export var relative_scale := false
-@export var color: Color = Color(1.0, 0.1, 0.3)
-var icon: Sprite2D
+signal selected(item: RadarItem)
+signal unselected(item: RadarItem)
+
+@export var selectable := false
+@export var detectable := true
+@export var config: RadarItemConfig
+
+var selection_size: float:
+	get: return 2.0 * config.radius
+
+var icon: RadarIcon
+var selected_icon: RadarIcon
+var destruction_handler: Callable
+
+var _collider: CollisionShape2D
 
 func _ready():
 	monitoring = false
-	monitorable = active
+	monitorable = true
 	collision_layer = 8
 	collision_mask = 0
+	init_shape(config.radius)
+	icon = RadarIcon.create(config.icon)
+	if is_instance_valid(config.selection_icon):
+		selected_icon = RadarIcon.create(config.selection_icon)
+	if selectable:
+		input_event.connect(handle_click)
 
-func init():
-	#TODO: Optimization: create sprite only when it needed
-	icon = Sprite2D.new()
-	icon.material = material
-	icon.texture = texture
-	icon.modulate = color
-	icon.modulate.a = 0.2
-	_update_scale()
+func handle_click(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE:
+		selected.emit(self)
 
-func clear():
-	icon.queue_free()
+func get_canvas_position() -> Vector2:
+	return get_global_transform_with_canvas().origin
 
-func update(radar_p: Vector2, view_r: float, radar_r: float):
-	if not is_instance_valid(icon): return
-	icon.rotation = global_rotation
-	var view_scale := view_r / radar_r
-	#var view_scale := view_r / sqrt(radar_r)
-	var i_pos = global_position - radar_p
-	#var dist = i_pos.length()
-	#var draw_pos = pos.normalized() * sqrt(dist)
-	icon.position = i_pos * view_scale * 0.98 + view_r * Vector2.ONE
-	if relative_scale:
-		_update_scale(view_scale)
+func init_shape(radius: float):
+	config = config.duplicate()
+	config.radius = radius
+	if is_instance_valid(_collider):
+		_collider.shape.radius = config.radius
+		return
+	_collider = CollisionShape2D.new()
+	_collider.shape = CircleShape2D.new()
+	_collider.debug_color = Color(Color.BLUE, 0.0)
+	_collider.shape.radius = config.radius
+	add_child(_collider)
 
-func _update_scale(view_scale: float = 1.0):
-	if not is_instance_valid(icon): return
-	icon.scale = icon_scale * view_scale * Vector2(1.0, icon_aspect)
+func _on_destroy():
+	if is_instance_valid(destruction_handler):
+		destruction_handler.call(self)
+
+func connect_on_destroy():
+	tree_exiting.connect(_on_destroy)
+
+func disconnect_on_destroy():
+	tree_exiting.disconnect(_on_destroy)

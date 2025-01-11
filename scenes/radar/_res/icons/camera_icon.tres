@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="RadarIconConfig" load_steps=4 format=3 uid="uid://bdt3tihrs4nj8"]
+
+[ext_resource type="Script" uid="uid://c5xv8rqbdj611" path="res://scenes/radar/scripts/resources/radar_icon_config.gd" id="1_hnpwc"]
+
+[sub_resource type="Gradient" id="Gradient_21tcn"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 0.0784314)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4ph7v"]
+gradient = SubResource("Gradient_21tcn")
+width = 1
+height = 1
+use_hdr = true
+
+[resource]
+script = ExtResource("1_hnpwc")
+texture = SubResource("GradientTexture2D_4ph7v")
+color = Color(0, 0.600972, 0.958982, 1)
+base_size = 1.0
+scale = 1.0
+aspect = 1.0
+dynamic_scale = true
+use_real_size = true
+free_rotation = false
+unique = true
+metadata/_custom_type_script = ExtResource("1_hnpwc")

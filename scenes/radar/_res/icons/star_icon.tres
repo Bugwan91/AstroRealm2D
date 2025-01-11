@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RadarIconConfig" load_steps=3 format=3 uid="uid://dcpvcj872hjms"]
+
+[ext_resource type="Script" uid="uid://c5xv8rqbdj611" path="res://scenes/radar/scripts/resources/radar_icon_config.gd" id="1_qepvh"]
+[ext_resource type="Texture2D" uid="uid://bd4oempo2wukk" path="res://assets/VFX_textures/star_07.png" id="2_g3c2o"]
+
+[resource]
+script = ExtResource("1_qepvh")
+texture = ExtResource("2_g3c2o")
+color = Color(1, 0.633333, 0, 1)
+base_size = 64.0
+scale = 1.0
+aspect = 1.0
+dynamic_scale = false
+free_rotation = false
+unique = false
+metadata/_custom_type_script = ExtResource("1_qepvh")
