@@ -116,6 +116,7 @@ height = 0.6
 light_mask = 0
 material = SubResource("ShaderMaterial_bh3nw")
 base_opacity = 0.02
+offset_shift = Vector2(250, 250)
 metadata/_edit_lock_ = true
 
 [node name="AutopilotPointer" parent="." instance=ExtResource("15_5xucn")]
@@ -252,5 +253,5 @@ config = SubResource("Resource_1xx6e")
 
 [node name="AsteroidField" parent="." instance=ExtResource("21_vo0go")]
 unique_name_in_owner = true
-count = 500
+count = 600
 dimensions = Vector2(20000, 20000)

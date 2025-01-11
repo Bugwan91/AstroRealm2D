@@ -7,6 +7,7 @@ const SUBGRID_SCALE := 5.0
 @export var grid_offset: Vector2
 @export var grid_scale := 1.0
 @export var speed_limit := 3000.0
+@export var offset_shift: Vector2
 
 @onready var _subgrid: Sprite2D = %Subgrid
 
@@ -32,7 +33,7 @@ func _physics_process(delta: float) -> void:
 		return
 	position = target.position
 	scale = _start_scale / camera.zoom
-	update_offset(-position / (texture.get_size() * grid_scale))
+	update_offset((-position + offset_shift) / (texture.get_size() * grid_scale))
 	update_scale(grid_scale)
 	update_opacity(base_opacity * clamp((speed_limit - target.linear_velocity.length()) / speed_limit, 0, 1))
 

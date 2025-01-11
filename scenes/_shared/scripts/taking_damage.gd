@@ -38,7 +38,7 @@ func _apply_impulse(damage: Damage):
 
 func _apply_hit_effetcs(damage: Damage, effect: BulletHitEffect):
 	effect.position = damage.position
-	effect.velocity = _get_velocity()
+	effect.linear_velocity = _get_velocity()
 	MainState.main_scene.add_child(effect)
 
 func _handle_damage_effect():

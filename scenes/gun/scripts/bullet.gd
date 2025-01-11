@@ -23,7 +23,7 @@ var _base_velocity: Vector2
 
 func _ready():
 	_base_velocity = transform.x * relative_speed
-	velocity = start_velocity + _base_velocity
+	linear_velocity = start_velocity + _base_velocity
 	trail.velocity = _base_velocity
 	ray.collision_mask = 3
 	#prediction_ray.collision_mask = 7
