@@ -3,9 +3,9 @@ extends Node
 
 const DELTA := 0.05
 const MAX_TIME_TO_APPROACH := 3.0
-const DIST_THRESHOLD := 180.0
 
-var input_data: ShipInputData
+@export var input_data: ShipInputData
+@export var radius := 64.0
 
 var _total_delta := 0.0
 var _delta := 0.0
@@ -29,29 +29,30 @@ func _update_avoidance_course():
 	_course = Vector2.ZERO
 	for item in items:
 		if item is RigidBody:
-			var r := item.global_position - _position
-			var v: Vector2= item.linear_velocity - _velocity
-			var t: float = - (r.dot(v)) / (v.length_squared() + 0.0001)
+			var b := item as RigidBody
+			var r := b.global_position - _position
+			var v := b.linear_velocity - _velocity
+			var t := - (r.dot(v)) / (v.length_squared() + 0.0001)
 			if t > 0 and t < t_min:
 				var d := r + v * t
 				var dist := d.length()
-				if dist < DIST_THRESHOLD:
+				if dist < b.radius + radius:
 					t_min = t
-					_course = _course * 0.5 - d.normalized()
+					var ints := dist / (b.radius + radius)
+					_course = _course * ints - d.normalized()
 					DebugDraw2d.line_vector(
 						_position,
 						_velocity * t_min,
-						item._debug_color, 2, DELTA)
+						b._debug_color, 2, DELTA)
 					DebugDraw2d.line_vector(
-						item.global_position,
-						item.linear_velocity * t_min,
-						item._debug_color, 2, DELTA)
-					var ints := 1.0 - dist / DIST_THRESHOLD
+						b.global_position,
+						b.linear_velocity * t_min,
+						b._debug_color, 2, DELTA)
 					DebugDraw2d.circle_filled(
 						_position + _velocity * t_min,
-						dist, 16, Color(item._debug_color, ints), DELTA)
+						dist, 16, Color(b._debug_color, 1.0 - ints), DELTA)
 					DebugDraw2d.line_vector(
 						_position + _velocity * t_min,
 						_course * v.length(),
-						item._debug_color, 4, DELTA)
-					DebugDraw2d.circle(item.global_position, 64.0, 16, item._debug_color, 2, DELTA)
+						b._debug_color, 4, DELTA)
+					DebugDraw2d.circle(b.global_position, b.radius, 16, b._debug_color, 2, DELTA)

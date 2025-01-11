@@ -16,7 +16,7 @@ var _base_radius := 64.0
 func _ready() -> void:
 	_view.scale = Vector2(size, size)
 	var shape := CircleShape2D.new()
-	var radius := size * _base_radius
+	radius = size * _base_radius
 	shape.radius = radius
 	_collider.shape = shape
 	_damage_collider.shape = shape

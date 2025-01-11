@@ -10,6 +10,7 @@ var ship: Spaceship:
 	set(value):
 		ship = value
 		flight_model = ship.data.flight_model
+		_closee_navigator.radius = ship.radius
 
 var flight_model: ShipFlightModelData
 

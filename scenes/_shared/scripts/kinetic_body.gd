@@ -3,6 +3,7 @@ extends Node2D
 
 @export var linear_velocity := Vector2.ZERO
 @export var include_on_grid := false
+@export var radius := 64.0
 @export var grid_time_shift := 0.2
 
 var _last_grid_update_delta := 0.0

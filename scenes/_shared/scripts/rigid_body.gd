@@ -4,6 +4,7 @@ extends RigidBody2D
 const GRID_TIME_SHIFT := 0.2
 
 @export var include_on_grid := true
+@export var radius := 64.0
 
 var tick_acceleration: Vector2
 
