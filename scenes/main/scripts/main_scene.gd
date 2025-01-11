@@ -26,6 +26,7 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	ship.input_reader = input_reader
 	ship.gun_scene = gun_scene
 	var radar: Radar = radar_scene.instantiate() as Radar
+	radar.radius = 10000.0
 	ship.add_child(radar)
 	ship.autopilot_pointer = autopilot_pointer
 	var audio_listener = AudioListener2D.new()
@@ -33,7 +34,7 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	audio_listener.make_current()
 	add_child(ship)
 	ship.setup_health(1000.0)
-	radar.radius = 10000.0
+	
 
 func _create_ship_configuration() -> ShipData:
 	var ship_data = ShipData.new()

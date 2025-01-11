@@ -20,6 +20,7 @@ func update_icons():
 
 func _connect_radar(value: Radar):
 	radar = value
+	radar.radius_updated.connect(_update_view_scale)
 	radar.detected.connect(_on_detect)
 	radar.undetected.connect(_on_exit)
 	radar.selected.connect(_on_select)

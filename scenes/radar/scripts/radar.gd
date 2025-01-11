@@ -1,6 +1,8 @@
 class_name Radar
 extends Area2D
 
+signal radius_updated(new_radius: float)
+
 signal detected(item: RadarItem)
 signal undetected(item: RadarItem)
 
@@ -14,17 +16,22 @@ signal unselected(item: RadarItem)
 var _items: Array[RadarItem] = []
 
 func _ready():
-	_set_radius()
 	monitorable = false
 	collision_layer = 8
 	collision_mask = 8
 	area_entered.connect(_radar_entered)
 	area_exited.connect(_radar_exited)
+	_setup_shape()
 	MainState.radar_manager.radar = self
 
 func _set_radius(value: float = 10000.0):
 	radius = value
-	covering_shape.shape.radius = radius
+	_setup_shape()
+	radius_updated.emit(radius)
+
+func _setup_shape():
+	if is_instance_valid(covering_shape):
+		covering_shape.shape.radius = radius
 
 func _radar_entered(item: Area2D):
 	if not item is RadarItem: return
