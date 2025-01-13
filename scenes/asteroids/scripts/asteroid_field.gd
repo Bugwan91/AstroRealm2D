@@ -5,6 +5,7 @@ extends Node2D
 @export var _asteroid_scene: PackedScene
 @export_range(0, 0.99) var size_variation: float = 0.5
 @export_range(0.01, 1000.0) var asteroid_mass: float = 5.0
+@export var general_velocity := Vector2.ZERO
 @export_range(0, 5000) var speed_variation: float = 256.0
 @export_range(0, PI) var angular_variation: float = 1
 @export_range(0, 5) var update_interval: float = 0.5
@@ -26,7 +27,7 @@ func spawn():
 		asteroid.rotation = randf_range(-PI, PI)
 		asteroid.size = size
 		asteroid.mass = sqrt(size) * asteroid_mass
-		asteroid.linear_velocity = Vector2(.0, randf_range(.0, speed_variation)).rotated(randf_range(-PI, PI))
+		asteroid.linear_velocity = general_velocity + Vector2(.0, randf_range(.0, speed_variation)).rotated(randf_range(-PI, PI))
 		asteroid.angular_velocity = (randf_range(.0, angular_variation * 2.0) - angular_variation) / asteroid.size
 		_asteroids.append(asteroid)
 		asteroid.tree_exiting.connect(func ():

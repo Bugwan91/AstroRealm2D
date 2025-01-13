@@ -7,10 +7,11 @@
 script = ExtResource("1_4y5ks")
 texture = ExtResource("2_g5pbn")
 color = Color(0.5, 0.5, 0.5, 1)
-base_size = 8.0
+base_size = 4.0
 scale = 1.0
 aspect = 1.0
 dynamic_scale = false
+use_real_size = false
 free_rotation = false
 unique = false
 metadata/_custom_type_script = ExtResource("1_4y5ks")

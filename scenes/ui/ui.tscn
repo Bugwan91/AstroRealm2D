@@ -22,8 +22,8 @@ colors = PackedColorArray(1, 1, 1, 0.2, 1, 1, 1, 0.5, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_f2him"]
 gradient = SubResource("Gradient_uycc6")
-width = 512
-height = 512
+width = 400
+height = 400
 use_hdr = true
 fill = 1
 fill_from = Vector2(0.5, 0.5)
@@ -132,12 +132,13 @@ layout_mode = 2
 script = ExtResource("5_u0tch")
 
 [node name="RadarContainer" type="Control" parent="Control/GameUI"]
-custom_minimum_size = Vector2(512, 512)
+custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 mouse_filter = 2
 script = ExtResource("7_8clra")
+radius = 200.0
 
 [node name="TextureRect" type="TextureRect" parent="Control/GameUI/RadarContainer"]
 modulate = Color(0, 0.8, 1.2, 0.156863)

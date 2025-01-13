@@ -17,7 +17,6 @@ var flight_model: ShipFlightModelData
 var inputs: ShipInput:
 	set(value):
 		inputs = value
-		_closee_navigator.input_data = inputs.data
 		
 var _input_data: ShipInputData
 

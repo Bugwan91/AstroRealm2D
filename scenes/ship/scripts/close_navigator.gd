@@ -1,10 +1,10 @@
 class_name CloseNavigator
 extends Node
 
-const DELTA := 0.05
+const DELTA := 0.1
 const MAX_TIME_TO_APPROACH := 3.0
+const DIST_MARGIN := 32.0
 
-@export var input_data: ShipInputData
 @export var radius := 64.0
 
 var _total_delta := 0.0
@@ -36,10 +36,10 @@ func _update_avoidance_course():
 			if t > 0 and t < t_min:
 				var d := r + v * t
 				var dist := d.length()
-				if dist < b.radius + radius:
+				if dist < (b.radius + radius + DIST_MARGIN):
 					t_min = t
 					var ints := dist / (b.radius + radius)
-					_course = _course * ints - d.normalized()
+					_course = -d.normalized()
 					DebugDraw2d.line_vector(
 						_position,
 						_velocity * t_min,
@@ -48,11 +48,11 @@ func _update_avoidance_course():
 						b.global_position,
 						b.linear_velocity * t_min,
 						b._debug_color, 2, DELTA)
-					DebugDraw2d.circle_filled(
+					DebugDraw2d.circle(
 						_position + _velocity * t_min,
-						dist, 16, Color(b._debug_color, 1.0 - ints), DELTA)
+						dist, 16, Color(b._debug_color, 1.0 - ints), 2, DELTA)
 					DebugDraw2d.line_vector(
 						_position + _velocity * t_min,
-						_course * v.length(),
-						b._debug_color, 4, DELTA)
+						_course * 256.0,
+						b._debug_color, 6, DELTA)
 					DebugDraw2d.circle(b.global_position, b.radius, 16, b._debug_color, 2, DELTA)

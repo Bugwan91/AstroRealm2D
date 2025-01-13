@@ -12,6 +12,7 @@ base_size = 8.0
 scale = 1.0
 aspect = 1.0
 dynamic_scale = false
+use_real_size = false
 free_rotation = false
 unique = false
 metadata/_custom_type_script = ExtResource("1_qxcyl")
