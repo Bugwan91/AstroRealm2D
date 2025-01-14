@@ -7,7 +7,7 @@ var tick_acceleration: Vector2
 
 var _last_velocity: Vector2
 var _last_grid_update_delta := 0.0
-var _debug_color: Color = Color.from_hsv(randf(), 0.9, 0.8)
+var _debug_color: Color = Color.from_hsv(randf(), 1.0, 1.0)
 
 var speed: float:
 	get:

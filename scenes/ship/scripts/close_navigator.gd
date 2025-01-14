@@ -55,4 +55,4 @@ func _update_avoidance_course():
 						_position + _velocity * t_min,
 						_course * 256.0,
 						b._debug_color, 6, DELTA)
-					DebugDraw2d.circle(b.global_position, b.radius, 16, b._debug_color, 2, DELTA)
+					DebugDraw2d.circle(b.global_position, b.radius + DIST_MARGIN, 16, b._debug_color, 2, DELTA)

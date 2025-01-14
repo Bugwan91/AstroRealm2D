@@ -24,10 +24,6 @@ hit_effect_scene = ExtResource("2_m6c5x")
 glow = 2.0
 radius = 8.0
 
-[node name="Timer" type="Timer" parent="."]
-unique_name_in_owner = true
-one_shot = true
-
 [node name="RayCast2D" type="RayCast2D" parent="."]
 unique_name_in_owner = true
 rotation = 4.71239

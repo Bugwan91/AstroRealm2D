@@ -3,11 +3,12 @@ extends KineticBody
 
 @export var group: String
 @export var hit_effect_scene: PackedScene
-@export var _color: Color
+@export var color: Color
+@export var effective_lifetime: float = 1.0
+@export var extra_lifetime: float = 0.5
 @export_range(0.0, 10.0) var glow := 1.0
 @export_range(0, 5) var time_prediction := 2.0
 
-@onready var timer: Timer = %Timer
 @onready var ray: RayCast2D = %RayCast2D
 @onready var prediction_ray: RayCast2D = %PredictionRay
 @onready var sprite: Sprite2D = %Sprite
@@ -20,6 +21,8 @@ var impulse := 0.0
 var relative_speed := 0.0
 var _damage := 10.0
 var _base_velocity: Vector2
+var _current_lifetime := 0.0
+var _light_base_energy: float
 
 func _ready():
 	super._ready()
@@ -27,23 +30,30 @@ func _ready():
 	linear_velocity = start_velocity + _base_velocity
 	trail.velocity = _base_velocity
 	ray.collision_mask = 3
+	_light_base_energy = light.energy
+	_update_material()
 	#prediction_ray.collision_mask = 7
 
 func _physics_process(delta: float):
+	_handle_lifetime(delta)
 	_update_ray(delta)
 	_collide()
 	super._physics_process(delta)
 
-func update_material(color: Color):
-	_color = color
-	var color_hdr := _color * glow
+func _update_material(mult: float = 1.0):
+	var color_hdr := color * glow * mult
 	sprite.modulate = color_hdr
 	trail.color = color_hdr
-	light.color = _color
+	light.color = color
+	light.energy = _light_base_energy * mult
 
-func start(lifetime: float, delta: float):
-	timer.timeout.connect(queue_free)
-	timer.start(lifetime)
+func _handle_lifetime(delta: float):
+	_current_lifetime += delta
+	if _current_lifetime > effective_lifetime:
+		if _current_lifetime > (effective_lifetime + extra_lifetime):
+			queue_free()
+			return
+		_update_material(1.0 - (_current_lifetime - effective_lifetime) / extra_lifetime)
 
 func _update_ray(delta: float):
 	ray.target_position.y = speed * delta
@@ -59,7 +69,7 @@ func _on_hit(target: TakingDamage):
 	target = target as TakingDamage
 	#if target.check_group(group): return
 	var hit_effect := hit_effect_scene.instantiate() as BulletHitEffect
-	hit_effect.color = _color
+	hit_effect.color = color
 	target.damage(_create_damage(), hit_effect)
 	queue_free()
 

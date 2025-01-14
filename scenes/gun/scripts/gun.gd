@@ -10,7 +10,8 @@ signal tranfser_heat(heat: float)
 @export var accuracy: float = 0.02
 @export var heat_spread: float = 0.04
 @export_range(0, 60) var fire_rate := 10.0
-@export_range(0, 5000) var range := 2000.0
+@export_range(0, 5000) var effective_range := 1000.0
+@export_range(0, 5000) var extra_range := 1000.0
 @export_range(0, 10000) var bullet_speed := 3000.0
 @export_range(0, 1000) var recoil := 20.0
 @export_range(0, 1000) var heat_per_shoot := 5.0
@@ -32,12 +33,14 @@ var _is_firing := false
 var _is_charging := false
 var _is_reloading := false
 var _firing_time := 0.0
-var _bullet_lifetime: float
+var _projectile_lifetime: float
+var _projectile_extra_lifetime: float
 
 func _ready():
 	_charge_timer.wait_time = 1.0 / fire_rate
 	_charge_timer.timeout.connect(_charge_done)
-	_bullet_lifetime = range / bullet_speed
+	_projectile_lifetime = effective_range / bullet_speed
+	_projectile_extra_lifetime = extra_range / bullet_speed
 	view.set_emission_color(bullet_color)
 
 func on_fire_input(value: bool):
@@ -71,6 +74,9 @@ func _spawn_bullet(delta: float):
 	var bullet = bullet_scene.instantiate() as Bullet
 	bullet.group = group
 	var spear: float = (accuracy + heat_spread * _heat.temperature) * pow(2.0 * (randf() - 0.5), 2.0) * sign(randf() - 0.5)
+	bullet.color = bullet_color
+	bullet.effective_lifetime = _projectile_lifetime
+	bullet.extra_lifetime = _projectile_extra_lifetime
 	bullet.position = _shoot_point.global_position
 	bullet.rotation = _shoot_point.global_rotation + spear
 	bullet.start_velocity = velocity
@@ -78,14 +84,13 @@ func _spawn_bullet(delta: float):
 	bullet.impulse = recoil
 	bullet.relative_speed = bullet_speed
 	MainState.main_scene.add_child(bullet)
-	bullet.update_material(bullet_color) # TODO: incapsulate this
-	bullet.start(_bullet_lifetime, delta)
 	_heat.add_heat(heat_per_shoot)
 	view.emit_max()
 
 func _update_marker():
-	if is_instance_valid(marker):
-		marker.update(global_transform.x * (range - 16.0), get_global_transform_with_canvas().origin)
+	pass
+	#if is_instance_valid(marker):
+		#marker.update(global_transform.x * (range - 16.0), get_global_transform_with_canvas().origin)
 
 func _on_reloaded():
 	_is_reloading = false
