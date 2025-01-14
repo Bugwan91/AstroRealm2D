@@ -14,6 +14,7 @@ extends RigidBody
 var _base_radius := 64.0
 
 func _ready() -> void:
+	super._ready()
 	_view.scale = Vector2(size, size)
 	var shape := CircleShape2D.new()
 	radius = size * _base_radius

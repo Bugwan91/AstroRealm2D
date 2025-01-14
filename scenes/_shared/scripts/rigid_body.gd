@@ -1,9 +1,6 @@
 class_name RigidBody
 extends RigidBody2D
 
-const GRID_TIME_SHIFT := 0.2
-
-@export var include_on_grid := true
 @export var radius := 64.0
 
 var tick_acceleration: Vector2
@@ -16,17 +13,13 @@ var speed: float:
 	get:
 		return linear_velocity.length()
 
+func _ready() -> void:
+	add_child(GridItem.new())
+
 ## Always call in the end of overriding method
 func _physics_process(delta: float):
 	tick_acceleration = (linear_velocity - _last_velocity)
 	_last_velocity = linear_velocity
-	if include_on_grid: _update_on_grid(delta)
 
 func delta_v(target_v: Vector2) -> Vector2:
 	return target_v - linear_velocity
-
-func _update_on_grid(delta: float):
-	_last_grid_update_delta += delta
-	if _last_grid_update_delta > MainState.world_grid.DELTA:
-		MainState.world_grid.add_or_update(self, linear_velocity * GRID_TIME_SHIFT)
-		_last_grid_update_delta = 0.0

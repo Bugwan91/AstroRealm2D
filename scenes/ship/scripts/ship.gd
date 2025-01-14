@@ -32,6 +32,7 @@ var _impulces := Vector2.ZERO
 #region Initialization
 func _ready():
 	assert(data != null, "Ship Data is missed")
+	super._ready()
 	_setup_view()
 	_setup_flight_controller()
 	_setup_weapon()
@@ -83,8 +84,8 @@ func _set_ship_data(new_data: ShipData):
 var _deb_time := 0.0
 func _process(delta: float) -> void:
 	_deb_time += delta
-	if _deb_time > MainState.world_grid.DELTA:
-		MainState.world_grid.draw_debug(position)
+	if _deb_time > MainState.local_grid.DELTA:
+		MainState.local_grid.draw_debug(position)
 		_deb_time = 0.0
 
 func _physics_process(delta):

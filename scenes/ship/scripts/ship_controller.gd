@@ -20,9 +20,10 @@ var inputs: ShipInput:
 		
 var _input_data: ShipInputData
 
-var _closee_navigator: CloseNavigator = CloseNavigator.new()
+var _closee_navigator: CloseNavigator
 
 func setup(spaceship: Spaceship):
+	_closee_navigator = %CloseNavigator
 	ship = spaceship
 
 func integrate_forces(state: PhysicsDirectBodyState2D):

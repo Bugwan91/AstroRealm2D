@@ -22,6 +22,7 @@ var _damage := 10.0
 var _base_velocity: Vector2
 
 func _ready():
+	super._ready()
 	_base_velocity = transform.x * relative_speed
 	linear_velocity = start_velocity + _base_velocity
 	trail.velocity = _base_velocity

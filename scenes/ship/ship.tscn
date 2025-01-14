@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=26 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" uid="uid://b2ih5uxk3qw0h" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dg5ceqg02tvgu" path="res://assets/spaceships/hull/01/_normal.png" id="11_6qm8q"]
 [ext_resource type="Script" uid="uid://cw01a0apshsem" path="res://scenes/_shared/scripts/view/view_ship.gd" id="11_d8ncc"]
 [ext_resource type="Script" uid="uid://dlnqyio8ujqvd" path="res://scenes/ship/scripts/ship_controller.gd" id="14_5nufi"]
+[ext_resource type="Script" uid="uid://bp5341wcuo33e" path="res://scenes/ship/scripts/close_navigator.gd" id="14_xvsf7"]
 [ext_resource type="Script" uid="uid://ce7t5qymrq553" path="res://scenes/_shared/scripts/taking_damage.gd" id="17_6qm8q"]
 [ext_resource type="Script" uid="uid://clrdqrh8dbwau" path="res://scenes/_shared/scripts/health.gd" id="18_woufe"]
 [ext_resource type="Resource" uid="uid://caqqbuwbg5ovc" path="res://scenes/radar/_res/ship.tres" id="19_xvsf7"]
@@ -96,6 +97,11 @@ script = ExtResource("11_d8ncc")
 [node name="FlightController" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("14_5nufi")
+
+[node name="CloseNavigator" type="Node" parent="FlightController"]
+unique_name_in_owner = true
+script = ExtResource("14_xvsf7")
+metadata/_custom_type_script = ExtResource("14_xvsf7")
 
 [node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view")]
 unique_name_in_owner = true

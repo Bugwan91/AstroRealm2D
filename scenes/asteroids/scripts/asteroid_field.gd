@@ -49,9 +49,6 @@ func _add_energy():
 	for a in _asteroids:
 		ke += a.linear_velocity.length() * a.mass
 	_delta_energy = _desired_energy - ke
-	MyDebug.info("del_energy", _delta_energy * 0.0001)
-	MyDebug.info("act_energy", ke * 0.0001)
-	MyDebug.info("des_energy", _desired_energy * 0.0001)
 
 func _get_asteroids_back():
 	for asteroid in _asteroids:

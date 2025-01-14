@@ -24,7 +24,7 @@ func update_course(delta: float, position: Vector2, velocity: Vector2) -> Vector
 	return _course
 
 func _update_avoidance_course():
-	var items := MainState.world_grid.get_nearby(_position)
+	var items := MainState.local_grid.get_nearby(_position)
 	var t_min := MAX_TIME_TO_APPROACH
 	_course = Vector2.ZERO
 	for item in items:

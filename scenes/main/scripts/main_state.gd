@@ -12,7 +12,8 @@ var main_scene: MainScene:
 		main_scene = value
 		main_scene_ready.emit()
 
-var world_grid := WorldGrid.new()
+var sector_grid: SectorGrid
+var local_grid: LocalGrid
 var camera_controller: CameraController
 var radar_manager := RadarManager.new()
 
