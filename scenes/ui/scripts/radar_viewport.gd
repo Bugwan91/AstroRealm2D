@@ -1,16 +1,20 @@
 class_name RadarViewport
 extends Control
 
+@export_range(0.01, 1.0) var update_interval := 0.1
 @export var radius := 256.0
 
-# TODO: do I need this array?
 var _icons: Array[RadarIcon] = []
+var _current_delta := 0.0
 
 func _ready() -> void:
 	MainState.radar_manager.radar_view = self
 
 func _physics_process(delta: float) -> void:
-	MainState.radar_manager.update_icons()
+	_current_delta += delta
+	if _current_delta > update_interval:
+		MainState.radar_manager.update_icons()
+		_current_delta = 0.0
 
 func add_icon(icon: RadarIcon):
 	if not is_instance_valid(icon): return

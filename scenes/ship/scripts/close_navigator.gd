@@ -5,7 +5,9 @@ const DELTA := 0.1
 const MAX_TIME_TO_APPROACH := 3.0
 const DIST_MARGIN := 32.0
 
+@export var disabled := false
 @export var radius := 64.0
+@export var debug := false
 
 var _total_delta := 0.0
 var _delta := 0.0
@@ -14,6 +16,9 @@ var _velocity := Vector2.ZERO
 var _course := Vector2.ZERO
 
 func update_course(delta: float, position: Vector2, velocity: Vector2) -> Vector2:
+	if disabled:
+		_course = Vector2.ZERO
+		return _course
 	_total_delta += delta
 	if _total_delta > DELTA:
 		_delta = delta
@@ -40,19 +45,20 @@ func _update_avoidance_course():
 					t_min = t
 					var ints := dist / (b.radius + radius)
 					_course = -d.normalized()
-					DebugDraw2d.line_vector(
-						_position,
-						_velocity * t_min,
-						b._debug_color, 2, DELTA)
-					DebugDraw2d.line_vector(
-						b.global_position,
-						b.linear_velocity * t_min,
-						b._debug_color, 2, DELTA)
-					DebugDraw2d.circle(
-						_position + _velocity * t_min,
-						dist, 16, Color(b._debug_color, 1.0 - ints), 2, DELTA)
-					DebugDraw2d.line_vector(
-						_position + _velocity * t_min,
-						_course * 256.0,
-						b._debug_color, 6, DELTA)
-					DebugDraw2d.circle(b.global_position, b.radius + DIST_MARGIN, 16, b._debug_color, 2, DELTA)
+					if debug:
+						DebugDraw2d.line_vector(
+							_position,
+							_velocity * t_min,
+							b._debug_color, 2, DELTA)
+						DebugDraw2d.line_vector(
+							b.global_position,
+							b.linear_velocity * t_min,
+							b._debug_color, 2, DELTA)
+						DebugDraw2d.circle(
+							_position + _velocity * t_min,
+							dist, 16, Color(b._debug_color, 1.0 - ints), 2, DELTA)
+						DebugDraw2d.line_vector(
+							_position + _velocity * t_min,
+							_course * 256.0,
+							b._debug_color, 6, DELTA)
+						DebugDraw2d.circle(b.global_position, b.radius + DIST_MARGIN, 16, b._debug_color, 2, DELTA)

@@ -1,5 +1,5 @@
 class_name Spaceship
-extends RigidBody
+extends ActiveRigidBody
 
 signal dead(ship: Spaceship)
 #region Export properties
@@ -81,16 +81,11 @@ func _set_ship_data(new_data: ShipData):
 #endregion
 
 #region Physics
-var _deb_time := 0.0
-func _process(delta: float) -> void:
-	_deb_time += delta
-	if _deb_time > MainState.local_grid.DELTA:
-		MainState.local_grid.draw_debug(position)
-		_deb_time = 0.0
-
 func _physics_process(delta):
 	_update_velocity_for_weapons()
 	super._physics_process(delta)
+	if _is_player():
+		MainState.local_grid.set_player_position(position)
 
 func _integrate_forces(state):
 	flight_controller.integrate_forces(state)
