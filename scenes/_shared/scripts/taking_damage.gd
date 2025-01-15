@@ -10,6 +10,12 @@ extends Area2D
 
 @onready var _parent: Node2D = get_parent()
 
+var linear_velocity: Vector2:
+	get:
+		if _parent is RigidBody2D or _parent is KineticBody:
+			return _parent.linear_velocity
+		return Vector2.ZERO
+
 var _damaged_effect: DamageEffect
 
 func _ready():
@@ -38,18 +44,13 @@ func _apply_impulse(damage: Damage):
 
 func _apply_hit_effetcs(damage: Damage, effect: BulletHitEffect):
 	effect.position = damage.position
-	effect.linear_velocity = _get_velocity()
+	effect.linear_velocity = linear_velocity
 	MainState.main_scene.add_child(effect)
 
 func _handle_damage_effect():
 	var intensity = clamp(1.0 - health.health / (health.max_health * _damaged_effect_threshold), 0, 1)
 	if intensity > 0.0:
 		_get_damage_effect().intensity = intensity
-
-func _get_velocity() -> Vector2:
-	if _parent is RigidBody2D: return _parent.linear_velocity
-	if _parent is KineticBody: return _parent.velocity
-	return Vector2.ZERO
 
 func _handle_death():
 	if health.is_dead:
@@ -66,5 +67,5 @@ func _get_damage_effect():
 func _handle_death_effect():
 	var effect: ShipDestroyEffect = _destroy_effect_scene.instantiate()
 	effect.position = _parent.global_position
-	effect.linear_velocity = _get_velocity()
+	effect.linear_velocity = linear_velocity
 	MainState.main_scene.add_child(effect)

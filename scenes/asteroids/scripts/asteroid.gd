@@ -1,5 +1,5 @@
 class_name Asteroid
-extends RigidBody
+extends StaticRigidBody
 
 @export var size: float
 @export var health: float = 500.0

@@ -1,7 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://c48f2sdpasbwy"]
 
 [ext_resource type="Script" uid="uid://cousmnn4iqib7" path="res://scenes/asteroids/scripts/asteroid.gd" id="1_vucqq"]
-[ext_resource type="Script" uid="uid://bex3ademjp5yw" path="res://scenes/_shared/scripts/rigid_body.gd" id="1_xn8ob"]
 [ext_resource type="Script" uid="uid://ce7t5qymrq553" path="res://scenes/_shared/scripts/taking_damage.gd" id="2_i3arg"]
 [ext_resource type="Script" uid="uid://clrdqrh8dbwau" path="res://scenes/_shared/scripts/health.gd" id="3_6cbl0"]
 [ext_resource type="Texture2D" uid="uid://b0wtgcdy54unw" path="res://resources/asteroids/asteroid10.tres" id="3_8vt2t"]
@@ -17,10 +16,13 @@
 [ext_resource type="Texture2D" uid="uid://brkdv7jwjlb07" path="res://assets/asteroids/asteroid_0_b.png" id="8_bey2v"]
 [ext_resource type="Texture2D" uid="uid://dp5pxxwnnt0qu" path="res://resources/asteroids/asteroid21.tres" id="8_vufhy"]
 [ext_resource type="Texture2D" uid="uid://cgea3l10flrym" path="res://resources/asteroids/asteroid31.tres" id="9_ma54s"]
+[ext_resource type="Script" uid="uid://dd1et7iue8frp" path="res://scenes/_shared/scripts/static_rigid_body.gd" id="10_k3qgf"]
 [ext_resource type="Resource" uid="uid://ci5yk7wngo6ue" path="res://scenes/radar/_res/asteroid.tres" id="18_l4sdg"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8vt2t"]
-bounce = 0.3
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k3qgf"]
+friction = 0.6
+rough = true
+bounce = 0.5
 
 [sub_resource type="Resource" id="Resource_xb7x4"]
 resource_local_to_scene = true
@@ -29,11 +31,10 @@ max_health = 500.0
 metadata/_custom_type_script = ExtResource("3_6cbl0")
 
 [node name="Asteroid" type="RigidBody2D"]
-mass = 5.0
-physics_material_override = SubResource("PhysicsMaterial_8vt2t")
+physics_material_override = SubResource("PhysicsMaterial_k3qgf")
 script = ExtResource("1_vucqq")
 variants = Array[CanvasTexture]([ExtResource("7_0wnxl"), ExtResource("3_8vt2t"), ExtResource("4_0wnxl"), ExtResource("5_0wnxl"), ExtResource("6_l4sdg"), ExtResource("7_g0deq"), ExtResource("8_vufhy"), ExtResource("9_ma54s")])
-metadata/_custom_type_script = ExtResource("1_xn8ob")
+metadata/_custom_type_script = ExtResource("10_k3qgf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
