@@ -19,3 +19,11 @@ func _ready() -> void:
 
 func delta_v(target_v: Vector2) -> Vector2:
 	return target_v - linear_velocity
+
+func set_collisions(enabled: bool):
+	if enabled:
+		collision_layer = _collision_layer
+		collision_mask = _collision_mask
+	else:
+		collision_layer = 0
+		collision_mask = 0
