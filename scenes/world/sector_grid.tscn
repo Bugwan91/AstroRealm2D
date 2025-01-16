@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dec77nmq1igwo"]
+
+[ext_resource type="Script" uid="uid://bmcx0gok375sa" path="res://scenes/world/scripts/sector_grid.gd" id="1_r6rmw"]
+[ext_resource type="Script" uid="uid://biw411f0cxwhk" path="res://scenes/world/scripts/world_grid.gd" id="2_n8xr4"]
+
+[node name="SectorGrid" type="Node"]
+script = ExtResource("1_r6rmw")
+metadata/_custom_type_script = ExtResource("1_r6rmw")
+
+[node name="WorldGrid" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_n8xr4")
+debug = true
+debug_offset = 10
+metadata/_custom_type_script = ExtResource("2_n8xr4")

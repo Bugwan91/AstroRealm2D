@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://c83n3ib0kufjx" path="res://resources/ship_parts/hull/01/hull.tres" id="5_62ybw"]
 [ext_resource type="Resource" uid="uid://bobgpeam3e5tj" path="res://resources/ship_parts/hull/01/02.tres" id="5_meece"]
 [ext_resource type="Texture2D" uid="uid://dvxp714x3fp80" path="res://assets/spaceships/Styles/02.png" id="7_lo2oh"]
-[ext_resource type="Script" uid="uid://voe4seyxa03" path="res://scenes/world/local_grid.gd" id="8_d8uwl"]
+[ext_resource type="PackedScene" uid="uid://dec77nmq1igwo" path="res://scenes/world/sector_grid.tscn" id="8_d8uwl"]
 [ext_resource type="PackedScene" uid="uid://3cqmtymu5w3p" path="res://scenes/ui/ui.tscn" id="8_myah8"]
 [ext_resource type="Shader" uid="uid://dpw7iewn6mbbt" path="res://scenes/navigation_grid/shaders/grid.gdshader" id="10_7ps0f"]
 [ext_resource type="PackedScene" uid="uid://sgnvwpsrs0xa" path="res://scenes/camera/camera.tscn" id="11_2fp23"]
@@ -88,10 +88,8 @@ metadata/_edit_lock_ = true
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.1, 0.1, 0.1, 1)
 
-[node name="LocalGrid" type="Node" parent="."]
-script = ExtResource("8_d8uwl")
-DELTA = 0.1
-metadata/_custom_type_script = ExtResource("8_d8uwl")
+[node name="SectorGrid" parent="." instance=ExtResource("8_d8uwl")]
+debug = true
 
 [node name="UI" parent="." instance=ExtResource("8_myah8")]
 
@@ -259,6 +257,6 @@ config = SubResource("Resource_1xx6e")
 
 [node name="AsteroidField" parent="." instance=ExtResource("21_vo0go")]
 unique_name_in_owner = true
-count = 1000
+count = 2000
 dimensions = Vector2(40000, 40000)
 speed_variation = 100.0

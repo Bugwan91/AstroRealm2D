@@ -4,6 +4,8 @@ signal main_scene_ready
 signal player_ship_updated(ship: Spaceship)
 signal player_dead
 signal radar_updated(radar: Radar)
+signal sector_grid_updated(grid: SectorGrid)
+signal world_grid_updated(grid: WorldGrid)
 
 const MAX_SPEED: float = 100000.0
 
@@ -13,7 +15,7 @@ var main_scene: MainScene:
 		main_scene_ready.emit()
 
 var sector_grid: SectorGrid
-var local_grid: LocalGrid
+var world_grid: WorldGrid
 var camera_controller: CameraController
 var radar_manager := RadarManager.new()
 

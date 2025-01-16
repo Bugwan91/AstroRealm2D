@@ -85,7 +85,8 @@ func _physics_process(delta):
 	_update_velocity_for_weapons()
 	super._physics_process(delta)
 	if _is_player():
-		MainState.local_grid.set_player_position(position)
+		MainState.world_grid.player_position = position
+		MainState.sector_grid.player_position = position
 
 func _integrate_forces(state):
 	flight_controller.integrate_forces(state)
