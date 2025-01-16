@@ -15,7 +15,7 @@ var speed: float:
 func _ready() -> void:
 	add_child(GridItem.new())
 	_collision_layer = collision_layer
-	_collision_mask = _collision_mask
+	_collision_mask = collision_mask
 
 func delta_v(target_v: Vector2) -> Vector2:
 	return target_v - linear_velocity

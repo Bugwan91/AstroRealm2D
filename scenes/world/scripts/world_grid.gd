@@ -38,10 +38,10 @@ func add_or_update(item: Node2D, force: bool = false):
 		var new_cell := _get_cell_position(item.global_position)
 		if old_cell != new_cell:
 			# Remove from old cell
-			if old_cell in grid and item in grid[old_cell]:
+			if grid.has(old_cell) and grid[old_cell].has(item):
 				grid[old_cell].erase(item)
 			# Add to new cell
-			if new_cell not in grid:
+			if not grid.has(new_cell):
 				grid[new_cell] = []
 			grid[new_cell].append(item)
 			# Update metadate

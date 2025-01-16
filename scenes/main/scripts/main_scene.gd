@@ -9,12 +9,10 @@ extends Node2D
 
 @onready var player_ship_baker: ShipBlueprintBaker = %PlayerShipBaker
 @onready var autopilot_pointer = %AutopilotPointer
-@onready var asteroid_field = %AsteroidField
 var ship_scene: PackedScene = preload("res://scenes/ship/ship.tscn")
 
 func _ready():
 	MainState.main_scene = self
-	asteroid_field.spawn()
 
 func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	var ship: Spaceship = ship_scene.instantiate() as Spaceship
@@ -22,7 +20,7 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	ship.data = await _create_ship_configuration()
 	ship.data.design.shininess = 0.6
 	ship.data.design.metallic = 0.3
-	ship.position = Vector2.ZERO
+	ship.position = Vector2(0, 0)
 	ship.input_reader = input_reader
 	ship.gun_scene = gun_scene
 	var radar: Radar = radar_scene.instantiate() as Radar

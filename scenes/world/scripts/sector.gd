@@ -3,47 +3,69 @@ extends Node
 
 const UNLOADING_DELTA := 0.5
 
-enum Status {ACTIVE, FREEZED, UNLOADING}
+enum Status {UNLOADING, FREEZED, ACTIVE}
 
 var grid_cells: Array[Vector2] = []
 var position: Vector2
-var status: Status
+var status: Sector.Status = 0
+var _old_status: Sector.Status = 0
+var content_manager: SectorContentManager
 
 var _world: WorldGrid
 var _sector_size: float
+var _loaded := false
 
-func init(sector_position: Vector2):
+func init(sector_position: Vector2, content: SectorContentManager):
 	position = sector_position
+	content_manager = content
 	_world = MainState.world_grid
 	_sector_size = MainState.sector_grid.sector_size
 	grid_cells = _calculate_sector_cells()
+	_old_status = Status.UNLOADING
 
-func update(new: Status):
+func update_status(new: Status):
 	if status == new: return
-	var old := status
+	var _old_status := status
 	status = new
 
+func update():
+	if status == Status.UNLOADING:
+		unload_content()
+	elif _old_status == Status.UNLOADING and not _loaded:
+		load_content()
+	if status == Status.FREEZED:
+		freeze()
+	elif status == Status.ACTIVE:
+		activate()
+
 func unload():
-	unload_content()
+	content_manager.unload_content(_get_items())
 	queue_free()
 
 func load_content():
-	pass
+	if is_instance_valid(content_manager):
+		content_manager.load_content(position)
+		_loaded = true
 
 func unload_content():
-	for cell in grid_cells:
-		if cell in _world.grid:
-			var items := _world.grid[cell]
+	content_manager.unload_content(_get_items())
 
 func freeze():
-	for cell in grid_cells:
-		if cell in _world.grid:
-			var items := _world.grid[cell]
+	for item in _get_items():
+		if item is StaticRigidBody:
+			item.freeze_body()
 
 func activate():
+	for item in _get_items():
+		if item is StaticRigidBody:
+			item.unfreeze_body()
+
+func _get_items() -> Array[Node2D]:
+	var items: Array[Node2D] = []
 	for cell in grid_cells:
 		if cell in _world.grid:
-			var items := _world.grid[cell]
+			items.append_array(_world.grid[cell])
+	return items
 
 func draw_debug(duration: float):
 	DebugDraw2d.rect(

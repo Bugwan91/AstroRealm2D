@@ -91,6 +91,7 @@ func _physics_process(delta):
 func _integrate_forces(state):
 	flight_controller.integrate_forces(state)
 	MyDebug.info("spd", speed)
+	MyDebug.info("pos", position)
 	_apply_impulces(state)
 
 func _update_velocity_for_weapons():

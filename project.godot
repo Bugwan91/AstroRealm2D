@@ -15,7 +15,6 @@ show_default_buttons=false
 config/name="AstroRealm"
 run/main_scene="res://scenes/main/main_scene.tscn"
 config/features=PackedStringArray("4.4", "Mobile")
-run/max_fps=60
 config/icon="res://AR_icon.png"
 
 [autoload]

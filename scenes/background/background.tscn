@@ -194,7 +194,7 @@ texture = SubResource("PlaceholderTexture2D_k3myr")
 
 [node name="4096" type="Node" parent="Layers"]
 script = ExtResource("1_48uix")
-distance = 4.096e+06
+distance = 1.024e+06
 
 [node name="black" type="Sprite2D" parent="Layers/4096"]
 modulate = Color(0, 0, 0, 1)
@@ -219,7 +219,7 @@ script = ExtResource("3_u112l")
 
 [node name="1024" type="Node" parent="Layers"]
 script = ExtResource("1_48uix")
-distance = 1.024e+06
+distance = 512000.0
 
 [node name="BackgroundSprite2" type="Sprite2D" parent="Layers/1024"]
 texture_repeat = 2
@@ -237,7 +237,7 @@ script = ExtResource("3_u112l")
 
 [node name="256" type="Node" parent="Layers"]
 script = ExtResource("1_48uix")
-distance = 256000.0
+distance = 128000.0
 
 [node name="BackgroundSprite2" type="Sprite2D" parent="Layers/256"]
 texture_repeat = 2
@@ -256,7 +256,7 @@ script = ExtResource("3_u112l")
 
 [node name="64" type="Node" parent="Layers"]
 script = ExtResource("1_48uix")
-distance = 64000.0
+distance = 32000.0
 
 [node name="BackgroundSprite2" type="Sprite2D" parent="Layers/64"]
 visible = false
@@ -275,7 +275,7 @@ script = ExtResource("3_u112l")
 
 [node name="16" type="Node" parent="Layers"]
 script = ExtResource("1_48uix")
-distance = 16000.0
+distance = 8000.0
 
 [node name="BackgroundSprite2" type="Sprite2D" parent="Layers/16"]
 visible = false
@@ -294,7 +294,7 @@ script = ExtResource("3_u112l")
 
 [node name="8" type="Node" parent="Layers"]
 script = ExtResource("1_48uix")
-distance = 8000.0
+distance = 4000.0
 
 [node name="BackgroundSprite" type="Sprite2D" parent="Layers/8"]
 texture_repeat = 2

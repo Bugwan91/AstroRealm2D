@@ -25,7 +25,6 @@ func update(pos: Vector2, rot: float, view_r: float, view_scale: float):
 	if config.free_rotation: rotation = rot
 	if config.use_real_size:
 		_recalculate_scale(view_scale)
-		MyDebug.info("cam_scale", scale)
 
 func _recalculate_scale(v_scale: float = 1.0):
 	scale = v_scale * _icon_scale() * Vector2(1.0, config.aspect)
