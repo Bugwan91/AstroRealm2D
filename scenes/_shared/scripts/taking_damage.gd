@@ -3,6 +3,7 @@ class_name TakingDamage
 extends Area2D
 
 @export var health: Health
+@export var keep_on_destroy: bool = false
 @export var _hit_effect_scene: PackedScene
 @export var _damaged_effect_scene: PackedScene
 @export_range(0, 1) var _damaged_effect_threshold: float = 0.3
@@ -39,6 +40,10 @@ func damage(damage: Damage, effect: BulletHitEffect):
 	_handle_damage_effect()
 	_handle_death()
 
+func reset():
+	health.reset()
+	_get_damage_effect().intensity = 0.0
+
 func _apply_impulse(damage: Damage):
 	if _parent is RigidBody2D: _parent.apply_central_impulse(damage.impulse)
 
@@ -56,7 +61,10 @@ func _handle_death():
 	if health.is_dead:
 		_handle_death_effect()
 		# TODO: create debris instead
-		_parent.queue_free()
+		if keep_on_destroy:
+			MainState.main_scene.remove_child(_parent)
+		else:
+			_parent.queue_free()
 
 func _get_damage_effect():
 	if not is_instance_valid(_damaged_effect):

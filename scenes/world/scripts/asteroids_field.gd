@@ -48,17 +48,23 @@ func _spawn(start: Vector2, end: Vector2):
 func unload_content(items: Array[Node2D]):
 	for item in items:
 		if item is Asteroid:
-			if item in _asteroids_in_use:
-				_asteroids_in_use.erase(item)
-			if item not in _asteroids_pool:
-				_asteroids_pool.append(item)
+			_on_asteroid_destroyed(item)
 			MainState.main_scene.remove_child(item)
 
 func _get_asteroid() -> Asteroid:
 	var asteroid: Asteroid
 	if _asteroids_pool.is_empty():
 		asteroid = _asteroid_scene.instantiate()
+		asteroid.tree_exiting.connect(func():
+			_on_asteroid_destroyed(asteroid)
+		)
 	else:
 		asteroid = _asteroids_pool.pop_front()
 	_asteroids_in_use.append(asteroid)
 	return asteroid
+
+func _on_asteroid_destroyed(asteroid: Asteroid):
+	if asteroid in _asteroids_in_use:
+		_asteroids_in_use.erase(asteroid)
+	if asteroid not in _asteroids_pool:
+		_asteroids_pool.append(asteroid)

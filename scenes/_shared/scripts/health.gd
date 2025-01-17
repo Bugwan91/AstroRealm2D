@@ -7,7 +7,7 @@ signal dying
 @export_range(0, 1000000) var max_health: = 1000.0:
 	set(value):
 		max_health = value if value > 0.0 else 0.0 
-		health = max_health
+		reset()
 
 var health: float
 
@@ -26,3 +26,6 @@ func damage(damage: float) -> float:
 	if health <= 0.0:
 		dying.emit()
 	return health
+
+func reset():
+	health = max_health

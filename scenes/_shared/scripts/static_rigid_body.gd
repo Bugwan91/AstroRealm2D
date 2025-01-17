@@ -32,4 +32,5 @@ func _physics_process(delta: float) -> void:
 	_delta += delta
 	if is_zero_approx(update_interval) or _delta > update_interval:
 		position += _l_v * _delta
+		rotation += _a_v * _delta
 		_delta = 0.0

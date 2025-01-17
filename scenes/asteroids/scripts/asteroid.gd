@@ -32,6 +32,7 @@ func init(
 	spd_variation: float,
 	rot: float,
 	rot_variation: float):
+		reset_hp()
 		mass = _base_mass * size * size
 		radius = size * _base_radius
 		_collider.shape.radius = radius
@@ -46,6 +47,8 @@ func init(
 		angular_velocity = _rand_rotation(rot, rot_variation, size_inv)
 		_a_v = angular_velocity
 
+func reset_hp():
+	_taking_damage.reset()
 
 func _rand_velocity(speed: float, variation: float, size_inv: float) -> Vector2:
 	return  (speed * size_inv * randf_range(1.0 - variation, 1.0 + variation) * Vector2.ONE).rotated(randf_range(-PI, PI))

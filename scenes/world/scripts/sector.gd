@@ -10,6 +10,7 @@ var position: Vector2
 var status: Sector.Status = 0
 var _old_status: Sector.Status = 0
 var content_manager: SectorContentManager
+var oposite_sector: Sector = null
 
 var _world: WorldGrid
 var _sector_size: float
@@ -48,6 +49,7 @@ func load_content():
 		_loaded = true
 
 func unload_content():
+	#TODO: turn asteroids back instead of removing them
 	content_manager.unload_content(_get_items())
 
 func freeze():
@@ -75,9 +77,9 @@ func draw_debug(duration: float):
 
 func get_debug_color() -> Color:
 	match status:
-		Sector.Status.UNLOADING: return Color.YELLOW
+		Sector.Status.UNLOADING: return Color.RED
 		Sector.Status.FREEZED: return Color.DODGER_BLUE
-		Sector.Status.ACTIVE: return Color.TOMATO
+		Sector.Status.ACTIVE: return Color.GREEN_YELLOW
 		_: return Color.PURPLE
 
 func _calculate_sector_cells() -> Array[Vector2]:

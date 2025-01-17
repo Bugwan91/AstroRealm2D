@@ -51,6 +51,7 @@ collision_mask = 4
 monitoring = false
 script = ExtResource("2_i3arg")
 health = SubResource("Resource_xb7x4")
+keep_on_destroy = true
 _damaged_effect_scene = ExtResource("4_6cbl0")
 _destroy_effect_scene = ExtResource("5_yhpvr")
 metadata/_custom_type_script = ExtResource("2_i3arg")

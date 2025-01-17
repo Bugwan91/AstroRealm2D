@@ -56,6 +56,10 @@ func _physics_process(delta: float):
 		if debug: draw_debug()
 	_unload_prepared_sectors()
 	_update_prepared_sectors()
+	MyDebug.list({
+		"pool": content_manager._asteroids_pool.size(),
+		"in_use": content_manager._asteroids_in_use.size()
+	})
 
 func _unload_prepared_sectors():
 	var i := 0
