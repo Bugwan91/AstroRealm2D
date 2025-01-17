@@ -27,7 +27,6 @@ MyDebug="*res://scenes/main/scripts/debug.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
 
 [dotnet]
 
@@ -203,3 +202,10 @@ environment/defaults/default_environment="res://scenes/main/main_environment.tre
 
 automade_path="res://automade_resources"
 recent_boards=["res://boards/Board.tres"]
+
+[shader_globals]
+
+temperature_texture={
+"type": "sampler2D",
+"value": "res://assets/spaceships/temperature.tres"
+}

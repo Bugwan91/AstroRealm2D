@@ -38,7 +38,7 @@ _asteroid_scene = ExtResource("9_j7r4u")
 density = 7.0
 size_variation = 0.5
 speed_variation = 0.5
-speed = 100
+speed = 0
 rotation = 0.5
 metadata/_custom_type_script = ExtResource("10_1xx6e")
 
@@ -100,9 +100,8 @@ metadata/_edit_lock_ = true
 color = Color(0.12549, 0.12549, 0.12549, 1)
 
 [node name="SectorGrid" parent="." instance=ExtResource("8_d8uwl")]
-sector_size = 5000
-world_cell_size = 500
 content_manager = SubResource("Resource_j7r4u")
+debug = true
 
 [node name="UI" parent="." instance=ExtResource("8_myah8")]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://f787xuov3u4t"]
+[gd_scene load_steps=14 format=3 uid="uid://f787xuov3u4t"]
 
 [ext_resource type="Script" uid="uid://dtkhtyoen3ad2" path="res://scenes/gun/scripts/gun.gd" id="1_heu61"]
 [ext_resource type="PackedScene" uid="uid://dwdthpisfmojs" path="res://scenes/gun/bullet.tscn" id="2_gsief"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://crv840up43nn7" path="res://assets/spaceships/weapons/01_emission.png" id="5_7c33b"]
 [ext_resource type="Texture2D" uid="uid://v65up786al4o" path="res://assets/spaceships/weapons/01_mask.png" id="6_1ulvv"]
 [ext_resource type="Texture2D" uid="uid://e1hf68e0dm4l" path="res://assets/spaceships/weapons/01_heat.png" id="6_2v8rv"]
-[ext_resource type="Texture2D" uid="uid://bdcrgonof28mh" path="res://assets/spaceships/temperature.tres" id="8_lcisn"]
 [ext_resource type="Texture2D" uid="uid://b5uejhd6j04e5" path="res://assets/spaceships/weapons/01_base.png" id="9_gdpxm"]
 [ext_resource type="Script" uid="uid://dybegsvrepwwy" path="res://scenes/_shared/scripts/view/view_weapon.gd" id="10_3kf55"]
 [ext_resource type="Texture2D" uid="uid://bycsfl6wbsu8g" path="res://assets/spaceships/weapons/01_normal.png" id="10_pmh73"]
@@ -23,7 +22,6 @@ shader_parameter/metallic = 0.8
 shader_parameter/mask_texture = ExtResource("6_1ulvv")
 shader_parameter/emission_texture = ExtResource("5_7c33b")
 shader_parameter/heat_texture = ExtResource("6_2v8rv")
-shader_parameter/temperature_texture = ExtResource("8_lcisn")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_c5j27"]
 diffuse_texture = ExtResource("9_gdpxm")

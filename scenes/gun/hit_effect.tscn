@@ -26,12 +26,12 @@ material = SubResource("CanvasItemMaterial_mfmu8")
 position = Vector2(0, 2)
 scale = Vector2(0.5, 0.5)
 emitting = false
+texture = ExtResource("3_ug1on")
 lifetime = 0.2
 one_shot = true
 explosiveness = 0.9
 fract_delta = false
 local_coords = true
-texture = ExtResource("3_ug1on")
 process_material = ExtResource("4_03671")
 
 [node name="Light" type="PointLight2D" parent="."]

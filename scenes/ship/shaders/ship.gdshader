@@ -8,7 +8,7 @@ uniform float metallic : hint_range(-1, 1) = 0.0;
 uniform sampler2D mask_texture : filter_nearest_mipmap, hint_default_black;
 uniform sampler2D emission_texture : filter_nearest_mipmap, hint_default_black;
 uniform sampler2D heat_texture : filter_nearest_mipmap, hint_default_black;
-uniform sampler2D temperature_texture : filter_linear, hint_default_black;
+global uniform sampler2D temperature_texture : filter_linear, hint_default_black;
 
 vec3 light_normal_compute(vec3 L, vec3 N, vec3 B_color, vec3 L_color, float Spec, float Met) {
 	vec3 V = vec3(0.0, 0.0, 1.0); // View vector
