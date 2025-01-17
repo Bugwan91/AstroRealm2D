@@ -41,7 +41,6 @@ func replace_content(items: Array[Node2D], offset: Vector2):
 func unload_content(items: Array[Node2D]):
 	for item in items:
 		if item is Asteroid:
-			_on_asteroid_destroyed(item)
 			MainState.main_scene.remove_child(item)
 
 func _spawn(start: Vector2, end: Vector2):
