@@ -18,6 +18,9 @@ func update_icons():
 		_update_icon_position(item, item.icon)
 		_update_selected_icon(item)
 
+func is_selected(item: RadarItem) -> bool:
+	return item == _selected_item
+
 func _connect_radar(value: Radar):
 	radar = value
 	radar.radius_updated.connect(_update_view_scale)

@@ -1,6 +1,8 @@
 class_name SectorGrid
 extends Node
 
+const TICK_TIME := 0.015
+
 @export var sector_size: int = 500:
 	set(value):
 		sector_size = value
@@ -92,7 +94,7 @@ func update_sectors():
 		for y in range(-_total_offset, _total_offset + 1):
 			var offset := Vector2(x, y)
 			var sector_pos = _current_sector + offset
-			load_or_update_sector(sector_pos, _get_sector_status(offset))
+			load_or_update_sector(sector_pos, offset)
 			if not _sectors_to_update.has(sector_pos):
 				_sectors_to_update.append(sector_pos)
 	for sector_pos in sectors.keys():
@@ -108,15 +110,15 @@ func _get_sector_status(offset: Vector2) -> Sector.Status:
 	else:
 		return Sector.Status.UNLOADING
 
-func load_or_update_sector(sector_position: Vector2, status: Sector.Status):
+func load_or_update_sector(sector_position: Vector2, offset: Vector2):
 	var sector: Sector
 	if not sector_position in sectors:
 		sector = Sector.new()
-		sector.init(sector_position, content_manager)
+		sector.init(sector_position, offset, content_manager)
 		sectors[sector_position] = sector
 	else:
 		sector = sectors[sector_position]
-	sector.update_status(status)
+	sector.update_status(_get_sector_status(offset), offset)
 
 func unload_sector(sector_position: Vector2):
 	sectors[sector_position].unload()
@@ -137,5 +139,5 @@ func _update_total_offset():
 func _update_batch_value():
 	var total_sectors := _total_offset * 2.0 + 1.0
 	total_sectors *= total_sectors
-	var ticks := sector_update_delta / 0.015
+	var ticks := sector_update_delta / TICK_TIME
 	_update_batch = total_sectors / ticks + 1

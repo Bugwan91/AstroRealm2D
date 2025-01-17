@@ -35,6 +35,7 @@ func _unhandled_input(event):
 	_target_zoom = _target_zoom.clamp(_zoom_min, _zoom_max)
 
 func update(delta: float) -> Vector2:
+	#TODO: IMPORTANT! Need to interpolate position according to physics step time
 	if not is_instance_valid(target): return Vector2.ZERO
 	if _target_zoom != zoom:
 		zoom = lerp(zoom, _target_zoom, 5.0 * delta)

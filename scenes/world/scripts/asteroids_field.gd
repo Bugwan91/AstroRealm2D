@@ -31,6 +31,19 @@ func load_content(sector: Vector2):
 	for i in _i_number:
 		_spawn(start, end)
 
+func replace_content(items: Array[Node2D], offset: Vector2):
+	var shift := offset * _sector_size
+	for item in items:
+		if item is Asteroid:
+			item.reset()
+			item.position += shift
+
+func unload_content(items: Array[Node2D]):
+	for item in items:
+		if item is Asteroid:
+			_on_asteroid_destroyed(item)
+			MainState.main_scene.remove_child(item)
+
 func _spawn(start: Vector2, end: Vector2):
 	var asteroid = _get_asteroid()
 	asteroid.position = Vector2(
@@ -44,12 +57,6 @@ func _spawn(start: Vector2, end: Vector2):
 		speed_variation,
 		rotation,
 		speed_variation)
-
-func unload_content(items: Array[Node2D]):
-	for item in items:
-		if item is Asteroid:
-			_on_asteroid_destroyed(item)
-			MainState.main_scene.remove_child(item)
 
 func _get_asteroid() -> Asteroid:
 	var asteroid: Asteroid

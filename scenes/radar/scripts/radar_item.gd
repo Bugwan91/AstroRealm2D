@@ -48,6 +48,10 @@ func init_shape(radius: float):
 	_collider.shape.radius = config.radius
 	add_child(_collider)
 
+func reset():
+	if MainState.radar_manager.is_selected(self):
+		unselected.emit(self)
+
 func _on_destroy():
 	if is_instance_valid(destruction_handler):
 		destruction_handler.call(self)

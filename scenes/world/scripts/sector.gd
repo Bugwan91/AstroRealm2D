@@ -3,41 +3,54 @@ extends Node
 
 const UNLOADING_DELTA := 0.5
 
-enum Status {UNLOADING, FREEZED, ACTIVE}
+enum Status {NONE, UNLOADING, FREEZED, ACTIVE}
 
 var grid_cells: Array[Vector2] = []
 var position: Vector2
-var status: Sector.Status = 0
-var _old_status: Sector.Status = 0
+var status := Sector.Status.NONE
+var _previous_status := Sector.Status.NONE
 var content_manager: SectorContentManager
-var oposite_sector: Sector = null
+var offset: Vector2
 
 var _world: WorldGrid
 var _sector_size: float
 var _loaded := false
 
-func init(sector_position: Vector2, content: SectorContentManager):
+var _should_load := true
+var _should_freeze := false
+var _should_unfreeze := false
+var _handled_items: Array[Node2D] = []
+
+func init(sector_position: Vector2, offset: Vector2, content: SectorContentManager):
 	position = sector_position
+	offset = offset
 	content_manager = content
 	_world = MainState.world_grid
 	_sector_size = MainState.sector_grid.sector_size
 	grid_cells = _calculate_sector_cells()
-	_old_status = Status.UNLOADING
 
-func update_status(new: Status):
-	if status == new: return
-	var _old_status := status
-	status = new
+func update_status(new_status: Status, new_offset: Vector2):
+	offset = new_offset
+	if status == new_status: return
+	var _previous_status := status
+	status = new_status
 
 func update():
-	if status == Status.UNLOADING:
-		unload_content()
-	elif _old_status == Status.UNLOADING and not _loaded:
-		load_content()
-	if status == Status.FREEZED:
-		freeze()
-	elif status == Status.ACTIVE:
-		activate()
+	if (_previous_status == Status.NONE\
+		or _previous_status == Status.UNLOADING)\
+		and status != Status.UNLOADING:
+			load_content()
+	elif status == Status.UNLOADING:
+		if status == _previous_status:
+			replace_content()
+		else:
+			unload_content()
+	if status != Status.UNLOADING:
+		if status == Status.ACTIVE:
+			activate()
+		if status == Status.FREEZED:
+			freeze()
+	_previous_status = status
 
 func unload():
 	content_manager.unload_content(_get_items())
@@ -48,8 +61,15 @@ func load_content():
 		content_manager.load_content(position)
 		_loaded = true
 
+func replace_content():
+	var items := _get_items()
+	if items.is_empty(): return
+	content_manager.replace_content(items, _get_opposite_sector())
+
+func _get_opposite_sector() -> Vector2:
+	return -(2.0 * offset - offset.clamp(-Vector2.ONE, Vector2.ONE))
+
 func unload_content():
-	#TODO: turn asteroids back instead of removing them
 	content_manager.unload_content(_get_items())
 
 func freeze():
