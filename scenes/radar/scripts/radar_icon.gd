@@ -19,12 +19,14 @@ func _init_tecture():
 func _setup(conf: RadarIconConfig):
 	config = conf.duplicate() if conf.unique else conf
 	_init_tecture()
+	visible = false
 
 func update(pos: Vector2, rot: float, view_r: float, view_scale: float):
 	position= RADAR_PADDING * (pos) * view_scale + view_r * Vector2.ONE
 	if config.free_rotation: rotation = rot
 	if config.use_real_size:
 		_recalculate_scale(view_scale)
+	visible = true
 
 func _recalculate_scale(v_scale: float = 1.0):
 	scale = v_scale * _icon_scale() * Vector2(1.0, config.aspect)
