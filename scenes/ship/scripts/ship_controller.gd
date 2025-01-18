@@ -114,6 +114,7 @@ func _boost(state: PhysicsDirectBodyState2D):
 	state.apply_central_force(boost)
 
 func _drag(state: PhysicsDirectBodyState2D):
+	if _dodge_acceleration: return
 	var extra_speed := state.linear_velocity.length_squared() - flight_model.speed_sq
 	if extra_speed < 0.0: return
 	var stop_force := sqrt(extra_speed) * DRAG * -state.linear_velocity.normalized()

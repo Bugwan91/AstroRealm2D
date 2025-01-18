@@ -5,7 +5,7 @@ const MASS_MIN := 0.01
 const INERTIA_MULTIPLYER: float = 2500.0
 const DODGE_MIN := 10.0
 const DODGE_DURATION_MIN := 0.05
-const DODGE_SLOWING_MULT := 2.0
+const DODGE_SLOWING_MULT := 4.0
 const DODGE_COOLDOWN_MIN := 0.2
 
 signal mass_changed(float)
