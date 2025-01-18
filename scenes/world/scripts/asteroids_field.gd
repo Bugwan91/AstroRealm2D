@@ -3,7 +3,7 @@ extends SectorContentManager
 
 @export var _asteroid_scene: PackedScene
 ## asteroids per 1000x1000 units
-@export_range(1, 20) var density: float = 5.0
+@export_range(0, 20) var density: float = 5.0
 @export_range(0.1, 0.9) var size_variation := 0.5
 @export_range(0.0, 1.0) var speed_variation := 0.5
 @export_range(0.0, 500.0) var speed := 250
