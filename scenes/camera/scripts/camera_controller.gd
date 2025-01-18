@@ -41,14 +41,15 @@ func update(delta: float) -> Vector2:
 		zoom = lerp(zoom, _target_zoom, 5.0 * delta)
 		zoomed.emit(zoom.x)
 	_required_look_position = lerp(_required_look_position, _get_look_position(), 2.0 * delta)
-	_hit_position = lerp(_hit_position, Vector2.ZERO, 10.0 * delta)
-	var d_a := target.tick_acceleration - _acceleration * delta
-	var a := d_a.length()
-	a = minf(a, acceleration * delta)
-	_acceleration += d_a.normalized() * a
-	a = minf(_acceleration.length(), acceleration_limit)
-	_acceleration = _acceleration.normalized() * a
-	var new_position = target.position - _acceleration + _required_look_position + _hit_position
+	#_hit_position = lerp(_hit_position, Vector2.ZERO, 10.0 * delta)
+	#var d_a := target.tick_acceleration - _acceleration * delta
+	#var a := d_a.length()
+	#a = minf(a, acceleration * delta)
+	#_acceleration += d_a.normalized() * a
+	#a = minf(_acceleration.length(), acceleration_limit)
+	#_acceleration = _acceleration.normalized() * a
+	#var new_position = target.position - _acceleration + _required_look_position + _hit_position
+	var new_position = target.position + _required_look_position
 	shift = new_position - position
 	position = new_position
 	return shift

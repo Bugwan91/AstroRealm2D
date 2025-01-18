@@ -3,6 +3,8 @@ extends Resource
 
 signal boost_changed(float)
 signal strafe_changed(Vector2)
+signal dodge_changed(bool)
+signal dodging_updated(bool)
 signal stop_changed(bool)
 signal target_changed(RadarItem)
 signal target_point_changed(Vector2)
@@ -24,6 +26,20 @@ var strafe: Vector2:
 		var len := value.length()
 		strafe = value if len < 1.0 else value / len
 		strafe_changed.emit(strafe)
+
+var dodge: bool:
+	set(value):
+		if dodge == value: return
+		dodge = value
+		if dodge:
+			dodging = true
+		dodge_changed.emit(dodge)
+
+var dodging: bool:
+	set(value):
+		if dodging == value: return
+		dodging = value
+		dodging_updated.emit(dodging)
 
 var stop: bool:
 	set(value):

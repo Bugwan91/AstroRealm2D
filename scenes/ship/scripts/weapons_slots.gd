@@ -28,3 +28,6 @@ func connect_inputs(inputs: ShipInput):
 func update_velocity(velocity: Vector2):
 	for slot in slots:
 		slot.update_velocity(velocity)
+
+func block_weapons(value: bool):
+	enabled = value

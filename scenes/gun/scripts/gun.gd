@@ -28,6 +28,7 @@ var emission = 0.0
 var emission_reduction = 10.0
 
 var velocity := Vector2.ZERO
+var enabled := true
 
 var _is_firing := false
 var _is_charging := false
@@ -54,7 +55,7 @@ func _physics_process(delta: float) -> void:
 	tranfser_heat.emit(_heat.transfer(delta))
 
 func _shoot(delta: float):
-	if _is_firing and not _heat.is_max():
+	if enabled and _is_firing and not _heat.is_max():
 		if not _is_charging:
 			_spawn_bullet(delta)
 			_charge_start()

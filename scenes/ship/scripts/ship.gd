@@ -40,6 +40,7 @@ func _ready():
 
 func _setup_flight_controller():
 	flight_controller.setup(self)
+	flight_controller.dodging.connect(_on_dodge)
 
 func _setup_weapon():
 	_weapon_slots.setup(data.design)
@@ -64,7 +65,7 @@ func _connect_player_inputs():
 	MainState.player_ship = self
 
 func _connect_flight_controller_inputs():
-	flight_controller.inputs = input_reader
+	flight_controller.input_reader = input_reader
 
 func _connect_weapon_inputs():
 	_weapon_slots.connect_inputs(input_reader)
@@ -129,3 +130,6 @@ func setup_health(value: float):
 
 func get_max_speed() -> float:
 	return data.flight_model.speed
+
+func _on_dodge(value: bool):
+	_weapon_slots.enabled = not value

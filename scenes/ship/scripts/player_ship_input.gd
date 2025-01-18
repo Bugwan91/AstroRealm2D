@@ -23,6 +23,8 @@ func _process(_delta):
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		update_target_point()
+	if event.is_action_pressed("dodge"):
+		data.dodge = true
 	if event.is_action_pressed("stop"):
 		data.stop = true
 	if event.is_action_released("stop"):
