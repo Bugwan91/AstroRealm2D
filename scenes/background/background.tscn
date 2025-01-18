@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cxdkw4g14655c"]
+[gd_scene load_steps=61 format=3 uid="uid://cxdkw4g14655c"]
 
 [ext_resource type="Script" uid="uid://d3snixmvgwv1q" path="res://scenes/background/scripts/background_layer.gd" id="1_48uix"]
 [ext_resource type="Script" uid="uid://cn1j1corr1vun" path="res://scenes/background/scripts/background.gd" id="1_lpf5v"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://dqj8o5lycjkyt" path="res://assets/backgrounds/noise/256_mask.png" id="14_xc4n7"]
 [ext_resource type="Texture2D" uid="uid://bea37ifxf0xvx" path="res://assets/backgrounds/noise/256_shift.png" id="15_bn0bt"]
 [ext_resource type="Texture2D" uid="uid://8xi2xlkeeh3u" path="res://assets/backgrounds/noise/256.png" id="16_q0cmu"]
+[ext_resource type="PackedScene" uid="uid://cmqm4dm8rpi0l" path="res://scenes/background/sun.tscn" id="18_hd5wb"]
 [ext_resource type="Texture2D" uid="uid://csi81c6n3d2s1" path="res://assets/backgrounds/noise/64_mask.png" id="18_t6ein"]
 [ext_resource type="Texture2D" uid="uid://chlws1gi7mvf" path="res://assets/backgrounds/noise/64_shift.png" id="19_ljsmy"]
 [ext_resource type="Texture2D" uid="uid://pwvynte6n46p" path="res://assets/backgrounds/noise/64.png" id="20_ahac3"]
@@ -32,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://cvf23phg02px4" path="res://assets/backgrounds/noise/0_mask.png" id="29_gghpb"]
 [ext_resource type="Texture2D" uid="uid://to71fwi1bmxl" path="res://assets/backgrounds/noise/0_shift.png" id="30_oem1p"]
 [ext_resource type="Texture2D" uid="uid://c0x2xkfvw2g2x" path="res://assets/backgrounds/0.tres" id="31_77rsq"]
+[ext_resource type="Environment" uid="uid://chl1sjnqh1sa7" path="res://scenes/main/main_environment.tres" id="34_geg3y"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_k3myr"]
 size = Vector2(8000, 8000)
@@ -43,7 +45,6 @@ size = Vector2(10, 10)
 shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = ExtResource("5_3nfay")
 shader_parameter/shift_texture_x = ExtResource("6_j364p")
-shader_parameter/glow = 0.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
 
@@ -57,7 +58,6 @@ shader_parameter/offset = null
 shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = ExtResource("10_1glsp")
 shader_parameter/shift_texture_x = ExtResource("11_2iny1")
-shader_parameter/glow = 0.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
 
@@ -71,7 +71,6 @@ shader_parameter/offset = null
 shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = ExtResource("14_xc4n7")
 shader_parameter/shift_texture_x = ExtResource("15_bn0bt")
-shader_parameter/glow = 0.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
 
@@ -85,7 +84,6 @@ shader_parameter/offset = null
 shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = ExtResource("18_t6ein")
 shader_parameter/shift_texture_x = ExtResource("19_ljsmy")
-shader_parameter/glow = 1.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
 
@@ -99,7 +97,6 @@ shader_parameter/offset = null
 shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = ExtResource("22_fputy")
 shader_parameter/shift_texture_x = ExtResource("23_usip3")
-shader_parameter/glow = 0.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
 
@@ -113,7 +110,6 @@ shader_parameter/offset = null
 shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = ExtResource("26_vpfgx")
 shader_parameter/shift_texture_x = ExtResource("27_osf1t")
-shader_parameter/glow = 0.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
 
@@ -121,7 +117,6 @@ shader_parameter/offset = null
 shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = ExtResource("29_gghpb")
 shader_parameter/shift_texture_x = ExtResource("30_oem1p")
-shader_parameter/glow = 0.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
 
@@ -149,7 +144,6 @@ noise = SubResource("FastNoiseLite_lsq7y")
 shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = SubResource("NoiseTexture2D_l3umk")
 shader_parameter/shift_texture_x = SubResource("NoiseTexture2D_ciakk")
-shader_parameter/glow = 0.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
 
@@ -177,7 +171,6 @@ noise = SubResource("FastNoiseLite_2ludj")
 shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = SubResource("NoiseTexture2D_tjyfp")
 shader_parameter/shift_texture_x = SubResource("NoiseTexture2D_ockv8")
-shader_parameter/glow = 0.0
 shader_parameter/vp = Vector2(1, 1)
 shader_parameter/offset = null
 
@@ -190,13 +183,15 @@ layer = -128
 
 [node name="Sprite2D" type="Sprite2D" parent="Layers"]
 modulate = Color(0, 0, 0, 1)
+z_index = -4096
 texture = SubResource("PlaceholderTexture2D_k3myr")
 
-[node name="4096" type="Node" parent="Layers"]
+[node name="4096" type="Node2D" parent="Layers"]
 script = ExtResource("1_48uix")
 distance = 1.024e+06
 
 [node name="black" type="Sprite2D" parent="Layers/4096"]
+visible = false
 modulate = Color(0, 0, 0, 1)
 texture = SubResource("PlaceholderTexture2D_svw7u")
 script = ExtResource("3_u112l")
@@ -217,7 +212,7 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("8_4osm0")
 script = ExtResource("3_u112l")
 
-[node name="1024" type="Node" parent="Layers"]
+[node name="1024" type="Node2D" parent="Layers"]
 script = ExtResource("1_48uix")
 distance = 512000.0
 
@@ -235,7 +230,7 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("10_hooou")
 script = ExtResource("3_u112l")
 
-[node name="256" type="Node" parent="Layers"]
+[node name="256" type="Node2D" parent="Layers"]
 script = ExtResource("1_48uix")
 distance = 128000.0
 
@@ -254,7 +249,11 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("11_5yul3")
 script = ExtResource("3_u112l")
 
-[node name="64" type="Node" parent="Layers"]
+[node name="Sun" parent="Layers/256" instance=ExtResource("18_hd5wb")]
+visible = false
+position = Vector2(472, 504)
+
+[node name="64" type="Node2D" parent="Layers"]
 script = ExtResource("1_48uix")
 distance = 32000.0
 
@@ -273,7 +272,7 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("10_y34go")
 script = ExtResource("3_u112l")
 
-[node name="16" type="Node" parent="Layers"]
+[node name="16" type="Node2D" parent="Layers"]
 script = ExtResource("1_48uix")
 distance = 8000.0
 
@@ -292,7 +291,7 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("10_enux2")
 script = ExtResource("3_u112l")
 
-[node name="8" type="Node" parent="Layers"]
+[node name="8" type="Node2D" parent="Layers"]
 script = ExtResource("1_48uix")
 distance = 4000.0
 
@@ -302,7 +301,7 @@ material = SubResource("ShaderMaterial_t82sx")
 texture = ExtResource("28_fvo3f")
 script = ExtResource("3_u112l")
 
-[node name="0" type="Node" parent="Layers"]
+[node name="0" type="Node2D" parent="Layers"]
 script = ExtResource("1_48uix")
 
 [node name="BackgroundSprite" type="Sprite2D" parent="Layers/0"]
@@ -319,7 +318,7 @@ material = SubResource("ShaderMaterial_o7yh2")
 texture = ExtResource("6_ody0m")
 script = ExtResource("3_u112l")
 
-[node name="DEBUG" type="Node" parent="Layers"]
+[node name="DEBUG" type="Node2D" parent="Layers"]
 script = ExtResource("1_48uix")
 
 [node name="debug" type="Sprite2D" parent="Layers/DEBUG"]
@@ -329,3 +328,6 @@ texture_repeat = 2
 material = SubResource("ShaderMaterial_bgctr")
 texture = ExtResource("6_ody0m")
 script = ExtResource("3_u112l")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("34_geg3y")

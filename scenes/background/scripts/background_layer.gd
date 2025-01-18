@@ -1,5 +1,5 @@
 class_name BackgroundLayer
-extends Node
+extends Node2D
 
 @export var distance: float = 0.0
 

@@ -1,8 +1,8 @@
 shader_type canvas_item;
+render_mode unshaded;
 
 uniform sampler2D mask_texture : filter_linear_mipmap, repeat_enable;
 uniform sampler2D shift_texture_x : filter_linear_mipmap, repeat_enable;
-uniform float glow = 0.0;
 uniform vec2 vp = vec2(1.0);
 uniform vec2 offset;
 
@@ -21,6 +21,7 @@ void fragment() {
 	//}
 	vec4 color = texture(TEXTURE, base_uv + shift_total * 0.125);
 	color.a = color.a * texture(mask_texture, base_uv + shift_total * 0.5).r;
-	color.a = pow(color.a, 2.5);
-	COLOR = vec4(color.rgb + color.rgb * glow, color.a);
+	//color.a = pow(color.a, 2.5);
+	color.a = smoothstep(0.0, 1.0, color.a);
+	COLOR = vec4(color.rgb * color.a, color.a);
 }
