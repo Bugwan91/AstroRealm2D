@@ -16,6 +16,7 @@ extends KineticBody
 @onready var trail: TrailEffect = %Trail
 
 var start_velocity: Vector2 = Vector2.ZERO
+var origin: Node2D
 
 var impulse := 0.0
 var relative_speed := 0.0
@@ -34,11 +35,11 @@ func _ready():
 	_update_material()
 	#prediction_ray.collision_mask = 7
 
-func _physics_process(delta: float):
+func _process(delta: float):
+	super._process(delta)
 	_handle_lifetime(delta)
 	_update_ray(delta)
 	_collide()
-	super._physics_process(delta)
 
 func _update_material(mult: float = 1.0):
 	var color_hdr := color * glow * mult
@@ -67,6 +68,7 @@ func _collide(force: bool = false):
 func _on_hit(target: TakingDamage):
 	if not target is TakingDamage: return
 	target = target as TakingDamage
+	if target.parent == origin: return
 	#if target.check_group(group): return
 	var hit_effect := hit_effect_scene.instantiate() as BulletHitEffect
 	hit_effect.color = color

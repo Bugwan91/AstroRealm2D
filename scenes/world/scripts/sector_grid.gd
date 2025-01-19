@@ -1,8 +1,6 @@
 class_name SectorGrid
 extends Node
 
-const TICK_TIME := 0.015
-
 @export var sector_size: int = 500:
 	set(value):
 		sector_size = value
@@ -139,5 +137,5 @@ func _update_total_offset():
 func _update_batch_value():
 	var total_sectors := _total_offset * 2.0 + 1.0
 	total_sectors *= total_sectors
-	var ticks := sector_update_delta / TICK_TIME
+	var ticks := sector_update_delta * Engine.physics_ticks_per_second
 	_update_batch = total_sectors / ticks + 1

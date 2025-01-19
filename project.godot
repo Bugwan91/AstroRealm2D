@@ -188,6 +188,7 @@ dodge={
 [physics]
 
 2d/run_on_separate_thread=true
+common/physics_ticks_per_second=30
 common/max_physics_steps_per_frame=1
 2d/default_gravity=0.0
 2d/default_linear_damp=0.0

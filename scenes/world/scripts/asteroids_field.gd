@@ -6,8 +6,9 @@ extends SectorContentManager
 @export_range(0, 20) var density: float = 5.0
 @export_range(0.1, 0.9) var size_variation := 0.5
 @export_range(0.0, 1.0) var speed_variation := 0.5
-@export_range(0.0, 500.0) var speed := 250
+@export_range(0.0, 3000.0) var speed := 250
 @export_range(0.0, PI) var rotation := 0.5
+@export var base_velocity: Vector2
 
 var _asteroids_in_use: Array[Asteroid]
 var _asteroids_pool: Array[Asteroid]
@@ -52,6 +53,7 @@ func _spawn(start: Vector2, end: Vector2):
 	MainState.main_scene.add_child(asteroid)
 	asteroid.init(
 		randf_range(1.0 - size_variation, 1.0 + size_variation),
+		base_velocity,
 		speed,
 		speed_variation,
 		rotation,

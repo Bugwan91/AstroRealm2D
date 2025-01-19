@@ -23,6 +23,10 @@ func is_selected(item: RadarItem) -> bool:
 
 func _connect_radar(value: Radar):
 	radar = value
+	if radar == null:
+		radar_view.visible = false
+		return
+	radar_view.visible = true
 	radar.radius_updated.connect(_update_view_scale)
 	radar.detected.connect(_on_detect)
 	radar.undetected.connect(_on_exit)

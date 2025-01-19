@@ -23,6 +23,8 @@ signal tranfser_heat(heat: float)
 @onready var _shoot_point: Node2D = %ShootPoint
 @onready var _heat = %Heat
 
+var origin: Node2D
+
 @onready var view: WeaponView = %View
 var emission = 0.0
 var emission_reduction = 10.0
@@ -73,6 +75,7 @@ func _charge_done():
 
 func _spawn_bullet(delta: float):
 	var bullet = bullet_scene.instantiate() as Bullet
+	bullet.origin = origin
 	bullet.group = group
 	var spear: float = (accuracy + heat_spread * _heat.temperature) * pow(2.0 * (randf() - 0.5), 2.0) * sign(randf() - 0.5)
 	bullet.color = bullet_color

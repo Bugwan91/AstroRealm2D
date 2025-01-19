@@ -1,6 +1,8 @@
 class_name RadarItem
 extends Area2D
 
+const RADIUS_MIN := 128.0
+
 signal selected(item: RadarItem)
 signal unselected(item: RadarItem)
 
@@ -15,9 +17,17 @@ var icon: RadarIcon
 var selected_icon: RadarIcon
 var destruction_handler: Callable
 
+var canvas_position:Vector2:
+	get:
+		return _parent.extrapolator.canvas_position\
+			if _parent is RigidBody\
+			else get_global_transform_with_canvas().origin
+
 var _collider: CollisionShape2D
+var _parent: Node2D
 
 func _ready():
+	_parent = get_parent()
 	monitoring = false
 	monitorable = true
 	collision_layer = 8
@@ -30,22 +40,21 @@ func _ready():
 		input_event.connect(handle_click)
 
 func handle_click(_viewport, event, _shape_idx):
+	# TODO: It's better to untilize new world partitioning system to get nearest radar item.
+	# Currently it's hard to click on object moving fast
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE:
 		selected.emit(self)
-
-func get_canvas_position() -> Vector2:
-	return get_global_transform_with_canvas().origin
 
 func init_shape(radius: float):
 	config = config.duplicate()
 	config.radius = radius
 	if is_instance_valid(_collider):
-		_collider.shape.radius = config.radius
+		_collider.shape.radius = maxf(RADIUS_MIN, config.radius)
 		return
 	_collider = CollisionShape2D.new()
 	_collider.shape = CircleShape2D.new()
 	_collider.debug_color = Color(Color.BLUE, 0.0)
-	_collider.shape.radius = config.radius
+	_collider.shape.radius = maxf(RADIUS_MIN, config.radius)
 	add_child(_collider)
 
 func reset():

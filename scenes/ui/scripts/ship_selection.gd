@@ -22,7 +22,7 @@ func _process(_delta):
 	if not is_instance_valid(_selected_target): container.visible = false
 	if not container.visible: return
 	var viewport = Vector2(get_viewport().get_size()) * 0.5
-	var position = _selected_target.get_canvas_position() - viewport
+	var position = _selected_target.canvas_position - viewport
 	position = Vector2(
 		min(abs(position.x * min(abs(viewport.y / position.y), 1.0)), viewport.x) * sign(position.x),
 		min(abs(position.y * min(abs(viewport.x / position.x), 1.0)), viewport.y) * sign(position.y)

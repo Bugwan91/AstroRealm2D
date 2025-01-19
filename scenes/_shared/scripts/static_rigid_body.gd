@@ -1,7 +1,7 @@
 class_name StaticRigidBody
 extends RigidBody
 
-@export_range(0.0, 2.0) var update_interval := 0.5
+@export_range(0.0, 2.0) var update_interval := 0.2
 
 var _delta := 0.0
 

@@ -21,7 +21,6 @@ var _zoom_speed: Vector2
 var _target_zoom: Vector2
 
 func _ready():
-	process_priority = -1000
 	MainState.camera_controller = self
 	MainState.player_ship_updated.connect(_on_update_player_ship)
 	_init_zoom()
@@ -49,9 +48,10 @@ func update(delta: float) -> Vector2:
 	#a = minf(_acceleration.length(), acceleration_limit)
 	#_acceleration = _acceleration.normalized() * a
 	#var new_position = target.position - _acceleration + _required_look_position + _hit_position
-	var new_position = target.position + _required_look_position
+	var new_position = target.extrapolator.smooth_position + _required_look_position
 	shift = new_position - position
 	position = new_position
+	MainState.camera_shift = shift
 	return shift
 
 func _init_zoom():

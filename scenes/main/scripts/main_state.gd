@@ -16,7 +16,9 @@ var main_scene: MainScene:
 
 var sector_grid: SectorGrid
 var world_grid: WorldGrid
+var last_delta: float
 var camera_controller: CameraController
+var camera_shift: Vector2
 var radar_manager := RadarManager.new()
 
 var ship_designer: ShipDesignerUI

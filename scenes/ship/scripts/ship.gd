@@ -47,6 +47,7 @@ func _setup_weapon():
 	for slot_index in _weapon_slots.slots.size():
 		var gun: Gun = gun_scene.instantiate() as Gun
 		gun.group = group
+		gun.origin = self
 		gun.shoot_recoil.connect(_on_weapon_shoot)
 		gun.tranfser_heat.connect(_on_transfered_heat)
 		_weapon_slots.add_weapon(gun, slot_index)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c48f2sdpasbwy"]
+[gd_scene load_steps=22 format=3 uid="uid://c48f2sdpasbwy"]
 
 [ext_resource type="Script" uid="uid://cousmnn4iqib7" path="res://scenes/asteroids/scripts/asteroid.gd" id="1_vucqq"]
 [ext_resource type="Script" uid="uid://ce7t5qymrq553" path="res://scenes/_shared/scripts/taking_damage.gd" id="2_i3arg"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dp5pxxwnnt0qu" path="res://resources/asteroids/asteroid21.tres" id="8_vufhy"]
 [ext_resource type="Texture2D" uid="uid://cgea3l10flrym" path="res://resources/asteroids/asteroid31.tres" id="9_ma54s"]
 [ext_resource type="Script" uid="uid://dd1et7iue8frp" path="res://scenes/_shared/scripts/static_rigid_body.gd" id="10_k3qgf"]
+[ext_resource type="Script" uid="uid://de333ogw3s8dt" path="res://scenes/_shared/scripts/position_extrapolator.gd" id="17_l4sdg"]
 [ext_resource type="Resource" uid="uid://ci5yk7wngo6ue" path="res://scenes/radar/_res/asteroid.tres" id="18_l4sdg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k3qgf"]
@@ -38,8 +39,13 @@ metadata/_custom_type_script = ExtResource("10_k3qgf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
+debug_color = Color(0, 0.6, 0.701961, 0.180392)
 
-[node name="View" type="Sprite2D" parent="."]
+[node name="PositionExtrapolator" type="Node2D" parent="."]
+script = ExtResource("17_l4sdg")
+metadata/_custom_type_script = ExtResource("17_l4sdg")
+
+[node name="View" type="Sprite2D" parent="PositionExtrapolator"]
 unique_name_in_owner = true
 material = ExtResource("8_34a3x")
 texture = ExtResource("8_bey2v")
@@ -58,6 +64,7 @@ metadata/_custom_type_script = ExtResource("2_i3arg")
 
 [node name="DamageCollisionShape2D" type="CollisionShape2D" parent="TakingDamage"]
 unique_name_in_owner = true
+debug_color = Color(0.772313, 0.443219, 1.92523e-07, 0.42)
 
 [node name="RadarItem" parent="." instance=ExtResource("6_yhpvr")]
 unique_name_in_owner = true

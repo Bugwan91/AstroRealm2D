@@ -12,7 +12,11 @@ extends Node2D
 var ship_scene: PackedScene = preload("res://scenes/ship/ship.tscn")
 
 func _ready():
+	process_physics_priority = -1001
 	MainState.main_scene = self
+
+func _physics_process(delta: float) -> void:
+	MainState.last_delta = delta
 
 func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	var ship: Spaceship = ship_scene.instantiate() as Spaceship

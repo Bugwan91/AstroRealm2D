@@ -1,8 +1,9 @@
 class_name Asteroid
 extends StaticRigidBody
 
-@export var size: float
+@export_range(0.1, 10.0) var size: float
 @export var health: float = 500.0
+@export var _base_mass := 5.0
 @export var variants: Array[CanvasTexture]
 
 @onready var _view: Sprite2D = %View
@@ -12,7 +13,6 @@ extends StaticRigidBody
 @onready var _radar: RadarItem = %RadarItem
 
 var _base_radius := 64.0
-var _base_mass := 5.0
 
 var is_in_world := false
 
@@ -28,6 +28,7 @@ func _set_variant():
 
 func init(
 	size: float,
+	vel: Vector2,
 	speed: float,
 	spd_variation: float,
 	rot: float,
@@ -42,7 +43,7 @@ func init(
 		_radar.init_shape(radius)
 		_radar.icon.setup_scale(size)
 		var size_inv := 1.0 / size
-		linear_velocity = _rand_velocity(speed, spd_variation, size_inv)
+		linear_velocity = vel + _rand_velocity(speed, spd_variation, size_inv)
 		_l_v = linear_velocity
 		angular_velocity = _rand_rotation(rot, rot_variation, size_inv)
 		_a_v = angular_velocity

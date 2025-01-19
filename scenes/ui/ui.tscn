@@ -132,6 +132,7 @@ layout_mode = 2
 script = ExtResource("5_u0tch")
 
 [node name="RadarContainer" type="Control" parent="Control/GameUI"]
+visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
 size_flags_horizontal = 8

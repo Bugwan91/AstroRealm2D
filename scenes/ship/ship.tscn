@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=28 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" uid="uid://b2ih5uxk3qw0h" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
@@ -13,7 +13,10 @@
 [ext_resource type="Script" uid="uid://dlnqyio8ujqvd" path="res://scenes/ship/scripts/ship_controller.gd" id="14_5nufi"]
 [ext_resource type="Script" uid="uid://bp5341wcuo33e" path="res://scenes/ship/scripts/close_navigator.gd" id="14_xvsf7"]
 [ext_resource type="Script" uid="uid://ce7t5qymrq553" path="res://scenes/_shared/scripts/taking_damage.gd" id="17_6qm8q"]
+[ext_resource type="PackedScene" uid="uid://cxaoyw4qxcd0p" path="res://scenes/ship/damage_effect.tscn" id="18_sakv4"]
 [ext_resource type="Script" uid="uid://clrdqrh8dbwau" path="res://scenes/_shared/scripts/health.gd" id="18_woufe"]
+[ext_resource type="PackedScene" uid="uid://dcy3g0684tgaa" path="res://scenes/ship/destroy_effect.tscn" id="19_3lg4r"]
+[ext_resource type="Script" uid="uid://de333ogw3s8dt" path="res://scenes/_shared/scripts/position_extrapolator.gd" id="19_6qm8q"]
 [ext_resource type="Resource" uid="uid://caqqbuwbg5ovc" path="res://scenes/radar/_res/ship.tres" id="19_xvsf7"]
 [ext_resource type="Script" uid="uid://liqs1h6x4e1p" path="res://scenes/heat/scripts/Heat.gd" id="20_1gdyl"]
 [ext_resource type="Script" uid="uid://w8vsnqoourdh" path="res://scenes/vfx/scripts/trail.gd" id="20_q0150"]
@@ -22,13 +25,6 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w2dh3"]
 radius = 42.0
 height = 128.31
-
-[sub_resource type="Curve" id="Curve_p4pb7"]
-_data = [Vector2(0, 1), 0.0, -0.322088, 0, 0, Vector2(1, 0), -1.16987, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="Gradient_sdsuv"]
-colors = PackedColorArray(1, 1, 1, 0.5, 1, 1, 1, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ma44e"]
 shader = ExtResource("7_byino")
@@ -46,6 +42,13 @@ diffuse_texture = ExtResource("10_r75st")
 normal_texture = ExtResource("11_6qm8q")
 texture_filter = 3
 
+[sub_resource type="Curve" id="Curve_p4pb7"]
+_data = [Vector2(0, 1), 0.0, -0.322088, 0, 0, Vector2(1, 0), -1.16987, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_sdsuv"]
+colors = PackedColorArray(1, 1, 1, 0.5, 1, 1, 1, 0)
+
 [sub_resource type="Resource" id="Resource_sakv4"]
 resource_local_to_scene = true
 script = ExtResource("18_woufe")
@@ -61,9 +64,21 @@ position = Vector2(-6, 0)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_w2dh3")
 
-[node name="WeaponSlots" type="Node2D" parent="."]
+[node name="PositionExtrapolator" type="Node2D" parent="."]
+script = ExtResource("19_6qm8q")
+metadata/_custom_type_script = ExtResource("19_6qm8q")
+
+[node name="WeaponSlots" type="Node2D" parent="PositionExtrapolator"]
 unique_name_in_owner = true
 script = ExtResource("8_4fwa5")
+
+[node name="View" type="Sprite2D" parent="PositionExtrapolator"]
+unique_name_in_owner = true
+texture_filter = 3
+material = SubResource("ShaderMaterial_ma44e")
+rotation = 1.5708
+texture = SubResource("CanvasTexture_fknoo")
+script = ExtResource("11_d8ncc")
 
 [node name="TrailEffect" type="Line2D" parent="."]
 position = Vector2(-60, -32)
@@ -73,7 +88,7 @@ width_curve = SubResource("Curve_p4pb7")
 gradient = SubResource("Gradient_sdsuv")
 script = ExtResource("20_q0150")
 color = Color(0.301961, 0.8, 2, 0.0784314)
-lifetime = 0.2
+lifetime = 0.5
 
 [node name="TrailEffect2" type="Line2D" parent="."]
 position = Vector2(-60, 32)
@@ -82,15 +97,7 @@ width_curve = SubResource("Curve_p4pb7")
 gradient = SubResource("Gradient_sdsuv")
 script = ExtResource("20_q0150")
 color = Color(0.301961, 0.8, 2, 0.0784314)
-lifetime = 0.2
-
-[node name="View" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-texture_filter = 3
-material = SubResource("ShaderMaterial_ma44e")
-rotation = 1.5708
-texture = SubResource("CanvasTexture_fknoo")
-script = ExtResource("11_d8ncc")
+lifetime = 0.5
 
 [node name="FlightController" type="Node" parent="."]
 unique_name_in_owner = true
@@ -99,7 +106,6 @@ script = ExtResource("14_5nufi")
 [node name="CloseNavigator" type="Node" parent="FlightController"]
 unique_name_in_owner = true
 script = ExtResource("14_xvsf7")
-debug = true
 metadata/_custom_type_script = ExtResource("14_xvsf7")
 
 [node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view")]
@@ -108,13 +114,15 @@ script = ExtResource("20_1gdyl")
 capacity = 80.0
 cooling = 2.0
 transfer_efficiency = 0.0
-view = NodePath("../View")
+view = NodePath("../PositionExtrapolator/View")
 
 [node name="TakingDamage" type="Area2D" parent="."]
 unique_name_in_owner = true
 collision_layer = 4
 script = ExtResource("17_6qm8q")
 health = SubResource("Resource_sakv4")
+_damaged_effect_scene = ExtResource("18_sakv4")
+_destroy_effect_scene = ExtResource("19_3lg4r")
 metadata/_custom_type_script = ExtResource("17_6qm8q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TakingDamage"]
