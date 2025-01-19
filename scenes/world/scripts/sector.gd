@@ -3,11 +3,14 @@ extends Node
 
 const UNLOADING_DELTA := 0.5
 
-enum Status {NONE, UNLOADING, ACTIVE}
+enum Status {NONE, UNLOADING, ACTIVE, DELETING}
 
 var grid_cells: Array[Vector2] = []
 var position: Vector2
-var status := Sector.Status.NONE
+var status := Sector.Status.NONE:
+	set(value):
+		_previous_status = status
+		status = value
 var _previous_status := Sector.Status.NONE
 var content_manager: SectorContentManager
 var offset: Vector2
@@ -32,19 +35,23 @@ func init(sector_position: Vector2, offset: Vector2, content: SectorContentManag
 func update_status(new_status: Status, new_offset: Vector2):
 	offset = new_offset
 	if status == new_status: return
-	var _previous_status := status
 	status = new_status
 
+func need_to_load() -> bool:
+	return (status == Status.ACTIVE and _previous_status == Status.UNLOADING)\
+		or status == Status.UNLOADING
+
 func update():
-	if (_previous_status == Status.NONE\
-		or (_previous_status == Status.UNLOADING)\
-		and status == Status.ACTIVE):
-			load_content()
+	if status == Status.DELETING:
+		unload_content()
+	elif status == Status.ACTIVE\
+	and (_previous_status == Status.NONE or _previous_status == Status.UNLOADING):
+		load_content()
 	elif status == Status.UNLOADING:
-		if status == _previous_status:
-			replace_content()
-		else:
+		if _previous_status == Status.ACTIVE:
 			unload_content()
+		else:
+			replace_content()
 	_previous_status = status
 
 func unload():
@@ -67,8 +74,8 @@ func _get_opposite_sector() -> Vector2:
 func unload_content():
 	content_manager.unload_content(_get_items())
 
-func _get_items() -> Array[Node2D]:
-	var items: Array[Node2D] = []
+func _get_items() -> Array[GridItem]:
+	var items: Array[GridItem] = []
 	for cell in grid_cells:
 		if cell in _world.grid:
 			items.append_array(_world.grid[cell])
@@ -82,7 +89,8 @@ func draw_debug(duration: float):
 
 func get_debug_color() -> Color:
 	match status:
-		Sector.Status.UNLOADING: return Color.RED
+		Sector.Status.DELETING: return Color.RED
+		Sector.Status.UNLOADING: return Color.HOT_PINK
 		Sector.Status.ACTIVE: return Color.GREEN_YELLOW
 		_: return Color.PURPLE
 

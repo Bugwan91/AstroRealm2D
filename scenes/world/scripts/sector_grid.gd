@@ -1,23 +1,23 @@
 class_name SectorGrid
 extends Node
 
-@export var sector_size: int = 500:
+@export var sector_size: int = 5000:
 	set(value):
 		sector_size = value
 		_sector_size_inv = 1.0 / value
-@export var world_cell_size: int = 100
+@export var world_cell_size: int = 500
 @export var active_offset: int = 3:
 	set(value):
 		active_offset = value
 		_update_batch_value()
-@export_range(0.01, 2.0) var sector_update_delta: float = 0.2
-@export_range(0.01, 1.0) var world_update_delta: float = 0.05
+@export_range(0.01, 2.0) var sector_update_delta: float = 0.5
 
 @export_category("Content")
 @export var content_manager: SectorContentManager
 
 @export_category("Debug")
-@export var debug := false
+@export var debug_sector := false
+@export var debug_grid := false
 
 @onready var world_grid: WorldGrid = %WorldGrid
 
@@ -37,7 +37,7 @@ func _ready() -> void:
 	cells_per_sector = sector_size / world_cell_size
 	_sector_size_inv = 1.0 / sector_size
 	world_grid.cell_size = world_cell_size
-	world_grid.update_delta = world_update_delta
+	world_grid.debug = debug_grid
 	_update_batch_value()
 	MainState.sector_grid = self
 	content_manager.init(sector_size)
@@ -48,7 +48,7 @@ func _physics_process(delta: float):
 		_current_sector = get_sector_position(player_position)
 		update_sectors()
 		_collected_delta = 0.0
-		if debug: draw_debug()
+		if debug_sector: draw_debug()
 	_unload_prepared_sectors()
 	_update_prepared_sectors()
 	MyDebug.list({
@@ -92,14 +92,9 @@ func update_sectors():
 			sectors_to_keep.append(sector_pos)
 	for sector_pos in sectors.keys():
 		if not sectors_to_keep.has(sector_pos)\
-			and not _sectors_to_unload.has(sector_pos):
+		and not _sectors_to_unload.has(sector_pos):
+			sectors[sector_pos].status = Sector.Status.DELETING
 			_sectors_to_unload.append(sector_pos)
-
-func _get_sector_status(offset: Vector2) -> Sector.Status:
-	if maxi(absi(offset.x), absi(offset.y)) <= active_offset:
-		return Sector.Status.ACTIVE
-	else:
-		return Sector.Status.UNLOADING
 
 func load_or_update_sector(sector_position: Vector2, offset: Vector2):
 	var sector: Sector
@@ -112,8 +107,17 @@ func load_or_update_sector(sector_position: Vector2, offset: Vector2):
 	else:
 		sector = sectors[sector_position]
 	sector.update_status(_get_sector_status(offset), offset)
-	if sector.status == Sector.Status.UNLOADING and not _sectors_to_update.has(sector_position):
+	if sector.need_to_load() and not _sectors_to_update.has(sector_position):
 		_sectors_to_update.append(sector_position)
+
+func _get_sector_status(offset: Vector2) -> Sector.Status:
+	var offset_max := maxi(absi(offset.x), absi(offset.y))
+	if offset_max <= active_offset:
+		return Sector.Status.ACTIVE
+	elif offset_max == active_offset + 1:
+		return Sector.Status.UNLOADING
+	else:
+		return Sector.Status.DELETING
 
 func unload_sector(sector_position: Vector2):
 	sectors[sector_position].unload()

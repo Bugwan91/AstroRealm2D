@@ -57,7 +57,7 @@ func _handle_lifetime(delta: float):
 		_update_material(1.0 - (_current_lifetime - effective_lifetime) / extra_lifetime)
 
 func _update_ray(delta: float):
-	ray.target_position.y = speed * delta
+	ray.target_position.y = speed * (FREEZE_DELTA if freeze else delta)
 	prediction_ray.target_position.y = speed * time_prediction
 
 func _collide(force: bool = false):

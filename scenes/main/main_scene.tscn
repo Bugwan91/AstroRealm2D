@@ -35,12 +35,12 @@ style = ExtResource("7_lo2oh")
 [sub_resource type="Resource" id="Resource_j7r4u"]
 script = ExtResource("10_1xx6e")
 _asteroid_scene = ExtResource("9_j7r4u")
-density = 5.0
+density = 1.0
 size_variation = 0.5
 speed_variation = 0.5
 speed = 200
 rotation = 0.5
-base_velocity = Vector2(200, 0)
+base_velocity = Vector2(300, 0)
 metadata/_custom_type_script = ExtResource("10_1xx6e")
 
 [sub_resource type="Gradient" id="Gradient_3co8r"]
@@ -101,11 +101,7 @@ metadata/_edit_lock_ = true
 color = Color(0.12549, 0.12549, 0.12549, 1)
 
 [node name="SectorGrid" parent="." instance=ExtResource("8_d8uwl")]
-world_cell_size = 250
-sector_update_delta = 0.5
-world_update_delta = 0.06
 content_manager = SubResource("Resource_j7r4u")
-debug = true
 
 [node name="UI" parent="." instance=ExtResource("8_myah8")]
 

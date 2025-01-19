@@ -20,7 +20,7 @@ var _extra_item: float
 
 func init(sector_size: float):
 	_sector_size = sector_size
-	_relative_density = density * _sector_size * _sector_size * 0.0000001
+	_relative_density = density * _sector_size * _sector_size * 0.000001
 	_i_number = floori(_relative_density)
 	_extra_item = _relative_density - _i_number
 
@@ -32,17 +32,17 @@ func load_content(sector: Vector2):
 	for i in _i_number:
 		_spawn(start, end)
 
-func replace_content(items: Array[Node2D], offset: Vector2):
+func replace_content(items: Array[GridItem], offset: Vector2):
 	var shift := offset * _sector_size
 	for item in items:
-		if item is Asteroid:
-			item.reset()
-			item.position += shift
+		if item.body is Asteroid:
+			item.body.reset()
+			item.body.position += shift
 
-func unload_content(items: Array[Node2D]):
+func unload_content(items: Array[GridItem]):
 	for item in items:
-		if item is Asteroid:
-			MainState.main_scene.remove_child(item)
+		if item.body is Asteroid:
+			MainState.main_scene.remove_child(item.body)
 
 func _spawn(start: Vector2, end: Vector2):
 	var asteroid = _get_asteroid()

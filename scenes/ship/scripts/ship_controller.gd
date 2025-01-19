@@ -39,11 +39,11 @@ func setup(spaceship: Spaceship):
 
 func integrate_forces(state: PhysicsDirectBodyState2D):
 	if not is_instance_valid(inputs): return
+	_dodge(state)
 	inputs.strafe += _closee_navigator.update_course(
 		state.step,
 		state.transform.origin,
 		state.linear_velocity).rotated(-ship.rotation) * 2.0
-	_dodge(state)
 	_stop(state)
 	_strafe(state)
 	_rotate(state)

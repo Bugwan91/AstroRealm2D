@@ -10,9 +10,9 @@ func load_content(sector: Vector2):
 	pass
 
 ## Override
-func unload_content(items: Array[Node2D]):
+func unload_content(items: Array[GridItem]):
 	pass
 
 ## Override if needed
-func replace_content(items: Array[Node2D], offset: Vector2):
+func replace_content(items: Array[GridItem], offset: Vector2):
 	pass
