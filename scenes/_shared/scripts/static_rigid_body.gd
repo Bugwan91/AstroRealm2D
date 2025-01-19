@@ -19,6 +19,8 @@ func freeze_body():
 	## INFO: Profiler shows no effect from disabling collisions
 	#set_collisions(!value)
 	freeze = true
+	if is_instance_valid(grid_item):
+		grid_item.freeze()
 	set_physics_process(true)
 
 func unfreeze_body():
@@ -26,6 +28,8 @@ func unfreeze_body():
 	linear_velocity = _l_v
 	angular_velocity = _a_v
 	freeze = false
+	if is_instance_valid(grid_item):
+		grid_item.unfreeze()
 	set_physics_process(false)
 
 func _physics_process(delta: float) -> void:
@@ -34,3 +38,4 @@ func _physics_process(delta: float) -> void:
 		position += _l_v * _delta
 		rotation += _a_v * _delta
 		_delta = 0.0
+		grid_item.update()

@@ -3,7 +3,7 @@ extends Node
 
 const UNLOADING_DELTA := 0.5
 
-enum Status {NONE, UNLOADING, FREEZED, ACTIVE}
+enum Status {NONE, UNLOADING, ACTIVE}
 
 var grid_cells: Array[Vector2] = []
 var position: Vector2
@@ -37,19 +37,14 @@ func update_status(new_status: Status, new_offset: Vector2):
 
 func update():
 	if (_previous_status == Status.NONE\
-		or _previous_status == Status.UNLOADING)\
-		and status != Status.UNLOADING:
+		or (_previous_status == Status.UNLOADING)\
+		and status == Status.ACTIVE):
 			load_content()
 	elif status == Status.UNLOADING:
 		if status == _previous_status:
 			replace_content()
 		else:
 			unload_content()
-	if status != Status.UNLOADING:
-		if status == Status.ACTIVE:
-			activate()
-		if status == Status.FREEZED:
-			freeze()
 	_previous_status = status
 
 func unload():
@@ -72,16 +67,6 @@ func _get_opposite_sector() -> Vector2:
 func unload_content():
 	content_manager.unload_content(_get_items())
 
-func freeze():
-	for item in _get_items():
-		if item is StaticRigidBody:
-			item.freeze_body()
-
-func activate():
-	for item in _get_items():
-		if item is StaticRigidBody:
-			item.unfreeze_body()
-
 func _get_items() -> Array[Node2D]:
 	var items: Array[Node2D] = []
 	for cell in grid_cells:
@@ -98,7 +83,6 @@ func draw_debug(duration: float):
 func get_debug_color() -> Color:
 	match status:
 		Sector.Status.UNLOADING: return Color.RED
-		Sector.Status.FREEZED: return Color.DODGER_BLUE
 		Sector.Status.ACTIVE: return Color.GREEN_YELLOW
 		_: return Color.PURPLE
 
