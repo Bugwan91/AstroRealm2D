@@ -12,7 +12,7 @@ show_default_buttons=false
 
 [application]
 
-config/name="AstroRealm"
+config/name="Void Sentinel"
 run/main_scene="res://scenes/main/main_scene.tscn"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://AR_icon.png"
