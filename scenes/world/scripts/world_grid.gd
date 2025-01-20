@@ -18,7 +18,6 @@ var player_position: Vector2
 
 var _cell_size_inv: float
 var _player_cell: Vector2
-var _camera: Camera2D
 var _viewport: Viewport
 
 var _viewport_rect: Rect2
@@ -28,7 +27,6 @@ func _ready() -> void:
 	process_physics_priority = -99
 	MainState.world_grid = self
 	_viewport = get_viewport()
-	_camera = _viewport.get_camera_2d()
 	_viewport_margin = 2.0 * (cell_size + VIEWPORT_EXTRA_MARGIN) * Vector2.ONE
 
 func _physics_process(delta: float) -> void:
@@ -82,8 +80,8 @@ func _get_cell_position(position: Vector2) -> Vector2:
 	)
 
 func _update_viewport_rect():
-	var center := _camera.get_screen_center_position()
-	var size := _viewport.get_visible_rect().size / _camera.zoom + _viewport_margin
+	var center := MainState.camera_controller.get_screen_center_position()
+	var size := _viewport.get_visible_rect().size / MainState.camera_controller.zoom_min + _viewport_margin
 	var pos := center - 0.5 * size
 	_viewport_rect = Rect2(pos, size)
 

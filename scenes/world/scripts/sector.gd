@@ -41,18 +41,24 @@ func need_to_load() -> bool:
 	return (status == Status.ACTIVE and _previous_status == Status.UNLOADING)\
 		or status == Status.UNLOADING
 
-func update():
+func update() -> bool:
+	var updated := false
 	if status == Status.DELETING:
 		unload_content()
+		updated = true
 	elif status == Status.ACTIVE\
 	and (_previous_status == Status.NONE or _previous_status == Status.UNLOADING):
 		load_content()
+		updated = true
 	elif status == Status.UNLOADING:
 		if _previous_status == Status.ACTIVE:
 			unload_content()
+			updated = true
 		else:
 			replace_content()
+			updated = true
 	_previous_status = status
+	return updated
 
 func unload():
 	content_manager.unload_content(_get_items())

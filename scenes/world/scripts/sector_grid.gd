@@ -70,7 +70,7 @@ func _update_prepared_sectors():
 	var i := 0
 	var copy = _sectors_to_update
 	for sector in copy:
-		sectors[sector].update()
+		if sectors[sector].update(): i += 1
 		_sectors_to_update.erase(sector)
 		if i > _update_batch:
 			return
