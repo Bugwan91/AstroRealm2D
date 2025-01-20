@@ -9,6 +9,6 @@ speed = 1200.0
 boost_base = 600.0
 strafe_base = 600.0
 turn_base = 0.05
-dodge_base = 40.0
+dodge_base = 30.0
 dodge_duration = 0.1
 dodge_cooldown = 0.5

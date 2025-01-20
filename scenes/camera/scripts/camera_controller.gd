@@ -3,8 +3,6 @@ extends Camera2D
 
 signal zoomed(zoom: float)
 
-@export var acceleration := 256.0
-@export var acceleration_limit := 64.0
 @export var zoom_min := 0.1
 @export var zoom_max := 2.0
 @export var zoom_speed := 0.05
@@ -12,7 +10,6 @@ signal zoomed(zoom: float)
 var shift := Vector2.ZERO
 
 var target: Spaceship
-var _acceleration: Vector2
 var _required_look_position: Vector2
 var _hit_position: Vector2
 var _zoom_min: Vector2
@@ -34,20 +31,11 @@ func _unhandled_input(event):
 	_target_zoom = _target_zoom.clamp(_zoom_min, _zoom_max)
 
 func update(delta: float) -> Vector2:
-	#TODO: IMPORTANT! Need to interpolate position according to physics step time
 	if not is_instance_valid(target): return Vector2.ZERO
 	if _target_zoom != zoom:
 		zoom = lerp(zoom, _target_zoom, 5.0 * delta)
 		zoomed.emit(zoom.x)
 	_required_look_position = lerp(_required_look_position, _get_look_position(), 2.0 * delta)
-	#_hit_position = lerp(_hit_position, Vector2.ZERO, 10.0 * delta)
-	#var d_a := target.tick_acceleration - _acceleration * delta
-	#var a := d_a.length()
-	#a = minf(a, acceleration * delta)
-	#_acceleration += d_a.normalized() * a
-	#a = minf(_acceleration.length(), acceleration_limit)
-	#_acceleration = _acceleration.normalized() * a
-	#var new_position = target.position - _acceleration + _required_look_position + _hit_position
 	var new_position = target.extrapolator.smooth_position + _required_look_position
 	shift = new_position - position
 	position = new_position
@@ -70,8 +58,7 @@ func _get_look_position() -> Vector2:
 func _on_update_player_ship(player_ship: Spaceship):
 	target = player_ship
 	if not target: return
-	#target.got_hit.connect(_shake_on_hit) # TODO: fix
-	# OR give projectiles abbility to transfer inpulse to target and skip this at all
 
+# TODO: Not unig this so far, probably should be deleting at all after playtesting
 func _shake_on_hit(hit: Vector2):
 	_hit_position = -hit * 0.5 / zoom # TODO: Clamp for huge impulses

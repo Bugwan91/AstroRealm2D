@@ -80,6 +80,8 @@ func _get_opposite_sector() -> Vector2:
 func unload_content():
 	content_manager.unload_content(_get_items())
 
+# HACK: Should returns Array[Node2D] instead of GridItems.
+# The GridItem should be incapsulated as much as possible
 func _get_items() -> Array[GridItem]:
 	var items: Array[GridItem] = []
 	for cell in grid_cells:

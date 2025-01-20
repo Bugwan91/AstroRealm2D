@@ -1,3 +1,4 @@
+# FIXME: Not using this
 class_name ShipFlightAssistant
 extends Node
 

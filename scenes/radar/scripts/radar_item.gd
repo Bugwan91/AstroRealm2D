@@ -40,7 +40,7 @@ func _ready():
 		input_event.connect(handle_click)
 
 func handle_click(_viewport, event, _shape_idx):
-	# TODO: It's better to untilize new world partitioning system to get nearest radar item.
+	# HACK: It's better to untilize new world partitioning system to get nearest radar item.
 	# Currently it's hard to click on object moving fast
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE:
 		selected.emit(self)

@@ -33,7 +33,7 @@ func update(type: ShipBlueprint.Type, value: Resource):
 
 func set_hull(resource: HullBakerResource):
 	if resource == null: return # Hull is mandatory, can't be completely romoved
-	# TODO: engine should be made mandatory as well
+	# HACK: engine should be made mandatory as well
 	_hull.texture = resource.texture(type)
 	_hull.position = -resource.pivot_point
 	_create_engines(resource.engine_slots, _clear_engines())
@@ -66,4 +66,3 @@ func _create_engines(positions: Array[Vector2], texture: Texture2D):
 		engine.position = engine_position
 		engine.texture = texture
 		_engines.add_child(engine)
-

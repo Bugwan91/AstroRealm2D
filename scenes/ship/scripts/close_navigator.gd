@@ -45,7 +45,7 @@ func _update_avoidance_course():
 				if dist < (b.radius + radius + DIST_MARGIN):
 					t_min = t
 					var ints := dist / (b.radius + radius)
-					_course = -d.normalized()
+					_course = (-d.normalized() + 0.5 * v.normalized()).normalized()
 					if debug:
 						DebugDraw2d.line_vector(
 							_position,

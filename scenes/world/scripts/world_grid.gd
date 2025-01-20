@@ -80,6 +80,7 @@ func _get_cell_position(position: Vector2) -> Vector2:
 	)
 
 func _update_viewport_rect():
+	# HACK: should not depends on mainState.camera_controller
 	var center := MainState.camera_controller.get_screen_center_position()
 	var size := _viewport.get_visible_rect().size / MainState.camera_controller.zoom_min + _viewport_margin
 	var pos := center - 0.5 * size

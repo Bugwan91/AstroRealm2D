@@ -4,7 +4,7 @@ extends ActiveRigidBody
 signal dead(ship: Spaceship)
 #region Export properties
 @export var data: ShipData: set = _set_ship_data
-@export var group: String # TODO: Rework with implementation factions/groups system
+@export var group: String # HACK: Rework with implementation factions/groups system
 
 @export var gun_scene: PackedScene
 

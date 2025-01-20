@@ -4,7 +4,7 @@ extends Node
 const ANGULAR_THRESHOLD := 0.01
 const STOP_THRESHOLD := 1.0
 const DRAG := 0.5 # Not needs yet, but should thi be a global constant?
-const STRAFE_LOW_SPEED_BONUS := 2.0
+const STRAFE_LOW_SPEED_BONUS := 4.0
 
 signal dodging(bool)
 
@@ -96,7 +96,7 @@ func _strafe(state: PhysicsDirectBodyState2D):
 func _strafe_bonus(state: PhysicsDirectBodyState2D) -> float:
 	var s := state.linear_velocity.length()
 	var d := minf(s / flight_model.speed, 1.0)
-	return pow((1.0 - d), 2.0) * STRAFE_LOW_SPEED_BONUS
+	return pow((1.0 - d), 3.0) * STRAFE_LOW_SPEED_BONUS
 
 func _rotate(state: PhysicsDirectBodyState2D):
 	var d := state.transform.x.angle_to(input_reader.update_target_point() - state.transform.origin)
@@ -105,7 +105,7 @@ func _rotate(state: PhysicsDirectBodyState2D):
 		return
 	var a := flight_model.turn * state.step
 	var vt := 0.5 * (sqrt(a * (a + 8.0 * absf(d))) - a) * signf(d) / state.step
-	# TODO: reimplemet this with apply_torque()
+	# HACK: reimplemet this with apply_torque()
 	ship.angular_velocity = vt
 
 func _boost(state: PhysicsDirectBodyState2D):

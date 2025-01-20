@@ -1,4 +1,4 @@
-# TODO: Refactoring: rename to SelectionItemUI
+# HACK: Refactoring: rename to SelectionItemUI
 class_name ShipSelectionUI
 extends CanvasLayer
 

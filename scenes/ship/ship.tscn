@@ -106,6 +106,7 @@ script = ExtResource("14_5nufi")
 [node name="CloseNavigator" type="Node" parent="FlightController"]
 unique_name_in_owner = true
 script = ExtResource("14_xvsf7")
+debug = true
 metadata/_custom_type_script = ExtResource("14_xvsf7")
 
 [node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view")]

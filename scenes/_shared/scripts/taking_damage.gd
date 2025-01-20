@@ -1,4 +1,3 @@
-#TODO: Refactor: move to another location
 class_name TakingDamage
 extends Area2D
 
@@ -64,7 +63,7 @@ func _handle_damage_effect():
 func _handle_death():
 	if health.is_dead:
 		_handle_death_effect()
-		# TODO: create debris instead
+		# HACK: create debris instead
 		if keep_on_destroy:
 			MainState.main_scene.remove_child(parent)
 		else:

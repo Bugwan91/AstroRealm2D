@@ -1,6 +1,6 @@
 class_name ShipBlueprintBaker
 extends Control
-#TODO: Render viewports only on demand
+# HACK: Render viewports only on demand
 signal updated(design: ShipDesignData)
 
 @export var bake_on_updates := false

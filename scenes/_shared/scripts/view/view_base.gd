@@ -1,4 +1,3 @@
-#TODO: Refactor: move to another location
 class_name BaseView
 extends Sprite2D
 

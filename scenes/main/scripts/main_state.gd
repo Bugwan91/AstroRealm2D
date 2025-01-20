@@ -1,3 +1,4 @@
+# FIXME: The whole class should be managed better. Find solution for such global bridge/manager!
 extends Node
 
 signal main_scene_ready
@@ -25,14 +26,14 @@ var ship_designer: ShipDesignerUI
 
 var player_ship: Spaceship: set = _update_player_ship
 
-### TODO # REMOVE ### REFACTOR ###
+### FIXME # REMOVE ### REFACTOR ###
 var fa_tracking := false
 var fa_tracking_distance := 0.0
 var fa_autopilot := false
 var fa_autopilot_speed := 500.0
-### TODO # REMOVE ### REFACTOR ###
+### REMOVE ### REFACTOR ###
 
-# TODO: move player related code into separate PlayerManager class
+# HACK: move player related code into separate PlayerManager class
 func connect_to_player(callback: Callable):
 	player_ship_updated.connect(callback)
 	callback.call(player_ship)

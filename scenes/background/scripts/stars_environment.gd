@@ -11,8 +11,7 @@ func _ready():
 
 func _process(_delta):
 	pass
-	# DEPRECATED
-	# TODO: fix this to work without floating origin
+	# FIXME: DEPRECATED: fix this to work without floating origin
 	# var speed := FloatingOrigin.speed
 	# process_material.directional_velocity_min = speed
 	# process_material.directional_velocity_max = speed
