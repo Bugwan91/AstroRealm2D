@@ -35,7 +35,7 @@ project/assembly_name="Astro2D"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/points_resource_editor/plugin.cfg", "res://addons/ship_editor_tool/plugin.cfg", "res://addons/tool_button/plugin.cfg", "res://addons/vector2_array_resource_editor/plugin.cfg")
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/points_resource_editor/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/ship_editor_tool/plugin.cfg", "res://addons/tool_button/plugin.cfg", "res://addons/vector2_array_resource_editor/plugin.cfg")
 
 [file_customization]
 
