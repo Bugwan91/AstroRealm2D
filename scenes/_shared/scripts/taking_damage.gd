@@ -65,7 +65,7 @@ func _handle_death():
 		_handle_death_effect()
 		# HACK: create debris instead
 		if keep_on_destroy:
-			MainState.main_scene.remove_child(parent)
+			WorldGridManager.instance.world_root.remove_child(parent)
 		else:
 			parent.queue_free()
 
@@ -79,4 +79,4 @@ func _handle_death_effect():
 	var effect: ShipDestroyEffect = _destroy_effect_scene.instantiate()
 	effect.position = parent.global_position
 	effect.linear_velocity = linear_velocity
-	MainState.main_scene.add_child(effect)
+	WorldGridManager.instance.world_root.add_child(effect)

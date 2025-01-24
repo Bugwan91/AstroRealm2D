@@ -1,41 +1,32 @@
 class_name StaticRigidBody
 extends RigidBody
 
-const FREEZE_DELTA := 0.5
-
-var _l_v: Vector2
-var _a_v: float
-
-var _order: int
-var _delta:= 0.0
-
-func _ready() -> void:
-	super._ready()
-	freeze_body(true)
-	_order = randi_range(1, Engine.physics_ticks_per_second * FREEZE_DELTA)
-	_delta = _order / Engine.physics_ticks_per_second
+var _lv: Vector2
+var _av: float
 
 func freeze_body(value: bool):
 	if freeze == value: return
 	freeze = value
-	extrapolator.freeze = value
-	if is_instance_valid(grid_item):
-		grid_item.freeze = value
-	set_physics_process(value)
-	## INFO: Profiler shows no effect from disabling collisions.
-	## Probably it is because freezed bodies dones't collide with other freezed bodies
-	#set_collisions(!value)
-	if value:
-		_l_v = linear_velocity
-		_a_v = angular_velocity
-	else:
-		linear_velocity = _l_v
-		angular_velocity = _a_v
+	if is_instance_valid(extrapolator):
+		extrapolator.freeze = value
+	_use_velocity_hack()
 
-func _physics_process(delta: float) -> void:
-	_delta += delta
-	if _delta > FREEZE_DELTA:
-		position += _l_v * _delta
-		rotation += _a_v * _delta
-		grid_item.update()
-		_delta = 0.0
+func _ready():
+	_init_velocity_hack()
+
+func freeze_process(delta: float):
+	position += _lv * delta
+	rotation += _av * delta
+
+# HACK: Do no know why, but after unfreezing RB stops moving. Used this hack to fix.
+func _init_velocity_hack():
+	_lv = linear_velocity
+	_av = angular_velocity
+
+func _use_velocity_hack():
+	if freeze:
+		_lv = linear_velocity
+		_av = angular_velocity
+	else:
+		linear_velocity = _lv
+		angular_velocity = _av

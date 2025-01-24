@@ -1,18 +1,23 @@
-class_name SectorContentManager
+class_name ChunkContentManager
 extends Resource
 
 ## Override
-func init(sector_size: float):
+func init(chunk_size: float):
 	pass
 
 ## Override
-func load_content(sector: Vector2):
+## Will be called when new chunk loaded. Passing chunk position as an argument
+func load_content(chunk: Vector2):
 	pass
 
 ## Override
-func unload_content(items: Array[GridItem]):
+## Will be called on chunk unloading. Passing all nodes in the unloaded chunk
+func unload_content(items: Array[Node2D]):
 	pass
 
 ## Override if needed
-func replace_content(items: Array[GridItem], offset: Vector2):
+## Optional
+## FIXME: it is probaby not optional now, as there are no asteroid deletion on sides.
+## Probably I can return boolean and check this in chunk to know if the unload_contedt should be called instead
+func replace_content(items: Array[Node2D], offset: Vector2):
 	pass

@@ -44,9 +44,8 @@ func init(
 		_radar.icon.setup_scale(size)
 		var size_inv := 1.0 / size
 		linear_velocity = vel + _rand_velocity(speed, spd_variation, size_inv)
-		_l_v = linear_velocity
 		angular_velocity = _rand_rotation(rot, rot_variation, size_inv)
-		_a_v = angular_velocity
+		_init_velocity_hack()
 
 func reset():
 	_radar.reset()

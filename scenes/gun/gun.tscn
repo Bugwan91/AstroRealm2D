@@ -57,8 +57,8 @@ material = SubResource("ShaderMaterial_whwpl")
 rotation = 1.5708
 texture = SubResource("CanvasTexture_c5j27")
 script = ExtResource("10_3kf55")
-emission_reduction = 2.0
-max_emission = 16.0
+emission_reduction = 4.0
+max_emission = 8.0
 
 [node name="ShootPoint" type="Marker2D" parent="."]
 unique_name_in_owner = true

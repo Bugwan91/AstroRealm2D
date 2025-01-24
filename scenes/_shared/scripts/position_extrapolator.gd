@@ -35,6 +35,9 @@ func _ready():
 	_body.extrapolator = self
 	set_process(is_active)
 
+# HACK: There is Godot's Physics interpolation, but it works not perfect.
+# Maybe I need to add camera as child to player's ship to fix it.
+# Need to try it layter.
 func _process(_delta) -> void:
 	var delta := Engine.get_physics_interpolation_fraction() * MainState.last_delta
 	rotation = _body.angular_velocity * delta

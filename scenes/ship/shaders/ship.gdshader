@@ -19,7 +19,7 @@ vec3 light_normal_compute(vec3 L, vec3 N, vec3 B_color, vec3 L_color, float Spec
 	vec3 Diffuse = NdotL * Color;
 		// Specular
 	vec3 R = reflect(-L, N);
-	float RdotV = clamp(dot(R, V), 0.0, 1.0);
+	float RdotV = clamp(dot(R, V) * 1.05, 0.0, 1.0);
 	float shini = 1.0 / (1.0 - Spec * 0.999);
 	float area = pow(RdotV, shini);
 	vec3 Specular = Color * area * shini;

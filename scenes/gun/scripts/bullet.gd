@@ -26,7 +26,6 @@ var _current_lifetime := 0.0
 var _light_base_energy: float
 
 func _ready():
-	super._ready()
 	_base_velocity = transform.x * relative_speed
 	linear_velocity = start_velocity + _base_velocity
 	trail.velocity = _base_velocity
@@ -57,7 +56,7 @@ func _handle_lifetime(delta: float):
 		_update_material(1.0 - (_current_lifetime - effective_lifetime) / extra_lifetime)
 
 func _update_ray(delta: float):
-	ray.target_position.y = speed * (FREEZE_DELTA if freeze else delta)
+	ray.target_position.y = speed * delta
 	prediction_ray.target_position.y = speed * time_prediction
 
 func _collide(force: bool = false):

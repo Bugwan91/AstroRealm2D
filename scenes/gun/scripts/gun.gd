@@ -87,7 +87,7 @@ func _spawn_bullet(delta: float):
 	shoot_recoil.emit(-transform.x.rotated(global_rotation + spear) * recoil)
 	bullet.impulse = recoil
 	bullet.relative_speed = bullet_speed
-	MainState.main_scene.add_child(bullet)
+	WorldGridManager.instance.world_root.add_child(bullet)
 	_heat.add_heat(heat_per_shoot)
 	view.emit_max()
 

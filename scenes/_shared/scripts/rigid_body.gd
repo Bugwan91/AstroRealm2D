@@ -3,7 +3,6 @@ extends RigidBody2D
 
 @export var radius := 64.0
 var extrapolator: PositionExtrapolator
-var grid_item: GridItem
 
 var _debug_color: Color = Color.from_hsv(randf(), 1.0, 1.0)
 

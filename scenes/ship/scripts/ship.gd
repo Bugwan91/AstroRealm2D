@@ -64,6 +64,7 @@ func _connect_player_inputs():
 	if not _is_player(): return
 	_radar_item.config.icon.color = Color(0.2, 0.8, 1.0)
 	MainState.player_ship = self
+	WorldGridManager.instance.player = self
 
 func _connect_flight_controller_inputs():
 	flight_controller.input_reader = input_reader
@@ -86,9 +87,6 @@ func _set_ship_data(new_data: ShipData):
 func _physics_process(delta):
 	_update_velocity_for_weapons()
 	super._physics_process(delta)
-	if _is_player():
-		MainState.world_grid.player_position = position
-		MainState.sector_grid.player_position = position
 
 func _integrate_forces(state):
 	flight_controller.integrate_forces(state)

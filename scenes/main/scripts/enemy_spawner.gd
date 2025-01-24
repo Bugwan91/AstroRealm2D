@@ -15,7 +15,7 @@ var ship_scene: PackedScene = preload("res://scenes/ship/ship.tscn")
 var ships: Array[Spaceship]
 
 func _ready():
-	await MainState.main_scene_ready
+	await MainState.world_root_ready
 	_ship_spawn_timer.wait_time = interval
 	_ship_spawn_timer.timeout.connect(func():
 		if ships.size() < max_count:

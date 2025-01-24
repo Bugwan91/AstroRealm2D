@@ -1,13 +1,18 @@
 class_name RadarViewport
 extends Control
 
+const DEF_RADIUS := 200.0
+
 @export_range(0.01, 1.0) var update_interval := 0.1
-@export var radius := 256.0
+var radius := 200.0
 
 var _icons: Array[RadarIcon] = []
 var _current_delta := 0.0
+var _scale := 1.0
 
 func _ready() -> void:
+	radius = custom_minimum_size.x * 0.5
+	_scale = radius / DEF_RADIUS
 	MainState.radar_manager.radar_view = self
 
 func _physics_process(delta: float) -> void:

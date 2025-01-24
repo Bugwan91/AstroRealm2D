@@ -29,11 +29,10 @@ func update_course(delta: float, position: Vector2, velocity: Vector2) -> Vector
 	return _course
 
 func _update_avoidance_course():
-	var grid_items := MainState.world_grid.get_nearby(_position)
+	var items := WorldGridManager.instance.grid.get_nearby(_position)
 	var t_min := MAX_TIME_TO_APPROACH
 	_course = Vector2.ZERO
-	for grid_item in grid_items:
-		var item = grid_item.body
+	for item in items:
 		if item is RigidBody:
 			var b := item as RigidBody
 			var r := b.global_position - _position

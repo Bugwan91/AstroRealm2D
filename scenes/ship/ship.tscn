@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=32 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" uid="uid://b2ih5uxk3qw0h" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
@@ -21,6 +21,9 @@
 [ext_resource type="Script" uid="uid://liqs1h6x4e1p" path="res://scenes/heat/scripts/Heat.gd" id="20_1gdyl"]
 [ext_resource type="Script" uid="uid://w8vsnqoourdh" path="res://scenes/vfx/scripts/trail.gd" id="20_q0150"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="20_w3y8g"]
+[ext_resource type="Material" uid="uid://cqy56rhnpln3r" path="res://scenes/ship/shaders/ship_mat.tres" id="22_2xkf5"]
+[ext_resource type="Texture2D" uid="uid://t4p237ht1kcg" path="res://assets/spaceships/hull/02/_interrior.png" id="23_0616w"]
+[ext_resource type="Texture2D" uid="uid://brgjtbampllsy" path="res://assets/spaceships/hull/02/_interrior_n.png" id="24_xvqm4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w2dh3"]
 radius = 42.0
@@ -42,6 +45,10 @@ diffuse_texture = ExtResource("10_r75st")
 normal_texture = ExtResource("11_6qm8q")
 texture_filter = 3
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_wcdsx"]
+diffuse_texture = ExtResource("23_0616w")
+normal_texture = ExtResource("24_xvqm4")
+
 [sub_resource type="Curve" id="Curve_p4pb7"]
 _data = [Vector2(0, 1), 0.0, -0.322088, 0, 0, Vector2(1, 0), -1.16987, 0.0, 0, 0]
 point_count = 2
@@ -60,6 +67,7 @@ script = ExtResource("1_5ckws")
 data = ExtResource("2_uwj24")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-6, 0)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_w2dh3")
@@ -79,6 +87,13 @@ material = SubResource("ShaderMaterial_ma44e")
 rotation = 1.5708
 texture = SubResource("CanvasTexture_fknoo")
 script = ExtResource("11_d8ncc")
+
+[node name="Interrior" type="Sprite2D" parent="PositionExtrapolator"]
+modulate = Color(1, 1, 1, 0.117647)
+material = ExtResource("22_2xkf5")
+position = Vector2(5, 0)
+rotation = 1.5708
+texture = SubResource("CanvasTexture_wcdsx")
 
 [node name="TrailEffect" type="Line2D" parent="."]
 position = Vector2(-60, -32)
@@ -119,6 +134,7 @@ view = NodePath("../PositionExtrapolator/View")
 
 [node name="TakingDamage" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 collision_layer = 4
 script = ExtResource("17_6qm8q")
 health = SubResource("Resource_sakv4")

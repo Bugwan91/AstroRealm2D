@@ -9,10 +9,12 @@ extends Node2D
 
 @onready var player_ship_baker: ShipBlueprintBaker = %PlayerShipBaker
 @onready var autopilot_pointer = %AutopilotPointer
+@onready var world = %World
 var ship_scene: PackedScene = preload("res://scenes/ship/ship.tscn")
 
 func _ready():
 	process_physics_priority = -1001
+	MainState.world_root = world
 	MainState.main_scene = self
 
 func _physics_process(delta: float) -> void:
@@ -34,9 +36,9 @@ func spawn_player_ship(position: Vector2 = Vector2.ZERO):
 	var audio_listener = AudioListener2D.new()
 	ship.add_child(audio_listener)
 	audio_listener.make_current()
-	add_child(ship)
+	WorldGridManager.instance.world_root.add_child(ship)
+	# HACK: ideally this should works before _ready() call
 	ship.setup_health(1000.0)
-	
 
 func _create_ship_configuration() -> ShipData:
 	var ship_data = ShipData.new()

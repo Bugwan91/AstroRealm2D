@@ -1,9 +1,9 @@
 class_name AsteroidField
-extends SectorContentManager
+extends ChunkContentManager
 
 @export var _asteroid_scene: PackedScene
 ## asteroids per 1000x1000 units
-@export_range(0, 20) var density: float = 5.0
+@export_range(0, 3) var density: float = 0.5
 @export_range(0.1, 0.9) var size_variation := 0.5
 @export_range(0.0, 1.0) var speed_variation := 0.5
 @export_range(0.0, 3000.0) var speed := 250
@@ -13,36 +13,36 @@ extends SectorContentManager
 var _asteroids_in_use: Array[Asteroid]
 var _asteroids_pool: Array[Asteroid]
 
-var _sector_size: float
+var _chunk_size: float
 var _relative_density: float
 var _i_number: int
 var _extra_item: float
 
-func init(sector_size: float):
-	_sector_size = sector_size
-	_relative_density = density * _sector_size * _sector_size * 0.000001
+func init(chunk_size: float):
+	_chunk_size = chunk_size
+	_relative_density = density * _chunk_size * _chunk_size * 0.000001
 	_i_number = floori(_relative_density)
 	_extra_item = _relative_density - _i_number
 
-func load_content(sector: Vector2):
-	var start := sector * _sector_size
-	var end := start + Vector2.ONE * _sector_size
+func load_content(chunk: Vector2):
+	var start := chunk * _chunk_size
+	var end := start + Vector2.ONE * _chunk_size
 	if _extra_item > randf():
 		_spawn(start, end)
 	for i in _i_number:
 		_spawn(start, end)
 
-func replace_content(items: Array[GridItem], offset: Vector2):
-	var shift := offset * _sector_size
+func replace_content(items: Array[Node2D], offset: Vector2):
+	var shift := offset * _chunk_size
 	for item in items:
-		if item.body is Asteroid:
-			item.body.reset()
-			item.body.position += shift
+		if item is Asteroid:
+			item.reset()
+			item.position += shift
 
-func unload_content(items: Array[GridItem]):
+func unload_content(items: Array[Node2D]):
 	for item in items:
-		if item.body is Asteroid:
-			MainState.main_scene.remove_child(item.body)
+		if item is Asteroid:
+			WorldGridManager.instance.world_root.remove_child(item)
 
 func _spawn(start: Vector2, end: Vector2):
 	var asteroid = _get_asteroid()
@@ -50,7 +50,7 @@ func _spawn(start: Vector2, end: Vector2):
 		randf_range(start.x, end.x),
 		randf_range(start.y, end.y)
 	)
-	MainState.main_scene.add_child(asteroid)
+	WorldGridManager.instance.world_root.add_child(asteroid)
 	asteroid.init(
 		randf_range(1.0 - size_variation, 1.0 + size_variation),
 		base_velocity,
