@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bpls80k7m83ak" path="res://scenes/gun/scripts/bullet_hit_effect.gd" id="1_27y4s"]
 [ext_resource type="AudioStream" uid="uid://cejv4j507tnti" path="res://assets/sounds/spacelord_hit2.wav" id="2_6t2pu"]
-[ext_resource type="Texture2D" uid="uid://1nvctn7w0agl" path="res://assets/VFX_textures/spark_04.png" id="3_ug1on"]
+[ext_resource type="Texture2D" uid="uid://1nvctn7w0agl" path="res://assets/VFX_textures/pack_1/spark_04.png" id="3_ug1on"]
 [ext_resource type="Material" uid="uid://clufqa0vb1vo4" path="res://scenes/gun/assets/hit_effect_mat.tres" id="4_03671"]
 [ext_resource type="Texture2D" uid="uid://c388olp5jsja" path="res://assets/my/circle_texture_128.tres" id="6_dsq42"]
 

@@ -37,7 +37,6 @@ unique_name_in_owner = true
 modulate = Color(0, 8, 0, 0.5)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_8unas")
-scale = Vector2(2, 1)
 texture = ExtResource("4_0sbfp")
 
 [node name="Light" type="PointLight2D" parent="."]
@@ -63,4 +62,5 @@ width = 2.0
 width_curve = SubResource("Curve_i0wtl")
 gradient = SubResource("Gradient_7dx5m")
 script = ExtResource("6_51oes")
-lifetime = 0.2
+lifetime = 0.1
+skip_tiks = 0

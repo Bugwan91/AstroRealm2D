@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://f787xuov3u4t"]
+[gd_scene load_steps=16 format=3 uid="uid://f787xuov3u4t"]
 
 [ext_resource type="Script" uid="uid://dtkhtyoen3ad2" path="res://scenes/gun/scripts/gun.gd" id="1_heu61"]
 [ext_resource type="PackedScene" uid="uid://dwdthpisfmojs" path="res://scenes/gun/bullet.tscn" id="2_gsief"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://dybegsvrepwwy" path="res://scenes/_shared/scripts/view/view_weapon.gd" id="10_3kf55"]
 [ext_resource type="Texture2D" uid="uid://bycsfl6wbsu8g" path="res://assets/spaceships/weapons/01_normal.png" id="10_pmh73"]
 [ext_resource type="Script" uid="uid://liqs1h6x4e1p" path="res://scenes/heat/scripts/Heat.gd" id="11_7n2e0"]
+[ext_resource type="Texture2D" uid="uid://lowp57mecpcf" path="res://assets/VFX_textures/muzzle_01.png" id="12_hyqnp"]
+[ext_resource type="Texture2D" uid="uid://c388olp5jsja" path="res://assets/my/circle_texture_128.tres" id="12_t6ksw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_whwpl"]
 shader = ExtResource("4_cqrqv")
@@ -31,9 +33,8 @@ texture_filter = 3
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_heu61")
 bullet_scene = ExtResource("2_gsief")
-bullet_color = Color(0.479839, 0.863858, 0.475553, 1)
+bullet_color = Color(0.973488, 0.705112, 0, 1)
 fire_rate = 8.0
-bullet_speed = 1000.0
 recoil = 10.0
 heat_per_shoot = 1.0
 
@@ -59,6 +60,20 @@ texture = SubResource("CanvasTexture_c5j27")
 script = ExtResource("10_3kf55")
 emission_reduction = 4.0
 max_emission = 8.0
+
+[node name="MuzzleFlash" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(51, -1)
+rotation = 1.5708
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("12_hyqnp")
+
+[node name="MuzzleFlashLight" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(16, 0)
+texture = ExtResource("12_t6ksw")
+texture_scale = 8.0
+height = 40.0
 
 [node name="ShootPoint" type="Marker2D" parent="."]
 unique_name_in_owner = true

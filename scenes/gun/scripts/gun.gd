@@ -23,6 +23,10 @@ signal tranfser_heat(heat: float)
 @onready var _shoot_point: Node2D = %ShootPoint
 @onready var _heat = %Heat
 
+@onready var _flash: Sprite2D = %MuzzleFlash
+@onready var _flash_light: PointLight2D = %MuzzleFlashLight
+var _flast_intensity := 0.0
+
 var origin: Node2D
 
 @onready var view: WeaponView = %View
@@ -45,6 +49,9 @@ func _ready():
 	_projectile_lifetime = effective_range / bullet_speed
 	_projectile_extra_lifetime = extra_range / bullet_speed
 	view.set_emission_color(bullet_color)
+	_flash.modulate = bullet_color * 0.0
+	_flash_light.color = bullet_color
+	_flash_light.energy = 0.0
 
 func on_fire_input(value: bool):
 	_is_firing = value
@@ -52,6 +59,13 @@ func on_fire_input(value: bool):
 func _process(delta):
 	_shoot(delta)
 	_update_marker()
+	_flash.modulate = bullet_color * 3.0 * _flast_intensity
+	_flash_light.energy = _flast_intensity * 2.0
+	if _flast_intensity > 0.0:
+		_flast_intensity -= 15.0 * delta
+	else:
+		_flast_intensity = 0.0
+	
 
 func _physics_process(delta: float) -> void:
 	tranfser_heat.emit(_heat.transfer(delta))
@@ -90,6 +104,7 @@ func _spawn_bullet(delta: float):
 	WorldGridManager.instance.world_root.add_child(bullet)
 	_heat.add_heat(heat_per_shoot)
 	view.emit_max()
+	_flast_intensity = 1.0
 
 func _update_marker():
 	pass
