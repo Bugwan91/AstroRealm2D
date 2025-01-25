@@ -36,7 +36,7 @@ style = ExtResource("7_lo2oh")
 [sub_resource type="Resource" id="Resource_d3v0f"]
 script = ExtResource("10_1xx6e")
 _asteroid_scene = ExtResource("9_j7r4u")
-density = 0.05
+density = 0.02
 size_variation = 0.5
 speed_variation = 0.5
 speed = 250
@@ -99,7 +99,7 @@ input_reader = NodePath("PlayerInputReader")
 metadata/_edit_lock_ = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.0156863, 0.0156863, 0.0156863, 1)
+color = Color(0.0117647, 0.0117647, 0.0117647, 1)
 
 [node name="WorldGridManager" type="Node" parent="." node_paths=PackedStringArray("world_root")]
 script = ExtResource("8_j7r4u")
@@ -125,6 +125,11 @@ unique_name_in_owner = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_h5iwh")
 
+[node name="AutopilotPointer" parent="." instance=ExtResource("15_5xucn")]
+unique_name_in_owner = true
+in_range_color = Color(0, 0, 1, 0.78)
+out_range_color = Color(0, 0, 0.486275, 0.784314)
+
 [node name="Sun" parent="." instance=ExtResource("46_aihwc")]
 position = Vector2(-20000, 0)
 scale = Vector2(2, 2)
@@ -143,8 +148,8 @@ config = SubResource("Resource_1xx6e")
 position = Vector2(-330, -177)
 rotation = 0.949459
 color = Color(0.45098, 0.87451, 1, 1)
-energy = 0.6
-height = 0.3
+energy = 0.4
+height = 0.15
 
 [node name="DirectionalLight2" type="DirectionalLight2D" parent="."]
 position = Vector2(-378.182, -548.359)
@@ -158,7 +163,7 @@ position = Vector2(-1041.55, -608.818)
 rotation = -3.29344
 color = Color(0.705367, 0.776415, 1, 1)
 energy = 0.05
-height = 0.05
+height = 0.6
 
 [node name="Grid" parent="." instance=ExtResource("4_aip35")]
 light_mask = 0
@@ -166,11 +171,6 @@ material = SubResource("ShaderMaterial_bh3nw")
 base_opacity = 0.02
 offset_shift = Vector2(250, 250)
 metadata/_edit_lock_ = true
-
-[node name="AutopilotPointer" parent="." instance=ExtResource("15_5xucn")]
-unique_name_in_owner = true
-in_range_color = Color(0, 0, 1, 0.78)
-out_range_color = Color(0, 0, 0.486275, 0.784314)
 
 [node name="RedLight" type="Node2D" parent="."]
 
