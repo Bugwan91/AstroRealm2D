@@ -16,15 +16,30 @@ vec3 light_normal_compute(vec3 L, vec3 N, vec3 B_color, vec3 L_color, float Spec
 	
 	// Diffuse light
 	float NdotL = clamp(dot(N, L), 0.0, 1.0);
-	vec3 Dif_color = B_color * L_color * NdotL;
+	float HNdotL = smoothstep(0.0, 1.0, dot(N, (N + L) * 0.5));
+	vec3 Diff_color = mix(B_color, B_color * L_color, Met) * (NdotL);// + pow(HNdotL, 1.0 + Met)) * 0.5;
 	// Specular
 	vec3 R = reflect(-L, N);
-	float shini = 2.0 / (1.0 - Spec * 0.999);
+	float shini = 2.0 / (1.0 - Spec * 0.99);
 	float RdotV = clamp(dot(R, V), .0, 1.0);
 	float area = pow(RdotV, shini);
-	vec3 Spec_color = mix(B_color, L_color, Met) * clamp(area * shini * Spec, 0, 32.0) * NdotL;
-	return Dif_color + Spec_color;
+	vec3 Spec_color = mix(B_color, L_color, Met) * clamp((1.0 + Met) * area * shini * Spec, 0, 32.0);
+	//vec3 Spec_color = Diff_color * clamp(area * shini * Spec, 0, 32.0);
+	return Diff_color + Spec_color;
 }
+
+//void fragment() {
+	//// EMISSION / Probably, this should go to fragment shader.
+	//vec4 base = texture(TEXTURE, UV);
+	//vec3 em_val = texture(emission_texture, UV).rgb * emission_color.rgb * emission;
+	//float ht_base = texture(heat_texture, UV).r * heat;
+	//vec3 ht_val = vec3(0.0);
+	//if (ht_base > 0.0) {
+		//vec3 ht_color = texture(temperature_texture, vec2(ht_base)).rgb;
+		//ht_val = ht_color * pow(ht_base, 2.0) * 32.0;
+	//}
+	//COLOR = vec4(base.rgb + em_val + ht_val, base.a);
+//}
 
 void light() {
 	 //SPECULAR & METALLIC
@@ -45,7 +60,6 @@ void light() {
 	if (ht_base > 0.0) {
 		vec3 ht_color = texture(temperature_texture, vec2(ht_base)).rgb;
 		ht_val = ht_color * pow(ht_base, 2.0) * 32.0;
-		//ht_val *= 1.0 + 0.5 * ht_base;
 	}
 	// EMISSION / Probably, this should go to fragment shader.
 	vec3 em_val = texture(emission_texture, UV).rgb * emission_color.rgb * emission;

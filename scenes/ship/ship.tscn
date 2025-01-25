@@ -1,12 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=28 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" uid="uid://b2ih5uxk3qw0h" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
-[ext_resource type="Texture2D" uid="uid://c4su0423xfs6g" path="res://assets/spaceships/hull/01/_emission.png" id="6_r75st"]
-[ext_resource type="Shader" uid="uid://balef3jw7dwu" path="res://scenes/ship/shaders/ship.gdshader" id="7_byino"]
-[ext_resource type="Texture2D" uid="uid://da8c67h3oaq7j" path="res://assets/spaceships/hull/01/_heat.png" id="7_q6f52"]
+[ext_resource type="Material" uid="uid://4cr00esf8aq7" path="res://resources/ships/ship_mat.tres" id="5_woufe"]
 [ext_resource type="Script" uid="uid://dyv36awovo4v7" path="res://scenes/ship/scripts/weapons_slots.gd" id="8_4fwa5"]
-[ext_resource type="Texture2D" uid="uid://b4grjooukm1dd" path="res://assets/spaceships/hull/01/_mask.png" id="8_xvsf7"]
 [ext_resource type="Texture2D" uid="uid://dsl72b3dwxid4" path="res://assets/spaceships/hull/01/_base.png" id="10_r75st"]
 [ext_resource type="Texture2D" uid="uid://dg5ceqg02tvgu" path="res://assets/spaceships/hull/01/_normal.png" id="11_6qm8q"]
 [ext_resource type="Script" uid="uid://cw01a0apshsem" path="res://scenes/_shared/scripts/view/view_ship.gd" id="11_d8ncc"]
@@ -28,17 +25,6 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w2dh3"]
 radius = 42.0
 height = 128.31
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ma44e"]
-shader = ExtResource("7_byino")
-shader_parameter/heat = 0.0
-shader_parameter/emission = 8.0
-shader_parameter/emission_color = Color(1, 1, 1, 1)
-shader_parameter/shininess = 0.0
-shader_parameter/metallic = 0.0
-shader_parameter/mask_texture = ExtResource("8_xvsf7")
-shader_parameter/emission_texture = ExtResource("6_r75st")
-shader_parameter/heat_texture = ExtResource("7_q6f52")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_fknoo"]
 diffuse_texture = ExtResource("10_r75st")
@@ -83,7 +69,7 @@ script = ExtResource("8_4fwa5")
 [node name="View" type="Sprite2D" parent="PositionExtrapolator"]
 unique_name_in_owner = true
 texture_filter = 3
-material = SubResource("ShaderMaterial_ma44e")
+material = ExtResource("5_woufe")
 rotation = 1.5708
 texture = SubResource("CanvasTexture_fknoo")
 script = ExtResource("11_d8ncc")
@@ -121,7 +107,7 @@ script = ExtResource("14_5nufi")
 [node name="CloseNavigator" type="Node" parent="FlightController"]
 unique_name_in_owner = true
 script = ExtResource("14_xvsf7")
-debug = true
+disabled = true
 metadata/_custom_type_script = ExtResource("14_xvsf7")
 
 [node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view")]

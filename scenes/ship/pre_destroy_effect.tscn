@@ -1,10 +1,10 @@
 [gd_scene load_steps=19 format=3 uid="uid://b6or8cehcqbe5"]
 
-[ext_resource type="Texture2D" uid="uid://8iveh5gra6v3" path="res://assets/VFX_textures/smoke_01.png" id="1_34ji3"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/pre_destroy_effect.gd" id="1_sxffd"]
+[ext_resource type="Texture2D" uid="uid://8iveh5gra6v3" path="res://assets/VFX_textures/pack_1/smoke_01.png" id="1_34ji3"]
+[ext_resource type="Script" uid="uid://dkhgkly28qnl0" path="res://scenes/ship/scripts/pre_destroy_effect.gd" id="1_sxffd"]
 [ext_resource type="Texture2D" uid="uid://dbc8lck8ryqlr" path="res://assets/my/star.png" id="2_15s40"]
 [ext_resource type="Texture2D" uid="uid://bieo28dpbwjng" path="res://assets/VFX_textures/colors/fire_color.tres" id="2_ramuw"]
-[ext_resource type="Texture2D" uid="uid://cse0cf22dqcvc" path="res://assets/VFX_textures/smoke_04.png" id="4_wowv5"]
+[ext_resource type="Texture2D" uid="uid://cse0cf22dqcvc" path="res://assets/VFX_textures/pack_1/smoke_04.png" id="4_wowv5"]
 
 [sub_resource type="Curve" id="Curve_061dh"]
 max_value = 100.0

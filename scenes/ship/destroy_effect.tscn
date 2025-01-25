@@ -1,8 +1,8 @@
 [gd_scene load_steps=28 format=3 uid="uid://dcy3g0684tgaa"]
 
 [ext_resource type="Script" uid="uid://dxhoxwmvlcgtp" path="res://scenes/ship/scripts/ship_destroy_effect.gd" id="1_l4mfa"]
-[ext_resource type="Texture2D" uid="uid://balodvxn3doji" path="res://assets/VFX_textures/smoke_05.png" id="2_e5hvd"]
-[ext_resource type="Texture2D" uid="uid://b2ihxapw1fwpv" path="res://assets/VFX_textures/smoke_02.png" id="3_n2ne6"]
+[ext_resource type="Texture2D" uid="uid://balodvxn3doji" path="res://assets/VFX_textures/pack_1/smoke_05.png" id="2_e5hvd"]
+[ext_resource type="Texture2D" uid="uid://b2ihxapw1fwpv" path="res://assets/VFX_textures/pack_1/smoke_02.png" id="3_n2ne6"]
 [ext_resource type="Texture2D" uid="uid://ct5hytm7xe6po" path="res://assets/my/star2.png" id="4_02x4f"]
 [ext_resource type="AudioStream" uid="uid://dmsdrcg5mpy6r" path="res://assets/sounds/explosion-91872.mp3" id="5_xtnug"]
 

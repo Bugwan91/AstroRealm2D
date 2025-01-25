@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c7cafyhhy135a"]
+[gd_scene load_steps=18 format=3 uid="uid://c7cafyhhy135a"]
 
 [ext_resource type="Script" uid="uid://bvoanxx4ohf47" path="res://scenes/ship_designer/scripts/ship_designer_ui.gd" id="1_citlv"]
 [ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="2_jrjbv"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://cbkf14lkotre5" path="res://scenes/ship_designer/scripts/designer_style_selector.gd" id="7_nka4o"]
 [ext_resource type="Script" uid="uid://cw01a0apshsem" path="res://scenes/_shared/scripts/view/view_ship.gd" id="7_wj4q0"]
 [ext_resource type="Texture2D" uid="uid://da8c67h3oaq7j" path="res://assets/spaceships/hull/01/_heat.png" id="8_ob45u"]
-[ext_resource type="Texture2D" uid="uid://bdcrgonof28mh" path="res://assets/spaceships/temperature.tres" id="9_l6t2q"]
 [ext_resource type="Texture2D" uid="uid://b4grjooukm1dd" path="res://assets/spaceships/hull/01/_mask.png" id="9_qlopd"]
 [ext_resource type="Script" uid="uid://d0fhyvn2u6c6u" path="res://scenes/ship_designer/point_light_cursor.gd" id="10_ob45u"]
 [ext_resource type="Texture2D" uid="uid://dsl72b3dwxid4" path="res://assets/spaceships/hull/01/_base.png" id="11_l6t2q"]
@@ -37,7 +36,6 @@ shader_parameter/metallic = 0.0
 shader_parameter/mask_texture = ExtResource("9_qlopd")
 shader_parameter/emission_texture = ExtResource("7_2mr7a")
 shader_parameter/heat_texture = ExtResource("8_ob45u")
-shader_parameter/temperature_texture = ExtResource("9_l6t2q")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ieo1e"]
 diffuse_texture = ExtResource("11_l6t2q")

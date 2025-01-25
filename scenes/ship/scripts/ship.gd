@@ -73,6 +73,8 @@ func _connect_weapon_inputs():
 	_weapon_slots.connect_inputs(input_reader)
 
 func _setup_view():
+	data.design.shininess = 0.8
+	data.design.metallic = 0.8
 	_view.setup_textures(data.design)
 
 func _set_ship_data(new_data: ShipData):

@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=3 uid="uid://cxaoyw4qxcd0p"]
 
 [ext_resource type="Script" uid="uid://m5ied82h272a" path="res://scenes/ship/scripts/damage_effect.gd" id="1_mp2sa"]
-[ext_resource type="Texture2D" uid="uid://hnfioahelelc" path="res://assets/VFX_textures/fire_01.png" id="2_7r8uf"]
-[ext_resource type="Texture2D" uid="uid://crf347o6fh4jm" path="res://assets/VFX_textures/smoke_07.png" id="3_qucro"]
+[ext_resource type="Texture2D" uid="uid://hnfioahelelc" path="res://assets/VFX_textures/pack_1/fire_01.png" id="2_7r8uf"]
+[ext_resource type="Texture2D" uid="uid://crf347o6fh4jm" path="res://assets/VFX_textures/pack_1/smoke_07.png" id="3_qucro"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_opo5s"]
 light_mode = 1
