@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="ShipDesignData" load_steps=7 format=3 uid="uid://ssbh0godnhno"]
+[gd_resource type="Resource" script_class="ShipDesignData" load_steps=8 format=3 uid="uid://ssbh0godnhno"]
 
 [ext_resource type="Texture2D" uid="uid://bqx61atmdag5g" path="res://assets/spaceships/hull/02/_base.png" id="1_7knnv"]
 [ext_resource type="Texture2D" uid="uid://dvtnerb2k0qle" path="res://assets/spaceships/hull/02/_emission.png" id="2_d1n20"]
 [ext_resource type="Texture2D" uid="uid://bsf8bix50mxto" path="res://assets/spaceships/hull/02/_heat.png" id="3_ml7b4"]
 [ext_resource type="Texture2D" uid="uid://vaw1wyhai2wf" path="res://assets/spaceships/hull/02/_mask.png" id="4_vwa36"]
 [ext_resource type="Texture2D" uid="uid://bi8g2s363ai44" path="res://assets/spaceships/hull/02/_normal.png" id="5_lrwlm"]
-[ext_resource type="Script" path="res://scenes/ship/scripts/resources/ship_design_data.gd" id="6_cc4yi"]
+[ext_resource type="Script" uid="uid://du8g0ca6jirs0" path="res://scenes/ship/scripts/resources/ship_design_data.gd" id="6_cc4yi"]
+[ext_resource type="Script" uid="uid://dysuxiql8stb1" path="res://addons/points_resource_editor/point_resource.gd" id="7_boswe"]
 
 [resource]
 script = ExtResource("6_cc4yi")
@@ -14,8 +15,9 @@ normal = ExtResource("5_lrwlm")
 mask = ExtResource("4_vwa36")
 emision = ExtResource("2_d1n20")
 heat = ExtResource("3_ml7b4")
-shininess = 0.0
+shininess = 0.95
+metallic = 0.95
 polygon = PackedVector2Array()
-thrusters = Array[Resource("res://addons/points_resource_editor/point_resource.gd")]([])
+thrusters = Array[ExtResource("7_boswe")]([])
 engines = PackedVector2Array()
-weapon_slots = Array[Resource("res://addons/points_resource_editor/point_resource.gd")]([])
+weapon_slots = Array[ExtResource("7_boswe")]([])

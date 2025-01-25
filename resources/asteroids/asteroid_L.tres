@@ -1,0 +1,8 @@
+[gd_resource type="CanvasTexture" load_steps=3 format=3 uid="uid://dp0ptoc0uybr1"]
+
+[ext_resource type="Texture2D" uid="uid://k1hayj4vudgv" path="res://assets/asteroids/asteroid_0.png" id="1_bwljl"]
+[ext_resource type="Texture2D" uid="uid://bvi8ccoxyow0t" path="res://assets/asteroids/asteroid_1_n.png" id="2_bwljl"]
+
+[resource]
+diffuse_texture = ExtResource("1_bwljl")
+normal_texture = ExtResource("2_bwljl")

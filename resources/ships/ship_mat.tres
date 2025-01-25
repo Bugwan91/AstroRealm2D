@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://4cr00esf8aq7"]
+
+[ext_resource type="Shader" uid="uid://balef3jw7dwu" path="res://scenes/ship/shaders/ship.gdshader" id="1_08l72"]
+[ext_resource type="Texture2D" uid="uid://c4su0423xfs6g" path="res://assets/spaceships/hull/01/_emission.png" id="2_oiain"]
+[ext_resource type="Texture2D" uid="uid://da8c67h3oaq7j" path="res://assets/spaceships/hull/01/_heat.png" id="3_1nlbg"]
+[ext_resource type="Texture2D" uid="uid://b4grjooukm1dd" path="res://assets/spaceships/hull/01/_mask.png" id="4_iipw7"]
+
+[resource]
+shader = ExtResource("1_08l72")
+shader_parameter/heat = 0.0
+shader_parameter/emission = 8.0
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/shininess = 0.95
+shader_parameter/metallic = 0.95
+shader_parameter/mask_texture = ExtResource("4_iipw7")
+shader_parameter/emission_texture = ExtResource("2_oiain")
+shader_parameter/heat_texture = ExtResource("3_1nlbg")
