@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bsf8bix50mxto" path="res://assets/spaceships/hull/02/_heat.png" id="3_l7o3d"]
 [ext_resource type="Texture2D" uid="uid://vaw1wyhai2wf" path="res://assets/spaceships/hull/02/_mask.png" id="4_b2kjs"]
 [ext_resource type="Script" uid="uid://b6lilmuq78cd7" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="5_mygow"]
-[ext_resource type="Texture2D" uid="uid://bi8g2s363ai44" path="res://assets/spaceships/hull/02/_normal.png" id="5_pbu5r"]
+[ext_resource type="Texture2D" uid="uid://snwu141lc0qe" path="res://assets/spaceships/hull/02/_normal_2.png" id="6_avnuu"]
 [ext_resource type="Script" uid="uid://dysuxiql8stb1" path="res://addons/points_resource_editor/point_resource.gd" id="7_mpeb5"]
 [ext_resource type="Script" uid="uid://b1cyik4ucr2m" path="res://addons/points_resource_editor/points_array_resource.gd" id="8_v1ajo"]
 
@@ -37,7 +37,7 @@ mass = 1.0
 type = 0
 allowed_ext = Array[ExtResource("1_avnuu")]([])
 diffuse = ExtResource("1_i25dp")
-normal = ExtResource("5_pbu5r")
+normal = ExtResource("6_avnuu")
 mask = ExtResource("4_b2kjs")
 emission = ExtResource("2_fsg1o")
 heat = ExtResource("3_l7o3d")

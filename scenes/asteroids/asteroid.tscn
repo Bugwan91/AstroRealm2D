@@ -12,11 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="6_yhpvr"]
 [ext_resource type="Texture2D" uid="uid://cpfovyi2ew0n3" path="res://resources/asteroids/asteroid00.tres" id="7_0wnxl"]
 [ext_resource type="Texture2D" uid="uid://phllsaowvfrj" path="res://resources/asteroids/asteroid11.tres" id="7_g0deq"]
-[ext_resource type="Material" uid="uid://cqy56rhnpln3r" path="res://scenes/ship/shaders/ship_mat.tres" id="8_34a3x"]
 [ext_resource type="Texture2D" uid="uid://brkdv7jwjlb07" path="res://assets/asteroids/asteroid_0_b.png" id="8_bey2v"]
 [ext_resource type="Texture2D" uid="uid://dp5pxxwnnt0qu" path="res://resources/asteroids/asteroid21.tres" id="8_vufhy"]
 [ext_resource type="Texture2D" uid="uid://cgea3l10flrym" path="res://resources/asteroids/asteroid31.tres" id="9_ma54s"]
 [ext_resource type="Script" uid="uid://dd1et7iue8frp" path="res://scenes/_shared/scripts/static_rigid_body.gd" id="10_k3qgf"]
+[ext_resource type="Material" uid="uid://4gfbqiicvvx0" path="res://resources/asteroids/asteroid_mat.tres" id="12_l4sdg"]
 [ext_resource type="Script" uid="uid://de333ogw3s8dt" path="res://scenes/_shared/scripts/position_extrapolator.gd" id="17_l4sdg"]
 [ext_resource type="Resource" uid="uid://ci5yk7wngo6ue" path="res://scenes/radar/_res/asteroid.tres" id="18_l4sdg"]
 
@@ -47,7 +47,7 @@ metadata/_custom_type_script = ExtResource("17_l4sdg")
 
 [node name="View" type="Sprite2D" parent="PositionExtrapolator"]
 unique_name_in_owner = true
-material = ExtResource("8_34a3x")
+material = ExtResource("12_l4sdg")
 texture = ExtResource("8_bey2v")
 
 [node name="TakingDamage" type="Area2D" parent="."]

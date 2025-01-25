@@ -9,27 +9,22 @@ uniform sampler2D mask_texture : filter_nearest_mipmap, hint_default_black;
 uniform sampler2D emission_texture : filter_nearest_mipmap, hint_default_black;
 uniform sampler2D heat_texture : filter_nearest_mipmap, hint_default_black;
 global uniform sampler2D temperature_texture : filter_linear, hint_default_black;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 
 vec3 light_normal_compute(vec3 L, vec3 N, vec3 B_color, vec3 L_color, float Spec, float Met) {
 	vec3 V = vec3(0.0, 0.0, 1.0); // View vector
-	// TODO: Metalic does not work
-	vec3 Color = B_color * L_color;// + L_color * mix(L_color, B_color, Met);
-		// Diffuse light
+	
+	// Diffuse light
 	float NdotL = clamp(dot(N, L), 0.0, 1.0);
-	vec3 Diffuse = NdotL * Color;
-		// Specular
+	vec3 Dif_color = B_color * L_color * NdotL;
+	// Specular
 	vec3 R = reflect(-L, N);
-	float RdotV = clamp(dot(R, V) * 1.05, 0.0, 1.0);
-	float shini = 1.0 / (1.0 - Spec * 0.999);
+	float shini = 2.0 / (1.0 - Spec * 0.999);
+	float RdotV = clamp(dot(R, V), .0, 1.0);
 	float area = pow(RdotV, shini);
-	vec3 Specular = Color * area * shini;
-		// Total light
-	return (Diffuse + Specular);
+	vec3 Spec_color = mix(B_color, L_color, Met) * area * clamp(shini * Spec, 0, 32.0);
+	return Dif_color + Spec_color;
 }
-
-//void fragment() {
-	//COLOR = texture(TEXTURE, UV);
-//}
 
 void light() {
 	 //SPECULAR & METALLIC
@@ -50,8 +45,9 @@ void light() {
 	if (ht_base > 0.0) {
 		vec3 ht_color = texture(temperature_texture, vec2(ht_base)).rgb;
 		ht_val = ht_color * pow(ht_base, 2.0) * 32.0;
+		//ht_val *= 1.0 + 0.5 * ht_base;
 	}
-	// EMISSION
+	// EMISSION / Probably, this should go to fragment shader.
 	vec3 em_val = texture(emission_texture, UV).rgb * emission_color.rgb * emission;
 	// TOTAL LIGHT
 	LIGHT = vec4(normal_spec + em_val + ht_val, LIGHT_COLOR.a);

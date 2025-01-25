@@ -5,14 +5,14 @@
 [ext_resource type="Texture2D" uid="uid://cpkdt03mo0gju" path="res://assets/spaceships/engine/0_emission.png" id="2_cqh0u"]
 [ext_resource type="Texture2D" uid="uid://dnffm6gpydmdf" path="res://assets/spaceships/engine/0_mask.png" id="3_gkks5"]
 [ext_resource type="Texture2D" uid="uid://vyefsyvxtuh7" path="res://assets/spaceships/engine/0_heat.png" id="3_p8o2s"]
-[ext_resource type="Texture2D" uid="uid://c67jksgqr76rm" path="res://assets/spaceships/engine/0_normal.png" id="5_dfnhk"]
+[ext_resource type="Texture2D" uid="uid://ckk57432ft4fy" path="res://assets/spaceships/engine/0_normal_2.png" id="6_kr1lh"]
 
 [resource]
 script = ExtResource("1_uujbc")
 type = 2
 allowed_ext = Array[ExtResource("1_uujbc")]([])
 diffuse = ExtResource("1_cqu7h")
-normal = ExtResource("5_dfnhk")
+normal = ExtResource("6_kr1lh")
 mask = ExtResource("3_gkks5")
 emission = ExtResource("2_cqh0u")
 heat = ExtResource("3_p8o2s")
