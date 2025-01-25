@@ -22,7 +22,7 @@ vec3 light_normal_compute(vec3 L, vec3 N, vec3 B_color, vec3 L_color, float Spec
 	float shini = 2.0 / (1.0 - Spec * 0.999);
 	float RdotV = clamp(dot(R, V), .0, 1.0);
 	float area = pow(RdotV, shini);
-	vec3 Spec_color = mix(B_color, L_color, Met) * area * clamp(shini * Spec, 0, 32.0);
+	vec3 Spec_color = mix(B_color, L_color, Met) * clamp(area * shini * Spec, 0, 32.0) * NdotL;
 	return Dif_color + Spec_color;
 }
 
