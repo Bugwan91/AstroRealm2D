@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RadarIconConfig" load_steps=3 format=3 uid="uid://dcpvcj872hjms"]
 
 [ext_resource type="Script" uid="uid://c5xv8rqbdj611" path="res://scenes/radar/scripts/resources/radar_icon_config.gd" id="1_qepvh"]
-[ext_resource type="Texture2D" uid="uid://bd4oempo2wukk" path="res://assets/VFX_textures/star_07.png" id="2_g3c2o"]
+[ext_resource type="Texture2D" uid="uid://bd4oempo2wukk" path="res://assets/VFX_textures/pack_1/star_07.png" id="2_g3c2o"]
 
 [resource]
 script = ExtResource("1_qepvh")
