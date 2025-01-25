@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgd0bjxddscui"
-path="res://.godot/imported/muzzle_04.png-7a611cafb461d9e96865fd80be89f7bf.ctex"
+uid="uid://cvigxa7cofcp7"
+path="res://.godot/imported/magic_05.png-7a8e4cfa1acea725b0d3cd34397548a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/VFX_textures/muzzle_04.png"
-dest_files=["res://.godot/imported/muzzle_04.png-7a611cafb461d9e96865fd80be89f7bf.ctex"]
+source_file="res://assets/VFX_textures/pack_1/magic_05.png"
+dest_files=["res://.godot/imported/magic_05.png-7a8e4cfa1acea725b0d3cd34397548a7.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgd0bjxddscui"
-path="res://.godot/imported/muzzle_04.png-7a611cafb461d9e96865fd80be89f7bf.ctex"
+uid="uid://bywh2qcmkh3dt"
+path="res://.godot/imported/flame_01.png-636d0538adf7ad3dc66af09a0d1b84ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/VFX_textures/muzzle_04.png"
-dest_files=["res://.godot/imported/muzzle_04.png-7a611cafb461d9e96865fd80be89f7bf.ctex"]
+source_file="res://assets/VFX_textures/pack_1/flame_01.png"
+dest_files=["res://.godot/imported/flame_01.png-636d0538adf7ad3dc66af09a0d1b84ed.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgd0bjxddscui"
-path="res://.godot/imported/muzzle_04.png-7a611cafb461d9e96865fd80be89f7bf.ctex"
+uid="uid://ca3vmig5whq4e"
+path="res://.godot/imported/dirt_03.png-84b298c2d3f711eb995261939b9b4e8b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/VFX_textures/muzzle_04.png"
-dest_files=["res://.godot/imported/muzzle_04.png-7a611cafb461d9e96865fd80be89f7bf.ctex"]
+source_file="res://assets/VFX_textures/pack_1/dirt_03.png"
+dest_files=["res://.godot/imported/dirt_03.png-84b298c2d3f711eb995261939b9b4e8b.ctex"]
 
 [params]
 
