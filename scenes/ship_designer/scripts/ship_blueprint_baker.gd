@@ -42,11 +42,21 @@ func _update_blueprint_value(type: ShipBlueprint.Type, value: Resource):
 
 func _set_blueprint(value: ShipBlueprint):
 	blueprint = value
-	blueprint.updated.connect(_on_blueprint_update)
+	blueprint.updated_part.connect(_on_blueprint_update)
+	blueprint.updated_specular.connect(_on_spec_updated)
+	blueprint.updated_metallic.connect(_on_met_updated)
 	_update_blueprint_value(ShipBlueprint.Type.HULL, value.hull)
 	_update_blueprint_value(ShipBlueprint.Type.HULL_EXT, value.hull_ext)
 	_update_blueprint_value(ShipBlueprint.Type.ENGINE, value.engine)
 	_update_blueprint_value(ShipBlueprint.Type.STYLE, value.style)
+
+func _on_spec_updated(value: float):
+	design.shininess = value
+	updated.emit(design)
+
+func _on_met_updated(value: float):
+	design.metallic = value
+	updated.emit(design)
 
 func bake() -> ShipDesignData:
 	if _is_baking: return
@@ -69,6 +79,8 @@ func _bake_textures() -> ShipDesignData:
 	design.normal = await normal.bake()
 	design.emision = await emission.bake()
 	design.heat = await heat.bake()
+	design.shininess = blueprint.shininess
+	design.metallic = blueprint.metallic
 	return design
 
 func _bake_diffuse() -> Texture2D:

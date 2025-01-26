@@ -59,7 +59,6 @@ func _update_with_resource():
 	_item_view.texture.normal_texture = resource.normal
 	_item_view.material.set("shader_parameter/emission_texture", resource.emission)
 	_item_view.material.set("shader_parameter/mask_texture", resource.mask)
-	_item_view.material.set("shader_parameter/shininess", resource.shininess)
 	_update_placeholders()
 
 func _update_placeholders():
@@ -86,4 +85,3 @@ func _handle_mouse_click(event: InputEvent):
 			and event.pressed:
 		is_selected = true
 		selected.emit(index)
-

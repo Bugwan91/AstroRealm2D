@@ -1,8 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=32 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" uid="uid://b2ih5uxk3qw0h" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
+[ext_resource type="Shader" uid="uid://balef3jw7dwu" path="res://scenes/ship/shaders/ship.gdshader" id="5_sakv4"]
 [ext_resource type="Material" uid="uid://4cr00esf8aq7" path="res://resources/ships/ship_mat.tres" id="5_woufe"]
+[ext_resource type="Texture2D" uid="uid://bwslvp6xbqrt8" path="res://assets/spaceships/specular.png" id="6_3lg4r"]
 [ext_resource type="Script" uid="uid://dyv36awovo4v7" path="res://scenes/ship/scripts/weapons_slots.gd" id="8_4fwa5"]
 [ext_resource type="Texture2D" uid="uid://dsl72b3dwxid4" path="res://assets/spaceships/hull/01/_base.png" id="10_r75st"]
 [ext_resource type="Texture2D" uid="uid://dg5ceqg02tvgu" path="res://assets/spaceships/hull/01/_normal.png" id="11_6qm8q"]
@@ -18,7 +20,6 @@
 [ext_resource type="Script" uid="uid://liqs1h6x4e1p" path="res://scenes/heat/scripts/Heat.gd" id="20_1gdyl"]
 [ext_resource type="Script" uid="uid://w8vsnqoourdh" path="res://scenes/vfx/scripts/trail.gd" id="20_q0150"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="20_w3y8g"]
-[ext_resource type="Material" uid="uid://cqy56rhnpln3r" path="res://scenes/ship/shaders/ship_mat.tres" id="22_2xkf5"]
 [ext_resource type="Texture2D" uid="uid://t4p237ht1kcg" path="res://assets/spaceships/hull/02/_interrior.png" id="23_0616w"]
 [ext_resource type="Texture2D" uid="uid://brgjtbampllsy" path="res://assets/spaceships/hull/02/_interrior_n.png" id="24_xvqm4"]
 
@@ -26,14 +27,31 @@
 radius = 42.0
 height = 128.31
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_fknoo"]
-diffuse_texture = ExtResource("10_r75st")
-normal_texture = ExtResource("11_6qm8q")
-texture_filter = 3
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2xkf5"]
+load_path = "res://.godot/imported/mask.png-6839ac794479610a9e23b6ca41d09cee.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0616w"]
+load_path = "res://.godot/imported/mask.png-6839ac794479610a9e23b6ca41d09cee.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xvqm4"]
+shader = ExtResource("5_sakv4")
+shader_parameter/heat = 0.0
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/shininess = 0.7
+shader_parameter/metallic = 0.0
+shader_parameter/mask_texture = ExtResource("6_3lg4r")
+shader_parameter/emission_texture = SubResource("CompressedTexture2D_2xkf5")
+shader_parameter/heat_texture = SubResource("CompressedTexture2D_0616w")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_wcdsx"]
 diffuse_texture = ExtResource("23_0616w")
 normal_texture = ExtResource("24_xvqm4")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_fknoo"]
+diffuse_texture = ExtResource("10_r75st")
+normal_texture = ExtResource("11_6qm8q")
+texture_filter = 3
 
 [sub_resource type="Curve" id="Curve_p4pb7"]
 _data = [Vector2(0, 1), 0.0, -0.322088, 0, 0, Vector2(1, 0), -1.16987, 0.0, 0, 0]
@@ -66,6 +84,11 @@ metadata/_custom_type_script = ExtResource("19_6qm8q")
 unique_name_in_owner = true
 script = ExtResource("8_4fwa5")
 
+[node name="Interrior" type="Sprite2D" parent="PositionExtrapolator"]
+material = SubResource("ShaderMaterial_xvqm4")
+rotation = 1.5708
+texture = SubResource("CanvasTexture_wcdsx")
+
 [node name="View" type="Sprite2D" parent="PositionExtrapolator"]
 unique_name_in_owner = true
 texture_filter = 3
@@ -73,13 +96,6 @@ material = ExtResource("5_woufe")
 rotation = 1.5708
 texture = SubResource("CanvasTexture_fknoo")
 script = ExtResource("11_d8ncc")
-
-[node name="Interrior" type="Sprite2D" parent="PositionExtrapolator"]
-modulate = Color(1, 1, 1, 0.117647)
-material = ExtResource("22_2xkf5")
-position = Vector2(5, 0)
-rotation = 1.5708
-texture = SubResource("CanvasTexture_wcdsx")
 
 [node name="TrailEffect" type="Line2D" parent="."]
 position = Vector2(-60, -32)

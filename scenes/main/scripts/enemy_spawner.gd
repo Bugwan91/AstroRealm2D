@@ -52,7 +52,8 @@ func _create_ship_configuration() -> ShipData:
 	_baker.blueprint.style = ship_parts.styles[randi_range(0, ship_parts.styles.size() - 1)]\
 		if randf() > 0.2 else null
 	_baker.design = await _baker.bake()
-	_baker.design.shininess = randf_range(-0.9, 0.9)
+	_baker.design.shininess = randf_range(-0.5, 0.95)
+	_baker.design.metallic = randf_range(-0.99, 0.3)
 	ship_configuration.design = _baker.design
 	return ship_configuration
 
