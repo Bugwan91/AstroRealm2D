@@ -4,7 +4,8 @@
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
 [ext_resource type="Shader" uid="uid://balef3jw7dwu" path="res://scenes/ship/shaders/ship.gdshader" id="5_sakv4"]
 [ext_resource type="Material" uid="uid://4cr00esf8aq7" path="res://resources/ships/ship_mat.tres" id="5_woufe"]
-[ext_resource type="Texture2D" uid="uid://bwslvp6xbqrt8" path="res://assets/spaceships/specular.png" id="6_3lg4r"]
+[ext_resource type="Texture2D" uid="uid://cdvkj0p02285g" path="res://assets/spaceships/hull/02/_interrior_emission.png" id="6_3lg4r"]
+[ext_resource type="Texture2D" uid="uid://c5s5fiin47nrm" path="res://assets/spaceships/hull/02/_interrior_mask.png" id="7_2xkf5"]
 [ext_resource type="Script" uid="uid://dyv36awovo4v7" path="res://scenes/ship/scripts/weapons_slots.gd" id="8_4fwa5"]
 [ext_resource type="Texture2D" uid="uid://dsl72b3dwxid4" path="res://assets/spaceships/hull/01/_base.png" id="10_r75st"]
 [ext_resource type="Texture2D" uid="uid://dg5ceqg02tvgu" path="res://assets/spaceships/hull/01/_normal.png" id="11_6qm8q"]
@@ -27,21 +28,18 @@
 radius = 42.0
 height = 128.31
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2xkf5"]
-load_path = "res://.godot/imported/mask.png-6839ac794479610a9e23b6ca41d09cee.ctex"
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0616w"]
 load_path = "res://.godot/imported/mask.png-6839ac794479610a9e23b6ca41d09cee.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xvqm4"]
 shader = ExtResource("5_sakv4")
 shader_parameter/heat = 0.0
-shader_parameter/emission = 0.0
+shader_parameter/emission = 0.5
 shader_parameter/emission_color = Color(1, 1, 1, 1)
-shader_parameter/shininess = 0.7
+shader_parameter/shininess = 0.0
 shader_parameter/metallic = 0.0
-shader_parameter/mask_texture = ExtResource("6_3lg4r")
-shader_parameter/emission_texture = SubResource("CompressedTexture2D_2xkf5")
+shader_parameter/mask_texture = ExtResource("7_2xkf5")
+shader_parameter/emission_texture = ExtResource("6_3lg4r")
 shader_parameter/heat_texture = SubResource("CompressedTexture2D_0616w")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_wcdsx"]

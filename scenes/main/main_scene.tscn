@@ -164,7 +164,7 @@ height = 0.2
 position = Vector2(-1041.55, -608.818)
 rotation = -3.29344
 color = Color(0.963877, 0.649097, 0, 1)
-energy = 0.5
+energy = 0.2
 height = 0.7
 
 [node name="Grid" parent="." instance=ExtResource("4_aip35")]

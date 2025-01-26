@@ -16,7 +16,6 @@ normal = ExtResource("5_i2kdh")
 mask = ExtResource("3_n2y5t")
 emission = ExtResource("2_3mxa1")
 heat = ExtResource("3_nan1c")
-shininess = 0.5
 mergeable = true
 pivot_point = Vector2(0, 0)
 heat_capacity = 500.0

@@ -41,7 +41,6 @@ normal = ExtResource("6_avnuu")
 mask = ExtResource("4_b2kjs")
 emission = ExtResource("2_fsg1o")
 heat = ExtResource("3_l7o3d")
-shininess = 0.949
 mergeable = true
 pivot_point = Vector2(0, 0)
 polygon = SubResource("Resource_lra27")
