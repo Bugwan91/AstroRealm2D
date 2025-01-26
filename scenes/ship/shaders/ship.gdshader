@@ -18,21 +18,22 @@ vec3 compute_heat(float ht_val) {
 	return vec3(0.0);
 }
 
-vec3 compute_diffuse(vec3 L, vec3 N, vec3 B_color, vec3 L_color, float Met) {
+vec3 compute_diffuse(vec3 L, vec3 N, vec3 B_color, vec3 L_color, float Spec, float Met) {
 	float NdotL = clamp(dot(N, L), .0, 1.);
-	vec3 color = mix(B_color, 0.25 * L_color, Met * Met) * L_color;
-	float intens = mix(NdotL, pow(smoothstep(.0, 1., NdotL), 2.), Met);
-	return color * intens;
+	float intens = NdotL * max(1.0 - Met * 0.6, 1. - Spec);
+	return B_color * L_color * intens;
 }
 
 vec3 compute_specular(vec3 L, vec3 N, vec3 B_color, vec3 L_color, float Spec, float Met) {
 	vec3 V = vec3(.0,.0,1.);
-	vec3 R = 0.25 * (reflect(-L, N) + 3. * V);
+	vec3 R = 0.1 * (reflect(-L, N) + 9. * V);
 	float RdotV = clamp(dot(R, V), 1e-4, 1.);
 	float S = Spec * Spec;
 	float shini = mix(1., 256., S);
-	float intens = pow(RdotV, shini) * mix(.0, 32., S) * S;
-	return mix(B_color, L_color, Met) * intens;
+	float s_m = Spec + Spec * Met;
+	float intens = pow(RdotV, shini) * mix(.0, 16., S) * S;
+	float fresnel = pow(1.0 - dot(N, V), 3.) * Met;
+	return mix(B_color * L_color, L_color * 0.5, Met) * (intens + fresnel);
 }
 
 void light() {
@@ -48,6 +49,7 @@ void light() {
 		NORMAL,
 		COLOR.rgb,
 		LIGHT_COLOR.rgb * LIGHT_ENERGY,
+		spec,
 		met
 	);
     vec3 specular = compute_specular(

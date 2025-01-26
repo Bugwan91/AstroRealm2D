@@ -43,7 +43,7 @@ texture = ExtResource("4_0sbfp")
 unique_name_in_owner = true
 texture = ExtResource("5_rn3vo")
 texture_scale = 2.0
-height = 20.0
+height = 100.0
 
 [node name="PredictionRay" type="RayCast2D" parent="."]
 unique_name_in_owner = true
@@ -58,7 +58,7 @@ config = ExtResource("6_irsm5")
 
 [node name="Trail" type="Line2D" parent="."]
 unique_name_in_owner = true
-width = 2.0
+width = 1.0
 width_curve = SubResource("Curve_i0wtl")
 gradient = SubResource("Gradient_7dx5m")
 script = ExtResource("6_51oes")

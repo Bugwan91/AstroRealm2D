@@ -197,10 +197,11 @@ height = 0.4
 
 [node name="PointLightCursor" type="PointLight2D" parent="HBoxContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
 position = Vector2(-122, 16)
-color = Color(1, 0.945, 0.45, 1)
+color = Color(1, 0.701961, 0, 1)
 energy = 0.5
 texture = SubResource("GradientTexture2D_2mr7a")
-height = 40.0
+texture_scale = 2.0
+height = 100.0
 script = ExtResource("10_ob45u")
 
 [node name="ShipPreview" type="Sprite2D" parent="HBoxContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]

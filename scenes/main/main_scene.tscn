@@ -149,16 +149,16 @@ config = SubResource("Resource_1xx6e")
 [node name="DirectionalLight" type="DirectionalLight2D" parent="."]
 position = Vector2(-330, -177)
 rotation = 0.949459
-color = Color(0.45098, 0.87451, 1, 1)
+color = Color(0.723465, 0.932284, 1, 1)
 energy = 0.4
 height = 0.4
 
 [node name="DirectionalLight2" type="DirectionalLight2D" parent="."]
 position = Vector2(-378.182, -548.359)
 rotation = -0.876155
-color = Color(1, 0.733333, 0, 1)
-energy = 0.1
-height = 0.2
+color = Color(0.439216, 1, 0.65098, 1)
+energy = 0.2
+height = 0.4
 
 [node name="DirectionalLight3" type="DirectionalLight2D" parent="."]
 position = Vector2(-1041.55, -608.818)
@@ -178,14 +178,14 @@ metadata/_edit_lock_ = true
 
 [node name="32" type="PointLight2D" parent="RedLight"]
 position = Vector2(6000, 0)
-color = Color(1, 0.211765, 0, 1)
+color = Color(1, 0, 0, 1)
 energy = 1.6
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 8.0
 height = 160.0
 
 [node name="Star08" type="Sprite2D" parent="RedLight/32"]
-modulate = Color(32, 6.4, 2.4, 1)
+modulate = Color(1, 0.07, 0.07, 1)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_lkrwm")
 texture = SubResource("GradientTexture2D_76frv")
@@ -195,14 +195,14 @@ config = ExtResource("18_o5677")
 
 [node name="16" type="PointLight2D" parent="RedLight"]
 position = Vector2(5000, 0)
-color = Color(1, 0.211765, 0, 1)
+color = Color(1, 0.490196, 0, 1)
 energy = 1.6
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 8.0
-height = 80.0
+height = 160.0
 
 [node name="Star02" type="Sprite2D" parent="RedLight/16"]
-modulate = Color(16, 3.2, 1.2, 1)
+modulate = Color(1, 0.498039, 0, 1)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_lkrwm")
 texture = SubResource("GradientTexture2D_76frv")
@@ -212,14 +212,14 @@ config = ExtResource("18_o5677")
 
 [node name="8" type="PointLight2D" parent="RedLight"]
 position = Vector2(4000, 0)
-color = Color(1, 0.211765, 0, 1)
+color = Color(1, 1, 0, 1)
 energy = 1.6
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 2.0
-height = 40.0
+height = 160.0
 
 [node name="Star05" type="Sprite2D" parent="RedLight/8"]
-modulate = Color(8, 1.6, 0.6, 1)
+modulate = Color(1, 1, 0.0705882, 1)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_lkrwm")
 texture = SubResource("GradientTexture2D_76frv")
@@ -229,14 +229,14 @@ config = ExtResource("18_o5677")
 
 [node name="4" type="PointLight2D" parent="RedLight"]
 position = Vector2(3000, 0)
-color = Color(1, 0.211765, 0, 1)
+color = Color(0, 1, 0.52549, 1)
 energy = 1.6
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 8.0
-height = 20.0
+height = 160.0
 
 [node name="Star04" type="Sprite2D" parent="RedLight/4"]
-modulate = Color(4, 0.8, 0.3, 1)
+modulate = Color(0, 1, 0.52549, 1)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_lkrwm")
 texture = SubResource("GradientTexture2D_76frv")
@@ -246,14 +246,14 @@ config = ExtResource("18_o5677")
 
 [node name="2" type="PointLight2D" parent="RedLight"]
 position = Vector2(2000, 0)
-color = Color(1, 0.211765, 0, 1)
+color = Color(0.133333, 0.341176, 1, 1)
 energy = 1.6
 texture = SubResource("GradientTexture2D_3cj2f")
 texture_scale = 8.0
-height = 10.0
+height = 160.0
 
 [node name="Star03" type="Sprite2D" parent="RedLight/2"]
-modulate = Color(2, 0.4, 0.15, 1)
+modulate = Color(0.0705882, 0.219608, 1, 1)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_lkrwm")
 texture = SubResource("GradientTexture2D_76frv")
@@ -285,6 +285,176 @@ texture = SubResource("GradientTexture2D_76frv")
 
 [node name="RadarItem2" parent="RedLight/1" instance=ExtResource("22_yvbma")]
 position = Vector2(6000, 0)
+config = ExtResource("18_o5677")
+
+[node name="33" type="PointLight2D" parent="RedLight"]
+position = Vector2(10925, 1)
+color = Color(1, 0, 0, 1)
+energy = 1.6
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 8.0
+height = 160.0
+
+[node name="Star08" type="Sprite2D" parent="RedLight/33"]
+modulate = Color(1, 0.07, 0.07, 1)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_lkrwm")
+texture = SubResource("GradientTexture2D_76frv")
+
+[node name="RadarItem" parent="RedLight/33" instance=ExtResource("22_yvbma")]
+config = ExtResource("18_o5677")
+
+[node name="17" type="PointLight2D" parent="RedLight"]
+position = Vector2(9925, 1)
+color = Color(1, 0.490196, 0, 1)
+energy = 1.6
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 8.0
+height = 160.0
+
+[node name="Star02" type="Sprite2D" parent="RedLight/17"]
+modulate = Color(1, 0.498039, 0, 1)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_lkrwm")
+texture = SubResource("GradientTexture2D_76frv")
+
+[node name="RadarItem2" parent="RedLight/17" instance=ExtResource("22_yvbma")]
+config = ExtResource("18_o5677")
+
+[node name="9" type="PointLight2D" parent="RedLight"]
+position = Vector2(8925, 1)
+color = Color(1, 1, 0, 1)
+energy = 1.6
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 2.0
+height = 160.0
+
+[node name="Star05" type="Sprite2D" parent="RedLight/9"]
+modulate = Color(1, 1, 0.0705882, 1)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_lkrwm")
+texture = SubResource("GradientTexture2D_76frv")
+
+[node name="RadarItem3" parent="RedLight/9" instance=ExtResource("22_yvbma")]
+config = ExtResource("18_o5677")
+
+[node name="5" type="PointLight2D" parent="RedLight"]
+position = Vector2(7925, 1)
+color = Color(0, 1, 0.52549, 1)
+energy = 1.6
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 8.0
+height = 160.0
+
+[node name="Star04" type="Sprite2D" parent="RedLight/5"]
+modulate = Color(0, 1, 0.52549, 1)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_lkrwm")
+texture = SubResource("GradientTexture2D_76frv")
+
+[node name="RadarItem4" parent="RedLight/5" instance=ExtResource("22_yvbma")]
+config = ExtResource("18_o5677")
+
+[node name="3" type="PointLight2D" parent="RedLight"]
+position = Vector2(6925, 1)
+color = Color(0.133333, 0.341176, 1, 1)
+energy = 1.6
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 8.0
+height = 160.0
+
+[node name="Star03" type="Sprite2D" parent="RedLight/3"]
+modulate = Color(0.0705882, 0.219608, 1, 1)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_lkrwm")
+texture = SubResource("GradientTexture2D_76frv")
+
+[node name="RadarItem5" parent="RedLight/3" instance=ExtResource("22_yvbma")]
+config = ExtResource("18_o5677")
+
+[node name="34" type="PointLight2D" parent="RedLight"]
+position = Vector2(15593, -1)
+color = Color(1, 0, 0, 1)
+energy = 1.6
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 8.0
+height = 160.0
+
+[node name="Star08" type="Sprite2D" parent="RedLight/34"]
+modulate = Color(1, 0.07, 0.07, 1)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_lkrwm")
+texture = SubResource("GradientTexture2D_76frv")
+
+[node name="RadarItem" parent="RedLight/34" instance=ExtResource("22_yvbma")]
+config = ExtResource("18_o5677")
+
+[node name="18" type="PointLight2D" parent="RedLight"]
+position = Vector2(14593, -1)
+color = Color(1, 0.490196, 0, 1)
+energy = 1.6
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 8.0
+height = 160.0
+
+[node name="Star02" type="Sprite2D" parent="RedLight/18"]
+modulate = Color(1, 0.498039, 0, 1)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_lkrwm")
+texture = SubResource("GradientTexture2D_76frv")
+
+[node name="RadarItem2" parent="RedLight/18" instance=ExtResource("22_yvbma")]
+config = ExtResource("18_o5677")
+
+[node name="10" type="PointLight2D" parent="RedLight"]
+position = Vector2(13593, -1)
+color = Color(1, 1, 0, 1)
+energy = 1.6
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 2.0
+height = 160.0
+
+[node name="Star05" type="Sprite2D" parent="RedLight/10"]
+modulate = Color(1, 1, 0.0705882, 1)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_lkrwm")
+texture = SubResource("GradientTexture2D_76frv")
+
+[node name="RadarItem3" parent="RedLight/10" instance=ExtResource("22_yvbma")]
+config = ExtResource("18_o5677")
+
+[node name="6" type="PointLight2D" parent="RedLight"]
+position = Vector2(12593, -1)
+color = Color(0, 1, 0.52549, 1)
+energy = 1.6
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 8.0
+height = 160.0
+
+[node name="Star04" type="Sprite2D" parent="RedLight/6"]
+modulate = Color(0, 1, 0.52549, 1)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_lkrwm")
+texture = SubResource("GradientTexture2D_76frv")
+
+[node name="RadarItem4" parent="RedLight/6" instance=ExtResource("22_yvbma")]
+config = ExtResource("18_o5677")
+
+[node name="7" type="PointLight2D" parent="RedLight"]
+position = Vector2(11593, -1)
+color = Color(0.133333, 0.341176, 1, 1)
+energy = 1.6
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 8.0
+height = 160.0
+
+[node name="Star03" type="Sprite2D" parent="RedLight/7"]
+modulate = Color(0.0705882, 0.219608, 1, 1)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_lkrwm")
+texture = SubResource("GradientTexture2D_76frv")
+
+[node name="RadarItem5" parent="RedLight/7" instance=ExtResource("22_yvbma")]
 config = ExtResource("18_o5677")
 
 [node name="World" type="Node2D" parent="."]
