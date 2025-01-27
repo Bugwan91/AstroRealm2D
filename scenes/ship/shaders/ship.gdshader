@@ -25,16 +25,15 @@ vec3 compute_diffuse(vec3 L, vec3 N, vec3 B_color, vec3 L_color) {
 
 vec3 compute_specular(vec3 L, vec3 N, vec3 B_color, vec3 L_color, float Spec, float Met) {
 	vec3 V = vec3(.0,.0,1.);
-	vec3 R = reflect(-L, N); // vector of reflected light
+	vec3 R = (reflect(-L, N) + 3. * V) * 0.25; // vector of reflected light
 	float RdotV = clamp(dot(R, V), 1e-4, 1.);
 	float S = Spec * Spec;
 	float shini = 1. + 256. * S;
 	float intens = 0.3 * (
 		shini * pow(RdotV, shini) // base specular intensity
-		+ (1. + 4. * Met) * pow(RdotV, 1. + 8. * S) // extra wide reflections for metallic
-		) * (S * .5 + 0.1) // magnitude increasing for intense bright spots
-		* (1. + Met * 0.07); // extra intensity for metallic as it has no diffuse
-	float fresnel = pow(1.0 - dot(N, V), 1.) * 2. * Met;
+		+ 4. * Met * pow(RdotV, 1. + 8. * S) // extra wide reflections for metallic
+		) * (S + Met) * 0.5; // fine-tune magnitude increasing
+	float fresnel = pow(1.0 - dot(N, V), 0.7) * Met * (1.5 - S * 0.5);
 	return mix(vec3(0.5), B_color, Met) * L_color * (intens + fresnel);
 	//return mix(
 		//L_color * 0.5, // non metallic color, reflect pure light
