@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c7cafyhhy135a"]
+[gd_scene load_steps=19 format=3 uid="uid://c7cafyhhy135a"]
 
 [ext_resource type="Script" uid="uid://bvoanxx4ohf47" path="res://scenes/ship_designer/scripts/ship_designer_ui.gd" id="1_citlv"]
 [ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="2_jrjbv"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://da8c67h3oaq7j" path="res://assets/spaceships/hull/01/_heat.png" id="8_ob45u"]
 [ext_resource type="Texture2D" uid="uid://b4grjooukm1dd" path="res://assets/spaceships/hull/01/_mask.png" id="9_qlopd"]
 [ext_resource type="Script" uid="uid://d0fhyvn2u6c6u" path="res://scenes/ship_designer/point_light_cursor.gd" id="10_ob45u"]
+[ext_resource type="Environment" uid="uid://chl1sjnqh1sa7" path="res://scenes/main/main_environment.tres" id="10_qlopd"]
 [ext_resource type="Texture2D" uid="uid://dsl72b3dwxid4" path="res://assets/spaceships/hull/01/_base.png" id="11_l6t2q"]
 [ext_resource type="Texture2D" uid="uid://dg5ceqg02tvgu" path="res://assets/spaceships/hull/01/_normal.png" id="12_r2knm"]
 
@@ -186,6 +187,9 @@ handle_input_locally = false
 size = Vector2i(256, 256)
 render_target_update_mode = 4
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="HBoxContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
+environment = ExtResource("10_qlopd")
+
 [node name="CanvasModulate" type="CanvasModulate" parent="HBoxContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
 color = Color(0.1, 0.1, 0.1, 1)
 
@@ -196,12 +200,12 @@ energy = 0.7
 height = 0.4
 
 [node name="PointLightCursor" type="PointLight2D" parent="HBoxContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
-position = Vector2(-122, 16)
+position = Vector2(102, 154)
 color = Color(1, 0.701961, 0, 1)
 energy = 0.5
 texture = SubResource("GradientTexture2D_2mr7a")
-texture_scale = 2.0
-height = 100.0
+texture_scale = 4.0
+height = 64.0
 script = ExtResource("10_ob45u")
 
 [node name="ShipPreview" type="Sprite2D" parent="HBoxContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]

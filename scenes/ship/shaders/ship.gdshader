@@ -13,61 +13,71 @@ global uniform sampler2D temperature_texture : filter_nearest, hint_default_blac
 vec3 compute_heat(float ht_val) {
 	if (ht_val > 0.0) {
 		vec4 ht_color = texture(temperature_texture, vec2(ht_val));
-		return 32.0 * ht_color.a * ht_val * ht_val * ht_color.rgb;
+		return 16.0 * ht_color.a * ht_val * ht_val * ht_color.rgb;
 	}
 	return vec3(0.0);
 }
 
-vec3 compute_diffuse(vec3 L, vec3 N, vec3 B_color, vec3 L_color, float Spec, float Met) {
+vec3 compute_diffuse(vec3 L, vec3 N, vec3 B_color, vec3 L_color) {
 	float NdotL = clamp(dot(N, L), .0, 1.);
-	float intens = NdotL * max(1.0 - Met * 0.6, 1. - Spec);
-	return B_color * L_color * intens;
+	return B_color * L_color * NdotL;
 }
 
 vec3 compute_specular(vec3 L, vec3 N, vec3 B_color, vec3 L_color, float Spec, float Met) {
 	vec3 V = vec3(.0,.0,1.);
-	vec3 R = 0.1 * (reflect(-L, N) + 9. * V);
+	vec3 R = reflect(-L, N); // vector of reflected light
 	float RdotV = clamp(dot(R, V), 1e-4, 1.);
 	float S = Spec * Spec;
-	float shini = mix(1., 256., S);
-	float s_m = Spec + Spec * Met;
-	float intens = pow(RdotV, shini) * mix(.0, 16., S) * S;
-	float fresnel = pow(1.0 - dot(N, V), 3.) * Met;
-	return mix(B_color * L_color, L_color * 0.5, Met) * (intens + fresnel);
+	float shini = 1. + 256. * S;
+	float intens = 0.3 * (
+		shini * pow(RdotV, shini) // base specular intensity
+		+ (1. + 4. * Met) * pow(RdotV, 1. + 8. * S) // extra wide reflections for metallic
+		) * (S * .5 + 0.1) // magnitude increasing for intense bright spots
+		* (1. + Met * 0.07); // extra intensity for metallic as it has no diffuse
+	float fresnel = pow(1.0 - dot(N, V), 1.) * 2. * Met;
+	return mix(vec3(0.5), B_color, Met) * L_color * (intens + fresnel);
+	//return mix(
+		//L_color * 0.5, // non metallic color, reflect pure light
+		//(B_color + L_color * 0.07) // metallic reflection, tint reflected light color
+		//, Met)
+		//* (intens + fresnel) * LE; // magniture of resulted reflections
 }
 
 void light() {
-    // Mask texture for specular and metallic
-    vec3 mask = texture(mask_texture, UV).rgb;
-    float spec = mask.g + (1. - mask.g) * shininess;
-    float met = mask.b + (1. - mask.b) * metallic;
+	// Mask texture for specular and metallic
+	vec3 mask = texture(mask_texture, UV).rgb;
+	float spec = mask.g + (1. - mask.g) * shininess * mask.r;
+	float met = mask.b + (1. - mask.b) * metallic * mask.r;
 
-	//float m = sin(TIME) * 0.5 + 0.5;
-    // Diffuse and specular light
-    vec3 diffuse = compute_diffuse(
+	// Diffuse and specular light
+		vec3 diffuse = compute_diffuse(
 		LIGHT_DIRECTION,
 		NORMAL,
 		COLOR.rgb,
-		LIGHT_COLOR.rgb * LIGHT_ENERGY,
-		spec,
-		met
+		LIGHT_COLOR.rgb
 	);
     vec3 specular = compute_specular(
 		LIGHT_DIRECTION,
 		NORMAL,
 		COLOR.rgb,
-		LIGHT_COLOR.rgb * LIGHT_ENERGY,
+		LIGHT_COLOR.rgb,
 		spec,
 		met
 	);
 
 	// Heat effect
-    float ht_val = texture(heat_texture, UV).r * heat;
-    vec3 ht = compute_heat(ht_val);
+	float ht_val = texture(heat_texture, UV).r * heat;
+	vec3 ht = compute_heat(ht_val);
 
-    // Emission effect
-    vec3 em = texture(emission_texture, UV).rgb * emission_color.rgb * emission;
+	// Emission effect
+	vec3 em = texture(emission_texture, UV).rgb * emission_color.rgb * emission;
 
-    // Total light
-    LIGHT = vec4(diffuse + specular + ht + em, LIGHT_COLOR.a);
+	// Total light
+	LIGHT = vec4(
+		(
+			diffuse * (1.0 - met) + // no diffuse for metallic
+			specular * (1.0 + met) // extra specular for metallic for consistant energy
+		) * LIGHT_ENERGY //
+		+ ht + em,
+		LIGHT_COLOR.a);
 }

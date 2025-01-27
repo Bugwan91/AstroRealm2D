@@ -215,3 +215,7 @@ temperature_texture={
 "type": "sampler2D",
 "value": "res://assets/spaceships/temperature.tres"
 }
+
+[xr]
+
+shaders/enabled=true
