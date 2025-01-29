@@ -65,8 +65,8 @@ void light() {
 	);
 
 	// Heat effect
-	float ht_val = texture(heat_texture, UV).r * heat;
-	vec3 ht = compute_heat(ht_val);
+	float ht_tex = texture(heat_texture, UV).r * heat;
+	vec3 ht = compute_heat(ht_tex);
 
 	// Emission effect
 	vec3 em = texture(emission_texture, UV).rgb * emission_color.rgb * emission;

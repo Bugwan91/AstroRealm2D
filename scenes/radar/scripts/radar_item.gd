@@ -26,7 +26,7 @@ var canvas_position:Vector2:
 var _collider: CollisionShape2D
 var _parent: Node2D
 
-func _ready():
+func _ready() -> void:
 	_parent = get_parent()
 	monitoring = false
 	monitorable = true
@@ -39,13 +39,13 @@ func _ready():
 	if selectable:
 		input_event.connect(handle_click)
 
-func handle_click(_viewport, event, _shape_idx):
+func handle_click(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	# HACK: It's better to untilize new world partitioning system to get nearest radar item.
 	# Currently it's hard to click on object moving fast
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE:
 		selected.emit(self)
 
-func init_shape(radius: float):
+func init_shape(radius: float) -> void:
 	config = config.duplicate()
 	config.radius = radius
 	if is_instance_valid(_collider):
@@ -57,16 +57,16 @@ func init_shape(radius: float):
 	_collider.shape.radius = maxf(RADIUS_MIN, config.radius)
 	add_child(_collider)
 
-func reset():
+func reset() -> void:
 	if MainState.radar_manager.is_selected(self):
 		unselected.emit(self)
 
-func _on_destroy():
+func _on_destroy() -> void:
 	if is_instance_valid(destruction_handler):
 		destruction_handler.call(self)
 
-func connect_on_destroy():
+func connect_on_destroy() -> void:
 	tree_exiting.connect(_on_destroy)
 
-func disconnect_on_destroy():
+func disconnect_on_destroy() -> void:
 	tree_exiting.disconnect(_on_destroy)

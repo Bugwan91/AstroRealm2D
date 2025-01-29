@@ -158,7 +158,7 @@ position = Vector2(-378.182, -548.359)
 rotation = -0.876155
 color = Color(0.439216, 1, 0.65098, 1)
 energy = 0.2
-height = 0.4
+height = 0.57
 
 [node name="DirectionalLight3" type="DirectionalLight2D" parent="."]
 position = Vector2(-1041.55, -608.818)

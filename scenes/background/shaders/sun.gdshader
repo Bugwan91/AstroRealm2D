@@ -23,6 +23,11 @@ void fragment() {
 				0.5 * (0.5 * dy + 1.0) + sin(TIME * rotation_speed * 0.5)
 			)).r;
 		vec4 sun_color = color * tex_color * tex_color;
-		COLOR = (sun_color + sun_color * pow(px * px + py * py, 2.0)) * brightness;
+		float edge = px * px + py * py;
+		COLOR = (sun_color + sun_color * 
+		(pow(edge, 1.0) * 0.3
+		+ pow(edge, 2.0) * 0.3
+		+ pow(edge, 4.0) * 0.3
+		)) * brightness;
 	}
 }

@@ -2,11 +2,11 @@
 class_name ShipView
 extends BaseView
 
-func _ready():
+func _ready() -> void:
 	texture = CanvasTexture.new()
 	material = material.duplicate()
 
-func setup_textures(design: ShipDesignData):
+func setup_textures(design: ShipDesignData) -> void:
 	if design == null: return
 	texture = CanvasTexture.new()
 	texture.diffuse_texture = design.diffuse

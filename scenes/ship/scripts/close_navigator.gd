@@ -28,7 +28,7 @@ func update_course(delta: float, position: Vector2, velocity: Vector2) -> Vector
 		_total_delta = 0.0
 	return _course
 
-func _update_avoidance_course():
+func _update_avoidance_course() -> void:
 	var items := WorldGridManager.instance.grid.get_nearby(_position)
 	var t_min := MAX_TIME_TO_APPROACH
 	_course = Vector2.ZERO
@@ -49,16 +49,16 @@ func _update_avoidance_course():
 						DebugDraw2d.line_vector(
 							_position,
 							_velocity * t_min,
-							b._debug_color, 2, DELTA)
+							b.debug_color, 2, DELTA)
 						DebugDraw2d.line_vector(
 							b.global_position,
 							b.linear_velocity * t_min,
-							b._debug_color, 2, DELTA)
+							b.debug_color, 2, DELTA)
 						DebugDraw2d.circle(
 							_position + _velocity * t_min,
-							dist, 16, Color(b._debug_color, 1.0 - ints), 2, DELTA)
+							dist, 16, Color(b.debug_color, 1.0 - ints), 2, DELTA)
 						DebugDraw2d.line_vector(
 							_position + _velocity * t_min,
 							_course * 256.0,
-							b._debug_color, 6, DELTA)
-						DebugDraw2d.circle(b.global_position, b.radius + DIST_MARGIN, 16, b._debug_color, 2, DELTA)
+							b.debug_color, 6, DELTA)
+						DebugDraw2d.circle(b.global_position, b.radius + DIST_MARGIN, 16, b.debug_color, 2, DELTA)

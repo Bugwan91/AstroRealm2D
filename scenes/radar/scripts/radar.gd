@@ -15,7 +15,7 @@ signal unselected(item: RadarItem)
 
 var _items: Array[RadarItem] = []
 
-func _ready():
+func _ready() -> void:
 	monitorable = false
 	collision_layer = 8
 	collision_mask = 8
@@ -24,16 +24,16 @@ func _ready():
 	_setup_shape()
 	MainState.radar_manager.radar = self
 
-func _set_radius(value: float = 10000.0):
+func _set_radius(value: float = 10000.0) -> void:
 	radius = value
 	_setup_shape()
 	radius_updated.emit(radius)
 
-func _setup_shape():
+func _setup_shape() -> void:
 	if is_instance_valid(covering_shape):
 		covering_shape.shape.radius = radius
 
-func _radar_entered(item: Area2D):
+func _radar_entered(item: Area2D) -> void:
 	if not item is RadarItem: return
 	var itm := item as RadarItem
 	_items.append(itm)
@@ -43,7 +43,7 @@ func _radar_entered(item: Area2D):
 	itm.connect_on_destroy()
 	detected.emit(item)
 
-func _radar_exited(item: Area2D):
+func _radar_exited(item: Area2D) -> void:
 	if not item is RadarItem: return
 	var itm := item as RadarItem
 	itm.selected.disconnect(_on_select)
@@ -52,8 +52,8 @@ func _radar_exited(item: Area2D):
 	_items.erase(item)
 	undetected.emit(item)
 
-func _on_select(item: RadarItem):
+func _on_select(item: RadarItem) -> void:
 	selected.emit(item)
 
-func _on_unselect(item: RadarItem):
+func _on_unselect(item: RadarItem) -> void:
 	unselected.emit(item)

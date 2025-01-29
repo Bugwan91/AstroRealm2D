@@ -1,20 +1,20 @@
 class_name ShipInputData
 extends Resource
 
-signal boost_changed(float)
-signal strafe_changed(Vector2)
-signal dodge_changed(bool)
-signal dodging_updated(bool)
-signal stop_changed(bool)
-signal target_changed(RadarItem)
-signal target_point_changed(Vector2)
-signal is_follow_toggled(bool)
-signal follow_distance_changed(float)
-signal is_autopilot_toggled(bool)
-signal autopilot_target_changed(Vector2)
-signal autopilot_speed_changed(float)
-signal firing_toggled(bool)
-signal auto_aim_toggled(bool)
+signal boost_changed(value: float)
+signal strafe_changed(value: Vector2)
+signal dodge_changed(value: bool)
+signal dodging_updated(value: bool)
+signal stop_changed(value: bool)
+signal target_changed(value: RadarItem)
+signal target_point_changed(value: Vector2)
+signal is_follow_toggled(value: bool)
+signal follow_distance_changed(value: float)
+signal is_autopilot_toggled(value: bool)
+signal autopilot_target_changed(value: Vector2)
+signal autopilot_speed_changed(value: float)
+signal firing_toggled(value: bool)
+signal auto_aim_toggled(value: bool)
 
 var boost: float:
 	set(value):
@@ -23,8 +23,8 @@ var boost: float:
 
 var strafe: Vector2:
 	set(value):
-		var len := value.length()
-		strafe = value if len < 1.0 else value / len
+		var _len := value.length()
+		strafe = value if _len < 1.0 else value / _len
 		strafe_changed.emit(strafe)
 
 var dodge: bool:

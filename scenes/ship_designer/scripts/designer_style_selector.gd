@@ -12,12 +12,12 @@ var update_blueprint: Callable
 
 var selected_index: int = -1
 
-func _ready():
+func _ready() -> void:
 	_init_empty_item()
 	if not textures.is_empty():
 		_init_textures()
 
-func init_selection(data: Resource):
+func init_selection(data: Resource) -> void:
 	if data == null: return
 	for index in range(0, textures.size()):
 		if textures[index].resource_path == data.resource_path:
@@ -27,9 +27,9 @@ func init_selection(data: Resource):
 			_get_preview(selected_index).is_selected = true
 			return
 
-func _init_textures():
+func _init_textures() -> void:
 	for index in range(0, textures.size()):
-		var item_view = _init_item_preview(index)
+		var item_view := _init_item_preview(index)
 		item_view.texture = textures[index]
 		item_view.update_view()
 
@@ -41,14 +41,14 @@ func _init_item_preview(index: int) -> ShipDesignerItemPreview:
 	preview.selected.connect(_on_selection)
 	return preview
 
-func _init_empty_item():
+func _init_empty_item() -> void:
 	if empty_allowed:
 		_init_item_preview(-1).update_view()
 
 func _get_preview(index: int) -> ShipDesignerItemPreview:
 	return get_children()[index + 1 if empty_allowed else index]
 
-func _on_selection(index: int):
+func _on_selection(index: int) -> void:
 	if index == selected_index: return
 	_get_preview(selected_index).is_selected = false
 	selected_index = index

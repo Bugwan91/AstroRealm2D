@@ -3,6 +3,7 @@ extends Area2D
 
 @export var health: Health
 @export var keep_on_destroy: bool = false
+# FIXME: use this internal hit effect on taking damage
 @export var _hit_effect_scene: PackedScene
 @export var _damaged_effect_scene: PackedScene
 @export_range(0, 1) var _damaged_effect_threshold: float = 0.3
@@ -23,44 +24,45 @@ var parent_visual_node: Node2D:
 	get:
 		return parent.extrapolator  if parent is RigidBody2D else parent
 
-func _ready():
+func _ready() -> void:
 	monitoring = false
 	collision_layer = 3
 
-func setup_health(value: float):
+func setup_health(value: float) -> void:
 	health.max_health = value
 
-func setup_polygon(hp: Health, polygon_data: PackedVector2Array):
+func setup_polygon(hp: Health, polygon_data: PackedVector2Array) -> void:
 	health = hp
 	var polygon := CollisionPolygon2D.new()
 	polygon.polygon = polygon_data
 	add_child(polygon)
 
-func damage(damage: Damage, effect: BulletHitEffect):
+func damage(_damage: Damage, effect: BulletHitEffect = null) -> void:
 	if not is_instance_valid(health): return
-	health.damage(damage.amount)
-	_apply_impulse(damage)
-	_apply_hit_effetcs(damage, effect)
+	health.damage(_damage.amount)
+	_apply_impulse(_damage)
+	_apply_hit_effetcs(_damage, effect)
 	_handle_damage_effect()
 	_handle_death()
 
-func reset():
+func reset() -> void:
 	health.reset()
 	_get_damage_effect().intensity = 0.0
 
-func _apply_impulse(damage: Damage):
-	if parent is RigidBody2D: parent.apply_central_impulse(damage.impulse)
+func _apply_impulse(_damage: Damage) -> void:
+	if parent is RigidBody2D: parent.apply_central_impulse(_damage.impulse)
 
-func _apply_hit_effetcs(damage: Damage, effect: BulletHitEffect):
-	effect.position = (damage.position - global_position).rotated(-global_rotation)
-	parent_visual_node.add_child(effect)
+func _apply_hit_effetcs(_damage: Damage, effect: BulletHitEffect = null) -> void:
+	if is_instance_valid(effect):
+		effect.position = (_damage.position - global_position).rotated(-global_rotation)
+		parent_visual_node.add_child(effect)
 
-func _handle_damage_effect():
-	var intensity = clamp(1.0 - health.health / (health.max_health * _damaged_effect_threshold), 0, 1)
+func _handle_damage_effect() -> void:
+	var intensity: float = clamp(1.0 - health.health / (health.max_health * _damaged_effect_threshold), 0, 1)
 	if intensity > 0.0:
 		_get_damage_effect().intensity = intensity
 
-func _handle_death():
+func _handle_death() -> void:
 	if health.is_dead:
 		_handle_death_effect()
 		# HACK: create debris instead
@@ -69,13 +71,13 @@ func _handle_death():
 		else:
 			parent.queue_free()
 
-func _get_damage_effect():
+func _get_damage_effect() -> DamageEffect:
 	if not is_instance_valid(_damaged_effect):
 		_damaged_effect = _damaged_effect_scene.instantiate()
 		parent_visual_node.add_child(_damaged_effect)
 	return _damaged_effect
 
-func _handle_death_effect():
+func _handle_death_effect() -> void:
 	var effect: ShipDestroyEffect = _destroy_effect_scene.instantiate()
 	effect.position = parent.global_position
 	effect.linear_velocity = linear_velocity

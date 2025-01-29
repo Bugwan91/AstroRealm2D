@@ -25,10 +25,11 @@ enum TextureType { DIFFUSE, NORMAL, MASK, HEAT, EMISSION }
 @export var heat_capacity: float = 500.0
 @export var heat_radiation: float = 20.0
 
-func texture(type: TextureType):
-	match type:
+func texture(_type: TextureType) -> Texture2D:
+	match _type:
 		TextureType.DIFFUSE: return diffuse
 		TextureType.NORMAL: return normal
 		TextureType.MASK: return mask
 		TextureType.EMISSION: return emission
 		TextureType.HEAT: return heat
+	return null

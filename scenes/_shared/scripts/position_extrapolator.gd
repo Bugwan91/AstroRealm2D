@@ -28,7 +28,7 @@ var smooth_rotation: float:
 
 var _body: RigidBody
 
-func _ready():
+func _ready() -> void:
 	process_priority = -1000
 	_body = get_parent() as RigidBody2D
 	assert(is_instance_valid(_body), "Wrong parent for position extrapolation")
@@ -38,7 +38,7 @@ func _ready():
 # HACK: There is Godot's Physics interpolation, but it works not perfect.
 # Maybe I need to add camera as child to player's ship to fix it.
 # Need to try it layter.
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	var delta := Engine.get_physics_interpolation_fraction() * MainState.last_delta
 	rotation = _body.angular_velocity * delta
 	position = _body.linear_velocity.rotated(-_body.rotation) * delta

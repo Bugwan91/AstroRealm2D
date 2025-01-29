@@ -21,15 +21,15 @@ signal updated(design: ShipDesignData)
 var design: ShipDesignData = ShipDesignData.new()
 var _is_baking := false
 
-func _ready():
+func _ready() -> void:
 	blueprint = ShipBlueprint.new()
 	visible = debug_visible
 
-func _on_blueprint_update(type: ShipBlueprint.Type, value: Resource):
+func _on_blueprint_update(type: ShipBlueprint.Type, value: Resource) -> void:
 	_update_blueprint_value(type, value)
 	if bake_on_updates: bake()
 
-func _update_blueprint_value(type: ShipBlueprint.Type, value: Resource):
+func _update_blueprint_value(type: ShipBlueprint.Type, value: Resource) -> void:
 	diffuse.update(type, value)
 	normal.update(type, value)
 	mask.update(type, value)
@@ -40,7 +40,7 @@ func _update_blueprint_value(type: ShipBlueprint.Type, value: Resource):
 	else:
 		polygon.update(type, value)
 
-func _set_blueprint(value: ShipBlueprint):
+func _set_blueprint(value: ShipBlueprint) -> void:
 	blueprint = value
 	blueprint.updated_part.connect(_on_blueprint_update)
 	blueprint.updated_specular.connect(_on_spec_updated)
@@ -50,11 +50,11 @@ func _set_blueprint(value: ShipBlueprint):
 	_update_blueprint_value(ShipBlueprint.Type.ENGINE, value.engine)
 	_update_blueprint_value(ShipBlueprint.Type.STYLE, value.style)
 
-func _on_spec_updated(value: float):
+func _on_spec_updated(value: float) -> void:
 	design.shininess = value
 	updated.emit(design)
 
-func _on_met_updated(value: float):
+func _on_met_updated(value: float) -> void:
 	design.metallic = value
 	updated.emit(design)
 
@@ -67,7 +67,7 @@ func bake() -> ShipDesignData:
 	_is_baking = false
 	return design
 
-func _bake_polygon():
+func _bake_polygon() -> void:
 	polygon.bake()
 	design.polygon = polygon.polygon
 	design.engines = polygon.engines

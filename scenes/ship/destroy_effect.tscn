@@ -131,24 +131,24 @@ script = ExtResource("1_l4mfa")
 unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_5cxbh")
 emitting = false
+texture = ExtResource("2_e5hvd")
 one_shot = true
 explosiveness = 0.8
 randomness = 0.3
 visibility_rect = Rect2(-200, -200, 400, 400)
 local_coords = true
-texture = ExtResource("2_e5hvd")
 process_material = SubResource("ParticleProcessMaterial_is74h")
 
 [node name="Fire" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_k17ep")
 emitting = false
+texture = ExtResource("3_n2ne6")
 lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 visibility_rect = Rect2(-200, -200, 400, 400)
 local_coords = true
-texture = ExtResource("3_n2ne6")
 process_material = SubResource("ParticleProcessMaterial_4iykj")
 
 [node name="Sparcles" type="GPUParticles2D" parent="."]
@@ -156,6 +156,7 @@ unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_trnaj")
 emitting = false
 amount = 32
+texture = ExtResource("4_02x4f")
 lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
@@ -163,7 +164,6 @@ randomness = 0.5
 visibility_rect = Rect2(-200, -200, 400, 400)
 local_coords = true
 trail_enabled = true
-texture = ExtResource("4_02x4f")
 process_material = SubResource("ParticleProcessMaterial_wtsvi")
 
 [node name="ExplosionAudio" type="AudioStreamPlayer2D" parent="."]

@@ -8,20 +8,20 @@ var enabled := true:
 		if is_instance_valid(_weapon):
 			_weapon.enabled = enabled
 
-func add(weapon: Gun):
+func add(weapon: Gun) -> void:
 	weapon.position = Vector2.ZERO
 	remove()
 	_weapon = weapon
 	add_child(_weapon)
 
-func remove():
+func remove() -> void:
 	if not is_instance_valid(_weapon): return
 	remove_child(_weapon)
 	_weapon.queue_free()
 
-func connect_input(input: Signal):
+func connect_input(input: Signal) -> void:
 	if not is_instance_valid(_weapon): return
 	input.connect(_weapon.on_fire_input)
 
-func update_velocity(velocity: Vector2):
+func update_velocity(velocity: Vector2) -> void:
 	_weapon.velocity = velocity

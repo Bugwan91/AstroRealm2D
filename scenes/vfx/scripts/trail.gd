@@ -23,16 +23,17 @@ extends Line2D
 var _is_global: bool
 var _life := 0.0
 var _points: PackedVector2Array
+# FIXME: The class variable "_offset" is declared but never used in the class.
 var _offset := Vector2.ZERO
 
-func _ready():
+func _ready() -> void:
 	process_priority = 999
 	modulate = color
 	_points = points
 	_last_position = _parent.position + _relative_position()
 	_update_is_global()
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	_life += delta
 	global_rotation = 0.0
 	var shift: Vector2
@@ -52,5 +53,5 @@ func _physics_process(delta):
 func _relative_position() -> Vector2:
 	return position.rotated(_parent.rotation)
 
-func _update_is_global():
+func _update_is_global() -> void:
 	_is_global = is_zero_approx(velocity.length_squared())

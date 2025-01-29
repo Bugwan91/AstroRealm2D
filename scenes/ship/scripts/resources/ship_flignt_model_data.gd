@@ -8,15 +8,15 @@ const DODGE_DURATION_MIN := 0.05
 const DODGE_SLOWING_MULT := 4.0
 const DODGE_COOLDOWN_MIN := 0.2
 
-signal mass_changed(float)
-signal inertia_changed(float)
-signal speed_changed(float)
-signal boost_changed(float)
-signal strafe_changed(float)
-signal turn_changed(float)
-signal dodge_changed(float)
-signal dodge_duration_changed(float)
-signal dodge_cooldown_changed(float)
+signal mass_changed(value: float)
+signal inertia_changed(value: float)
+signal speed_changed(value: float)
+signal boost_changed(value: float)
+signal strafe_changed(value: float)
+signal turn_changed(value: float)
+signal dodge_changed(value: float)
+signal dodge_duration_changed(value: float)
+signal dodge_cooldown_changed(value: float)
 
 @export_range(MASS_MIN, 1000.0) var mass: float = 1.0: set = _set_mass
 @export_range(0.0, 50000.0) var speed: float = 2000.0: set = _set_speed
@@ -48,7 +48,7 @@ var ship: Spaceship
 var _mass_inv: float
 var _inertia_inv: float
 
-func init():
+func init() -> void:
 	_mass_inv = 1.0 / mass
 	inertia = mass * INERTIA_MULTIPLYER
 	_inertia_inv = 1.0 / inertia
@@ -63,41 +63,41 @@ func init():
 	_update_dodge_duration(dodge_duration)
 	_update_turn(turn_base)
 
-func _set_mass(new: float):
+func _set_mass(new: float) -> void:
 	mass = maxf(MASS_MIN, new)
 	init()
 
-func _set_speed(new: float):
+func _set_speed(new: float) -> void:
 	speed = maxf(0.0, new)
 	speed_sq = speed * speed
 	speed_changed.emit(speed)
 
-func _update_boost(new: float):
+func _update_boost(new: float) -> void:
 	boost_base = maxf(0.0, new)
 	boost = boost_base * _mass_inv
 	boost_changed.emit(boost)
 
-func _update_strafe(new: float):
+func _update_strafe(new: float) -> void:
 	strafe_base = maxf(0.0, new)
 	strafe = strafe_base * _mass_inv
 	strafe_changed.emit(strafe)
 
-func _update_turn(new: float):
+func _update_turn(new: float) -> void:
 	turn_base = maxf(0.0, new)
 	turn = turn_base * _mass_inv
 	turn_changed.emit(turn)
 
-func _update_dodge(new: float):
+func _update_dodge(new: float) -> void:
 	dodge_base = maxf(DODGE_MIN, new)
 	dodge = strafe * dodge_base
 	dodge_stop = strafe * dodge_base * 0.9 / DODGE_SLOWING_MULT
 	dodge_changed.emit(dodge)
 
-func _update_dodge_duration(new: float):
+func _update_dodge_duration(new: float) -> void:
 	dodge_duration = maxf(DODGE_DURATION_MIN, new)
 	dodge_stop_duration = dodge_duration * DODGE_SLOWING_MULT
 	dodge_duration_changed.emit(dodge_duration)
 
-func _update_dodge_cooldown(new: float):
+func _update_dodge_cooldown(new: float) -> void:
 	dodge_cooldown = maxf(DODGE_COOLDOWN_MIN, new)
 	dodge_cooldown_changed.emit(dodge_cooldown)

@@ -11,10 +11,10 @@ var _current_emission := 0.0:
 		_current_emission = value if value > 0.0 else 0.0
 		set_emission(_current_emission)
 
-func emit_max():
+func emit_max() -> void:
 	_current_emission = max_emission
 
-func _process(delta): 
+func _process(delta: float) -> void: 
 	if _current_emission > EMISSION_THRESHOLD:
 		_current_emission -= max_emission * delta * emission_reduction
 	else:

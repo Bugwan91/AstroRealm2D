@@ -1,8 +1,8 @@
 class_name AssistantPointer
 extends Node
 
-@onready var pointer = %Pointer
-@onready var pointer_texture = %PointerTexture
+@onready var pointer: Control = %Pointer
+@onready var pointer_texture: TextureRect = %PointerTexture
 
 @export var in_range_color: Color
 @export var out_range_color: Color
@@ -10,22 +10,22 @@ extends Node
 var _pivot: Vector2
 var _position: Vector2
 
-func _ready():
+func _ready() -> void:
 	pointer_texture.visible = false
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	_update_position()
 
-func update(new_position: Vector2, pivot: Vector2 = Vector2.ZERO, in_range: bool = true):
+func update(new_position: Vector2, pivot: Vector2 = Vector2.ZERO, in_range: bool = true) -> void:
 	_pivot = pivot
 	_position = new_position
 	pointer_texture.modulate = in_range_color if in_range else out_range_color
 	_update_position()
 	pointer_texture.visible = true
 
-func disable():
+func disable() -> void:
 	pointer_texture.visible = false
 
-func _update_position():
-	var zoom = get_viewport().get_camera_2d().zoom
+func _update_position() -> void:
+	var zoom := get_viewport().get_camera_2d().zoom
 	pointer.position = _pivot + _position * zoom

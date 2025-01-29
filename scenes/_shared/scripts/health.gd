@@ -17,15 +17,15 @@ var hp: float:
 var is_dead: bool:
 	get: return is_zero_approx(health)
 
-func _ready():
+func _ready() -> void:
 	health = max_health
 
-func damage(damage: float) -> float:
-	health = max(0.0, health - damage)
+func damage(_damage: float) -> float:
+	health = max(0.0, health - _damage)
 	damaged.emit(health, max_health)
 	if health <= 0.0:
 		dying.emit()
 	return health
 
-func reset():
+func reset() -> void:
 	health = max_health

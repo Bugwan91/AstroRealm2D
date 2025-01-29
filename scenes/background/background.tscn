@@ -251,14 +251,14 @@ script = ExtResource("3_u112l")
 
 [node name="Sun" parent="Layers/256" instance=ExtResource("18_hd5wb")]
 visible = false
-position = Vector2(472, 504)
+position = Vector2(180, 178)
+scale = Vector2(0.2, 0.2)
 
 [node name="64" type="Node2D" parent="Layers"]
 script = ExtResource("1_48uix")
 distance = 32000.0
 
 [node name="BackgroundSprite2" type="Sprite2D" parent="Layers/64"]
-visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_lh6as")
 texture = ExtResource("20_ahac3")
@@ -277,7 +277,6 @@ script = ExtResource("1_48uix")
 distance = 8000.0
 
 [node name="BackgroundSprite2" type="Sprite2D" parent="Layers/16"]
-visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_e3wy6")
 texture = ExtResource("24_t06r1")

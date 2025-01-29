@@ -30,7 +30,7 @@ var _impulces := Vector2.ZERO
 #endregion
 
 #region Initialization
-func _ready():
+func _ready() -> void:
 	assert(data != null, "Ship Data is missed")
 	super._ready()
 	_setup_view()
@@ -38,11 +38,11 @@ func _ready():
 	_setup_weapon()
 	connect_inputs(input_reader)
 
-func _setup_flight_controller():
+func _setup_flight_controller() -> void:
 	flight_controller.setup(self)
 	flight_controller.dodging.connect(_on_dodge)
 
-func _setup_weapon():
+func _setup_weapon() -> void:
 	_weapon_slots.setup(data.design)
 	for slot_index in _weapon_slots.slots.size():
 		var gun: Gun = gun_scene.instantiate() as Gun
@@ -52,7 +52,7 @@ func _setup_weapon():
 		gun.tranfser_heat.connect(_on_transfered_heat)
 		_weapon_slots.add_weapon(gun, slot_index)
 
-func connect_inputs(new_inputs: ShipInput):
+func connect_inputs(new_inputs: ShipInput) -> void:
 	input_reader = new_inputs
 	if not is_instance_valid(new_inputs): return
 	input_reader.setup(self)
@@ -60,22 +60,22 @@ func connect_inputs(new_inputs: ShipInput):
 	_connect_weapon_inputs()
 	_connect_flight_controller_inputs()
 
-func _connect_player_inputs():
+func _connect_player_inputs() -> void:
 	if not _is_player(): return
 	_radar_item.config.icon.color = Color(0.2, 0.8, 1.0)
 	MainState.player_ship = self
 	WorldGridManager.instance.player = self
 
-func _connect_flight_controller_inputs():
+func _connect_flight_controller_inputs() -> void:
 	flight_controller.input_reader = input_reader
 
-func _connect_weapon_inputs():
+func _connect_weapon_inputs() -> void:
 	_weapon_slots.connect_inputs(input_reader)
 
-func _setup_view():
+func _setup_view() -> void:
 	_view.setup_textures(data.design)
 
-func _set_ship_data(new_data: ShipData):
+func _set_ship_data(new_data: ShipData) -> void:
 	if new_data == null: return
 	data = new_data
 	mass = data.flight_model.mass
@@ -84,51 +84,51 @@ func _set_ship_data(new_data: ShipData):
 #endregion
 
 #region Physics
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	_update_velocity_for_weapons()
 	super._physics_process(delta)
 
-func _integrate_forces(state):
+func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	flight_controller.integrate_forces(state)
 	MyDebug.info("spd", speed)
 	MyDebug.info("pos", position)
 	_apply_impulces(state)
 
-func _update_velocity_for_weapons():
+func _update_velocity_for_weapons() -> void:
 	_weapon_slots.update_velocity(linear_velocity)
 #endregion
 
 #region Events
-func set_target(target: RigidBody2D):
+func set_target(_target: RigidBody2D) -> void:
 	pass
 
-func _die():
+func _die() -> void:
 	_weapon_slots.enabled = false
 	dead.emit(self)
 
-func _destroy():
+func _destroy() -> void:
 	queue_free()
 
-func _on_weapon_shoot(recoil: Vector2):
+func _on_weapon_shoot(recoil: Vector2) -> void:
 	_impulces += recoil
 
-func _on_transfered_heat(transfered_heat: float):
+func _on_transfered_heat(transfered_heat: float) -> void:
 	heat.add_heat(transfered_heat)
 #endregion
 
 func _is_player() -> bool:
 	return input_reader is PlayerShipInput
 
-func _apply_impulces(state: PhysicsDirectBodyState2D):
+func _apply_impulces(state: PhysicsDirectBodyState2D) -> void:
 	if is_zero_approx(_impulces.x) and is_zero_approx(_impulces.y): return
 	state.apply_impulse(_impulces)
 	_impulces = Vector2.ZERO
 
-func setup_health(value: float):
+func setup_health(value: float) -> void:
 	taking_damage.setup_health(value)
 
 func get_max_speed() -> float:
 	return data.flight_model.speed
 
-func _on_dodge(value: bool):
+func _on_dodge(value: bool) -> void:
 	_weapon_slots.enabled = not value

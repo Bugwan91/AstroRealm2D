@@ -7,16 +7,16 @@ extends PanelContainer
 
 var player: Spaceship
 
-func _ready():
+func _ready() -> void:
 	visible = false
 	MainState.player_ship_updated.connect(_on_player_ship_updated)
 
-func _process(delta):
+func _process(_delta: float) -> void:
 	if player == null: return
 	heat.value = player.heat.temperature
 	speed.value = player.speed / player.get_max_speed()
 
-func _on_player_ship_updated(new_player_ship: Spaceship):
+func _on_player_ship_updated(new_player_ship: Spaceship) -> void:
 	player = new_player_ship
 	if player == null:
 		visible = false
@@ -25,5 +25,5 @@ func _on_player_ship_updated(new_player_ship: Spaceship):
 	visible = true
 	player.taking_damage.health.damaged.connect(_on_health_update)
 
-func _on_health_update(value: float, max: float):
-	health.value = value / max
+func _on_health_update(value: float, _max: float) -> void:
+	health.value = value / _max

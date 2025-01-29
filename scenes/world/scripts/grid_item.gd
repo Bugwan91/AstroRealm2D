@@ -22,7 +22,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	_update_grid()
 
-func freeze_process(delta: float):
+func freeze_process(delta: float) -> void:
 	if not freeze: return
 	if body is KineticBody:
 		#body._process(delta)
@@ -31,10 +31,10 @@ func freeze_process(delta: float):
 		body.freeze_process(delta)
 	_update_grid()
 
-func _update_grid(force: bool = false):
-	cell = WorldGridManager.instance.grid.add_or_update(self)
+func _update_grid(force: bool = false) -> void:
+	cell = WorldGridManager.instance.grid.add_or_update(self, force)
 
-func _set_freeze(value: bool):
+func _set_freeze(value: bool) -> void:
 	if freeze == value: return
 	freeze = value
 	set_physics_process(not freeze)

@@ -8,11 +8,11 @@ const SPEED_STEP := 100.0
 
 var _camera_shift: Vector2
 
-func _ready():
+func _ready() -> void:
 	process_priority = -999
 	MainState.radar_manager.selected.connect(_target_updated)
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	_camera_shift = _camera_controller.update(_delta)
 	update_target_point()
 	data.strafe = Vector2(Input.get_axis("manuever_back", "manuever_forward"), Input.get_axis("manuever_left", "manuever_right"))
@@ -20,7 +20,7 @@ func _process(_delta):
 	if Input.is_action_pressed("set_target"):
 		data.autopilot_target = get_global_mouse_position()
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		update_target_point()
 	if event.is_action_pressed("dodge"):
@@ -50,7 +50,7 @@ func _unhandled_input(event):
 	if event.is_action_pressed("auto_aim"):
 		data.auto_aim = not data.auto_aim
 
-func _target_updated(target: RadarItem):
+func _target_updated(target: RadarItem) -> void:
 	data.target = target
 
 func update_target_point() -> Vector2:

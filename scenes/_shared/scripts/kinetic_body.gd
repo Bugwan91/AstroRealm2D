@@ -14,9 +14,9 @@ var speed: float:
 	get: return linear_velocity.length()
 
 ## IMPORTANT: Should call it from child if overrided
-func _process(delta: float):
+func _process(delta: float) -> void:
 	position += linear_velocity * delta
 	rotation += angular_velocity * delta
 
-func freeze_process(delta: float):
+func freeze_process(delta: float) -> void:
 	_process(delta)

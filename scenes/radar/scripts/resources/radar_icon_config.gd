@@ -15,14 +15,14 @@ signal aspect_updated(aspect: float)
 @export var free_rotation: bool = true
 @export var unique: bool = false
 
-func _update_size(value: float):
+func _update_size(value: float) -> void:
 	base_size = value
 	base_size_updated.emit(value)
 
-func _update_scale(value: float):
+func _update_scale(value: float) -> void:
 	scale = value
 	scale_updated.emit(value)
 
-func _update_aspect(value: float):
+func _update_aspect(value: float) -> void:
 	aspect = value
 	aspect_updated.emit(value)

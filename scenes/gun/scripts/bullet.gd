@@ -25,7 +25,7 @@ var _base_velocity: Vector2
 var _current_lifetime := 0.0
 var _light_base_energy: float
 
-func _ready():
+func _ready() -> void:
 	_base_velocity = transform.x * relative_speed
 	linear_velocity = start_velocity + _base_velocity
 	trail.velocity = _base_velocity
@@ -34,20 +34,20 @@ func _ready():
 	_update_material()
 	#prediction_ray.collision_mask = 7
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	super._process(delta)
 	_handle_lifetime(delta)
 	_update_ray(delta)
 	_collide()
 
-func _update_material(mult: float = 1.0):
+func _update_material(mult: float = 1.0) -> void:
 	var color_hdr := color * glow * mult
 	sprite.modulate = color_hdr
 	trail.color = color_hdr
 	light.color = color
 	light.energy = _light_base_energy * mult
 
-func _handle_lifetime(delta: float):
+func _handle_lifetime(delta: float) -> void:
 	_current_lifetime += delta
 	if _current_lifetime > effective_lifetime:
 		if _current_lifetime > (effective_lifetime + extra_lifetime):
@@ -55,16 +55,16 @@ func _handle_lifetime(delta: float):
 			return
 		_update_material(1.0 - (_current_lifetime - effective_lifetime) / extra_lifetime)
 
-func _update_ray(delta: float):
+func _update_ray(delta: float) -> void:
 	ray.target_position.y = speed * delta
 	prediction_ray.target_position.y = speed * time_prediction
 
-func _collide(force: bool = false):
+func _collide(force: bool = false) -> void:
 	if force: ray.force_raycast_update()
 	if ray.is_colliding():
 		_on_hit(ray.get_collider())
 
-func _on_hit(target: TakingDamage):
+func _on_hit(target: TakingDamage) -> void:
 	if not target is TakingDamage: return
 	target = target as TakingDamage
 	if target.parent == origin: return
@@ -81,6 +81,6 @@ func _create_damage() -> Damage:
 	damage.impulse = transform.x * impulse
 	return damage
 
-func _predict_hit():
+func _predict_hit() -> void:
 	if not prediction_ray.is_colliding(): return
 	pass

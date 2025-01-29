@@ -40,43 +40,43 @@ func _ready() -> void:
 	_viewport_margin = 2.0 * (cell_size + VIEWPORT_EXTRA_MARGIN) * Vector2.ONE
 	_init_freezed_dictionary()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	_player_cell = _get_cell_position(player_position)
 	_update_viewport_rect()
 	if is_debug: draw_debug()
 	_update_freezed()
 
-func _update_freezed():
+func _update_freezed() -> void:
 	for item in _freezed_items[_current_freeze_tick] as Array[GridItem]:
 		item.freeze_process(FREEZE_DELTA)
 	_current_freeze_tick += 1
 
 # HACK: Not used so far, but can be better for optimisation reasons.
-func _clear_cells():
+func _clear_cells() -> void:
 	var copy := cells
 	for cell in cells:
 		if cells[cell].is_empty():
 			copy.erase(cell)
 	cells = copy
 
-func _connect_root(node: Node2D):
+func _connect_root(node: Node2D) -> void:
 	if is_instance_valid(root):
 		root.child_entered_tree.disconnect(_new_item_added)
 	root = node
 	root.child_entered_tree.connect(_new_item_added)
 
-func _new_item_added(node: Node2D):
+func _new_item_added(node: Node2D) -> void:
 	var grid_item := GridItem.new()
 	grid_item.body = node
 	grid_item.order = _get_order()
-	node.tree_exiting.connect(func():
+	node.tree_exiting.connect(func() -> void:
 		remove(grid_item)
 	)
 	node.add_child(grid_item)
 
 func add_or_update(item: GridItem, force: bool = false) -> Vector2:
 	_handle_freezing(item)
-	var old_cell = item.cell
+	var old_cell := item.cell
 	var new_cell := _get_cell_position(item.global_position)
 	if old_cell != new_cell or force:
 		# Remove from old cell
@@ -90,7 +90,7 @@ func add_or_update(item: GridItem, force: bool = false) -> Vector2:
 		cells[new_cell].append(item)
 	return new_cell
 
-func _handle_freezing(item: GridItem):
+func _handle_freezing(item: GridItem) -> void:
 	item.freeze = not _viewport_rect.has_point(item.global_position)
 	if item.freeze:
 		if item not in _freezed_items[item.order]:
@@ -98,8 +98,8 @@ func _handle_freezing(item: GridItem):
 	elif item in _freezed_items[item.order]:
 			_freezed_items[item.order].erase(item)
 
-func remove(item: GridItem):
-	var old_cell = item.cell
+func remove(item: GridItem) -> void:
+	var old_cell := item.cell
 	if old_cell in cells and item in cells[old_cell]:
 		cells[old_cell].erase(item)
 		if cells[old_cell].is_empty():
@@ -114,7 +114,7 @@ func get_nearby(position: Vector2, offset: int = 4) -> Array[Node2D]:
 		for y_offset in range(1-offset, 1+offset):
 			var neighbor_cell := cell + Vector2(x_offset, y_offset)
 			if neighbor_cell in cells and not cells[neighbor_cell].is_empty():
-				for item in cells[neighbor_cell]:
+				for item in cells[neighbor_cell] as Array[GridItem]:
 					nearby_items.append(item.body)
 	return nearby_items
 
@@ -132,7 +132,7 @@ func get_items_in_cells(request_cells: Array[Vector2]) -> Array[Node2D]:
 	var result: Array[Node2D] = []
 	for cell in request_cells:
 		if cell in cells:
-			for item in cells[cell]:
+			for item in cells[cell] as Array[GridItem]:
 				result.append(item.body)
 	return result
 
@@ -148,7 +148,7 @@ func _get_cell_position(position: Vector2) -> Vector2:
 		floor(position.y * _cell_size_inv)
 	)
 
-func _update_viewport_rect():
+func _update_viewport_rect() -> void:
 	# HACK: should not depends on mainState.camera_controller
 	var center := MainState.camera_controller.get_screen_center_position()
 	var size := _viewport.get_visible_rect().size / MainState.camera_controller.zoom_min + _viewport_margin
@@ -156,14 +156,14 @@ func _update_viewport_rect():
 	_viewport_rect = Rect2(pos, size)
 
 func _get_order() -> int:
-	return randi_range(0, Engine.physics_ticks_per_second * FREEZE_DELTA - 1)
+	return randi_range(0, int(Engine.physics_ticks_per_second * FREEZE_DELTA - 1))
 
-func _init_freezed_dictionary():
+func _init_freezed_dictionary() -> void:
 	_max_freeze_ticks = floori(Engine.physics_ticks_per_second * FREEZE_DELTA)
 	for i in range(0, _max_freeze_ticks):
 		_freezed_items[i] = []
 
-func draw_debug():
+func draw_debug() -> void:
 	for x_offset in range(1-debug_offset, 1+debug_offset):
 		for y_offset in range(1-debug_offset, 1+debug_offset):
 			var neighbor_cell := _player_cell + Vector2(x_offset, y_offset)

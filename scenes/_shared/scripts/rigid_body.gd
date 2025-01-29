@@ -4,7 +4,7 @@ extends RigidBody2D
 @export var radius := 64.0
 var extrapolator: PositionExtrapolator
 
-var _debug_color: Color = Color.from_hsv(randf(), 1.0, 1.0)
+var debug_color: Color = Color.from_hsv(randf(), 1.0, 1.0)
 
 var _collision_layer: int = 0
 var _collision_mask: int = 0
@@ -21,7 +21,7 @@ func _ready() -> void:
 func delta_v(target_v: Vector2) -> Vector2:
 	return target_v - linear_velocity
 
-func set_collisions(enabled: bool):
+func set_collisions(enabled: bool) -> void:
 	if enabled:
 		collision_layer = _collision_layer
 		collision_mask = _collision_mask

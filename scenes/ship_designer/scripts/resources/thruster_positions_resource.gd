@@ -18,8 +18,8 @@ enum Direction {
 		direction = value
 		rotation = _get_rotation_for_direction(direction)
 
-func _get_rotation_for_direction(direction: Direction) -> float:
-	match direction:
+func _get_rotation_for_direction(_direction: Direction) -> float:
+	match _direction:
 		Direction.FRONT_LEFT, Direction.FRONT_RIGHT: return 90.0
 		Direction.RIGHT_FRONT, Direction.RIGHT_BACK: return 180.0
 		Direction.LEFT_FRONT, Direction.LEFT_BACK: return 0.0
@@ -28,4 +28,3 @@ func _get_rotation_for_direction(direction: Direction) -> float:
 
 func is_match(thruster: ThrusterPositionsResource) -> bool:
 	return thruster.direction == direction
-

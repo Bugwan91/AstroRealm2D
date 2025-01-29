@@ -1,7 +1,7 @@
 class_name Damage
 extends Node
 
-enum Type {KINETIC}
+enum Type {KINETIC, HEAT}
 
 var amount: float = 10.0
 var position: Vector2

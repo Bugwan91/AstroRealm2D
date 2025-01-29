@@ -200,7 +200,7 @@ energy = 0.7
 height = 0.4
 
 [node name="PointLightCursor" type="PointLight2D" parent="HBoxContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
-position = Vector2(102, 154)
+position = Vector2(-52, 146)
 color = Color(1, 0.701961, 0, 1)
 energy = 0.5
 texture = SubResource("GradientTexture2D_2mr7a")

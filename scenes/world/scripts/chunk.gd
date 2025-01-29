@@ -16,26 +16,22 @@ var offset: Vector2
 
 var _previous_status := Chunk.Status.NONE
 var _loaded := false
-var _should_load := true
-var _should_freeze := false
-var _should_unfreeze := false
-var _handled_items: Array[Node2D] = []
 
 func init(
 	chunk_position: Vector2,
 	chunk_size: float,
 	cells_in_chunk: int,
-	offset: Vector2,
+	_offset: Vector2,
 	new_content_managers: Array[ChunkContentManager]
-	):
+	) -> void:
 	position = chunk_position
 	size = chunk_size
 	cells_per_chunk = cells_in_chunk
-	offset = offset
+	offset = _offset
 	content_managers = new_content_managers
 	grid_cells = _calculate_chunk_cells()
 
-func update_status(new_status: Status, new_offset: Vector2):
+func update_status(new_status: Status, new_offset: Vector2) -> void:
 	offset = new_offset
 	if status == new_status: return
 	status = new_status
@@ -63,25 +59,25 @@ func update() -> bool:
 	_previous_status = status
 	return updated
 
-func unload():
+func unload() -> void:
 	for manager in content_managers:
 		manager.unload_content(_get_items())
 	# HACK: check is there no bugs here. It should be not,
 	# as chunks are abstract thing that are not a child of any node
 	#queue_free()
 
-func load_content():
+func load_content() -> void:
 	for manager in content_managers:
 		manager.load_content(position)
 	_loaded = true
 
-func replace_content():
+func replace_content() -> void:
 	var items := _get_items()
 	if items.is_empty(): return
 	for manager in content_managers:
 		manager.replace_content(items, _get_opposite_chunk())
 
-func unload_content():
+func unload_content() -> void:
 	for manager in content_managers:
 		manager.unload_content(_get_items())
 
@@ -92,7 +88,6 @@ func _get_opposite_chunk() -> Vector2:
 	return -(2.0 * offset - offset.clamp(-Vector2.ONE, Vector2.ONE))
 
 func _calculate_chunk_cells() -> Array[Vector2]:
-	cells_per_chunk
 	var origin := position * cells_per_chunk
 	var cells: Array[Vector2] = []
 	for x in range(0, cells_per_chunk):
@@ -103,7 +98,7 @@ func _calculate_chunk_cells() -> Array[Vector2]:
 			))
 	return cells
 
-func draw_debug(duration: float):
+func draw_debug(duration: float) -> void:
 	DebugDraw2d.rect(
 		position * size + Vector2.ONE * size * 0.5,
 		Vector2.ONE * size - Vector2(4,4),

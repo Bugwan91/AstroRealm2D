@@ -9,14 +9,14 @@ extends Node2D
 var _fire_material: ParticleProcessMaterial
 var _smoke_material: ParticleProcessMaterial
 
-func _ready():
+func _ready() -> void:
 	_fire_material = fire.process_material.duplicate()
 	fire.process_material = _fire_material
 	_smoke_material = smoke.process_material.duplicate()
 	smoke.process_material = _smoke_material
 	#intensity = 0.0
 
-func _set_intensity(value: float):
+func _set_intensity(value: float) -> void:
 	intensity = value
 	if intensity > 0.0:
 		fire.emitting = true

@@ -21,18 +21,18 @@ func _physics_process(delta: float) -> void:
 		MainState.radar_manager.update_icons()
 		_current_delta = 0.0
 
-func add_icon(icon: RadarIcon):
+func add_icon(icon: RadarIcon) -> void:
 	if not is_instance_valid(icon): return
 	if not _icons.has(icon):
 		_icons.append(icon)
 		add_child(icon)
 
-func remove_icon(icon: RadarIcon):
+func remove_icon(icon: RadarIcon) -> void:
 	if not is_instance_valid(icon): return
 	_icons.erase(icon)
 	remove_child(icon)
 
-func reset():
+func reset() -> void:
 	for icon in _icons:
 		remove_child(icon)
 	_icons.clear()

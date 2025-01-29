@@ -18,7 +18,7 @@ var opacity: float
 var _start_scale: Vector2
 var _start_grid_scale: float
 
-func _ready():
+func _ready() -> void:
 	MainState.player_ship_updated.connect(_on_update_player_ship)
 	camera = get_viewport().get_camera_2d()
 	_start_scale = scale
@@ -27,7 +27,7 @@ func _ready():
 	update_scale(grid_scale)
 	update_offset(grid_offset)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not is_instance_valid(target):
 		update_opacity(0.0)
 		return
@@ -37,21 +37,21 @@ func _physics_process(delta: float) -> void:
 	update_scale(grid_scale)
 	update_opacity(base_opacity * clamp((speed_limit - target.linear_velocity.length()) / speed_limit, 0, 1))
 
-func update_opacity(value: float = 0.0):
+func update_opacity(value: float = 0.0) -> void:
 	opacity = value
 	material.set("shader_parameter/opacity", opacity)
 	_subgrid.material.set("shader_parameter/opacity", opacity * SUBGRID_SCALE / scale.x)
 
-func update_offset(value: Vector2 = Vector2.ZERO):
+func update_offset(value: Vector2 = Vector2.ZERO) -> void:
 	grid_offset = value
 	material.set("shader_parameter/offset", grid_offset)
 	_subgrid.material.set("shader_parameter/offset", grid_offset * 5)
 
-func update_scale(value: float = 0.0):
+func update_scale(value: float = 0.0) -> void:
 	grid_scale = value
 	material.set("shader_parameter/scale", scale / grid_scale)
 	_subgrid.material.set("shader_parameter/scale", SUBGRID_SCALE * scale / grid_scale)
 
-func _on_update_player_ship(player_ship: Spaceship):
+func _on_update_player_ship(player_ship: Spaceship) -> void:
 	target = player_ship
 	position = target.position

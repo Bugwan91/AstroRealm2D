@@ -34,7 +34,7 @@ func _ready() -> void:
 	WorldGridManager.instance = self
 	tree_exiting.connect(_on_destroy)
 
-func _create_grid_system():
+func _create_grid_system() -> void:
 	grid = WorldGrid.new()
 	grid.root = world_root
 	grid.cell_size = world_cell_size
@@ -42,7 +42,7 @@ func _create_grid_system():
 	grid.debug_offset = grid_debug_offset
 	add_child(grid)
 
-func _create_chunks_system():
+func _create_chunks_system() -> void:
 	chunks = ChunkGrid.new()
 	chunks.active_offset = active_offset
 	chunks.chunk_size = chunk_size
@@ -51,7 +51,7 @@ func _create_chunks_system():
 	chunks.is_debug = draw_debug_chunk
 	add_child(chunks)
 
-func _set_player_position(value: Vector2):
+func _set_player_position(value: Vector2) -> void:
 	player_position = value
 	chunks.player_position = player_position
 	grid.player_position = player_position
@@ -59,5 +59,5 @@ func _set_player_position(value: Vector2):
 func _physics_process(_delta: float) -> void:
 	player_position = player.global_position if is_instance_valid(player) else Vector2.ZERO
 
-func _on_destroy():
+func _on_destroy() -> void:
 	WorldGridManager.instance = null

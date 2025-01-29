@@ -1,10 +1,16 @@
 class_name Heat
 extends Node
 
+const OVERHEAT_DAMAGE := 50.0; # dmg/sec
+
 @export var capacity: float = 100.0 # heat
 @export var cooling: float = 10.0 # heat/sec
 @export var transfer_efficiency: = 10.0 # heat/sec
 @export var view: BaseView
+@export var health: TakingDamage:
+	set(value):
+		health = value
+		print(value)
 
 var _heat := 0.0:
 	set(value):
@@ -25,12 +31,21 @@ func transfer(delta: float) -> float:
 func is_max() -> bool:
 	return _heat > capacity
 
-func add_heat(heat: float):
+func add_heat(heat: float) -> void:
 	_heat += heat
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if is_zero_approx(_heat): return
 	_heat -= delta * _current_cooling()
+	if _heat > capacity:
+		_apply_overheat_damage(delta)
 
 func _current_cooling() -> float:
 	return 0.5 * cooling * (1.0 + clampf(temperature, 0.0, 1.0))
+
+func _apply_overheat_damage(delta: float) -> void:
+	if not is_instance_valid(health): return
+	var damage := Damage.new();
+	damage.amount = OVERHEAT_DAMAGE * delta;
+	damage.type = Damage.Type.HEAT;
+	health.damage(damage)

@@ -7,7 +7,7 @@ signal radius_updated(radius: float)
 @export var icon: RadarIconConfig
 @export var selection_icon: RadarIconConfig
 
-func _set_radius(value: float):
+func _set_radius(value: float) -> void:
 	if radius == value: return
 	radius = value
 	radius_updated.emit(radius)

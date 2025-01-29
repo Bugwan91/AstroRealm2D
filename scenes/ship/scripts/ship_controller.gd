@@ -6,7 +6,7 @@ const STOP_THRESHOLD := 1.0
 const DRAG := 0.5 # Not needs yet, but should thi be a global constant?
 const STRAFE_LOW_SPEED_BONUS := 4.0
 
-signal dodging(bool)
+signal dodging(value: bool)
 
 var ship: Spaceship:
 	set(value):
@@ -32,12 +32,12 @@ var _dodge_acceleration := false
 var _dodge_time := 0.0
 var _dodge_vector := Vector2(1.0, 0.0)
 
-func setup(spaceship: Spaceship):
+func setup(spaceship: Spaceship) -> void:
 	_closee_navigator = %CloseNavigator
 	ship = spaceship
 	flight_model.init()
 
-func integrate_forces(state: PhysicsDirectBodyState2D):
+func integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if not is_instance_valid(inputs): return
 	_dodge(state)
 	inputs.strafe += _closee_navigator.update_course(
@@ -50,7 +50,7 @@ func integrate_forces(state: PhysicsDirectBodyState2D):
 	_boost(state)
 	_drag(state)
 
-func _stop(state: PhysicsDirectBodyState2D):
+func _stop(state: PhysicsDirectBodyState2D) -> void:
 	if not inputs.stop or inputs.dodge: return
 	var stop_vector := -ship.linear_velocity.normalized()
 	var step_distance := flight_model.strafe * (1.0 + _strafe_bonus(state)) * state.step
@@ -61,7 +61,7 @@ func _stop(state: PhysicsDirectBodyState2D):
 		# But probably it doesn't mater as long as strafe input doesn't changing every frame
 		inputs.strafe += 2.0 * (stop_vector).rotated(-ship.rotation)
 
-func _dodge(state: PhysicsDirectBodyState2D):
+func _dodge(state: PhysicsDirectBodyState2D) -> void:
 	if inputs.dodge and not _dodging:
 		_dodging = true
 		_dodge_acceleration = true
@@ -86,7 +86,7 @@ func _dodge(state: PhysicsDirectBodyState2D):
 	else:
 		_dodge_vector = state.transform.x
 
-func _strafe(state: PhysicsDirectBodyState2D):
+func _strafe(state: PhysicsDirectBodyState2D) -> void:
 	if inputs.strafe.is_zero_approx(): return
 	var str_input := inputs.strafe.rotated(ship.rotation) # Ralative
 	#var str_input := inputs.strafe.rotated(-0.5*PI) # Absolute
@@ -98,7 +98,7 @@ func _strafe_bonus(state: PhysicsDirectBodyState2D) -> float:
 	var d := minf(s / flight_model.speed, 1.0)
 	return pow((1.0 - d), 3.0) * STRAFE_LOW_SPEED_BONUS
 
-func _rotate(state: PhysicsDirectBodyState2D):
+func _rotate(state: PhysicsDirectBodyState2D) -> void:
 	var d := state.transform.x.angle_to(input_reader.update_target_point() - state.transform.origin)
 	if abs(d) < ANGULAR_THRESHOLD and abs(ship.angular_velocity) < ANGULAR_THRESHOLD:
 		ship.angular_velocity = 0.0
@@ -108,12 +108,12 @@ func _rotate(state: PhysicsDirectBodyState2D):
 	# HACK: reimplemet this with apply_torque()
 	ship.angular_velocity = vt
 
-func _boost(state: PhysicsDirectBodyState2D):
+func _boost(state: PhysicsDirectBodyState2D) -> void:
 	if not inputs.boost: return
 	var boost := inputs.boost * flight_model.boost * state.transform.x
 	state.apply_central_force(boost)
 
-func _drag(state: PhysicsDirectBodyState2D):
+func _drag(state: PhysicsDirectBodyState2D) -> void:
 	if _dodge_acceleration: return
 	var extra_speed := state.linear_velocity.length_squared() - flight_model.speed_sq
 	if extra_speed < 0.0: return

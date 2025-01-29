@@ -7,13 +7,13 @@ extends HBoxContainer
 
 @onready var _main_state: MainState = get_node("/root/MainState")
 
-func _ready():
+func _ready() -> void:
 	tracking.visible = false
 	autopilot.visible = false
 	tracking_distance.visible = false
 	autopilot_speed.visible = false
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	tracking.visible = _main_state.fa_tracking
 	autopilot.visible = _main_state.fa_autopilot
 	if _main_state.fa_tracking and _main_state.fa_tracking_distance > 0:

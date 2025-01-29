@@ -124,13 +124,14 @@ script = ExtResource("14_xvsf7")
 disabled = true
 metadata/_custom_type_script = ExtResource("14_xvsf7")
 
-[node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view")]
+[node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view", "health")]
 unique_name_in_owner = true
 script = ExtResource("20_1gdyl")
 capacity = 80.0
 cooling = 2.0
 transfer_efficiency = 0.0
 view = NodePath("../PositionExtrapolator/View")
+health = NodePath("../TakingDamage")
 
 [node name="TakingDamage" type="Area2D" parent="."]
 unique_name_in_owner = true

@@ -12,7 +12,7 @@ var _time:= 0.0
 var _start_light_energy: float
 var _sound_finished := false
 
-func _ready():
+func _ready() -> void:
 	_particles.process_material = _particles.process_material.duplicate()
 	_particles.process_material.color = color * 6.0
 	_particles.emitting = true
@@ -31,10 +31,10 @@ func _process(delta: float) -> void:
 	else:
 		_end()
 
-func _end_sound():
+func _end_sound() -> void:
 	_sound_finished = true
 	_end()
 
-func _end():
+func _end() -> void:
 	if _time >= duration and _sound_finished:
 		queue_free()
