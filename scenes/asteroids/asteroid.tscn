@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c48f2sdpasbwy"]
+[gd_scene load_steps=22 format=3 uid="uid://c48f2sdpasbwy"]
 
 [ext_resource type="Script" uid="uid://cousmnn4iqib7" path="res://scenes/asteroids/scripts/asteroid.gd" id="1_vucqq"]
 [ext_resource type="Script" uid="uid://ce7t5qymrq553" path="res://scenes/_shared/scripts/taking_damage.gd" id="2_i3arg"]
@@ -21,11 +21,6 @@
 [ext_resource type="Script" uid="uid://de333ogw3s8dt" path="res://scenes/_shared/scripts/position_extrapolator.gd" id="17_l4sdg"]
 [ext_resource type="Resource" uid="uid://ci5yk7wngo6ue" path="res://scenes/radar/_res/asteroid.tres" id="18_l4sdg"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k3qgf"]
-friction = 0.6
-rough = true
-bounce = 0.5
-
 [sub_resource type="Resource" id="Resource_xb7x4"]
 resource_local_to_scene = true
 script = ExtResource("3_6cbl0")
@@ -33,7 +28,6 @@ max_health = 500.0
 metadata/_custom_type_script = ExtResource("3_6cbl0")
 
 [node name="Asteroid" type="RigidBody2D"]
-physics_material_override = SubResource("PhysicsMaterial_k3qgf")
 script = ExtResource("1_vucqq")
 variants = Array[CanvasTexture]([ExtResource("7_0wnxl"), ExtResource("3_8vt2t"), ExtResource("4_0wnxl"), ExtResource("5_0wnxl"), ExtResource("6_l4sdg"), ExtResource("7_g0deq"), ExtResource("8_vufhy"), ExtResource("9_ma54s"), ExtResource("10_g0deq")])
 metadata/_custom_type_script = ExtResource("10_k3qgf")
