@@ -8,6 +8,7 @@ extends CanvasLayer
 
 func _ready() -> void:
 	process_priority = 999
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	MainState.player_ship_updated.connect(_on_player_updated)
 	game_over_container.open_ship_designer.connect(open_ship_designer)
 	ship_designer_ui.closed.connect(show_game_ui)

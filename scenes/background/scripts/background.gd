@@ -9,6 +9,7 @@ var _camera: Camera2D
 var _layers: Array[BackgroundLayer]
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	_camera = get_viewport().get_camera_2d()
 	for layer in layers_container.get_children():
 		if layer is BackgroundLayer:

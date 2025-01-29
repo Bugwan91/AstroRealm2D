@@ -16,9 +16,13 @@ func _ready() -> void:
 	process_physics_priority = -1001
 	MainState.world_root = world
 	MainState.main_scene = self
+	pause()
 
 func _physics_process(delta: float) -> void:
 	MainState.last_delta = delta
+
+func pause(value: bool = true) -> void:
+	get_tree().paused = value
 
 func spawn_player_ship(_position: Vector2 = Vector2.ZERO) -> void:
 	var ship: Spaceship = ship_scene.instantiate() as Spaceship
