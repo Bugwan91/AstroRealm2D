@@ -16,7 +16,7 @@ var _selected_target: RadarItem:
 func _ready() -> void:
 	process_priority = 999
 	container.visible = false
-	MainState.radar_manager.selected.connect(_target_updated)
+	RadarManager.instance.selected.connect(_target_updated)
 
 func _process(_delta: float) -> void:
 	if not is_instance_valid(_selected_target): container.visible = false

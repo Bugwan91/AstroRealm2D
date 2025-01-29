@@ -10,17 +10,12 @@ var _target: Spaceship
 
 func init(ship: Spaceship):
 	_ship = ship
-	_ship.dead.connect(_on_dead)
-	MainState.player_ship_updated.connect(update_target_ship)
+	PlayerManager.instance.ship_spawned.connect(new_target_ship)
+	PlayerManager.instance.ship_destroyed.connect(remove_target_ship)
 	_ship.flight_assistant.is_turn_enabled = false
 
-
-func update_target_ship(target_ship: Spaceship):
+func new_target_ship(target_ship: Spaceship):
 	_target = target_ship
-	if not is_instance_valid(_target):
-		_ship.flight_assistant.is_follow = false
-		_ship.battle_assistant._is_auto_aim = false
-		return
 	_ship.flight_assistant.target = _target
 	_ship.battle_assistant.target = _target
 	_ship.flight_assistant.is_follow = true
@@ -29,5 +24,7 @@ func update_target_ship(target_ship: Spaceship):
 	_ship.battle_assistant._is_auto_aim = true
 	_ship.battle_assistant.is_auto_shoot = agressive
 
-func _on_dead(_pass):
-	MainState.player_ship_updated.disconnect(update_target_ship)
+func remove_target_ship() -> void:
+	_target = null
+	_ship.flight_assistant.is_follow = false
+	_ship.battle_assistant._is_auto_aim = false

@@ -42,7 +42,9 @@ func replace_content(items: Array[Node2D], offset: Vector2) -> void:
 func unload_content(items: Array[Node2D]) -> void:
 	for item in items:
 		if item is Asteroid:
-			WorldGridManager.instance.world_root.remove_child(item)
+			# FIXME: Condition "p_child->data.parent != this" is true.
+			if item.get_parent() == WorldGridManager.instance.world_root:
+				WorldGridManager.instance.world_root.remove_child(item)
 
 func _spawn(start: Vector2, end: Vector2) -> void:
 	var asteroid := _get_asteroid()

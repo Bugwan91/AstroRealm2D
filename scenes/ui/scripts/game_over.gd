@@ -9,35 +9,49 @@ signal open_ship_designer
 @onready var ship_designer_button: Button = %ShipEditorButton
 
 func _ready() -> void:
-	visible = not is_instance_valid(MainState.player_ship)
+	visible = not PlayerManager.instance.is_alive()
 	get_tree().paused = not visible
-	MainState.player_dead.connect(_on_player_dead)
+	PlayerManager.instance.ship_spawned.connect(_on_player_spawned)
+	PlayerManager.instance.ship_destroyed.connect(_on_player_dstroyed)
 	continue_button.pressed.connect(_continue)
-	continue_button.disabled = not is_instance_valid(MainState.player_ship)
+	continue_button.disabled = not PlayerManager.instance.is_alive()
 	respawn_button.pressed.connect(_respawn_player)
 	ship_designer_button.pressed.connect(_open_ship_designer)
 
-func _on_player_dead() -> void:
+func open(paused: bool = true) -> void:
 	visible = true
-	continue_button.disabled = true
+	if paused:
+		MainState.main_scene.pause()
+
+func close() -> void:
+	visible = false
+	MainState.main_scene.pause(false)
+
+func toggle() -> void:
+	if visible:
+		close()
+	else:
+		open()
 
 func _continue() -> void:
-	if is_instance_valid(MainState.player_ship):
-		visible = false
-		MainState.main_scene.pause(false)
+	if PlayerManager.instance.is_alive():
+		close()
 
 func _respawn_player() -> void:
-	var pos := MainState.player_ship.position if is_instance_valid(MainState.player_ship) else Vector2.ZERO
-	MainState.main_scene.spawn_player_ship(pos)
-	visible = false
+	PlayerManager.instance.respawn_player_ship()
+
+func _on_player_spawned(_ship: Spaceship) -> void:
 	continue_button.disabled = false
-	MainState.main_scene.pause(false)
+	close()
+
+func _on_player_dstroyed() -> void:
+	open(false)
+	continue_button.disabled = true
 
 func _open_ship_designer() -> void:
 	open_ship_designer.emit()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("escape") and is_instance_valid(MainState.player_ship):
-		if not is_instance_valid(MainState.player_ship): return
-		MainState.main_scene.pause(not visible)
-		visible = not visible
+	if event.is_action_pressed("escape")\
+		and PlayerManager.instance.is_alive():
+		toggle()

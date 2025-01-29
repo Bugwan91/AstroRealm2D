@@ -9,7 +9,8 @@ var player: Spaceship
 
 func _ready() -> void:
 	visible = false
-	MainState.player_ship_updated.connect(_on_player_ship_updated)
+	PlayerManager.instance.ship_spawned.connect(_on_player_ship_updated)
+	PlayerManager.instance.ship_destroyed.connect(_on_player_destroyed)
 
 func _process(_delta: float) -> void:
 	if player == null: return
@@ -18,12 +19,13 @@ func _process(_delta: float) -> void:
 
 func _on_player_ship_updated(new_player_ship: Spaceship) -> void:
 	player = new_player_ship
-	if player == null:
-		visible = false
-		return
 	health.value = player.taking_damage.health.hp
 	visible = true
 	player.taking_damage.health.damaged.connect(_on_health_update)
+
+func _on_player_destroyed() -> void:
+	visible = false
+	player = null
 
 func _on_health_update(value: float, _max: float) -> void:
 	health.value = value / _max

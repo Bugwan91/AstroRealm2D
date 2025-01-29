@@ -72,7 +72,9 @@ func _handle_death() -> void:
 		_handle_death_effect()
 		# HACK: create debris instead
 		if keep_on_destroy:
-			WorldGridManager.instance.world_root.remove_child(parent)
+			# FIXME: Condition "p_child->data.parent != this" is true.
+			if parent.get_parent() == WorldGridManager.instance.world_root:
+				WorldGridManager.instance.world_root.remove_child(parent)
 		else:
 			parent.queue_free()
 

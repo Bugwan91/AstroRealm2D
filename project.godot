@@ -58,6 +58,7 @@ folder_colors={
 "res://scenes/navigation_grid/scripts/": "blue",
 "res://scenes/navigation_grid/shaders/": "purple",
 "res://scenes/player/scripts/": "blue",
+"res://scenes/radar/scripts/": "blue",
 "res://scenes/ship/scripts/": "blue",
 "res://scenes/ship/shaders/": "purple",
 "res://scenes/ship_designer/scripts/": "blue",
@@ -65,7 +66,9 @@ folder_colors={
 "res://scenes/ship_designer/styles/": "red",
 "res://scenes/ship_designer/tool/": "yellow",
 "res://scenes/thruster/scripts/": "blue",
-"res://scenes/ui/scripts/": "blue"
+"res://scenes/ui/scripts/": "blue",
+"res://scenes/world/_res/": "yellow",
+"res://scenes/world/scripts/": "blue"
 }
 
 [filesystem]

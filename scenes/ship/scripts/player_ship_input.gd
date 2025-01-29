@@ -4,16 +4,14 @@ extends ShipInput
 const DISTANCE_STEP := 100.0
 const SPEED_STEP := 100.0
 
-@onready var _camera_controller: CameraController = %Camera
-
 var _camera_shift: Vector2
 
 func _ready() -> void:
 	process_priority = -999
-	MainState.radar_manager.selected.connect(_target_updated)
+	RadarManager.instance.selected.connect(_target_updated)
 
 func _process(_delta: float) -> void:
-	_camera_shift = _camera_controller.update(_delta)
+	_camera_shift = CameraController.instance.update(_delta)
 	update_target_point()
 	data.strafe = Vector2(Input.get_axis("manuever_back", "manuever_forward"), Input.get_axis("manuever_left", "manuever_right"))
 	# CAUTION: Doesn't work. Controls is hardcoded is SelectionArea
@@ -34,7 +32,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("boost"):
 		data.boost = false
 	if event.is_action_pressed("target_reset"):
-		MainState.radar_manager.reselect(null)
+		RadarManager.instance.reselect(null)
 	if event.is_action_pressed("autopilot"):
 		data.is_autopilot = not data.is_autopilot
 	if event.is_action_pressed("distance_up"):

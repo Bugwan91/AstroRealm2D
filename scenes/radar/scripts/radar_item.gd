@@ -58,7 +58,7 @@ func init_shape(radius: float) -> void:
 	add_child(_collider)
 
 func reset() -> void:
-	if MainState.radar_manager.is_selected(self):
+	if RadarManager.instance.is_selected(self):
 		unselected.emit(self)
 
 func _on_destroy() -> void:

@@ -19,7 +19,8 @@ var _start_scale: Vector2
 var _start_grid_scale: float
 
 func _ready() -> void:
-	MainState.player_ship_updated.connect(_on_update_player_ship)
+	PlayerManager.instance.ship_spawned.connect(_on_player_spawn)
+	PlayerManager.instance.ship_destroyed.connect(_on_player_destroyed)
 	camera = get_viewport().get_camera_2d()
 	_start_scale = scale
 	_start_grid_scale = grid_scale
@@ -52,10 +53,10 @@ func update_scale(value: float = 0.0) -> void:
 	material.set("shader_parameter/scale", scale / grid_scale)
 	_subgrid.material.set("shader_parameter/scale", SUBGRID_SCALE * scale / grid_scale)
 
-func _on_update_player_ship(player_ship: Spaceship) -> void:
+func _on_player_spawn(player_ship: Spaceship) -> void:
 	target = player_ship
-	if is_instance_valid(target):
-		position = target.position
-		visible = true
-	else:
-		visible = false
+	visible = true
+
+func _on_player_destroyed() -> void:
+	target = null
+	visible = false

@@ -7,6 +7,8 @@ signal zoomed(zoom: float)
 @export var zoom_max := 2.0
 @export var zoom_speed := 0.05
 
+static var instance: CameraController
+
 var shift := Vector2.ZERO
 
 var target: Spaceship
@@ -18,9 +20,12 @@ var _zoom_speed: Vector2
 var _target_zoom: Vector2
 
 func _ready() -> void:
+	# TODO: create singleton instead of this one
 	MainState.camera_controller = self
-	MainState.player_ship_updated.connect(_on_update_player_ship)
+	PlayerManager.instance.ship_spawned.connect(_on_player_spawn)
+	PlayerManager.instance.ship_destroyed.connect(_on_player_destroyed)
 	_init_zoom()
+	CameraController.instance = self
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_key_pressed(KEY_ALT): return
@@ -55,9 +60,11 @@ func _get_look_position() -> Vector2:
 	var delta := get_global_mouse_position() - target.position
 	return delta.clamp(-deadzone, deadzone) / 2
 
-func _on_update_player_ship(player_ship: Spaceship) -> void:
+func _on_player_spawn(player_ship: Spaceship) -> void:
 	target = player_ship
-	if not target: return
+
+func _on_player_destroyed() -> void:
+	target = null
 
 # TODO: Not unig this so far, probably should be deleting at all after playtesting
 func _shake_on_hit(hit: Vector2) -> void:

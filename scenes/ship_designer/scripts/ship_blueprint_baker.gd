@@ -42,8 +42,12 @@ func _update_blueprint_value(type: ShipBlueprint.Type, value: Resource) -> void:
 
 func _set_blueprint(value: ShipBlueprint) -> void:
 	blueprint = value
+	# FIXME: Signal 'updated_part' is already connected to given callable
+	# 'Control(ShipBlueprintBaker)::_on_blueprint_update' in that object.
 	blueprint.updated_part.connect(_on_blueprint_update)
+	# FIXME same
 	blueprint.updated_specular.connect(_on_spec_updated)
+	# FIXME same
 	blueprint.updated_metallic.connect(_on_met_updated)
 	_update_blueprint_value(ShipBlueprint.Type.HULL, value.hull)
 	_update_blueprint_value(ShipBlueprint.Type.HULL_EXT, value.hull_ext)

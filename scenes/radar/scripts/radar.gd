@@ -22,7 +22,7 @@ func _ready() -> void:
 	area_entered.connect(_radar_entered)
 	area_exited.connect(_radar_exited)
 	_setup_shape()
-	MainState.radar_manager.radar = self
+	RadarManager.instance.radar = self
 
 func _set_radius(value: float = 10000.0) -> void:
 	radius = value

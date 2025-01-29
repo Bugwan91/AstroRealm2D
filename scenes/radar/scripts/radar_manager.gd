@@ -4,6 +4,8 @@ extends Node
 signal radar_changed(radar: Radar)
 signal selected(item: RadarItem)
 
+static var instance: RadarManager
+
 var radar: Radar: set = _connect_radar
 var radar_view: RadarViewport: set = _connect_view
 
@@ -11,6 +13,9 @@ var _view_scale: float
 var _selected_item: RadarItem: set = _set_selected
 var _default_selection_icon: RadarIcon = RadarIcon.create(
 	load("res://scenes/radar/_res/icons/selection_icon.tres"))
+
+func _ready() -> void:
+	RadarManager.instance = self
 
 func update_icons() -> void:
 	if not is_instance_valid(radar): return
@@ -20,6 +25,9 @@ func update_icons() -> void:
 
 func is_selected(item: RadarItem) -> bool:
 	return item == _selected_item
+
+func is_active() -> bool:
+	return is_instance_valid(radar)
 
 func _connect_radar(value: Radar) -> void:
 	radar = value

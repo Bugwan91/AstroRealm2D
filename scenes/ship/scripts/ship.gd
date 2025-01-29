@@ -1,7 +1,6 @@
 class_name Spaceship
 extends ActiveRigidBody
 
-signal dead(ship: Spaceship)
 #region Export properties
 @export var data: ShipData: set = _set_ship_data
 @export var group: String # HACK: Rework with implementation factions/groups system
@@ -63,7 +62,6 @@ func connect_inputs(new_inputs: ShipInput) -> void:
 func _connect_player_inputs() -> void:
 	if not _is_player(): return
 	_radar_item.config.icon.color = Color(0.2, 0.8, 1.0)
-	MainState.player_ship = self
 	WorldGridManager.instance.player = self
 
 func _connect_flight_controller_inputs() -> void:
@@ -102,11 +100,6 @@ func _update_velocity_for_weapons() -> void:
 func set_target(_target: RigidBody2D) -> void:
 	pass
 
-func die() -> void:
-	_weapon_slots.enabled = false
-	dead.emit(self)
-	queue_free()
-
 func _on_weapon_shoot(recoil: Vector2) -> void:
 	_impulces += recoil
 
@@ -124,7 +117,6 @@ func _apply_impulces(state: PhysicsDirectBodyState2D) -> void:
 
 func setup_health(value: float) -> void:
 	taking_damage.setup_health(value)
-	taking_damage.destroyed.connect(die)
 
 func get_max_speed() -> float:
 	return data.flight_model.speed

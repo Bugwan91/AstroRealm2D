@@ -31,7 +31,6 @@ var _metallic := 0.0
 
 func _ready() -> void:
 	_setup_selectors_data()
-	MainState.ship_designer = self
 	cancel_button.pressed.connect(close)
 	confirm_button.pressed.connect(confirm)
 	hull_selector.update_blueprint = func(value: HullBakerResource) -> void:

@@ -1,7 +1,7 @@
 class_name WorldGrid
 extends Node
 
-const FREEZE_DELTA := 0.5
+const FREEZE_DELTA := 0.2
 const VIEWPORT_EXTRA_MARGIN := 256.0
 
 var root: Node2D: set = _connect_root

@@ -31,11 +31,11 @@ func spawn_ship():
 	ship.health = _create_health()
 	ship.gun = _create_gun()
 	ships.append(ship)
-	ship.dead.connect(_on_ship_dead)
+	ship.tree_exiting.connect(_on_ship_dead)
 	owner.add_child(ship)
 	ship.connect_inputs(_create_AI())
-	if is_instance_valid(MainState.player_ship):
-		ship.inputs.update_target_ship(MainState.player_ship)
+	if PlayerManager.instance.is_alive():
+		ship.inputs.update_target_ship(PlayerManager.instance.ship)
 
 func _on_ship_dead(ship: Spaceship):
 	ships.erase(ship)
