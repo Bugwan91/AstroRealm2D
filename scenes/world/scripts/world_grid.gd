@@ -133,7 +133,8 @@ func get_items_in_cells(request_cells: Array[Vector2]) -> Array[Node2D]:
 	for cell in request_cells:
 		if cell in cells:
 			for item in cells[cell] as Array[GridItem]:
-				result.append(item.body)
+				if is_instance_valid(item):
+					result.append(item.body)
 	return result
 
 func _grid_items_to_node(items: Array[GridItem]) -> Array[Node2D]:

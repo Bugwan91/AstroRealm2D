@@ -31,6 +31,7 @@ func _ready() -> void:
 	process_physics_priority = -1000
 	_create_grid_system()
 	_create_chunks_system()
+	player_position = Vector2.ZERO
 	WorldGridManager.instance = self
 	tree_exiting.connect(_on_destroy)
 
@@ -57,7 +58,8 @@ func _set_player_position(value: Vector2) -> void:
 	grid.player_position = player_position
 
 func _physics_process(_delta: float) -> void:
-	player_position = player.global_position if is_instance_valid(player) else Vector2.ZERO
+	if is_instance_valid(player):
+		player_position = player.global_position
 
 func _on_destroy() -> void:
 	WorldGridManager.instance = null

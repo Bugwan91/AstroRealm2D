@@ -54,4 +54,8 @@ func update_scale(value: float = 0.0) -> void:
 
 func _on_update_player_ship(player_ship: Spaceship) -> void:
 	target = player_ship
-	position = target.position
+	if is_instance_valid(target):
+		position = target.position
+		visible = true
+	else:
+		visible = false

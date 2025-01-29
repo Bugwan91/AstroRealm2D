@@ -102,11 +102,9 @@ func _update_velocity_for_weapons() -> void:
 func set_target(_target: RigidBody2D) -> void:
 	pass
 
-func _die() -> void:
+func die() -> void:
 	_weapon_slots.enabled = false
 	dead.emit(self)
-
-func _destroy() -> void:
 	queue_free()
 
 func _on_weapon_shoot(recoil: Vector2) -> void:
@@ -126,6 +124,7 @@ func _apply_impulces(state: PhysicsDirectBodyState2D) -> void:
 
 func setup_health(value: float) -> void:
 	taking_damage.setup_health(value)
+	taking_damage.destroyed.connect(die)
 
 func get_max_speed() -> float:
 	return data.flight_model.speed

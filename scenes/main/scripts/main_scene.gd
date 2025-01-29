@@ -25,6 +25,8 @@ func pause(value: bool = true) -> void:
 	get_tree().paused = value
 
 func spawn_player_ship(_position: Vector2 = Vector2.ZERO) -> void:
+	if is_instance_valid(MainState.player_ship):
+		MainState.player_ship.die()
 	var ship: Spaceship = ship_scene.instantiate() as Spaceship
 	ship.group = "player"
 	ship.data = await _create_ship_configuration()

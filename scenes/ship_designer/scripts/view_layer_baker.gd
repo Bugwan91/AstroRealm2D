@@ -47,13 +47,15 @@ func set_hull_ext(resource: ViewBakerResource) -> void:
 		_hull_ext.position = -resource.pivot_point
 
 func set_engine(resource: ViewBakerResource) -> void:
+	# HACK: not shure that Array[Sprite2D] is correct
 	for engine in _engines.get_children() as Array[Sprite2D]:
 		engine.texture = resource.texture(type) if resource != null else null
 
 func _clear_engines() -> Texture2D:
 	var texture: Texture2D
 	if _engines.get_child_count() > 0:
-		var engines := _engines.get_children() as Array[Sprite2D]
+		# HACK: not shure that Array[Node] is correct
+		var engines := _engines.get_children() as Array[Node]
 		texture = engines[0].texture
 		for engine in engines:
 			_engines.remove_child(engine)

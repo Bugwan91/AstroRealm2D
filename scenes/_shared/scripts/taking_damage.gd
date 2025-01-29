@@ -1,6 +1,9 @@
 class_name TakingDamage
 extends Area2D
 
+signal damaged(value: Damage)
+signal destroyed()
+
 @export var health: Health
 @export var keep_on_destroy: bool = false
 # FIXME: use this internal hit effect on taking damage
@@ -39,6 +42,7 @@ func setup_polygon(hp: Health, polygon_data: PackedVector2Array) -> void:
 
 func damage(_damage: Damage, effect: BulletHitEffect = null) -> void:
 	if not is_instance_valid(health): return
+	damaged.emit(damage)
 	health.damage(_damage.amount)
 	_apply_impulse(_damage)
 	_apply_hit_effetcs(_damage, effect)
@@ -64,6 +68,7 @@ func _handle_damage_effect() -> void:
 
 func _handle_death() -> void:
 	if health.is_dead:
+		destroyed.emit()
 		_handle_death_effect()
 		# HACK: create debris instead
 		if keep_on_destroy:

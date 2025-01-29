@@ -72,8 +72,8 @@ texture = ExtResource("12_hyqnp")
 unique_name_in_owner = true
 position = Vector2(16, 0)
 texture = ExtResource("12_t6ksw")
-texture_scale = 8.0
-height = 40.0
+texture_scale = 4.0
+height = 16.0
 
 [node name="ShootPoint" type="Marker2D" parent="."]
 unique_name_in_owner = true

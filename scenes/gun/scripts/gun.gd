@@ -60,7 +60,7 @@ func _process(delta: float) -> void:
 	_shoot(delta)
 	_update_marker()
 	_flash.modulate = bullet_color * 3.0 * _flast_intensity
-	_flash_light.energy = _flast_intensity * 2.0
+	_flash_light.energy = _flast_intensity * 0.5
 	if _flast_intensity > 0.0:
 		_flast_intensity -= 15.0 * delta
 	else:

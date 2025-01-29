@@ -1,3 +1,4 @@
+# FIXME: Move all this functional to TakingDamage
 class_name Health
 extends Resource
 
