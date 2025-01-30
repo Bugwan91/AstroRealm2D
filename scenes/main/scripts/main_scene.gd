@@ -15,3 +15,6 @@ func _physics_process(delta: float) -> void:
 
 func pause(value: bool = true) -> void:
 	get_tree().paused = value
+
+func exit_game() -> void:
+	get_tree().quit()

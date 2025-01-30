@@ -7,6 +7,7 @@ signal open_ship_designer
 @onready var continue_button: Button = %ContinueButton
 @onready var respawn_button: Button = %RespawnButton
 @onready var ship_designer_button: Button = %ShipEditorButton
+@onready var exit_button: Button = %ExitButton
 
 func _ready() -> void:
 	visible = not PlayerManager.instance.is_alive()
@@ -17,6 +18,7 @@ func _ready() -> void:
 	continue_button.disabled = not PlayerManager.instance.is_alive()
 	respawn_button.pressed.connect(_respawn_player)
 	ship_designer_button.pressed.connect(_open_ship_designer)
+	exit_button.pressed.connect(_exit)
 
 func open(paused: bool = true) -> void:
 	visible = true
@@ -50,6 +52,9 @@ func _on_player_dstroyed() -> void:
 
 func _open_ship_designer() -> void:
 	open_ship_designer.emit()
+
+func _exit() -> void:
+	MainState.main_scene.exit_game()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("escape")\
