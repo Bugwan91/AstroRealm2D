@@ -29,26 +29,23 @@ var player_position: Vector2: set = _set_player_position
 
 func _ready() -> void:
 	process_physics_priority = -1000
-	_create_grid_system()
-	_create_chunks_system()
-	player_position = Vector2.ZERO
 	WorldGridManager.instance = self
 	tree_exiting.connect(_on_destroy)
+	_create_grid_system()
+	_create_chunks_system()
+
+func init_load() -> void:
+	player_position = Vector2.ZERO
+	chunks.init_load()
 
 func _create_grid_system() -> void:
-	grid = WorldGrid.new()
-	grid.root = world_root
-	grid.cell_size = world_cell_size
+	grid = WorldGrid.create(world_root, world_cell_size)
 	grid.is_debug = draw_debug_grid
 	grid.debug_offset = grid_debug_offset
 	add_child(grid)
 
 func _create_chunks_system() -> void:
-	chunks = ChunkGrid.new()
-	chunks.active_offset = active_offset
-	chunks.chunk_size = chunk_size
-	chunks.cell_size = world_cell_size
-	chunks.content_managers = content_managers
+	chunks = ChunkGrid.create(chunk_size, world_cell_size, active_offset, content_managers)
 	chunks.is_debug = draw_debug_chunk
 	add_child(chunks)
 

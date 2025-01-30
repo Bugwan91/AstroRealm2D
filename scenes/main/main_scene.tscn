@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=39 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" uid="uid://dn170a8jtfbql" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -25,12 +25,13 @@
 [ext_resource type="Resource" uid="uid://dcpvcj872hjms" path="res://scenes/radar/_res/icons/star_icon.tres" id="20_o5677"]
 [ext_resource type="Script" uid="uid://bfy4thm52835j" path="res://scenes/radar/scripts/resources/radar_item_config.gd" id="21_d8uwl"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="22_yvbma"]
+[ext_resource type="Script" uid="uid://c63eir7evomhx" path="res://scenes/world/scripts/level_loader.gd" id="27_d3v0f"]
 [ext_resource type="PackedScene" uid="uid://cmqm4dm8rpi0l" path="res://scenes/background/sun.tscn" id="46_aihwc"]
 
 [sub_resource type="Resource" id="Resource_d3v0f"]
 script = ExtResource("10_1xx6e")
 _asteroid_scene = ExtResource("9_j7r4u")
-density = 0.2
+density = 0.5
 size_variation = 0.5
 speed_variation = 0.5
 speed = 400
@@ -48,23 +49,6 @@ shininess = 0.0
 metallic = 0.0
 metadata/_custom_type_script = ExtResource("11_fkpwp")
 
-[sub_resource type="Gradient" id="Gradient_3co8r"]
-offsets = PackedFloat32Array(0, 0.686529)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_3cj2f"]
-gradient = SubResource("Gradient_3co8r")
-width = 1024
-height = 1024
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="Resource" id="Resource_1xx6e"]
-script = ExtResource("21_d8uwl")
-radius = 64.0
-icon = ExtResource("20_o5677")
-metadata/_custom_type_script = ExtResource("21_d8uwl")
-
 [sub_resource type="Gradient" id="Gradient_2be3f"]
 offsets = PackedFloat32Array(0, 0.746063)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -81,6 +65,23 @@ shader_parameter/opacity = 0.031
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/emission = Color(0.554273, 0.827548, 1, 1)
 shader_parameter/mask = SubResource("GradientTexture2D_njkiq")
+
+[sub_resource type="Gradient" id="Gradient_3co8r"]
+offsets = PackedFloat32Array(0, 0.686529)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3cj2f"]
+gradient = SubResource("Gradient_3co8r")
+width = 1024
+height = 1024
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Resource" id="Resource_1xx6e"]
+script = ExtResource("21_d8uwl")
+radius = 64.0
+icon = ExtResource("20_o5677")
+metadata/_custom_type_script = ExtResource("21_d8uwl")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lkrwm"]
 light_mode = 1
@@ -102,15 +103,18 @@ metadata/_edit_lock_ = true
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.0117647, 0.0117647, 0.0117647, 1)
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("4_h5iwh")
+
+[node name="RadarManager" type="Node" parent="."]
+script = ExtResource("13_sunwe")
+metadata/_custom_type_script = ExtResource("13_sunwe")
+
 [node name="WorldGridManager" type="Node" parent="." node_paths=PackedStringArray("world_root")]
 script = ExtResource("8_j7r4u")
 world_root = NodePath("../World")
 content_managers = Array[ExtResource("9_sunwe")]([SubResource("Resource_d3v0f")])
 metadata/_custom_type_script = ExtResource("8_j7r4u")
-
-[node name="RadarManager" type="Node" parent="."]
-script = ExtResource("13_sunwe")
-metadata/_custom_type_script = ExtResource("13_sunwe")
 
 [node name="PlayerManager" parent="." instance=ExtResource("6_3co8r")]
 ship_flight_model = ExtResource("2_3s1kf")
@@ -128,27 +132,10 @@ script = ExtResource("12_c6lr5")
 [node name="Background" parent="." instance=ExtResource("1_b53p2")]
 unique_name_in_owner = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("4_h5iwh")
-
 [node name="AutopilotPointer" parent="." instance=ExtResource("15_5xucn")]
 unique_name_in_owner = true
 in_range_color = Color(0, 0, 1, 0.78)
 out_range_color = Color(0, 0, 0.486275, 0.784314)
-
-[node name="Sun" parent="." instance=ExtResource("46_aihwc")]
-position = Vector2(-20000, 0)
-scale = Vector2(2, 2)
-
-[node name="PointLightSun" type="PointLight2D" parent="Sun"]
-color = Color(1, 0.741176, 0.313726, 1)
-energy = 2.0
-texture = SubResource("GradientTexture2D_3cj2f")
-texture_scale = 34.0
-height = 3000.0
-
-[node name="RadarItem" parent="Sun" instance=ExtResource("22_yvbma")]
-config = SubResource("Resource_1xx6e")
 
 [node name="DirectionalLight" type="DirectionalLight2D" parent="."]
 position = Vector2(-330, -177)
@@ -178,7 +165,23 @@ base_opacity = 0.02
 offset_shift = Vector2(250, 250)
 metadata/_edit_lock_ = true
 
+[node name="Sun" parent="." instance=ExtResource("46_aihwc")]
+visible = false
+position = Vector2(-20000, 0)
+scale = Vector2(2, 2)
+
+[node name="PointLightSun" type="PointLight2D" parent="Sun"]
+color = Color(1, 0.741176, 0.313726, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_3cj2f")
+texture_scale = 34.0
+height = 3000.0
+
+[node name="RadarItem" parent="Sun" instance=ExtResource("22_yvbma")]
+config = SubResource("Resource_1xx6e")
+
 [node name="RedLight" type="Node2D" parent="."]
+visible = false
 
 [node name="32" type="PointLight2D" parent="RedLight"]
 position = Vector2(6000, 0)
@@ -448,3 +451,7 @@ config = ExtResource("18_o5677")
 
 [node name="World" type="Node2D" parent="."]
 unique_name_in_owner = true
+
+[node name="LevelLoader" type="Node" parent="."]
+script = ExtResource("27_d3v0f")
+metadata/_custom_type_script = ExtResource("27_d3v0f")

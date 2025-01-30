@@ -28,12 +28,30 @@ var _update_batch: int = 1
 var _chunk_size_inv: float
 var _total_offset: int
 
+static func create(
+	chunk_size: float,
+	cell_size: float,
+	active_offset: int,
+	content_managers: Array[ChunkContentManager]
+	) -> ChunkGrid:
+	var grid := ChunkGrid.new()
+	grid.chunk_size = chunk_size
+	grid.cell_size = cell_size
+	grid.active_offset = active_offset
+	grid.content_managers = content_managers
+	return grid
+
 func _ready() -> void:
 	process_physics_priority = -998
 	cells_per_chunk = int(chunk_size / cell_size)
 	_chunk_size_inv = 1.0 / chunk_size
 	_update_batch_value()
 	_init_content_managers()
+
+func init_load() -> void:
+	_current_chunk = get_chunk_position(player_position)
+	update_chunks()
+	_update_prepared_chunks(true)
 
 func _init_content_managers() -> void:
 	for manager in content_managers:
@@ -64,13 +82,13 @@ func _unload_prepared_chunks() -> void:
 		if i > _update_batch:
 			return
 
-func _update_prepared_chunks() -> void:
+func _update_prepared_chunks(force: bool = false) -> void:
 	var i := 0
 	var copy := _chunks_to_update
 	for chunk in copy:
 		if chunks[chunk].update(): i += 1
 		_chunks_to_update.erase(chunk)
-		if i > _update_batch:
+		if not force and i > _update_batch:
 			return
 
 func get_chunk_position(position: Vector2) -> Vector2:
