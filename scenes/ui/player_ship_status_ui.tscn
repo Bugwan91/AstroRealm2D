@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bdcrgonof28mh" path="res://assets/spaceships/temperature.tres" id="2_3bl0r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48qji"]
-bg_color = Color(1, 0.8, 0, 1)
+bg_color = Color(1, 0, 0.203922, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jlrfh"]
 bg_color = Color(0, 0.9, 1, 1)
@@ -39,6 +39,7 @@ mouse_filter = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_48qji")
 max_value = 1.0
 step = 0.001
+value = 0.5
 show_percentage = false
 
 [node name="HeatProgressBar" type="TextureProgressBar" parent="MarginContainer/VBoxContainer"]

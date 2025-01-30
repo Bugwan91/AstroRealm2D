@@ -59,6 +59,7 @@ func _update_with_resource() -> void:
 	_item_view.texture.normal_texture = resource.normal
 	_item_view.material.set("shader_parameter/emission_texture", resource.emission)
 	_item_view.material.set("shader_parameter/mask_texture", resource.mask)
+	_item_view.modulate = Color(0.2, 0.2, 0.2)
 	_update_placeholders()
 
 func _update_placeholders() -> void:
