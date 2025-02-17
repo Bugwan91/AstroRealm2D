@@ -30,16 +30,15 @@ vec3 compute_specular(vec3 L, vec3 N, vec3 B_color, vec3 L_color, float Spec, fl
 	float S = Spec * Spec;
 	float shini = 1. + 256. * S;
 	float intens = 0.3 * (
-		shini * pow(RdotV, shini) // base specular intensity
-		+ 4. * Met * pow(RdotV, 1. + 8. * S) // extra wide reflections for metallic
-		) * (S + Met) * 0.5; // fine-tune magnitude increasing
+		// base specular intensity
+		shini * pow(RdotV, shini)
+		// extra wide reflections for metallic
+		// as it is too dark in not bright spots without diffuse
+		+ 4. * Met * pow(RdotV, 1. + 8. * S)
+		// Shininess nagnitude increasing depending on specular and metalnes
+		) * (S + Met) * 0.5;
 	float fresnel = pow(1.0 - dot(N, V), 0.7) * Met * (1.5 - S * 0.5);
 	return mix(vec3(0.5), B_color, Met) * L_color * (intens + fresnel);
-	//return mix(
-		//L_color * 0.5, // non metallic color, reflect pure light
-		//(B_color + L_color * 0.07) // metallic reflection, tint reflected light color
-		//, Met)
-		//* (intens + fresnel) * LE; // magniture of resulted reflections
 }
 
 void light() {
@@ -74,9 +73,12 @@ void light() {
 	// Total light
 	LIGHT = vec4(
 		(
-			diffuse * (1.0 - met) + // no diffuse for metallic
-			specular * (1.0 + met) // extra specular for metallic for consistant energy
-		) * LIGHT_ENERGY //
+			// no diffuse for metallic
+			diffuse * (1.0 - met) +
+			// extra specular for metallic for consistant brightnes
+			specular * (1.0 + met)
+		) * LIGHT_ENERGY
+		// extra lightning from heat and emmision
 		+ ht + em,
 		LIGHT_COLOR.a);
 }

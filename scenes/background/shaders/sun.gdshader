@@ -24,7 +24,7 @@ void fragment() {
 			)).r;
 		vec4 sun_color = color * tex_color * tex_color;
 		float edge = px * px + py * py;
-		COLOR = (sun_color + sun_color * 
+		COLOR = (sun_color + sun_color *
 		(pow(edge, 1.0) * 0.3
 		+ pow(edge, 2.0) * 0.3
 		+ pow(edge, 4.0) * 0.3

@@ -26,6 +26,7 @@ func add_icon(icon: RadarIcon) -> void:
 	if not is_instance_valid(icon): return
 	if not _icons.has(icon):
 		_icons.append(icon)
+		icon.tree_exiting.connect(_on_icon_destroy.bind(icon))
 		add_child(icon)
 
 func remove_icon(icon: RadarIcon) -> void:
@@ -39,3 +40,6 @@ func reset() -> void:
 	for icon in _icons:
 		remove_child(icon)
 	_icons.clear()
+
+func _on_icon_destroy(icon: RadarIcon):
+	_icons.erase(icon)

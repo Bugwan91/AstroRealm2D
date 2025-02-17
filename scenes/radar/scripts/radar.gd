@@ -40,7 +40,6 @@ func _radar_entered(item: Area2D) -> void:
 	itm.selected.connect(_on_select)
 	itm.unselected.connect(_on_unselect)
 	itm.destruction_handler = _radar_exited
-	itm.connect_on_destroy()
 	detected.emit(item)
 
 func _radar_exited(item: Area2D) -> void:
@@ -48,7 +47,6 @@ func _radar_exited(item: Area2D) -> void:
 	var itm := item as RadarItem
 	itm.selected.disconnect(_on_select)
 	itm.unselected.disconnect(_on_unselect)
-	itm.disconnect_on_destroy()
 	_items.erase(item)
 	undetected.emit(item)
 

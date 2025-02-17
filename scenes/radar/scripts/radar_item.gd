@@ -62,11 +62,8 @@ func reset() -> void:
 		unselected.emit(self)
 
 func _on_destroy() -> void:
+	icon.queue_free()
 	if is_instance_valid(destruction_handler):
 		destruction_handler.call(self)
-
-func connect_on_destroy() -> void:
-	tree_exiting.connect(_on_destroy)
-
-func disconnect_on_destroy() -> void:
-	tree_exiting.disconnect(_on_destroy)
+	if is_instance_valid(selected_icon):
+		selected_icon.queue_free()
