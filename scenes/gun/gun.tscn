@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://f787xuov3u4t"]
+[gd_scene load_steps=14 format=3 uid="uid://f787xuov3u4t"]
 
 [ext_resource type="Script" uid="uid://dtkhtyoen3ad2" path="res://scenes/gun/scripts/gun.gd" id="1_heu61"]
 [ext_resource type="PackedScene" uid="uid://dwdthpisfmojs" path="res://scenes/gun/bullet.tscn" id="2_gsief"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://e1hf68e0dm4l" path="res://assets/spaceships/weapons/01_heat.png" id="6_2v8rv"]
 [ext_resource type="Texture2D" uid="uid://b5uejhd6j04e5" path="res://assets/spaceships/weapons/01_base.png" id="9_gdpxm"]
 [ext_resource type="Script" uid="uid://dybegsvrepwwy" path="res://scenes/_shared/scripts/view/view_weapon.gd" id="10_3kf55"]
-[ext_resource type="Texture2D" uid="uid://bycsfl6wbsu8g" path="res://assets/spaceships/weapons/01_normal.png" id="10_pmh73"]
 [ext_resource type="Script" uid="uid://liqs1h6x4e1p" path="res://scenes/heat/scripts/Heat.gd" id="11_7n2e0"]
 [ext_resource type="Texture2D" uid="uid://lowp57mecpcf" path="res://assets/VFX_textures/muzzle_01.png" id="12_hyqnp"]
 [ext_resource type="Texture2D" uid="uid://c388olp5jsja" path="res://assets/my/circle_texture_128.tres" id="12_t6ksw"]
@@ -24,11 +23,6 @@ shader_parameter/metallic = 1.0
 shader_parameter/mask_texture = ExtResource("6_1ulvv")
 shader_parameter/emission_texture = ExtResource("5_7c33b")
 shader_parameter/heat_texture = ExtResource("6_2v8rv")
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_c5j27"]
-diffuse_texture = ExtResource("9_gdpxm")
-normal_texture = ExtResource("10_pmh73")
-texture_filter = 3
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_heu61")
@@ -56,7 +50,7 @@ unique_name_in_owner = true
 texture_filter = 3
 material = SubResource("ShaderMaterial_whwpl")
 rotation = 1.5708
-texture = SubResource("CanvasTexture_c5j27")
+texture = ExtResource("9_gdpxm")
 script = ExtResource("10_3kf55")
 emission_reduction = 4.0
 max_emission = 8.0

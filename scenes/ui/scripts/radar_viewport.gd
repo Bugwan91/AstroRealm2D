@@ -33,6 +33,7 @@ func remove_icon(icon: RadarIcon) -> void:
 	if not is_instance_valid(icon): return
 	# FIXME: Condition "p_child->data.parent != this" is true.
 	if icon.get_parent() == self:
+		icon.tree_exiting.disconnect(_on_icon_destroy.bind(icon))
 		remove_child(icon)
 	_icons.erase(icon)
 

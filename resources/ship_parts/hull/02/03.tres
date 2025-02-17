@@ -18,12 +18,14 @@ data = PackedVector2Array(62, 43, 45, 64, 17, 64, 15, 52, -15, 52, -17, 64, -45,
 
 [sub_resource type="Resource" id="Resource_2k5ev"]
 script = ExtResource("9_wk06o")
-position = Vector2(-31, -52)
+x = -31
+y = -50
 rotation = -90.0
 
 [sub_resource type="Resource" id="Resource_y4ngp"]
 script = ExtResource("9_wk06o")
-position = Vector2(31, -52)
+x = 31
+y = -50
 rotation = -90.0
 
 [sub_resource type="Resource" id="Resource_iig6i"]

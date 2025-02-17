@@ -1,7 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=33 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" uid="uid://b2ih5uxk3qw0h" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
+[ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="3_2xkf5"]
 [ext_resource type="Shader" uid="uid://balef3jw7dwu" path="res://scenes/ship/shaders/ship.gdshader" id="5_sakv4"]
 [ext_resource type="Material" uid="uid://4cr00esf8aq7" path="res://resources/ships/ship_mat.tres" id="5_woufe"]
 [ext_resource type="Texture2D" uid="uid://cdvkj0p02285g" path="res://assets/spaceships/hull/02/_interrior_emission.png" id="6_3lg4r"]
@@ -67,6 +68,7 @@ metadata/_custom_type_script = ExtResource("18_woufe")
 [node name="Ship" type="RigidBody2D"]
 script = ExtResource("1_5ckws")
 data = ExtResource("2_uwj24")
+gun_scene = ExtResource("3_2xkf5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

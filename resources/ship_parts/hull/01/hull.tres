@@ -21,7 +21,8 @@ points = Array[ExtResource("8_i1onv")]([])
 
 [sub_resource type="Resource" id="Resource_hsmag"]
 script = ExtResource("8_i1onv")
-position = Vector2(0, -65)
+x = 0
+y = -62
 rotation = -90.0
 
 [sub_resource type="Resource" id="Resource_6muh1"]

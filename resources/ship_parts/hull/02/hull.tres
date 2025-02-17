@@ -21,7 +21,8 @@ points = Array[ExtResource("7_mpeb5")]([])
 
 [sub_resource type="Resource" id="Resource_5wlys"]
 script = ExtResource("7_mpeb5")
-position = Vector2(0, -63)
+x = 0
+y = -63
 rotation = -90.0
 
 [sub_resource type="Resource" id="Resource_2fruw"]

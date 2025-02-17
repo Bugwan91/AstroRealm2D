@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://tulgf6ok78fw"]
 
-[ext_resource type="Script" path="res://scenes/ship_designer/tool/hull_res_editor.gd" id="1_bjnxi"]
+[ext_resource type="Script" uid="uid://c7b4fg201mi0w" path="res://scenes/ship_designer/tool/hull_res_editor.gd" id="1_bjnxi"]
 [ext_resource type="Resource" uid="uid://f7ckmary6jm8" path="res://resources/ship_parts/hull/02/03.tres" id="2_pmu7d"]
 [ext_resource type="Texture2D" uid="uid://dniawmfa8aif6" path="res://assets/spaceships/hull/02/03_base.png" id="3_e5ijr"]
 [ext_resource type="Texture2D" uid="uid://bqx61atmdag5g" path="res://assets/spaceships/hull/02/_base.png" id="4_exi7b"]
