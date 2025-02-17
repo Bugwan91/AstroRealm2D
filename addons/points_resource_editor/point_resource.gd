@@ -2,7 +2,10 @@
 class_name PointResource
 extends Resource
 
-@export var position: Vector2
+@export_range(-1000, 1000) var x: int
+@export_range(-1000, 1000) var y: int
+var position: Vector2:
+	get: return Vector2(x, y)
 @export_range(-180, 180) var rotation: float
 
 var radian: float:
@@ -10,7 +13,8 @@ var radian: float:
 		return deg_to_rad(rotation)
 
 func move(new_position: Vector2):
-	position = new_position
+	x = new_position.x
+	y = new_position.y
 	emit_changed()
 
 func rotate_point(new_rotation: float):
