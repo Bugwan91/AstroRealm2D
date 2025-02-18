@@ -88,3 +88,8 @@ func _on_baker_updates(baked_design: ShipDesignData) -> void:
 	debug_mask.texture = baked_design.mask
 	debug_emission.texture = baked_design.emision
 	debug_heat.texture = baked_design.heat
+
+func _unhandled_input(event: InputEvent) -> void:
+	if visible and event.is_action_pressed("escape"):
+		get_viewport().set_input_as_handled()
+		close()

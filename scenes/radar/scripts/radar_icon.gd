@@ -22,7 +22,7 @@ func _setup(conf: RadarIconConfig) -> void:
 	visible = false
 
 func update(pos: Vector2, rot: float, view_r: float, view_scale: float, v_scl: float = 1.0) -> void:
-	position= RADAR_PADDING * (pos) * view_scale + view_r * Vector2.ONE
+	position = RADAR_PADDING * pos * view_scale
 	if config.free_rotation: rotation = rot
 	if config.use_real_size:
 		_recalculate_scale(view_scale * v_scl)

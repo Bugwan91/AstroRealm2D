@@ -5,7 +5,7 @@ extends Node
 @onready var camera: Camera2D = owner
 
 func _process(_delta: float) -> void:
-	# TODO: incapsulate this logic into CameraController and use it here instead
+	# FIXME: Camera radar rect does not work
 	var view := camera.get_viewport_rect().size / camera.zoom
 	radar_item.icon.config.base_size = view.x
 	radar_item.icon.config.aspect = view.y / view.x

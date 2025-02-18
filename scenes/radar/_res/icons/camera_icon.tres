@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://c5xv8rqbdj611" path="res://scenes/radar/scripts/resources/radar_icon_config.gd" id="1_hnpwc"]
 
 [sub_resource type="Gradient" id="Gradient_21tcn"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1, 1, 1, 0.0784314)
+offsets = PackedFloat32Array(0.0171821)
+colors = PackedColorArray(1, 1, 1, 0.7)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_4ph7v"]
 gradient = SubResource("Gradient_21tcn")
@@ -15,7 +15,7 @@ use_hdr = true
 [resource]
 script = ExtResource("1_hnpwc")
 texture = SubResource("GradientTexture2D_4ph7v")
-color = Color(0, 0.600972, 0.958982, 1)
+color = Color(0.816652, 0.91182, 1, 1)
 base_size = 1.0
 scale = 1.0
 aspect = 1.0

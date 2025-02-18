@@ -4,9 +4,9 @@ extends Control
 const DEF_RADIUS := 200.0
 
 @export_range(0.01, 1.0) var update_interval := 0.1
+@export var _container: Control
 var radius := 200.0
 
-var _icons: Array[RadarIcon] = []
 var _current_delta := 0.0
 var _scale := 1.0
 
@@ -24,23 +24,20 @@ func _physics_process(delta: float) -> void:
 
 func add_icon(icon: RadarIcon) -> void:
 	if not is_instance_valid(icon): return
-	if not _icons.has(icon):
-		_icons.append(icon)
+	if icon.get_parent() != _container:
 		icon.tree_exiting.connect(_on_icon_destroy.bind(icon))
-		add_child(icon)
+		_container.add_child(icon)
 
 func remove_icon(icon: RadarIcon) -> void:
 	if not is_instance_valid(icon): return
 	# FIXME: Condition "p_child->data.parent != this" is true.
-	if icon.get_parent() == self:
+	if icon.get_parent() == _container:
 		icon.tree_exiting.disconnect(_on_icon_destroy.bind(icon))
-		remove_child(icon)
-	_icons.erase(icon)
+		_container.remove_child(icon)
 
 func reset() -> void:
-	for icon in _icons:
-		remove_child(icon)
-	_icons.clear()
+	for icon in _container.get_children():
+		_container.remove_child(icon)
 
 func _on_icon_destroy(icon: RadarIcon):
-	_icons.erase(icon)
+	icon.tree_exiting.disconnect(_on_icon_destroy.bind(icon))

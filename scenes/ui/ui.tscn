@@ -131,13 +131,14 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 script = ExtResource("5_u0tch")
 
-[node name="RadarContainer" type="Control" parent="Control/GameUI"]
+[node name="RadarContainer" type="Control" parent="Control/GameUI" node_paths=PackedStringArray("_container")]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 mouse_filter = 2
 script = ExtResource("7_8clra")
+_container = NodePath("Control")
 
 [node name="TextureRect" type="TextureRect" parent="Control/GameUI/RadarContainer"]
 modulate = Color(0, 0.8, 1.2, 0.156863)
@@ -150,6 +151,16 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_f2him")
 expand_mode = 1
+
+[node name="Control" type="Control" parent="Control/GameUI/RadarContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="GameOverContainer" parent="Control/GameUI" instance=ExtResource("7_vcp7q")]
 unique_name_in_owner = true
