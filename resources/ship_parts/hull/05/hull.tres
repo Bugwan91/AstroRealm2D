@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="HullBakerResource" load_steps=15 format=3 uid="uid://mobsilfygcko"]
+
+[ext_resource type="Script" uid="uid://p47ksddy7fs0" path="res://scenes/ship_designer/scripts/resources/view_baker_resource.gd" id="1_78yg8"]
+[ext_resource type="Texture2D" uid="uid://balgmqly3wl6n" path="res://assets/spaceships/hull/05/_base.png" id="2_6qqj4"]
+[ext_resource type="Texture2D" uid="uid://bj3adk7atxlas" path="res://assets/spaceships/hull/05/_base_e.png" id="3_ay7w3"]
+[ext_resource type="Texture2D" uid="uid://ynloc6n74op8" path="res://assets/spaceships/hull/05/_base_h.png" id="4_7qrfb"]
+[ext_resource type="Texture2D" uid="uid://bbx2ue0ctxwwy" path="res://assets/spaceships/hull/05/_base_m.png" id="5_f7jbl"]
+[ext_resource type="Texture2D" uid="uid://dbfwwt1h1u55d" path="res://assets/spaceships/hull/05/_base_n.png" id="6_8bkxf"]
+[ext_resource type="Script" uid="uid://b6lilmuq78cd7" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="6_70s8e"]
+[ext_resource type="Script" uid="uid://n101buc5ybpd" path="res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd" id="7_4c1j7"]
+[ext_resource type="Script" uid="uid://dysuxiql8stb1" path="res://addons/points_resource_editor/point_resource.gd" id="8_e7hyo"]
+[ext_resource type="Script" uid="uid://b1cyik4ucr2m" path="res://addons/points_resource_editor/points_array_resource.gd" id="9_2occu"]
+
+[sub_resource type="Resource" id="Resource_vueic"]
+script = ExtResource("6_70s8e")
+data = PackedVector2Array(-10, -64, 10, -64, 20, -44, 34, 0, 35, 45, 26, 64, -26, 64, -35, 45, -34, 0, -20, -44)
+
+[sub_resource type="Resource" id="Resource_fpffb"]
+script = ExtResource("9_2occu")
+points = Array[ExtResource("8_e7hyo")]([])
+
+[sub_resource type="Resource" id="Resource_hsmag"]
+script = ExtResource("8_e7hyo")
+x = 0
+y = -62
+rotation = -90.0
+
+[sub_resource type="Resource" id="Resource_6muh1"]
+script = ExtResource("9_2occu")
+points = Array[ExtResource("8_e7hyo")]([SubResource("Resource_hsmag")])
+
+[resource]
+script = ExtResource("7_4c1j7")
+engine_slots = Array[Vector2]([Vector2(0, 32)])
+thrusters = SubResource("Resource_fpffb")
+weapon_slots = SubResource("Resource_6muh1")
+mass = 1.0
+type = 0
+allowed_ext = Array[ExtResource("1_78yg8")]([])
+diffuse = ExtResource("2_6qqj4")
+normal = ExtResource("6_8bkxf")
+mask = ExtResource("5_f7jbl")
+emission = ExtResource("3_ay7w3")
+heat = ExtResource("4_7qrfb")
+mergeable = true
+scale = 0.25
+pivot_point = Vector2(0, 0)
+polygon = SubResource("Resource_vueic")
+heat_capacity = 500.0
+heat_radiation = 20.0
