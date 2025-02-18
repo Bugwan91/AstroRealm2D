@@ -15,6 +15,7 @@ enum TextureType { DIFFUSE, NORMAL, MASK, HEAT, EMISSION }
 @export var emission: Texture2D
 @export var heat: Texture2D
 @export var mergeable := true
+@export var scale := 1.0
 
 @export_group("physics")
 @export var pivot_point: Vector2

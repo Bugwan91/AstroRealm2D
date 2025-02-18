@@ -25,7 +25,12 @@ signal tranfser_heat(heat: float)
 
 @onready var _flash: Sprite2D = %MuzzleFlash
 @onready var _flash_light: PointLight2D = %MuzzleFlashLight
-var _flast_intensity := 0.0
+var _flast_intensity := 0.0:
+	set(value):
+		_flast_intensity = value
+		var show := value > 0.0
+		_flash.visible = show
+		_flash_light.visible = show
 
 var origin: Node2D
 
@@ -60,12 +65,12 @@ func _process(delta: float) -> void:
 	_shoot(delta)
 	_update_marker()
 	_flash.modulate = bullet_color * 3.0 * _flast_intensity
-	_flash_light.energy = _flast_intensity * 0.5
+	_flash_light.energy = _flast_intensity * 4.0
 	if _flast_intensity > 0.0:
+		
 		_flast_intensity -= 15.0 * delta
 	else:
 		_flast_intensity = 0.0
-	
 
 func _physics_process(delta: float) -> void:
 	tranfser_heat.emit(_heat.transfer(delta))

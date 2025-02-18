@@ -1,5 +1,5 @@
 shader_type canvas_item;
-render_mode blend_add;
+render_mode unshaded;
 
 uniform vec2 scale;
 uniform float opacity = 0.1;
@@ -12,9 +12,5 @@ void fragment() {
 	vec4 color = texture(TEXTURE, new_uv);
 	float mask_color = texture(mask, UV).r * opacity;
 	color.a = color.a * mask_color;
-	COLOR = color * emission;
-}
-
-void light() {
-	LIGHT = emission;
+	COLOR = color * emission * 2.;
 }

@@ -2,7 +2,7 @@
 
 [resource]
 background_mode = 3
-tonemap_mode = 2
+tonemap_mode = 3
 glow_enabled = true
 glow_levels/1 = 16.0
 glow_levels/2 = 8.0

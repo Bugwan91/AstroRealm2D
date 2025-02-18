@@ -18,7 +18,7 @@ shader = ExtResource("1_lgcud")
 shader_parameter/scale = Vector2(4, 4)
 shader_parameter/opacity = 0.031
 shader_parameter/offset = Vector2(0, 0)
-shader_parameter/emission = Color(0, 0.301961, 1, 1)
+shader_parameter/emission = Color(0, 0.615686, 0.882353, 1)
 shader_parameter/mask = SubResource("GradientTexture2D_fghus")
 
 [sub_resource type="Gradient" id="Gradient_6bk7i"]
@@ -34,7 +34,7 @@ fill_from = Vector2(0.5, 0.5)
 shader = ExtResource("1_lgcud")
 shader_parameter/scale = Vector2(10, 10)
 shader_parameter/opacity = 0.02
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 shader_parameter/emission = Color(4.04298e-06, 0.616243, 0.883859, 1)
 shader_parameter/mask = SubResource("GradientTexture2D_01ymm")
 

@@ -48,6 +48,7 @@ mask = ExtResource("6_hjcrd")
 emission = ExtResource("4_t6fsw")
 heat = ExtResource("5_c7qqy")
 mergeable = true
+scale = 1.0
 pivot_point = Vector2(0, -12)
 polygon = SubResource("Resource_xwb07")
 heat_capacity = 500.0

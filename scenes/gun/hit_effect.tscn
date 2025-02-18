@@ -36,7 +36,7 @@ process_material = ExtResource("4_03671")
 
 [node name="Light" type="PointLight2D" parent="."]
 unique_name_in_owner = true
-energy = 4.0
+energy = 8.0
 texture = ExtResource("6_dsq42")
 texture_scale = 4.0
 height = 40.0

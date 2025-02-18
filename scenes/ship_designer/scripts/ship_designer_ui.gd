@@ -82,6 +82,7 @@ func _update_matallic(value_changed: bool) -> void:
 
 func _on_baker_updates(baked_design: ShipDesignData) -> void:
 	ship_preview.setup_textures(baked_design)
+	ship_preview.scale = 2.0 * Vector2.ONE * baked_design.view_scale
 	debug_diffuse.texture = baked_design.diffuse
 	debug_normal.texture = baked_design.normal
 	debug_mask.texture = baked_design.mask

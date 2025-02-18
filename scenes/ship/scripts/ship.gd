@@ -72,6 +72,7 @@ func _connect_weapon_inputs() -> void:
 
 func _setup_view() -> void:
 	_view.setup_textures(data.design)
+	_view.scale = Vector2.ONE * data.design.view_scale
 
 func _set_ship_data(new_data: ShipData) -> void:
 	if new_data == null: return

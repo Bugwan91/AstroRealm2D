@@ -5,15 +5,15 @@ uniform float emission : hint_range(0, 10) = 2.0;
 uniform vec4 emission_color : source_color = vec4(1.0);
 uniform float shininess : hint_range(-1, 1) = 0.0;
 uniform float metallic : hint_range(-1, 1) = 0.0;
-uniform sampler2D mask_texture : filter_nearest_mipmap, hint_default_black;
-uniform sampler2D emission_texture : filter_nearest_mipmap, hint_default_black;
-uniform sampler2D heat_texture : filter_nearest, hint_default_black;
+uniform sampler2D mask_texture : filter_linear, hint_default_black;
+uniform sampler2D emission_texture : filter_linear, hint_default_black;
+uniform sampler2D heat_texture : filter_linear, hint_default_black;
 global uniform sampler2D temperature_texture : filter_nearest, hint_default_black;
 
 vec3 compute_heat(float ht_val) {
 	if (ht_val > 0.0) {
 		vec4 ht_color = texture(temperature_texture, vec2(ht_val));
-		return 16.0 * ht_color.a * ht_val * ht_val * ht_color.rgb;
+		return 8.0 * ht_color.a * ht_val * ht_val * ht_color.rgb;
 	}
 	return vec3(0.0);
 }
@@ -23,23 +23,47 @@ vec3 compute_diffuse(vec3 L, vec3 N, vec3 B_color, vec3 L_color) {
 	return B_color * L_color * NdotL;
 }
 
+vec3 rotateLightVector(vec3 L) {
+	vec3 V = vec3(0.0, 0.0, 1.0);
+	float A = acos(L.z);
+	if (A < 1e-6) { return L; }
+	vec3 axis = normalize(cross(V, L));
+	// Rodrigues' rotation
+	return L * cos(A) + cross(axis, L) * sin(A);
+}
+
 vec3 compute_specular(vec3 L, vec3 N, vec3 B_color, vec3 L_color, float Spec, float Met) {
 	vec3 V = vec3(.0,.0,1.);
-	vec3 R = (reflect(-L, N) + 3. * V) * 0.25; // vector of reflected light
+	L = rotateLightVector(L);
+	vec3 R = (reflect(-L, N)); // vector of reflected light
 	float RdotV = clamp(dot(R, V), 1e-4, 1.);
 	float S = Spec * Spec;
-	float shini = 1. + 256. * S;
-	float intens = 0.3 * (
+	float SM = (S + 0.2 * Met) * (S + Met);
+	float intens = (
+		0.0
 		// base specular intensity
-		shini * pow(RdotV, shini)
+		+ 16. * SM * pow(RdotV, 1. + 64. * S)
+		+ 0.2 * SM * pow(RdotV, 1. + 4. * S)
+		+ 0.1 * SM * pow(RdotV, 1. + S)
+		//+ 0.02 * SM * RdotV
+		+ 0.02 * SM * pow(RdotV, 0.5)
+		//+ .5 * shini * S * pow(RdotV, shini)
+		//+ 0.002 * shini * pow(RdotV, shini * 0.1)
+		//+ 0.001 * shini * pow(RdotV, shini * 0.05)
 		// extra wide reflections for metallic
 		// as it is too dark in not bright spots without diffuse
-		+ 4. * Met * pow(RdotV, 1. + 8. * S)
+		//+ 0.2 * Met * pow(RdotV, 0.1 + S * 0.2)
+		//+ 0.2 * Met * pow(RdotV, 1. + 8. * S)
 		// Shininess nagnitude increasing depending on specular and metalnes
-		) * (S + Met) * 0.5;
-	float fresnel = pow(1.0 - dot(N, V), 0.7) * Met * (1.5 - S * 0.5);
+		) * 2. * SM;
+	float fresnel = 0.5 * (1.0 - pow(1.0 - dot(N, V), 0.1)) * Met * (2. - S);
 	return mix(vec3(0.5), B_color, Met) * L_color * (intens + fresnel);
 }
+
+//void fragment() {
+	//float a = texture(TEXTURE, UV).a;
+	//COLOR = vec4(1.0,1.0,1.0,a);
+//}
 
 void light() {
 	// Mask texture for specular and metallic
@@ -52,13 +76,13 @@ void light() {
 		LIGHT_DIRECTION,
 		NORMAL,
 		COLOR.rgb,
-		LIGHT_COLOR.rgb
+		LIGHT_COLOR.rgb * LIGHT_ENERGY
 	);
     vec3 specular = compute_specular(
 		LIGHT_DIRECTION,
 		NORMAL,
 		COLOR.rgb,
-		LIGHT_COLOR.rgb,
+		LIGHT_COLOR.rgb * LIGHT_ENERGY,
 		spec,
 		met
 	);
@@ -73,11 +97,12 @@ void light() {
 	// Total light
 	LIGHT = vec4(
 		(
+			//0.0
 			// no diffuse for metallic
-			diffuse * (1.0 - met) +
+			diffuse * (1.0 - met)
 			// extra specular for metallic for consistant brightnes
-			specular * (1.0 + met)
-		) * LIGHT_ENERGY
+			+ specular
+		) * 1.0//* LIGHT_ENERGY
 		// extra lightning from heat and emmision
 		+ ht + em,
 		LIGHT_COLOR.a);

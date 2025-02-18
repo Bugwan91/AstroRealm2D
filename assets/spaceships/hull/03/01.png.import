@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8yahcv554er"
-path="res://.godot/imported/01_style.png-eca5f47653cea41c8aa07a33fda7dc09.ctex"
+uid="uid://bhyfwdf5vvmbg"
+path="res://.godot/imported/01.png-19a9f1b9ec932b9864edd15bb97d5aea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spaceships/hull/01_style.png"
-dest_files=["res://.godot/imported/01_style.png-eca5f47653cea41c8aa07a33fda7dc09.ctex"]
+source_file="res://assets/spaceships/hull/03/01.png"
+dest_files=["res://.godot/imported/01.png-19a9f1b9ec932b9864edd15bb97d5aea.ctex"]
 
 [params]
 

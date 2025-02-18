@@ -1,6 +1,8 @@
 class_name ViewLayerBaker
 extends SubViewport
 
+const BASE_SIZE = Vector2(128.0, 128.0)
+
 @export var type: ViewBakerResource.TextureType
 @export var background: Texture2D: set = _set_background
 
@@ -36,6 +38,8 @@ func set_hull(resource: HullBakerResource) -> void:
 	# HACK: engine should be made mandatory as well
 	_hull.texture = resource.texture(type)
 	_hull.position = -resource.pivot_point
+	_views.position = (BASE_SIZE / resource.scale) * 0.5
+	size = BASE_SIZE / resource.scale
 	_create_engines(resource.engine_slots, _clear_engines())
 
 
@@ -47,6 +51,7 @@ func set_hull_ext(resource: ViewBakerResource) -> void:
 		_hull_ext.position = -resource.pivot_point
 
 func set_engine(resource: ViewBakerResource) -> void:
+	return
 	# HACK: not shure that Array[Sprite2D] is correct
 	for engine in _engines.get_children() as Array[Sprite2D]:
 		engine.texture = resource.texture(type) if resource != null else null

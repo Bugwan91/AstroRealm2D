@@ -1,9 +1,12 @@
 class_name ShipStyleBaker
 extends SubViewport
 
+const BASE_SIZE = Vector2(128.0, 128.0)
+
 @export var texture: Texture2D: set = _set_texture
 @export var style: Texture2D: set = _set_style
 @export var mask: Texture2D: set = _set_mask
+@export var scale: float: set = _set_scale
 
 @onready var _view: Sprite2D = %View
 
@@ -31,3 +34,9 @@ func _set_style(value: Texture2D) -> void:
 	style = value
 	if not is_instance_valid(_view): return
 	_view.material.set("shader_parameter/style_texture", style)
+
+func _set_scale(value: float):
+	scale = value
+	size = BASE_SIZE / scale
+	_view.position = size * 0.5
+	

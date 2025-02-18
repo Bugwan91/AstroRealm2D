@@ -79,6 +79,7 @@ func _bake_polygon() -> void:
 	design.weapon_slots = polygon.weapons
 
 func _bake_textures() -> ShipDesignData:
+	design.view_scale = blueprint.hull.scale
 	design.diffuse = await _bake_diffuse()
 	design.normal = await normal.bake()
 	design.emision = await emission.bake()
@@ -91,4 +92,5 @@ func _bake_diffuse() -> Texture2D:
 	style.texture = await diffuse.bake()
 	design.mask = await mask.bake()
 	style.mask = design.mask
+	style.scale = design.view_scale
 	return await style.bake()

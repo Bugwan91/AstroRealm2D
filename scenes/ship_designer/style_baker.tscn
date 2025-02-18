@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cllccy4uwm102"]
 
-[ext_resource type="Script" path="res://scenes/ship_designer/ship_style_baker.gd" id="1_rgs2j"]
-[ext_resource type="Shader" path="res://scenes/ship_designer/shaders/ship_style.gdshader" id="2_fsgit"]
+[ext_resource type="Script" uid="uid://kpkjabcjeksb" path="res://scenes/ship_designer/ship_style_baker.gd" id="1_rgs2j"]
+[ext_resource type="Shader" uid="uid://ercdqjvrqn08" path="res://scenes/ship_designer/shaders/ship_style.gdshader" id="2_fsgit"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_26ds1"]
 shader = ExtResource("2_fsgit")

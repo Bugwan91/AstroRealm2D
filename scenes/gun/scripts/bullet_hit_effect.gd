@@ -2,7 +2,7 @@ class_name BulletHitEffect
 extends KineticBody
 
 @export var color: Color
-@export var duration := 0.2
+@export var duration := 0.1
 
 @onready var _particles: GPUParticles2D = %GPUParticles2D
 @onready var _light: PointLight2D = %Light
@@ -24,10 +24,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_time += delta
 	if _time < duration:
-		_light.energy = lerpf(
-			_light.energy,
-			0.0,
-			delta * _start_light_energy / duration)
+		_light.energy = _start_light_energy * pow((duration - _time) / duration, 2.0)
 	else:
 		_end()
 

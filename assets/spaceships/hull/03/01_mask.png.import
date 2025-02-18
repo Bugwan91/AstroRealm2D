@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://det6wne80wjvy"
-path="res://.godot/imported/01_mask.png-53fe66126779dd41e5d208b4b8f935a8.ctex"
+uid="uid://b1xwsqj54pg43"
+path="res://.godot/imported/01_mask.png-0cef3d5911d8c0c6b3805db030cc8fe5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spaceships/hull/01_mask.png"
-dest_files=["res://.godot/imported/01_mask.png-53fe66126779dd41e5d208b4b8f935a8.ctex"]
+source_file="res://assets/spaceships/hull/03/01_mask.png"
+dest_files=["res://.godot/imported/01_mask.png-0cef3d5911d8c0c6b3805db030cc8fe5.ctex"]
 
 [params]
 

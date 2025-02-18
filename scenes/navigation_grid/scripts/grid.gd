@@ -41,7 +41,7 @@ func _physics_process(_delta: float) -> void:
 func update_opacity(value: float = 0.0) -> void:
 	opacity = value
 	material.set("shader_parameter/opacity", opacity)
-	_subgrid.material.set("shader_parameter/opacity", opacity * SUBGRID_SCALE / scale.x)
+	_subgrid.material.set("shader_parameter/opacity", opacity * 0.8)
 
 func update_offset(value: Vector2 = Vector2.ZERO) -> void:
 	grid_offset = value

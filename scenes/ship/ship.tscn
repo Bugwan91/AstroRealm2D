@@ -50,7 +50,7 @@ normal_texture = ExtResource("24_xvqm4")
 [sub_resource type="CanvasTexture" id="CanvasTexture_fknoo"]
 diffuse_texture = ExtResource("10_r75st")
 normal_texture = ExtResource("11_6qm8q")
-texture_filter = 3
+texture_filter = 2
 
 [sub_resource type="Curve" id="Curve_p4pb7"]
 _data = [Vector2(0, 1), 0.0, -0.322088, 0, 0, Vector2(1, 0), -1.16987, 0.0, 0, 0]
@@ -91,7 +91,7 @@ texture = SubResource("CanvasTexture_wcdsx")
 
 [node name="View" type="Sprite2D" parent="PositionExtrapolator"]
 unique_name_in_owner = true
-texture_filter = 3
+texture_filter = 2
 material = ExtResource("5_woufe")
 rotation = 1.5708
 texture = SubResource("CanvasTexture_fknoo")

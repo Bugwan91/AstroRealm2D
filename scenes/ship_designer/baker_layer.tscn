@@ -1,9 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://pbokfmo8p4jh"]
 
-[ext_resource type="Script" path="res://scenes/ship_designer/scripts/view_layer_baker.gd" id="1_bhafl"]
+[ext_resource type="Script" uid="uid://ddsoonxwth8kf" path="res://scenes/ship_designer/scripts/view_layer_baker.gd" id="1_bhafl"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mwndk"]
-load_path = "res://.godot/imported/01_base.png-128da25420d03d0b06c57fe2796bc06d.ctex"
 
 [node name="BakerLayer" type="SubViewport"]
 transparent_bg = true

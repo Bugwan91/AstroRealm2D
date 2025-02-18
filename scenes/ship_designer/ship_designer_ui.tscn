@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c7cafyhhy135a"]
+[gd_scene load_steps=23 format=3 uid="uid://c7cafyhhy135a"]
 
 [ext_resource type="Script" uid="uid://bvoanxx4ohf47" path="res://scenes/ship_designer/scripts/ship_designer_ui.gd" id="1_citlv"]
 [ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="2_jrjbv"]
@@ -14,16 +14,20 @@
 [ext_resource type="Environment" uid="uid://chl1sjnqh1sa7" path="res://scenes/main/main_environment.tres" id="10_qlopd"]
 [ext_resource type="Texture2D" uid="uid://dsl72b3dwxid4" path="res://assets/spaceships/hull/01/_base.png" id="11_l6t2q"]
 [ext_resource type="Texture2D" uid="uid://dg5ceqg02tvgu" path="res://assets/spaceships/hull/01/_normal.png" id="12_r2knm"]
+[ext_resource type="Texture2D" uid="uid://c6xu3bs26ltl2" path="res://assets/spaceships/hull/04/_base_h.png" id="13_8wr4q"]
+[ext_resource type="Texture2D" uid="uid://uich1eto803k" path="res://assets/spaceships/hull/04/_base_m.png" id="14_ieo1e"]
+[ext_resource type="Texture2D" uid="uid://der26cev2v2bv" path="res://assets/spaceships/hull/04/_base.png" id="15_q7qfe"]
+[ext_resource type="Texture2D" uid="uid://tfkbd0y3825m" path="res://assets/spaceships/hull/04/_base_n.png" id="16_xnucv"]
 
 [sub_resource type="Gradient" id="Gradient_owpx4"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.686529, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.666667)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_2mr7a"]
 gradient = SubResource("Gradient_owpx4")
-width = 1024
-height = 1024
+width = 2000
+height = 2000
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
@@ -32,16 +36,16 @@ shader = ExtResource("5_alsfe")
 shader_parameter/heat = 0.5
 shader_parameter/emission = 1.0
 shader_parameter/emission_color = Color(1, 1, 1, 1)
-shader_parameter/shininess = 0.0
-shader_parameter/metallic = 0.0
-shader_parameter/mask_texture = ExtResource("9_qlopd")
-shader_parameter/emission_texture = ExtResource("7_2mr7a")
-shader_parameter/heat_texture = ExtResource("8_ob45u")
+shader_parameter/shininess = -1.0
+shader_parameter/metallic = 1.0
+shader_parameter/mask_texture = ExtResource("14_ieo1e")
+shader_parameter/emission_texture = ExtResource("13_8wr4q")
+shader_parameter/heat_texture = ExtResource("13_8wr4q")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ieo1e"]
-diffuse_texture = ExtResource("11_l6t2q")
-normal_texture = ExtResource("12_r2knm")
-texture_filter = 3
+diffuse_texture = ExtResource("15_q7qfe")
+normal_texture = ExtResource("16_xnucv")
+texture_filter = 2
 
 [node name="ShipDesignerContainer" type="PanelContainer"]
 anchors_preset = 15
@@ -143,35 +147,40 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("11_l6t2q")
-stretch_mode = 3
+expand_mode = 1
+stretch_mode = 5
 
 [node name="NormalDebug" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("12_r2knm")
-stretch_mode = 3
+expand_mode = 1
+stretch_mode = 5
 
 [node name="MaskDebug" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("9_qlopd")
-stretch_mode = 3
+expand_mode = 1
+stretch_mode = 5
 
 [node name="EmissionDebug" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("7_2mr7a")
-stretch_mode = 3
+expand_mode = 1
+stretch_mode = 5
 
 [node name="HeatDebug" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("8_ob45u")
-stretch_mode = 3
+expand_mode = 1
+stretch_mode = 5
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -195,25 +204,31 @@ color = Color(0.1, 0.1, 0.1, 1)
 
 [node name="Light" type="DirectionalLight2D" parent="HBoxContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
 position = Vector2(-64, -214)
-rotation = -0.785398
-energy = 0.7
-height = 0.4
+rotation = 0.797436
+color = Color(0.9039, 0.739941, 0.453773, 1)
+energy = 0.9
+height = 0.7
+
+[node name="Light2" type="DirectionalLight2D" parent="HBoxContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
+position = Vector2(-260.576, -320.066)
+rotation = -1.5498
+scale = Vector2(1, 1)
+color = Color(0.253122, 0.591738, 0.736422, 1)
+energy = 0.5
+height = 0.7
 
 [node name="PointLightCursor" type="PointLight2D" parent="HBoxContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
-position = Vector2(-52, 146)
-color = Color(1, 0.701961, 0, 1)
-energy = 0.5
+position = Vector2(-507, -5)
 texture = SubResource("GradientTexture2D_2mr7a")
-texture_scale = 4.0
-height = 64.0
+height = 200.0
 script = ExtResource("10_ob45u")
 
 [node name="ShipPreview" type="Sprite2D" parent="HBoxContainer/VBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
-texture_filter = 3
+texture_filter = 2
 material = SubResource("ShaderMaterial_8wr4q")
 position = Vector2(128, 128)
-scale = Vector2(2, 2)
+scale = Vector2(0.5, 0.5)
 texture = SubResource("CanvasTexture_ieo1e")
 script = ExtResource("7_wj4q0")
 

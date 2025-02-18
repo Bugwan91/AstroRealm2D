@@ -65,9 +65,10 @@ texture = ExtResource("12_hyqnp")
 [node name="MuzzleFlashLight" type="PointLight2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(16, 0)
+energy = 0.0
 texture = ExtResource("12_t6ksw")
 texture_scale = 4.0
-height = 16.0
+height = 64.0
 
 [node name="ShootPoint" type="Marker2D" parent="."]
 unique_name_in_owner = true

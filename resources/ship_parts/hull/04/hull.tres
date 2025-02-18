@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="HullBakerResource" load_steps=14 format=3 uid="uid://c04i1f6eeisoq"]
+
+[ext_resource type="Script" uid="uid://p47ksddy7fs0" path="res://scenes/ship_designer/scripts/resources/view_baker_resource.gd" id="1_algb5"]
+[ext_resource type="Texture2D" uid="uid://der26cev2v2bv" path="res://assets/spaceships/hull/04/_base.png" id="2_8gns4"]
+[ext_resource type="Texture2D" uid="uid://c6xu3bs26ltl2" path="res://assets/spaceships/hull/04/_base_h.png" id="3_l7nmx"]
+[ext_resource type="Texture2D" uid="uid://uich1eto803k" path="res://assets/spaceships/hull/04/_base_m.png" id="4_ttrln"]
+[ext_resource type="Texture2D" uid="uid://tfkbd0y3825m" path="res://assets/spaceships/hull/04/_base_n.png" id="5_sgexm"]
+[ext_resource type="Script" uid="uid://b6lilmuq78cd7" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="7_y4f3j"]
+[ext_resource type="Script" uid="uid://n101buc5ybpd" path="res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd" id="8_t5g4a"]
+[ext_resource type="Script" uid="uid://dysuxiql8stb1" path="res://addons/points_resource_editor/point_resource.gd" id="9_rs2d8"]
+[ext_resource type="Script" uid="uid://b1cyik4ucr2m" path="res://addons/points_resource_editor/points_array_resource.gd" id="10_yfv8y"]
+
+[sub_resource type="Resource" id="Resource_vueic"]
+script = ExtResource("7_y4f3j")
+data = PackedVector2Array(-10, -64, 10, -64, 20, -44, 34, 0, 35, 45, 26, 64, -26, 64, -35, 45, -34, 0, -20, -44)
+
+[sub_resource type="Resource" id="Resource_fpffb"]
+script = ExtResource("10_yfv8y")
+points = Array[ExtResource("9_rs2d8")]([])
+
+[sub_resource type="Resource" id="Resource_hsmag"]
+script = ExtResource("9_rs2d8")
+x = 0
+y = -62
+rotation = -90.0
+
+[sub_resource type="Resource" id="Resource_6muh1"]
+script = ExtResource("10_yfv8y")
+points = Array[ExtResource("9_rs2d8")]([SubResource("Resource_hsmag")])
+
+[resource]
+script = ExtResource("8_t5g4a")
+engine_slots = Array[Vector2]([Vector2(0, 32)])
+thrusters = SubResource("Resource_fpffb")
+weapon_slots = SubResource("Resource_6muh1")
+mass = 1.0
+type = 0
+allowed_ext = Array[ExtResource("1_algb5")]([])
+diffuse = ExtResource("2_8gns4")
+normal = ExtResource("5_sgexm")
+mask = ExtResource("4_ttrln")
+emission = ExtResource("3_l7nmx")
+heat = ExtResource("3_l7nmx")
+mergeable = true
+scale = 0.25
+pivot_point = Vector2(0, 0)
+polygon = SubResource("Resource_vueic")
+heat_capacity = 500.0
+heat_radiation = 20.0
