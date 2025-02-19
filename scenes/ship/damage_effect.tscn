@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cxaoyw4qxcd0p"]
+[gd_scene load_steps=20 format=3 uid="uid://cxaoyw4qxcd0p"]
 
 [ext_resource type="Script" uid="uid://m5ied82h272a" path="res://scenes/ship/scripts/damage_effect.gd" id="1_mp2sa"]
 [ext_resource type="Texture2D" uid="uid://hnfioahelelc" path="res://assets/VFX_textures/pack_1/fire_01.png" id="2_7r8uf"]
@@ -7,12 +7,12 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_opo5s"]
 light_mode = 1
 
-[sub_resource type="Gradient" id="Gradient_378vb"]
-offsets = PackedFloat32Array(0.00234742, 0.0610329, 0.603286, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+[sub_resource type="Curve" id="Curve_jsnkp"]
+_data = [Vector2(0, 0), 0.0, 12.7746, 0, 0, Vector2(0.158363, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_dj3qi"]
-gradient = SubResource("Gradient_378vb")
+[sub_resource type="CurveTexture" id="CurveTexture_uanbt"]
+curve = SubResource("Curve_jsnkp")
 
 [sub_resource type="Curve" id="Curve_n4m7n"]
 _data = [Vector2(0, 0.101536), 0.0, 1.86048, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -33,23 +33,38 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.5
 scale_max = 2.0
 scale_curve = SubResource("CurveTexture_qfxxv")
-color = Color(0.21, 0.21, 0.21, 0.5)
-color_ramp = SubResource("GradientTexture1D_dj3qi")
+color = Color(0.21, 0.21, 0.21, 1)
+alpha_curve = SubResource("CurveTexture_uanbt")
 turbulence_enabled = true
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oflux"]
 light_mode = 1
 
+[sub_resource type="Curve" id="Curve_wmwcc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jsnkp"]
+curve = SubResource("Curve_wmwcc")
+
 [sub_resource type="Gradient" id="Gradient_ksgce"]
-offsets = PackedFloat32Array(0, 0.409605, 1)
-colors = PackedColorArray(20, 10, 0, 1, 10, 2, 0, 1, 10, 1, 0, 0)
+offsets = PackedFloat32Array(0.114815, 1)
+colors = PackedColorArray(1, 0.5, 0, 1, 1, 0.168627, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ft1rn"]
 gradient = SubResource("Gradient_ksgce")
 use_hdr = true
 
+[sub_resource type="Curve" id="Curve_uanbt"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 8), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fcwe3"]
+curve = SubResource("Curve_uanbt")
+
 [sub_resource type="Curve" id="Curve_hvqik"]
-_data = [Vector2(0, 0.666382), 0.0, 0.0, 0, 0, Vector2(0.991071, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.378198), 0.0, 0.0, 0, 0, Vector2(0.991071, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_caox6"]
@@ -63,13 +78,15 @@ angle_min = -90.0
 angle_max = 90.0
 spread = 180.0
 initial_velocity_max = 250.0
-angular_velocity_min = -90.0
-angular_velocity_max = 90.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.1
-scale_max = 0.2
+scale_min = 0.2
+scale_max = 0.6
 scale_curve = SubResource("CurveTexture_caox6")
 color_ramp = SubResource("GradientTexture1D_ft1rn")
+alpha_curve = SubResource("CurveTexture_jsnkp")
+emission_curve = SubResource("CurveTexture_fcwe3")
 hue_variation_min = -0.01
 hue_variation_max = 0.00999998
 turbulence_enabled = true
@@ -82,15 +99,15 @@ smoke = NodePath("Smoke")
 [node name="Smoke" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_opo5s")
 amount = 16
+texture = ExtResource("3_qucro")
 randomness = 0.5
 visibility_rect = Rect2(-500, -500, 1000, 1000)
-texture = ExtResource("3_qucro")
 process_material = SubResource("ParticleProcessMaterial_k28ba")
 
 [node name="Fire" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_oflux")
-lifetime = 0.2
-visibility_rect = Rect2(-500, -500, 1000, 1000)
-local_coords = true
 texture = ExtResource("2_7r8uf")
+lifetime = 0.16
+fixed_fps = 60
+visibility_rect = Rect2(-500, -500, 1000, 1000)
 process_material = SubResource("ParticleProcessMaterial_pcjcm")

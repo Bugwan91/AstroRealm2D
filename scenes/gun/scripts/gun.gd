@@ -17,19 +17,22 @@ signal tranfser_heat(heat: float)
 @export_range(0, 1000) var heat_per_shoot := 5.0
 @export var marker: AssistantPointer
 
-@onready var _charge_timer: Timer = %ChargeTimer
+@export var recoil_max_shift := 10.0
+@export var recoild_return_speed := 30.0
+
+@export var shoot_dellay := 0.0
+
 @onready var _sound: AudioStreamPlayer2D = %Sound
 @onready var reloading_timer: Timer = %ReloadingTimer
 @onready var _shoot_point: Node2D = %ShootPoint
 @onready var _heat: Heat = %Heat
 
-@onready var _flash: Sprite2D = %MuzzleFlash
+@onready var _flash: GPUParticles2D = %MuzzleFlash
 @onready var _flash_light: PointLight2D = %MuzzleFlashLight
 var _flast_intensity := 0.0:
 	set(value):
 		_flast_intensity = value
 		var show := value > 0.0
-		_flash.visible = show
 		_flash_light.visible = show
 
 var origin: Node2D
@@ -42,55 +45,57 @@ var velocity := Vector2.ZERO
 var enabled := true
 
 var _is_firing := false
-var _is_charging := false
+var _is_charging := false:
+	get: return _charge_time_current > 0.0
 var _is_reloading := false
 var _firing_time := 0.0
 var _projectile_lifetime: float
 var _projectile_extra_lifetime: float
 
+var _charge_time := 1.0
+var _charge_time_current := 0.0
+
 func _ready() -> void:
-	_charge_timer.wait_time = 1.0 / fire_rate
-	_charge_timer.timeout.connect(_charge_done)
+	_charge_time = 1.0 / fire_rate
 	_projectile_lifetime = effective_range / bullet_speed
 	_projectile_extra_lifetime = extra_range / bullet_speed
 	view.set_emission_color(bullet_color)
-	_flash.modulate = bullet_color * 0.0
+	_flash.modulate = bullet_color
 	_flash_light.color = bullet_color
 	_flash_light.energy = 0.0
 
 func on_fire_input(value: bool) -> void:
 	_is_firing = value
+	_charge_time_current += shoot_dellay * _charge_time
 
 func _process(delta: float) -> void:
 	_shoot(delta)
 	_update_marker()
 	_flash.modulate = bullet_color * 3.0 * _flast_intensity
-	_flash_light.energy = _flast_intensity * 4.0
+	_flash_light.energy = _flast_intensity * 2.0
 	if _flast_intensity > 0.0:
-		
 		_flast_intensity -= 15.0 * delta
 	else:
 		_flast_intensity = 0.0
+	if view.position.x < 0.0:
+		view.position.x += recoild_return_speed * delta
+	if _is_charging and enabled:
+		_charge_time_current -= delta
 
 func _physics_process(delta: float) -> void:
 	tranfser_heat.emit(_heat.transfer(delta))
 
 func _shoot(delta: float) -> void:
-	if enabled and _is_firing and not _heat.is_max():
+	if enabled and _is_firing and not _heat.is_high():
 		if not _is_charging:
 			_spawn_bullet(delta)
 			_charge_start()
-			_sound.pitch_scale = randf_range(0.95, 1.05)
+			_sound.pitch_scale = randf_range(0.9, 1.1)
 			_sound.play()
 		_firing_time += delta
 
 func _charge_start() -> void:
-	_is_charging = true
-	_charge_timer.start()
-
-func _charge_done() -> void:
-	_is_charging = false
-	_charge_timer.stop()
+	_charge_time_current = _charge_time
 
 func _spawn_bullet(_delta: float) -> void:
 	var bullet := bullet_scene.instantiate() as Bullet
@@ -109,6 +114,9 @@ func _spawn_bullet(_delta: float) -> void:
 	WorldGridManager.instance.world_root.add_child(bullet)
 	_heat.add_heat(heat_per_shoot)
 	view.emit_max()
+	view.position.x = -recoil_max_shift
+	_flash.emitting = true
+	_flash.restart()
 	_flast_intensity = 1.0
 
 func _update_marker() -> void:

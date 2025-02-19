@@ -35,7 +35,10 @@ func _ready() -> void:
 	_heat_max = capacity + _extra_heat_max
 
 func is_max() -> bool:
-	return _heat > capacity
+	return _extra_heat > 0.0
+
+func is_high() -> bool:
+	return temperature > 0.9
 
 func add_heat(heat: float) -> void:
 	_heat += heat
