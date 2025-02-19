@@ -21,7 +21,7 @@ void fragment() {
 	//}
 	vec4 color = texture(TEXTURE, base_uv + shift_total * 0.125);
 	color.a = color.a * texture(mask_texture, base_uv + shift_total * 0.5).r;
-	//color.a = pow(color.a, 2.5);
 	color.a = smoothstep(0.0, 1.0, color.a);
+	color.a = pow(color.a, 0.6);
 	COLOR = vec4(color.rgb * color.a, color.a);
 }

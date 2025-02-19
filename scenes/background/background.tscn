@@ -46,79 +46,79 @@ shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = ExtResource("5_3nfay")
 shader_parameter/shift_texture_x = ExtResource("6_j364p")
 shader_parameter/vp = Vector2(1, 1)
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vnm3e"]
 shader = ExtResource("6_gdvqf")
 shader_parameter/glow = 1.0
 shader_parameter/vp = Vector2(1, 1)
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_022s5"]
 shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = ExtResource("10_1glsp")
 shader_parameter/shift_texture_x = ExtResource("11_2iny1")
 shader_parameter/vp = Vector2(1, 1)
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_abxdr"]
 shader = ExtResource("6_gdvqf")
 shader_parameter/glow = 1.0
 shader_parameter/vp = Vector2(1, 1)
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b54vu"]
 shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = ExtResource("14_xc4n7")
 shader_parameter/shift_texture_x = ExtResource("15_bn0bt")
 shader_parameter/vp = Vector2(1, 1)
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_04u48"]
 shader = ExtResource("6_gdvqf")
 shader_parameter/glow = 1.0
 shader_parameter/vp = Vector2(1, 1)
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lh6as"]
 shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = ExtResource("18_t6ein")
 shader_parameter/shift_texture_x = ExtResource("19_ljsmy")
 shader_parameter/vp = Vector2(1, 1)
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_edfsm"]
 shader = ExtResource("6_gdvqf")
 shader_parameter/glow = 1.0
 shader_parameter/vp = Vector2(1, 1)
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e3wy6"]
 shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = ExtResource("22_fputy")
 shader_parameter/shift_texture_x = ExtResource("23_usip3")
 shader_parameter/vp = Vector2(1, 1)
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uya4s"]
 shader = ExtResource("6_gdvqf")
 shader_parameter/glow = 1.0
 shader_parameter/vp = Vector2(1, 1)
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t82sx"]
 shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = ExtResource("26_vpfgx")
 shader_parameter/shift_texture_x = ExtResource("27_osf1t")
 shader_parameter/vp = Vector2(1, 1)
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qaupf"]
 shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = ExtResource("29_gghpb")
 shader_parameter/shift_texture_x = ExtResource("30_oem1p")
 shader_parameter/vp = Vector2(1, 1)
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 
 [sub_resource type="Gradient" id="Gradient_lirhd"]
 offsets = PackedFloat32Array(0.562874, 1)
@@ -145,7 +145,7 @@ shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = SubResource("NoiseTexture2D_l3umk")
 shader_parameter/shift_texture_x = SubResource("NoiseTexture2D_ciakk")
 shader_parameter/vp = Vector2(1, 1)
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 
 [sub_resource type="Gradient" id="Gradient_kh73o"]
 offsets = PackedFloat32Array(0, 0.49501)
@@ -172,7 +172,7 @@ shader = ExtResource("3_pr640")
 shader_parameter/mask_texture = SubResource("NoiseTexture2D_tjyfp")
 shader_parameter/shift_texture_x = SubResource("NoiseTexture2D_ockv8")
 shader_parameter/vp = Vector2(1, 1)
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 
 [node name="Background" type="Node2D"]
 script = ExtResource("1_lpf5v")
