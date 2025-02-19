@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HullBakerResource" load_steps=14 format=3 uid="uid://c04i1f6eeisoq"]
+[gd_resource type="Resource" script_class="HullBakerResource" load_steps=15 format=3 uid="uid://c04i1f6eeisoq"]
 
 [ext_resource type="Script" uid="uid://p47ksddy7fs0" path="res://scenes/ship_designer/scripts/resources/view_baker_resource.gd" id="1_algb5"]
 [ext_resource type="Texture2D" uid="uid://der26cev2v2bv" path="res://assets/spaceships/hull/04/_base.png" id="2_8gns4"]
@@ -12,7 +12,7 @@
 
 [sub_resource type="Resource" id="Resource_vueic"]
 script = ExtResource("7_y4f3j")
-data = PackedVector2Array(-10, -64, 10, -64, 20, -44, 34, 0, 35, 45, 26, 64, -26, 64, -35, 45, -34, 0, -20, -44)
+data = PackedVector2Array(8, -58, 53, 17, 57, 42, 29, 56, -30, 56, -57, 42, -53, 16, -8, -58)
 
 [sub_resource type="Resource" id="Resource_fpffb"]
 script = ExtResource("10_yfv8y")
@@ -20,13 +20,19 @@ points = Array[ExtResource("9_rs2d8")]([])
 
 [sub_resource type="Resource" id="Resource_hsmag"]
 script = ExtResource("9_rs2d8")
-x = 0
-y = -62
+x = -13
+y = -47
+rotation = -90.0
+
+[sub_resource type="Resource" id="Resource_8gns4"]
+script = ExtResource("9_rs2d8")
+x = 13
+y = -47
 rotation = -90.0
 
 [sub_resource type="Resource" id="Resource_6muh1"]
 script = ExtResource("10_yfv8y")
-points = Array[ExtResource("9_rs2d8")]([SubResource("Resource_hsmag")])
+points = Array[ExtResource("9_rs2d8")]([SubResource("Resource_hsmag"), SubResource("Resource_8gns4")])
 
 [resource]
 script = ExtResource("8_t5g4a")

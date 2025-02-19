@@ -9,7 +9,6 @@ signal finished(blueprint: ShipBlueprint, design: ShipDesignData)
 
 @onready var hull_selector: ShipBakerHullSelector = %HullSelector
 @onready var hull_ext_selector: ShipBakerHullSelector = %HullExtSelector
-@onready var engine_selector: ShipBakerPartSelector = %EngineSelector
 @onready var style_selector: ShipBakerStyleSelector = %StyleSelector
 
 @onready var specular_slider: Slider = %SpecSlider
@@ -29,6 +28,9 @@ var _metallic := 0.0
 @onready var debug_emission: TextureRect = %EmissionDebug
 @onready var debug_heat: TextureRect = %HeatDebug
 
+var _specular_updating := false
+var _metallic_updating := false
+
 func _ready() -> void:
 	_setup_selectors_data()
 	cancel_button.pressed.connect(close)
@@ -37,18 +39,29 @@ func _ready() -> void:
 		baker.blueprint.hull = value
 	hull_ext_selector.update_blueprint = func(value: HullBakerResource) -> void:
 		baker.blueprint.hull_ext = value
-	engine_selector.update_blueprint = func(value: ViewBakerResource) -> void:
-		baker.blueprint.engine = value
 	style_selector.update_blueprint = func(value: Texture2D) -> void:
 		baker.blueprint.style = value
 	baker.updated.connect(_on_baker_updates)
-	specular_slider.drag_ended.connect(_update_specular)
-	metallic_slider.drag_ended.connect(_update_matallic)
+	specular_slider.drag_started.connect(func():
+		_specular_updating = true)
+	specular_slider.drag_ended.connect(func():
+		baker.blueprint.shininess = specular_slider.value
+		_specular_updating = false)
+	metallic_slider.drag_started.connect(func():
+		_metallic_updating = true)
+	metallic_slider.drag_ended.connect(func():
+		baker.blueprint.metallic = metallic_slider.value
+		_metallic_updating = false)
+
+func _process(delta: float) -> void:
+	if _specular_updating:
+		baker.blueprint.shininess = specular_slider.value
+	if _metallic_updating:
+		baker.blueprint.metallic = metallic_slider.value
 
 func _setup_selectors_data() -> void:
 	hull_selector.resources = all_parts.hulls
 	hull_ext_selector.resources = all_parts.hulls_ext
-	engine_selector.resources = all_parts.engines
 	style_selector.textures = all_parts.styles
 
 func set_blueprint(blueprint: ShipBlueprint) -> void:
@@ -56,7 +69,6 @@ func set_blueprint(blueprint: ShipBlueprint) -> void:
 	baker.bake()
 	hull_selector.init_selection(baker.blueprint.hull)
 	hull_ext_selector.init_selection(baker.blueprint.hull_ext)
-	engine_selector.init_selection(baker.blueprint.engine)
 	style_selector.init_selection(baker.blueprint.style)
 
 func open() -> void:
@@ -71,14 +83,6 @@ func confirm() -> void:
 	baker.design.shininess = _specular
 	baker.design.metallic = _metallic
 	finished.emit(baker.blueprint, baker.design)
-
-func _update_specular(value_changed: bool) -> void:
-	if not value_changed: return
-	baker.blueprint.shininess = specular_slider.value
-
-func _update_matallic(value_changed: bool) -> void:
-	if not value_changed: return
-	baker.blueprint.metallic = metallic_slider.value
 
 func _on_baker_updates(baked_design: ShipDesignData) -> void:
 	ship_preview.setup_textures(baked_design)

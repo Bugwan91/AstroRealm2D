@@ -5,7 +5,7 @@ signal updated_part(type: Type, value: Resource)
 signal updated_specular(value: float)
 signal updated_metallic(value: float)
 
-enum Type { HULL, HULL_EXT, ENGINE, STYLE }
+enum Type { HULL, HULL_EXT, STYLE }
 
 @export var hull: HullBakerResource:
 	set(value):
@@ -16,11 +16,6 @@ enum Type { HULL, HULL_EXT, ENGINE, STYLE }
 	set(value):
 		hull_ext = value
 		updated_part.emit(Type.HULL_EXT, hull_ext)
-
-@export var engine: ViewBakerResource:
-	set(value):
-		engine = value
-		updated_part.emit(Type.ENGINE, engine)
 
 @export var style: Texture2D:
 	set(value):

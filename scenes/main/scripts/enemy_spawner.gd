@@ -48,7 +48,6 @@ func _create_ship_configuration() -> ShipData:
 	_baker.blueprint.hull = ship_parts.hulls[randi_range(0, ship_parts.hulls.size() - 1)]
 	_baker.blueprint.hull_ext = ship_parts.hulls_ext[randi_range(0, ship_parts.hulls_ext.size() - 1)]\
 		if randf() > 0.2 else null
-	_baker.blueprint.engine = ship_parts.engines[randi_range(0, ship_parts.engines.size() - 1)]
 	_baker.blueprint.style = ship_parts.styles[randi_range(0, ship_parts.styles.size() - 1)]\
 		if randf() > 0.2 else null
 	_baker.design = await _baker.bake()

@@ -2,7 +2,7 @@
 class_name ViewBakerResource # TODO rename to ShipModule
 extends Resource
 
-enum Type { HULL, HULL_EXT, ENGINE } # TODO: use this type in ship designer
+enum Type { HULL, HULL_EXT } # TODO: use this type in ship designer
 enum TextureType { DIFFUSE, NORMAL, MASK, HEAT, EMISSION }
 
 @export var type: Type

@@ -51,7 +51,6 @@ func _set_blueprint(value: ShipBlueprint) -> void:
 	blueprint.updated_metallic.connect(_on_met_updated)
 	_update_blueprint_value(ShipBlueprint.Type.HULL, value.hull)
 	_update_blueprint_value(ShipBlueprint.Type.HULL_EXT, value.hull_ext)
-	_update_blueprint_value(ShipBlueprint.Type.ENGINE, value.engine)
 	_update_blueprint_value(ShipBlueprint.Type.STYLE, value.style)
 
 func _on_spec_updated(value: float) -> void:
@@ -74,7 +73,6 @@ func bake() -> ShipDesignData:
 func _bake_polygon() -> void:
 	polygon.bake()
 	design.polygon = polygon.polygon
-	design.engines = polygon.engines
 	design.thrusters = polygon.thrusters
 	design.weapon_slots = polygon.weapons
 

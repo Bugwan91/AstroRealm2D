@@ -3,24 +3,19 @@ extends Node
 
 var _hull := PackedVector2Array()
 var _hull_ext := PackedVector2Array()
-var _engine := PackedVector2Array()
-var _engine_positions: Array[Vector2]
 
 var _hull_thrusters: PointsArrayResource
 var _hull_ext_thrusters: PointsArrayResource
-var _engines: PackedVector2Array
 var _weapons: PointsArrayResource
 var _weapons_ext: PointsArrayResource
 
 var polygon: PackedVector2Array
 var thrusters: Array[PointResource]
-var engines: PackedVector2Array
 var weapons: Array[PointResource]
 
 func bake() -> void:
 	polygon = _rotate_polygon(merge_polygons(), 0.5 * PI)
 	thrusters = _override_thrusters().rotated(0.5 * PI)
-	engines = _rotate_polygon(_engines, 0.5 * PI)
 	weapons = _weapons.rotated(0.5 * PI)
 	if _weapons_ext != null:
 		weapons.append_array(_weapons_ext.rotated(0.5 * PI))
@@ -28,8 +23,6 @@ func bake() -> void:
 func merge_polygons() -> PackedVector2Array:
 	if _hull.is_empty(): return _hull
 	var poly := Geometry2D.merge_polygons(_hull, _hull_ext)[0]
-	for engine_position in _engine_positions:
-		poly = Geometry2D.merge_polygons(poly, _shift_polygon(_engine, engine_position))[0]
 	return poly
 
 func update(type: ShipBlueprint.Type, data: ViewBakerResource) -> void:
@@ -37,14 +30,11 @@ func update(type: ShipBlueprint.Type, data: ViewBakerResource) -> void:
 	match type:
 		ShipBlueprint.Type.HULL: _update_hull(data)
 		ShipBlueprint.Type.HULL_EXT: _update_hull_ext(data)
-		ShipBlueprint.Type.ENGINE: _engine = poly
 
 func _update_hull(hull: HullBakerResource) -> void:
 	if hull == null: return
 	_hull = hull.polygon.data
-	_engine_positions = hull.engine_slots
 	_hull_thrusters = hull.thrusters
-	_engines = hull.get_engines_points()
 	_weapons = hull.weapon_slots
 
 func _update_hull_ext(hull: HullBakerResource) -> void:

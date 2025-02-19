@@ -8,7 +8,6 @@ signal selected(index: int)
 @export var texture: Texture2D: set = _set_texture
 
 @export var _empty_texture: Texture2D
-@export var _engine_image: Texture2D
 
 @export_group("style")
 @export var _default_style: StyleBox
@@ -18,8 +17,6 @@ signal selected(index: int)
 @onready var _outline_panel: Panel = %OutlinePanel
 
 var is_selected: bool = false: set = _set_selection
-
-var _engines: Array[Sprite2D]
 
 func _ready() -> void:
 	_outline_panel.gui_input.connect(_handle_mouse_click)
@@ -61,25 +58,6 @@ func _update_with_resource() -> void:
 	_item_view.material.set("shader_parameter/mask_texture", resource.mask)
 	_item_view.modulate = Color(0.2, 0.2, 0.2)
 	_item_view.scale = Vector2.ONE * resource.scale
-	_update_placeholders()
-
-func _update_placeholders() -> void:
-	if resource != null and resource is HullBakerResource:
-		_add_engines(resource)
-	else:
-		_clear_placeholders()
-
-func _clear_placeholders() -> void:
-	for engine in _engines:
-		engine.queue_free()
-
-func _add_engines(hull: HullBakerResource) -> void:
-	for engine_slot in hull.engine_slots:
-		var engine := Sprite2D.new()
-		engine.texture = _engine_image
-		engine.modulate = Color(1.0, 0.2, 0.0, 0.7)
-		_item_view.add_child(engine)
-		engine.position = engine_slot
 
 func _handle_mouse_click(event: InputEvent) -> void:
 	if event is InputEventMouseButton\

@@ -30,7 +30,3 @@ texture = SubResource("CompressedTexture2D_mwndk")
 [node name="hull_ext" type="Sprite2D" parent="CanvasLayer/views"]
 unique_name_in_owner = true
 texture_filter = 3
-
-[node name="engines" type="Node2D" parent="CanvasLayer/views"]
-unique_name_in_owner = true
-texture_filter = 3

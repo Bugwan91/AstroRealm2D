@@ -49,6 +49,7 @@ func _setup_weapon() -> void:
 		gun.origin = self
 		gun.shoot_recoil.connect(_on_weapon_shoot)
 		gun.tranfser_heat.connect(_on_transfered_heat)
+		gun.shoot_dellay = 0.0 if slot_index % 2 == 0 else 0.5
 		_weapon_slots.add_weapon(gun, slot_index)
 
 func connect_inputs(new_inputs: ShipInput) -> void:
