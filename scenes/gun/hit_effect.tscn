@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dcjlidv1ftgrv"]
 
 [ext_resource type="Script" uid="uid://bpls80k7m83ak" path="res://scenes/gun/scripts/bullet_hit_effect.gd" id="1_27y4s"]
-[ext_resource type="AudioStream" uid="uid://cejv4j507tnti" path="res://assets/sounds/spacelord_hit2.wav" id="2_6t2pu"]
+[ext_resource type="AudioStream" uid="uid://dfo0s55ra2w22" path="res://assets/sounds/hit.wav" id="2_ug1on"]
 [ext_resource type="Texture2D" uid="uid://1nvctn7w0agl" path="res://assets/VFX_textures/pack_1/spark_04.png" id="3_ug1on"]
 [ext_resource type="Material" uid="uid://clufqa0vb1vo4" path="res://scenes/gun/assets/hit_effect_mat.tres" id="4_03671"]
 [ext_resource type="Texture2D" uid="uid://c388olp5jsja" path="res://assets/my/circle_texture_128.tres" id="6_dsq42"]
@@ -14,8 +14,7 @@ script = ExtResource("1_27y4s")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("2_6t2pu")
-volume_db = 4.0
+stream = ExtResource("2_ug1on")
 autoplay = true
 max_distance = 4000.0
 
