@@ -10,6 +10,7 @@ signal unselected(item: RadarItem)
 @export var detectable := true
 @export var config: RadarItemConfig
 
+var parent: Node2D
 var selection_size: float:
 	get: return 2.0 * config.radius
 
@@ -19,15 +20,14 @@ var destruction_handler: Callable
 
 var canvas_position:Vector2:
 	get:
-		return _parent.extrapolator.canvas_position\
-			if _parent is RigidBody\
+		return parent.extrapolator.canvas_position\
+			if parent is RigidBody\
 			else get_global_transform_with_canvas().origin
 
 var _collider: CollisionShape2D
-var _parent: Node2D
 
 func _ready() -> void:
-	_parent = get_parent()
+	parent = get_parent()
 	monitoring = false
 	monitorable = true
 	collision_layer = 8

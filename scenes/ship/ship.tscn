@@ -1,7 +1,8 @@
-[gd_scene load_steps=31 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=32 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" uid="uid://b2ih5uxk3qw0h" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
+[ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/_shared/pointer.tscn" id="5_3lg4r"]
 [ext_resource type="Shader" uid="uid://balef3jw7dwu" path="res://scenes/ship/shaders/ship.gdshader" id="5_sakv4"]
 [ext_resource type="Material" uid="uid://4cr00esf8aq7" path="res://resources/ships/ship_mat.tres" id="5_woufe"]
 [ext_resource type="Texture2D" uid="uid://cdvkj0p02285g" path="res://assets/spaceships/hull/02/_interrior_emission.png" id="6_3lg4r"]
@@ -81,6 +82,9 @@ metadata/_custom_type_script = ExtResource("19_6qm8q")
 unique_name_in_owner = true
 script = ExtResource("8_4fwa5")
 
+[node name="Pointer" parent="PositionExtrapolator/MainWeaponSlot" instance=ExtResource("5_3lg4r")]
+unique_name_in_owner = true
+
 [node name="Interrior" type="Sprite2D" parent="PositionExtrapolator"]
 material = SubResource("ShaderMaterial_xvqm4")
 rotation = 1.5708
@@ -121,6 +125,7 @@ script = ExtResource("14_5nufi")
 unique_name_in_owner = true
 script = ExtResource("14_xvsf7")
 disabled = true
+debug = true
 metadata/_custom_type_script = ExtResource("14_xvsf7")
 
 [node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view", "health")]

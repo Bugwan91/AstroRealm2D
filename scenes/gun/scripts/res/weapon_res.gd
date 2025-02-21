@@ -16,7 +16,7 @@ extends Resource
 ## Damage reduced with extra range
 @export_range(0, 5000) var extra_range := 1000.0
 
-## Only for projectiles
+## 0 is for beam weapons
 @export_range(0, 10000) var projectile_speed := 1000.0
 
 ## Radians. Do no make sence for beams
@@ -44,6 +44,9 @@ extends Resource
 ## Max duration of fire. 0 is infinite. Actual for beams
 ## TODO: Maybe I should use overheat instead, but it may be no so flexible
 @export_range(0, 100) var fire_duration_max: float = 0.0
+
+var is_beam: bool:
+	get: return projectile_speed == 0.0
 
 func create() -> Gun:
 	var weapon: Gun = scene.instantiate()

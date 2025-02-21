@@ -54,7 +54,8 @@ func _spawn(start: Vector2, end: Vector2) -> void:
 	)
 	WorldGridManager.instance.world_root.add_child(asteroid)
 	asteroid.init(
-		randf_range(1.0 - size_variation, 1.0 + size_variation),
+		# TODO: udpate asteroid size generation: (min, max) instead of size and variation
+		randf_range(1.0 - size_variation, 1.0 + size_variation * 2.),
 		base_velocity,
 		speed,
 		speed_variation,

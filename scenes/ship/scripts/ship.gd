@@ -66,7 +66,8 @@ func _connect_flight_controller_inputs() -> void:
 	flight_controller.input_reader = input_reader
 
 func _connect_weapon_inputs() -> void:
-	_main_weapon_slot.connect_inputs(input_reader.data.firing_toggled)
+	_main_weapon_slot.connect_fire_input(input_reader.data.firing_toggled)
+	_main_weapon_slot.connect_target_input(input_reader.data.target_changed)
 
 func _setup_view() -> void:
 	_view.setup_textures(data.design)

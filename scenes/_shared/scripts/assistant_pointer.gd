@@ -27,5 +27,5 @@ func disable() -> void:
 	pointer_texture.visible = false
 
 func _update_position() -> void:
-	var zoom := get_viewport().get_camera_2d().zoom
-	pointer.position = _pivot + _position * zoom
+	## HACK: I should add zoom signa to camera
+	pointer.position = _pivot + _position * CameraController.instance.zoom
