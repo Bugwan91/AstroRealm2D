@@ -20,6 +20,7 @@ func _ready() -> void:
 	_start_light_energy = _light.energy
 	_sound.pitch_scale = randf_range(0.9, 1.1)
 	_sound.finished.connect(_end_sound)
+	get_parent().tree_exited.connect(queue_free)
 
 func _process(delta: float) -> void:
 	_time += delta

@@ -19,7 +19,7 @@
 [ext_resource type="Script" uid="uid://dd1et7iue8frp" path="res://scenes/_shared/scripts/static_rigid_body.gd" id="10_k3qgf"]
 [ext_resource type="Material" uid="uid://4gfbqiicvvx0" path="res://resources/asteroids/asteroid_mat.tres" id="12_l4sdg"]
 [ext_resource type="Script" uid="uid://de333ogw3s8dt" path="res://scenes/_shared/scripts/position_extrapolator.gd" id="17_l4sdg"]
-[ext_resource type="Resource" uid="uid://ci5yk7wngo6ue" path="res://scenes/radar/_res/asteroid.tres" id="18_l4sdg"]
+[ext_resource type="Resource" uid="uid://ci5yk7wngo6ue" path="res://resources/radar/asteroid.tres" id="18_l4sdg"]
 
 [sub_resource type="Resource" id="Resource_xb7x4"]
 resource_local_to_scene = true

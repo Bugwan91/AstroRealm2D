@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d1oncove15ly4"]
 
 [ext_resource type="Script" path="res://scenes/_shared/scripts/selection_item.gd" id="1_g84to"]
-[ext_resource type="Resource" uid="uid://b3vvrqjsupl6c" path="res://scenes/radar/_res/icons/selection_icon.tres" id="2_8fv74"]
+[ext_resource type="Resource" uid="uid://b3vvrqjsupl6c" path="res://resources/radar/icons/selection_icon.tres" id="2_8fv74"]
 
 [node name="SelectionItem" type="Area2D"]
 collision_layer = 2147483648

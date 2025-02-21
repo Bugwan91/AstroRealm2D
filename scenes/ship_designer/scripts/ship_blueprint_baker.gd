@@ -66,6 +66,8 @@ func bake() -> ShipDesignData:
 	_is_baking = true
 	design = await _bake_textures()
 	_bake_polygon()
+	design.main_weapon = blueprint.main_weapon
+	design.secondary_weapon = blueprint.secondary_weapon
 	updated.emit(design)
 	_is_baking = false
 	return design
@@ -74,7 +76,8 @@ func _bake_polygon() -> void:
 	polygon.bake()
 	design.polygon = polygon.polygon
 	design.thrusters = polygon.thrusters
-	design.weapon_slots = polygon.weapons
+	design.main_weapon_points = polygon.main_weapons
+	design.secondary_weapon_points = polygon.secondary_weapons
 
 func _bake_textures() -> ShipDesignData:
 	design.view_scale = blueprint.hull.scale

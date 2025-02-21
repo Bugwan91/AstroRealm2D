@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="RadarItemConfig" load_steps=6 format=3 uid="uid://c1qhjv4ledpam"]
+
+[ext_resource type="Script" uid="uid://c5xv8rqbdj611" path="res://scenes/radar/scripts/resources/radar_icon_config.gd" id="1_6dq00"]
+[ext_resource type="Script" uid="uid://bfy4thm52835j" path="res://scenes/radar/scripts/resources/radar_item_config.gd" id="2_3fnfu"]
+
+[sub_resource type="Gradient" id="Gradient_4ph7v"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 0.1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k3vso"]
+gradient = SubResource("Gradient_4ph7v")
+width = 1
+height = 1
+
+[sub_resource type="Resource" id="Resource_kuc5t"]
+script = ExtResource("1_6dq00")
+texture = SubResource("GradientTexture2D_k3vso")
+color = Color(0.423529, 0.741176, 1, 1)
+base_size = 8.0
+scale = 1.0
+aspect = 1.0
+dynamic_scale = true
+use_real_size = true
+free_rotation = false
+unique = false
+metadata/_custom_type_script = ExtResource("1_6dq00")
+
+[resource]
+script = ExtResource("2_3fnfu")
+radius = 64.0
+icon = SubResource("Resource_kuc5t")
+metadata/_custom_type_script = ExtResource("2_3fnfu")

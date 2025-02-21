@@ -7,8 +7,6 @@ signal ship_destroyed()
 @export var ship_flight_model: ShipFlightModelData
 @export var ship_blueprint: ShipBlueprint
 
-var _ship_scene: PackedScene = preload("res://scenes/ship/ship.tscn")
-var _gun_scene: PackedScene = preload("res://scenes/gun/gun.tscn")
 var _radar_scene: PackedScene = preload("res://scenes/ship/radar.tscn")
 
 var ship: Spaceship: set = _set_ship
@@ -35,13 +33,11 @@ func respawn_player_ship(_position: Vector2 = Vector2.ZERO) -> void:
 		_position = position
 	if is_alive():
 		ship.queue_free()
-	var new_ship: Spaceship = _ship_scene.instantiate() as Spaceship
-	new_ship.group = "player"
-	new_ship.data = await _create_ship_configuration()
+	var ship_data = await _create_ship_configuration()
+	var new_ship = ship_data.create()
 	new_ship.position = _position
 	new_ship.input_reader = _input_reader
-	new_ship.gun_scene = _gun_scene
-	var radar: Radar = _radar_scene.instantiate() as Radar
+	var radar: Radar = _radar_scene.instantiate()
 	radar.radius = 10000.0
 	new_ship.add_child(radar)
 	#ship.autopilot_pointer = autopilot_pointer
@@ -71,6 +67,7 @@ func _create_ship_configuration() -> ShipData:
 	_ship_baker.blueprint = ship_blueprint
 	_ship_baker.design = await _ship_baker.bake()
 	ship_data.design = _ship_baker.design
+	ship_data.radar_item = ship_blueprint.radar_item_config
 	return ship_data
 
 func _on_ship_destroyed() -> void:

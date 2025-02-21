@@ -3,9 +3,6 @@ extends ActiveRigidBody
 
 #region Export properties
 @export var data: ShipData: set = _set_ship_data
-@export var group: String # HACK: Rework with implementation factions/groups system
-
-@export var gun_scene: PackedScene
 
 @export var input_reader: ShipInput
 
@@ -20,7 +17,7 @@ extends ActiveRigidBody
 @onready var heat: Heat = %Heat
 
 @onready var _view: ShipView = %View
-@onready var _weapon_slots: WeaponSlots = %WeaponSlots
+@onready var _main_weapon_slot: WeaponSlot = %MainWeaponSlot
 @onready var _radar_item: RadarItem = %RadarItem
 #endregion
 
@@ -29,10 +26,15 @@ var _impulces := Vector2.ZERO
 #endregion
 
 #region Initialization
+
+func init(config: ShipData):
+	pass
+
 func _ready() -> void:
 	assert(data != null, "Ship Data is missed")
 	super._ready()
 	_setup_view()
+	_setup_radar_item()
 	_setup_flight_controller()
 	_setup_weapon()
 	connect_inputs(input_reader)
@@ -42,15 +44,10 @@ func _setup_flight_controller() -> void:
 	flight_controller.dodging.connect(_on_dodge)
 
 func _setup_weapon() -> void:
-	_weapon_slots.setup(data.design)
-	for slot_index in _weapon_slots.slots.size():
-		var gun: Gun = gun_scene.instantiate() as Gun
-		gun.group = group
-		gun.origin = self
-		gun.shoot_recoil.connect(_on_weapon_shoot)
-		gun.tranfser_heat.connect(_on_transfered_heat)
-		gun.shoot_dellay = 0.0 if slot_index % 2 == 0 else 0.5
-		_weapon_slots.add_weapon(gun, slot_index)
+	_main_weapon_slot.setup(data.design.main_weapon_points)
+	_main_weapon_slot.set_weapon(data.design.main_weapon)
+	_main_weapon_slot.heat_generated.connect(_on_transfered_heat)
+	_main_weapon_slot.recoil.connect(_on_weapon_shoot)
 
 func connect_inputs(new_inputs: ShipInput) -> void:
 	input_reader = new_inputs
@@ -69,11 +66,14 @@ func _connect_flight_controller_inputs() -> void:
 	flight_controller.input_reader = input_reader
 
 func _connect_weapon_inputs() -> void:
-	_weapon_slots.connect_inputs(input_reader)
+	_main_weapon_slot.connect_inputs(input_reader.data.firing_toggled)
 
 func _setup_view() -> void:
 	_view.setup_textures(data.design)
 	_view.scale = Vector2.ONE * data.design.view_scale
+
+func _setup_radar_item() -> void:
+	_radar_item.configure(data.radar_item)
 
 func _set_ship_data(new_data: ShipData) -> void:
 	if new_data == null: return
@@ -84,18 +84,11 @@ func _set_ship_data(new_data: ShipData) -> void:
 #endregion
 
 #region Physics
-func _physics_process(delta: float) -> void:
-	_update_velocity_for_weapons()
-	super._physics_process(delta)
-
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	flight_controller.integrate_forces(state)
 	MyDebug.info("spd", speed)
 	MyDebug.info("pos", position)
 	_apply_impulces(state)
-
-func _update_velocity_for_weapons() -> void:
-	_weapon_slots.update_velocity(linear_velocity)
 #endregion
 
 #region Events
@@ -124,4 +117,4 @@ func get_max_speed() -> float:
 	return data.flight_model.speed
 
 func _on_dodge(value: bool) -> void:
-	_weapon_slots.enabled = not value
+	_main_weapon_slot.enabled = not value

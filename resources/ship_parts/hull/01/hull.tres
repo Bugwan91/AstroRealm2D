@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HullBakerResource" load_steps=15 format=3 uid="uid://c83n3ib0kufjx"]
+[gd_resource type="Resource" script_class="HullBakerResource" load_steps=16 format=3 uid="uid://c83n3ib0kufjx"]
 
 [ext_resource type="Texture2D" uid="uid://dsl72b3dwxid4" path="res://assets/spaceships/hull/01/_base.png" id="1_3thuo"]
 [ext_resource type="Script" uid="uid://p47ksddy7fs0" path="res://scenes/ship_designer/scripts/resources/view_baker_resource.gd" id="1_d15x1"]
@@ -21,17 +21,22 @@ points = Array[ExtResource("8_i1onv")]([])
 
 [sub_resource type="Resource" id="Resource_hsmag"]
 script = ExtResource("8_i1onv")
-x = 0
+x = -4
+y = -62
+rotation = -90.0
+
+[sub_resource type="Resource" id="Resource_d15x1"]
+script = ExtResource("8_i1onv")
+x = 4
 y = -62
 rotation = -90.0
 
 [sub_resource type="Resource" id="Resource_6muh1"]
 script = ExtResource("7_gdle5")
-points = Array[ExtResource("8_i1onv")]([SubResource("Resource_hsmag")])
+points = Array[ExtResource("8_i1onv")]([SubResource("Resource_hsmag"), SubResource("Resource_d15x1")])
 
 [resource]
 script = ExtResource("6_imvnp")
-engine_slots = Array[Vector2]([Vector2(0, 32)])
 thrusters = SubResource("Resource_fpffb")
 weapon_slots = SubResource("Resource_6muh1")
 mass = 1.0

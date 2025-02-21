@@ -12,7 +12,7 @@ var radar_view: RadarViewport: set = _connect_view
 var _view_scale: float
 var _selected_item: RadarItem: set = _set_selected
 var _default_selection_icon: RadarIcon = RadarIcon.create(
-	load("res://scenes/radar/_res/icons/selection_icon.tres"))
+	load("res://resources/radar/icons/selection_icon.tres"))
 
 func _ready() -> void:
 	RadarManager.instance = self
@@ -66,7 +66,7 @@ func _update_icon_position(item: RadarItem, icon: RadarIcon) -> void:
 		item.global_position - radar.global_position,
 		item.global_rotation,
 		radar_view.radius,
-		_view_scale)
+		_view_scale, 0.75)
 
 func _update_view_scale() -> void:
 	if is_instance_valid(radar) and is_instance_valid(radar_view):

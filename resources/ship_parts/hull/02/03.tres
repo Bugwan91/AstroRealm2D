@@ -35,7 +35,6 @@ points = Array[ExtResource("9_wk06o")]([SubResource("Resource_2k5ev"), SubResour
 [resource]
 script = ExtResource("8_mfier")
 parent = ExtResource("6_3udhd")
-engine_slots = Array[Vector2]([])
 weapon_slots = SubResource("Resource_iig6i")
 mass = 1.0
 type = 1

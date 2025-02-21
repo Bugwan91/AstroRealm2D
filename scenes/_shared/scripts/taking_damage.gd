@@ -25,7 +25,7 @@ var _damaged_effect: DamageEffect
 
 var parent_visual_node: Node2D:
 	get:
-		return parent.extrapolator  if parent is RigidBody2D else parent
+		return parent.extrapolator if parent is RigidBody2D else parent
 
 func _ready() -> void:
 	monitoring = false

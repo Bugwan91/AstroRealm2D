@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dwdaypca54j40"]
 
 [ext_resource type="Script" uid="uid://bxq8vurbbdqgr" path="res://scenes/radar/scripts/radar_item.gd" id="1_qgcs5"]
-[ext_resource type="Resource" uid="uid://blul3j02rqued" path="res://scenes/radar/_res/icons/default_icon.tres" id="2_ktxn5"]
+[ext_resource type="Resource" uid="uid://blul3j02rqued" path="res://resources/radar/icons/default_icon.tres" id="2_ktxn5"]
 [ext_resource type="Script" uid="uid://bfy4thm52835j" path="res://scenes/radar/scripts/resources/radar_item_config.gd" id="4_c0mlq"]
 
 [sub_resource type="Resource" id="Resource_sy3uu"]

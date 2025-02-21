@@ -1,13 +1,12 @@
-[gd_scene load_steps=33 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=31 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" uid="uid://b2ih5uxk3qw0h" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
-[ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="3_2xkf5"]
 [ext_resource type="Shader" uid="uid://balef3jw7dwu" path="res://scenes/ship/shaders/ship.gdshader" id="5_sakv4"]
 [ext_resource type="Material" uid="uid://4cr00esf8aq7" path="res://resources/ships/ship_mat.tres" id="5_woufe"]
 [ext_resource type="Texture2D" uid="uid://cdvkj0p02285g" path="res://assets/spaceships/hull/02/_interrior_emission.png" id="6_3lg4r"]
 [ext_resource type="Texture2D" uid="uid://c5s5fiin47nrm" path="res://assets/spaceships/hull/02/_interrior_mask.png" id="7_2xkf5"]
-[ext_resource type="Script" uid="uid://dyv36awovo4v7" path="res://scenes/ship/scripts/weapons_slots.gd" id="8_4fwa5"]
+[ext_resource type="Script" uid="uid://dyv36awovo4v7" path="res://scenes/gun/scripts/weapon_slot.gd" id="8_4fwa5"]
 [ext_resource type="Texture2D" uid="uid://dsl72b3dwxid4" path="res://assets/spaceships/hull/01/_base.png" id="10_r75st"]
 [ext_resource type="Texture2D" uid="uid://dg5ceqg02tvgu" path="res://assets/spaceships/hull/01/_normal.png" id="11_6qm8q"]
 [ext_resource type="Script" uid="uid://cw01a0apshsem" path="res://scenes/_shared/scripts/view/view_ship.gd" id="11_d8ncc"]
@@ -18,7 +17,6 @@
 [ext_resource type="Script" uid="uid://clrdqrh8dbwau" path="res://scenes/_shared/scripts/health.gd" id="18_woufe"]
 [ext_resource type="PackedScene" uid="uid://dcy3g0684tgaa" path="res://scenes/ship/destroy_effect.tscn" id="19_3lg4r"]
 [ext_resource type="Script" uid="uid://de333ogw3s8dt" path="res://scenes/_shared/scripts/position_extrapolator.gd" id="19_6qm8q"]
-[ext_resource type="Resource" uid="uid://caqqbuwbg5ovc" path="res://scenes/radar/_res/ship.tres" id="19_xvsf7"]
 [ext_resource type="Script" uid="uid://liqs1h6x4e1p" path="res://scenes/heat/scripts/Heat.gd" id="20_1gdyl"]
 [ext_resource type="Script" uid="uid://w8vsnqoourdh" path="res://scenes/vfx/scripts/trail.gd" id="20_q0150"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="20_w3y8g"]
@@ -68,7 +66,6 @@ metadata/_custom_type_script = ExtResource("18_woufe")
 [node name="Ship" type="RigidBody2D"]
 script = ExtResource("1_5ckws")
 data = ExtResource("2_uwj24")
-gun_scene = ExtResource("3_2xkf5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -80,7 +77,7 @@ shape = SubResource("CapsuleShape2D_w2dh3")
 script = ExtResource("19_6qm8q")
 metadata/_custom_type_script = ExtResource("19_6qm8q")
 
-[node name="WeaponSlots" type="Node2D" parent="PositionExtrapolator"]
+[node name="MainWeaponSlot" type="Node2D" parent="PositionExtrapolator"]
 unique_name_in_owner = true
 script = ExtResource("8_4fwa5")
 
@@ -152,4 +149,3 @@ shape = SubResource("CapsuleShape2D_w2dh3")
 
 [node name="RadarItem" parent="." instance=ExtResource("20_w3y8g")]
 unique_name_in_owner = true
-config = ExtResource("19_xvsf7")

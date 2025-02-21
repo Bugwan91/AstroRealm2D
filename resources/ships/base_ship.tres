@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="ShipData" load_steps=9 format=3 uid="uid://c5khrxh5yovq4"]
+[gd_resource type="Resource" script_class="ShipData" load_steps=8 format=3 uid="uid://c5khrxh5yovq4"]
 
-[ext_resource type="Resource" uid="uid://brpfjpxetwlmd" path="res://resources/ship_parts/engine/1.tres" id="1_1u4qc"]
 [ext_resource type="Resource" uid="uid://c83n3ib0kufjx" path="res://resources/ship_parts/hull/01/hull.tres" id="2_mroq4"]
 [ext_resource type="Script" uid="uid://bnl3gx1nvuvom" path="res://scenes/ship_designer/scripts/resources/ship_blueprint.gd" id="3_khkmu"]
 [ext_resource type="Texture2D" uid="uid://dvxp714x3fp80" path="res://assets/spaceships/Styles/02.png" id="4_terws"]
@@ -11,7 +10,6 @@
 [sub_resource type="Resource" id="Resource_nfcp8"]
 script = ExtResource("3_khkmu")
 hull = ExtResource("2_mroq4")
-engine = ExtResource("1_1u4qc")
 style = ExtResource("4_terws")
 shininess = 0.0
 metallic = 0.0

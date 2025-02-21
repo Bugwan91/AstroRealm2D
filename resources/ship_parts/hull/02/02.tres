@@ -17,7 +17,6 @@ data = PackedVector2Array(70, 44, 49, 49, 35, 64, 14, 64, 12, 45, -11, 45, -14, 
 [resource]
 script = ExtResource("8_yngsl")
 parent = ExtResource("6_27svm")
-engine_slots = Array[Vector2]([])
 mass = 1.0
 type = 1
 allowed_ext = Array[ExtResource("1_8glpa")]([])

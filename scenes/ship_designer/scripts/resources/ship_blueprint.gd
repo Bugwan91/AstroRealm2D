@@ -30,3 +30,8 @@ enum Type { HULL, HULL_EXT, STYLE }
 	set(value):
 		metallic = value
 		updated_metallic.emit(metallic)
+
+@export var main_weapon: WeaponRes
+@export var secondary_weapon: WeaponRes
+
+@export var radar_item_config: RadarItemConfig

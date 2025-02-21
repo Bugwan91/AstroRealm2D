@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RadarItemConfig" load_steps=3 format=3 uid="uid://bm0f8nu5dn68n"]
 
-[ext_resource type="Resource" uid="uid://dw00ssg6payqc" path="res://scenes/radar/_res/icons/projectile_icon.tres" id="1_ogg34"]
+[ext_resource type="Resource" uid="uid://dw00ssg6payqc" path="res://resources/radar/icons/projectile_icon.tres" id="1_ogg34"]
 [ext_resource type="Script" uid="uid://bfy4thm52835j" path="res://scenes/radar/scripts/resources/radar_item_config.gd" id="2_r0lof"]
 
 [resource]

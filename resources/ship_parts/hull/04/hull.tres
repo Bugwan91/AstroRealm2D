@@ -36,7 +36,6 @@ points = Array[ExtResource("9_rs2d8")]([SubResource("Resource_hsmag"), SubResour
 
 [resource]
 script = ExtResource("8_t5g4a")
-engine_slots = Array[Vector2]([Vector2(0, 32)])
 thrusters = SubResource("Resource_fpffb")
 weapon_slots = SubResource("Resource_6muh1")
 mass = 1.0

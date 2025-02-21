@@ -1,16 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://sgnvwpsrs0xa"]
+[gd_scene load_steps=5 format=3 uid="uid://sgnvwpsrs0xa"]
 
 [ext_resource type="Script" uid="uid://dmeyffknuya8c" path="res://scenes/camera/scripts/camera_controller.gd" id="1_gmqix"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="2_2ctbd"]
-[ext_resource type="Script" uid="uid://bfy4thm52835j" path="res://scenes/radar/scripts/resources/radar_item_config.gd" id="3_qr7cc"]
+[ext_resource type="Resource" uid="uid://c1qhjv4ledpam" path="res://resources/radar/camera.tres" id="3_qr7cc"]
 [ext_resource type="Script" uid="uid://c0noelhebcmc6" path="res://scenes/camera/scripts/viewport_radar_manager.gd" id="3_td7tu"]
-[ext_resource type="Resource" uid="uid://bdt3tihrs4nj8" path="res://scenes/radar/_res/icons/camera_icon.tres" id="3_u3rx3"]
-
-[sub_resource type="Resource" id="Resource_21tcn"]
-script = ExtResource("3_qr7cc")
-radius = 64.0
-icon = ExtResource("3_u3rx3")
-metadata/_custom_type_script = ExtResource("3_qr7cc")
 
 [node name="Camera" type="Camera2D"]
 ignore_rotation = false
@@ -20,7 +13,7 @@ script = ExtResource("1_gmqix")
 
 [node name="RadarItem" parent="." instance=ExtResource("2_2ctbd")]
 unique_name_in_owner = true
-config = SubResource("Resource_21tcn")
+config = ExtResource("3_qr7cc")
 
 [node name="ViewportRadarManager" type="Node" parent="."]
 script = ExtResource("3_td7tu")

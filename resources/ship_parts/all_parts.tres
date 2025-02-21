@@ -1,8 +1,5 @@
-[gd_resource type="Resource" script_class="ShipDesignerParts" load_steps=43 format=3 uid="uid://dso44ig5a2xx4"]
+[gd_resource type="Resource" script_class="ShipDesignerParts" load_steps=40 format=3 uid="uid://dso44ig5a2xx4"]
 
-[ext_resource type="Script" uid="uid://p47ksddy7fs0" path="res://scenes/ship_designer/scripts/resources/view_baker_resource.gd" id="1_bqqy7"]
-[ext_resource type="Resource" uid="uid://c33swp4vn5c51" path="res://resources/ship_parts/engine/0.tres" id="1_f6783"]
-[ext_resource type="Resource" uid="uid://brpfjpxetwlmd" path="res://resources/ship_parts/engine/1.tres" id="2_bex6w"]
 [ext_resource type="Resource" uid="uid://c83n3ib0kufjx" path="res://resources/ship_parts/hull/01/hull.tres" id="3_ns6b6"]
 [ext_resource type="Script" uid="uid://n101buc5ybpd" path="res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd" id="4_8h3hf"]
 [ext_resource type="Resource" uid="uid://dkfenlyktvckf" path="res://resources/ship_parts/hull/02/hull.tres" id="4_16dyl"]
@@ -47,5 +44,4 @@
 script = ExtResource("9_oee7v")
 hulls = Array[ExtResource("4_8h3hf")]([ExtResource("3_ns6b6"), ExtResource("4_16dyl"), ExtResource("7_y8rcx"), ExtResource("8_b53sp"), ExtResource("9_kvm8h")])
 hulls_ext = Array[ExtResource("4_8h3hf")]([ExtResource("5_m7vfw"), ExtResource("6_xyliv"), ExtResource("7_t1vdd"), ExtResource("8_3mr3y"), ExtResource("9_ca4ac"), ExtResource("10_kl2f0"), ExtResource("14_c4ir2"), ExtResource("15_b53sp")])
-engines = Array[ExtResource("1_bqqy7")]([ExtResource("1_f6783"), ExtResource("2_bex6w")])
 styles = Array[Texture2D]([ExtResource("10_llqbd"), ExtResource("11_clk7m"), ExtResource("16_fpre7"), ExtResource("17_oltgj"), ExtResource("18_0dsbj"), ExtResource("19_fuvpn"), ExtResource("19_0dsbj"), ExtResource("20_gxm1p"), ExtResource("12_6h25f"), ExtResource("13_nfpt5"), ExtResource("14_hsl0j"), ExtResource("30_3onrg"), ExtResource("15_lylw5"), ExtResource("16_s7xt2"), ExtResource("27_gxm1p"), ExtResource("28_fuvpn"), ExtResource("22_8h3hf"), ExtResource("26_gxm1p"), ExtResource("30_if0sr"), ExtResource("31_cyy4x"), ExtResource("32_cyy4x"), ExtResource("33_gp5ut"), ExtResource("34_p6gwf"), ExtResource("35_b1l2o")])

@@ -14,7 +14,7 @@ func _ready() -> void:
 	fire.process_material = _fire_material
 	_smoke_material = smoke.process_material.duplicate()
 	smoke.process_material = _smoke_material
-	#intensity = 0.0
+	get_parent().tree_exited.connect(queue_free)
 
 func _set_intensity(value: float) -> void:
 	intensity = value
@@ -27,3 +27,6 @@ func _set_intensity(value: float) -> void:
 	else:
 		fire.emitting = false
 		smoke.emitting = false
+
+func _on_destroy():
+	queue_free()

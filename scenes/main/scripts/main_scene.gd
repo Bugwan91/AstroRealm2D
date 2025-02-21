@@ -2,7 +2,6 @@ class_name MainScene
 extends Node2D
 
 @onready var world: Node2D = %World
-var ship_scene: PackedScene = preload("res://scenes/ship/ship.tscn")
 
 func _ready() -> void:
 	process_physics_priority = -1001

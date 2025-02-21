@@ -23,9 +23,9 @@ vec3 compute_diffuse(vec3 L, vec3 N, vec3 B_color, vec3 L_color) {
 	return B_color * L_color * NdotL;
 }
 
-vec3 rotateLightVector(vec3 L) {
+vec3 rotate_light_vector(vec3 L) {
 	vec3 V = vec3(0.0, 0.0, 1.0);
-	float A = acos(L.z);
+	float A = acos(L.z) * 0.9;
 	if (A < 1e-6) { return L; }
 	vec3 axis = normalize(cross(V, L));
 	// Rodrigues' rotation
@@ -34,7 +34,7 @@ vec3 rotateLightVector(vec3 L) {
 
 vec3 compute_specular(vec3 L, vec3 N, vec3 B_color, vec3 L_color, float Spec, float Met) {
 	vec3 V = vec3(.0,.0,1.);
-	L = rotateLightVector(L);
+	L = rotate_light_vector(L);
 	vec3 R = (reflect(-L, N)); // vector of reflected light
 	float RdotV = clamp(dot(R, V), 1e-4, 1.);
 	float S = Spec * Spec;

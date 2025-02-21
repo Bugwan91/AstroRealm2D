@@ -32,21 +32,19 @@ func _ready() -> void:
 	monitorable = true
 	collision_layer = 8
 	collision_mask = 0
+	if selectable:
+		input_event.connect(handle_click)
+	if is_instance_valid(config):
+		configure(config)
+
+func configure(conf: RadarItemConfig):
+	config = conf.duplicate()
 	init_shape(config.radius)
 	icon = RadarIcon.create(config.icon)
 	if is_instance_valid(config.selection_icon):
 		selected_icon = RadarIcon.create(config.selection_icon)
-	if selectable:
-		input_event.connect(handle_click)
-
-func handle_click(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	# HACK: It's better to untilize new world partitioning system to get nearest radar item.
-	# Currently it's hard to click on object moving fast
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE:
-		selected.emit(self)
 
 func init_shape(radius: float) -> void:
-	config = config.duplicate()
 	config.radius = radius
 	if is_instance_valid(_collider):
 		_collider.shape.radius = maxf(RADIUS_MIN, config.radius)
@@ -56,6 +54,12 @@ func init_shape(radius: float) -> void:
 	_collider.debug_color = Color(Color.BLUE, 0.0)
 	_collider.shape.radius = maxf(RADIUS_MIN, config.radius)
 	add_child(_collider)
+
+func handle_click(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	# HACK: It's better to untilize new world partitioning system to get nearest radar item.
+	# Currently it's hard to click on object moving fast
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE:
+		selected.emit(self)
 
 func reset() -> void:
 	if RadarManager.instance.is_selected(self):

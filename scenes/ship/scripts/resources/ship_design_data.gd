@@ -14,4 +14,9 @@ extends Resource
 @export_category("Shape and thrusters")
 @export var polygon: PackedVector2Array
 @export var thrusters: Array[PointResource]
-@export var weapon_slots: Array[PointResource] 
+@export var main_weapon_points: Array[PointResource]
+@export var secondary_weapon_points: Array[PointResource]
+
+@export_category("Weapons & Modules")
+@export var main_weapon: WeaponRes
+@export var secondary_weapon: WeaponRes

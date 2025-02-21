@@ -1,7 +1,6 @@
 class_name Bullet
 extends KineticBody
 
-@export var group: String
 @export var hit_effect_scene: PackedScene
 @export var color: Color
 @export var effective_lifetime: float = 1.0
@@ -67,8 +66,7 @@ func _collide(force: bool = false) -> void:
 func _on_hit(target: TakingDamage) -> void:
 	if not target is TakingDamage: return
 	target = target as TakingDamage
-	if target.parent == origin: return
-	#if target.check_group(group): return
+	if is_instance_valid(origin) and target.parent == origin: return
 	var hit_effect := hit_effect_scene.instantiate() as BulletHitEffect
 	hit_effect.color = color
 	target.damage(_create_damage(), hit_effect)
