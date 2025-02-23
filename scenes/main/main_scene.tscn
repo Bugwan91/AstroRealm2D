@@ -135,6 +135,7 @@ script = ExtResource("12_c6lr5")
 
 [node name="Background" parent="." instance=ExtResource("1_b53p2")]
 unique_name_in_owner = true
+position = Vector2(23, 22)
 
 [node name="AutopilotPointer" parent="." instance=ExtResource("15_5xucn")]
 unique_name_in_owner = true
@@ -142,30 +143,30 @@ in_range_color = Color(0, 0, 1, 0.78)
 out_range_color = Color(0, 0, 0.486275, 0.784314)
 
 [node name="DirectionalLight2" type="DirectionalLight2D" parent="."]
-position = Vector2(-620, -265)
-rotation = -0.765024
+position = Vector2(-656, 430)
+rotation = -2.42775
 color = Color(0.439216, 1, 0.65098, 1)
-energy = 0.5
-height = 0.05
+energy = 0.7
+height = 0.1
 
 [node name="DirectionalLight" type="DirectionalLight2D" parent="."]
-position = Vector2(-615, -261)
-rotation = 0.63411
+position = Vector2(-656, 446)
+rotation = -1.89368
 color = Color(3.08037e-06, 0.650897, 0.786304, 1)
-energy = 1.2
-height = 0.3
+height = 0.2
 
 [node name="DirectionalLight3" type="DirectionalLight2D" parent="."]
-visible = false
-position = Vector2(-619, -257)
+position = Vector2(-656, 459)
+rotation = -1.6057
 color = Color(0.963877, 0.649097, 0, 1)
-energy = 0.5
-height = 0.6
+energy = 0.7
+height = 0.37
 
 [node name="DirectionalLight4" type="DirectionalLight2D" parent="."]
-position = Vector2(-628, -264)
+position = Vector2(-656, 469)
+rotation = 0.876155
 color = Color(1, 0.313726, 0, 1)
-height = 0.6
+height = 0.65
 
 [node name="Grid" parent="." instance=ExtResource("4_aip35")]
 light_mask = 0
@@ -698,8 +699,8 @@ config = ExtResource("26_b0s70")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("28_n0sfc")
-position = Vector2(-550, 470)
-rotation = 0.254243
+position = Vector2(-545, 469)
+rotation = 0.0709523
 scale = Vector2(0.25, 0.25)
 texture = SubResource("CanvasTexture_sls11")
 

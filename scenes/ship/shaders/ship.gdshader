@@ -38,15 +38,15 @@ vec3 compute_specular(vec3 L, vec3 N, vec3 B_color, vec3 L_color, float Spec, fl
 	vec3 R = (reflect(-L, N)); // vector of reflected light
 	float RdotV = clamp(dot(R, V), 1e-4, 1.);
 	float S = Spec * Spec;
-	float SM = (S + 0.2 * Met) * (S + Met);
+	float SM = (S + 0.1 * Met);
 	float intens = (
-		16. * SM * pow(RdotV, 1. + 64. * S)
+		+ 16. * SM * pow(RdotV, 1. + 64. * S)
 		+ 0.2 * SM * pow(RdotV, 1. + 4. * S)
 		+ 0.1 * SM * pow(RdotV, 1. + S)
 		+ 0.02 * SM * pow(RdotV, 0.5)
-		) * 2. * SM;
+		) * 2. * SM * (1. + 4. * Met);
 	float fresnel = 0.5 * (1.0 - pow(1.0 - dot(N, V), 0.1)) * Met * (2. - S);
-	return mix(vec3(0.5), B_color, Met) * L_color * (intens + fresnel);
+	return mix(vec3(0.5), B_color, Met) * L_color * (fresnel + intens);
 }
 
 void light() {
