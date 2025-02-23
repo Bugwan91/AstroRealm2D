@@ -13,7 +13,7 @@ global uniform sampler2D temperature_texture : filter_nearest, hint_default_blac
 vec3 compute_heat(float ht_val) {
 	if (ht_val > 0.0) {
 		vec4 ht_color = texture(temperature_texture, vec2(ht_val));
-		return 8.0 * ht_color.a * ht_val * ht_val * ht_color.rgb;
+		return 16.0 * ht_color.a * ht_val * ht_val * ht_color.rgb;
 	}
 	return vec3(0.0);
 }
