@@ -1,0 +1,9 @@
+[gd_resource type="CanvasTexture" load_steps=3 format=3 uid="uid://ch8a84augi1ur"]
+
+[ext_resource type="Texture2D" uid="uid://daujxgm7q05ct" path="res://assets/asteroids/03/_base.png" id="1_dt58a"]
+[ext_resource type="Texture2D" uid="uid://dmv1wa6gjsseh" path="res://assets/asteroids/03/n_05.png" id="2_dt58a"]
+
+[resource]
+diffuse_texture = ExtResource("1_dt58a")
+normal_texture = ExtResource("2_dt58a")
+specular_color = Color(0.1812, 0.1812, 0.1812, 1)

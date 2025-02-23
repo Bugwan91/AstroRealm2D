@@ -1,25 +1,25 @@
-[gd_scene load_steps=22 format=3 uid="uid://c48f2sdpasbwy"]
+[gd_scene load_steps=19 format=3 uid="uid://c48f2sdpasbwy"]
 
 [ext_resource type="Script" uid="uid://cousmnn4iqib7" path="res://scenes/asteroids/scripts/asteroid.gd" id="1_vucqq"]
 [ext_resource type="Script" uid="uid://ce7t5qymrq553" path="res://scenes/_shared/scripts/taking_damage.gd" id="2_i3arg"]
+[ext_resource type="Texture2D" uid="uid://etxspprl4s1i" path="res://resources/asteroids/asteroid_31.tres" id="3_0wnxl"]
 [ext_resource type="Script" uid="uid://clrdqrh8dbwau" path="res://scenes/_shared/scripts/health.gd" id="3_6cbl0"]
-[ext_resource type="Texture2D" uid="uid://b0wtgcdy54unw" path="res://resources/asteroids/asteroid10.tres" id="3_8vt2t"]
-[ext_resource type="Texture2D" uid="uid://vp3omvdokq06" path="res://resources/asteroids/asteroid20.tres" id="4_0wnxl"]
 [ext_resource type="PackedScene" uid="uid://cxaoyw4qxcd0p" path="res://scenes/ship/damage_effect.tscn" id="4_6cbl0"]
-[ext_resource type="Texture2D" uid="uid://dlgsccwgvpbc0" path="res://resources/asteroids/asteroid30.tres" id="5_0wnxl"]
+[ext_resource type="Texture2D" uid="uid://b2j60h7xnyvha" path="res://resources/asteroids/asteroid_33.tres" id="4_bey2v"]
+[ext_resource type="Texture2D" uid="uid://cahxugr5huf7o" path="res://resources/asteroids/asteroid_32.tres" id="4_d48al"]
+[ext_resource type="Texture2D" uid="uid://dyafbw3oyyrpv" path="res://resources/asteroids/asteroid_34.tres" id="5_ihnjr"]
 [ext_resource type="PackedScene" uid="uid://dcy3g0684tgaa" path="res://scenes/ship/destroy_effect.tscn" id="5_yhpvr"]
-[ext_resource type="Texture2D" uid="uid://dxu6faqbeepkn" path="res://resources/asteroids/asteroid01.tres" id="6_l4sdg"]
+[ext_resource type="Texture2D" uid="uid://ch8a84augi1ur" path="res://resources/asteroids/asteroid_35.tres" id="6_eekj5"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="6_yhpvr"]
-[ext_resource type="Texture2D" uid="uid://cpfovyi2ew0n3" path="res://resources/asteroids/asteroid00.tres" id="7_0wnxl"]
-[ext_resource type="Texture2D" uid="uid://phllsaowvfrj" path="res://resources/asteroids/asteroid11.tres" id="7_g0deq"]
 [ext_resource type="Texture2D" uid="uid://brkdv7jwjlb07" path="res://assets/asteroids/asteroid_0_b.png" id="8_bey2v"]
-[ext_resource type="Texture2D" uid="uid://dp5pxxwnnt0qu" path="res://resources/asteroids/asteroid21.tres" id="8_vufhy"]
-[ext_resource type="Texture2D" uid="uid://cgea3l10flrym" path="res://resources/asteroids/asteroid31.tres" id="9_ma54s"]
-[ext_resource type="Texture2D" uid="uid://dp0ptoc0uybr1" path="res://resources/asteroids/asteroid_L.tres" id="10_g0deq"]
-[ext_resource type="Script" uid="uid://dd1et7iue8frp" path="res://scenes/_shared/scripts/static_rigid_body.gd" id="10_k3qgf"]
 [ext_resource type="Material" uid="uid://4gfbqiicvvx0" path="res://resources/asteroids/asteroid_mat.tres" id="12_l4sdg"]
+[ext_resource type="Texture2D" uid="uid://b4k55duxaxrqb" path="res://assets/asteroids/asteroid_0_n0.png" id="14_g0deq"]
 [ext_resource type="Script" uid="uid://de333ogw3s8dt" path="res://scenes/_shared/scripts/position_extrapolator.gd" id="17_l4sdg"]
 [ext_resource type="Resource" uid="uid://ci5yk7wngo6ue" path="res://resources/radar/asteroid.tres" id="18_l4sdg"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_vufhy"]
+diffuse_texture = ExtResource("8_bey2v")
+normal_texture = ExtResource("14_g0deq")
 
 [sub_resource type="Resource" id="Resource_xb7x4"]
 resource_local_to_scene = true
@@ -29,8 +29,8 @@ metadata/_custom_type_script = ExtResource("3_6cbl0")
 
 [node name="Asteroid" type="RigidBody2D"]
 script = ExtResource("1_vucqq")
-variants = Array[CanvasTexture]([ExtResource("7_0wnxl"), ExtResource("3_8vt2t"), ExtResource("4_0wnxl"), ExtResource("5_0wnxl"), ExtResource("6_l4sdg"), ExtResource("7_g0deq"), ExtResource("8_vufhy"), ExtResource("9_ma54s"), ExtResource("10_g0deq")])
-metadata/_custom_type_script = ExtResource("10_k3qgf")
+variants = Array[CanvasTexture]([ExtResource("3_0wnxl"), ExtResource("4_d48al"), ExtResource("4_bey2v"), ExtResource("5_ihnjr"), ExtResource("6_eekj5")])
+metadata/_custom_type_script = "uid://dd1et7iue8frp"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
@@ -38,12 +38,13 @@ debug_color = Color(0, 0.6, 0.701961, 0.180392)
 
 [node name="PositionExtrapolator" type="Node2D" parent="."]
 script = ExtResource("17_l4sdg")
-metadata/_custom_type_script = ExtResource("17_l4sdg")
+metadata/_custom_type_script = "uid://de333ogw3s8dt"
 
 [node name="View" type="Sprite2D" parent="PositionExtrapolator"]
 unique_name_in_owner = true
 material = ExtResource("12_l4sdg")
-texture = ExtResource("8_bey2v")
+scale = Vector2(0.125, 0.125)
+texture = SubResource("CanvasTexture_vufhy")
 
 [node name="TakingDamage" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -55,7 +56,7 @@ health = SubResource("Resource_xb7x4")
 keep_on_destroy = true
 _damaged_effect_scene = ExtResource("4_6cbl0")
 _destroy_effect_scene = ExtResource("5_yhpvr")
-metadata/_custom_type_script = ExtResource("2_i3arg")
+metadata/_custom_type_script = "uid://ce7t5qymrq553"
 
 [node name="DamageCollisionShape2D" type="CollisionShape2D" parent="TakingDamage"]
 unique_name_in_owner = true

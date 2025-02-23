@@ -13,7 +13,7 @@ extends StaticRigidBody
 @onready var _taking_damage: TakingDamage = %TakingDamage
 @onready var _radar: RadarItem = %RadarItem
 
-var _base_radius := 64.0
+var _base_radius := 60.0
 
 var is_in_world := false
 
@@ -39,7 +39,7 @@ func init(
 		radius = _size * _base_radius
 		_collider.shape.radius = radius
 		_damage_collider.shape.radius = radius
-		_view.scale = Vector2(_size, _size)
+		_view.scale = Vector2(_size, _size) * 0.25
 		_taking_damage.setup_health(health * _size)
 		_radar.init_shape(radius)
 		_radar.icon.setup_scale(_size)

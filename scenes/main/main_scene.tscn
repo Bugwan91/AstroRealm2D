@@ -34,7 +34,7 @@
 [sub_resource type="Resource" id="Resource_d3v0f"]
 script = ExtResource("10_1xx6e")
 _asteroid_scene = ExtResource("9_j7r4u")
-density = 0.05
+density = 0.2
 size_variation = 0.5
 speed_variation = 0.5
 speed = 400
@@ -110,17 +110,18 @@ environment = ExtResource("4_h5iwh")
 
 [node name="RadarManager" type="Node" parent="."]
 script = ExtResource("13_sunwe")
-metadata/_custom_type_script = ExtResource("13_sunwe")
+metadata/_custom_type_script = "uid://bgkivbjnetils"
 
 [node name="WorldGridManager" type="Node" parent="." node_paths=PackedStringArray("world_root")]
 script = ExtResource("8_j7r4u")
 world_root = NodePath("../World")
 content_managers = Array[ExtResource("9_sunwe")]([SubResource("Resource_d3v0f")])
-metadata/_custom_type_script = ExtResource("8_j7r4u")
+metadata/_custom_type_script = "uid://bwxea4j42jmor"
 
 [node name="PlayerManager" parent="." instance=ExtResource("6_3co8r")]
 ship_flight_model = ExtResource("2_3s1kf")
 ship_blueprint = SubResource("Resource_k3hja")
+metadata/_custom_type_script = "uid://odckrdvfju5b"
 
 [node name="UI" parent="." instance=ExtResource("8_myah8")]
 
@@ -707,4 +708,4 @@ unique_name_in_owner = true
 
 [node name="LevelLoader" type="Node" parent="."]
 script = ExtResource("27_d3v0f")
-metadata/_custom_type_script = ExtResource("27_d3v0f")
+metadata/_custom_type_script = "uid://c63eir7evomhx"
