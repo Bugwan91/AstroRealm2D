@@ -12,10 +12,8 @@ extends ActiveRigidBody
 
 #region Onready propeties
 @onready var flight_controller: FlightController = %FlightController
-
 @onready var taking_damage: TakingDamage = %TakingDamage
 @onready var heat: Heat = %Heat
-
 @onready var _view: ShipView = %View
 @onready var _main_weapon_slot: WeaponSlot = %MainWeaponSlot
 @onready var _radar_item: RadarItem = %RadarItem

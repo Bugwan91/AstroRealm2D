@@ -74,10 +74,7 @@ func _connect_root(node: Node2D) -> void:
 func _new_item_added(node: Node2D) -> void:
 	var grid_item := GridItem.new()
 	grid_item.body = node
-	grid_item.order = _get_order()
-	node.tree_exiting.connect(func() -> void:
-		remove(grid_item)
-	)
+	grid_item.order = generate_item_process_order()
 	node.add_child(grid_item)
 
 func add_or_update(item: GridItem, force: bool = false) -> Vector2:
@@ -113,21 +110,22 @@ func remove(item: GridItem) -> void:
 	if item in _freezed_items[item.order]:
 		_freezed_items[item.order].erase(item)
 
-func get_nearby(position: Vector2, offset: int = 4) -> Array[Node2D]:
+func get_nearby(position: Vector2, offset: int = 2, v: Vector2 = Vector2.ZERO) -> Array[Node2D]:
 	var cell := _get_cell_position(position)
+	var cell_v := _get_cell_position(v)
 	var nearby_items: Array[Node2D] = []
-	for x_offset in range(1-offset, 1+offset):
-		for y_offset in range(1-offset, 1+offset):
+	for x_offset in range(min(-offset, cell_v.x), max(offset, cell_v.x) + 1):
+		for y_offset in range(min(-offset, cell_v.y), max(offset, cell_v.y) + 1):
 			var neighbor_cell := cell + Vector2(x_offset, y_offset)
 			if neighbor_cell in cells and not cells[neighbor_cell].is_empty():
 				for item in cells[neighbor_cell] as Array[GridItem]:
 					nearby_items.append(item.body)
 	return nearby_items
 
-func get_nearest(position: Vector2, offset: int = 2) -> Node2D:
+func get_nearest(position: Vector2, offset: int = 1, v: Vector2 = Vector2.ZERO) -> Node2D:
 	var nearest: Node2D = null
 	var distance := INF
-	for item in get_nearby(position, offset):
+	for item in get_nearby(position, offset, v):
 		var d := (item.global_position - position).length_squared()
 		if d < distance:
 			distance = d
@@ -142,6 +140,9 @@ func get_items_in_cells(request_cells: Array[Vector2]) -> Array[Node2D]:
 				if is_instance_valid(item):
 					result.append(item.body)
 	return result
+
+func generate_item_process_order() -> int:
+	return randi_range(0, int(Engine.physics_ticks_per_second * FREEZE_DELTA - 1))
 
 func _grid_items_to_node(items: Array[GridItem]) -> Array[Node2D]:
 	var result: Array[Node2D] = []
@@ -161,9 +162,6 @@ func _update_viewport_rect() -> void:
 	var size := _viewport.get_visible_rect().size / MainState.camera_controller.zoom_min + _viewport_margin
 	var pos := center - 0.5 * size
 	_viewport_rect = Rect2(pos, size)
-
-func _get_order() -> int:
-	return randi_range(0, int(Engine.physics_ticks_per_second * FREEZE_DELTA - 1))
 
 func _init_freezed_dictionary() -> void:
 	_max_freeze_ticks = floori(Engine.physics_ticks_per_second * FREEZE_DELTA)

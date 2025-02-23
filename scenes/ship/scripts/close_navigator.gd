@@ -29,7 +29,7 @@ func update_course(delta: float, position: Vector2, velocity: Vector2) -> Vector
 	return _course
 
 func _update_avoidance_course() -> void:
-	var items := WorldGridManager.instance.grid.get_nearby(_position)
+	var items := WorldGridManager.instance.grid.get_nearby(_position, 2., _velocity)
 	var t_min := MAX_TIME_TO_APPROACH
 	_course = Vector2.ZERO
 	for item in items:

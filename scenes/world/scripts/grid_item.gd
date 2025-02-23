@@ -12,12 +12,14 @@ var freeze: bool: set = _set_freeze
 
 func _ready() -> void:
 	process_physics_priority = 100
+	#order = WorldGridManager.instance.grid.get_order()
 	body = get_parent()
 	if body is StaticRigidBody:
 		body._init_velocity_hack()
 	if body is StaticRigidBody or body is KineticBody:
 		freeze = body.freeze
 	_update_grid(true)
+	tree_exiting.connect(_remove_from_grid)
 
 func _physics_process(_delta: float) -> void:
 	_update_grid()
@@ -25,7 +27,6 @@ func _physics_process(_delta: float) -> void:
 func freeze_process(delta: float) -> void:
 	if not freeze: return
 	if body is KineticBody:
-		#body._process(delta)
 		body.freeze_process(delta)
 	if body is StaticRigidBody:
 		body.freeze_process(delta)
@@ -33,6 +34,9 @@ func freeze_process(delta: float) -> void:
 
 func _update_grid(force: bool = false) -> void:
 	cell = WorldGridManager.instance.grid.add_or_update(self, force)
+
+func _remove_from_grid():
+	WorldGridManager.instance.grid.remove(self)
 
 func _set_freeze(value: bool) -> void:
 	if freeze == value: return

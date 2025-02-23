@@ -22,7 +22,7 @@ var input_reader: ShipInput:
 			inputs = input_reader.data
 var inputs: ShipInputData
 
-var _closee_navigator: CloseNavigator
+@onready var _closee_navigator: CloseNavigator = %CloseNavigator
 
 var _dodging := false:
 	set(value):
@@ -33,7 +33,6 @@ var _dodge_time := 0.0
 var _dodge_vector := Vector2(1.0, 0.0)
 
 func setup(spaceship: Spaceship) -> void:
-	_closee_navigator = %CloseNavigator
 	ship = spaceship
 	flight_model.init()
 
