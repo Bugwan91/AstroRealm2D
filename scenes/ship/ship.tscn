@@ -76,7 +76,7 @@ shape = SubResource("CapsuleShape2D_w2dh3")
 
 [node name="PositionExtrapolator" type="Node2D" parent="."]
 script = ExtResource("19_6qm8q")
-metadata/_custom_type_script = ExtResource("19_6qm8q")
+metadata/_custom_type_script = "uid://de333ogw3s8dt"
 
 [node name="MainWeaponSlot" type="Node2D" parent="PositionExtrapolator"]
 unique_name_in_owner = true
@@ -126,7 +126,7 @@ unique_name_in_owner = true
 script = ExtResource("14_xvsf7")
 disabled = true
 debug = true
-metadata/_custom_type_script = ExtResource("14_xvsf7")
+metadata/_custom_type_script = "uid://bp5341wcuo33e"
 
 [node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view", "health")]
 unique_name_in_owner = true
@@ -145,7 +145,7 @@ script = ExtResource("17_6qm8q")
 health = SubResource("Resource_sakv4")
 _damaged_effect_scene = ExtResource("18_sakv4")
 _destroy_effect_scene = ExtResource("19_3lg4r")
-metadata/_custom_type_script = ExtResource("17_6qm8q")
+metadata/_custom_type_script = "uid://ce7t5qymrq553"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TakingDamage"]
 position = Vector2(-6, 0)

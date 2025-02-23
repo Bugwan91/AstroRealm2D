@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 	if is_instance_valid(target) and is_instance_valid(pointer):
 		var to_target = get_intersection()
 		var dist := to_target.length()
-		if dist < weapon_resource.extra_range + weapon_resource.extra_range:
+		if dist < (weapon_resource.effective_range + weapon_resource.extra_range):
 			pointer.update(to_target, origin.extrapolator.canvas_position, to_target.length() < weapon_resource.effective_range)
 		else:
 			pointer.disable()
