@@ -34,6 +34,7 @@ var _dodge_vector := Vector2(1.0, 0.0)
 
 func setup(spaceship: Spaceship) -> void:
 	ship = spaceship
+	_closee_navigator.enabled = not ship.is_player()
 	flight_model.init()
 
 func integrate_forces(state: PhysicsDirectBodyState2D) -> void:

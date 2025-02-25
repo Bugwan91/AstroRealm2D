@@ -1,8 +1,12 @@
 class_name ShipBlueprintBaker
 extends Control
+
+static var instance: ShipBlueprintBaker
+
 # HACK: Render viewports only on demand
 signal updated(design: ShipDesignData)
 
+@export var unique := true
 @export var bake_on_updates := false
 @export var blueprint: ShipBlueprint: set = _set_blueprint
 @export var debug_visible := false:
@@ -22,6 +26,8 @@ var design: ShipDesignData = ShipDesignData.new()
 var _is_baking := false
 
 func _ready() -> void:
+	if unique:
+		ShipBlueprintBaker.instance = self
 	blueprint = ShipBlueprint.new()
 	visible = debug_visible
 
@@ -71,6 +77,10 @@ func bake() -> ShipDesignData:
 	updated.emit(design)
 	_is_baking = false
 	return design
+
+func bake_from_blueprint(_blueprint: ShipBlueprint) -> ShipDesignData:
+	blueprint = _blueprint
+	return await bake()
 
 func _bake_polygon() -> void:
 	polygon.bake()

@@ -39,6 +39,7 @@ script = ExtResource("10_1b5nu")
 parent = ExtResource("8_lkmky")
 weapon_slots = SubResource("Resource_aj45n")
 mass = 1.0
+hp = 1000
 type = 0
 allowed_ext = Array[ExtResource("1_incvi")]([ExtResource("1_aff3o"), ExtResource("2_wjp4q"), null])
 diffuse = ExtResource("3_0o4ko")

@@ -35,3 +35,5 @@ enum Type { HULL, HULL_EXT, STYLE }
 @export var secondary_weapon: WeaponRes
 
 @export var radar_item_config: RadarItemConfig
+
+@export_range(0, 1000000) var health: int = 1000

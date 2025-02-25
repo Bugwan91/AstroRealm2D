@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=50 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" uid="uid://dn170a8jtfbql" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -22,13 +22,19 @@
 [ext_resource type="Script" uid="uid://bgkivbjnetils" path="res://scenes/radar/scripts/radar_manager.gd" id="13_sunwe"]
 [ext_resource type="Resource" uid="uid://caqqbuwbg5ovc" path="res://resources/radar/ship.tres" id="14_k3hja"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/_shared/pointer.tscn" id="15_5xucn"]
+[ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="16_o7m8d"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="22_yvbma"]
 [ext_resource type="Resource" uid="uid://b1q7bv30m17g" path="res://resources/radar/star.tres" id="25_n0sfc"]
 [ext_resource type="Resource" uid="uid://bdbghva0843vk" path="res://resources/radar/red_dot.tres" id="26_b0s70"]
 [ext_resource type="Script" uid="uid://c63eir7evomhx" path="res://scenes/world/scripts/level_loader.gd" id="27_d3v0f"]
 [ext_resource type="Material" uid="uid://4cr00esf8aq7" path="res://resources/ships/ship_mat.tres" id="28_n0sfc"]
 [ext_resource type="Texture2D" uid="uid://der26cev2v2bv" path="res://assets/spaceships/hull/04/_base.png" id="29_b0s70"]
+[ext_resource type="PackedScene" uid="uid://ce1dw618jykrb" path="res://scenes/ship/ship.tscn" id="30_b0s70"]
 [ext_resource type="Texture2D" uid="uid://tfkbd0y3825m" path="res://assets/spaceships/hull/04/_base_n.png" id="30_o7m8d"]
+[ext_resource type="Resource" uid="uid://do8eu456ikffk" path="res://resources/radar/ship_red.tres" id="32_gkufm"]
+[ext_resource type="Script" uid="uid://c17wwx222aeii" path="res://scenes/ship/scripts/resources/ship_data.gd" id="32_sls11"]
+[ext_resource type="Texture2D" uid="uid://d4k0glhpkgm68" path="res://assets/spaceships/Styles/pirate_red.png" id="33_uwdjs"]
+[ext_resource type="Script" uid="uid://bn3wtodsbhv53" path="res://scenes/ai/scripts/new_ship_ai_dummy.gd" id="35_uwdjs"]
 [ext_resource type="PackedScene" uid="uid://cmqm4dm8rpi0l" path="res://scenes/background/sun.tscn" id="46_aihwc"]
 
 [sub_resource type="Resource" id="Resource_d3v0f"]
@@ -51,6 +57,7 @@ shininess = 0.769
 metallic = 1.0
 main_weapon = ExtResource("12_n0sfc")
 radar_item_config = ExtResource("14_k3hja")
+health = 1000
 metadata/_custom_type_script = ExtResource("11_fkpwp")
 
 [sub_resource type="Gradient" id="Gradient_2be3f"]
@@ -98,6 +105,25 @@ fill_from = Vector2(0.470085, 0.440171)
 diffuse_texture = ExtResource("29_b0s70")
 normal_texture = ExtResource("30_o7m8d")
 
+[sub_resource type="Resource" id="Resource_1fxwg"]
+script = ExtResource("11_fkpwp")
+hull = ExtResource("10_n0sfc")
+hull_ext = ExtResource("11_b0s70")
+style = ExtResource("33_uwdjs")
+shininess = 0.506
+metallic = 1.0
+main_weapon = ExtResource("12_n0sfc")
+radar_item_config = ExtResource("32_gkufm")
+health = 10000
+metadata/_custom_type_script = "uid://bnl3gx1nvuvom"
+
+[sub_resource type="Resource" id="Resource_ab3l1"]
+script = ExtResource("32_sls11")
+flight_model = ExtResource("2_3s1kf")
+blueprint = SubResource("Resource_1fxwg")
+radar_item = ExtResource("32_gkufm")
+metadata/_custom_type_script = "uid://c17wwx222aeii"
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2ehlx")
 metadata/_edit_lock_ = true
@@ -121,7 +147,9 @@ metadata/_custom_type_script = "uid://bwxea4j42jmor"
 [node name="PlayerManager" parent="." instance=ExtResource("6_3co8r")]
 ship_flight_model = ExtResource("2_3s1kf")
 ship_blueprint = SubResource("Resource_k3hja")
-metadata/_custom_type_script = "uid://odckrdvfju5b"
+
+[node name="ShipBaker" parent="." instance=ExtResource("16_o7m8d")]
+unique = false
 
 [node name="UI" parent="." instance=ExtResource("8_myah8")]
 
@@ -706,6 +734,15 @@ texture = SubResource("CanvasTexture_sls11")
 
 [node name="World" type="Node2D" parent="."]
 unique_name_in_owner = true
+
+[node name="Ship" parent="World" node_paths=PackedStringArray("input_reader") instance=ExtResource("30_b0s70")]
+position = Vector2(-530, -443)
+rotation = -0.56197
+data = SubResource("Resource_ab3l1")
+input_reader = NodePath("NPCShipInput")
+
+[node name="NPCShipInput" type="Node2D" parent="World/Ship"]
+script = ExtResource("35_uwdjs")
 
 [node name="LevelLoader" type="Node" parent="."]
 script = ExtResource("27_d3v0f")

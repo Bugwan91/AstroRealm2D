@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_w8j8h")
 texture = ExtResource("2_jyf3e")
-color = Color(0.170095, 0.580643, 0.840954, 1)
+color = Color(0.993641, 0.00155202, 0.458618, 1)
 base_size = 12.0
 scale = 1.0
 aspect = 1.0

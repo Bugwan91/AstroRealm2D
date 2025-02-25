@@ -124,7 +124,6 @@ script = ExtResource("14_5nufi")
 [node name="CloseNavigator" type="Node" parent="FlightController"]
 unique_name_in_owner = true
 script = ExtResource("14_xvsf7")
-disabled = true
 debug = true
 metadata/_custom_type_script = "uid://bp5341wcuo33e"
 
@@ -154,3 +153,4 @@ shape = SubResource("CapsuleShape2D_w2dh3")
 
 [node name="RadarItem" parent="." instance=ExtResource("20_w3y8g")]
 unique_name_in_owner = true
+selectable = true

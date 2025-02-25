@@ -5,7 +5,7 @@ const DELTA := 0.1
 const MAX_TIME_TO_APPROACH := 3.0
 const DIST_MARGIN := 32.0
 
-@export var disabled := false
+@export var enabled := true
 @export var radius := 64.0
 @export var debug := false
 
@@ -16,7 +16,7 @@ var _velocity := Vector2.ZERO
 var _course := Vector2.ZERO
 
 func update_course(delta: float, position: Vector2, velocity: Vector2) -> Vector2:
-	if disabled:
+	if not enabled:
 		_course = Vector2.ZERO
 		return _course
 	_total_delta += delta

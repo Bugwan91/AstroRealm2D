@@ -40,6 +40,7 @@ script = ExtResource("8_7olti")
 thrusters = SubResource("Resource_fpffb")
 weapon_slots = SubResource("Resource_6muh1")
 mass = 1.0
+hp = null
 type = 0
 allowed_ext = Array[ExtResource("1_fh2te")]([])
 diffuse = ExtResource("2_7367i")

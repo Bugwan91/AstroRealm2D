@@ -25,14 +25,20 @@ var temperature: float = 0.0:
 		if is_instance_valid(view):
 			view.set_temperature(clampf(temperature, 0.0, 1.0))
 
+func init(_capacity: float, _cooling: float, _transfer: float = 0.0):
+	capacity = _capacity
+	cooling = _cooling
+	transfer_efficiency = _transfer
+	_heat = 0.0
+	_recalculate_values()
+
 func transfer(delta: float) -> float:
 	var transfer_heat := minf(_heat, transfer_efficiency * temperature * delta)
 	_heat -= transfer_heat
 	return transfer_heat
 
 func _ready() -> void:
-	_extra_heat_max = capacity * EXTRA_HEAT_MAX
-	_heat_max = capacity + _extra_heat_max
+	_recalculate_values()
 
 func is_max() -> bool:
 	return _extra_heat > 0.0
@@ -50,6 +56,10 @@ func _physics_process(delta: float) -> void:
 	_heat -= delta * _get_current_cooling()
 	if _extra_heat > 0.0:
 		_apply_overheat_damage(delta)
+
+func _recalculate_values():
+	_extra_heat_max = capacity * EXTRA_HEAT_MAX
+	_heat_max = capacity + _extra_heat_max
 
 func _get_current_cooling() -> float:
 	return cooling * (1.0 + temperature * temperature)

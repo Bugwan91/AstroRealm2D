@@ -29,12 +29,17 @@ func init(config: ShipData):
 	pass
 
 func _ready() -> void:
-	assert(data != null, "Ship Data is missed")
+	assert(data != null, "Ship Data is missing")
+	assert(data.blueprint != null, "Ship Blueprint is missing")
+	if data.design == null:
+		data.design = await ShipBlueprintBaker.instance.bake_from_blueprint(data.blueprint)
 	super._ready()
 	_setup_view()
 	_setup_radar_item()
 	_setup_flight_controller()
 	_setup_weapon()
+	_setup_health()
+	_setup_heat()
 	connect_inputs(input_reader)
 
 func _setup_flight_controller() -> void:
@@ -56,7 +61,7 @@ func connect_inputs(new_inputs: ShipInput) -> void:
 	_connect_flight_controller_inputs()
 
 func _connect_player_inputs() -> void:
-	if not _is_player(): return
+	if not is_player(): return
 	_radar_item.config.icon.color = Color(0.2, 0.8, 1.0)
 	WorldGridManager.instance.player = self
 
@@ -71,8 +76,15 @@ func _setup_view() -> void:
 	_view.setup_textures(data.design)
 	_view.scale = Vector2.ONE * data.design.view_scale
 
+func _setup_health() -> void:
+	taking_damage.setup_health(data.blueprint.health)
+
+func _setup_heat() -> void:
+	heat.init(data.blueprint.hull.heat_capacity, data.blueprint.hull.heat_radiation)
+
 func _setup_radar_item() -> void:
 	_radar_item.configure(data.radar_item)
+	_radar_item.selectable = not is_player()
 
 func _set_ship_data(new_data: ShipData) -> void:
 	if new_data == null: return
@@ -101,16 +113,13 @@ func _on_transfered_heat(transfered_heat: float) -> void:
 	heat.add_heat(transfered_heat)
 #endregion
 
-func _is_player() -> bool:
-	return input_reader is PlayerShipInput
-
 func _apply_impulces(state: PhysicsDirectBodyState2D) -> void:
 	if is_zero_approx(_impulces.x) and is_zero_approx(_impulces.y): return
 	state.apply_impulse(_impulces)
 	_impulces = Vector2.ZERO
 
-func setup_health(value: float) -> void:
-	taking_damage.setup_health(value)
+func is_player() -> bool:
+	return input_reader is PlayerShipInput
 
 func get_max_speed() -> float:
 	return data.flight_model.speed

@@ -16,8 +16,6 @@ var position: Vector2:
 
 static var instance: PlayerManager
 
-@onready var _ship_baker: ShipBlueprintBaker = %PlayerShipBaker
-
 var _input_reader: ShipInput
 
 func _ready() -> void:
@@ -45,8 +43,6 @@ func respawn_player_ship(_position: Vector2 = Vector2.ZERO) -> void:
 	new_ship.add_child(audio_listener)
 	audio_listener.make_current()
 	WorldGridManager.instance.world_root.add_child(new_ship)
-	# HACK: ideally this should works before _ready() call
-	new_ship.setup_health(1000.0)
 	ship = new_ship
 	ship.tree_exiting.connect(_on_ship_destroyed)
 
@@ -64,9 +60,7 @@ func _create_ship_configuration() -> ShipData:
 	var ship_data := ShipData.new()
 	ship_data.flight_model = ship_flight_model
 	ship_data.blueprint = ship_blueprint
-	_ship_baker.blueprint = ship_blueprint
-	_ship_baker.design = await _ship_baker.bake()
-	ship_data.design = _ship_baker.design
+	ship_data.design = await ShipBlueprintBaker.instance.bake_from_blueprint(ship_blueprint)
 	ship_data.radar_item = ship_blueprint.radar_item_config
 	return ship_data
 

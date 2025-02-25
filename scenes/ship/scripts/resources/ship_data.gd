@@ -2,8 +2,8 @@ class_name ShipData
 extends Resource
 
 @export var flight_model: ShipFlightModelData
-@export var design: ShipDesignData
 @export var blueprint: ShipBlueprint
+@export var design: ShipDesignData
 @export var radar_item: RadarItemConfig
 
 var _ship_scene: PackedScene = preload("res://scenes/ship/ship.tscn")

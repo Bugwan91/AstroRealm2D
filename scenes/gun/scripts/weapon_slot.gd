@@ -83,10 +83,12 @@ func get_intersection() -> Vector2:
 	if weapon_resource.is_beam:
 		return target.position - origin.position
 	else:
+		var a := (target as ActiveRigidBody).tick_acceleration * 30.0 if target is ActiveRigidBody else Vector2.ZERO
+		DebugDraw2d.line_vector(target.extrapolator.smooth_position, a)
 		return InterceptionCalculator.interception(
 			origin.extrapolator.smooth_position,
 			origin.linear_velocity,
 			target.extrapolator.smooth_position,
 			target.linear_velocity,
-			Vector2.ZERO,#target.tick_acceleration,
+			a,
 			weapon_resource.projectile_speed)

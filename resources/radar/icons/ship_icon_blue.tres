@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="RadarIconConfig" load_steps=3 format=3 uid="uid://bj7pgx3yofc57"]
+
+[ext_resource type="Script" uid="uid://c5xv8rqbdj611" path="res://scenes/radar/scripts/resources/radar_icon_config.gd" id="1_pjv6f"]
+[ext_resource type="Texture2D" uid="uid://c0g0c4k4h83o" path="res://assets/icons/ship_s.png" id="2_ohd2r"]
+
+[resource]
+script = ExtResource("1_pjv6f")
+texture = ExtResource("2_ohd2r")
+color = Color(3.46541e-06, 0.577612, 0.890718, 1)
+base_size = 12.0
+scale = 1.0
+aspect = 1.0
+dynamic_scale = false
+use_real_size = false
+free_rotation = true
+unique = false
+metadata/_custom_type_script = ExtResource("1_pjv6f")

@@ -14,3 +14,5 @@ signal parent_changed(parent: HullBakerResource)
 @export var weapon_slots: PointsArrayResource
 
 @export_range(0.001, 10000.0) var mass := 1.0
+
+@export_range(0, 10000) var hp: int = 1000

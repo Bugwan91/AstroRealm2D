@@ -17,6 +17,7 @@ data = PackedVector2Array(73, 5, 73, 32, 33, 50, -33, 50, -73, 32, -73, 5, -31, 
 script = ExtResource("8_spsui")
 parent = ExtResource("6_ani62")
 mass = 1.0
+hp = 1000
 type = 1
 allowed_ext = Array[ExtResource("1_dqdrc")]([])
 diffuse = ExtResource("2_gsa7h")

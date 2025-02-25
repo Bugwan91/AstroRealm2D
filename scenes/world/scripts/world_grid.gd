@@ -70,6 +70,8 @@ func _connect_root(node: Node2D) -> void:
 		root.child_entered_tree.disconnect(_new_item_added)
 	root = node
 	root.child_entered_tree.connect(_new_item_added)
+	for item in root.get_children():
+		_new_item_added(item)
 
 func _new_item_added(node: Node2D) -> void:
 	var grid_item := GridItem.new()

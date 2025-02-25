@@ -1,11 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cljygu2p3a4mm"]
+[gd_scene load_steps=2 format=3 uid="uid://cljygu2p3a4mm"]
 
 [ext_resource type="Script" uid="uid://odckrdvfju5b" path="res://scenes/player/scripts/player_manager.gd" id="1_ixenh"]
-[ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="2_mfv1e"]
 
 [node name="PlayerManager" type="Node"]
 script = ExtResource("1_ixenh")
-metadata/_custom_type_script = ExtResource("1_ixenh")
-
-[node name="PlayerShipBaker" parent="." instance=ExtResource("2_mfv1e")]
-unique_name_in_owner = true
+metadata/_custom_type_script = "uid://odckrdvfju5b"
