@@ -31,11 +31,11 @@ func _ready() -> void:
 	monitoring = false
 	collision_layer = 3
 
-func setup_health(value: float) -> void:
+func set_health(value: float):
 	health.max_health = value
 
-func setup_polygon(hp: Health, polygon_data: PackedVector2Array) -> void:
-	health = hp
+func setup_polygon(_hp: float, polygon_data: PackedVector2Array) -> void:
+	set_health(_hp)
 	var polygon := CollisionPolygon2D.new()
 	polygon.polygon = polygon_data
 	add_child(polygon)

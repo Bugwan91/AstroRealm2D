@@ -13,7 +13,7 @@
 
 [sub_resource type="Resource" id="Resource_vueic"]
 script = ExtResource("7_l08xe")
-data = PackedVector2Array(-10, -64, 0, 0, 20, -44, 34, 0, 35, 45, 26, 64, -26, 64, -35, 45, -34, 0, -20, -44)
+data = PackedVector2Array(10, -64, 20, -44, 34, 0, 35, 45, 26, 64, -26, 64, -35, 45, -34, 0, -20, -44, -10, -64)
 
 [sub_resource type="Resource" id="Resource_fpffb"]
 script = ExtResource("10_2smql")

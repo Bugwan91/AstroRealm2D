@@ -5,17 +5,17 @@
 [ext_resource type="Texture2D" uid="uid://1dp3atj3v0ck" path="res://assets/spaceships/hull/03/01_heat.png" id="3_profq"]
 [ext_resource type="Texture2D" uid="uid://b1xwsqj54pg43" path="res://assets/spaceships/hull/03/01_mask.png" id="4_yhbxg"]
 [ext_resource type="Texture2D" uid="uid://cvriqh1cpqjlw" path="res://assets/spaceships/hull/03/01_normal.png" id="5_irgu2"]
-[ext_resource type="Resource" uid="uid://c83n3ib0kufjx" path="res://resources/ship_parts/hull/01/hull.tres" id="6_ani62"]
+[ext_resource type="Resource" uid="uid://sk43gbibomwd" path="res://resources/ship_parts/hull/03/hull_new.tres" id="6_dqdrc"]
 [ext_resource type="Script" uid="uid://b6lilmuq78cd7" path="res://addons/vector2_array_resource_editor/vector2_array_resource.gd" id="7_ftds0"]
 [ext_resource type="Script" uid="uid://n101buc5ybpd" path="res://scenes/ship_designer/scripts/resources/hull_baker_resource.gd" id="8_spsui"]
 
 [sub_resource type="Resource" id="Resource_pw2v4"]
 script = ExtResource("7_ftds0")
-data = PackedVector2Array(73, 5, 73, 32, 33, 50, -33, 50, -73, 32, -73, 5, -31, -17, 32, -17)
+data = PackedVector2Array(49, 31, 49, 50, 35, 60, -35, 60, -49, 50, -49, 31, -20, -27, 20, -27)
 
 [resource]
 script = ExtResource("8_spsui")
-parent = ExtResource("6_ani62")
+parent = ExtResource("6_dqdrc")
 mass = 1.0
 hp = 1000
 type = 1

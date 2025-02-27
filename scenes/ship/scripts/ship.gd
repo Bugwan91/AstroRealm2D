@@ -8,6 +8,7 @@ extends ActiveRigidBody
 
 @export var autopilot_pointer: AssistantPointer
 @export var target_prediction_pointer: AssistantPointer
+@export var blackboard_plan: BlackboardPlan
 #endregion
 
 #region Onready propeties
@@ -17,7 +18,10 @@ extends ActiveRigidBody
 @onready var _view: ShipView = %View
 @onready var _main_weapon_slot: WeaponSlot = %MainWeaponSlot
 @onready var _radar_item: RadarItem = %RadarItem
+@onready var _collision_polygon: CollisionPolygon2D = %CollisionPolygon2D
 #endregion
+
+var blackboard: Blackboard
 
 #region Private properties
 var _impulces := Vector2.ZERO
@@ -34,6 +38,7 @@ func _ready() -> void:
 	if data.design == null:
 		data.design = await ShipBlueprintBaker.instance.bake_from_blueprint(data.blueprint)
 	super._ready()
+	_setup_collider()
 	_setup_view()
 	_setup_radar_item()
 	_setup_flight_controller()
@@ -41,6 +46,23 @@ func _ready() -> void:
 	_setup_health()
 	_setup_heat()
 	connect_inputs(input_reader)
+	init_blackboard()
+
+func init_blackboard():
+	blackboard = blackboard_plan.create_blackboard(self)
+	blackboard.bind_var_to_property(&"mass", data.flight_model, &"mass", true)
+	blackboard.bind_var_to_property(&"inertia", data.flight_model, &"inertia", true)
+	blackboard.bind_var_to_property(&"speed", data.flight_model, &"speed", true)
+	blackboard.bind_var_to_property(&"boost", data.flight_model, &"boost", true)
+	blackboard.bind_var_to_property(&"strafe", data.flight_model, &"strafe", true)
+	blackboard.bind_var_to_property(&"dodge", data.flight_model, &"dodge", true)
+	blackboard.bind_var_to_property(&"turn", data.flight_model, &"turn", true)
+	blackboard.bind_var_to_property(&"heat_max", heat, &"capacity", true)
+	blackboard.bind_var_to_property(&"heat_cooling", heat, &"cooling", true)
+	blackboard.bind_var_to_property(&"heat", heat, &"_heat", true)
+	blackboard.bind_var_to_property(&"hp_max", taking_damage.health, &"max_health", true)
+	blackboard.bind_var_to_property(&"hp", taking_damage.health, &"health", true)
+	print(blackboard.get_vars_as_dict())
 
 func _setup_flight_controller() -> void:
 	flight_controller.setup(self)
@@ -51,6 +73,9 @@ func _setup_weapon() -> void:
 	_main_weapon_slot.set_weapon(data.design.main_weapon)
 	_main_weapon_slot.heat_generated.connect(_on_transfered_heat)
 	_main_weapon_slot.recoil.connect(_on_weapon_shoot)
+
+func _setup_collider() -> void:
+	_collision_polygon.polygon = data.design.polygon
 
 func connect_inputs(new_inputs: ShipInput) -> void:
 	input_reader = new_inputs
@@ -77,7 +102,8 @@ func _setup_view() -> void:
 	_view.scale = Vector2.ONE * data.design.view_scale
 
 func _setup_health() -> void:
-	taking_damage.setup_health(data.blueprint.health)
+	taking_damage.setup_polygon(data.blueprint.health, data.design.polygon)
+	#taking_damage.setup_health(data.blueprint.health)
 
 func _setup_heat() -> void:
 	heat.init(data.blueprint.hull.heat_capacity, data.blueprint.hull.heat_radiation)

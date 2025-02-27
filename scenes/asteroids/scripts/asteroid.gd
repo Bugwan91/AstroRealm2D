@@ -40,7 +40,7 @@ func init(
 		_collider.shape.radius = radius
 		_damage_collider.shape.radius = radius
 		_view.scale = Vector2(_size, _size) * 0.25
-		_taking_damage.setup_health(health * _size)
+		_taking_damage.set_health(health * _size)
 		_radar.init_shape(radius)
 		_radar.icon.setup_scale(_size)
 		var size_inv := 1.0 / _size

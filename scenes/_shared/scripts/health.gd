@@ -12,6 +12,7 @@ signal dying
 
 var health: float
 
+# FIXME: This is not what it should be
 var hp: float:
 	get: return health / max_health
 

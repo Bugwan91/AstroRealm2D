@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2ih5uxk3qw0h" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
+[ext_resource type="BlackboardPlan" uid="uid://1k0otpmc70i" path="res://scenes/ai/BTs/blackboards/ship.tres" id="3_2xkf5"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/_shared/pointer.tscn" id="5_3lg4r"]
 [ext_resource type="Shader" uid="uid://balef3jw7dwu" path="res://scenes/ship/shaders/ship.gdshader" id="5_sakv4"]
 [ext_resource type="Material" uid="uid://4cr00esf8aq7" path="res://resources/ships/ship_mat.tres" id="5_woufe"]
@@ -23,10 +24,6 @@
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="20_w3y8g"]
 [ext_resource type="Texture2D" uid="uid://t4p237ht1kcg" path="res://assets/spaceships/hull/02/_interrior.png" id="23_0616w"]
 [ext_resource type="Texture2D" uid="uid://brgjtbampllsy" path="res://assets/spaceships/hull/02/_interrior_n.png" id="24_xvqm4"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w2dh3"]
-radius = 42.0
-height = 128.31
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0616w"]
 load_path = "res://.godot/imported/mask.png-6839ac794479610a9e23b6ca41d09cee.ctex"
@@ -67,12 +64,12 @@ metadata/_custom_type_script = ExtResource("18_woufe")
 [node name="Ship" type="RigidBody2D"]
 script = ExtResource("1_5ckws")
 data = ExtResource("2_uwj24")
+blackboard_plan = ExtResource("3_2xkf5")
+metadata/_custom_type_script = "uid://b2ih5uxk3qw0h"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-6, 0)
-rotation = -1.5708
-shape = SubResource("CapsuleShape2D_w2dh3")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+unique_name_in_owner = true
+polygon = PackedVector2Array(16, -32, 64, -8, 64, 9, 16, 32, -51, 32, -64, 18, -64, -19, -51, -32)
 
 [node name="PositionExtrapolator" type="Node2D" parent="."]
 script = ExtResource("19_6qm8q")
@@ -138,18 +135,12 @@ health = NodePath("../TakingDamage")
 
 [node name="TakingDamage" type="Area2D" parent="."]
 unique_name_in_owner = true
-visible = false
 collision_layer = 4
 script = ExtResource("17_6qm8q")
 health = SubResource("Resource_sakv4")
 _damaged_effect_scene = ExtResource("18_sakv4")
 _destroy_effect_scene = ExtResource("19_3lg4r")
 metadata/_custom_type_script = "uid://ce7t5qymrq553"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TakingDamage"]
-position = Vector2(-6, 0)
-rotation = -1.5708
-shape = SubResource("CapsuleShape2D_w2dh3")
 
 [node name="RadarItem" parent="." instance=ExtResource("20_w3y8g")]
 unique_name_in_owner = true

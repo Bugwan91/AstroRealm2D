@@ -1,0 +1,15 @@
+[gd_resource type="BlackboardPlan" format=3 uid="uid://1k0otpmc70i"]
+
+[resource]
+var/position/name = &"position"
+var/position/type = 5
+var/position/value = Vector2(0, 0)
+var/position/hint = 0
+var/position/hint_string = ""
+var/linear_velocity/name = &"linear_velocity"
+var/linear_velocity/type = 5
+var/linear_velocity/value = Vector2(0, 0)
+var/linear_velocity/hint = 0
+var/linear_velocity/hint_string = ""
+binding/position = NodePath(".:position")
+binding/linear_velocity = NodePath(".:linear_velocity")

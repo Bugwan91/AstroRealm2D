@@ -28,6 +28,7 @@ func _update_editor():
 		_reset()
 		return
 	view.scale = Vector2.ONE * res.scale
+	hull_placceholder.scale = view.scale
 	view.texture = res.diffuse
 	hull_placceholder.texture = res.parent.diffuse if res.parent != null else null
 	view.position = -res.pivot_point

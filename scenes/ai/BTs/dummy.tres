@@ -1,0 +1,14 @@
+[gd_resource type="BehaviorTree" load_steps=3 format=3 uid="uid://pujrdebila3w"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_ay72j"]
+var/position/name = &"position"
+var/position/type = 5
+var/position/value = Vector2(0, 0)
+var/position/hint = 0
+var/position/hint_string = ""
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_umuaq"]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_ay72j")
+root_task = SubResource("BTDynamicSelector_umuaq")

@@ -2,7 +2,9 @@ class_name ShipPolygonBaker
 extends Node
 
 var _hull := PackedVector2Array()
+var _hull_pivot: Vector2
 var _hull_ext := PackedVector2Array()
+var _hull_ext_pivot: Vector2
 
 var _hull_thrusters: PointsArrayResource
 var _hull_ext_thrusters: PointsArrayResource
@@ -35,17 +37,20 @@ func update(type: ShipBlueprint.Type, data: ViewBakerResource) -> void:
 
 func _update_hull(hull: HullBakerResource) -> void:
 	if hull == null: return
-	_hull = hull.polygon.data
+	_hull_pivot = hull.pivot_point
+	_hull = _shift_polygon(hull.polygon.data, hull.pivot_point) 
 	_hull_thrusters = hull.thrusters
 	_main_weapons = hull.weapon_slots
 
 func _update_hull_ext(hull: HullBakerResource) -> void:
 	if hull == null:
 		_hull_ext = PackedVector2Array()
+		_hull_ext_pivot = Vector2.ZERO
 		_hull_ext_thrusters = null
 		_secondary_weapons = null
 	else:
-		_hull_ext = hull.polygon.data
+		_hull_ext_pivot = hull.pivot_point
+		_hull_ext = _shift_polygon(hull.polygon.data, hull.pivot_point)
 		_hull_ext_thrusters = hull.thrusters
 		_secondary_weapons = hull.weapon_slots
 
@@ -66,6 +71,10 @@ func _shift_polygon(_polygon: PackedVector2Array, shift: Vector2) -> PackedVecto
 	for point in _polygon:
 		points.append(point + shift)
 	return points
+
+# FIXME: Need to implement and use this as currently point positions are incorrect when pivot_point is not (0,0)
+#func _shift_points(points: PointsArrayResource, shift: Vector2) -> PointsArrayResource:
+	#pass
 
 func _rotate_polygon(_polygon: PackedVector2Array, rotation: float) -> PackedVector2Array:
 	var points := PackedVector2Array()

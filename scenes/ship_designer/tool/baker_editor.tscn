@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://tulgf6ok78fw"]
 
 [ext_resource type="Script" uid="uid://c7b4fg201mi0w" path="res://scenes/ship_designer/tool/hull_res_editor.gd" id="1_bjnxi"]
-[ext_resource type="Resource" uid="uid://c83n3ib0kufjx" path="res://resources/ship_parts/hull/01/hull.tres" id="2_xdrjn"]
-[ext_resource type="Texture2D" uid="uid://dsl72b3dwxid4" path="res://assets/spaceships/hull/01/_base.png" id="3_mp04o"]
+[ext_resource type="Resource" uid="uid://sk43gbibomwd" path="res://resources/ship_parts/hull/03/hull_new.tres" id="2_xdrjn"]
+[ext_resource type="Texture2D" uid="uid://bonsi01f6881w" path="res://assets/spaceships/hull/03/hull_new_base.png" id="3_mp04o"]
 [ext_resource type="Texture2D" uid="uid://csaa8hvq7uu2a" path="res://assets/spaceships/engine/placeholder.png" id="4_lgvaj"]
 [ext_resource type="Texture2D" uid="uid://b5uejhd6j04e5" path="res://assets/spaceships/weapons/01_base.png" id="5_5cuof"]
 
@@ -20,6 +20,7 @@ heat_gradient = SubResource("GradientTexture1D_bfkg3")
 
 [node name="ResourceView" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_mp04o")
 
 [node name="Placeholders" type="Node2D" parent="."]
@@ -28,6 +29,7 @@ modulate = Color(1, 1, 1, 0.325)
 [node name="hull_placceholder" type="Sprite2D" parent="Placeholders"]
 unique_name_in_owner = true
 modulate = Color(0.5, 0.7, 1, 1)
+scale = Vector2(0.25, 0.25)
 
 [node name="eng_0" type="Sprite2D" parent="Placeholders"]
 modulate = Color(1, 0.5, 0, 1)

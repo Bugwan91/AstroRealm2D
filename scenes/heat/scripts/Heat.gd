@@ -6,7 +6,7 @@ const OVERHEAT_DAMAGE := 50.0; # dmg/sec
 
 @export var capacity: float = 100.0 # heat
 @export var cooling: float = 10.0 # heat/sec
-@export var transfer_efficiency: = 10.0 # heat/sec
+@export var transfer_efficiency: float = 10.0 # heat/sec
 @export var view: BaseView
 @export var health: TakingDamage
 
