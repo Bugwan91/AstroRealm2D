@@ -2,6 +2,7 @@ class_name CameraController
 extends Camera2D
 
 signal zoomed(zoom: float)
+signal updated(position: Vector2, zoom: float)
 
 @export var zoom_min := 0.1
 @export var zoom_max := 2.0
@@ -44,8 +45,12 @@ func update(delta: float) -> Vector2:
 	var new_position := target.extrapolator.smooth_position + _required_look_position
 	shift = new_position - position
 	position = new_position
-	MainState.camera_shift = shift
+	MainState.camera_shift = shift # TODO: this looks not right
+	updated.emit(position, zoom.x)
 	return shift
+
+func get_view_rect_size() -> Vector2:
+	return get_viewport_rect().size / zoom.x
 
 func _init_zoom() -> void:
 	_zoom_min = Vector2(zoom_min, zoom_min)

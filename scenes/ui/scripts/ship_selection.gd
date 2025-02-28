@@ -21,13 +21,13 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not is_instance_valid(_selected_target): container.visible = false
 	if not container.visible: return
-	var viewport := Vector2(get_viewport().get_size()) * 0.5
-	var position := _selected_target.canvas_position - viewport
+	var vp_size: Vector2 = CameraController.instance.get_viewport_rect().size * 0.5
+	var position := _selected_target.canvas_position - vp_size
 	position = Vector2(
-		min(abs(position.x * min(abs(viewport.y / position.y), 1.0)), viewport.x) * sign(position.x),
-		min(abs(position.y * min(abs(viewport.x / position.x), 1.0)), viewport.y) * sign(position.y)
+		min(abs(position.x * min(abs(vp_size.y / position.y), 1.0)), vp_size.x) * sign(position.x),
+		min(abs(position.y * min(abs(vp_size.x / position.x), 1.0)), vp_size.y) * sign(position.y)
 	)
-	pivot.position = position + viewport
+	pivot.position = position + vp_size
 	_update_size()
 
 func _target_updated(target: RadarItem = null) -> void:

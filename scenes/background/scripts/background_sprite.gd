@@ -10,26 +10,31 @@ var distance: float:
 		distance = value
 		_d = distance * UV_SIZE
 
-
 var _vp_size: Vector2
+var _sp_size: Vector2
+var _zoom: float
 var _d: float
+var _position: Vector2
 
 func _ready() -> void:
 	if is_instance_valid(material):
 		var u_mat := material.duplicate()
 		material = u_mat
-	get_viewport().size_changed.connect(resize)
-	resize()
+	CameraController.instance.updated.connect(camera_updated)
+	camera_updated(Vector2.ZERO, 1.0)
 
-func shift(shift_vector: Vector2, zoom: Vector2) -> void:
+func camera_updated(pos: Vector2, zoom: float):
+	_vp_size = CameraController.instance.get_viewport_rect().size
+	_sp_size = _vp_size / zoom
+	_position = pos
+	_zoom = zoom
+	scale = _sp_size / texture.get_size()
+	position = Vector2.ZERO
+	shift()
+
+func shift() -> void:
 	if is_static: return
-	var z := zoom.x
 	var vp := _vp_size * UV_SIZE
-	var _s := (_d * z + 1) / (_d * z + z)
+	var _s := (_d * _zoom + 1.0) / (_d * _zoom + _zoom)
 	material.set("shader_parameter/vp", vp * _s)
-	material.set("shader_parameter/offset", shift_vector * UV_SIZE / (_d + 1.0))
-
-func resize() -> void:
-	_vp_size = Vector2(get_viewport().size)
-	scale = _vp_size / texture.get_size()
-	position = _vp_size * 0.5
+	material.set("shader_parameter/offset", _position * UV_SIZE / (_d + 1.0))

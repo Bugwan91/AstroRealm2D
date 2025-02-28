@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cxdkw4g14655c"]
+[gd_scene load_steps=59 format=3 uid="uid://cxdkw4g14655c"]
 
 [ext_resource type="Script" uid="uid://d3snixmvgwv1q" path="res://scenes/background/scripts/background_layer.gd" id="1_48uix"]
 [ext_resource type="Script" uid="uid://cn1j1corr1vun" path="res://scenes/background/scripts/background.gd" id="1_lpf5v"]
@@ -33,10 +33,6 @@
 [ext_resource type="Texture2D" uid="uid://cvf23phg02px4" path="res://assets/backgrounds/noise/0_mask.png" id="29_gghpb"]
 [ext_resource type="Texture2D" uid="uid://to71fwi1bmxl" path="res://assets/backgrounds/noise/0_shift.png" id="30_oem1p"]
 [ext_resource type="Texture2D" uid="uid://c0x2xkfvw2g2x" path="res://assets/backgrounds/0.tres" id="31_77rsq"]
-[ext_resource type="Environment" uid="uid://chl1sjnqh1sa7" path="res://scenes/main/main_environment.tres" id="34_geg3y"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_k3myr"]
-size = Vector2(8000, 8000)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_svw7u"]
 size = Vector2(10, 10)
@@ -177,34 +173,24 @@ shader_parameter/offset = Vector2(0, 0)
 [node name="Background" type="Node2D"]
 script = ExtResource("1_lpf5v")
 
-[node name="Layers" type="CanvasLayer" parent="."]
-unique_name_in_owner = true
-layer = -128
-
-[node name="Sprite2D" type="Sprite2D" parent="Layers"]
-modulate = Color(0, 0, 0, 1)
-z_index = -4096
-texture = SubResource("PlaceholderTexture2D_k3myr")
-
-[node name="4096" type="Node2D" parent="Layers"]
+[node name="4096" type="Node2D" parent="."]
 script = ExtResource("1_48uix")
 distance = 1.024e+06
 
-[node name="black" type="Sprite2D" parent="Layers/4096"]
-visible = false
+[node name="black" type="Sprite2D" parent="4096"]
 modulate = Color(0, 0, 0, 1)
 texture = SubResource("PlaceholderTexture2D_svw7u")
 script = ExtResource("3_u112l")
 is_static = true
 
-[node name="BackgroundSprite" type="Sprite2D" parent="Layers/4096"]
+[node name="BackgroundSprite" type="Sprite2D" parent="4096"]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_0cqxu")
 position = Vector2(0, 1)
 texture = ExtResource("7_bc73e")
 script = ExtResource("3_u112l")
 
-[node name="Stars0" type="Sprite2D" parent="Layers/4096"]
+[node name="Stars0" type="Sprite2D" parent="4096"]
 texture_filter = 4
 texture_repeat = 2
 material = SubResource("ShaderMaterial_vnm3e")
@@ -212,17 +198,17 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("8_4osm0")
 script = ExtResource("3_u112l")
 
-[node name="1024" type="Node2D" parent="Layers"]
+[node name="1024" type="Node2D" parent="."]
 script = ExtResource("1_48uix")
 distance = 512000.0
 
-[node name="BackgroundSprite2" type="Sprite2D" parent="Layers/1024"]
+[node name="BackgroundSprite2" type="Sprite2D" parent="1024"]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_022s5")
 texture = ExtResource("12_41078")
 script = ExtResource("3_u112l")
 
-[node name="Stars1" type="Sprite2D" parent="Layers/1024"]
+[node name="Stars1" type="Sprite2D" parent="1024"]
 texture_filter = 4
 texture_repeat = 2
 material = SubResource("ShaderMaterial_abxdr")
@@ -230,18 +216,18 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("10_hooou")
 script = ExtResource("3_u112l")
 
-[node name="256" type="Node2D" parent="Layers"]
+[node name="256" type="Node2D" parent="."]
 script = ExtResource("1_48uix")
 distance = 128000.0
 
-[node name="BackgroundSprite2" type="Sprite2D" parent="Layers/256"]
+[node name="BackgroundSprite2" type="Sprite2D" parent="256"]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_b54vu")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("16_q0cmu")
 script = ExtResource("3_u112l")
 
-[node name="Stars2" type="Sprite2D" parent="Layers/256"]
+[node name="Stars2" type="Sprite2D" parent="256"]
 texture_filter = 4
 texture_repeat = 2
 material = SubResource("ShaderMaterial_04u48")
@@ -249,22 +235,22 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("11_5yul3")
 script = ExtResource("3_u112l")
 
-[node name="Sun" parent="Layers/256" instance=ExtResource("18_hd5wb")]
+[node name="Sun" parent="256" instance=ExtResource("18_hd5wb")]
 visible = false
 position = Vector2(180, 178)
 scale = Vector2(0.2, 0.2)
 
-[node name="64" type="Node2D" parent="Layers"]
+[node name="64" type="Node2D" parent="."]
 script = ExtResource("1_48uix")
 distance = 32000.0
 
-[node name="BackgroundSprite2" type="Sprite2D" parent="Layers/64"]
+[node name="BackgroundSprite2" type="Sprite2D" parent="64"]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_lh6as")
 texture = ExtResource("20_ahac3")
 script = ExtResource("3_u112l")
 
-[node name="Stars3" type="Sprite2D" parent="Layers/64"]
+[node name="Stars3" type="Sprite2D" parent="64"]
 texture_filter = 4
 texture_repeat = 2
 material = SubResource("ShaderMaterial_edfsm")
@@ -272,17 +258,17 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("10_y34go")
 script = ExtResource("3_u112l")
 
-[node name="16" type="Node2D" parent="Layers"]
+[node name="16" type="Node2D" parent="."]
 script = ExtResource("1_48uix")
 distance = 8000.0
 
-[node name="BackgroundSprite2" type="Sprite2D" parent="Layers/16"]
+[node name="BackgroundSprite2" type="Sprite2D" parent="16"]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_e3wy6")
 texture = ExtResource("24_t06r1")
 script = ExtResource("3_u112l")
 
-[node name="Stars4" type="Sprite2D" parent="Layers/16"]
+[node name="Stars4" type="Sprite2D" parent="16"]
 texture_filter = 4
 texture_repeat = 2
 material = SubResource("ShaderMaterial_uya4s")
@@ -290,43 +276,41 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("10_enux2")
 script = ExtResource("3_u112l")
 
-[node name="8" type="Node2D" parent="Layers"]
+[node name="8" type="Node2D" parent="."]
 script = ExtResource("1_48uix")
 distance = 4000.0
 
-[node name="BackgroundSprite" type="Sprite2D" parent="Layers/8"]
+[node name="BackgroundSprite" type="Sprite2D" parent="8"]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_t82sx")
 texture = ExtResource("28_fvo3f")
 script = ExtResource("3_u112l")
 
-[node name="0" type="Node2D" parent="Layers"]
+[node name="0" type="Node2D" parent="."]
 script = ExtResource("1_48uix")
 
-[node name="BackgroundSprite" type="Sprite2D" parent="Layers/0"]
+[node name="BackgroundSprite" type="Sprite2D" parent="0"]
 texture_filter = 4
 texture_repeat = 2
 material = SubResource("ShaderMaterial_qaupf")
 texture = ExtResource("31_77rsq")
 script = ExtResource("3_u112l")
 
-[node name="debug" type="Sprite2D" parent="Layers/0"]
+[node name="debug" type="Sprite2D" parent="0"]
 visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_o7yh2")
 texture = ExtResource("6_ody0m")
 script = ExtResource("3_u112l")
 
-[node name="DEBUG" type="Node2D" parent="Layers"]
-script = ExtResource("1_48uix")
-
-[node name="debug" type="Sprite2D" parent="Layers/DEBUG"]
+[node name="DEBUG" type="Node2D" parent="."]
 visible = false
+script = ExtResource("1_48uix")
+distance = 8000.0
+
+[node name="debug" type="Sprite2D" parent="DEBUG"]
 texture_filter = 4
 texture_repeat = 2
 material = SubResource("ShaderMaterial_bgctr")
 texture = ExtResource("6_ody0m")
 script = ExtResource("3_u112l")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("34_geg3y")

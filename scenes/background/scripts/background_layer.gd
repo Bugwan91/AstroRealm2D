@@ -10,7 +10,3 @@ func _ready() -> void:
 		if sprite is BackgroundSprite:
 			sprite.distance = distance
 			_sprites.append(sprite)
-
-func shift(shift_vector: Vector2, zoom: Vector2) -> void:
-	for sprite in _sprites:
-		sprite.shift(shift_vector, zoom)
