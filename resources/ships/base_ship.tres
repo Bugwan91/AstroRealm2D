@@ -1,26 +1,12 @@
-[gd_resource type="Resource" script_class="ShipData" load_steps=9 format=3 uid="uid://c5khrxh5yovq4"]
+[gd_resource type="Resource" script_class="ShipData" load_steps=5 format=3 uid="uid://c5khrxh5yovq4"]
 
-[ext_resource type="Resource" uid="uid://sk43gbibomwd" path="res://resources/ship_parts/hull/03/hull_new.tres" id="1_oh5jq"]
-[ext_resource type="Resource" uid="uid://dse0542d8mny0" path="res://resources/weapons/cannon_01.tres" id="2_c6afv"]
-[ext_resource type="Script" uid="uid://bnl3gx1nvuvom" path="res://scenes/ship_designer/scripts/resources/ship_blueprint.gd" id="3_khkmu"]
+[ext_resource type="Resource" uid="uid://bvfy1jw4ibnve" path="res://resources/ships/dummy_blueprint.tres" id="1_uetys"]
+[ext_resource type="Resource" uid="uid://i8bs6diwujm2" path="res://resources/ships/dummy_flight_model.tres" id="2_h5vg5"]
 [ext_resource type="Resource" uid="uid://do8eu456ikffk" path="res://resources/radar/ship_red.tres" id="3_m2yj4"]
-[ext_resource type="Texture2D" uid="uid://d4k0glhpkgm68" path="res://assets/spaceships/Styles/pirate_red.png" id="5_bh328"]
-[ext_resource type="Resource" uid="uid://cahse1ttns3br" path="res://resources/ships/base_flight_model.tres" id="6_g1dyi"]
 [ext_resource type="Script" uid="uid://c17wwx222aeii" path="res://scenes/ship/scripts/resources/ship_data.gd" id="7_xd8et"]
-
-[sub_resource type="Resource" id="Resource_m56i6"]
-script = ExtResource("3_khkmu")
-hull = ExtResource("1_oh5jq")
-style = ExtResource("5_bh328")
-shininess = 0.458
-metallic = 1.0
-main_weapon = ExtResource("2_c6afv")
-radar_item_config = ExtResource("3_m2yj4")
-health = 1000
-metadata/_custom_type_script = "uid://bnl3gx1nvuvom"
 
 [resource]
 script = ExtResource("7_xd8et")
-flight_model = ExtResource("6_g1dyi")
-blueprint = SubResource("Resource_m56i6")
+flight_model = ExtResource("2_h5vg5")
+blueprint = ExtResource("1_uetys")
 radar_item = ExtResource("3_m2yj4")

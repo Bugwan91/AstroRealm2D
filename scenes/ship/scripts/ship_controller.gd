@@ -40,10 +40,11 @@ func setup(spaceship: Spaceship) -> void:
 func integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if not is_instance_valid(inputs): return
 	_dodge(state)
-	inputs.strafe += _closee_navigator.update_course(
+	var avoid_strafe := _closee_navigator.update_course(
 		state.step,
 		state.transform.origin,
-		state.linear_velocity).rotated(-ship.rotation) * 2.0
+		state.linear_velocity) * 2.0
+	inputs.strafe += avoid_strafe if inputs.use_absolute else avoid_strafe.rotated(-ship.rotation)
 	_stop(state)
 	_strafe(state)
 	_rotate(state)
@@ -59,22 +60,22 @@ func _stop(state: PhysicsDirectBodyState2D) -> void:
 	else:
 		# CAUTION Probably it's not sync safe, as inputs.strafe also updates in ShipInput
 		# But probably it doesn't mater as long as strafe input doesn't changing every frame
-		inputs.strafe += 2.0 * (stop_vector).rotated(-ship.rotation)
+		inputs.strafe += 2.0 * (stop_vector if inputs.use_absolute else stop_vector.rotated(-ship.rotation))
 
 func _dodge(state: PhysicsDirectBodyState2D) -> void:
-	if inputs.dodge and not _dodging:
+	if inputs.dodge and not _dodging and abs(inputs.strafe.y) > 1e-4:
 		_dodging = true
 		_dodge_acceleration = true
 		inputs.dodge = false
 		_dodge_time = 0.0
-		if not inputs.strafe.is_zero_approx():
-			_dodge_vector = inputs.strafe.rotated(ship.rotation)
+		var y := 1.0 if inputs.strafe.y > 0 else -1.0
+		_dodge_vector = Vector2(0.0, y).rotated(ship.rotation) # update to allow dodging within absolute coorditates
+	inputs.dodge = false
 	if _dodging:
 		if _dodge_acceleration:
 			_dodge_time += state.step
 			state.apply_central_force(_dodge_vector * flight_model.dodge)
 			if _dodge_time > flight_model.dodge_duration:
-				inputs.dodge = false
 				_dodge_time = 0.0
 				_dodge_acceleration = false
 		else:
@@ -83,12 +84,16 @@ func _dodge(state: PhysicsDirectBodyState2D) -> void:
 			if _dodge_time > flight_model.dodge_stop_duration:
 				_dodging = false
 				_dodge_time = 0.0
-	else:
-		_dodge_vector = state.transform.x
+	
 
 func _strafe(state: PhysicsDirectBodyState2D) -> void:
 	if inputs.strafe.is_zero_approx(): return
-	var str_input := inputs.strafe.rotated(ship.rotation) # Ralative
+	#var str_inp := inputs.strafe
+	#str_inp.x = str_inp.x if str_inp.x > 0. else str_inp.x * 0.2
+	# penalty for strafing backwards
+	# need playtesting
+	# also it requires better logic with extra rotation for better avoiding collisions
+	var str_input := inputs.strafe if inputs.use_absolute else inputs.strafe.rotated(ship.rotation) # Ralative
 	#var str_input := inputs.strafe.rotated(-0.5*PI) # Absolute
 	str_input += str_input * _strafe_bonus(state)
 	state.apply_central_force(str_input * flight_model.strafe)

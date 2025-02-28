@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=45 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" uid="uid://dn170a8jtfbql" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -29,22 +29,18 @@
 [ext_resource type="Script" uid="uid://c63eir7evomhx" path="res://scenes/world/scripts/level_loader.gd" id="27_d3v0f"]
 [ext_resource type="Material" uid="uid://4cr00esf8aq7" path="res://resources/ships/ship_mat.tres" id="28_n0sfc"]
 [ext_resource type="Texture2D" uid="uid://der26cev2v2bv" path="res://assets/spaceships/hull/04/_base.png" id="29_b0s70"]
-[ext_resource type="PackedScene" uid="uid://ce1dw618jykrb" path="res://scenes/ship/ship.tscn" id="30_b0s70"]
 [ext_resource type="Texture2D" uid="uid://tfkbd0y3825m" path="res://assets/spaceships/hull/04/_base_n.png" id="30_o7m8d"]
-[ext_resource type="Resource" uid="uid://do8eu456ikffk" path="res://resources/radar/ship_red.tres" id="32_gkufm"]
-[ext_resource type="Script" uid="uid://c17wwx222aeii" path="res://scenes/ship/scripts/resources/ship_data.gd" id="32_sls11"]
-[ext_resource type="Texture2D" uid="uid://d4k0glhpkgm68" path="res://assets/spaceships/Styles/pirate_red.png" id="33_uwdjs"]
-[ext_resource type="Script" uid="uid://bn3wtodsbhv53" path="res://scenes/ai/scripts/new_ship_ai_dummy.gd" id="35_uwdjs"]
-[ext_resource type="BehaviorTree" uid="uid://pujrdebila3w" path="res://scenes/ai/BTs/dummy.tres" id="36_1fxwg"]
+[ext_resource type="PackedScene" uid="uid://b4ck2h0854fdk" path="res://scenes/ship/npc_ship.tscn" id="31_o7m8d"]
+[ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="32_sls11"]
 [ext_resource type="PackedScene" uid="uid://cmqm4dm8rpi0l" path="res://scenes/background/sun.tscn" id="46_aihwc"]
 
 [sub_resource type="Resource" id="Resource_d3v0f"]
 script = ExtResource("10_1xx6e")
 _asteroid_scene = ExtResource("9_j7r4u")
-density = 0.2
+density = 0.01
 size_variation = 0.5
 speed_variation = 0.5
-speed = 400
+speed = 50
 rotation = 0.7
 base_velocity = Vector2(0, 0)
 metadata/_custom_type_script = ExtResource("10_1xx6e")
@@ -105,28 +101,6 @@ fill_from = Vector2(0.470085, 0.440171)
 [sub_resource type="CanvasTexture" id="CanvasTexture_sls11"]
 diffuse_texture = ExtResource("29_b0s70")
 normal_texture = ExtResource("30_o7m8d")
-
-[sub_resource type="Resource" id="Resource_1fxwg"]
-script = ExtResource("11_fkpwp")
-hull = ExtResource("10_n0sfc")
-hull_ext = ExtResource("11_b0s70")
-style = ExtResource("33_uwdjs")
-shininess = 0.506
-metallic = 1.0
-main_weapon = ExtResource("12_n0sfc")
-radar_item_config = ExtResource("32_gkufm")
-health = 10000
-metadata/_custom_type_script = "uid://bnl3gx1nvuvom"
-
-[sub_resource type="Resource" id="Resource_ab3l1"]
-script = ExtResource("32_sls11")
-flight_model = ExtResource("2_3s1kf")
-blueprint = SubResource("Resource_1fxwg")
-radar_item = ExtResource("32_gkufm")
-metadata/_custom_type_script = "uid://c17wwx222aeii"
-
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_ymmxm"]
-binding/position = NodePath("..:position")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2ehlx")
@@ -740,18 +714,9 @@ texture = SubResource("CanvasTexture_sls11")
 [node name="World" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="Ship" parent="World" node_paths=PackedStringArray("input_reader") instance=ExtResource("30_b0s70")]
-position = Vector2(-530, -443)
-rotation = -0.56197
-data = SubResource("Resource_ab3l1")
-input_reader = NodePath("NPCShipInput")
-
-[node name="NPCShipInput" type="Node2D" parent="World/Ship"]
-script = ExtResource("35_uwdjs")
-
-[node name="BTPlayer" type="BTPlayer" parent="World/Ship"]
-behavior_tree = ExtResource("36_1fxwg")
-blackboard_plan = SubResource("BlackboardPlan_ymmxm")
+[node name="Ship" parent="World" instance=ExtResource("31_o7m8d")]
+position = Vector2(-432, -422)
+data = ExtResource("32_sls11")
 
 [node name="LevelLoader" type="Node" parent="."]
 script = ExtResource("27_d3v0f")

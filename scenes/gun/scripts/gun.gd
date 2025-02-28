@@ -20,6 +20,7 @@ signal tranfser_heat(heat: float)
 @onready var _heat: Heat = %Heat
 @onready var _flash: GPUParticles2D = %MuzzleFlash
 @onready var _flash_light: PointLight2D = %MuzzleFlashLight
+@onready var _line: Line2D = %Line2D
 
 var config: WeaponRes
 var origin: Spaceship
@@ -63,6 +64,9 @@ func _ready() -> void:
 	_flash.modulate = config.color
 	_flash_light.color = config.color
 	_flash_light.energy = 0.0
+	_line.add_point(_shoot_point.position)
+	_line.add_point(_shoot_point.position + Vector2(config.effective_range + config.extra_range, 0.0))
+	_line.modulate = config.color
 
 func _process(delta: float) -> void:
 	_shoot(delta)

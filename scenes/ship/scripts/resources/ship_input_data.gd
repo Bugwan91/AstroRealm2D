@@ -16,6 +16,7 @@ signal autopilot_speed_changed(value: float)
 signal firing_toggled(value: bool)
 signal auto_aim_toggled(value: bool)
 
+var use_absolute := true
 var boost: float:
 	set(value):
 		boost = clampf(value, -1.0, 1.0)

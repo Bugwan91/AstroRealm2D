@@ -12,6 +12,14 @@ var weapon_resource: WeaponRes
 var enabled := true
 var origin: Spaceship
 var target: RigidBody
+var aim_point: Vector2
+
+var temperature: float:
+	get:
+		var t := 0.0
+		for w in _weapons:
+			t += w._heat.temperature
+		return t / _weapons.size()
 
 var _weapons: Array[Gun]
 var _container: Node2D
@@ -24,13 +32,15 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if is_instance_valid(target) and is_instance_valid(pointer):
-		var to_target = get_intersection()
-		var dist := to_target.length()
-		if dist < (weapon_resource.effective_range + weapon_resource.extra_range):
-			pointer.update(to_target, origin.extrapolator.canvas_position, to_target.length() < weapon_resource.effective_range)
-		else:
-			pointer.disable()
+		aim_point = get_intersection()
+		var dist := aim_point.length()
+		#if dist < (weapon_resource.effective_range + weapon_resource.extra_range):
+		pointer.update(aim_point, origin.extrapolator.canvas_position, aim_point.length() < weapon_resource.effective_range)
+		#else:
+			#pointer.disable()
 	#TODO: maybe I should handle fire here
+	else:
+		aim_point = Vector2.ZERO
 
 func setup(weapon_points: Array[PointResource]) -> void:
 	points = []
@@ -84,7 +94,7 @@ func get_intersection() -> Vector2:
 		return target.position - origin.position
 	else:
 		var a := (target as ActiveRigidBody).acceleration if target is ActiveRigidBody else Vector2.ZERO
-		DebugDraw2d.line_vector(target.extrapolator.smooth_position, a)
+		#DebugDraw2d.line_vector(target.extrapolator.smooth_position, a)
 		return InterceptionCalculator.interception(
 			origin.extrapolator.smooth_position,
 			origin.linear_velocity,

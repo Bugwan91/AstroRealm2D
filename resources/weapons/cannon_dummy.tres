@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="WeaponRes" load_steps=3 format=3 uid="uid://ba8t40yqcntdj"]
+
+[ext_resource type="Script" uid="uid://p2l25epyigdr" path="res://scenes/gun/scripts/res/weapon_res.gd" id="1_g16it"]
+[ext_resource type="PackedScene" uid="uid://f787xuov3u4t" path="res://scenes/gun/gun.tscn" id="2_sgums"]
+
+[resource]
+script = ExtResource("1_g16it")
+scene = ExtResource("2_sgums")
+color = Color(0.912338, 0, 0.209441, 1)
+damage = 10.0
+fire_rate = 1.0
+salvo = false
+effective_range = 1500.0
+extra_range = 500.0
+projectile_speed = 1500.0
+accuracy = 0.01
+overheat_accuracy = 0.02
+recoil_impulse = 0.0
+heat_generation = 0.5
+heat_capacity = 12.0
+heat_radiating = 1.0
+heat_transfer = 3.0
+clip_size = 0
+reload_time = 0.0
+charging_time = 0.0
+energy_cost = 0.0
+fire_duration_max = 0.0
+metadata/_custom_type_script = ExtResource("1_g16it")

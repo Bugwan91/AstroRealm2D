@@ -9,6 +9,7 @@ var _camera_shift: Vector2
 func _ready() -> void:
 	process_priority = -999
 	RadarManager.instance.selected.connect(_target_updated)
+	data.use_absolute = false
 
 func _process(_delta: float) -> void:
 	_camera_shift = CameraController.instance.update(_delta)

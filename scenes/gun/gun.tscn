@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://f787xuov3u4t"]
+[gd_scene load_steps=25 format=3 uid="uid://f787xuov3u4t"]
 
 [ext_resource type="Script" uid="uid://dtkhtyoen3ad2" path="res://scenes/gun/scripts/gun.gd" id="1_heu61"]
 [ext_resource type="PackedScene" uid="uid://dwdthpisfmojs" path="res://scenes/gun/bullet.tscn" id="2_gsief"]
@@ -68,6 +68,13 @@ alpha_curve = SubResource("CurveTexture_6wc7x")
 hue_variation_min = -0.01
 hue_variation_max = 0.00999998
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t6ksw"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_6wc7x"]
+offsets = PackedFloat32Array(0.385113, 0.932039, 1)
+colors = PackedColorArray(1, 1, 1, 0.1, 1, 1, 1, 0.02, 1, 1, 1, 0)
+
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_heu61")
 bullet_scene = ExtResource("2_gsief")
@@ -126,3 +133,9 @@ transfer_efficiency = 3.0
 view = NodePath("../View")
 
 [node name="Prediction" type="Line2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_t6ksw")
+width = 2.0
+gradient = SubResource("Gradient_6wc7x")

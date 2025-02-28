@@ -1,4 +1,4 @@
-class_name AIShipInput
+#class_name AIShipInput
 extends ShipInput
 
 @export var agressive := false

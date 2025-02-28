@@ -194,6 +194,11 @@ dodge={
 2d_physics/layer_8="Radar"
 2d_physics/layer_32="Mouse"
 
+[limbo_ai]
+
+behavior_tree/behavior_tree_default_dir="res://scenes/ai/BTs"
+behavior_tree/user_task_dirs=PackedStringArray("res://scenes/ai/tasks")
+
 [physics]
 
 2d/run_on_separate_thread=true

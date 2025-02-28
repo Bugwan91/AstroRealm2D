@@ -1,14 +1,21 @@
-[gd_resource type="BehaviorTree" load_steps=3 format=3 uid="uid://pujrdebila3w"]
+[gd_resource type="BehaviorTree" load_steps=5 format=3 uid="uid://pujrdebila3w"]
+
+[ext_resource type="Script" uid="uid://brgnb3x8fo3j6" path="res://scenes/ai/tasks/task/match_velocity.gd" id="1_umuaq"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_ay72j"]
-var/position/name = &"position"
-var/position/type = 5
-var/position/value = Vector2(0, 0)
-var/position/hint = 0
-var/position/hint_string = ""
 
-[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_umuaq"]
+[sub_resource type="BTAction" id="BTAction_umuaq"]
+script = ExtResource("1_umuaq")
+velocity_key = &"linear_velocity"
+target_velocity_key = &"linear_velocity"
+strafe_key = &"strafe"
+threshold = 300.0
+smooth = 0.01
+
+[sub_resource type="BTParallel" id="BTParallel_nan2c"]
+repeat = true
+children = [SubResource("BTAction_umuaq")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_ay72j")
-root_task = SubResource("BTDynamicSelector_umuaq")
+root_task = SubResource("BTParallel_nan2c")

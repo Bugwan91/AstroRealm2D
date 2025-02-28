@@ -44,7 +44,9 @@ func respawn_player_ship(_position: Vector2 = Vector2.ZERO) -> void:
 	audio_listener.make_current()
 	WorldGridManager.instance.world_root.add_child(new_ship)
 	ship = new_ship
+	ship._setup_health(10000.0)
 	ship.tree_exiting.connect(_on_ship_destroyed)
+	MainState.player = ship
 
 func destroy_ship() -> void:
 	ship.queue_free()

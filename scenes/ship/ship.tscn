@@ -1,8 +1,7 @@
-[gd_scene load_steps=32 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=31 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" uid="uid://b2ih5uxk3qw0h" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
-[ext_resource type="BlackboardPlan" uid="uid://1k0otpmc70i" path="res://scenes/ai/BTs/blackboards/ship.tres" id="3_2xkf5"]
 [ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/_shared/pointer.tscn" id="5_3lg4r"]
 [ext_resource type="Shader" uid="uid://balef3jw7dwu" path="res://scenes/ship/shaders/ship.gdshader" id="5_sakv4"]
 [ext_resource type="Material" uid="uid://4cr00esf8aq7" path="res://resources/ships/ship_mat.tres" id="5_woufe"]
@@ -64,7 +63,6 @@ metadata/_custom_type_script = ExtResource("18_woufe")
 [node name="Ship" type="RigidBody2D"]
 script = ExtResource("1_5ckws")
 data = ExtResource("2_uwj24")
-blackboard_plan = ExtResource("3_2xkf5")
 metadata/_custom_type_script = "uid://b2ih5uxk3qw0h"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
@@ -81,6 +79,8 @@ script = ExtResource("8_4fwa5")
 
 [node name="Pointer" parent="PositionExtrapolator/MainWeaponSlot" instance=ExtResource("5_3lg4r")]
 unique_name_in_owner = true
+in_range_color = Color(1, 0, 0, 0.2)
+out_range_color = Color(0.486, 0, 0, 0.2)
 
 [node name="Interrior" type="Sprite2D" parent="PositionExtrapolator"]
 material = SubResource("ShaderMaterial_xvqm4")
@@ -121,7 +121,6 @@ script = ExtResource("14_5nufi")
 [node name="CloseNavigator" type="Node" parent="FlightController"]
 unique_name_in_owner = true
 script = ExtResource("14_xvsf7")
-debug = true
 metadata/_custom_type_script = "uid://bp5341wcuo33e"
 
 [node name="Heat" type="Node" parent="." node_paths=PackedStringArray("view", "health")]

@@ -8,7 +8,6 @@ extends ActiveRigidBody
 
 @export var autopilot_pointer: AssistantPointer
 @export var target_prediction_pointer: AssistantPointer
-@export var blackboard_plan: BlackboardPlan
 #endregion
 
 #region Onready propeties
@@ -46,10 +45,20 @@ func _ready() -> void:
 	_setup_health()
 	_setup_heat()
 	connect_inputs(input_reader)
-	init_blackboard()
+	_setup_blackboard()
 
-func init_blackboard():
-	blackboard = blackboard_plan.create_blackboard(self)
+func get_blackboard() -> Blackboard:
+	if blackboard == null:
+		_setup_blackboard()
+	return blackboard
+
+func setup_blackboard(bb: Blackboard) -> Blackboard:
+	if bb != null or blackboard == null:
+		_setup_blackboard(bb)
+	return blackboard
+
+func _setup_blackboard(bb: Blackboard = null):
+	blackboard = bb if is_instance_valid(bb) else Blackboard.new()
 	blackboard.bind_var_to_property(&"mass", data.flight_model, &"mass", true)
 	blackboard.bind_var_to_property(&"inertia", data.flight_model, &"inertia", true)
 	blackboard.bind_var_to_property(&"speed", data.flight_model, &"speed", true)
@@ -62,7 +71,10 @@ func init_blackboard():
 	blackboard.bind_var_to_property(&"heat", heat, &"_heat", true)
 	blackboard.bind_var_to_property(&"hp_max", taking_damage.health, &"max_health", true)
 	blackboard.bind_var_to_property(&"hp", taking_damage.health, &"health", true)
-	print(blackboard.get_vars_as_dict())
+	blackboard.bind_var_to_property(&"linear_velocity", self, &"linear_velocity", true)
+	blackboard.bind_var_to_property(&"aim_point", _main_weapon_slot, &"aim_point", true)
+	blackboard.bind_var_to_property(&"weapon_temperature", _main_weapon_slot, &"temperature", true)
+	#blackboard.bind_var_to_property(&"weapon_range", data.design.main_weapon, &"effective_range", true)
 
 func _setup_flight_controller() -> void:
 	flight_controller.setup(self)
@@ -101,9 +113,11 @@ func _setup_view() -> void:
 	_view.setup_textures(data.design)
 	_view.scale = Vector2.ONE * data.design.view_scale
 
-func _setup_health() -> void:
-	taking_damage.setup_polygon(data.blueprint.health, data.design.polygon)
-	#taking_damage.setup_health(data.blueprint.health)
+func _setup_health(value: float = 0.0) -> void:
+	taking_damage.setup_polygon(
+		data.blueprint.health if value == 0.0 else value,
+		data.design.polygon
+	)
 
 func _setup_heat() -> void:
 	heat.init(data.blueprint.hull.heat_capacity, data.blueprint.hull.heat_radiation)

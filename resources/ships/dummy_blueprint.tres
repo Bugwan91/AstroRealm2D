@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ShipBlueprint" load_steps=7 format=3 uid="uid://bvfy1jw4ibnve"]
+
+[ext_resource type="Resource" uid="uid://sk43gbibomwd" path="res://resources/ship_parts/hull/03/hull_new.tres" id="1_6po8a"]
+[ext_resource type="Resource" uid="uid://ba8t40yqcntdj" path="res://resources/weapons/cannon_dummy.tres" id="2_6po8a"]
+[ext_resource type="Resource" uid="uid://baat0vsp668sr" path="res://resources/ship_parts/hull/03/01.tres" id="2_e7u8k"]
+[ext_resource type="Resource" uid="uid://do8eu456ikffk" path="res://resources/radar/ship_red.tres" id="3_x6mr0"]
+[ext_resource type="Script" uid="uid://bnl3gx1nvuvom" path="res://scenes/ship_designer/scripts/resources/ship_blueprint.gd" id="4_qmie0"]
+[ext_resource type="Texture2D" uid="uid://biad3wcdcstyb" path="res://assets/spaceships/Styles/pirate_2.png" id="6_e7u8k"]
+
+[resource]
+script = ExtResource("4_qmie0")
+hull = ExtResource("1_6po8a")
+hull_ext = ExtResource("2_e7u8k")
+style = ExtResource("6_e7u8k")
+shininess = 0.458
+metallic = 1.0
+main_weapon = ExtResource("2_6po8a")
+radar_item_config = ExtResource("3_x6mr0")
+health = 1000
+metadata/_custom_type_script = "uid://bnl3gx1nvuvom"
