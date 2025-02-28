@@ -35,7 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://c0x2xkfvw2g2x" path="res://assets/backgrounds/0.tres" id="31_77rsq"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_svw7u"]
-size = Vector2(10, 10)
+size = Vector2(1024, 1024)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0cqxu"]
 shader = ExtResource("3_pr640")
