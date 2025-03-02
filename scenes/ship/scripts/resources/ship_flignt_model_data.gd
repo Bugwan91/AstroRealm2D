@@ -22,6 +22,7 @@ signal dodge_cooldown_changed(value: float)
 @export_range(0.0, 50000.0) var speed: float = 2000.0: set = _set_speed
 @export_range(0.0, 10000.0) var boost_base: float = 0.5: set = _update_boost
 @export_range(0.0, 10000.0) var strafe_base: float = 100.0: set = _update_strafe
+@export var strafe_start_bonus: float = 0.0
 @export_range(0.0, 15.0) var turn_base: float = 1.0: set = _update_turn
 ## Dodge shoudl be used as strafe multiplyer
 @export_range(DODGE_MIN, 1000.0) var dodge_base: float = 15.0: set = _update_dodge

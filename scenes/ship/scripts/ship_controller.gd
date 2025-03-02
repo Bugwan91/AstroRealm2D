@@ -26,7 +26,7 @@ var inputs: ShipInputData
 
 var current_strafe_thrust: float:
 	get():
-		return flight_model.strafe * (1.0 + _strafe_bonus())\
+		return flight_model.strafe * _strafe_bonus\
 			if is_instance_valid(flight_model)\
 			else 0.0
 
@@ -37,6 +37,9 @@ var _dodging := false:
 var _dodge_acceleration := false
 var _dodge_time := 0.0
 var _dodge_vector := Vector2(1.0, 0.0)
+
+var _strafe_buildup := Vector2.ZERO
+var _strafe_bonus := 1.0
 
 func setup(spaceship: Spaceship) -> void:
 	ship = spaceship
@@ -49,6 +52,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if not is_instance_valid(inputs): return
+	_update_strafe_bonus()
 	_dodge(delta)
 	var avoid_strafe := _closee_navigator.update_course(
 		delta,
@@ -61,10 +65,19 @@ func _physics_process(delta: float) -> void:
 	_boost()
 	_drag()
 
+func _update_strafe_bonus() -> void:
+	if flight_model.strafe_start_bonus == 0.0: return
+	_strafe_buildup += inputs.strafe * 0.1
+	var l := _strafe_buildup.length()
+	if l > 1.0:
+		_strafe_buildup /= l
+	_strafe_bonus = 1.0 + flight_model.strafe_start_bonus * (1.0 - clampf(_strafe_buildup.dot(inputs.strafe), 0.0, 1.0))
+	_strafe_buildup *= 0.9
+
 func _stop(delta: float) -> void:
 	if not inputs.stop or inputs.dodge: return
 	var stop_vector := -ship.linear_velocity.normalized()
-	var step_distance := flight_model.strafe * (1.0 + _strafe_bonus()) * delta
+	var step_distance := flight_model.strafe * delta
 	if ship.speed < step_distance:
 		ship.linear_velocity = Vector2.ZERO
 	else:
@@ -104,14 +117,9 @@ func _strafe() -> void:
 	# also it requires better logic with extra rotation for better avoiding collisions
 	var str_input := inputs.strafe if inputs.use_absolute else inputs.strafe.rotated(ship.rotation) # Ralative
 	#var str_input := inputs.strafe.rotated(-0.5*PI) # Absolute
-	str_input += str_input * _strafe_bonus()
-	ship.apply_central_force(str_input * flight_model.strafe)
-
-func _strafe_bonus() -> float:
-	return 0.0
-	#var s := ship.linear_velocity.length()
-	#var d := minf(s / flight_model.speed, 1.0)
-	#return pow((1.0 - d), 3.0) * STRAFE_LOW_SPEED_BONUS
+	str_input *= _strafe_bonus #str_input * _strafe_bonus()
+	# TODO: precalculate strafe_force in flight_model
+	ship.apply_central_force(str_input * flight_model.strafe * ship.mass)
 
 func _rotate(delta: float) -> void:
 	var angle := ship.transform.x.angle_to(input_reader.update_target_point() - ship.position)
@@ -133,7 +141,10 @@ func _boost() -> void:
 
 func _drag() -> void:
 	if _dodge_acceleration: return
-	var extra_speed := ship.linear_velocity.length_squared() - flight_model.speed_sq
-	if extra_speed < 0.0: return
-	var stop_force := sqrt(extra_speed) * DRAG * -ship.linear_velocity.normalized()
-	ship.apply_central_force(stop_force)
+	var speed := ship.linear_velocity.length()
+	var extra_speed := speed - flight_model.speed
+	if extra_speed > 0.0:
+		var stop_force := extra_speed * DRAG * -ship.linear_velocity.normalized()
+		ship.apply_central_force(stop_force * ship.mass)
+	if speed < 300.0:
+		ship.apply_central_force(-ship.linear_velocity.normalized() * 10.0)
