@@ -33,7 +33,6 @@ func _tick(delta: float) -> Status:
 		and d_v.length_squared() < _v_threshold_sq:
 		return SUCCESS
 	var strafe: float = blackboard.get_var(strafe_key)
-	MyDebug.info("strafe", strafe)
 	var v_stop := ControlUnils.get_stop_velocity(d_p, d_v, strafe, a_target)
 	var controls := ControlUnils.match_velocity_control(v_stop - v, strafe * delta)
 	(agent as AIShipInput).move(controls)

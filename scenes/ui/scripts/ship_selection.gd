@@ -35,7 +35,6 @@ func _target_updated(target: RadarItem = null) -> void:
 
 func _update_size() -> void:
 	var zoom := get_viewport().get_camera_2d().zoom.x
-	MyDebug.info("Selection", _selected_target.selection_size)
 	var icon_size: float = max(MIN_SIZE, _selected_target.selection_size * zoom) + PADDING
 	var size_v := Vector2(icon_size, icon_size)
 	pivot.size = size_v

@@ -105,8 +105,6 @@ func _strafe() -> void:
 	var str_input := inputs.strafe if inputs.use_absolute else inputs.strafe.rotated(ship.rotation) # Ralative
 	#var str_input := inputs.strafe.rotated(-0.5*PI) # Absolute
 	str_input += str_input * _strafe_bonus()
-	if (inputs.use_absolute):
-		MyDebug.info("str_input", str_input.length())
 	ship.apply_central_force(str_input * flight_model.strafe)
 
 func _strafe_bonus() -> float:
@@ -116,14 +114,17 @@ func _strafe_bonus() -> float:
 	#return pow((1.0 - d), 3.0) * STRAFE_LOW_SPEED_BONUS
 
 func _rotate(delta: float) -> void:
-	var d := ship.transform.x.angle_to(input_reader.update_target_point() - ship.position)
-	if abs(d) < ANGULAR_THRESHOLD and abs(ship.angular_velocity) < ANGULAR_THRESHOLD:
+	var angle := ship.transform.x.angle_to(input_reader.update_target_point() - ship.position)
+	var d := absf(angle)
+	if d < ANGULAR_THRESHOLD and abs(ship.angular_velocity) < ANGULAR_THRESHOLD:
 		ship.angular_velocity = 0.0
 		return
-	var a := flight_model.turn * delta
-	var vt := 0.5 * (sqrt(a * (a + 8.0 * absf(d))) - a) * signf(d) / delta
-	# HACK: reimplemet this with apply_torque()
-	ship.angular_velocity = vt
+	var a := flight_model.turn * delta * delta
+	var n := floorf((sqrt(a*a + 8*a*d) - a) / (2*a))
+	var wt := signf(angle) * (d/(n+1.0) + 0.5*a*n)
+	var w := ship.angular_velocity * delta
+	var control := clampf((wt - w) / a, -1., 1.)
+	ship.apply_torque(control * flight_model.turn * ship.inertia)
 
 func _boost() -> void:
 	if not inputs.boost: return
