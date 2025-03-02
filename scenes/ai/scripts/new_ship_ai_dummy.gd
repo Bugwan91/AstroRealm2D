@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	# Resseting all movements from previous tick
-	move()
+	reset_move()
 
 func _on_player_ship_updated(player: Spaceship):
 	data.target = player._radar_item if is_instance_valid(player) else null
@@ -41,8 +41,11 @@ func update_target_point() -> Vector2:
 	return data.target_point
 
 #region Actions
-func move(control: Vector2 = Vector2.ZERO) -> void:
+func move(control: Vector2) -> void:
 	data.strafe += control
+
+func reset_move() -> void:
+	data.strafe = Vector2.ZERO
 
 func aim_with_main():
 	aim = AIM.MAIN
