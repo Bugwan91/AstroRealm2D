@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://baat0vsp668sr" path="res://resources/ship_parts/hull/03/01.tres" id="2_e7u8k"]
 [ext_resource type="Resource" uid="uid://do8eu456ikffk" path="res://resources/radar/ship_red.tres" id="3_x6mr0"]
 [ext_resource type="Script" uid="uid://bnl3gx1nvuvom" path="res://scenes/ship_designer/scripts/resources/ship_blueprint.gd" id="4_qmie0"]
-[ext_resource type="Texture2D" uid="uid://biad3wcdcstyb" path="res://assets/spaceships/Styles/pirate_2.png" id="6_e7u8k"]
+[ext_resource type="Texture2D" uid="uid://dvxp714x3fp80" path="res://assets/spaceships/Styles/02.png" id="6_e7u8k"]
 
 [resource]
 script = ExtResource("4_qmie0")

@@ -1,6 +1,6 @@
-[gd_resource type="BehaviorTree" load_steps=16 format=3 uid="uid://pujrdebila3w"]
+[gd_resource type="BehaviorTree" load_steps=16 format=3 uid="uid://jrl8o8kgd26f"]
 
-[ext_resource type="Script" uid="uid://dwa2wci75w01x" path="res://scenes/ai/tasks/task/strafe_to_position.gd" id="1_umuaq"]
+[ext_resource type="Script" uid="uid://dwa2wci75w01x" path="res://scenes/ai/tasks/task/strafe_to_position.gd" id="1_2bcrq"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_ay72j"]
 
@@ -14,15 +14,15 @@ variable = &"target_position"
 value = SubResource("BBVariant_nan2c")
 
 [sub_resource type="BTAction" id="BTAction_bfnkk"]
-script = ExtResource("1_umuaq")
+script = ExtResource("1_2bcrq")
 position_key = &"position"
 velocity_key = &"velocity"
 target_position_key = &"target_position"
 target_velocity_key = &"target_velocity"
 target_acceleration_key = &"target_acceleration"
 strafe_key = &"strafe"
-position_threshold = 100.0
-velocity_threshold = 10.0
+position_threshold = 500.0
+velocity_threshold = 100.0
 
 [sub_resource type="BBVariant" id="BBVariant_brlfa"]
 type = 5
@@ -34,15 +34,15 @@ variable = &"target_position"
 value = SubResource("BBVariant_brlfa")
 
 [sub_resource type="BTAction" id="BTAction_vbu8s"]
-script = ExtResource("1_umuaq")
+script = ExtResource("1_2bcrq")
 position_key = &"position"
 velocity_key = &"velocity"
 target_position_key = &"target_position"
 target_velocity_key = &"target_velocity"
 target_acceleration_key = &"target_acceleration"
 strafe_key = &"strafe"
-position_threshold = 100.0
-velocity_threshold = 10.0
+position_threshold = 500.0
+velocity_threshold = 100.0
 
 [sub_resource type="BBVariant" id="BBVariant_2aslv"]
 type = 5
@@ -54,15 +54,15 @@ variable = &"target_position"
 value = SubResource("BBVariant_2aslv")
 
 [sub_resource type="BTAction" id="BTAction_7p413"]
-script = ExtResource("1_umuaq")
+script = ExtResource("1_2bcrq")
 position_key = &"position"
 velocity_key = &"velocity"
 target_position_key = &"target_position"
 target_velocity_key = &"target_velocity"
 target_acceleration_key = &"target_acceleration"
 strafe_key = &"strafe"
-position_threshold = 100.0
-velocity_threshold = 10.0
+position_threshold = 500.0
+velocity_threshold = 100.0
 
 [sub_resource type="BBVariant" id="BBVariant_qv0at"]
 type = 5
@@ -74,15 +74,15 @@ variable = &"target_position"
 value = SubResource("BBVariant_qv0at")
 
 [sub_resource type="BTAction" id="BTAction_b4e5y"]
-script = ExtResource("1_umuaq")
+script = ExtResource("1_2bcrq")
 position_key = &"position"
 velocity_key = &"velocity"
 target_position_key = &"target_position"
 target_velocity_key = &"target_velocity"
 target_acceleration_key = &"target_acceleration"
 strafe_key = &"strafe"
-position_threshold = 100.0
-velocity_threshold = 10.0
+position_threshold = 500.0
+velocity_threshold = 100.0
 
 [sub_resource type="BTSequence" id="BTSequence_umuaq"]
 children = [SubResource("BTSetVar_ay72j"), SubResource("BTAction_bfnkk"), SubResource("BTSetVar_xypgu"), SubResource("BTAction_vbu8s"), SubResource("BTSetVar_euf8c"), SubResource("BTAction_7p413"), SubResource("BTSetVar_pwp8j"), SubResource("BTAction_b4e5y")]

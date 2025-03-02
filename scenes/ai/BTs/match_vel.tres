@@ -1,0 +1,29 @@
+[gd_resource type="BehaviorTree" load_steps=8 format=3 uid="uid://c685r6ljaliji"]
+
+[ext_resource type="Script" uid="uid://c257otqd5katn" path="res://scenes/ai/tasks/task/update_target_velocity.gd" id="1_uichc"]
+[ext_resource type="Script" uid="uid://brgnb3x8fo3j6" path="res://scenes/ai/tasks/task/match_velocity.gd" id="2_sesos"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_1m8xd"]
+
+[sub_resource type="BTAction" id="BTAction_2fsot"]
+script = ExtResource("1_uichc")
+velocity_key = &"velocity"
+target_velocity_key = &"target_velocity"
+
+[sub_resource type="BTAction" id="BTAction_xcc4y"]
+script = ExtResource("2_sesos")
+velocity_key = &"velocity"
+target_velocity_key = &"target_velocity"
+strafe_key = &"strafe"
+velocity_threshold = 1.0
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_1m8xd"]
+time_limit = 0.5
+children = [SubResource("BTAction_xcc4y")]
+
+[sub_resource type="BTSequence" id="BTSequence_2fsot"]
+children = [SubResource("BTAction_2fsot"), SubResource("BTTimeLimit_1m8xd")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_1m8xd")
+root_task = SubResource("BTSequence_2fsot")

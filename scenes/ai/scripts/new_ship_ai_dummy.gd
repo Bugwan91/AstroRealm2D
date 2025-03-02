@@ -8,11 +8,13 @@ enum AIM { NONE, MAIN, SECCONDARY }
 var aim: AIM = AIM.NONE
 
 func _ready() -> void:
+	# _physics_process() should be called before BTPlayer
+	process_physics_priority = -100
 	MainState.player_ship_spawned.connect(_on_player_ship_updated)
 	aim_with_main()
 
 func _process(delta: float) -> void:
-	#data.strafe = Vector2(0.5, 0.0)
+	return
 	fire(
 		(controlled_ship.transform.x.dot(
 			controlled_ship._main_weapon_slot.aim_point.normalized()
@@ -21,6 +23,10 @@ func _process(delta: float) -> void:
 		< (controlled_ship._main_weapon_slot.weapon_resource.effective_range\
 			+ controlled_ship._main_weapon_slot.weapon_resource.extra_range * 0.8)
 		)
+
+func _physics_process(delta: float) -> void:
+	# Resseting all movements from previous tick
+	move()
 
 func _on_player_ship_updated(player: Spaceship):
 	data.target = player._radar_item if is_instance_valid(player) else null
@@ -35,9 +41,8 @@ func update_target_point() -> Vector2:
 	return data.target_point
 
 #region Actions
-func move(direction: Vector2) -> void:
-	DebugDraw2d.line_vector(controlled_ship.position, direction * 200.0, Color.AQUA, 2.0)
-	data.strafe = direction
+func move(control: Vector2 = Vector2.ZERO) -> void:
+	data.strafe += control
 
 func aim_with_main():
 	aim = AIM.MAIN

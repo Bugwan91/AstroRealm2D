@@ -1,39 +1,29 @@
 @tool
-class_name BTmatchVeclocity
+class_name BTMatchVeclocity
 extends BTAction
 
-@export var velocity_key: StringName = &"linear_velocity"
-@export var target_velocity_key: StringName = &"linear_velocity"
+@export var velocity_key: StringName = &"velocity"
+@export var target_velocity_key: StringName = &"target_velocity"
 @export var strafe_key: StringName = &"strafe"
-@export var threshold := 100.0
-@export_range(0, 1) var smooth := 0.5
+@export var velocity_threshold := 1.0
+
+var _v_threshold_sq: float
 
 func _generate_name() -> String:
-	return "Match velocity with target"
-
-func _setup() -> void:
-	pass
+	return "Match velocity"
 
 func _enter() -> void:
-	pass
-
-func _exit() -> void:
-	pass
+	_v_threshold_sq = velocity_threshold * velocity_threshold
 
 func _tick(delta: float) -> Status:
-	if not (is_instance_valid(blackboard.get_parent())\
-	and blackboard.get_parent().has_var(target_velocity_key)):
-		return Status.FAILURE
-	var target_velocity: Vector2 = blackboard.get_parent().get_var(target_velocity_key)
-	var velocity: Vector2 = blackboard.get_var(velocity_key)
+	if not blackboard.has_var(target_velocity_key):
+		return FAILURE
+	var v: Vector2 = blackboard.get_var(velocity_key)
+	var v_target: Vector2 = blackboard.get_var(target_velocity_key)
+	var d_v := v_target - v
+	if d_v.length_squared() < _v_threshold_sq:
+		return SUCCESS
 	var strafe: float = blackboard.get_var(strafe_key)
-	var dv := target_velocity - velocity
-	var dv_len := dv.length()
-	if dv_len > threshold:
-		var dv_n := dv / dv_len
-		var a := delta * strafe
-		if a == 0:
-			return Status.RUNNING
-		var f := (dv_len / a) * smooth
-		(agent as AIShipInput).move(f * dv_n)
-	return Status.RUNNING
+	var controls := ControlUnils.match_velocity_control(d_v, strafe * delta)
+	(agent as AIShipInput).move(controls)
+	return RUNNING

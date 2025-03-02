@@ -37,12 +37,12 @@
 [sub_resource type="Resource" id="Resource_d3v0f"]
 script = ExtResource("10_1xx6e")
 _asteroid_scene = ExtResource("9_j7r4u")
-density = 0.01
+density = 0.2
 size_variation = 0.5
-speed_variation = 0.5
+speed_variation = 0.2
 speed = 50
 rotation = 0.7
-base_velocity = Vector2(0, 0)
+base_velocity = Vector2(100, 0)
 metadata/_custom_type_script = ExtResource("10_1xx6e")
 
 [sub_resource type="Resource" id="Resource_k3hja"]

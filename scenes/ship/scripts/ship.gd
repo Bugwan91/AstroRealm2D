@@ -45,7 +45,6 @@ func _ready() -> void:
 	_setup_health()
 	_setup_heat()
 	connect_inputs(input_reader)
-	_setup_blackboard()
 
 func get_blackboard() -> Blackboard:
 	if blackboard == null:
@@ -63,7 +62,7 @@ func _setup_blackboard(bb: Blackboard = null):
 	blackboard.bind_var_to_property(&"inertia", data.flight_model, &"inertia", true)
 	blackboard.bind_var_to_property(&"speed", data.flight_model, &"speed", true)
 	blackboard.bind_var_to_property(&"boost", data.flight_model, &"boost", true)
-	blackboard.bind_var_to_property(&"strafe", data.flight_model, &"strafe", true)
+	blackboard.bind_var_to_property(&"strafe", flight_controller, &"current_strafe_thrust", true)
 	blackboard.bind_var_to_property(&"dodge", data.flight_model, &"dodge", true)
 	blackboard.bind_var_to_property(&"turn", data.flight_model, &"turn", true)
 	blackboard.bind_var_to_property(&"heat_max", heat, &"capacity", true)
@@ -71,10 +70,11 @@ func _setup_blackboard(bb: Blackboard = null):
 	blackboard.bind_var_to_property(&"heat", heat, &"_heat", true)
 	blackboard.bind_var_to_property(&"hp_max", taking_damage.health, &"max_health", true)
 	blackboard.bind_var_to_property(&"hp", taking_damage.health, &"health", true)
-	blackboard.bind_var_to_property(&"linear_velocity", self, &"linear_velocity", true)
+	blackboard.bind_var_to_property(&"position", self, &"position", true)
+	blackboard.bind_var_to_property(&"velocity", self, &"linear_velocity", true)
 	blackboard.bind_var_to_property(&"aim_point", _main_weapon_slot, &"aim_point", true)
 	blackboard.bind_var_to_property(&"weapon_temperature", _main_weapon_slot, &"temperature", true)
-	#blackboard.bind_var_to_property(&"weapon_range", data.design.main_weapon, &"effective_range", true)
+	blackboard.bind_var_to_property(&"weapon_range", data.blueprint.main_weapon, &"effective_range", true)
 
 func _setup_flight_controller() -> void:
 	flight_controller.setup(self)
@@ -135,11 +135,10 @@ func _set_ship_data(new_data: ShipData) -> void:
 #endregion
 
 #region Physics
-func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
-	flight_controller.integrate_forces(state)
-	MyDebug.info("spd", speed)
-	MyDebug.info("pos", position)
-	_apply_impulces(state)
+func _physics_process(delta: float) -> void:
+	MyDebug.info("spd", int(speed))
+	MyDebug.info("pos", Vector2i(position))
+	_apply_impulces()
 #endregion
 
 #region Events
@@ -153,9 +152,9 @@ func _on_transfered_heat(transfered_heat: float) -> void:
 	heat.add_heat(transfered_heat)
 #endregion
 
-func _apply_impulces(state: PhysicsDirectBodyState2D) -> void:
+func _apply_impulces() -> void:
 	if is_zero_approx(_impulces.x) and is_zero_approx(_impulces.y): return
-	state.apply_impulse(_impulces)
+	apply_impulse(_impulces)
 	_impulces = Vector2.ZERO
 
 func is_player() -> bool:

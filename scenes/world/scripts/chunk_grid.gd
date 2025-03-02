@@ -86,7 +86,9 @@ func _update_prepared_chunks(force: bool = false) -> void:
 	var i := 0
 	var copy := _chunks_to_update
 	for chunk in copy:
-		if chunks[chunk].update(): i += 1
+		# FIXME: I have bug where chunks[chunk] may not exists
+		# when physics delta is very low
+		if chunks.has(chunk) and chunks[chunk].update(): i += 1
 		_chunks_to_update.erase(chunk)
 		if not force and i > _update_batch:
 			return
