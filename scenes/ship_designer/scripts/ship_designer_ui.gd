@@ -42,18 +42,18 @@ func _ready() -> void:
 	style_selector.update_blueprint = func(value: Texture2D) -> void:
 		baker.blueprint.style = value
 	baker.updated.connect(_on_baker_updates)
-	specular_slider.drag_started.connect(func():
+	specular_slider.drag_started.connect(func() -> void:
 		_specular_updating = true)
-	specular_slider.drag_ended.connect(func():
+	specular_slider.drag_ended.connect(func() -> void:
 		baker.blueprint.shininess = specular_slider.value
 		_specular_updating = false)
-	metallic_slider.drag_started.connect(func():
+	metallic_slider.drag_started.connect(func() -> void:
 		_metallic_updating = true)
-	metallic_slider.drag_ended.connect(func():
+	metallic_slider.drag_ended.connect(func() -> void:
 		baker.blueprint.metallic = metallic_slider.value
 		_metallic_updating = false)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _specular_updating:
 		baker.blueprint.shininess = specular_slider.value
 	if _metallic_updating:

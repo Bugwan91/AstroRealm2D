@@ -34,7 +34,7 @@ var _current_freeze_tick: int = 0:
 	set(value):
 		_current_freeze_tick = value if value < _max_freeze_ticks else 0
 
-static func create(root: Node2D, cell_size: float) -> WorldGrid:
+static func create(root: Node2D, cell_size: int) -> WorldGrid:
 	var grid := WorldGrid.new()
 	grid.root = root
 	grid.cell_size = cell_size

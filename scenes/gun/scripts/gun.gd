@@ -41,19 +41,18 @@ var _projectile_extra_lifetime: float
 var _flast_intensity := 0.0:
 	set(value):
 		_flast_intensity = value
-		var show := value > 0.0
-		_flash_light.visible = show
+		_flash_light.visible = value > 1e-3
 
 var _charge_time := 1.0
 var _charge_time_current := 0.0
 
-func init(conf: WeaponRes):
+func init(conf: WeaponRes) -> void:
 	config = conf
 	_charge_time = 1.0 / config.fire_rate
 	_projectile_lifetime = config.effective_range / config.projectile_speed
 	_projectile_extra_lifetime = config.extra_range / config.projectile_speed
 
-func connect_radiator(radiator: Heat):
+func connect_radiator(radiator: Heat) -> void:
 	pass
 
 #func connect_generator(generator: Generator):
@@ -84,10 +83,10 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	tranfser_heat.emit(_heat.transfer(delta))
 
-func set_origin(ship: Spaceship):
+func set_origin(ship: Spaceship) -> void:
 	origin = ship
 
-func fire(value: bool):
+func fire(value: bool) -> void:
 	_is_firing = value
 
 func _shoot(delta: float) -> void:

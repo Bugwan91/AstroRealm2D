@@ -23,7 +23,7 @@ func _ready() -> void:
 	CameraController.instance.updated.connect(camera_updated)
 	camera_updated(Vector2.ZERO, 1.0)
 
-func camera_updated(pos: Vector2, zoom: float):
+func camera_updated(pos: Vector2, zoom: float) -> void:
 	_vp_size = CameraController.instance.get_viewport_rect().size
 	_sp_size = _vp_size / zoom
 	_position = pos

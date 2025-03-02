@@ -29,8 +29,8 @@ var _chunk_size_inv: float
 var _total_offset: int
 
 static func create(
-	chunk_size: float,
-	cell_size: float,
+	chunk_size: int,
+	cell_size: int,
 	active_offset: int,
 	content_managers: Array[ChunkContentManager]
 	) -> ChunkGrid:

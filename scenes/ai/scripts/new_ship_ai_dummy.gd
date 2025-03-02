@@ -13,22 +13,22 @@ func _ready() -> void:
 	MainState.player_ship_spawned.connect(_on_player_ship_updated)
 	aim_with_main()
 
-func _process(delta: float) -> void:
-	return
-	fire(
-		(controlled_ship.transform.x.dot(
-			controlled_ship._main_weapon_slot.aim_point.normalized()
-		) > 0.98)\
-		and controlled_ship._main_weapon_slot.aim_point.length()\
-		< (controlled_ship._main_weapon_slot.weapon_resource.effective_range\
-			+ controlled_ship._main_weapon_slot.weapon_resource.extra_range * 0.8)
-		)
+#func _process(delta: float) -> void:
+	#return
+	#fire(
+		#(controlled_ship.transform.x.dot(
+			#controlled_ship._main_weapon_slot.aim_point.normalized()
+		#) > 0.98)\
+		#and controlled_ship._main_weapon_slot.aim_point.length()\
+		#< (controlled_ship._main_weapon_slot.weapon_resource.effective_range\
+			#+ controlled_ship._main_weapon_slot.weapon_resource.extra_range * 0.8)
+		#)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Resseting all movements from previous tick
 	reset_move()
 
-func _on_player_ship_updated(player: Spaceship):
+func _on_player_ship_updated(player: Spaceship) -> void:
 	data.target = player._radar_item if is_instance_valid(player) else null
 
 func update_target_point() -> Vector2:
@@ -47,16 +47,16 @@ func move(control: Vector2) -> void:
 func reset_move() -> void:
 	data.strafe = Vector2.ZERO
 
-func aim_with_main():
+func aim_with_main() -> void:
 	aim = AIM.MAIN
 
-func aim_with_Seccondary():
+func aim_with_Seccondary() -> void:
 	aim = AIM.SECCONDARY
 
-func unaim():
+func unaim() -> void:
 	aim = AIM.NONE
 
-func fire(value: bool):
+func fire(value: bool) -> void:
 	# TODO: automatically handle weapon group with current AIM option
 	data.fire = value
 #endregion

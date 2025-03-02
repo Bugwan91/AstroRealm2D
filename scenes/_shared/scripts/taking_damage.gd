@@ -31,7 +31,7 @@ func _ready() -> void:
 	monitoring = false
 	collision_layer = 3
 
-func set_health(value: float):
+func set_health(value: float) -> void:
 	health.max_health = value
 
 func setup_polygon(_hp: float, polygon_data: PackedVector2Array) -> void:

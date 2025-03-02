@@ -17,9 +17,9 @@ static func get_stop_velocity(
 	a: float,
 	a_target: Vector2 = Vector2.ZERO
 	) -> Vector2:
-	var d_speed = v_delta.project(p_delta).length()
-	var distance = p_delta.length()
-	var dir_n = p_delta / distance
+	var d_speed := v_delta.project(p_delta).length()
+	var distance := p_delta.length()
+	var dir_n := p_delta / distance
 	if distance < DISTANCE_THRESHOLD and d_speed < VELOCITY_THRESHOLD:
 		return Vector2.ZERO
 	var a_total: Vector2 = a * dir_n + a_target

@@ -35,7 +35,7 @@ func _set_style(value: Texture2D) -> void:
 	if not is_instance_valid(_view): return
 	_view.material.set("shader_parameter/style_texture", style)
 
-func _set_scale(value: float):
+func _set_scale(value: float) -> void:
 	scale = value
 	size = BASE_SIZE / scale
 	_view.position = size * 0.5

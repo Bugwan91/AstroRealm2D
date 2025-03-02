@@ -28,5 +28,5 @@ func _set_intensity(value: float) -> void:
 		fire.emitting = false
 		smoke.emitting = false
 
-func _on_destroy():
+func _on_destroy() -> void:
 	queue_free()

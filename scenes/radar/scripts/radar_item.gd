@@ -37,7 +37,7 @@ func _ready() -> void:
 	if is_instance_valid(config):
 		configure(config)
 
-func configure(conf: RadarItemConfig):
+func configure(conf: RadarItemConfig) -> void:
 	config = conf.duplicate()
 	init_shape(config.radius)
 	icon = RadarIcon.create(config.icon)

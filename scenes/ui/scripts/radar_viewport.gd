@@ -39,5 +39,5 @@ func reset() -> void:
 	for icon in _container.get_children():
 		_container.remove_child(icon)
 
-func _on_icon_destroy(icon: RadarIcon):
+func _on_icon_destroy(icon: RadarIcon) -> void:
 	icon.tree_exiting.disconnect(_on_icon_destroy.bind(icon))

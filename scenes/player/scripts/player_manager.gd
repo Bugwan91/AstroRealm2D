@@ -31,8 +31,8 @@ func respawn_player_ship(_position: Vector2 = Vector2.ZERO) -> void:
 		_position = position
 	if is_alive():
 		ship.queue_free()
-	var ship_data = await _create_ship_configuration()
-	var new_ship = ship_data.create()
+	var ship_data := await _create_ship_configuration()
+	var new_ship := ship_data.create()
 	new_ship.position = _position
 	new_ship.input_reader = _input_reader
 	var radar: Radar = _radar_scene.instantiate()

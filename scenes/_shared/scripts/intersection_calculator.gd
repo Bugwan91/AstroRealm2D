@@ -31,8 +31,8 @@ static func simple_interception(
 			return D
 		
 		var sqrt_disc := sqrt(discriminant)
-		var t1 = (-b + sqrt_disc) / (2.0 * a)
-		var t2 = (-b - sqrt_disc) / (2.0 * a)
+		var t1 := (-b + sqrt_disc) / (2.0 * a)
+		var t2 := (-b - sqrt_disc) / (2.0 * a)
 		
 		if t1 > 0:
 			t_min = t1

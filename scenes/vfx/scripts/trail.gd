@@ -23,8 +23,6 @@ extends Line2D
 var _is_global: bool
 var _life := 0.0
 var _points: PackedVector2Array
-# FIXME: The class variable "_offset" is declared but never used in the class.
-var _offset := Vector2.ZERO
 
 func _ready() -> void:
 	process_priority = 999

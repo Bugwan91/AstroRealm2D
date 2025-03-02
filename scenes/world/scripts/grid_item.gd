@@ -35,7 +35,7 @@ func freeze_process(delta: float) -> void:
 func _update_grid(force: bool = false) -> void:
 	cell = WorldGridManager.instance.grid.add_or_update(self, force)
 
-func _remove_from_grid():
+func _remove_from_grid() -> void:
 	WorldGridManager.instance.grid.remove(self)
 
 func _set_freeze(value: bool) -> void:

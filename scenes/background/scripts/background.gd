@@ -11,7 +11,7 @@ func _ready() -> void:
 	_setup_z_indexes_for_layers()
 	CameraController.instance.updated.connect(_on_camera_updated)
 
-func _on_camera_updated(pos: Vector2, zoom: float):
+func _on_camera_updated(pos: Vector2, _zoom: float) -> void:
 	position = pos
 
 func _setup_z_indexes_for_layers() -> void:

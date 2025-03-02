@@ -43,9 +43,9 @@ func setup(spaceship: Spaceship) -> void:
 	_closee_navigator.enabled = not ship.is_player()
 	flight_model.init()
 
-func _ready():
+func _ready() -> void:
 	# _physics_process() should be called after BTPlayer or user controls
-	process_physics_priority = 100.0
+	process_physics_priority = 100
 
 func _physics_process(delta: float) -> void:
 	if not is_instance_valid(inputs): return
@@ -56,10 +56,10 @@ func _physics_process(delta: float) -> void:
 		ship.linear_velocity) * 2.0
 	inputs.strafe += avoid_strafe if inputs.use_absolute else avoid_strafe.rotated(-ship.rotation)
 	_stop(delta)
-	_strafe(delta)
+	_strafe()
 	_rotate(delta)
-	_boost(delta)
-	_drag(delta)
+	_boost()
+	_drag()
 
 func _stop(delta: float) -> void:
 	if not inputs.stop or inputs.dodge: return
@@ -95,7 +95,7 @@ func _dodge(delta: float) -> void:
 				_dodging = false
 				_dodge_time = 0.0
 
-func _strafe(delta: float) -> void:
+func _strafe() -> void:
 	if inputs.strafe.is_zero_approx(): return
 	#var str_inp := inputs.strafe
 	#str_inp.x = str_inp.x if str_inp.x > 0. else str_inp.x * 0.2
@@ -111,9 +111,9 @@ func _strafe(delta: float) -> void:
 
 func _strafe_bonus() -> float:
 	return 0.0
-	var s := ship.linear_velocity.length()
-	var d := minf(s / flight_model.speed, 1.0)
-	return pow((1.0 - d), 3.0) * STRAFE_LOW_SPEED_BONUS
+	#var s := ship.linear_velocity.length()
+	#var d := minf(s / flight_model.speed, 1.0)
+	#return pow((1.0 - d), 3.0) * STRAFE_LOW_SPEED_BONUS
 
 func _rotate(delta: float) -> void:
 	var d := ship.transform.x.angle_to(input_reader.update_target_point() - ship.position)
@@ -125,12 +125,12 @@ func _rotate(delta: float) -> void:
 	# HACK: reimplemet this with apply_torque()
 	ship.angular_velocity = vt
 
-func _boost(delta: float) -> void:
+func _boost() -> void:
 	if not inputs.boost: return
 	var boost := inputs.boost * flight_model.boost * ship.transform.x
 	ship.apply_central_force(boost)
 
-func _drag(delta: float) -> void:
+func _drag() -> void:
 	if _dodge_acceleration: return
 	var extra_speed := ship.linear_velocity.length_squared() - flight_model.speed_sq
 	if extra_speed < 0.0: return

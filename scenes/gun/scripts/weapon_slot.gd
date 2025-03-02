@@ -30,10 +30,10 @@ func _ready() -> void:
 	add_child(_container)
 	pointer.disable()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_instance_valid(target) and is_instance_valid(pointer):
 		aim_point = get_intersection()
-		var dist := aim_point.length()
+		#var dist := aim_point.length()
 		#if dist < (weapon_resource.effective_range + weapon_resource.extra_range):
 		pointer.update(aim_point, origin.extrapolator.canvas_position, aim_point.length() < weapon_resource.effective_range)
 		#else:
@@ -58,13 +58,13 @@ func set_weapon(_weapon_resource: WeaponRes) -> void:
 		weapon.set_origin(origin)
 		weapon.position = point
 		_weapons.append(weapon)
-		weapon.shoot_recoil.connect(func(value: Vector2):
+		weapon.shoot_recoil.connect(func(value: Vector2) -> void:
 			recoil.emit(value))
-		weapon.tranfser_heat.connect(func(value: float):
+		weapon.tranfser_heat.connect(func(value: float) -> void:
 			heat_generated.emit(value))
 		add_child(weapon)
 
-func _clear():
+func _clear() -> void:
 	weapon_resource = null
 	for weapon in _weapons:
 		weapon.queue_free()
@@ -76,13 +76,13 @@ func connect_fire_input(input: Signal) -> void:
 func connect_target_input(input: Signal) -> void:
 	input.connect(on_target_changed)
 
-func on_fire(value):
+func on_fire(value: bool) -> void:
 	#TODO: handle enabled
 	#TODO: handle salvo
 	for weapon in _weapons:
 		weapon.fire(value)
 
-func on_target_changed(_target: RadarItem):
+func on_target_changed(_target: RadarItem) -> void:
 	if is_instance_valid(_target) and _target.parent is RigidBody:
 		target = _target.parent
 	else:

@@ -8,7 +8,7 @@ extends BTAction
 func _generate_name() -> String:
 	return "Update target vellocity"
 
-func _tick(delta: float) -> Status:
+func _tick(_delta: float) -> Status:
 	if not is_instance_valid(blackboard.get_parent()):
 		return Status.FAILURE
 	var v: Vector2 = blackboard.get_parent().get_var(velocity_key)

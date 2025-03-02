@@ -30,7 +30,6 @@ func merge_polygons() -> PackedVector2Array:
 	return poly
 
 func update(type: ShipBlueprint.Type, data: ViewBakerResource) -> void:
-	var poly := data.polygon.data if data != null and data.polygon != null else PackedVector2Array()
 	match type:
 		ShipBlueprint.Type.HULL: _update_hull(data)
 		ShipBlueprint.Type.HULL_EXT: _update_hull_ext(data)

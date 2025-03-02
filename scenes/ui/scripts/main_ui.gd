@@ -31,7 +31,7 @@ func hide_game_ui() -> void:
 func show_game_ui() -> void:
 	game_ui.visible = true
 
-func _on_player_spawn(player_ship: Spaceship) -> void:
+func _on_player_spawn(_player_ship: Spaceship) -> void:
 	Input.set_custom_mouse_cursor(_crosshair_image, Input.CURSOR_ARROW, Vector2(16.0, 16.0))
 
 func _on_player_destroyed() -> void:

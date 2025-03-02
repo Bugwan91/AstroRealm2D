@@ -28,7 +28,7 @@ var _impulces := Vector2.ZERO
 
 #region Initialization
 
-func init(config: ShipData):
+func init(config: ShipData) -> void:
 	pass
 
 func _ready() -> void:
@@ -56,7 +56,7 @@ func setup_blackboard(bb: Blackboard) -> Blackboard:
 		_setup_blackboard(bb)
 	return blackboard
 
-func _setup_blackboard(bb: Blackboard = null):
+func _setup_blackboard(bb: Blackboard = null) -> void:
 	blackboard = bb if is_instance_valid(bb) else Blackboard.new()
 	blackboard.bind_var_to_property(&"mass", data.flight_model, &"mass", true)
 	blackboard.bind_var_to_property(&"inertia", data.flight_model, &"inertia", true)
@@ -113,9 +113,9 @@ func _setup_view() -> void:
 	_view.setup_textures(data.design)
 	_view.scale = Vector2.ONE * data.design.view_scale
 
-func _setup_health(value: float = 0.0) -> void:
+func _setup_health(value: int = 0) -> void:
 	taking_damage.setup_polygon(
-		data.blueprint.health if value == 0.0 else value,
+		data.blueprint.health if value == 0 else value,
 		data.design.polygon
 	)
 
@@ -135,7 +135,7 @@ func _set_ship_data(new_data: ShipData) -> void:
 #endregion
 
 #region Physics
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	MyDebug.info("spd", int(speed))
 	MyDebug.info("pos", Vector2i(position))
 	_apply_impulces()

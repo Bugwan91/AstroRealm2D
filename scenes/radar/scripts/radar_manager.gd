@@ -65,7 +65,6 @@ func _update_icon_position(item: RadarItem, icon: RadarIcon) -> void:
 	icon.update(
 		item.global_position - radar.global_position,
 		item.global_rotation,
-		radar_view.radius,
 		_view_scale, 0.75)
 
 func _update_view_scale() -> void:
