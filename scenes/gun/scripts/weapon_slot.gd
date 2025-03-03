@@ -35,6 +35,7 @@ func _process(_delta: float) -> void:
 		aim_point = get_intersection()
 		#var dist := aim_point.length()
 		#if dist < (weapon_resource.effective_range + weapon_resource.extra_range):
+		#if origin.is_player():
 		pointer.update(aim_point, origin.extrapolator.canvas_position, aim_point.length() < weapon_resource.effective_range)
 		#else:
 			#pointer.disable()
@@ -90,15 +91,11 @@ func on_target_changed(_target: RadarItem) -> void:
 		pointer.disable()
 
 func get_intersection() -> Vector2:
-	if weapon_resource.is_beam:
-		return target.position - origin.position
-	else:
-		var a := (target as ActiveRigidBody).acceleration if target is ActiveRigidBody else Vector2.ZERO
-		#DebugDraw2d.line_vector(target.extrapolator.smooth_position, a)
-		return InterceptionCalculator.interception(
-			origin.extrapolator.smooth_position,
-			origin.linear_velocity,
-			target.extrapolator.smooth_position,
-			target.linear_velocity,
-			a,
-			weapon_resource.projectile_speed)
+	return InterceptionCalculator.interception(
+		origin.extrapolator.smooth_position,
+		origin.linear_velocity,
+		target.extrapolator.smooth_position,
+		target.linear_velocity,
+		(target as ActiveRigidBody).acceleration if target is ActiveRigidBody else Vector2.ZERO,
+		weapon_resource.projectile_speed
+	)

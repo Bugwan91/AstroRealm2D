@@ -13,16 +13,16 @@ func _ready() -> void:
 	MainState.player_ship_spawned.connect(_on_player_ship_updated)
 	aim_with_main()
 
-#func _process(delta: float) -> void:
+func _process(delta: float) -> void:
 	#return
-	#fire(
-		#(controlled_ship.transform.x.dot(
-			#controlled_ship._main_weapon_slot.aim_point.normalized()
-		#) > 0.98)\
-		#and controlled_ship._main_weapon_slot.aim_point.length()\
-		#< (controlled_ship._main_weapon_slot.weapon_resource.effective_range\
-			#+ controlled_ship._main_weapon_slot.weapon_resource.extra_range * 0.8)
-		#)
+	fire(
+		(controlled_ship.transform.x.dot(
+			controlled_ship._main_weapon_slot.aim_point.normalized()
+		) > 0.998)\
+		and controlled_ship._main_weapon_slot.aim_point.length()\
+		< (controlled_ship._main_weapon_slot.weapon_resource.effective_range\
+			+ controlled_ship._main_weapon_slot.weapon_resource.extra_range * 0.8)
+		)
 
 func _physics_process(_delta: float) -> void:
 	# Resseting all movements from previous tick

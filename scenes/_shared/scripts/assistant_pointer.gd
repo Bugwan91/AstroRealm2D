@@ -4,6 +4,7 @@ extends Node
 @onready var pointer: Control = %Pointer
 @onready var pointer_texture: TextureRect = %PointerTexture
 
+@export var show := true
 @export var in_range_color: Color
 @export var out_range_color: Color
 
@@ -12,6 +13,7 @@ var _position: Vector2
 
 func _ready() -> void:
 	pointer_texture.visible = false
+	pointer_texture.visible = show
 
 func _process(_delta: float) -> void:
 	_update_position()

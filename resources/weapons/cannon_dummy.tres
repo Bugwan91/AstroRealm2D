@@ -7,12 +7,12 @@
 script = ExtResource("1_g16it")
 scene = ExtResource("2_sgums")
 color = Color(0.912338, 0, 0.209441, 1)
-damage = 10.0
-fire_rate = 1.0
+damage = 1.0
+fire_rate = 2.0
 salvo = false
 effective_range = 1500.0
 extra_range = 500.0
-projectile_speed = 1500.0
+projectile_speed = 2000.0
 accuracy = 0.01
 overheat_accuracy = 0.02
 recoil_impulse = 0.0

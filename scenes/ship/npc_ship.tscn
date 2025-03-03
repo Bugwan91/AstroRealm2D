@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://clrdqrh8dbwau" path="res://scenes/_shared/scripts/health.gd" id="3_50e5s"]
 [ext_resource type="Resource" uid="uid://djvh46emc4h5f" path="res://resources/ships/dummy_ship.tres" id="3_axc4t"]
 [ext_resource type="Script" uid="uid://bn3wtodsbhv53" path="res://scenes/ai/scripts/new_ship_ai_dummy.gd" id="4_pnfbm"]
-[ext_resource type="BehaviorTree" uid="uid://c685r6ljaliji" path="res://scenes/ai/BTs/match_vel.tres" id="6_axc4t"]
+[ext_resource type="BehaviorTree" uid="uid://oprwpsd2e8wl" path="res://scenes/ai/BTs/keep_fire_distance.tres" id="6_axc4t"]
 [ext_resource type="Script" uid="uid://7an63nrdsiux" path="res://scenes/ai/scripts/dummy_bt_player.gd" id="6_j51wx"]
 
 [sub_resource type="Resource" id="Resource_monmg"]

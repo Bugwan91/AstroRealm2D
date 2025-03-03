@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://fn4ucxsb1i6t"]
+[gd_scene load_steps=44 format=3 uid="uid://fn4ucxsb1i6t"]
 
 [ext_resource type="Script" uid="uid://dn170a8jtfbql" path="res://scenes/main/scripts/main_scene.gd" id="1_2ehlx"]
 [ext_resource type="PackedScene" uid="uid://cxdkw4g14655c" path="res://scenes/background/background.tscn" id="1_b53p2"]
@@ -21,7 +21,6 @@
 [ext_resource type="Script" uid="uid://bgkivbjnetils" path="res://scenes/radar/scripts/radar_manager.gd" id="13_sunwe"]
 [ext_resource type="Resource" uid="uid://caqqbuwbg5ovc" path="res://resources/radar/ship.tres" id="14_k3hja"]
 [ext_resource type="Texture2D" uid="uid://d1plve26u31ph" path="res://assets/spaceships/Styles/Bunblebee.png" id="15_1fxwg"]
-[ext_resource type="PackedScene" uid="uid://dc0s2khypwfnm" path="res://scenes/_shared/pointer.tscn" id="15_5xucn"]
 [ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="16_o7m8d"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="22_yvbma"]
 [ext_resource type="Resource" uid="uid://b1q7bv30m17g" path="res://resources/radar/star.tres" id="25_n0sfc"]
@@ -37,7 +36,7 @@
 [sub_resource type="Resource" id="Resource_d3v0f"]
 script = ExtResource("10_1xx6e")
 _asteroid_scene = ExtResource("9_j7r4u")
-density = 0.2
+density = 0.01
 size_variation = 0.5
 speed_variation = 0.2
 speed = 50
@@ -141,11 +140,6 @@ script = ExtResource("12_c6lr5")
 
 [node name="Background" parent="." instance=ExtResource("1_b53p2")]
 unique_name_in_owner = true
-
-[node name="AutopilotPointer" parent="." instance=ExtResource("15_5xucn")]
-unique_name_in_owner = true
-in_range_color = Color(0, 0, 1, 0.78)
-out_range_color = Color(0, 0, 0.486275, 0.784314)
 
 [node name="DirectionalLight2" type="DirectionalLight2D" parent="."]
 position = Vector2(-656, 430)

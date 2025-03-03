@@ -79,6 +79,7 @@ script = ExtResource("8_4fwa5")
 
 [node name="Pointer" parent="PositionExtrapolator/MainWeaponSlot" instance=ExtResource("5_3lg4r")]
 unique_name_in_owner = true
+show = false
 in_range_color = Color(1, 0, 0, 0.2)
 out_range_color = Color(0.486, 0, 0, 0.2)
 
