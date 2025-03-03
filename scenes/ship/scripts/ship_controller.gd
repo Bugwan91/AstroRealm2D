@@ -52,13 +52,13 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if not is_instance_valid(inputs): return
-	_update_strafe_bonus()
 	_dodge(delta)
 	var avoid_strafe := _closee_navigator.update_course(
 		delta,
 		ship.position,
 		ship.linear_velocity) * 2.0
 	inputs.strafe += avoid_strafe if inputs.use_absolute else avoid_strafe.rotated(-ship.rotation)
+	_update_strafe_bonus()
 	_stop(delta)
 	_strafe()
 	_rotate(delta)

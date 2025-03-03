@@ -21,7 +21,7 @@ func _enter() -> void:
 
 func _tick(delta: float) -> Status:
 	if not blackboard.has_var(target_position_key):
-		return Status.FAILURE
+		return FAILURE
 	var p: Vector2 = blackboard.get_var(position_key)
 	var v: Vector2 = blackboard.get_var(velocity_key)
 	var p_target: Vector2 = blackboard.get_var(target_position_key)
@@ -34,6 +34,6 @@ func _tick(delta: float) -> Status:
 		return SUCCESS
 	var strafe: float = blackboard.get_var(strafe_key)
 	var v_stop := ControlUnils.get_stop_velocity(d_p, d_v, strafe, a_target)
-	var controls := ControlUnils.match_velocity_control(v_stop - v, strafe * delta)
+	var controls := ControlUnils.match_velocity_control(v_stop - v + v_target, strafe * delta)
 	(agent as AIShipInput).move(controls)
 	return RUNNING

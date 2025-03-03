@@ -8,7 +8,11 @@
 [sub_resource type="BTAction" id="BTAction_2fsot"]
 script = ExtResource("1_uichc")
 velocity_key = &"velocity"
+acceleration_key = null
 target_velocity_key = &"target_velocity"
+target_velocity_new_key = null
+target_acceleration_key = null
+target_acceleration_new_key = null
 
 [sub_resource type="BTAction" id="BTAction_xcc4y"]
 script = ExtResource("2_sesos")

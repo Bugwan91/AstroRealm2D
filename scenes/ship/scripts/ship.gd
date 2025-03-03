@@ -72,6 +72,7 @@ func _setup_blackboard(bb: Blackboard = null) -> void:
 	blackboard.bind_var_to_property(&"hp", taking_damage.health, &"health", true)
 	blackboard.bind_var_to_property(&"position", self, &"position", true)
 	blackboard.bind_var_to_property(&"velocity", self, &"linear_velocity", true)
+	blackboard.bind_var_to_property(&"acceleration", self, &"acceleration", true)
 	blackboard.bind_var_to_property(&"aim_point", _main_weapon_slot, &"aim_point", true)
 	blackboard.bind_var_to_property(&"weapon_temperature", _main_weapon_slot, &"temperature", true)
 	blackboard.bind_var_to_property(&"weapon_range", data.blueprint.main_weapon, &"effective_range", true)

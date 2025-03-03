@@ -1,0 +1,74 @@
+[gd_resource type="BehaviorTree" load_steps=16 format=3 uid="uid://oprwpsd2e8wl"]
+
+[ext_resource type="Script" uid="uid://hj1dcq3xbcwj" path="res://scenes/ai/tasks/task/update_fire_distance_position.gd" id="1_ssbwy"]
+[ext_resource type="Script" uid="uid://dwa2wci75w01x" path="res://scenes/ai/tasks/task/strafe_to_position.gd" id="2_0fk1d"]
+[ext_resource type="Script" uid="uid://c257otqd5katn" path="res://scenes/ai/tasks/task/update_target_velocity.gd" id="2_8m681"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_2fsot"]
+
+[sub_resource type="BTAction" id="BTAction_0fk1d"]
+script = ExtResource("1_ssbwy")
+position_key = &"position"
+target_position_key = &"target_position"
+weapon_range_key = &"weapon_range"
+extra_close = 0.8
+
+[sub_resource type="BTAction" id="BTAction_kjy56"]
+script = ExtResource("2_8m681")
+velocity_key = &"velocity"
+acceleration_key = &"acceleration"
+target_velocity_key = &"target_velocity"
+target_velocity_new_key = &"target_velocity_new"
+target_acceleration_key = &"target_acceleration"
+target_acceleration_new_key = &"target_acceleration_new"
+
+[sub_resource type="BTRunLimit" id="BTRunLimit_ssbwy"]
+children = [SubResource("BTAction_0fk1d"), SubResource("BTAction_kjy56")]
+
+[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_0fk1d"]
+children = [SubResource("BTRunLimit_ssbwy")]
+
+[sub_resource type="BTAction" id="BTAction_ssbwy"]
+script = ExtResource("1_ssbwy")
+position_key = &"position"
+target_position_key = &"target_position"
+weapon_range_key = &"weapon_range"
+extra_close = 0.8
+
+[sub_resource type="BTRepeat" id="BTRepeat_0fk1d"]
+forever = true
+children = [SubResource("BTAction_ssbwy")]
+
+[sub_resource type="BTAction" id="BTAction_v0c4j"]
+script = ExtResource("2_8m681")
+velocity_key = &"velocity"
+acceleration_key = &"acceleration"
+target_velocity_key = &"target_velocity"
+target_velocity_new_key = &"target_velocity_new"
+target_acceleration_key = &"target_acceleration"
+target_acceleration_new_key = &"target_acceleration_new"
+
+[sub_resource type="BTDelay" id="BTDelay_ssbwy"]
+children = [SubResource("BTAction_v0c4j")]
+
+[sub_resource type="BTAction" id="BTAction_8m681"]
+script = ExtResource("2_0fk1d")
+position_key = &"position"
+velocity_key = &"velocity"
+target_position_key = &"target_position"
+target_velocity_key = &"target_velocity"
+target_acceleration_key = &"target_acceleration"
+strafe_key = &"strafe"
+position_threshold = 100.0
+velocity_threshold = 10.0
+
+[sub_resource type="BTParallel" id="BTParallel_kjy56"]
+repeat = true
+children = [SubResource("BTRepeat_0fk1d"), SubResource("BTDelay_ssbwy"), SubResource("BTAction_8m681")]
+
+[sub_resource type="BTSequence" id="BTSequence_kjy56"]
+children = [SubResource("BTAlwaysSucceed_0fk1d"), SubResource("BTParallel_kjy56")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_2fsot")
+root_task = SubResource("BTSequence_kjy56")
