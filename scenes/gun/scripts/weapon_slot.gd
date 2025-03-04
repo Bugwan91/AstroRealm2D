@@ -6,13 +6,18 @@ signal heat_generated(value: float)
 
 @onready var pointer: AssistantPointer = %Pointer
 
+var enabled := true:
+	set(value):
+		enabled = value
+		_update_fire()
 var points: Array[Vector2]
 var center: Vector2
 var weapon_resource: WeaponRes
-var enabled := true
 var origin: Spaceship
 var target: RigidBody
 var aim_point: Vector2
+
+var _fire_input := false
 
 var temperature: float:
 	get:
@@ -78,10 +83,14 @@ func connect_target_input(input: Signal) -> void:
 	input.connect(on_target_changed)
 
 func on_fire(value: bool) -> void:
-	#TODO: handle enabled
+	_fire_input = value
 	#TODO: handle salvo
+	_update_fire()
+
+func _update_fire() -> void:
+	var fire := enabled and _fire_input
 	for weapon in _weapons:
-		weapon.fire(value)
+		weapon.fire(fire)
 
 func on_target_changed(_target: RadarItem) -> void:
 	if is_instance_valid(_target) and _target.parent is RigidBody:

@@ -221,6 +221,7 @@ script = ExtResource("1_48uix")
 distance = 128000.0
 
 [node name="BackgroundSprite2" type="Sprite2D" parent="256"]
+visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_b54vu")
 scale = Vector2(0.5, 0.5)

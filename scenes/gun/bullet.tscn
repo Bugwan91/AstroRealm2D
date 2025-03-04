@@ -57,5 +57,5 @@ width = 1.0
 width_curve = SubResource("Curve_i0wtl")
 gradient = SubResource("Gradient_7dx5m")
 script = ExtResource("6_51oes")
-lifetime = 0.1
+lifetime = 0.08
 skip_tiks = 0
