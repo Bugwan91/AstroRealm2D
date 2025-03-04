@@ -16,5 +16,5 @@ shininess = 0.458
 metallic = 1.0
 main_weapon = ExtResource("2_6po8a")
 radar_item_config = ExtResource("3_x6mr0")
-health = 1000
+health = 20
 metadata/_custom_type_script = "uid://bnl3gx1nvuvom"

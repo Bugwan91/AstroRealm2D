@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 		) > 0.998)\
 		and controlled_ship._main_weapon_slot.aim_point.length()\
 		< (controlled_ship._main_weapon_slot.weapon_resource.effective_range\
-			+ controlled_ship._main_weapon_slot.weapon_resource.extra_range * 0.8)
+			+ controlled_ship._main_weapon_slot.weapon_resource.extra_range * 0.9)
 		)
 
 func _physics_process(_delta: float) -> void:
@@ -46,6 +46,9 @@ func move(control: Vector2) -> void:
 
 func reset_move() -> void:
 	data.strafe = Vector2.ZERO
+
+func dodge() -> void:
+	data.dodge = true
 
 func aim_with_main() -> void:
 	aim = AIM.MAIN

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=32 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" uid="uid://b2ih5uxk3qw0h" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://w8vsnqoourdh" path="res://scenes/vfx/scripts/trail.gd" id="20_q0150"]
 [ext_resource type="PackedScene" uid="uid://dwdaypca54j40" path="res://scenes/radar/radar_item.tscn" id="20_w3y8g"]
 [ext_resource type="Texture2D" uid="uid://t4p237ht1kcg" path="res://assets/spaceships/hull/02/_interrior.png" id="23_0616w"]
+[ext_resource type="PackedScene" uid="uid://cor2bkqrdl620" path="res://scenes/ship_designer/baker.tscn" id="24_2xkf5"]
 [ext_resource type="Texture2D" uid="uid://brgjtbampllsy" path="res://assets/spaceships/hull/02/_interrior_n.png" id="24_xvqm4"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0616w"]
@@ -145,3 +146,6 @@ metadata/_custom_type_script = "uid://ce7t5qymrq553"
 [node name="RadarItem" parent="." instance=ExtResource("20_w3y8g")]
 unique_name_in_owner = true
 selectable = true
+
+[node name="ShipBaker" parent="." instance=ExtResource("24_2xkf5")]
+unique_name_in_owner = true

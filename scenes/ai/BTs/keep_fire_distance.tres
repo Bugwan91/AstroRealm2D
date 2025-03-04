@@ -1,8 +1,11 @@
-[gd_resource type="BehaviorTree" load_steps=16 format=3 uid="uid://oprwpsd2e8wl"]
+[gd_resource type="BehaviorTree" load_steps=27 format=3 uid="uid://oprwpsd2e8wl"]
 
 [ext_resource type="Script" uid="uid://hj1dcq3xbcwj" path="res://scenes/ai/tasks/task/update_fire_distance_position.gd" id="1_ssbwy"]
 [ext_resource type="Script" uid="uid://dwa2wci75w01x" path="res://scenes/ai/tasks/task/strafe_to_position.gd" id="2_0fk1d"]
 [ext_resource type="Script" uid="uid://c257otqd5katn" path="res://scenes/ai/tasks/task/update_target_velocity.gd" id="2_8m681"]
+[ext_resource type="Script" uid="uid://cn8eo8xlugwfi" path="res://scenes/ai/tasks/task/update_flanking_target_position.gd" id="3_kjy56"]
+[ext_resource type="Script" uid="uid://mq4tdtilmw0b" path="res://scenes/ai/tasks/task/dodge.gd" id="4_8m681"]
+[ext_resource type="Script" uid="uid://bflmnjmobhke6" path="res://scenes/ai/tasks/task/update_is_target_look_at_me.gd" id="5_v0c4j"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_2fsot"]
 
@@ -28,16 +31,14 @@ children = [SubResource("BTAction_0fk1d"), SubResource("BTAction_kjy56")]
 [sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_0fk1d"]
 children = [SubResource("BTRunLimit_ssbwy")]
 
-[sub_resource type="BTAction" id="BTAction_ssbwy"]
-script = ExtResource("1_ssbwy")
+[sub_resource type="BTAction" id="BTAction_qeaow"]
+script = ExtResource("3_kjy56")
 position_key = &"position"
 target_position_key = &"target_position"
 weapon_range_key = &"weapon_range"
+transform_key = &"transform"
 extra_close = 0.8
-
-[sub_resource type="BTRepeat" id="BTRepeat_0fk1d"]
-forever = true
-children = [SubResource("BTAction_ssbwy")]
+flank_angle = null
 
 [sub_resource type="BTAction" id="BTAction_v0c4j"]
 script = ExtResource("2_8m681")
@@ -49,7 +50,17 @@ target_acceleration_key = &"target_acceleration"
 target_acceleration_new_key = &"target_acceleration_new"
 
 [sub_resource type="BTDelay" id="BTDelay_ssbwy"]
+seconds = 0.5
 children = [SubResource("BTAction_v0c4j")]
+
+[sub_resource type="BBVariant" id="BBVariant_jvm4b"]
+type = 1
+saved_value = false
+resource_name = "false"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_qeaow"]
+variable = &"dodging"
+value = SubResource("BBVariant_jvm4b")
 
 [sub_resource type="BTAction" id="BTAction_8m681"]
 script = ExtResource("2_0fk1d")
@@ -62,12 +73,44 @@ strafe_key = &"strafe"
 position_threshold = 100.0
 velocity_threshold = 10.0
 
-[sub_resource type="BTParallel" id="BTParallel_kjy56"]
+[sub_resource type="BTSequence" id="BTSequence_6fyxl"]
+children = [SubResource("BTCheckVar_qeaow"), SubResource("BTAction_8m681")]
+
+[sub_resource type="BTAction" id="BTAction_il1ps"]
+script = ExtResource("5_v0c4j")
+position_key = &"position"
+transform_key = &"transform"
+target_look_at_me_angle_key = &"target_look_at_me_angle_key"
+is_target_look_at_me_key = &"is_target_look_at_me"
+angle_threshold = 0.2
+
+[sub_resource type="BBVariant" id="BBVariant_t4huo"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_epwt1"]
+variable = &"is_target_look_at_me"
+value = SubResource("BBVariant_t4huo")
+
+[sub_resource type="BTAction" id="BTAction_jvm4b"]
+script = ExtResource("4_8m681")
+dodging_key = &"dodging"
+metadata/_weight_ = 0.25
+
+[sub_resource type="BTSequence" id="BTSequence_yesit"]
+children = [SubResource("BTAction_il1ps"), SubResource("BTCheckVar_epwt1"), SubResource("BTAction_jvm4b")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_fuko1"]
+duration = 1.0
+children = [SubResource("BTSequence_yesit")]
+
+[sub_resource type="BTParallel" id="BTParallel_v0c4j"]
 repeat = true
-children = [SubResource("BTRepeat_0fk1d"), SubResource("BTDelay_ssbwy"), SubResource("BTAction_8m681")]
+children = [SubResource("BTAction_qeaow"), SubResource("BTDelay_ssbwy"), SubResource("BTSequence_6fyxl"), SubResource("BTCooldown_fuko1")]
 
 [sub_resource type="BTSequence" id="BTSequence_kjy56"]
-children = [SubResource("BTAlwaysSucceed_0fk1d"), SubResource("BTParallel_kjy56")]
+children = [SubResource("BTAlwaysSucceed_0fk1d"), SubResource("BTParallel_v0c4j")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_2fsot")

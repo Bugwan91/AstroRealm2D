@@ -18,6 +18,7 @@ extends ActiveRigidBody
 @onready var _main_weapon_slot: WeaponSlot = %MainWeaponSlot
 @onready var _radar_item: RadarItem = %RadarItem
 @onready var _collision_polygon: CollisionPolygon2D = %CollisionPolygon2D
+@onready var _blueprint_baker: ShipBlueprintBaker = %ShipBaker
 #endregion
 
 var blackboard: Blackboard
@@ -35,7 +36,7 @@ func _ready() -> void:
 	assert(data != null, "Ship Data is missing")
 	assert(data.blueprint != null, "Ship Blueprint is missing")
 	if data.design == null:
-		data.design = await ShipBlueprintBaker.instance.bake_from_blueprint(data.blueprint)
+		data.design = await _blueprint_baker.bake_from_blueprint(data.blueprint)
 	super._ready()
 	_setup_collider()
 	_setup_view()
@@ -71,11 +72,14 @@ func _setup_blackboard(bb: Blackboard = null) -> void:
 	blackboard.bind_var_to_property(&"hp_max", taking_damage.health, &"max_health", true)
 	blackboard.bind_var_to_property(&"hp", taking_damage.health, &"health", true)
 	blackboard.bind_var_to_property(&"position", self, &"position", true)
+	blackboard.bind_var_to_property(&"rotation", self, &"rotation", true)
+	blackboard.bind_var_to_property(&"transform", self, &"transform", true)
 	blackboard.bind_var_to_property(&"velocity", self, &"linear_velocity", true)
 	blackboard.bind_var_to_property(&"acceleration", self, &"acceleration", true)
 	blackboard.bind_var_to_property(&"aim_point", _main_weapon_slot, &"aim_point", true)
 	blackboard.bind_var_to_property(&"weapon_temperature", _main_weapon_slot, &"temperature", true)
 	blackboard.bind_var_to_property(&"weapon_range", data.blueprint.main_weapon, &"effective_range", true)
+	blackboard.bind_var_to_property(&"dodging", flight_controller, &"_dodging", true)
 
 func _setup_flight_controller() -> void:
 	flight_controller.setup(self)

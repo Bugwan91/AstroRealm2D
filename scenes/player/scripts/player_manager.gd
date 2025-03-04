@@ -36,7 +36,7 @@ func respawn_player_ship(_position: Vector2 = Vector2.ZERO) -> void:
 	new_ship.position = _position
 	new_ship.input_reader = _input_reader
 	var radar: Radar = _radar_scene.instantiate()
-	radar.radius = 10000.0
+	radar.radius = 5000.0
 	new_ship.add_child(radar)
 	#ship.autopilot_pointer = autopilot_pointer
 	var audio_listener := AudioListener2D.new()
@@ -44,7 +44,6 @@ func respawn_player_ship(_position: Vector2 = Vector2.ZERO) -> void:
 	audio_listener.make_current()
 	WorldGridManager.instance.world_root.add_child(new_ship)
 	ship = new_ship
-	ship._setup_health(10000.0)
 	ship.tree_exiting.connect(_on_ship_destroyed)
 	MainState.player = ship
 

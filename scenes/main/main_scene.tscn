@@ -53,7 +53,7 @@ shininess = 0.769
 metallic = 1.0
 main_weapon = ExtResource("12_n0sfc")
 radar_item_config = ExtResource("14_k3hja")
-health = 1000
+health = 40
 metadata/_custom_type_script = ExtResource("11_fkpwp")
 
 [sub_resource type="Gradient" id="Gradient_2be3f"]
@@ -710,6 +710,10 @@ unique_name_in_owner = true
 
 [node name="Ship" parent="World" instance=ExtResource("31_o7m8d")]
 position = Vector2(-432, -422)
+data = ExtResource("32_sls11")
+
+[node name="Ship2" parent="World" instance=ExtResource("31_o7m8d")]
+position = Vector2(-401, 340)
 data = ExtResource("32_sls11")
 
 [node name="LevelLoader" type="Node" parent="."]

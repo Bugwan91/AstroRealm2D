@@ -9,4 +9,5 @@ func on_player_spawned(value: Spaceship) -> void:
 	if is_instance_valid(_target):
 		blackboard.set_parent(_target.get_blackboard())
 	else:
+		# FIXME: it looks like this doesn't work
 		blackboard.set_parent(null)
