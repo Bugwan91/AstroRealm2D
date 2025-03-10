@@ -16,6 +16,8 @@ var weapon_resource: WeaponRes
 var origin: Spaceship
 var target: RigidBody
 var aim_point: Vector2
+var is_firing: bool:
+	get: return enabled and _fire_input
 
 var _fire_input := false
 
@@ -33,17 +35,18 @@ func _ready() -> void:
 	origin = owner
 	_container = Node2D.new()
 	add_child(_container)
-	pointer.disable()
+	pointer.hide()
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(target) and is_instance_valid(pointer):
 		aim_point = get_intersection()
-		#var dist := aim_point.length()
-		#if dist < (weapon_resource.effective_range + weapon_resource.extra_range):
-		#if origin.is_player():
-		pointer.update(aim_point, origin.extrapolator.canvas_position, aim_point.length() < weapon_resource.effective_range)
-		#else:
-			#pointer.disable()
+		if origin.is_player():
+			var dist := aim_point.length()
+			pointer.update(aim_point, origin.extrapolator.canvas_position)
+			if dist < weapon_resource.effective_range + weapon_resource.extra_range * 0.5:
+				pointer.set_active()
+			else:
+				pointer.set_inactive()
 	#TODO: maybe I should handle fire here
 	else:
 		aim_point = Vector2.ZERO
@@ -96,7 +99,7 @@ func on_target_changed(_target: RadarItem) -> void:
 		target = _target.parent
 	else:
 		target = null
-		pointer.disable()
+		pointer.hide()
 
 func get_intersection() -> Vector2:
 	return InterceptionCalculator.interception(

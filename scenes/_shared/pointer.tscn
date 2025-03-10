@@ -5,8 +5,6 @@
 
 [node name="Pointer" type="Node"]
 script = ExtResource("1_tdna1")
-in_range_color = Color(1, 0, 0, 0.784314)
-out_range_color = Color(0.486275, 0, 0, 0.784314)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
