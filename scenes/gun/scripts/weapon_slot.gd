@@ -88,9 +88,8 @@ func on_fire(value: bool) -> void:
 	_update_fire()
 
 func _update_fire() -> void:
-	var fire := enabled and _fire_input
 	for weapon in _weapons:
-		weapon.fire(fire)
+		weapon.fire(is_firing)
 
 func on_target_changed(_target: RadarItem) -> void:
 	if is_instance_valid(_target) and _target.parent is RigidBody:

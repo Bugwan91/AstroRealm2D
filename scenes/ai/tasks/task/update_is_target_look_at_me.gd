@@ -6,6 +6,10 @@ extends BTAction
 @export var transform_key: StringName = &"transform"
 @export var target_look_at_me_angle_key: StringName = &"target_look_at_me_angle_key"
 @export var is_target_look_at_me_key: StringName = &"is_target_look_at_me"
+@export var is_firing_key: StringName = &"is_firing"
+@export var is_target_firing_key: StringName = &"is_target_firing"
+@export var distance_to_target_key: StringName = &"distance_to_target"
+
 @export var angle_threshold: float = 0.2
 
 func _generate_name() -> String:
@@ -23,4 +27,6 @@ func _tick(delta: float) -> Status:
 	var angle := absf(target_forward.angle_to(dir_from_target))
 	blackboard.set_var(target_look_at_me_angle_key, angle)
 	blackboard.set_var(is_target_look_at_me_key, abs(angle) < angle_threshold)
+	blackboard.set_var(is_target_firing_key, parent.get_var(is_firing_key))
+	blackboard.set_var(distance_to_target_key, dir_from_target.length())
 	return SUCCESS
