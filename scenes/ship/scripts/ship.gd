@@ -12,7 +12,7 @@ extends ActiveRigidBody
 
 #region Onready propeties
 @onready var flight_controller: FlightController = %FlightController
-@onready var taking_damage: TakingDamage = %TakingDamage
+@onready var main_hp: TakingDamage = %MainHP
 @onready var heat: Heat = %Heat
 @onready var _view: ShipView = %View
 @onready var _main_weapon_slot: WeaponSlot = %MainWeaponSlot
@@ -69,8 +69,8 @@ func _setup_blackboard(bb: Blackboard = null) -> void:
 	blackboard.bind_var_to_property(&"heat_max", heat, &"capacity", true)
 	blackboard.bind_var_to_property(&"heat_cooling", heat, &"cooling", true)
 	blackboard.bind_var_to_property(&"heat", heat, &"_heat", true)
-	blackboard.bind_var_to_property(&"hp_max", taking_damage.health, &"max_health", true)
-	blackboard.bind_var_to_property(&"hp", taking_damage.health, &"health", true)
+	blackboard.bind_var_to_property(&"hp_max", main_hp, &"hp_max", true)
+	blackboard.bind_var_to_property(&"hp", main_hp, &"hp", true)
 	blackboard.bind_var_to_property(&"position", self, &"position", true)
 	blackboard.bind_var_to_property(&"rotation", self, &"rotation", true)
 	blackboard.bind_var_to_property(&"transform", self, &"transform", true)
@@ -80,6 +80,7 @@ func _setup_blackboard(bb: Blackboard = null) -> void:
 	blackboard.bind_var_to_property(&"weapon_temperature", _main_weapon_slot, &"temperature", true)
 	blackboard.bind_var_to_property(&"weapon_range", data.blueprint.main_weapon, &"effective_range", true)
 	blackboard.bind_var_to_property(&"dodging", flight_controller, &"_dodging", true)
+	blackboard.bind_var_to_property(&"is_firing", _main_weapon_slot, &"is_firing", true)
 
 func _setup_flight_controller() -> void:
 	flight_controller.setup(self)
@@ -119,7 +120,7 @@ func _setup_view() -> void:
 	_view.scale = Vector2.ONE * data.design.view_scale
 
 func _setup_health(value: int = 0) -> void:
-	taking_damage.setup_polygon(
+	main_hp.setup_polygon(
 		data.blueprint.health if value == 0 else value,
 		data.design.polygon
 	)

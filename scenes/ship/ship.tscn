@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://ce1dw618jykrb"]
+[gd_scene load_steps=30 format=3 uid="uid://ce1dw618jykrb"]
 
 [ext_resource type="Script" uid="uid://b2ih5uxk3qw0h" path="res://scenes/ship/scripts/ship.gd" id="1_5ckws"]
 [ext_resource type="Resource" uid="uid://c5khrxh5yovq4" path="res://resources/ships/base_ship.tres" id="2_uwj24"]
@@ -15,7 +15,6 @@
 [ext_resource type="Script" uid="uid://bp5341wcuo33e" path="res://scenes/ship/scripts/close_navigator.gd" id="14_xvsf7"]
 [ext_resource type="Script" uid="uid://ce7t5qymrq553" path="res://scenes/_shared/scripts/taking_damage.gd" id="17_6qm8q"]
 [ext_resource type="PackedScene" uid="uid://cxaoyw4qxcd0p" path="res://scenes/ship/damage_effect.tscn" id="18_sakv4"]
-[ext_resource type="Script" uid="uid://clrdqrh8dbwau" path="res://scenes/_shared/scripts/health.gd" id="18_woufe"]
 [ext_resource type="PackedScene" uid="uid://dcy3g0684tgaa" path="res://scenes/ship/destroy_effect.tscn" id="19_3lg4r"]
 [ext_resource type="Script" uid="uid://de333ogw3s8dt" path="res://scenes/_shared/scripts/position_extrapolator.gd" id="19_6qm8q"]
 [ext_resource type="Script" uid="uid://liqs1h6x4e1p" path="res://scenes/heat/scripts/Heat.gd" id="20_1gdyl"]
@@ -55,12 +54,6 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_sdsuv"]
 colors = PackedColorArray(1, 1, 1, 0.5, 1, 1, 1, 0)
 
-[sub_resource type="Resource" id="Resource_sakv4"]
-resource_local_to_scene = true
-script = ExtResource("18_woufe")
-max_health = 1000.0
-metadata/_custom_type_script = ExtResource("18_woufe")
-
 [node name="Ship" type="RigidBody2D"]
 script = ExtResource("1_5ckws")
 data = ExtResource("2_uwj24")
@@ -80,9 +73,8 @@ script = ExtResource("8_4fwa5")
 
 [node name="Pointer" parent="PositionExtrapolator/MainWeaponSlot" instance=ExtResource("5_3lg4r")]
 unique_name_in_owner = true
-show = false
-in_range_color = Color(1, 0, 0, 0.2)
-out_range_color = Color(0.486, 0, 0, 0.2)
+active_color = Color(1, 0, 0, 0.2)
+inactive_color = Color(0.5, 0, 0, 0.2)
 
 [node name="Interrior" type="Sprite2D" parent="PositionExtrapolator"]
 material = SubResource("ShaderMaterial_xvqm4")
@@ -132,13 +124,13 @@ capacity = 80.0
 cooling = 2.0
 transfer_efficiency = 0.0
 view = NodePath("../PositionExtrapolator/View")
-health = NodePath("../TakingDamage")
+health = NodePath("../MainHP")
 
-[node name="TakingDamage" type="Area2D" parent="."]
+[node name="MainHP" type="Area2D" parent="."]
 unique_name_in_owner = true
 collision_layer = 4
 script = ExtResource("17_6qm8q")
-health = SubResource("Resource_sakv4")
+is_main_hp = true
 _damaged_effect_scene = ExtResource("18_sakv4")
 _destroy_effect_scene = ExtResource("19_3lg4r")
 metadata/_custom_type_script = "uid://ce7t5qymrq553"

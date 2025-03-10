@@ -19,9 +19,9 @@ func _process(_delta: float) -> void:
 
 func _on_player_ship_updated(new_player_ship: Spaceship) -> void:
 	player = new_player_ship
-	health.value = player.taking_damage.health.hp
+	health.value = player.main_hp.hp_percentage
 	visible = true
-	player.taking_damage.health.damaged.connect(_on_health_update)
+	player.main_hp.damaged.connect(_on_health_update)
 
 func _on_player_destroyed() -> void:
 	visible = false

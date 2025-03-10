@@ -1,18 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://b4ck2h0854fdk"]
+[gd_scene load_steps=8 format=3 uid="uid://b4ck2h0854fdk"]
 
 [ext_resource type="PackedScene" uid="uid://ce1dw618jykrb" path="res://scenes/ship/ship.tscn" id="1_k2027"]
 [ext_resource type="Script" uid="uid://dbm243vswi8jo" path="res://scenes/ship/scripts/npc_ship.gd" id="2_fdnbw"]
-[ext_resource type="Script" uid="uid://clrdqrh8dbwau" path="res://scenes/_shared/scripts/health.gd" id="3_50e5s"]
 [ext_resource type="Resource" uid="uid://djvh46emc4h5f" path="res://resources/ships/dummy_ship.tres" id="3_axc4t"]
 [ext_resource type="Script" uid="uid://bn3wtodsbhv53" path="res://scenes/ai/scripts/new_ship_ai_dummy.gd" id="4_pnfbm"]
 [ext_resource type="BehaviorTree" uid="uid://oprwpsd2e8wl" path="res://scenes/ai/BTs/keep_fire_distance.tres" id="6_axc4t"]
 [ext_resource type="Script" uid="uid://7an63nrdsiux" path="res://scenes/ai/scripts/dummy_bt_player.gd" id="6_j51wx"]
-
-[sub_resource type="Resource" id="Resource_monmg"]
-resource_local_to_scene = true
-script = ExtResource("3_50e5s")
-max_health = 1000.0
-metadata/_custom_type_script = ExtResource("3_50e5s")
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_axc4t"]
 
@@ -20,9 +13,6 @@ metadata/_custom_type_script = ExtResource("3_50e5s")
 script = ExtResource("2_fdnbw")
 data = ExtResource("3_axc4t")
 input_reader = NodePath("NPCShipInput")
-
-[node name="TakingDamage" parent="." index="6"]
-health = SubResource("Resource_monmg")
 
 [node name="NPCShipInput" type="Node2D" parent="." index="8"]
 unique_name_in_owner = true
