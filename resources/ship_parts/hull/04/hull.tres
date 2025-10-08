@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="HullBakerResource" load_steps=15 format=3 uid="uid://c04i1f6eeisoq"]
 
-[ext_resource type="Script" uid="uid://p47ksddy7fs0" path="res://scenes/ship_designer/scripts/resources/view_baker_resource.gd" id="1_algb5"]
+[ext_resource type="Script" uid="uid://p47ksddy7fs0" path="res://scenes/ship_designer/scripts/resources/view_baker_resource.gd" id="1_8gns4"]
 [ext_resource type="Texture2D" uid="uid://der26cev2v2bv" path="res://assets/spaceships/hull/04/_base.png" id="2_8gns4"]
 [ext_resource type="Texture2D" uid="uid://c6xu3bs26ltl2" path="res://assets/spaceships/hull/04/_base_h.png" id="3_l7nmx"]
 [ext_resource type="Texture2D" uid="uid://uich1eto803k" path="res://assets/spaceships/hull/04/_base_m.png" id="4_ttrln"]
@@ -41,7 +41,7 @@ weapon_slots = SubResource("Resource_6muh1")
 mass = 1.0
 hp = 1000
 type = 0
-allowed_ext = Array[ExtResource("1_algb5")]([])
+allowed_ext = Array[ExtResource("1_8gns4")]([])
 diffuse = ExtResource("2_8gns4")
 normal = ExtResource("5_sgexm")
 mask = ExtResource("4_ttrln")
